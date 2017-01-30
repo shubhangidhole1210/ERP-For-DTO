@@ -1,0 +1,80 @@
+<md-dialog aria-label="Mango (Fruit)" >
+  <form name="rmVendorAssociation"  novalidate>
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{title}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content >
+      <div class="md-dialog-content" >
+       
+      <div layout-gt-sm="row">
+         
+            <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">PRICE PER UNIT</label>
+            <input type="text" ng-model="rmOrderAssociation.pricePerUnit" value="rmOrderAssociation.pricePerUnit"  required name="pricePerUnit" ng-disabled="isReadOnly"  >
+             <div ng-messages="rmVendorAssociation.pricePerUnit.$error">
+            <div ng-message="required">Please Enter Price per Unit </div>
+          </div>
+          </md-input-container>
+           
+          
+        </div>
+      <div>
+      <md-input-container>
+          <label style="color: black;">Raw material*</label>
+          <md-select ng-model="rmOrderAssociation.rawmaterial.id" name="rawMaterial" value="rawMaterial.id" ng-disabled="isReadOnly" ng-init="getRawMaterials()" required>
+            <md-option ng-repeat="rawMaterial in rawmaterials" ng-value="rawMaterial.id" >
+               {{rawMaterial.name}}
+            </md-option>
+          </md-select>
+          <div ng-messages="rmVendorAssociation.rawMaterial.$error">
+            <div ng-message="required">Please select Raw Material </div>
+          </div>
+        </md-input-container>
+      </div>
+          
+        
+        
+            <md-input-container>
+          <label style="color: black;">VENDOR *</label>
+          <md-select ng-model="rmOrderAssociation.vendor.id" name="vendor" value="vendor.id" ng-disabled="isReadOnly" ng-init="getVendors()" required>
+            <md-option ng-repeat="vendor in venodrs" ng-value="vendor.id" >
+               {{vendor.companyName}}
+            </md-option>
+          </md-select>
+          <div ng-messages="rmVendorAssociation.vendor.$error">
+            <div ng-message="required">Please select Vendor </div>
+          </div>
+        </md-input-container>
+          
+      
+       
+        
+         </div>
+          
+         
+      
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitRMVendorAssociationInformation(rmVendorAssociation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+    
+  </form>
+</md-dialog>
+
+
+
+
+
+

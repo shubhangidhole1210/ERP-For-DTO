@@ -1,0 +1,40 @@
+<div ng-controller="rawMaterialCtrl">
+<div class="erp-information">
+   <div>
+			<md-button class="md-raised" ng-click="showAddRawMaterial($event);"  ng-init="populateRawMaterial();flag=0">ADD
+			RAW MATERIAL INFORMATION</md-button>
+		</div>
+		 <input type="text" ng-model="searchText" placeholder="Search by Name">
+<md-content class="md-padding">
+    <form ng-submit="$event.preventDefault()">
+      <p style="font-weight: bold;font-size: 20px">RAW MATERIAL LIST</p>
+     
+      <br/>
+    </form>
+  </md-content>
+  <table>
+			<tr>
+				<th> NAME</th>
+				<th>DESCRIPTION</th>
+				<th>PART NUMBER</th>
+				<th>action</th>
+			</tr>
+			<tr ng-repeat="rawMaterials in data |  filter:{ name: searchText }" >
+				<td>{{rawMaterials.name}}</td>
+				<td>{{rawMaterials.description}}</td>
+				<td>{{rawMaterials.partNumber}}</td>
+				<td>
+				     <md-button class="md-raised"  ng-click="showEditRM($event,$index)" ng-init="flag=1">EDIT</md-button>
+				<!-- <md-button class="md-raised" ng-click="showConfirm($event)">REMOVE</md-button> -->
+				<md-button class="md-raised"  ng-click="showConfirm($event,$index)">Remove</md-button>
+				
+				<md-button class="md-raised" ng-click="viewRMInformation($event,$index)">VIEW</md-button>
+				</td>
+				
+			</tr>
+		</table>
+</div>
+</div>
+
+
+

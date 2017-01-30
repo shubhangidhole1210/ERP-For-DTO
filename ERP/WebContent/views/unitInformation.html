@@ -1,0 +1,79 @@
+<md-dialog aria-label="Mango (Fruit)" >
+  <form name="unitInformation"  novalidate>
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{information}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content >
+      <div class="md-dialog-content" >
+       
+      <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">NAME</label>
+            <input type="text" ng-model="unit.name"   required name="name" ng-disabled="isReadOnly"  >
+             <div ng-messages="unitInformation.name.$error">
+            <div ng-message="required">Please enter Unit</div>
+          </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm type="password">
+            <label class="input-filed-label">DESCRIPTION</label>
+            <input type="text" ng-model="unit.description" required name="description"  ng-disabled="isReadOnly">
+            <div ng-messages="unitInformation.description.$error">
+              <div ng-message="required">Unit Description Required</div>
+            </div>
+          </md-input-container>
+        </div>
+      
+       
+        
+         
+        
+        
+       
+         
+          <!-- <md-input-container class="md-block" flex-gt-sm type="password">
+              <label class="input-filed-label">CREATE DATE</label>
+              
+              <input type="date" placeholder="Enter date of birth" ng-model="user.dob "  name="dob" required ng-disabled="isReadOnly">
+              <div ng-messages="userInformation.dob.$error">
+                 <div ng-message="required">Please Enter Date of Birth</div>
+              </div>
+         </md-input-container>    -->
+        
+        
+         </div>
+          
+         <!--  <md-input-container class="md-block" flex-gt-sm type="password">
+         <input type="date" placeholder="Enter date of birth" ng-model="user.doj" name="doj" required ng-disabled="isReadOnly">
+          <label class="input-filed-label">UPDATE DATE</label>
+              <div ng-messages="userInformation.doj.$error">
+                 <div ng-message="required">Please Enter Date of Joining</div>
+              </div>
+         </md-input-container>   --> 
+         
+      
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+   
+      <md-button class="md-raised" ng-click="submitUnitInformation(unitInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+    
+  </form>
+</md-dialog>
+
+
+
+
+
+

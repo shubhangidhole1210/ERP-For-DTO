@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script src="/node_modules/angular/angular.js"></script> 
+    <script src="/node_modules/angular-aria/angular-aria.js"></script> 
+    <script src="/node_modules/angular-animate/angular-animate.js"></script> 
+    <script src="/node_modules/angular-material/angular-material.js"></script> 
+    <script src="/node_modules/angular-route/angular-route.js"></script>
+    <script src="/node_modules/angular-messages/angular-messages.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+<!--     <script type="text/javascript" src="js/angular-material.js"></script> -->
+    <script type="text/javascript" src="js/controllers/userCtrl.js"></script>
+     <script type="text/javascript" src="js/controllers/vendorCtrl.js"></script>
+     <script type="text/javascript" src="js/controllers/rawMaterialCtrl.js"></script>
+     <script type="text/javascript" src="js/controllers/unitCtrl.js"></script>
+     <script type="text/javascript" src="js/controllers/productCtrl.js"></script>
+     <script type="text/javascript" src="js/controllers/RMOrderCtrl.js"></script>
+      <script type="text/javascript" src="js/controllers/RMVendorAssociationCtrl.js"></script>
+       <script type="text/javascript" src="js/controllers/RMInventaryCtrl.js"></script>
+         <script type="text/javascript" src="js/controllers/clientCtrl.js"></script>
+         <script type="text/javascript" src="js/controllers/productRMAssociationCtrl.js"></script>
+         <script type="text/javascript" src="js/controllers/productOrderCtrl.js"></script>
+         <script type="text/javascript" src="js/controllers/productInventoryCtrl.js"></script>
+         
+</head>
+    <body ng-app="ERPApp">
+       
+    <div ng-controller="ERPController">
+    <div>
+   <div class="erp-headder">
+      <div class="display-erp-img"> <img alt="" src="image/angular_img.png" width="70px" height="70px"></div> 
+       <div class="erp-user-name" ng-show="isuserName">{{userName}}</div>
+       <!-- <div align="center">
+        <md-button class="md-raised" ng-click="displayLogin()">User Login</md-button>
+       </div> -->
+    
+   </div>
+   </div>
+   
+   
+   
+        <div class="erp-menubar">
+           <div class="erp-menu" id="user"  ng-class="{changeERPMenu : selected=='user'}" ng-click="selected='user'"><a href="#/user" >USER</a></div>
+           <div class="erp-menu" id="unit"  ng-class="{changeERPMenu : selected=='unit'}" ng-click="selected='unit'"><a href="#/unit" >UNIT</a></div>
+            <div class="erp-menu" id="page"  ng-class="{changeERPMenu : selected=='page'}" ng-click="selected='user'"><a href="#/page" >PAGE</a></div>
+            <div class="erp-menu" id="product"  ng-class="{changeERPMenu : selected=='product'}" ng-click="selected='product'"><a href="#/product" >PRODUCT</a></div>
+           <div class="erp-menu" id="home"  ng-class="{changeERPMenu : selected=='home'}" ng-click="selected='home'"><a href="#/home" >HOME</a></div>
+           <div class="erp-menu" id="vendor" ng-class="{changeERPMenu : selected=='vendor'}" ng-click="selected='vendor'"><a href="#/vendor">VENDOR</a></div>
+           <div class="erp-menu" id="rawMaterial"  ng-class="{changeERPMenu : selected=='rawMaterial'}" ng-click="selected='rawMaterial'"><a href="#/rawMaterial">RAW MATERIAL</a></div>
+           <div class="erp-menu" id="finishGood" ng-class="{changeERPMenu : selected=='finishGood'}" ng-click="selected='finishGood'"><a href="#/finishedGood" >FINISHED GOOD</a></div>
+           <div class="erp-menu" id="orders" ng-class="{changeERPMenu : selected=='orders'}" ng-click="selected='orders'"><a href="#/order">ORDERS</a></div>
+           <div class="erp-menu" id="administration" ng-class="{changeERPMenu : selected=='administration'}" ng-click="selected='administration'"><a href="#/administration" >ADMINISTRATION</a></div>
+           <div class="erp-menu" id="report"  ng-class="{changeERPMenu : selected=='report'}" ng-click="selected='report'"><a href="#/Report">REPORT</a></div>
+           <div class="erp-menu" id="norification" ng-class="{changeERPMenu : selected=='norification'}" ng-click="selected='norification'"><a href="#/notification">NOTIFICATION</a></div>
+        </div>
+        </div>
+ <div ng-view class="main-class"></div>
+  
+ 
+</body>
+</html>

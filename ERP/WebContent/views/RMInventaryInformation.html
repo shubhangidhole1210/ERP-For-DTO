@@ -1,0 +1,76 @@
+<md-dialog aria-label="Mango (Fruit)" >
+  <form name="RMInventaryInformation"  novalidate>
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{information}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content >
+      <div class="md-dialog-content" >
+       
+      <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">NAME</label>
+            <input type="text" ng-model="rmInventary.name" value="rmInventary.name"  required name="name" ng-disabled="isReadOnly"  >
+             <div ng-messages="RMInventaryInformation.name.$error">
+            <div ng-message="required">Please enter Name</div>
+          </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm type="password">
+            <label class="input-filed-label">DESCRIPTION</label>
+            <input type="text" ng-model="rmInventary.description" value="rmInventary.description" required name="description"  ng-disabled="isReadOnly">
+            <div ng-messages="RMInventaryInformation.description.$error">
+              <div ng-message="required">Enter inventory description </div>
+            </div>
+          </md-input-container>
+        </div>
+      
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">QUANTITY AVAILABLE</label>
+            <input type="text" ng-model="rmInventary.quantityAvailable" value="rmInventary.quantityAvailable" required name="quantityAvailable" ng-disabled="isReadOnly">
+            <div ng-messages="RMInventaryInformation.quantityAvailable.$error">
+             <div ng-message="required">Please enter quantity</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container>
+          <label style="color: black;">RAW MATERIAL</label>
+          <md-select ng-model="rmInventary.rawmaterial.id" name="RMInventory" value="RMInventory.id" ng-disabled="isReadOnly" ng-required="true" rrquired>
+            <md-option ng-repeat="RMInventory in data" ng-value="RMInventory.id" >
+               {{RMInventory.name}}
+            </md-option>
+          </md-select>
+           <div ng-messages="RMInventaryInformation.RMInventory.$error">
+                 <div ng-message="required">Please Select Raw Material Inventory</div>
+              </div>
+        </md-input-container>
+        </div>
+      
+         </div>
+          
+      
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitRMInventaryInformation(RMInventaryInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+    
+  </form>
+</md-dialog>
+
+
+
+
+
+

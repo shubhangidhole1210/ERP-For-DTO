@@ -1,0 +1,45 @@
+<div ng-controller="userCtrl">
+	<div class="erp-information" ng-init="populateUserList($event);">
+		<div>
+			<md-button class="md-raised" ng-click="showAddNewUser($event);" >ADD
+			NEW USER</md-button>
+		</div>
+		
+		<input type="text" ng-model="searchText" placeholder="Search by Name">
+		
+		<table>
+			<tr>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>MOBILE</th>
+				<th>USER TYPE</th>
+				<th>EMAIL</th>
+				<th>ACTION</th>
+			</tr>
+			<tr ng-repeat="users in data |  filter:{ firstName: searchText } " >
+				<td>{{users.firstName}}</td>
+				<td>{{users.lastName}}</td>
+				<td>{{users.mobile}}</td>
+				<td>{{users.usertype.usertypeName}}</td>
+				<td>{{users.email}}</td>
+				<td>
+				     <md-button class="md-raised"  ng-click="showEditUser($event,$index)" ng-init="flag=1">EDIT</md-button>
+				
+				<md-button class="md-raised"  ng-click="showConfirm($event,$index)">Remove</md-button>
+				
+				<md-button class="md-raised" ng-click="viewUserInformation($event,$index)">VIEW</md-button>
+				</td>
+				
+			</tr>
+		</table>
+		
+    
+   <div class="" ng-show="isUserUnavailable">
+       Currently there are no active users.Please add new user.
+   </div>
+
+
+
+	</div>
+
+</div>

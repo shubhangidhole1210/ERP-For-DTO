@@ -1,0 +1,78 @@
+<md-dialog aria-label="Mango (Fruit)" >
+  <form name="productInformation"  novalidate>
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{information}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content >
+      <div class="md-dialog-content" >
+       
+      <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">NAME</label>
+            <input type="text" ng-model="product.name" value="product.name"  required name="name" ng-disabled="isReadOnly"  >
+             <div ng-messages="productInformation.name.$error">
+            <div ng-message="required">Please enter Name of Product</div>
+          </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm type="password">
+            <label class="input-filed-label">PART NUMBER</label>
+            <input type="text" ng-model="product.partNumber" value="product.partNumber" required name="partNumber"  ng-disabled="isReadOnly">
+            <div ng-messages="productInformation.partNumber.$error">
+              <div ng-message="required">Please Enter Product Part Number</div>
+            </div>
+          </md-input-container>
+        </div>
+      
+        <div layout-gt-sm="row">
+        
+        <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">CLIENT PART NUMBER*</label>
+            <input type="text" ng-model="product.clientpartnumber" value="product.clientpartnumber" required name="clientpartnumber" ng-disabled="isReadOnly">
+            <div ng-messages="productInformation.clientpartnumber.$error">
+             <div ng-message="required">Please Enter client part number</div>
+            </div>
+          </md-input-container>
+        
+          <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">DESCRIPTION</label>
+            <input type="text" ng-model="product.description" value="product.description" required name="description" ng-disabled="isReadOnly">
+            <div ng-messages="productInformation.description.$error">
+             <div ng-message="required">Please Enter Description</div>
+            </div>
+          </md-input-container>
+
+          
+        </div>
+        
+     
+         </div>
+          
+         
+         
+      
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitProductInformation(productInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+    
+  </form>
+</md-dialog>
+
+
+
+
+
+

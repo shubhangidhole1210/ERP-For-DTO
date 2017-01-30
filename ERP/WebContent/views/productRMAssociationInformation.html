@@ -1,0 +1,79 @@
+<md-dialog aria-label="" >
+  <form name="productRMAssociationInformation"  novalidate>
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{information}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content >
+      <div class="md-dialog-content" >
+       
+      
+      
+       
+        
+         
+         <md-input-container ng-init="getRawMaterials()">
+          <label style="color: black;">RAW MATERIAL*</label>
+          <md-select ng-model="productRMAssociation.rawmaterial.id" name="rawmaterial"  ng-disabled="isReadOnly" ng-required="true" required>
+            <md-option ng-repeat="rawMaterial in rawMaterials" ng-value="rawMaterial.id" >
+               {{rawMaterial.name}}
+            </md-option>
+          </md-select>
+          <div ng-messages="productRMAssociationInformation.rawmaterial.$error">
+                 <div ng-message="required">Please Select Raw Material</div>
+              </div>
+        </md-input-container>
+        
+        <md-input-container ng-init="getProducts()">
+          <label style="color: black;">PRODUCT*</label>
+          <md-select ng-model="productRMAssociation.product.id" name="product"  ng-disabled="isReadOnly" ng-required="true" required>
+            <md-option ng-repeat="product in products" ng-value="product.id" >
+               {{product.name}}
+            </md-option>
+          </md-select>
+          <div ng-messages="productRMAssociationInformation.product.$error">
+                 <div ng-message="required">Please Select Product</div>
+              </div>
+        </md-input-container>
+        
+      
+         
+          <md-input-container class="md-block" flex-gt-sm type="password">
+              <label class="input-filed-label">QUANTITY*</label>
+              
+              <input type="number" placeholder="Enter quantity" ng-model="productRMAssociation.quantity "  name="quantity" required ng-disabled="isReadOnly">
+              <div ng-messages="productRMAssociationInformation.dob.$error">
+                 <div ng-message="required">Please Enter Quantity</div>
+              </div>
+         </md-input-container>   
+                      
+        
+         </div>
+          
+          
+         
+      
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <!-- <md-button class="md-raised" ng-click="saveproductRMAssociation($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitInformation(productRMAssociationInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+    
+  </form>
+</md-dialog>
+
+
+
+
+
+

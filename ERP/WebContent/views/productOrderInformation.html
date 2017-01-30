@@ -1,0 +1,111 @@
+<md-dialog >
+  <form name="productOrderInformation"  novalidate>
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{information}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content >
+      <div class="md-dialog-content" >
+       
+      <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">DESCRIPTION</label>
+            <input type="text" ng-model="productOrder.description"  required name="description" ng-disabled="isReadOnly"  >
+             <div ng-messages="productOrderInformation.description.$error">
+            <div ng-message="required">Please enter Description</div>
+          </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm type="password">
+            <label class="input-filed-label">QUANTITY</label>
+            <input type="text" ng-model="productOrder.quantity"  required name="quantity"  ng-disabled="isReadOnly">
+            <div ng-messages="productOrderInformation.quantity.$error">
+              <div ng-message="required">Please Enter Product quantity</div>
+            </div>
+          </md-input-container>
+        </div>
+      
+        <div layout-gt-sm="row">
+           <md-input-container>
+          <label style="color: black;">PRODUCT*</label>
+          <md-select ng-model="productOrder.product.id" name="product"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getProducts()">
+            <md-option ng-repeat="product in products" ng-value="product.id" >
+               {{product.name}}
+            </md-option>
+          </md-select>
+          <div ng-messages="productOrderInformation.product.$error">
+                 <div ng-message="required">Please Select Product</div>
+              </div>
+        </md-input-container>
+
+          <md-input-container>
+          <label style="color: black;">STATUS*</label>
+          <md-select ng-model="productOrder.status.id" name="status"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getStatus()">
+            <md-option ng-repeat="status in statusData" ng-value="status.id" >
+               {{status.name}}
+            </md-option>
+          </md-select>
+          <div ng-messages="productOrderInformation.status.$error">
+                 <div ng-message="required">Please Select Status</div>
+              </div>
+        </md-input-container>
+        </div>
+        
+         <div layout-gt-sm="row">
+          <md-input-container>
+          <label style="color: black;">CLIENT*</label>
+          <md-select ng-model="productOrder.client.id" name="client"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getClient()">
+            <md-option ng-repeat="client in clients" ng-value="client.id" >
+               {{client.companyname}}
+            </md-option>
+          </md-select>
+          <div ng-messages="productOrderInformation.client.$error">
+                 <div ng-message="required">Please Select Client</div>
+              </div>
+        </md-input-container>
+
+          
+        </div>
+        
+        
+      
+         
+          <md-input-container class="md-block" flex-gt-sm type="password">
+              <label class="input-filed-label">DATE OF DELIVERY[MM/DD/YYYY]*</label>
+              
+              <input type="date" placeholder="Enter date of birth" ng-model="productOrder.expecteddeliveryDate"  name="dob" required ng-disabled="isReadOnly">
+              <div ng-messages="productOrderInformation.expecteddeliveryDate.$error">
+                 <div ng-message="required">Please Enter Expected Delivery Date</div>
+              </div>
+         </md-input-container>   
+                     
+        
+         </div>
+          
+          
+         
+      
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitInformation(productOrderInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+    
+  </form>
+</md-dialog>
+
+
+
+
+
+

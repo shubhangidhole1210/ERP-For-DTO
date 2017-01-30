@@ -1,0 +1,92 @@
+<md-dialog aria-label="Mango (Fruit)" >
+  <form name="rawMaterialInformation"  novalidate>
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{information}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content >
+      <div class="md-dialog-content" >
+       
+      <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">NAME</label>
+            <input type="text" ng-model="rawMaterial.name" value="rawMaterial.name"  required name="name" ng-disabled="isReadOnly"  >
+             <div ng-messages="rawMaterialInformation.name.$error">
+            <div ng-message="required">Please enter Name</div>
+          </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm type="password">
+            <label class="input-filed-label">DESCRIPTION</label>
+            <input type="text" ng-model="rawMaterial.description" value="rawMaterial.description" required name="description"  ng-disabled="isReadOnly">
+            <div ng-messages="rawMaterialInformation.description.$error">
+              <div ng-message="required">Please Enter Description</div>
+            </div>
+          </md-input-container>
+        </div>
+      
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">PART NUMBER</label>
+            <input type="text" ng-model="rawMaterial.partNumber" value="rawMaterial.partNumber" required name="partNumber" ng-disabled="isReadOnly">
+            <div ng-messages="rawMaterialInformation.partNumber.$error">
+             <div ng-message="required">Please Enter Raw Material part number</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm type="password">
+            <label class="input-filed-label">PRICE PER UNIT</label>
+            <input type="text" ng-model="rawMaterial.pricePerUnit" value="rawMaterial.pricePerUnit" required name="pricePerUnit" ng-disabled="isReadOnly">
+            <div ng-messages="rawMaterialInformation.pricePerUnit.$error">
+             <div ng-message="required">Please Enter Unit</div>
+            </div>
+          </md-input-container>
+        </div>
+        
+         
+         <md-input-container>
+          <label style="color: black;">UNIT ID*</label>
+          <md-select ng-model="rawMaterial.unit.id" name="unitID" value="unitID.id" ng-disabled="isReadOnly" ng-init="getUnitList()"  ng-required="true" rrquired>
+            <md-option ng-repeat="unitID in data" ng-value="unitID.id" >
+               {{unitID.name}}
+            </md-option>
+          </md-select>
+           <div ng-messages="rawMaterialInformation.unitID.$error">
+                 <div ng-message="required">Please Select User</div>
+              </div>
+        </md-input-container>
+        
+      
+         
+          
+        
+        
+         </div>
+          
+           
+         
+      
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitRMInformation(rawMaterialInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+    
+  </form>
+</md-dialog>
+
+
+
+
+
+

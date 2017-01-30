@@ -1,0 +1,162 @@
+<md-dialog aria-label="Mango (Fruit)" >
+  <form name="RMOrderInformation"  novalidate>
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{title}}</h2>
+        <span flex></span>
+      <!--   <md-button class="md-icon-button" ng-click="cancel()">
+        </md-button> -->
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content >
+      <div class="md-dialog-content" >
+       
+      <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">NAME</label>
+            <input type="text" ng-model="rmOrder.name" value="rmOrder.name"  required name="name" ng-disabled="isReadOnly"  >
+             <div ng-messages="RMOrderInformation.name.$error">
+            <div ng-message="required">Please enter name</div>
+          </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm type="password">
+            <label class="input-filed-label">DESCRIPTION</label>
+            <input type="text" ng-model="rmOrder.description" value="rmOrder.description" required name="description"  ng-disabled="isReadOnly">
+            <div ng-messages="RMOrderInformation.description.$error">
+              <div ng-message="required">please enter description</div>
+            </div>
+          </md-input-container>
+        </div>
+      
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">QUANTITY</label>
+            <input type="text" ng-model="rmOrder.quantity" value="rmOrder.quantity" required name="quantity" ng-disabled="isReadOnly">
+            <div ng-messages="RMOrderInformation.quantity.$error">
+             <div ng-message="required">please enter quantity </div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm type="password">
+            <label class="input-filed-label">TAX</label>
+            <input type="text" ng-model="rmOrder.tax" value="rmOrder.tax" required name="tax" ng-disabled="isReadOnly">
+            <div ng-messages="RMOrderInformation.tax.$error">
+             <div ng-message="required">please enter tax</div>
+            </div>
+          </md-input-container>
+        </div>
+        
+         <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">TOTAL PRICE</label>
+            <input type="text" ng-model="rmOrder.totalprice" value="rmOrder.totalprice" required name="totalprice"  ng-disabled="isReadOnly">
+              <div ng-messages="RMOrderInformation.totalprice.$error">
+                 <div ng-message="required">Please enter total price</div>
+              </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm type="password">
+            <label class="input-filed-label">ACTUAL PRICE</label>
+            <input type="text" ng-model="rmOrder.actualPrice" value="rmOrder.actualPrice" required name="actualPrice" ng-disabled="isReadOnly">
+            <div ng-messages="RMOrderInformation.actualPrice.$error">
+            <div ng-message="required">Please enter actual price </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">OTHER CHARG</label>
+            <input type="text" ng-model="rmOrder.otherCharges" value="rmOrder.otherCharges" required name="otherCharges"  ng-disabled="isReadOnly">
+              <div ng-messages="RMOrderInformation.otherCharges.$error">
+                 <div ng-message="required">Please enter charges</div>
+              </div>
+          </md-input-container>
+               <md-input-container>
+          <label style="color: black;">STATUS*</label>
+          <md-select ng-model="rmOrder.status.id" name="statusId" value="statusId.id" ng-disabled="isReadOnly" ng-init="displayStatusId()" name="statusId" ng-required="true" required>
+            <md-option ng-repeat="statusId in statusData" ng-value="statusId.id" >
+               {{statusId.name}}
+            </md-option>
+          </md-select>
+          <div ng-messages="RMOrderInformation.statusId.$error">
+                 <div ng-message="required">Please select status </div>
+              </div>
+        </md-input-container>
+          
+        </div>
+         
+         <div layout-gt-sm="row">
+           <md-input-container>
+          <label style="color: black;">RAW MATERIAL</label>
+          <md-select ng-model="rmOrder.rawmaterial.id" name="rawMaterialId" value="rawMaterialId.id" ng-disabled="isReadOnly" ng-init="rawMaterialId()" name="rawMaterialId" required>
+            <md-option ng-repeat="rawMaterialId in RMData" ng-value="rawMaterialId.id" >
+               {{rawMaterialId.partNumber}}
+            </md-option>
+          </md-select>
+          <div ng-messages="RMOrderInformation.rawMaterialId.$error">
+                 <div ng-message="required">Please select Raw Material </div>
+              </div>
+        </md-input-container>
+</div>
+          <md-input-container>
+          <label style="color: black;">VENDIR </label>
+          <md-select ng-model="rmOrder.vendor.id" name="vendorId" value="vendorId.id" ng-disabled="isReadOnly" ng-init="displayVendorId()" name="vendorId" required>
+            <md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id" >
+               {{vendorId.companyName}}
+            </md-option>
+             <div ng-messages="RMOrderInformation.vendorId.$error">
+                 <div ng-message="required">Please select Vendor </div>
+              </div>
+          </md-select>
+        </md-input-container>
+        
+        
+        
+         <div layout-gt-sm="row">
+          <!--  <md-input-container class="md-block" flex-gt-sm type="password">
+              <label class="input-filed-label">CREATE DATE</label>
+              
+              <input type="date" placeholder="" ng-model="rmOrder.createDate " value="rmOrder.createDate" name="createDate" required ng-disabled="isReadOnly">
+              <div ng-messages="RMOrderInformation.createDate.$error">
+                 <div ng-message="required">Please Enter create date</div>
+              </div>
+         </md-input-container> -->
+
+           <md-input-container class="md-block" flex-gt-sm type="password">
+         <input type="date" placeholder="" ng-model="rmOrder.expectedDeliveryDate" name="expectedDeliveryDate" value="rmOrderr.expectedDeliveryDate" required ng-disabled="isReadOnly">
+          <label class="input-filed-label">EXPECTED DEVIVERY DATE(MM/DD/YYYY)</label>
+              <div ng-messages="RMOrderInformation.expectedDeliveryDate.$error">
+                 <div ng-message="required">Please Select Date </div>
+              </div>
+         </md-input-container>   
+         
+        </div>
+     
+         
+            
+        
+        
+         </div>
+          
+        
+      
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitRMOrderInformation(RMOrderInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+    
+  </form>
+</md-dialog>
+
+
+
+
+
+

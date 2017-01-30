@@ -1,0 +1,44 @@
+<div ng-controller="clientCtrl">
+	<div class="erp-information">
+		<div>
+			<md-button class="md-raised" ng-click="showAddNewClient($event);"  ng-init="populateClientList();flag=0">ADD
+			NEW CLIENT</md-button>
+		</div>
+		
+		<input type="text" ng-model="searchText" placeholder="Search by Name">
+		<md-content class="md-padding">
+    <form ng-submit="$event.preventDefault()">
+      <p style="font-weight: bold;font-size: 20px">CLIENT LIST</p>
+     
+      <br/>
+    </form>
+  </md-content>
+		<table>
+			<tr>
+				<th>COMPANY NAME</th>
+				<th>EMAIL ID</th>
+				<th>CONTACT NUMBER</th>
+				<th>ACTION</th>
+			</tr>
+			<tr ng-repeat=" clients in data |  filter:{ companyname: searchText }" >
+				<td>{{clients.companyname}}</td>
+				<td>{{clients.emailid}}</td>
+				<td>{{clients.contactnumber}}</td>
+				<td>
+				     <md-button class="md-raised"  ng-click="showEditClient($event,$index)" ng-init="flag=1">EDIT</md-button>
+				<!-- <md-button class="md-raised" ng-click="showConfirm($event)">REMOVE</md-button> -->
+				<md-button class="md-raised"  ng-click="showConfirm($event,$index)">Remove</md-button>
+				
+				<md-button class="md-raised" ng-click="viewClientInformation($event,$index)">VIEW</md-button>
+				</td>
+				
+			</tr>
+		</table>
+		
+
+
+
+
+	</div>
+
+</div>

@@ -1,0 +1,37 @@
+{"data":
+[
+{
+      "userName": "Shubhangi",
+	   "lastName": "Dhole",
+		"email": "shubhangidhole122gmail.com",
+		"userId": "1",
+		"password": "shubh1993",
+		"dob": "12-10-1993",
+		"doj": "1-1-2017",
+		"mobilenumber": "9970506677",
+		"userType": "Admin"
+},
+{
+      "userName": "shadeo",
+	   "lastName": "chavan",
+		"email": "shahdeoChavan22gmail.com",
+		"userId": "2",
+		"password": "shubh1993",
+		"dob": "12-10-1993",
+		"doj": "1-1-2017",
+		"mobilenumber": "9970506677",
+		"userType": "HR"
+},
+
+{
+      "userName": "neha",
+	   "lastName": "mundada",
+		"email": "heha1232gmail.com",
+		"userId": "3",
+		"password": "shubh1993",
+		"dob": "12-10-1993",
+		"doj": "1-1-2017",
+		"mobilenumber": "9970506677",
+		"userType": "technical"
+}
+]}
