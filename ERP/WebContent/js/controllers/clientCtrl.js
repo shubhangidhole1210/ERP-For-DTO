@@ -19,16 +19,58 @@ erpApp
 						}).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.clients = response.data;
-
+							$scope.isClientInfirmation();
 							console.log(response);
+							$mdDialog.hide();
 
 						}, function errorCallback(response) {
 							$scope.message = "We are Sorry. Something went wrong. Please try again later."
 							$scope.showToast();
 							console.log("Error");
-
+							$mdDialog.hide();
 						});
+						$scope.showProgressBarOne();
 					}
+					
+					$scope.isClientPresent=false;
+					$scope.isClientInfirmation=function()
+					{
+						if($scope.data.length==0)
+							{
+							$scope.isClientPresent=true;
+							}
+						else{
+							$scope.isClientPresent=false;
+						}
+					}
+					$scope.showProgressBarOne= function()
+					{
+						$mdDialog
+						.show(
+								{
+									controller : ProgressBarController,
+									templateUrl : 'views/progressBar.html',
+									parent : angular
+											.element(document.body),
+									/*targetEvent : ev,*/
+									clickOutsideToClose : false,
+									fullscreen : $scope.customFullscreen,
+									onComplete : function() {
+									/*	$scope.populateUserList(ev);*/
+									}
+									
+								
+								})
+						.then(
+								function(answer) {
+									$scope.status = 'You said the information was "'
+											+ answer + '".';
+								},
+								function() {
+									$scope.status = 'You cancelled the dialog.';
+								});
+					};
+					
 					
 					$scope.showToast = function() {
 						$mdToast.show({
@@ -243,6 +285,7 @@ erpApp
 											+ $scope.clients[index].id
 
 								}).then(function successCallback(data) {
+									$mdDialog.hide();
 							$rootScope.$emit("CallPopulateClientList", {});
 							console.log(data);
 
@@ -250,6 +293,7 @@ erpApp
 							console.log("Error");
 
 						});
+						$scope.showProgressBarOne
 
 					};
 

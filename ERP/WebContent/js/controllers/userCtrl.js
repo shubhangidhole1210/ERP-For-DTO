@@ -46,9 +46,9 @@ erpApp.controller(
 							}
 					}
 					
-					$rootScope.$on("callProgressBar", function($event){
-						$scope.showProgressBarOne();
-					});
+				/*	$rootScope.$on("callProgressBar", function($event){
+						$scope.showProgressBar();
+					});*/
 					
 					$scope.showProgressBarOne= function()
 					{
@@ -219,7 +219,7 @@ erpApp.controller(
 
 						$scope.submitInformation = function(isvaliduser,$event) {
 							if (isvaliduser) {
-							 /* $rootScope.$emit("callProgressBar",{});*/
+							/*  $rootScope.$emit("callProgressBar",{});*/
 								$scope.saveUser($event);
 								
 							} else {
@@ -240,7 +240,7 @@ erpApp.controller(
 							});
 						};
 						
-						/*$scope.showProgressBar = function(ev) {
+						$scope.showProgressBar = function(ev) {
 							$scope.displayProgressBar = true;
 							$mdDialog
 									.show(
@@ -267,7 +267,7 @@ erpApp.controller(
 												$scope.status = 'You cancelled the dialog.';
 											});
 						};
-						*/
+						
 						
 						
 						

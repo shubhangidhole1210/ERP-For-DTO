@@ -15,16 +15,56 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		}).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.rawMaterials = response.data;
-
+			$scope.getRawMaterialInformation();
 			console.log(response);
-
+			$mdDialog.hide();
 		}, function errorCallback(response) {
 			$scope.message = "We are Sorry. Something went wrong. Please try again later."
 			$scope.showToast();
 			console.log("Error");
-
+			$mdDialog.hide();
 		});
+		$scope.showProgressBarOne();
 }
+	$scope.showProgressBarOne= function()
+	{
+		$mdDialog
+		.show(
+				{
+					controller : ProgressBarController,
+					templateUrl : 'views/progressBar.html',
+					parent : angular
+							.element(document.body),
+					/*targetEvent : ev,*/
+					clickOutsideToClose : false,
+					fullscreen : $scope.customFullscreen,
+					onComplete : function() {
+					/*	$scope.populateUserList(ev);*/
+					}
+					
+				
+				})
+		.then(
+				function(answer) {
+					$scope.status = 'You said the information was "'
+							+ answer + '".';
+				},
+				function() {
+					$scope.status = 'You cancelled the dialog.';
+				});
+	};
+	$scope.isRmPresent=false;
+	$scope.getRawMaterialInformation=function()
+	{
+		if($scope.data.length==0)
+		{
+			$scope.isRmPresent=true;
+		}
+		else
+			{
+				$scope.isRmPresent=false;
+			}
+	}
 	
 	$scope.showToast = function() {
 		$mdToast.show({
@@ -294,6 +334,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 							+ $scope.rawMaterials[index].id
 
 				}).then(function successCallback(data) {
+					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateRawMaterial", {});
 			console.log(data);
 
@@ -301,7 +342,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 			console.log("Error");
 
 		});
-
+		$scope.showProgressBarOne();
 	};
 	
 	$scope.showConfirm = function(ev,index) {

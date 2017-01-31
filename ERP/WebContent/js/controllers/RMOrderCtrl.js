@@ -22,14 +22,16 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			$scope.data = response.data;
 			$scope.rmOrders = response.data;
 			$scope.isRMOrderInformation();
+			$mdDialog.hide();
 			console.log(response);
 
 		}, function errorCallback(response) {
 			$scope.message = "We are Sorry. Something went wrong. Please try again later."
 			$scope.showToast();
 			console.log("Error");
-
+			$mdDialog.hide();
 		});
+		$scope.showProgressBarOne();
 	}
 	
 	$scope.isRMOrderPresent=false;
@@ -44,6 +46,34 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			$scope.isRMOrderPresent=false;
 			}
 	}
+	
+	$scope.showProgressBarOne= function()
+	{
+		$mdDialog
+		.show(
+				{
+					controller : ProgressBarController,
+					templateUrl : 'views/progressBar.html',
+					parent : angular
+							.element(document.body),
+					/*targetEvent : ev,*/
+					clickOutsideToClose : false,
+					fullscreen : $scope.customFullscreen,
+					onComplete : function() {
+					/*	$scope.populateUserList(ev);*/
+					}
+					
+				
+				})
+		.then(
+				function(answer) {
+					$scope.status = 'You said the information was "'
+							+ answer + '".';
+				},
+				function() {
+					$scope.status = 'You cancelled the dialog.';
+				});
+	};
 		
 	
 	$scope.showToast = function() {
@@ -360,6 +390,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 							+ $scope.rmOrders[index].id
 
 				}).then(function successCallback(data) {
+					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateRMOrderList", {});
 			console.log(data);
 
@@ -367,6 +398,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			console.log("Error");
 
 		});
+		$scope.showProgressBarOne();
 
 	};
 

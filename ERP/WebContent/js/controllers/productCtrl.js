@@ -15,16 +15,46 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		}).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.products = response.data;
-
+			$scope.isProductInformation();
 			console.log(response);
+			$mdDialog.hide();
 
 		}, function errorCallback(response) {
 			$scope.message = "We are Sorry. Something went wrong. Please try again later."
 			$scope.showToast();
 			console.log("Error");
+			$mdDialog.hide();
 
 		});
+		$scope.showProgressBarOne();
 	}
+	$scope.showProgressBarOne= function()
+	{
+		$mdDialog
+		.show(
+				{
+					controller : ProgressBarController,
+					templateUrl : 'views/progressBar.html',
+					parent : angular
+							.element(document.body),
+					/*targetEvent : ev,*/
+					clickOutsideToClose : false,
+					fullscreen : $scope.customFullscreen,
+					onComplete : function() {
+					/*	$scope.populateUserList(ev);*/
+					}
+					
+				
+				})
+		.then(
+				function(answer) {
+					$scope.status = 'You said the information was "'
+							+ answer + '".';
+				},
+				function() {
+					$scope.status = 'You cancelled the dialog.';
+				});
+	};
 	$scope.showToast = function() {
 		$mdToast.show({
 			hideDelay : 3000,
@@ -37,6 +67,18 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		});
 	};
 	
+	$scope.isProductPresent=false;
+	$scope.isProductInformation= function()
+	{
+		if($scope.data.length==0)
+			{
+			$scope.isProductPresent=true;
+			}
+		else
+			{
+			$scope.isProductPresent=false;
+			}
+	}
 	
 	
 	$scope.product = {};
@@ -275,13 +317,14 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 							+ $scope.products[index].id
 
 				}).then(function successCallback(data) {
+					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateProductList", {});
 			console.log(data);
 
 		}, function errorCallback(data) {
 			console.log("Error");
-
 		});
+		$scope.showProgressBarOne();
 
 	};
 

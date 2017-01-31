@@ -16,16 +16,60 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				url : SERVER_URL + "productorder/list"
 			}).then(function successCallback(response) {
 				$scope.data = response.data;
-				
 				$scope.productOrders = response.data;
 				console.log(response);
-
+				$scope.isProductOrderInformation();
+				$mdDialog.hide();
 			}, function errorCallback(response) {
 				$scope.showToast();
 				console.log("Error");
-
+				$scope.message = "We are Sorry. Something went wrong. Please try again later."
+				$mdDialog.hide();
 			});
+		 $scope.showProgressBarOne();
 	}
+	
+	$scope.isProductOrderPresent=false;
+	$scope.isProductOrderInformation=function()
+	{
+		if($scope.data.length==0)
+			{
+			$scope.isProductOrderPresent=true;
+			}
+		else
+			{
+			$scope.isProductOrderPresent=false;
+			}
+	}
+	
+	$scope.showProgressBarOne= function()
+	{
+		$mdDialog
+		.show(
+				{
+					controller : ProgressBarController,
+					templateUrl : 'views/progressBar.html',
+					parent : angular
+							.element(document.body),
+					/*targetEvent : ev,*/
+					clickOutsideToClose : false,
+					fullscreen : $scope.customFullscreen,
+					onComplete : function() {
+					/*	$scope.populateUserList(ev);*/
+					}
+					
+				
+				})
+		.then(
+				function(answer) {
+					$scope.status = 'You said the information was "'
+							+ answer + '".';
+				},
+				function() {
+					$scope.status = 'You cancelled the dialog.';
+				});
+	};
+	
 	
 	$scope.showToast = function() {
 		$mdToast.show({
@@ -295,6 +339,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 								+ $scope.productOrders[index].id
 
 					}).then(function successCallback(data) {
+						$mdDialog.hide();
 						$rootScope.$emit("callPopulateProductOrderList", {});
 				console.log(data);
 
@@ -302,7 +347,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				console.log("Error");
 
 			});
-
+			 $scope.showProgressBarOne();
 		};
 		
 		$scope.viewProductOrderrInformation = function(ev, index) {

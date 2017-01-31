@@ -63,11 +63,14 @@
               </div>
           </md-input-container>
 
-          <!-- <md-input-container class="md-block" flex-gt-sm type="password">
+          <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">CONTACT PERSON NAME</label>
-            <input type="email" ng-model="client.contactpersonname"   name="contactpersonname" ng-disabled="isReadOnly">
-           
-          </md-input-container> -->
+            <input type="type" ng-model="client.contactpersonname" required   name="contactpersonname" ng-disabled="isReadOnly">
+           <div ng-messages="clientInformation.contactpersonname.$error">
+             <div ng-message="required">Please enter Contact  Person name</div>
+            </div>
+          </md-input-container>
+         
         </div>
         
          </div>

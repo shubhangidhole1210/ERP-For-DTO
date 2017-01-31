@@ -17,10 +17,14 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 			$scope.units=response.data;
 			$scope.isUnitInformation()
 			console.log(response)
+			$mdDialog.hide();
 		}, function errorCallback(response) {
+			$scope.message = "We are Sorry. Something went wrong. Please try again later."
+			$scope.showToast();
 			console.log("Error");
-
+			$mdDialog.hide();
 		});
+		$scope.showProgressBarOne();
 	}
 	$scope.isUnitInPresent=false; 
 	$scope.isUnitInformation=function()
@@ -34,6 +38,33 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 			$scope.isUnitInPresent=false; 
 			}
 	}
+	$scope.showProgressBarOne= function()
+	{
+		$mdDialog
+		.show(
+				{
+					controller : ProgressBarController,
+					templateUrl : 'views/progressBar.html',
+					parent : angular
+							.element(document.body),
+					/*targetEvent : ev,*/
+					clickOutsideToClose : false,
+					fullscreen : $scope.customFullscreen,
+					onComplete : function() {
+					/*	$scope.populateUserList(ev);*/
+					}
+					
+				
+				})
+		.then(
+				function(answer) {
+					$scope.status = 'You said the information was "'
+							+ answer + '".';
+				},
+				function() {
+					$scope.status = 'You cancelled the dialog.';
+				});
+	};
 	
 	$scope.showToast = function() {
 		$mdToast.show({
@@ -283,6 +314,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 							+ $scope.units[index].id
 
 				}).then(function successCallback(data) {
+					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateUnitList", {});
 			console.log(data);
 
@@ -290,6 +322,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 			console.log("Error");
 
 		});
+		$scope.showProgressBarOne();
 
 	};
 	$scope.showConfirm = function(ev,index) {
@@ -308,8 +341,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 							
 							$scope.message = 'Delete user sucessfully';
 							$scope.showToast();
-							
-							
+						
 						},
 						function() {
 							$scope.status = 'You decided to keep your debt.';

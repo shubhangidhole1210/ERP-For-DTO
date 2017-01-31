@@ -53,7 +53,17 @@
               </div>
         </md-input-container>
         </div>
-      
+            <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">RACK NUMBER</label>
+            <input type="text" ng-model="rmInventary.quantityAvailable" value="rmInventary.quantityAvailable" required name="quantityAvailable" ng-disabled="isReadOnly">
+            <div ng-messages="RMInventaryInformation.quantityAvailable.$error">
+             <div ng-message="required">Please enter quantity</div>
+            </div>
+          </md-input-container>
+
+          
+        </div>
          </div>
           
       

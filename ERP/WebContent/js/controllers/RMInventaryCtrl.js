@@ -118,7 +118,9 @@ erpApp
 									created_date:  null,
 									updatedBy:3,
 									updated_date: null,
-									isactive:true
+									isactive:true,
+									racknumber: '12',
+									
 							};
 							var httpparams = {};
 							if ($scope.flag == 0) {

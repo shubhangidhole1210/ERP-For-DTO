@@ -29,6 +29,19 @@ erpApp
 						});
 					}
 					
+					$scope.isProductRmAssociationPresent=false;
+					$scope.isProductRMAssociationInfo=function()
+					{
+						if($scope.data.length==0)
+							{
+							$scope.isProductRmAssociationPresent=true;
+							}
+						else
+							{
+							$scope.isProductRmAssociationPresent=false;
+							}
+					}
+					
 					$scope.showToast = function() {
 						$mdToast.show({
 							hideDelay : 3000,
