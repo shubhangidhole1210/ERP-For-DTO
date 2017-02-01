@@ -47,6 +47,38 @@ erpApp.config(function($routeProvider) {
 		redirectTo : '/'
 	});
 });
+/*erpApp.service('progressBar',function($mdDialog)
+{
+
+	this.showProgressBarOne= function()
+	{
+		$mdDialog
+		.show(
+				{
+					controller : ProgressBarController,
+					templateUrl : 'views/progressBar.html',
+					parent : angular
+							.element(document.body),
+					targetEvent : ev,
+					clickOutsideToClose : false,
+					fullscreen : $scope.customFullscreen,
+					onComplete : function() {
+						$scope.populateUserList(ev);
+					}
+					
+				
+				})
+		.then(
+				function(answer) {
+					$scope.status = 'You said the information was "'
+							+ answer + '".';
+				},
+				function() {
+					$scope.status = 'You cancelled the dialog.';
+				});
+	};
+	
+	});*/
 
 erpApp.controller('ERPController', function($scope) {
 	

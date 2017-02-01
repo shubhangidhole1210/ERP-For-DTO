@@ -1,6 +1,6 @@
 erpApp.controller(
 				'userCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL) {
+				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,utils) {
 					$scope.isReadOnly = false;
 
 					$rootScope.$on("CallPopulateUserList", function($event) {
@@ -12,15 +12,18 @@ erpApp.controller(
 					});
 
 					$scope.populateUserList = function() {
+						utils.showProgressBar();
 						$http({
 							method : 'GET',
 							url : SERVER_URL + "user/list"
 						}).then(function successCallback(response) {
+							
 							$scope.data = response.data;
 							$scope.users = response.data;
 							$scope.isUserInformation();
 							console.log(response);
-							$mdDialog.hide();
+							utils.hideProgressBar();
+							/*$mdDialog.hide();*/
 
 						}, function errorCallback(response) {
 							$scope.message = "We are Sorry. Something went wrong. Please try again later."
@@ -29,8 +32,10 @@ erpApp.controller(
 							$mdDialog.hide();
 						
 						});
-					
-						$scope.showProgressBarOne();
+							
+						
+						/*$scope.showProgressBarOne();*/
+						/*progressBar.showProgressBarOne();*/
 					} 
 					
 					$scope.isUserUnavailable=false;
@@ -45,11 +50,11 @@ erpApp.controller(
 							$scope.isUserUnavailable=false;
 							}
 					}
-					
-				/*	$rootScope.$on("callProgressBar", function($event){
+					/*
+					$rootScope.$on("callProgressBar", function($event){
 						$scope.showProgressBar();
-					});*/
-					
+					});
+					*/
 					$scope.showProgressBarOne= function()
 					{
 						$mdDialog
@@ -63,7 +68,7 @@ erpApp.controller(
 									clickOutsideToClose : false,
 									fullscreen : $scope.customFullscreen,
 									onComplete : function() {
-									/*	$scope.populateUserList(ev);*/
+										/*$scope.populateUserList(ev);*/
 									}
 									
 								
@@ -214,7 +219,7 @@ erpApp.controller(
 												$scope.message = 'Something went worng. Please try again later.';
 												$scope.showToast();
 											});
-							 $rootScope.$emit("callProgressBar",{});
+							 /*$rootScope.$emit("callProgressBar",{});*/
 						}
 
 						$scope.submitInformation = function(isvaliduser,$event) {
@@ -267,7 +272,6 @@ erpApp.controller(
 												$scope.status = 'You cancelled the dialog.';
 											});
 						};
-						
 						
 						
 						

@@ -1,5 +1,8 @@
 erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast) {
 	
+	$scope.isProductOrderPresent=false;
+	$scope.productOrder={};
+	
 	$rootScope.$on("callPopulateProductOrderList", function() {
 		$scope.populateProductOrderList();
 	});
@@ -7,61 +10,43 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		$scope.showAddNewProductOrder()
 	});
 	
-	
-	$scope.populateProductOrderList=function()
-	{
-		
-		 $http({
-				method : 'GET',
-				url : SERVER_URL + "productorder/list"
-			}).then(function successCallback(response) {
-				$scope.data = response.data;
-				$scope.productOrders = response.data;
-				console.log(response);
-				$scope.isProductOrderInformation();
-				$mdDialog.hide();
-			}, function errorCallback(response) {
-				$scope.showToast();
-				console.log("Error");
-				$scope.message = "We are Sorry. Something went wrong. Please try again later."
-				$mdDialog.hide();
+	$scope.populateProductOrderList = function() {
+			$http({	method : 'GET',	url : SERVER_URL + "productorder/list"})
+					.then( function successCallback(response) {
+								$scope.data = response.data;
+								$scope.productOrders = response.data;
+								console.log(response);
+								$scope.isProductOrderInformation();
+								$mdDialog.hide();
+							},
+							function errorCallback(response) {
+								$scope.showToast();
+								console.log("Error");
+								$scope.message = "We are Sorry. Something went wrong. Please try again later."
+								$mdDialog.hide();
 			});
-		 $scope.showProgressBarOne();
-	}
+			$scope.showProgressBarOne();
+	};
 	
-	$scope.isProductOrderPresent=false;
-	$scope.isProductOrderInformation=function()
-	{
+	$scope.isProductOrderInformation=function()	{
 		if($scope.data.length==0)
-			{
 			$scope.isProductOrderPresent=true;
-			}
 		else
-			{
 			$scope.isProductOrderPresent=false;
-			}
-	}
+	};
 	
-	$scope.showProgressBarOne= function()
-	{
-		$mdDialog
-		.show(
-				{
+	$scope.showProgressBarOne= function(){
+		$mdDialog.show({
 					controller : ProgressBarController,
 					templateUrl : 'views/progressBar.html',
-					parent : angular
-							.element(document.body),
+					parent : angular.element(document.body),
 					/*targetEvent : ev,*/
 					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					onComplete : function() {
 					/*	$scope.populateUserList(ev);*/
 					}
-					
-				
-				})
-		.then(
-				function(answer) {
+			}).then(function(answer) {
 					$scope.status = 'You said the information was "'
 							+ answer + '".';
 				},
@@ -69,7 +54,6 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 					$scope.status = 'You cancelled the dialog.';
 				});
 	};
-	
 	
 	$scope.showToast = function() {
 		$mdToast.show({
@@ -84,8 +68,6 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 	};
 	 
 	 
-	$scope.productOrder={};
-	
 	$scope.showAddNewProductOrder = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
@@ -106,17 +88,9 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				information : $scope.information
 			}
 		};
-		$mdDialog
-				.show(abc)
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+		$mdDialog.show(abc).then(function() {},	function() {});
 	  };
+	  
 	  function DialogVendorController($scope, $mdDialog,productOrder,flag,action,$rootScope,$mdToast,information) {
 		    $scope.productOrder=productOrder;
 		    $scope.flag=flag;
@@ -137,10 +111,8 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		    
 		    $scope.saveProductOrder=function(ev)
 		    {
-		    	/* console.log($scope.data)*/
 		    	 var data = {
-
-		    			 product: $scope.productOrder.product.id,
+		    			/* product: $scope.productOrder.product.id,*/
 		    			 description:$scope.productOrder.description,
 		    			 status:$scope.productOrder.status.id,
 		    			 quantity:$scope.productOrder.quantity ,
@@ -283,8 +255,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 					});
 			    };
 			    
-			    $scope.getClient=function()
-			    {
+			    $scope.getClient=function(){
 				 $http({
 						method : 'GET',
 						url : SERVER_URL + "client/list"
@@ -300,7 +271,17 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			    };
 			    
 		    
-		  }
+			    
+			    $scope.orderProductAssociations=[];
+			    $scope.orderProductAssociation={};
+			    $scope.addOrderProductAssociation=function(){
+			    	if(!angular.equals($scope.orderProductAssociation,{})){
+						   $scope.orderProductAssociations.push($scope.orderProductAssociation);	
+						   $scope.orderProductAssociation = {};
+						   console.log($scope.orderProductAssociations);
+					}
+			    };
+		  };
 	  
 	  
 	  $scope.showEditProductOrder = function(ev , index) {
