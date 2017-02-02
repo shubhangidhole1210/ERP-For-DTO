@@ -376,6 +376,17 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		};
 		
 		
+		 $scope.orderRawMaterials=[];
+		    $scope.orderRawMaterial={};
+		    $scope.addOrderRawMaterial=function(){
+		    	if(!angular.equals($scope.orderRawMaterial,{})){
+					   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
+					   $scope.orderRawMaterial = {};
+					   console.log($scope.orderRawMaterials);
+				}
+		    };
+		
+		
 
 	};
 

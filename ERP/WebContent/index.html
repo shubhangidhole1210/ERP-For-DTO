@@ -25,6 +25,8 @@
          <script type="text/javascript" src="js/controllers/productOrderCtrl.js"></script>
          <script type="text/javascript" src="js/controllers/productInventoryCtrl.js"></script>
          <script type="text/javascript" src="js/controllers/ProgressBarController.js"></script>
+          <script type="text/javascript" src="js/controllers/homeCtrl.js"></script>
+         <script type="text/javascript" src="js/controllers/loginCtrl.js"></script>
          <script type="text/javascript" src="js/services/utils.js"></script>
 </head>
     <body ng-app="ERPApp">
@@ -33,10 +35,11 @@
     <div>
    <div class="erp-headder">
       <div class="display-erp-img"> <img alt="" src="image/angular_img.png" width="70px" height="70px"></div> 
-       <div class="erp-user-name" ng-show="isuserName">{{userName}}</div>
-       <!-- <div align="center">
-        <md-button class="md-raised" ng-click="displayLogin()">User Login</md-button>
-       </div> -->
+      <div style="margin-left: 80%">
+         <md-button class="md-raised"  ng-click="displayLogin()">User Login</md-button>
+      </div>
+       
+       
     
    </div>
    </div>

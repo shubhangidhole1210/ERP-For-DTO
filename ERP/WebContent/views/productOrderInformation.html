@@ -114,7 +114,7 @@
           <label style="color: black;">PRODUCT*</label>
           <md-select ng-model="orderProductAssociation.product" name="product"  ng-disabled="isReadOnly"  ng-init="getProducts()">
             <md-option ng-repeat="product in products" ng-value="product" >
-               {{product.name}}
+              <!--  {{product.name}} -->
             </md-option>
           </md-select>
          <!--  <div ng-messages="productOrderInformation.product.$error">

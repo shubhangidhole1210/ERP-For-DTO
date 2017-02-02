@@ -198,3 +198,40 @@ tr:nth-child(even) {
     height: 30px;
     padding: 10px;
 }
+.login-form
+{
+	
+    width: 400px;
+    margin: 0 auto;
+    padding: 50px 50px;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
+
+.text
+{
+	border-bottom: 1px solid #e0e0e0;
+	width: 300px;
+	padding: 10px;
+    padding-right: 70px;
+    margin-bottom: 10px;
+}
+.password-container{
+	position: relative;
+}
+.forgotLink
+{
+	right: 10px;
+    top: 10px;
+    position: absolute;
+    font-weight: bold;
+	
+}
+.input-error{
+	border: 1px solid red;
+}
+.loginForm
+{
+	padding: 20px;
+}
