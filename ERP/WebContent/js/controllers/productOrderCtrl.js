@@ -112,7 +112,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		    $scope.saveProductOrder=function(ev)
 		    {
 		    	 var data = {
-		    			/* product: $scope.productOrder.product.id,*/
+		    			 orderproductassociations : $scope.orderProductAssociations,
 		    			 description:$scope.productOrder.description,
 		    			 status:$scope.productOrder.status.id,
 		    			 quantity:$scope.productOrder.quantity ,
@@ -130,7 +130,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		    	 if($scope.flag==0)
 		    		 {
 		    		    httpparams.method='post',
-		    		    httpparams.url=SERVER_URL + "productorder/create"
+		    		    httpparams.url=SERVER_URL + "productorder/createmultiple"
 		    		 }
 		    	 else
 		    		 {
@@ -273,11 +273,11 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		    
 			    
 			    $scope.orderProductAssociations=[];
-			    $scope.orderProductAssociation={};
+			    $scope.orderProductAssociation={isActive : true};
 			    $scope.addOrderProductAssociation=function(){
 			    	if(!angular.equals($scope.orderProductAssociation,{})){
 						   $scope.orderProductAssociations.push($scope.orderProductAssociation);	
-						   $scope.orderProductAssociation = {};
+						   $scope.orderProductAssociation = {isActive : true};
 						   console.log($scope.orderProductAssociations);
 					}
 			    };

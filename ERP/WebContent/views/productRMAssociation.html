@@ -2,13 +2,13 @@
 	<div class="erp-information">
 		<div>
 			<md-button class="md-raised" ng-click="showAddNewProductRMAssociation($event);"  ng-init="populateProductRMAssociationList();flag=0">ADD
-			NEW PRODUCT RM ASSOCIATION</md-button>
+			NEW PRODUCT RM ASSOCIATION LIST</md-button>
 		</div>
 		
 		<input type="text" ng-model="searchText" placeholder="Search by Name">
 		<md-content class="md-padding">
     <form ng-submit="$event.preventDefault()">
-      <p style="font-weight: bold;font-size: 20px">USER LIST</p>
+      <p style="font-weight: bold;font-size: 20px">PRODUCT RAW MATERIAL ASSOCIATION LIST</p>
      
       <br/>
     </form>
@@ -35,7 +35,7 @@
 			</tr>
 		</table>
 		
-		<div ng-show="isProductRmAssociation">
+		<div ng-show="isProductRmAssociationPresent">
 		         Currently there are no active Product Raw material.Please add new Product Raw material.
 		</div>
 

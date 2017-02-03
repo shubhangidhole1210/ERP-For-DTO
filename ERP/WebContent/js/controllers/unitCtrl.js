@@ -172,7 +172,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 									$scope.showToast();
 								}else{
 									$scope.displayProgressBar = false;
-									$scope.message = 'User Information saved successfully.';
+									$scope.message = 'Unit Information saved successfully.';
 									$scope.showToast();
 									$rootScope.$emit("CallPopulateUnitList",{});
 								}
@@ -339,7 +339,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteUnit(index);
 							
-							$scope.message = 'Delete user sucessfully';
+							$scope.message = 'Delete unit sucessfully';
 							$scope.showToast();
 						
 						},

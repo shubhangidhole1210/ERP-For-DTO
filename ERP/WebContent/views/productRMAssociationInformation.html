@@ -35,7 +35,7 @@
           <label style="color: black;">PRODUCT*</label>
           <md-select ng-model="productRMAssociation.product.id" name="product"  ng-disabled="isReadOnly" ng-required="true" required>
             <md-option ng-repeat="product in products" ng-value="product.id" >
-               {{product.name}}
+               {{product.partNumber}}
             </md-option>
           </md-select>
           <div ng-messages="productRMAssociationInformation.product.$error">

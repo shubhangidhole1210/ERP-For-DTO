@@ -176,7 +176,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 									$scope.showToast();
 								}else{
 									$scope.displayProgressBar = false;
-									$scope.message = 'User Information saved successfully.';
+									$scope.message = 'Product Information saved successfully.';
 									$scope.showToast();
 									$rootScope.$emit("CallPopulateProductList",{});
 								}
@@ -342,7 +342,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteProduct(index);
 							
-							$scope.message = 'Delete Record sucessfully';
+							$scope.message = 'Delete Product Record sucessfully';
 							$scope.showToast();
 							
 							

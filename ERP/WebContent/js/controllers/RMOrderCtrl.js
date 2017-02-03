@@ -213,7 +213,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			
 			
 			var data = {
-					rawmaterial: $scope.rmOrder.rawmaterial.id,
+					/*rawmaterial: $scope.rmOrder.rawmaterial.id,*/
+					rawmaterialorderassociations:$scope.orderRawMaterials,
 					name:$scope.rmOrder.name,
 					description:$scope.rmOrder.description,
 					status:$scope.rmOrder.status.id,
@@ -237,7 +238,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				console.log($scope.rmOrder);
 				console.log($scope.data);
 				httpparams.method = 'post';
-				httpparams.url = SERVER_URL + "rawmaterialorder/create";
+				httpparams.url = SERVER_URL + "rawmaterialorder/createmultiple";
 			} else {
 				console.log($scope.rmOrder);
 				data.id = $scope.rmOrder.id;
@@ -377,11 +378,11 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		
 		
 		 $scope.orderRawMaterials=[];
-		    $scope.orderRawMaterial={};
+		    $scope.orderRawMaterial={isActive : true};
 		    $scope.addOrderRawMaterial=function(){
 		    	if(!angular.equals($scope.orderRawMaterial,{})){
 					   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
-					   $scope.orderRawMaterial = {};
+					   $scope.orderRawMaterial = {isActive : true};
 					   console.log($scope.orderRawMaterials);
 				}
 		    };

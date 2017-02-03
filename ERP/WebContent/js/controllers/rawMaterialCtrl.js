@@ -81,8 +81,8 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 	$scope.showAddRawMaterial = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
-		$scope.rawMaterial = {};
-		$scope.information="Add Raw Material Information"
+		/*$scope.rawMaterial = {};*/
+		$scope.information="ADD RAW MATERIAL INFORMATION"
 		var abc = {
 			controller : rawMaterialController,
 			templateUrl : 'views/rawMaterialInformation.html',
@@ -173,7 +173,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 									$scope.showToast();
 								}else{
 									$scope.displayProgressBar = false;
-									$scope.message = 'User Information saved successfully.';
+									$scope.message = 'Raw material Information saved successfully.';
 									$scope.showToast();
 									$rootScope.$emit("CallPopulateRawMaterial",{});
 								}
@@ -266,7 +266,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		$scope.isReadOnly = false;
 		$scope.rawMaterial = $scope.rawMaterials[index];
 		console.log($scope.user);
-		$scope.information = "Edit Raw Material Information"
+		$scope.information = "EDIT RAW MATERIAL INFORMATION"
 		$mdDialog
 				.show({
 					controller : rawMaterialController,
@@ -297,7 +297,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		$scope.rawMaterial = $scope.rawMaterials[index];
 		$scope.isSaving = false;
 		console.log($scope.rawMaterial);
-		$scope.information="View Raw material Information"
+		$scope.information="VIEW RAW MATERIAL INFORMATION"
 		$mdDialog.show({
 					controller : rawMaterialController,
 					templateUrl : 'views/rawMaterialInformation.html',
@@ -359,7 +359,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteraeMaterial(index);
 							
-							$scope.message = 'Delete Record sucessfully';
+							$scope.message = 'Delete Raw material Record sucessfully';
 							$scope.showToast();
 							
 							

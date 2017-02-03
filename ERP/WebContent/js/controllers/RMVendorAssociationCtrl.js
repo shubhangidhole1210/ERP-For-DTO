@@ -191,7 +191,7 @@ erpApp
 													$scope.showToast();
 												}else{
 													$scope.displayProgressBar = false;
-													$scope.message = 'User Information saved successfully.';
+													$scope.message = ' Raw Material Vendor Association Information saved successfully.';
 													$scope.showToast();
 													$rootScope.$emit("CallPopulateRMVendorAssociationList",{});
 												}

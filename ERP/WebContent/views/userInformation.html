@@ -17,18 +17,18 @@
       <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">USER ID</label>
-            <input type="text" ng-model="user.userid"  required name="userid" ng-minlength="5" ng-maxlength="20" ng-disabled="isReadOnly"  >
+            <input type="text" ng-model="user.userid"  required name="userid" ng-minlength="5"  ng-disabled="isReadOnly"  >
              <div ng-messages="userInformation.userid.$error">
             <div ng-message="required">Please enter user ID</div>
-            <div ng-message="minlength">User ID should be minimum 5 or maximum 20 character </div>
+            <div ng-message="minlength">User ID should be minimum 5 character or Digit</div>
           </div>
           </md-input-container>
 
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">PASSWORD</label>
-            <input type="password" ng-model="user.password"  required name="password" ng-minlength="6" ng-disabled="isReadOnly">
+            <input type="password" ng-model="user.password"  required name="password" ng-minlength="5" ng-disabled="isReadOnly">
             <div ng-messages="userInformation.password.$error">
-              <div ng-message="required">Password must be required</div>
+              <div ng-message="required">Password is required</div>
               <div ng-message="minlength">password is too short</div>
             </div>
           </md-input-container>
@@ -37,17 +37,19 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">FIRST NAME</label>
-            <input type="text" ng-model="user.firstName"  required name="firstName" ng-disabled="isReadOnly">
+            <input type="text" ng-model="user.firstName"  required name="firstName" ng-disabled="isReadOnly" ng-minlength="2">
             <div ng-messages="userInformation.firstName.$error">
-             <div ng-message="required">User Name must be required please enter valid user name</div>
+             <div ng-message="required">Please Enter valid user name</div>
+             <div ng-message="minlength">User Name Should be minimum two character</div>
             </div>
           </md-input-container>
 
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">LAST NAME</label>
-            <input type="text" ng-model="user.lastName"  required name="lastName" ng-disabled="isReadOnly">
+            <input type="text" ng-model="user.lastName"  required name="lastName" ng-minlength="2" ng-disabled="isReadOnly">
             <div ng-messages="userInformation.lastName.$error">
-             <div ng-message="required">Last Name must be required please enter user last name</div>
+             <div ng-message="required">Please enter user last name</div>
+             <div ng-message="minlength">Last Name Should be minimum two character</div>
             </div>
           </md-input-container>
         </div>

@@ -18,7 +18,7 @@ erpApp
 						}).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.productRMAssociations = response.data;
-
+							$scope.isProductRMAssociationInfo();
 							console.log(response);
 
 						}, function errorCallback(response) {
@@ -88,12 +88,7 @@ erpApp
 					};
 					
 					
-					
-					
-					
-					
-					
-					
+				
 					
 
 					function DialogController($scope, $mdDialog, productRMAssociation,
@@ -164,6 +159,9 @@ erpApp
 									product: $scope.productRMAssociation.product.id,
 									quantity: $scope.productRMAssociation.quantity,
 									isActive : true
+									
+									
+									
 							};
 							var httpparams = {};
 							if ($scope.flag == 0) {
@@ -385,3 +383,5 @@ erpApp
 					}
 
 				});
+
+

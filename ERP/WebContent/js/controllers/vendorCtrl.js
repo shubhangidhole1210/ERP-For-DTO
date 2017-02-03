@@ -187,7 +187,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 									$scope.showToast();
 								}else{
 									/*$scope.displayProgressBar = false;*/
-									$scope.message = 'User Information saved successfully.';
+									$scope.message = 'Vendor Information saved successfully.';
 									$scope.showToast();
 									$rootScope.$emit("callPopulateVendorList",{});
 								}
@@ -349,7 +349,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 								$scope.status = 'You decided to get rid of your debt.';
 								$scope.deleteVendor(index);
 								
-								$scope.message = 'Delete Record sucessfully';
+								$scope.message = 'Delete Vendor Record sucessfully';
 								$scope.showToast();
 								
 								

@@ -19,16 +19,19 @@ erpApp
 						}).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.rmInventarys = response.data;
-
+							$scope.isRmInventoryInformation();
 							console.log(response);
-
+							$mdDialog.hide();
 						}, function errorCallback(response) {
 							$scope.message = "We are Sorry. Something went wrong. Please try again later."
 							$scope.showToast();
 							console.log("Error");
-
+							$mdDialog.hide();
 						});
+						$scope.showProgressBarOne();
 					}
+					
+					
 					
 					$scope.showToast = function() {
 						$mdToast.show({
@@ -40,6 +43,46 @@ erpApp
 								message : $scope.message
 							}
 						});
+					};
+					
+					$scope.isrmInventoryPresent=false;
+					$scope.isRmInventoryInformation=function()
+					{
+						if($scope.data.length==0)
+							{
+							$scope.isrmInventoryPresent=true;
+							}
+						else
+							{
+							$scope.isrmInventoryPresent=false;
+							}
+					}
+					$scope.showProgressBarOne= function()
+					{
+						$mdDialog
+						.show(
+								{
+									controller : ProgressBarController,
+									templateUrl : 'views/progressBar.html',
+									parent : angular
+											.element(document.body),
+									/*targetEvent : ev,*/
+									clickOutsideToClose : false,
+									fullscreen : $scope.customFullscreen,
+									onComplete : function() {
+									/*	$scope.populateUserList(ev);*/
+									}
+									
+								
+								})
+						.then(
+								function(answer) {
+									$scope.status = 'You said the information was "'
+											+ answer + '".';
+								},
+								function() {
+									$scope.status = 'You cancelled the dialog.';
+								});
 					};
 					
 					$scope.rmInventary = {};
@@ -119,7 +162,7 @@ erpApp
 									updatedBy:3,
 									updated_date: null,
 									isactive:true,
-									racknumber: '12',
+									racknumber: $scope.rmInventary.racknumber
 									
 							};
 							var httpparams = {};
@@ -150,7 +193,7 @@ erpApp
 													$scope.showToast();
 												}else{
 													$scope.displayProgressBar = false;
-													$scope.message = 'User Information saved successfully.';
+													$scope.message = 'Raw material inventory Information saved successfully.';
 													$scope.showToast();
 													$rootScope.$emit("CallPopulateRMInventaryList",{});
 												}
@@ -245,6 +288,7 @@ erpApp
 											+ $scope.rmInventarys[index].id
 
 								}).then(function successCallback(data) {
+									$mdDialog.hide();
 							$rootScope.$emit("CallPopulateRMInventaryList", {});
 							console.log(data);
 
@@ -252,6 +296,7 @@ erpApp
 							console.log("Error");
 
 						});
+						$scope.showProgressBarOne();
 
 					};
 					$scope.showConfirm = function(ev,index) {
@@ -268,7 +313,7 @@ erpApp
 											$scope.status = 'You decided to get rid of your debt.';
 											$scope.deleteRMInventory(index);
 											
-											$scope.message = 'Delete Record sucessfully';
+											$scope.message = 'Delete Raw Material inventory Record sucessfully';
 											$scope.showToast();
 											
 											
