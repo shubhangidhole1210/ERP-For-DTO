@@ -3,7 +3,7 @@ var erpApp = angular
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-erpApp.value('SERVER_URL', 'http://192.168.2.111:8080/ERP/');
+erpApp.value('SERVER_URL', 'http://localhost:8080/ERP-BackEnd/');
 erpApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/home.html',
@@ -110,25 +110,7 @@ erpApp.config(function($routeProvider) {
 	});
 	
 });
-/*erpApp.run(function ($rootScope,$location){
-	$rootScope.$on('$routeChangeStart', function (event, next, prev) {
-	    if (next !== undefined) {
-	        if ('data' in next) {
-	            if ('loginRequired' in next.data) {
-	                var loginRequired = next.data.loginRequired;
-	                console.log('loginRequired = ' + loginRequired);
-	                if(loginRequired)
-	                 {
-	                	$location.path('/login');
-	                 }
-	                
-	               
-	            }
-	        }
-	    }
-	});
-	
-});*/
+
 
 
 erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
@@ -157,13 +139,16 @@ erpApp.factory('Auth', function(){
 	    },
 	    isLoggedIn : function(){
 	        return (user)? user : false;
+	    },
+	    getAuthToken : function(){
+	        return user.auth_token;
 	    }
 	  }
-	})
+	});
 
 
 
-erpApp.controller('ERPController', function($scope) {
+erpApp.controller('ERPController', function($scope,$rootScope,Auth) {
 	
 	/*$scope.isLoginButton = true;
 	$scope.isuserName = false;
@@ -171,11 +156,15 @@ erpApp.controller('ERPController', function($scope) {
 		$scope.isLoginButton = false;
 		$scope.isuserName = true;
 	}*/
-	/*$scope.displayMenu=Auth.isLoggedIn();
-	rootScope.changeMenu=function($event)
-	{
-		
-	};*/
+	$scope.displayMenu=Auth.isLoggedIn();
+	$rootScope.$on('logout',function($event){
+		console.log('Inside logout event');
+		$scope.displayMenu=Auth.isLoggedIn();
+	});
+	$rootScope.$on('loginSuccess',function($event){
+		console.log('Inside login success event');
+		$scope.displayMenu=Auth.isLoggedIn();
+	});
 });
 
 /*erpApp.controller('homectrl', function($scope, $http,SERVER_URL) {

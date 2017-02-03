@@ -1,11 +1,13 @@
 erpApp.controller(
 				'userCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,utils) {
+				function($scope, $http, $mdDialog, $mdToast, $rootScope,
+						SERVER_URL, utils, Auth) {
 					$scope.isReadOnly = false;
-
+					$scope.isUserUnavailable = false;
+					
 					$rootScope.$on("CallPopulateUserList", function($event) {
 						$scope.populateUserList();
-						
+
 					});
 					$rootScope.$on("saveUserError", function() {
 						$scope.showAddNewUser();
@@ -17,72 +19,41 @@ erpApp.controller(
 							method : 'GET',
 							url : SERVER_URL + "user/list"
 						}).then(function successCallback(response) {
-							
-							$scope.data = response.data;
-							$scope.users = response.data;
-							$scope.isUserInformation();
-							console.log(response);
-							utils.hideProgressBar();
-							/*$mdDialog.hide();*/
 
-						}, function errorCallback(response) {
-							$scope.message = "We are Sorry. Something went wrong. Please try again later."
-							$scope.showToast();
-							console.log("Error");
-							$mdDialog.hide();
-						
-						});
-							
-						
-						/*$scope.showProgressBarOne();*/
-						/*progressBar.showProgressBarOne();*/
-					} 
-					
-					$scope.isUserUnavailable=false;
-					$scope.isUserInformation=function()
-					{
-						if($scope.data.length==0)
-							{
-							$scope.isUserUnavailable=true;
-							}
-						else
-							{
-							$scope.isUserUnavailable=false;
-							}
-					}
-					/*
-					$rootScope.$on("callProgressBar", function($event){
-						$scope.showProgressBar();
-					});
-					*/
-					$scope.showProgressBarOne= function()
-					{
+											$scope.data = response.data;
+											$scope.users = response.data;
+											$scope.isUserInformation();
+											console.log(response);
+											utils.hideProgressBar();
+										},
+										function errorCallback(response) {
+											$scope.message = "We are Sorry. Something went wrong. Please try again later."
+											$scope.showToast();
+											console.log("Error");
+											$mdDialog.hide();
+
+										});
+					};
+
+					$scope.isUserInformation = function() {
+						if ($scope.data.length == 0) {
+							$scope.isUserUnavailable = true;
+						} else {
+							$scope.isUserUnavailable = false;
+						}
+					};
+					$scope.showProgressBarOne = function() {
 						$mdDialog
-						.show(
-								{
+								.show({
 									controller : ProgressBarController,
 									templateUrl : 'views/progressBar.html',
-									parent : angular
-											.element(document.body),
-									/*targetEvent : ev,*/
+									parent : angular.element(document.body),
 									clickOutsideToClose : false,
-									fullscreen : $scope.customFullscreen,
-									onComplete : function() {
-										/*$scope.populateUserList(ev);*/
-									}
-									
-								
-								})
-						.then(
-								function(answer) {
-									$scope.status = 'You said the information was "'
-											+ answer + '".';
-								},
-								function() {
-									$scope.status = 'You cancelled the dialog.';
-								});
+									fullscreen : $scope.customFullscreen
+									})
+								.then( function(answer) {}, function() {});
 					};
-					
+
 					$scope.showToast = function() {
 						$mdToast.show({
 							hideDelay : 3000,
@@ -94,11 +65,11 @@ erpApp.controller(
 							}
 						});
 					};
-					
+
 					$scope.user = {};
 					$scope.showAddNewUser = function(ev) {
 						$scope.user = {};
-						$scope.information="ADD NEW USER"
+						$scope.information = "ADD NEW USER"
 						$scope.flag = 0;
 						$scope.isReadOnly = false;
 						var abc = {
@@ -107,7 +78,6 @@ erpApp.controller(
 							parent : angular.element(document.body),
 							targetEvent : ev,
 							clickOutsideToClose : true,
-							onRemoving : function(){console.log('Removing user dialog');},
 							fullscreen : $scope.customFullscreen,
 							locals : {
 								user : $scope.user,
@@ -118,27 +88,12 @@ erpApp.controller(
 						};
 						$mdDialog
 								.show(abc)
-								.then(
-										function(answer) {
-											$scope.status = 'You said the information was "'
-													+ answer + '".';
-										},
-										function() {
-											$scope.status = 'You cancelled the dialog.';
-										});
+								.then( function(answer) {}, function() {});
 					};
-					
-					
-					
-					
-					
-					
-					
-					
-					
 
 					function DialogController($scope, $mdDialog, user,
-							$location, $rootScope,SERVER_URL,flag,action,information) {
+							$location, $rootScope, SERVER_URL, flag, action,
+							information, Auth) {
 						$scope.isReadOnly = action;
 						$scope.flag = flag;
 						$scope.user = user;
@@ -159,8 +114,7 @@ erpApp.controller(
 						};
 
 						$scope.saveUser = function(ev) {
-							
-							
+
 							var data = {
 
 								userid : $scope.user.userid,
@@ -184,31 +138,41 @@ erpApp.controller(
 								console.log($scope.data);
 								httpparams.method = 'post';
 								httpparams.url = SERVER_URL + "user/create";
+
 							} else {
 								console.log($scope.user);
 								data.id = $scope.user.id;
 								httpparams.method = 'put';
 								httpparams.url = SERVER_URL + "user/update";
 							}
+							httpparams.headers = {
+								"auth_token" : Auth.getAuthToken()
+							};
 							httpparams.data = data;
 							$http(httpparams)
 									.then(
 											function successCallback(data) {
 												$mdDialog.hide();
 												console.log(data);
-												if(data.data.code === 0){
-													console.log(data.data.message);
-													$rootScope.$emit(
-															"saveUserError", {});
+												if (data.data.code === 0) {
+													console
+															.log(data.data.message);
+													$rootScope
+															.$emit(
+																	"saveUserError",
+																	{});
 													console.log(data);
 													$scope.hide();
 													$scope.message = 'Something went worng. Please try again later.';
 													$scope.showToast();
-												}else{
+												} else {
 													$scope.displayProgressBar = false;
 													$scope.message = 'User Information saved successfully.';
 													$scope.showToast();
-													$rootScope.$emit("CallPopulateUserList",{});
+													$rootScope
+															.$emit(
+																	"CallPopulateUserList",
+																	{});
 												}
 											},
 											function errorCallback(data) {
@@ -219,19 +183,15 @@ erpApp.controller(
 												$scope.message = 'Something went worng. Please try again later.';
 												$scope.showToast();
 											});
-							 /*$rootScope.$emit("callProgressBar",{});*/
 						}
 
-						$scope.submitInformation = function(isvaliduser,$event) {
+						$scope.submitInformation = function(isvaliduser, $event) {
 							if (isvaliduser) {
-							/*  $rootScope.$emit("callProgressBar",{});*/
 								$scope.saveUser($event);
-								
 							} else {
 								console.log('its else block');
 							}
-
-						}
+						};
 
 						$scope.showToast = function() {
 							$mdToast.show({
@@ -244,7 +204,7 @@ erpApp.controller(
 								}
 							});
 						};
-						
+
 						$scope.showProgressBar = function(ev) {
 							$scope.displayProgressBar = true;
 							$mdDialog
@@ -260,7 +220,7 @@ erpApp.controller(
 												onComplete : function() {
 													$scope.saveUser(ev);
 												}
-												
+
 											// Only for -xs, -sm breakpoints.
 											})
 									.then(
@@ -272,9 +232,7 @@ erpApp.controller(
 												$scope.status = 'You cancelled the dialog.';
 											});
 						};
-						
-						
-						
+
 						$http({
 							method : 'GET',
 							url : SERVER_URL + "usertype/list"
@@ -288,41 +246,33 @@ erpApp.controller(
 							console.log("Error");
 
 						});
-						
-					/*	$rootScope.$on("callProgressBar", function($event){
-							$scope.showProgressBar();
-						});*/
-						
-						
-						
 
-					};
+						/*	$rootScope.$on("callProgressBar", function($event){
+								$scope.showProgressBar();
+							});*/
+
+					}
+					;
 
 					$scope.deleteUser = function(index) {
 						/* $scope.user = $scope.users[index].id; */
 						console.log($scope.user);
 
-						$http(
-								{
-									method : 'delete',
-									url : SERVER_URL + "user/delete/"
-											+ $scope.users[index].id
-
-								}).then(function successCallback(data) {
-									$mdDialog.hide();
-							$rootScope.$emit("CallPopulateUserList", {});
-							console.log(data);
-							/*$mdDialog.hide();*/
-						}, function errorCallback(data) {
-							console.log("Error");
-
+						$http({ method : 'delete',
+								url : SERVER_URL + "user/delete/" + $scope.users[index].id
+							}).then(function successCallback(data) {
+								$mdDialog.hide();
+								$rootScope.$emit("CallPopulateUserList", {});
+								console.log(data);
+								}, function errorCallback(data) {
+									console.log("Error");
 						});
 
 						$scope.showProgressBarOne();
 					};
 
 					$scope.showEditUser = function(ev, index) {
-						$scope.information ="EDIT USER INFORMATION"
+						$scope.information = "EDIT USER INFORMATION"
 						$scope.flag = 1;
 						$scope.isReadOnly = false;
 						$scope.user = $scope.users[index];
@@ -342,14 +292,7 @@ erpApp.controller(
 										information : $scope.information
 									}
 								})
-								.then(
-										function(answer) {
-											$scope.status = 'You said the information was "'
-													+ answer + '".';
-										},
-										function() {
-											$scope.status = 'You cancelled the dialog.';
-										});
+								.then(function(answer) {}, function() {});
 					};
 
 					$scope.viewUserInformation = function(ev, index) {
@@ -357,9 +300,10 @@ erpApp.controller(
 						$scope.isReadOnly = true;
 						$scope.user = $scope.users[index];
 						$scope.isSaving = false;
-						$scope.information ="VIEW USER INFORMATION"
+						$scope.information = "VIEW USER INFORMATION"
 						console.log($scope.user);
-						$mdDialog.show({
+						$mdDialog
+								.show({
 									controller : DialogController,
 									templateUrl : 'views/userInformation.html',
 									parent : angular.element(document.body),
@@ -372,55 +316,25 @@ erpApp.controller(
 										action : $scope.isReadOnly,
 										information : $scope.information
 									}
-								})
-								.then(
-											function(answer) {
-											$scope.status = 'You said the information was "'
-													+ answer + '".';
-											
-										},
-										function() {
-											$scope.status = 'You cancelled the dialog.';
-										});
+								}).then(function(){}, function() {});
 					};
 
-					$scope.showConfirm = function(ev,index) {
+					$scope.showConfirm = function(ev, index) {
 						// Appending dialog to document.body to cover sidenav in docs app
-						var confirm = $mdDialog.confirm().title(
-								'Are you sure you want to Delete User Information?')
+						var confirm = $mdDialog
+								.confirm()
+								.title(
+										'Are you sure you want to Delete User Information?')
 								.ariaLabel('Lucky day').targetEvent(ev).ok(
-										'YES' ).cancel('NO');
+										'YES').cancel('NO');
 
-						$mdDialog
-								.show(confirm)
-								.then(
-										function() {
-											$scope.status = 'You decided to get rid of your debt.';
+						$mdDialog.show(confirm)
+								.then(function() {
 											$scope.deleteUser(index);
-											
 											$scope.message = 'Delete Record sucessfully';
 											$scope.showToast();
-											
-											
 										},
-										function() {
-											$scope.status = 'You decided to keep your debt.';
-										});
+										function() { });
 					};
-
-					function ProgressBarController($scope, $mdDialog) {
-						
-						$scope.hide = function() {
-							$mdDialog.hide();
-						};
-
-						$scope.cancel = function() {
-							$mdDialog.cancel();
-						};
-
-						$scope.answer = function(answer) {
-							$mdDialog.hide(answer);
-						};
-					}
 
 				});
