@@ -60,8 +60,10 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	}).when('/finishedGood', {
-		templateUrl : 'views/finishedGood.html',
+	})
+	
+	.when('/userTypeAsso', {
+		templateUrl : 'views/userPageTypeAsso.html',
 		data : {
 			loginRequired : true
 		}

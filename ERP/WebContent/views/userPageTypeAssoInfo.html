@@ -1,0 +1,58 @@
+<md-dialog aria-label="Mango (Fruit)" >
+  <form name="userTypePageInformtion"  novalidate>
+  
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{information}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content >
+      <div class="md-dialog-content" >
+         <div layout-gt-sm="row">
+           <md-input-container>
+          <label style="color: black;">USER TYPE*</label>
+          <md-select ng-model="userTypePageAsso.usertype.id" name="userType"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getUserType()">
+            <md-option ng-repeat="userType in userTypes" ng-value="userType.id" >
+               {{userType.usertypeName}}
+            </md-option>
+          </md-select>
+          <div ng-messages="userTypePageInformtion.userType.$error" >
+                 <div ng-message="required">Please Select User Type</div>
+              </div>
+        </md-input-container>
+         <md-input-container>
+          <label style="color: black;">PAGE*</label>
+          <md-select ng-model="userTypePageAsso.page.id" name="page"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getPage()">
+            <md-option ng-repeat="page in pages" ng-value="page.id" >
+               {{page.pageName}}
+            </md-option>
+          </md-select>
+          <div ng-messages="userTypePageInformtion.userType.$error" >
+                 <div ng-message="required">Please Select User Page</div>
+              </div>
+        </md-input-container>
+        </div>
+         </div>
+  
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitUserTypePageInformation(userTypePageInformtion.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+    
+  </form>
+</md-dialog>
+
+
+
+
+
+
