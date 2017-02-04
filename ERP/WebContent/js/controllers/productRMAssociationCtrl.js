@@ -159,8 +159,7 @@ erpApp
 									product: $scope.productRMAssociation.product.id,
 									quantity: $scope.productRMAssociation.quantity,
 									isActive : true
-									
-									
+							
 									
 							};
 							var httpparams = {};
