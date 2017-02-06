@@ -3,7 +3,7 @@ var erpApp = angular
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-erpApp.value('SERVER_URL', 'http://localhost:8080/ERP-BackEnd/');
+erpApp.value('SERVER_URL', 'http://192.168.2.103:8080/ERP/');
 erpApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/home.html',

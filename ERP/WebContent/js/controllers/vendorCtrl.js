@@ -185,8 +185,21 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 									$scope.hide();
 									$scope.message = 'Something went worng. Please try again later.';
 									$scope.showToast();
-								}else{
-									/*$scope.displayProgressBar = false;*/
+								}
+								else if(data.data.code===2)
+									{
+									console.log(data.data.message);
+									$rootScope.$emit(
+											"saveVendorError", {});
+									console.log(data);
+									$scope.hide();
+									$scope.message = data.data.message;
+									$scope.showToast();
+									 
+									}
+								
+								else{
+									$scope.displayProgressBar = false;
 									$scope.message = 'Vendor Information saved successfully.';
 									$scope.showToast();
 									$rootScope.$emit("callPopulateVendorList",{});

@@ -188,7 +188,18 @@ erpApp
 													$scope.hide();
 													$scope.message = 'Something went worng. Please try again later.';
 													$scope.showToast();
-												}else{
+												}
+												else if(data.data.code === 2)
+													{
+													console.log(data.data.message);
+													$rootScope.$emit(
+															"saveClientError", {});
+													console.log(data);
+													$scope.hide();
+													$scope.message = data.data.message;
+													$scope.showToast();
+													}
+												else{
 													$scope.displayProgressBar = false;
 													$scope.message = 'User Information saved successfully.';
 													$scope.showToast();

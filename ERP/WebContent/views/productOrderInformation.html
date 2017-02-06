@@ -74,7 +74,7 @@
             <th>ACTION</th>
           </tr>
           <tr ng-repeat="orderProductAssociation in orderProductAssociations">
-          <td>{{orderProductAssociation.product.name}}</td>
+          <td>{{orderProductAssociation.product.partNumber}}</td>
           <td>{{orderProductAssociation.quantity}}</td>
           <td>
              <button type="button" style="height: 40px">EDIT</button>
@@ -113,7 +113,7 @@
            <md-input-container>
           <label style="color: black;">PRODUCT*</label>
           <md-select ng-model="orderProductAssociation.product" name="product"  ng-disabled="isReadOnly"  ng-init="getProducts()">
-            <md-option ng-repeat="product in products" ng-value="product.id" >
+            <md-option ng-repeat="product in products" ng-value="product.partNumber" >
                {{product.name}}
             </md-option>
           </md-select>

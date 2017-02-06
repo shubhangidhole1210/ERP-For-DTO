@@ -174,11 +174,26 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 									$scope.hide();
 									$scope.message = 'Something went worng. Please try again later.';
 									$scope.showToast();
-								}else{
+								}
+								else if(data.data.code === 2)
+									{
+									console.log(data.data.message);
+									$rootScope.$emit(
+											"saveProductError", {});
+									console.log(data);
+									$scope.hide();
+									/*$scope.message = 'Product  Name already Exist.';*/
+									$scope.message=data.data.message;
+									$scope.showToast();
+									}
+								
+								else
+								{
 									$scope.displayProgressBar = false;
 									$scope.message = 'Product Information saved successfully.';
 									$scope.showToast();
 									$rootScope.$emit("CallPopulateProductList",{});
+									
 								}
 							},
 							function errorCallback(data) {

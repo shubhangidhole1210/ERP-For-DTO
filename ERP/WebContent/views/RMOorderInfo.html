@@ -121,13 +121,13 @@
          <h2>Raw Material List</h2>
         <table>
           <tr>
+          <th>QUANTITY</th>
             <th>RAW MATERIAL</th>
-            <th>QUANTITY</th>
             <th>ACTION</th>
           </tr>
           <tr ng-repeat="orderRawMaterial in orderRawMaterials">
+           <td>{{orderRawMaterial.quantity}}</td>
           <td>{{orderRawMaterial.rawmaterial.partNumber}}</td>
-          <td>{{orderRawMaterial.quantity}}</td>
           <td>
              <button type="button" style="height: 40px">EDIT</button>
                <button type="button" style="height: 40px">VIEW</button>
