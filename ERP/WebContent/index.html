@@ -28,6 +28,8 @@
           <script type="text/javascript" src="js/controllers/homeCtrl.js"></script>
          <script type="text/javascript" src="js/controllers/loginCtrl.js"></script>
          <script type="text/javascript" src="js/controllers/userTypePageAssociationCtrl.js"></script>
+          <script type="text/javascript" src="js/controllers/securityCtrl.js"></script>
+          <script type="text/javascript" src="js/controllers/administrationCtrl.js"></script>
          <script type="text/javascript" src="js/services/utils.js"></script>
 </head>
     <body ng-app="ERPApp">
@@ -35,7 +37,7 @@
     <div ng-controller="ERPController">
     <div>
    <div class="erp-headder">
-      <div class="display-erp-img"> <img alt="" src="image/angular_img.png" width="70px" height="70px"></div> 
+      <div class="display-erp-img"> <img alt="" src="image/erp-logo.png" width="120px" height="70px"></div> 
       <div style="margin-left: 80%">
          <md-button class="md-raised"  ng-click="displayLogin()">User Login</md-button>
       </div>
@@ -58,7 +60,7 @@
            <div class="erp-menu" id="finishGood" ng-class="{changeERPMenu : selected=='finishGood'}" ng-click="selected='finishGood'"><a href="#/finishedGood" >FINISHED GOOD</a></div>
            <div class="erp-menu" id="orders" ng-class="{changeERPMenu : selected=='orders'}" ng-click="selected='orders'"><a href="#/order">ORDERS</a></div>
            <div class="erp-menu" id="administration" ng-class="{changeERPMenu : selected=='administration'}" ng-click="selected='administration'"><a href="#/administration" >ADMINISTRATION</a></div>
-           <div class="erp-menu" id="report"  ng-class="{changeERPMenu : selected=='report'}" ng-click="selected='report'"><a href="#/Report">REPORT</a></div>
+           <div class="erp-menu" id="report"  ng-class="{changeERPMenu : selected=='report'}" ng-click="selected='report'"><a href="#/securityInformation">SECURITY</a></div>
            <div class="erp-menu" id="norification" ng-class="{changeERPMenu : selected=='norification'}" ng-click="selected='norification'"><a href="#/notification">NOTIFICATION</a></div>
         </div>
         </div>

@@ -30,6 +30,7 @@
             <div ng-messages="productInformation.partNumber.$error">
               <div ng-message="required">Please Enter Product Part Number</div>
             </div>
+            <div style="color: red">{{data.data.message}}</div>
           </md-input-container>
         </div>
       
@@ -54,7 +55,8 @@
 
           
         </div>
-        
+        <input type="file" file-model="myFile"/>
+    <button ng-click="uploadFile()">upload me</button>
      
          </div>
           

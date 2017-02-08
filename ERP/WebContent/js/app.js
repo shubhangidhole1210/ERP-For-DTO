@@ -60,9 +60,7 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	})
-	
-	.when('/userTypeAsso', {
+	}).when('/userTypeAsso', {
 		templateUrl : 'views/userPageTypeAsso.html',
 		data : {
 			loginRequired : true
@@ -97,13 +95,18 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	}).when('/Report', {
-		templateUrl : 'views/Report.html',
+	}).when('/securityInformation', {
+		templateUrl : 'views/securityInformation.html',
 		data : {
 			loginRequired : true
 		}
 	}).when('/notification', {
 		templateUrl : 'views/notification.html',
+		data : {
+			loginRequired : true
+		}
+	}).when('/page', {
+		templateUrl : 'views/page.html',
 		data : {
 			loginRequired : true
 		}
@@ -148,7 +151,36 @@ erpApp.factory('Auth', function(){
 	  }
 	});
 
+erpApp.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
 
+erpApp.service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function(file, uploadUrl){
+        var fd = new FormData();
+        fd.append('file', file);
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function(){
+        })
+        .error(function(){
+        });
+    }
+}]);
 
 erpApp.controller('ERPController', function($scope,$rootScope,Auth) {
 	
@@ -198,15 +230,14 @@ erpApp.controller('administrationCtrl', function($scope) {
 
 });
 
-erpApp.controller('reportctrl', function($scope) {
-
-});
 
 erpApp.controller('notificationCtrl', function($scope) {
 
 });
 
+erpApp.controller('pageCtrl', function($scope) {
 
+});
 
 
 erpApp.controller('ToastCtrl', function($scope, $mdToast, message) {

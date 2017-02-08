@@ -1,4 +1,4 @@
-erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL) {
+erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,fileUpload) {
 	
 	$rootScope.$on("CallPopulateProductList", function() {
 		$scope.populteProductList();
@@ -113,7 +113,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 							$scope.status = 'You cancelled the dialog.';
 						});
 	};
-	function ProductController($scope, $mdDialog,product,action,flag,$mdToast,information) {
+	function ProductController($scope, $mdDialog,product,action,flag,$mdToast,information,fileUpload) {
 		$scope.isReadOnly = action;
 		$scope.flag = flag;
 		$scope.product = product;
@@ -206,6 +206,13 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 							});
 
 		}
+		  $scope.uploadFile = function(){
+		        var file = $scope.myFile;
+		        console.log('file is ' );
+		        console.dir(file);
+		        var uploadUrl = "/fileUpload";
+		        fileUpload.uploadFileToUrl(file, uploadUrl);
+		    };
 
 		$scope.submitProductInformation = function(isvaliduser,$event) {
 			if (isvaliduser) {

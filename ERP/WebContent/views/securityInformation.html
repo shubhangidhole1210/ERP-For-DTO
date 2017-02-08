@@ -1,0 +1,125 @@
+<div ng-controller="securityCtrl">
+<div class="erp-security">
+ <p style="font-weight: bold;font-size: 20px">SECURITY CHECK</p>
+<form  class="login-form" name="securityInformation" novalidate style="width: 900px">
+<fieldset>
+<div class="loginForm" >
+   <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">INVOICE NUMBER </label>
+            <input type="text" required name="invoiceNumber" ng-model="invoice_No" value="invoice_No">
+             <div ng-messages="securityInformation.invoiceNumber.$error">
+            <div ng-message="required">Please enter Invoice Number</div>
+           
+          </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm type="password">
+            <label class="input-filed-label">VENODR NAME</label>
+            <input type="text" required name="vendorName" ng-model="vendorname" value="vendorname" >
+            <div ng-messages="securityInformation.vendorName.$error">
+              <div ng-message="required">Please Enter Vendor name</div>
+            </div>
+          </md-input-container>
+        </div>
+         <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">VEHICLE NAME</label>
+            <input type="text" required name="vehicleName" ng-model="vehicleNo" value="vendorUser.companyName"   >
+             <div ng-messages="securityInformation.vehicleName.$error">
+            <div ng-message="required">Please enter Vehicle Name</div>
+          </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm >
+            <label class="input-filed-label">DRIVER NAME</label>
+            <input type="text" required name="driverName" ng-model="driver_Name" value="driver_Name" >
+            <div ng-messages="securityInformation.driverName.$error">
+              <div ng-message="required">Please Enter Driver Name</div>
+            </div>
+          </md-input-container>
+        </div>
+         <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">IN TIME</label>
+            <input type="time"  name="inTime" ng-model="intime" value="intime">
+             <div ng-messages="securityInformation.inTime.$error">
+            <div ng-message="required">Please enter exact IN Time</div>
+            
+          </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm >
+            <label class="input-filed-label">OUT TIME</label>
+            <input type="time"  name="outTime" ng-model="outtime" value="outtime" >
+            <div ng-messages="securityInformation.outTime.$error">
+              <div ng-message="required">Please Enter Out Time</div>
+            </div>
+          </md-input-container>
+        </div>
+         <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm type="password">
+              <label class="input-filed-label">DATE[MM/DD/YYYY]*</label>
+              
+              <input type="date" placeholder="Enter date of birth" ng-model="user.dob "  name="date" >
+              <div ng-messages="securityInformation.date.$error">
+                 <!-- <div ng-message="required">Please Enter Date</div> -->
+              </div>
+         </md-input-container> 
+         </div>
+          <div layout-gt-sm="row">
+         <md-input-container>
+          <label style="color: black;">PO.NO*</label>
+          <md-select ng-model="user.usertype.id" name="rawMaterial"    ng-init="getRMInformation()">
+            <md-option ng-repeat="rawMaterial in rawMaterials" ng-value="rawMaterial.name" >
+               {{rawMaterial.name}}
+            </md-option>
+          </md-select>
+         <!--  <div ng-messages="securityInformation.rawMaterial.$error" >
+                 <div ng-message="required">Please Select P.O number</div>
+              </div> -->
+        </md-input-container>
+          
+
+        </div>
+        <h3>Raw Material List</h3>
+        <table >
+        <tr >
+          <th>RAW MATERIAL NAME</th>
+          <th>QUANTITY</th>
+        
+        </tr>
+        <tr>
+          <td>xyz</td>
+          <!-- <td>
+          <input type="text" name="quantity">
+           <div ng-messages="securityInformation.quantity.$error">
+            <div ng-message="required">Please enter Raw Material quantity</div>
+          </div>
+          </td> -->
+          <td>
+              <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">QUANTITY</label>
+            <input type="text" ng-model="orderRawMaterial.quantity"  name="quantity"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            <div ng-messages="securityInformation.quantity.$error">
+             <div ng-message="required">please enter quantity </div>
+            <div ng-message="pattern">Please enter Digit only</div>
+            </div>
+          </md-input-container>
+          </td>
+        </tr>
+       
+        </table>
+        <div style="margin-top: 5%;margin-left: 70%">
+         <md-dialog-actions layout="row">
+      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitInformation(securityInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+        </div>
+        
+        </div>
+        </fieldset>
+</form>
+</div>
+</div>

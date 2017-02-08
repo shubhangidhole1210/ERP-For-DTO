@@ -115,6 +115,11 @@
 	padding-left: 17%;
 	padding-top: 100px;
 }
+.erp-security
+{
+	padding-left: 15%;
+	padding-top: 100px;
+}
 .ng-view-class
 {
 	display: flex;
@@ -208,7 +213,15 @@ tr:nth-child(even) {
     display: inline-block;
     height: 100%;
 }
-
+.security-Form
+{
+	 width: 400px;
+    margin: 0 auto;
+    padding: 50px 50px;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
 .text
 {
 	border-bottom: 1px solid #e0e0e0;

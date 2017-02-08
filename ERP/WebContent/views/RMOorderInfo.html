@@ -121,13 +121,13 @@
          <h2>Raw Material List</h2>
         <table>
           <tr>
+          <th>RAW MATERIAL</th>
           <th>QUANTITY</th>
-            <th>RAW MATERIAL</th>
             <th>ACTION</th>
           </tr>
           <tr ng-repeat="orderRawMaterial in orderRawMaterials">
+           <td>{{orderRawMaterial.rawmaterial.partNumber}}</td>
            <td>{{orderRawMaterial.quantity}}</td>
-          <td>{{orderRawMaterial.rawmaterial.partNumber}}</td>
           <td>
              <button type="button" style="height: 40px">EDIT</button>
                <button type="button" style="height: 40px">VIEW</button>
@@ -136,16 +136,9 @@
           </tr>
         </table>
            <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label class="input-filed-label">QUANTITY</label>
-            <input type="text" ng-model="orderRawMaterial.quantity"  name="quantity" ng-disabled="isReadOnly">
-           <!--  <div ng-messages="RMOrderInformation.quantity.$error">
-             <div ng-message="required">please enter quantity </div>
-            </div> -->
-          </md-input-container>
-           <md-input-container>
+             <md-input-container ng-init="rawMaterialId()">
           <label style="color: black;">RAW MATERIAL</label>
-          <md-select ng-model="orderRawMaterial.rawmaterial" name="rawmaterial" value="rawmaterial.id" ng-disabled="isReadOnly" ng-init="rawMaterialId()" name="rawMaterialId" >
+          <md-select ng-model="orderRawMaterial.rawmaterial" name="rawmaterial" value="rawmaterial.id" ng-disabled="isReadOnly"  name="rawMaterialId" >
             <md-option ng-repeat="rawmaterial in RMData" ng-value="rawmaterial" >
                {{rawmaterial.partNumber}}
             </md-option>
@@ -154,6 +147,14 @@
                  <div ng-message="required">Please select Raw Material </div>
               </div> -->
         </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">QUANTITY</label>
+            <input type="text" ng-model="orderRawMaterial.quantity"  name="quantity" ng-disabled="isReadOnly">
+           <!--  <div ng-messages="RMOrderInformation.quantity.$error">
+             <div ng-message="required">please enter quantity </div>
+            </div> -->
+          </md-input-container>
+         
          <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderRawMaterial()">Add Raw Material</button>
        
          </div>
