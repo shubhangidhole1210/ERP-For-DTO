@@ -19,12 +19,16 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast, $
 
 		});
 	}
+	
+	/*$scope.displayRMList=function(index)
 	{
+		console.log($scope.rawMaterials)
 		$http({
 			method : 'GET',
-			url : SERVER_URL + "rawmaterialorderinvoice/list"
+			url : SERVER_URL + "rawmaterialorderassociation/listrm"
+			                       + $scope.rawMaterials[index].id
 		}).then(function successCallback(response) {
-			$scope.rawMaterials = response.data;
+			$scope.rawMaterialList = response.data;
 			
 
 			console.log(response);
@@ -33,7 +37,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast, $
 			console.log("Error");
 
 		});
-	}
+	}*/
 	
 	$scope.submitInformation = function(isvaliduser, $event) {
 		if (isvaliduser) {
