@@ -73,6 +73,7 @@ erpApp.controller(
 						$scope.flag = 0;
 						$scope.isReadOnly = false;
 						var abc = {
+								
 							controller : DialogController,
 							templateUrl : 'views/userInformation.html',
 							parent : angular.element(document.body),
@@ -112,7 +113,21 @@ erpApp.controller(
 						$scope.answer = function(answer) {
 							$mdDialog.hide(answer);
 						};
-
+                         
+						 $scope.checkErr = function(doj,doj) {
+						        $scope.errMessage = '';
+						        var curDate = new Date();
+						        
+						        if(new Date(doj) > new Date(doj)){
+						          $scope.errMessage = 'End Date should be greater than start date';
+						          return false;
+						        }
+						        if(new Date(doj) < curDate){
+						           $scope.errMessage = 'Start date should not be before today.';
+						           return false;
+						        }
+						    };
+						
 						$scope.saveUser = function(ev) {
 
 							var data = {
@@ -206,6 +221,19 @@ erpApp.controller(
 							}
 						};
 
+						 $scope.checkErr = function(dob,doj) {
+						        $scope.errMessage = '';
+						         var curDate = new Date();
+						        
+						         if(new Date(dob) > new Date(doj)){
+							          $scope.errMessage = 'End Date should be greater than start date';
+							          return false;
+							        }
+							        if(new Date(dob) < curDate){
+							           $scope.errMessage = 'Start date should not be before today.';
+							           return false;
+							        }
+						    };
 						$scope.showToast = function() {
 							$mdToast.show({
 								hideDelay : 3000,

@@ -24,10 +24,10 @@
         </div>
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
-            <label  class="input-filed-label">VEHICLE NAME</label>
+            <label  class="input-filed-label">VEHICLE NUMBER</label>
             <input type="text" required name="vehicleName" ng-model="vehicleNo" value="vendorUser.companyName"   >
              <div ng-messages="securityInformation.vehicleName.$error">
-            <div ng-message="required">Please enter Vehicle Name</div>
+            <div ng-message="required">Please enter Vehicle Number</div>
           </div>
           </md-input-container>
 
@@ -42,7 +42,7 @@
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">IN TIME</label>
-            <input type="time"  name="inTime" ng-model="intime" value="intime">
+            <input type="time"  name="inTime" ng-model="intime" value="intime" required id="intime">
              <div ng-messages="securityInformation.inTime.$error">
             <div ng-message="required">Please enter exact IN Time</div>
             
@@ -51,26 +51,27 @@
 
           <md-input-container class="md-block" flex-gt-sm >
             <label class="input-filed-label">OUT TIME</label>
-            <input type="time"  name="outTime" ng-model="outtime" value="outtime" >
+            <input type="time"  name="outTime" ng-model="outtime" value="outtime" id="outtime" required ng-change='checkErr(intime,outtime)' >
             <div ng-messages="securityInformation.outTime.$error">
               <div ng-message="required">Please Enter Out Time</div>
             </div>
           </md-input-container>
+          <span>{{errMessage}}</span>
         </div>
-         <div layout-gt-sm="row">
+         <!-- <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm type="password">
               <label class="input-filed-label">DATE[MM/DD/YYYY]*</label>
               
               <input type="date" placeholder="Enter date of birth" ng-model="user.dob "  name="date" >
               <div ng-messages="securityInformation.date.$error">
-                 <!-- <div ng-message="required">Please Enter Date</div> -->
+                 <div ng-message="required">Please Enter Date</div>
               </div>
          </md-input-container> 
-         </div>
+         </div> -->
           <div layout-gt-sm="row">
          <md-input-container>
           <label style="color: black;">PO.NO*</label>
-          <md-select ng-model="user.usertype.id" name="rawMaterial"    ng-init="getRMInformation()">
+          <md-select ng-model="user.usertype.id" name="rawMaterial" ng-init="getRMInformation()">
             <md-option ng-repeat="rawMaterial in rawMaterials" ng-value="rawMaterial.name" >
                {{rawMaterial.name}}
             </md-option>
@@ -84,7 +85,7 @@
         </div>
         <h3>Raw Material List</h3>
         <table >
-        <tr >
+        <tr>
           <th>RAW MATERIAL NAME</th>
           <th>QUANTITY</th>
         

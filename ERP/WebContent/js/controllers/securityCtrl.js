@@ -42,6 +42,21 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast, $
 			console.log('its else block');
 		}
 	};
+	 $scope.checkErr=function(intime,outtime)
+	 {
+		 $scope.errMessage = '';
+	       /* var curTime = new Time();*/
+		 $scope.curTime=new Time();
+	        
+	        if(new Time(intime) > new Time(outtime)){
+	          $scope.errMessage = 'End Date should be greater than start date';
+	          return false;
+	        }
+	        if(new Date(intime) < curTime){
+	           $scope.errMessage = 'Start date should not be before today.';
+	           return false;
+	        }
+	 };
 	
 	$scope.saveSecurityInformation=function()
 	{

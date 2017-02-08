@@ -100,8 +100,8 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	}).when('/notification', {
-		templateUrl : 'views/notification.html',
+	}).when('/qualityInspection', {
+		templateUrl : 'views/qualityInspection.html',
 		data : {
 			loginRequired : true
 		}
