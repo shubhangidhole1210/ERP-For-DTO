@@ -42,7 +42,7 @@
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">IN TIME</label>
-            <input type="time"  name="inTime" ng-model="intime" value="intime" required id="intime">
+            <input type="time"  name="inTime" ng-model="intime" value="intime"  id="intime">
              <div ng-messages="securityInformation.inTime.$error">
             <div ng-message="required">Please enter exact IN Time</div>
             
@@ -51,14 +51,21 @@
 
           <md-input-container class="md-block" flex-gt-sm >
             <label class="input-filed-label">OUT TIME</label>
-            <input type="time"  name="outTime" ng-model="outtime" value="outtime" id="outtime" required ng-change='checkErr(intime,outtime)' >
+            <input type="time"  name="outTime" ng-model="outtime" value="outtime" id="outtime"  ng-change='checkErr(intime,outtime)' >
             <div ng-messages="securityInformation.outTime.$error">
               <div ng-message="required">Please Enter Out Time</div>
             </div>
           </md-input-container>
           <span>{{errMessage}}</span>
         </div>
-         <!-- <div layout-gt-sm="row">
+         <md-input-container class="md-block" flex-gt-sm >
+            <label class="input-filed-label">DESCRIPTION</label>
+            <input type="text" required name="description" ng-model="description" value="description" >
+            <div ng-messages="securityInformation.description.$error">
+              <div ng-message="required">Please Enter Description</div>
+            </div>
+          </md-input-container>
+         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm type="password">
               <label class="input-filed-label">DATE[MM/DD/YYYY]*</label>
               
@@ -67,12 +74,12 @@
                  <div ng-message="required">Please Enter Date</div>
               </div>
          </md-input-container> 
-         </div> -->
+         </div>
           <div layout-gt-sm="row">
          <md-input-container>
           <label style="color: black;">PO.NO*</label>
-          <md-select ng-model="user.usertype.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayRMList($index)">
-            <md-option ng-repeat="rawMaterial in rawMaterials" ng-value="rawMaterial.name"  >
+          <md-select ng-model="rawmaterialorderassociation.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayRMList($index)">
+            <md-option ng-repeat="rawMaterial in rawMaterials" ng-value="rawMaterial.id"  >
                {{rawMaterial.name}}
             </md-option>
           </md-select>
@@ -90,14 +97,8 @@
           <th>QUANTITY</th>
         
         </tr>
-        <tr>
-          <td>xyz</td>
-          <!-- <td>
-          <input type="text" name="quantity">
-           <div ng-messages="securityInformation.quantity.$error">
-            <div ng-message="required">Please enter Raw Material quantity</div>
-          </div>
-          </td> -->
+        <tr ng-repeat="rawmaterial in rawMaterialList">
+          <td>{{rawmaterial.name}}</td>
           <td>
               <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANTITY</label>

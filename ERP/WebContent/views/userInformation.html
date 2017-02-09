@@ -92,24 +92,25 @@
           <md-input-container class="md-block" flex-gt-sm type="password">
               <label class="input-filed-label">DATE OF BIRTH[MM/DD/YYYY]*</label>
               
-              <input type="date" placeholder="Enter date of birth" ng-model="user.dob "  name="dob" required id="dob" ng-disabled="isReadOnly">
+              <input type="date" placeholder="Enter date of birth" ng-model="user.dob "  name="dob" required id="dob" ng-disabled="isReadOnly"  >
               <div ng-messages="userInformation.dob.$error">
                  <div ng-message="required">Please Enter Date of Birth</div>
               </div>
          </md-input-container>   
                       <md-input-container class="md-block" flex-gt-sm type="password">
-         <input type="date" placeholder="Enter date of birth" ng-model="user.doj" name="doj" required ng-disabled="isReadOnly" id="doj" ng-change="checkErr(dob,doj)">
+         <input type="date" placeholder="Enter date of birth" ng-model="user.doj" name="doj" required ng-disabled="isReadOnly" id="doj" ng-change="checkDate(dob,doj)">
           <label class="input-filed-label">DATE OF JOINING[MM/DD/YYYY]*</label>
               <div ng-messages="userInformation.doj.$error">
                  <div ng-message="required">Please Enter Date of Joining</div>
               </div>
+              
          </md-input-container>   
-         <span>{{errMessage}}</span>
+        
         
          </div>
           
           
-         
+         <h4 style="color: red;margin-left: 40px">{{errorMessage}}</h4>
       
     </md-dialog-content>
 

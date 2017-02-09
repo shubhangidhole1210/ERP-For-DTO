@@ -114,7 +114,7 @@ erpApp.controller(
 							$mdDialog.hide(answer);
 						};
                          
-						 $scope.checkErr = function(doj,doj) {
+						/* $scope.checkErr = function(doj,doj) {
 						        $scope.errMessage = '';
 						        var curDate = new Date();
 						        
@@ -126,7 +126,7 @@ erpApp.controller(
 						           $scope.errMessage = 'Start date should not be before today.';
 						           return false;
 						        }
-						    };
+						    };*/
 						
 						$scope.saveUser = function(ev) {
 
@@ -211,29 +211,33 @@ erpApp.controller(
 												$scope.message = 'Something went worng. Please try again later.';
 												$scope.showToast();
 											});
+							
 						}
 
 						$scope.submitInformation = function(isvaliduser, $event) {
 							if (isvaliduser) {
 								$scope.saveUser($event);
+								
 							} else {
 								console.log('its else block');
 							}
 						};
 
-						 $scope.checkErr = function(dob,doj) {
-						        $scope.errMessage = '';
-						         var curDate = new Date();
-						        
-						         if(new Date(dob) > new Date(doj)){
-							          $scope.errMessage = 'End Date should be greater than start date';
-							          return false;
-							        }
-							        if(new Date(dob) < curDate){
-							           $scope.errMessage = 'Start date should not be before today.';
-							           return false;
-							        }
-						    };
+						$scope.checkDate=function(dob,doj)
+						{
+							   $scope.errorMessage='';
+							   var currentDate=new Date();
+							 
+							   if(new  Date(dob) > Date(doj))
+								   {
+								     console.log('its if condition')
+								   }
+							   else
+								   {
+								      console.log('its else condition')
+								      
+								   }
+						}
 						$scope.showToast = function() {
 							$mdToast.show({
 								hideDelay : 3000,
