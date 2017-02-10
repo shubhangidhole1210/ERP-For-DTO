@@ -9,7 +9,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			url : SERVER_URL + "rawmaterialorder/list"
 		}).then(function successCallback(response) {
 			$scope.rawMaterialOrders = response.data;
-
+			/*$scope.rawMaterials = response.data;*/
 			console.log(response);
 
 		}, function errorCallback(response) {
@@ -22,7 +22,8 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		console.log($scope.rawMaterials)
 		$http({
 				method : 'GET',
-				url : SERVER_URL + "rawmaterial/getRMForRMOrder/"+ $scope.rawMaterialOrder
+				url : SERVER_URL + "rawmaterial/getRMForRMOrder/"+ $scope.rawMaterialOrder.id
+				/*url : SERVER_URL + "rawmaterial/getRMForRMOrder/"+ $scope.rawmaterialorderassociation.id*/
 				}).then(function successCallback(response) {
 			$scope.rawMaterialList = response.data;
 
@@ -41,20 +42,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 //			console.log('its else block');
 //		}
 	};
-	$scope.checkErr = function(intime, outtime) {
-		$scope.errMessage = '';
-		/* var curTime = new Time(); */
-		$scope.curTime = new Time();
-
-		if (new Time(intime) > new Time(outtime)) {
-			$scope.errMessage = 'End Date should be greater than start date';
-			return false;
-		}
-		if (new Date(intime) < curTime) {
-			$scope.errMessage = 'Start date should not be before today.';
-			return false;
-		}
-	};
+	
 
 	$scope.saveSecurityInformation = function() {
 		console.log('its save function')
@@ -69,8 +57,10 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			driver_Name : $scope.driver_Name,
 			description : $scope.description,
 			createDate : 2017 - 01 - 25,
-			intime : null,
-			outtime : null,
+			/*intime : null,
+			outtime : null,*/
+			intime:'01:30:20',
+			outtime:'01:30:20',
 			status : 4,
 			po_No : $scope.po_No,
 			createdBy : 2,
@@ -78,7 +68,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			updatedBy : 1,
 			updated_date : null,
 			isactive : true,
-			rawmaterialorderinvoiceassociations : $scope.rawMaterialList
+			rmorderinvoiceintakquantities : $scope.rawMaterialLists
 		};
 		$http({
 			method : 'post',
@@ -92,6 +82,19 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 
 		});
 
+		 $scope.rawMaterialLists=[];
+		    $scope.rawMaterialList={};
+		    	if(!angular.equals($scope.rawMateriaslList,{})){
+					   $scope.rawMaterialLists.push($scope.rawMaterialList);	
+					   $scope.rawMateriaslList = {};
+					   console.log($scope.rawMaterialList);
+					 
+				}
+		
+		
+		
+		 
+		
 	}
 
 });
