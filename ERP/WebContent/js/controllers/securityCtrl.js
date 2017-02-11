@@ -22,13 +22,13 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		console.log($scope.rawMaterials)
 		$http({
 				method : 'GET',
-				url : SERVER_URL + "rawmaterial/getRMForRMOrder/"+ $scope.rawMaterialOrder.id
+				url : SERVER_URL + "rawmaterial/getRMForRMOrder/"+ $scope.rawMaterialOrders.id
 				/*url : SERVER_URL + "rawmaterial/getRMForRMOrder/"+ $scope.rawmaterialorderassociation.id*/
 				}).then(function successCallback(response) {
 			$scope.rawMaterialList = response.data;
 
-			console.log(response);
-
+			/*console.log(response);*/
+             console.log($scope.rawMaterialList)
 		}, function errorCallback(response) {
 			console.log("Error");
 
@@ -62,7 +62,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			intime:'01:30:20',
 			outtime:'01:30:20',
 			status : 4,
-			po_No : $scope.po_No,
+			po_No : $scope.rawMaterialOrders.id,
 			createdBy : 2,
 			created_date : null,
 			updatedBy : 1,

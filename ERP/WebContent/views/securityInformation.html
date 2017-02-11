@@ -78,7 +78,7 @@
           <div layout-gt-sm="row">
          <md-input-container>
           <label style="color: black;">PO.NO*</label>
-          <md-select ng-model="rawMaterialOrder.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayRMList($index)">
+          <md-select ng-model="rawMaterialOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayRMList($index)">
             <md-option ng-repeat="rawMaterial in rawMaterialOrders" ng-value="rawMaterial.id"  >
                {{rawMaterial.name}}
             </md-option>
@@ -102,7 +102,7 @@
           <td>
               <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANTITY</label>
-            <input type="text" ng-model="orderRawMaterial.quantity"  name="quantity"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+            <input type="text" ng-model="rawMaterialList.quantity"  name="quantity"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
             <div ng-messages="securityInformation.quantity.$error">
              <div ng-message="required">please enter quantity </div>
             <div ng-message="pattern">Please enter Digit only</div>
