@@ -25,7 +25,7 @@
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">VEHICLE NUMBER</label>
-            <input type="text" required name="vehicleName" ng-model="vehicleNo" value="vendorUser.companyName"   >
+            <input type="text" required name="vehicleName" ng-model="vehicleNo"    >
              <div ng-messages="securityInformation.vehicleName.$error">
             <div ng-message="required">Please enter Vehicle Number</div>
           </div>
@@ -43,8 +43,8 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">IN TIME</label>
             <input type="time"  name="inTime" ng-model="intime" value="intime"  id="intime">
-             <div ng-messages="securityInformation.inTime.$error">
-            <div ng-message="required">Please enter exact IN Time</div>
+             <!-- <div ng-messages="securityInformation.inTime.$error">
+            <div ng-message="required">Please enter exact IN Time</div> -->
             
           </div>
           </md-input-container>
@@ -69,8 +69,8 @@
           <md-input-container class="md-block" flex-gt-sm type="password">
               <label class="input-filed-label">DATE[MM/DD/YYYY]*</label>
               
-              <input type="date" placeholder="Enter date of birth" ng-model="user.dob "  name="date" >
-              <div ng-messages="securityInformation.date.$error">
+              <input type="date" placeholder="Enter date of birth" ng-model="createDate "  name="createDate" >
+              <div ng-messages="securityInformation.createDate.$error">
                  <div ng-message="required">Please Enter Date</div>
               </div>
          </md-input-container> 
@@ -87,8 +87,20 @@
                  <div ng-message="required">Please Select P.O number</div>
               </div> -->
         </md-input-container>
-          
-
+        </div>
+        <div layout-gt-sm="row">
+      
+               <md-input-container>
+          <label style="color: black;">STATUS*</label>
+          <md-select ng-model="rawmaterialorderinvoice.id" name="statusId"   ng-init="displayStatusId()" name="statusId" ng-change="displayStatusInformationList($index)" >
+            <md-option ng-repeat="statusId in statusData" ng-value="statusId.id" >
+               {{statusId.name}}
+            </md-option>
+          </md-select>
+          <div ng-messages="RMOrderInformation.statusId.$error">
+                 <div ng-message="required">Please select status </div>
+              </div>
+        </md-input-container>
         </div>
         <h3>Raw Material List</h3>
         <table >
@@ -108,6 +120,21 @@
             <div ng-message="pattern">Please enter Digit only</div>
             </div>
           </md-input-container>
+          </td>
+        </tr>
+       
+        </table>
+           <h3>Security Status Check List</h3>
+         <table >
+        <tr>
+          <th>VENDOR NAME</th>
+          <th>VEHICAL NUMBER</th>
+        
+        </tr>
+        <tr ng-repeat="statusInfo in statusInformationList">
+          <td>{{statusInfo.vendorname}}</td>
+          <td>
+             {{statusInfo.vehicleNo}}
           </td>
         </tr>
        

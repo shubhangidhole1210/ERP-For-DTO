@@ -3,7 +3,7 @@ var erpApp = angular
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-erpApp.value('SERVER_URL', 'http://192.168.2.103:8080/ERP/');
+erpApp.value('SERVER_URL', 'http://192.168.2.102:8080/ERP/');
 erpApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/home.html',
@@ -115,9 +115,6 @@ erpApp.config(function($routeProvider) {
 	});
 	
 });
-
-
-
 erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
     $rootScope.$on('$routeChangeStart', function (event,next) {
 
