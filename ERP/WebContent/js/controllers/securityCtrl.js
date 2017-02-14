@@ -76,12 +76,11 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 //		}
 	};
 	
-
+	$scope.createDate = new Date($scope.createDate);
 	$scope.saveSecurityInformation = function() {
 		console.log('its save function')
-	/*	$scope.createDate = new Date($scope.createDate);*/
-		// iterate populated Raw material table and create list of objects with 'id' and 'quantity' for each row.
-		//assign that list to 'rawmaterialorderinvoiceassociations' in data
+	
+		
 		var data = {
 
 			invoice_No : $scope.invoice_No,
@@ -92,16 +91,17 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			createDate : $scope.createDate,
 			/*intime : null,*/
 			/*outtime : null,*/
-			intime:'01:30:20',
-			outtime:'01:30:20',
-			status : $scope.rawmaterialorderinvoice.id,
+			intime:$scope.intime,
+			outtime:$scope.outtime,
+			status:9,
+
 			po_No : $scope.rawMaterialOrders.id,
 			createdBy : 2,
 			created_date : null,
 			updatedBy : 1,
 			updated_date : null,
 			isactive : true,
-			rmorderinvoiceintakquantities : $scope.rawMaterialLists
+			rmorderinvoiceintakquantities : $scope.rawMaterialList
 		};
 		$http({
 			method : 'post',
@@ -115,25 +115,9 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 
 		});
 
-		/* $scope.rawMaterialLists=[];
-		    $scope.rawMaterialList={};
-		    	if(!angular.equals($scope.rawMateriaslList,{})){
-					   $scope.rawMaterialLists.push($scope.rawMaterialList);	
-					   $scope.rawMateriaslList = {};
-					   console.log($scope.rawMaterialList);
-					 
-				}*/
+		
 		    	
 	}
-	
-	$scope.rawMaterialLists=[];
-    $scope.rawMaterialList={};
-    	if(!angular.equals($scope.rawMateriaslList,{})){
-			   $scope.rawMaterialLists.push($scope.rawMaterialList);	
-			   $scope.rawMateriaslList = {};
-			   console.log($scope.rawMaterialList);
-			 
-		}
 });
 
 

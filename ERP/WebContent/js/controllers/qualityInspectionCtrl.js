@@ -5,9 +5,9 @@ $scope.getRMInformation=function()
 	{
 		$http({
 			method : 'GET',
-			url : SERVER_URL + "rawmaterialorder/list"
+			url : SERVER_URL + "rawmaterialorderinvoice/security-in-invoices"
 		}).then(function successCallback(response) {
-			$scope.rawMaterials = response.data;
+			$scope.invoiceList = response.data;
 			
 
 			console.log(response);
@@ -17,4 +17,25 @@ $scope.getRMInformation=function()
 
 		});
 	}
+
+$scope.invoiceRawMaterialList=function(index)
+{
+	$http({
+		method : 'GET',
+		url : SERVER_URL + "qualitycheckrawmaterial/listrm/"
+		                 + $scope.invoiceList.id
+	}).then(function successCallback(response) {
+		$scope.rmInvoiceList = response.data;
+		console.log($scope.rmInvoiceList)
+
+		console.log(response);
+
+	}, function errorCallback(response) {
+		console.log("Error");
+
+	});
+	
+	}
+
+
 });
