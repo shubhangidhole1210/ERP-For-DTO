@@ -141,9 +141,9 @@ erpApp.controller(
 								usertype : $scope.user.usertype.id,
 								doj : $scope.user.doj,
 								dob : $scope.user.dob,
-								created_by : null,
+								createdBy : "123",
 								created_date : null,
-								updated_by : null,
+								updatedBy : "456",
 								updated_date : null,
 								isactive : true
 							};

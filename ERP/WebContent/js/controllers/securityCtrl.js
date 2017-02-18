@@ -91,10 +91,11 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			createDate : $scope.createDate,
 			/*intime : null,*/
 			/*outtime : null,*/
-			intime:$scope.intime,
-			outtime:$scope.outtime,
+			/*intime:$scope.intime,
+			outtime:$scope.outtime,*/
 			status:9,
-
+			intime:"01:30:20",
+			outtime:"01:30:20",
 			po_No : $scope.rawMaterialOrders.id,
 			createdBy : 2,
 			created_date : null,
