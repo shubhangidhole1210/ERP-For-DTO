@@ -34,26 +34,26 @@
       <tr>
         <th>RAW MATERIAL NAME</th>
         <th>INVOICE QUANTITY</th>
-        <th>RECIVED OK</th>
+        <th>RECEIVED OK</th>
         <th>REMARK</th>
         <th>IS RETURN INVOICE</th>
       </tr>
       <tr ng-repeat="invoiceList in rmInvoiceList">
-        <td>{{invoiceList.name}}</td>
-        <td></td>
+        <td>{{invoiceList.rawmaterial.name}}</td>
+        <td>{{invoiceList.quantity}}</td>
          <td>
               <md-input-container class="md-block" flex-gt-sm>
-            <label class="input-filed-label">RECIVED OK</label>
+            <label class="input-filed-label">RECEIVED OK</label>
             <input type="text" ng-model="invoiceList.goodQuantity"  name="recivedOk" required >
             <div ng-messages="qualityInspectionForm.recivedOk.$error">
-             <div ng-message="required">please enter recive ok    </div>
+             <div ng-message="required">please enter receive ok    </div>
             </div>
           </md-input-container>
           </td>
           <td>
               <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">REMARK</label>
-            <input type="text" ng-model="invoiceList.remark"  name="remark" required>
+            <input type="text" ng-model="invoiceList.remark"  name="remark" required >
             <div ng-messages="qualityInspectionForm.remark.$error">
              <div ng-message="required">please enter remark </div>
            

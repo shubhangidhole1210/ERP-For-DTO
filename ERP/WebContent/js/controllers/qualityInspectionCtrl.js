@@ -47,7 +47,7 @@ $scope.invoiceRawMaterialList=function(index)
 	   var data = {
 
 			   description:$scope.description,
-			   rawmaterialorderinvoice: $scope.invoiceList.id,
+			   id: $scope.invoiceList.id,
 			   qualitycheckrawmaterials:$scope.rmInvoiceList
 			};
 	   $http({

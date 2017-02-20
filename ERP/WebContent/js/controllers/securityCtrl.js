@@ -1,5 +1,5 @@
 erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
-		$rootScope, SERVER_URL) {
+		$rootScope, SERVER_URL,$filter) {
 
 	$scope.getRMInformation = function()
 
@@ -77,6 +77,10 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 	};
 	
 	$scope.createDate = new Date($scope.createDate);
+	/*$scope.intime = $filter('date')(new Date(), 'hh:mm:ss a');
+	$scope.outtime = $filter('date')(new Date(), 'hh:mm:ss a');*/
+	/*$scope.intime = new Date($scope.intime);
+	$scope.outtime = new Date($scope.intime);*/
 	$scope.saveSecurityInformation = function() {
 		console.log('its save function')
 	
@@ -91,11 +95,11 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			createDate : $scope.createDate,
 			/*intime : null,*/
 			/*outtime : null,*/
-			/*intime:$scope.intime,
-			outtime:$scope.outtime,*/
+			intime:$scope.intime,
+			outtime:$scope.outtime,
 			status:9,
-			intime:"01:30:20",
-			outtime:"01:30:20",
+			/*intime:"01:30:20",
+			outtime:"01:30:20",*/
 			po_No : $scope.rawMaterialOrders.id,
 			createdBy : 2,
 			created_date : null,

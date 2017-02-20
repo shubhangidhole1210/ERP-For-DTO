@@ -228,7 +228,7 @@ erpApp.controller(
 							   $scope.errorMessage='';
 							   var currentDate=new Date();
 							 
-							   if(new  Date(dob) > Date(doj))
+							   if(new  Date(dob) > new Date(doj))
 								   {
 								     console.log('its if condition')
 								   }
