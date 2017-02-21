@@ -30,7 +30,7 @@ erpApp.controller(
 											$scope.message = "We are Sorry. Something went wrong. Please try again later."
 											$scope.showToast();
 											console.log("Error");
-											$mdDialog.hide();
+											utils.hideProgressBar();
 
 										});
 					};

@@ -7,7 +7,7 @@
    <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">INVOICE NUMBER </label>
-            <input type="text" required name="invoiceNumber" ng-model="invoice_No" value="invoice_No">
+            <input type="number" required name="invoiceNumber" ng-model="invoice_No" value="invoice_No">
              <div ng-messages="securityInformation.invoiceNumber.$error">
             <div ng-message="required">Please enter Invoice Number</div>
            
@@ -41,13 +41,11 @@
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">IN TIME</label>
-            <input type="time"  name="inTime" ng-model="intime" value="intime"  id="intime" step='1' >
+            <input type="time"  name="inTime" ng-model="intime" value="intime"  id="intime" step='1'  >
              <!-- <div ng-messages="securityInformation.inTime.$error">
             <div ng-message="required">Please enter exact IN Time</div> -->
-            
           </div>
           </md-input-container>
-
           <md-input-container class="md-block" flex-gt-sm >
             <label class="input-filed-label">OUT TIME</label>
             <input type="time"  name="outTime" ng-model="outtime" value="outtime" id="outtime"  step='1' >
@@ -55,7 +53,7 @@
               <div ng-message="required">Please Enter Out Time</div>
             </div>
           </md-input-container>
-          <span>{{errMessage}}</span>
+          <span ng-show="inTime<=outTime" style="color:red;">out time should be greater than in time</span>
         </div>
          <md-input-container class="md-block" flex-gt-sm >
             <label class="input-filed-label">DESCRIPTION</label>
@@ -76,7 +74,7 @@
          </div>
           <div layout-gt-sm="row">
          <md-input-container>
-          <label style="color: black;">PO.NO*</label>
+          <label style="color: black;">RM Order</label>
           <md-select ng-model="rawMaterialOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayRMList($index)">
             <md-option ng-repeat="rawMaterial in rawMaterialOrders" ng-value="rawMaterial.id"  >
                {{rawMaterial.name}}

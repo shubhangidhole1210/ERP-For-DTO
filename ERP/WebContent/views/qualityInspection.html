@@ -6,14 +6,14 @@
  <div class="loginForm">
   <div layout-gt-sm="row">
  <md-input-container>
-          <label style="color: black;">PO.NO*</label>
+          <label style="color: black;">Invoice No*</label>
           <md-select ng-model="invoiceList.id" name="invoice" ng-init="getRMInformation()" ng-change="invoiceRawMaterialList($index)" required>
             <md-option ng-repeat="invoice in invoiceList" ng-value="invoice.id" >
                {{invoice.invoice_No}}
             </md-option>
           </md-select>
           <div ng-messages="qualityInspectionForm.rawMaterial.$error" >
-                 <div ng-message="required">Please Select P.O number</div>
+                 <div ng-message="required">Please Select Invoice number</div>
               </div>
         </md-input-container>
           
@@ -44,7 +44,7 @@
          <td>
               <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">RECEIVED OK</label>
-            <input type="text" ng-model="invoiceList.goodQuantity"  name="recivedOk" required >
+            <input type="text" ng-model="invoiceList.goodQuantity"  name="recivedOk"  >
             <div ng-messages="qualityInspectionForm.recivedOk.$error">
              <div ng-message="required">please enter receive ok    </div>
             </div>
@@ -53,7 +53,7 @@
           <td>
               <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">REMARK</label>
-            <input type="text" ng-model="invoiceList.remark"  name="remark" required >
+            <input type="text" ng-model="invoiceList.remark"  name="remark"  >
             <div ng-messages="qualityInspectionForm.remark.$error">
              <div ng-message="required">please enter remark </div>
            
