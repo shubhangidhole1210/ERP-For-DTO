@@ -55,7 +55,7 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	}).when('/Rmorder', {
+	}).when('/rmOrder', {
 		templateUrl : 'views/RMOrder.html',
 		data : {
 			loginRequired : true
@@ -95,12 +95,12 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	}).when('/securityInformation', {
+	}).when('/securityCheck', {
 		templateUrl : 'views/securityInformation.html',
 		data : {
 			loginRequired : true
 		}
-	}).when('/qualityInspection', {
+	}).when('/qualityCheck', {
 		templateUrl : 'views/qualityInspection.html',
 		data : {
 			loginRequired : true
@@ -286,7 +286,6 @@ erpApp.controller('pageCtrl', function($scope) {
 erpApp.controller('ToastCtrl', function($scope, $mdToast, message) {
 	$scope.message = message;
 	$scope.closeToast = function() {
-
 		$mdToast.hide().then(function() {
 
 		});

@@ -7,7 +7,7 @@
   <div layout-gt-sm="row">
  <md-input-container>
           <label style="color: black;">Invoice No*</label>
-          <md-select ng-model="invoiceList.id" name="invoice" ng-init="getRMInformation()" ng-change="invoiceRawMaterialList($index)" required>
+          <md-select ng-model="invoiceList.id" name="invoice" ng-init="getRMOrderInvoiceInformation()" ng-change="invoiceRawMaterialList($index)" required>
             <md-option ng-repeat="invoice in invoiceList" ng-value="invoice.id" >
                {{invoice.invoice_No}}
             </md-option>

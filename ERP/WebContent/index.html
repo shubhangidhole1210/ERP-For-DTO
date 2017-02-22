@@ -51,7 +51,7 @@
    
    
         <div class="erp-menubar" ng-show="displayMenu">
-        	<div class="erp-menu" id="{{menuItem.pageName}}" ng-repeat="menuItem in menu"  ng-class="{changeERPMenu : selected=='user'}" ng-click="selected='user'"><a href="#{{menuItem.url}}" >{{menuItem.submenu}}</a></div>
+        	<div class="erp-menu" id="{{menuItem.pageName}}" ng-repeat="menuItem in menu"   ng-click="selected='user'"><a href="#{{menuItem.url}}" >{{menuItem.submenu}}</a></div>
         
            <!-- <div class="erp-menu" id="user"  ng-class="{changeERPMenu : selected=='user'}" ng-click="selected='user'"><a href="#/user" >USER</a></div>
            <div class="erp-menu" id="unit"  ng-class="{changeERPMenu : selected=='unit'}" ng-click="selected='unit'"><a href="#/unit" >UNIT</a></div>

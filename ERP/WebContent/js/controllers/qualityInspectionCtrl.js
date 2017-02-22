@@ -1,12 +1,19 @@
 erpApp.controller('qualityInspectionCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,
-		SERVER_URL,utils) {
-$scope.getRMInformation=function()
+		SERVER_URL,utils,Auth) {
+$scope.getRMOrderInvoiceInformation=function()
 	
 	{
-		$http({
+	var httpparams = {};
+	httpparams.method = 'GET';
+	httpparams.url = SERVER_URL + "rawmaterialorderinvoice/security-in-invoices";
+	httpparams.headers = {
+			auth_token : Auth.getAuthToken()
+		};
+		/*$http({
 			method : 'GET',
 			url : SERVER_URL + "rawmaterialorderinvoice/security-in-invoices"
-		}).then(function successCallback(response) {
+		})*/
+	$http(httpparams).then(function successCallback(response) {
 			$scope.invoiceList = response.data;
 			console.log(response);
 			$mdDialog.hide();
@@ -19,11 +26,18 @@ $scope.getRMInformation=function()
 
 $scope.invoiceRawMaterialList=function(index)
 {
-	$http({
+	var httpparams = {};
+	httpparams.method = 'GET';
+	httpparams.url = SERVER_URL + "qualitycheckrawmaterial/listrm/" + $scope.invoiceList.id;
+	httpparams.headers = {
+			auth_token : Auth.getAuthToken()
+		};
+	/*$http({
 		method : 'GET',
 		url : SERVER_URL + "qualitycheckrawmaterial/listrm/"
 		                 + $scope.invoiceList.id
-	}).then(function successCallback(response) {
+	})*/
+	$http(httpparams).then(function successCallback(response) {
 		$scope.rmInvoiceList = response.data;
 		console.log($scope.rmInvoiceList)
 		console.log(response);
@@ -33,7 +47,7 @@ $scope.invoiceRawMaterialList=function(index)
 		$mdDialog.hide();
 	});
 	 $scope.showProgressBarOne();
-	}
+	};
 
    $scope.submitInformation=function(isvaliduser, $event)
    {
@@ -84,11 +98,21 @@ $scope.invoiceRawMaterialList=function(index)
 			   qualitycheckrawmaterials:$scope.rmInvoiceList
 			   
 			};
-	   $http({
+	   
+	   var httpparams = {};
+		httpparams.method = 'post';
+		httpparams.url = SERVER_URL + "qualitycheckrawmaterial/qualitycheck";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		httpparams.data = data;
+	   /*$http({
 			method : 'post',
 			url : SERVER_URL + "qualitycheckrawmaterial/qualitycheck",
 			data : data
-		}).then(function successCallback(data) {
+		})*/
+		
+		$http(httpparams).then(function successCallback(data) {
 			
 			if(data.data.code === 1){
 				console.log(data.data.message);
