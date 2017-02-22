@@ -1,4 +1,4 @@
-erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast)
+erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth)
 {
 	
 	$rootScope.$on("CallPopulateUnitList", function() {
@@ -9,10 +9,18 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 	});
 	$scope.populateUnitList=function()
 	{
-		$http({
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "unit/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		/*$http({
 			method : 'GET',
-			url : SERVER_URL + 'unit/list'
-		}).then(function successCallback(response) {
+			url : SERVER_URL + 'unit/list',
+			headers : {"auth_token" : Auth.getAuthToken()}
+		})*/	
+		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.units=response.data;
 			$scope.isUnitInformation()

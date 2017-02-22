@@ -20,6 +20,18 @@
               <div ng-message="required">Please Enter Vendor name</div>
             </div>
           </md-input-container>
+           <!-- <md-input-container>
+          <label style="color: black;">USER TYPE*</label>
+          <md-select ng-model="user.usertype.id" name="userType"  ng-disabled="isReadOnly" ng-required="true" required>
+            <md-option ng-repeat="userType in data" ng-value="userType.id" >
+               {{userType.usertypeName}}
+            </md-option>
+          </md-select>
+          <div ng-messages="userInformation.userType.$error" >
+                 <div ng-message="required">Please Select Veno</div>
+              </div>
+        </md-input-container>
+           -->
         </div>
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>

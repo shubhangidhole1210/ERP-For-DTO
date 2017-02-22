@@ -20,6 +20,7 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 				var userInfo = {};
 				userInfo.auth_token = data.headers('auth_token');
 				Auth.setUser(userInfo);
+				Auth.setMenu(data.data.data);
 				$scope.$emit('loginSuccess',{});
 				
 				$location.path('/');

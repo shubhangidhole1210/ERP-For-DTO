@@ -94,7 +94,7 @@ $scope.invoiceRawMaterialList=function(index)
 				console.log(data.data.message);
 				console.log(data);
 			
-				$scope.hide();
+				/*$scope.hide();*/
 				$scope.message = 'Qualitycheckrawmaterial added Successfully !';
 				$scope.showToast();
 				$mdDialog.hide();

@@ -123,23 +123,23 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			if(data.data.code === 1){
 				console.log(data.data.message);
 				console.log(data);
-				$scope.message = "Rawmaterialorderinvoice added Successfully !"
-				$scope.showToast();
+				/*$scope.message = "Rawmaterialorderinvoice added Successfully !"
+				$scope.showToast();*/
 				 utils.hideProgressBar();
 			}
 			else
 				{
-				$scope.message = "something went wrong";
-				$scope.showToast();
+			/*	$scope.message = "something went wrong";*/
+				/*$scope.showToast();*/
 				 utils.hideProgressBar();
 				}
 			
 			
 		}, function errorCallback(response) {
 			console.log("Error");
-			 utils.hideProgressBar();
+			 /*utils.hideProgressBar();
 			$scope.message = 'Something went worng. Please try again later.';
-			$scope.showToast();
+			$scope.showToast();*/
 			 utils.hideProgressBar();
 		});
 

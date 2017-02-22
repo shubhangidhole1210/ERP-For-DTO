@@ -90,8 +90,8 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	}).when('/administration', {	
-		templateUrl : 'views/administration.html',
+	}).when('/unAuthorized', {	
+		templateUrl : 'views/unAuthorized.html',
 		data : {
 			loginRequired : true
 		}
@@ -110,8 +110,10 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
+	}).when('/notFound', {
+		templateUrl : 'views/notFound.html',
 	}).otherwise({
-		redirectTo : '/login'
+		redirectTo : '/notFound'
 	});
 	
 });
@@ -120,11 +122,16 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
 
     	 if (next !== undefined) {
  	        if ('data' in next) {
- 	            if ('loginRequired' in next.data) {
+ 	            if ('loginRequired' in next.data ) {
  	                var loginRequired = next.data.loginRequired;
  	                console.log('loginRequired = ' + loginRequired);
  	                if(!Auth.isLoggedIn() && loginRequired){
  	                	$location.path('/login');
+ 	                 }else if(next.$$route.originalPath !=='/' && !Auth.isPageAccessible(next)){
+ 	                	 console.log('page is not accessible');
+ 	                	$location.path('/unAuthorized');
+ 	                 }else{
+ 	                	 //do nothing
  	                 }
  	            }
  	        }
@@ -138,12 +145,46 @@ erpApp.factory('Auth', function(){
 	return{
 	    setUser : function(aUser){
 	        user = aUser;
+        	sessionStorage.user =JSON.stringify(user);
+        	console.log('setting sessionstorage : '+ sessionStorage.user);
+	    },
+	    setMenu : function(menu){
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
+	    	user.menu = menu;
+	    	sessionStorage.user =JSON.stringify(user);
 	    },
 	    isLoggedIn : function(){
-	        return (user)? user : false;
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
+	        return (user)? true : false;
 	    },
 	    getAuthToken : function(){
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
 	        return user.auth_token;
+	    },
+	    getMenu : function(){
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
+	    	return user.menu;
+	    },
+	    isPageAccessible : function(next){
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
+	    	var index = 0;
+	    	var isPageAccessible = false;
+	    	for(index = 0; index<user.menu.length;index++){
+	    		if(user.menu[index].url == next.$$route.originalPath){
+	    			isPageAccessible = true;
+	    		}
+	    	}
+	    	return isPageAccessible;
 	    }
 	  }
 	});
@@ -187,7 +228,11 @@ erpApp.controller('ERPController', function($scope,$rootScope,Auth) {
 		$scope.isLoginButton = false;
 		$scope.isuserName = true;
 	}*/
+	$scope.menu = [];
 	$scope.displayMenu=Auth.isLoggedIn();
+	if($scope.displayMenu){
+		$scope.menu = Auth.getMenu();
+	}
 	$rootScope.$on('logout',function($event){
 		console.log('Inside logout event');
 		$scope.displayMenu=Auth.isLoggedIn();
@@ -195,6 +240,7 @@ erpApp.controller('ERPController', function($scope,$rootScope,Auth) {
 	$rootScope.$on('loginSuccess',function($event){
 		console.log('Inside login success event');
 		$scope.displayMenu=Auth.isLoggedIn();
+		$scope.menu = Auth.getMenu();
 	});
 });
 
