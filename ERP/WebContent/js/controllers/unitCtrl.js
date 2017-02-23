@@ -156,13 +156,23 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 			if ($scope.flag == 0) {
 				console.log($scope.user);
 				console.log($scope.data);
+				/*httpparams.method = 'post';
+				httpparams.url = SERVER_URL + "unit/create";*/
 				httpparams.method = 'post';
 				httpparams.url = SERVER_URL + "unit/create";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+					};
 			} else {
 				console.log($scope.unit);
 				data.id = $scope.unit.id;
+				/*httpparams.method = 'put';
+				httpparams.url = SERVER_URL + "unit/update";*/
 				httpparams.method = 'put';
 				httpparams.url = SERVER_URL + "unit/update";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+					};
 			}
 			httpparams.data = data;
 			$http(httpparams)
@@ -315,13 +325,20 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		/* $scope.user = $scope.users[index].id; */
 		console.log($scope.unit);
 
-		$http(
+		/*$http(
 				{
 					method : 'delete',
 					url : SERVER_URL + "unit/delete/"
 							+ $scope.units[index].id
 
-				}).then(function successCallback(data) {
+				})*/
+		var httpparams = {};
+		httpparams.method = 'delete';
+		httpparams.url = SERVER_URL + "unit/delete/" + $scope.units[index].id;
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(data) {
 					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateUnitList", {});
 			console.log(data);

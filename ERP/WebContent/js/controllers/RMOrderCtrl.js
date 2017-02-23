@@ -1,4 +1,4 @@
-erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL) {
+erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth) {
 	
 	$scope.isReadOnly = false;
 	/*
@@ -15,10 +15,18 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	});
 
 	$scope.populateRMOrderList = function() {
-		$http({
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "rawmaterialorder/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		/*$http({
 			method : 'GET',
 			url : SERVER_URL + "rawmaterialorder/list"
-		}).then(function successCallback(response) {
+		})*/
+		
+		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.rmOrders = response.data;
 			$scope.isRMOrderInformation();
@@ -237,14 +245,25 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			if ($scope.flag == 0) {
 				console.log($scope.rmOrder);
 				console.log($scope.data);
+				/*httpparams.method = 'post';
+				httpparams.url = SERVER_URL + "rawmaterialorder/createmultiple";*/
 				httpparams.method = 'post';
 				httpparams.url = SERVER_URL + "rawmaterialorder/createmultiple";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+					};
 			} else {
 				console.log($scope.rmOrder);
 				data.id = $scope.rmOrder.id;
+				/*httpparams.method = 'put';
+				httpparams.url = SERVER_URL + "rawmaterialorder/update";*/
 				httpparams.method = 'put';
 				httpparams.url = SERVER_URL + "rawmaterialorder/update";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+					};
 			}
+			
 			httpparams.data = data;
 			$http(httpparams)
 					.then(
@@ -329,10 +348,18 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		
 		$scope.displayStatusId=function()
 		{
-			$http({
+			var httpparams = {};
+			httpparams.method = 'GET';
+			httpparams.url = SERVER_URL + "status/list";
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			/*$http({
 				method : 'GET',
 				url : SERVER_URL + "status/list"
-			}).then(function successCallback(response) {
+			})*/
+			
+			$http(httpparams).then(function successCallback(response) {
 				$scope.statusData = response.data;
 
 				console.log(response);
@@ -345,10 +372,19 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		
 		$scope.rawMaterialId=function()
 		{
-			$http({
+			
+			var httpparams = {};
+			httpparams.method = 'GET';
+			httpparams.url = SERVER_URL + "rawmaterial/list";
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			
+			/*$http({
 				method : 'GET',
 				url : SERVER_URL + "rawmaterial/list"
-			}).then(function successCallback(response) {
+			})*/
+			$http(httpparams).then(function successCallback(response) {
 				$scope.RMData = response.data;
 
 				console.log(response);
@@ -362,10 +398,19 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		
 		$scope.displayVendorId=function()
 		{
-			$http({
+			var httpparams = {};
+			httpparams.method = 'GET';
+			httpparams.url = SERVER_URL + "vendor/list";
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			
+			/*$http({
 				method : 'GET',
 				url : SERVER_URL + "vendor/list"
-			}).then(function successCallback(response) {
+			})*/
+			
+			$http(httpparams).then(function successCallback(response) {
 				$scope.vendorData = response.data;
 
 				console.log(response);
@@ -395,13 +440,20 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		/* $scope.user = $scope.users[index].id; */
 		/*console.log($scope.user);*/
 
-		$http(
+	/*	$http(
 				{
 					method : 'delete',
 					url : SERVER_URL + "rawmaterialorder/delete/"
 							+ $scope.rmOrders[index].id
 
-				}).then(function successCallback(data) {
+				})*/
+		var httpparams = {};
+		httpparams.method = 'delete';
+		httpparams.url = SERVER_URL + "rawmaterialorder/delete/" +  $scope.rmOrders[index].id;
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(data) {
 					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateRMOrderList", {});
 			console.log(data);
