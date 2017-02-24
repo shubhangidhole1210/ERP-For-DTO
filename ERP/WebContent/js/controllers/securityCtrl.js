@@ -1,13 +1,17 @@
 erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
-		$rootScope, SERVER_URL,$filter,utils) {
+		$rootScope, SERVER_URL,$filter,utils,Auth) {
 
 	$scope.getRMInformation = function()
 
 	{
-		$http({
-			method : 'GET',
-			url : SERVER_URL + "rawmaterialorder/list"
-		}).then(function successCallback(response) {
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "rawmaterialorder/list/securityCheck";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
 			$scope.rawMaterialOrders = response.data;
 			$scope.rawMaterials = response.data;
 			utils.hideProgressBar();
@@ -24,12 +28,15 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 	
 	
 	$scope.displayRMList = function(index) {
-		console.log($scope.rawMaterials)
-		$http({
-				method : 'GET',
-				url : SERVER_URL + "rawmaterial/getRMForRMOrder/"+ $scope.rawMaterialOrders.id
-				//url : SERVER_URL + "rawmaterial/getRMForRMOrder/"+ $scope.rawmaterialorderassociation.id
-				}).then(function successCallback(response) {
+		console.log($scope.rawMaterials);
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "rawmaterialorderassociation/getRMForRMOrder/"+ $scope.rawMaterialOrders.id;
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
 			$scope.rawMaterialList = response.data;
 			console.log(response);
              console.log($scope.rawMaterialList)
@@ -44,11 +51,14 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 	
 	$scope.displayStatusInformationList = function(index)
 	{
-		$http({
-			method : 'GET',
-			url : SERVER_URL + "rawmaterialorderinvoice/liststatus/"+ $scope.rawmaterialorderinvoice.id
-			//url : SERVER_URL + "rawmaterial/getRMForRMOrder/"+ $scope.rawmaterialorderassociation.id
-			}).then(function successCallback(response) {
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "rawmaterialorderinvoice/liststatus/"+ $scope.rawmaterialorderinvoice.id;
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
 		$scope.statusInformationList = response.data;
 
 		console.log(response);
@@ -59,28 +69,23 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 	});
 	}
 
-	$scope.submitInformation = function(isvaliduser, $event) {
-//		if (isvaliduser) {
+	$scope.submitInformation = function($event) {
 			$scope.saveSecurityInformation();
-//		} else {
-//			console.log('its else block');
-//		}
 	};
 	
 	$scope.createDate = new Date($scope.createDate);
-	/*$scope.intime = $filter('date')(new Date(), 'hh:mm:ss a');
-	$scope.outtime = $filter('date')(new Date(), 'hh:mm:ss a');*/
-	/*$scope.intime = new Date($scope.intime);
-	$scope.outtime = new Date($scope.intime);*/
+	
 	$scope.saveSecurityInformation = function() {
-		console.log('its save function')
+		
+		console.log('Saving saveSecurityInformation');
 		var index=0;
 		var rmorderinvoiceintakquantities = [];
 		for(index=0;index<$scope.rawMaterialList.length;index++){
 			var rmorderinvoiceintakquantity = {};
 			rmorderinvoiceintakquantity.rawmaterial= $scope.rawMaterialList[index].id;
-			rmorderinvoiceintakquantity.quantity = $scope.rawMaterialList[index].quantity;
+			rmorderinvoiceintakquantity.quantity = $scope.rawMaterialList[index].invoiceQuantity;
 			rmorderinvoiceintakquantity.isactive=true;
+			rmorderinvoiceintakquantity.remainingQuantity = $scope.rawMaterialList[index].remainingQuantity;
 			rmorderinvoiceintakquantities.push(rmorderinvoiceintakquantity);
 		}
 		console.log('intime : ' + $scope.intime.getTime());
@@ -100,13 +105,9 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			driver_Name : $scope.driver_Name,
 			description : $scope.description,
 			createDate : $scope.createDate,
-			/*intime : null,
-			outtime : null,*/
 			intime : $scope.intime.toLocaleTimeString().split(" ")[0],
 			outtime : $scope.outtime.toLocaleTimeString().split(" ")[0],
 			status:9,
-			/*intime:"01:30:20",
-			outtime:"01:30:20",*/
 			po_No : $scope.rawMaterialOrders.id,
 			createdBy : 2,
 			created_date : null,
@@ -115,49 +116,52 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			isactive : true,
 			rmorderinvoiceintakquantities : rmorderinvoiceintakquantities
 		};
-		$http({
-			method : 'post',
-			url : SERVER_URL + "rawmaterialorderinvoice/securitycheck",
-			data : data
-		}).then(function successCallback(data) {
-			if(data.data.code === 1){
-				console.log(data.data.message);
-				console.log(data);
-				/*$scope.message = "Rawmaterialorderinvoice added Successfully !"
-				$scope.showToast();*/
-				 utils.hideProgressBar();
-			}
-			else
-				{
-			/*	$scope.message = "something went wrong";*/
-				/*$scope.showToast();*/
-				 utils.hideProgressBar();
-				}
+		var httpparams = {
+				method : 'post',
+				url : SERVER_URL + "rawmaterialorderinvoice/securitycheck",
+				data : data
+			};
+		
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(data) {
 			
+			console.log(data.data.message);
+			console.log(data);
+			
+			if(data.data.code === 1){
+				utils.showToast("Rawmaterial Order Invoice added Successfully !");
+			}else{
+				utils.showToast("Something went wrong. Please try again later.");
+			}
+			utils.hideProgressBar();
 			
 		}, function errorCallback(response) {
 			console.log("Error");
-			 /*utils.hideProgressBar();
-			$scope.message = 'Something went worng. Please try again later.';
-			$scope.showToast();*/
-			 utils.hideProgressBar();
+			utils.showToast("Something went wrong. Please try again later.");
+			utils.hideProgressBar();
 		});
 
 		utils.showProgressBar();
 		    	
-	}
+	};
 	
-	 $scope.showToast = function() {
-			$mdToast.show({
-				hideDelay : 3000,
-				position : 'top right',
-				controller : 'ToastCtrl',
-				templateUrl : 'views/toast.html',
-				locals : {
-					message : $scope.message
-				}
-			});
-		};
+	
+	$scope.toCompareQuantity=function(remainingQuantity,invoiceQuantity){
+		console.log(remainingQuantity);
+		console.log(invoiceQuantity)
+		$scope.errorMsg="";
+		if(remainingQuantity>=invoiceQuantity){
+			console.log("Valid invoice quantity");
+		}else{
+			console.log("In-Valid invoice quantity");
+		}
+			
+	};
+	
+	
+	
 });
 
 

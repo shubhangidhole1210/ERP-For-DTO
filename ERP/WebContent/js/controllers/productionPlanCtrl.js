@@ -44,6 +44,53 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog, $mdTo
 		
 	}*/
 	
+	
+	
+	/*var currentDate = new Date();
+	  function formatDate(d)
+	  {
+		  var curr_date = d.getDate();
+		  var curr_month = d.getMonth() + 1; //Months are zero based
+		  var curr_year = d.getFullYear();
+		  var currentDate = curr_date + "-" + curr_month + "-" + curr_year;
+		  console.log(currentDate); 
+		  return currentDate;
+	  }
+
+
+	var monthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+	var alldays=[];
+	while(monthStart.getMonth()===currentDate.getMonth())
+		{
+		alldays.push(formatDate(new Date(monthStart)));
+		monthStart.setDate(monthStart.getDate() + 1);
+		}
+		console.log(alldays);*/
+	
+	var currentDate = new Date();
+	  function formatDate(d)
+	  {
+		  var curr_date = d.getDate();
+		  var curr_month = d.getMonth() + 1; //Months are zero based
+		  var curr_year = d.getFullYear();
+		  var currentDate = curr_date + "-" + curr_month + "-" + curr_year;
+		  console.log(currentDate); 
+		  return currentDate;
+	  }
+
+
+	var monthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+	var alldays=[];
+	while(monthStart.getMonth()===currentDate.getMonth())
+		{
+		alldays.push(formatDate(new Date(monthStart)));
+		monthStart.setDate(monthStart.getDate() + 1);
+		}
+		console.log(alldays);
+	
+	
 	$scope.getProductList=function()
 	{
 		

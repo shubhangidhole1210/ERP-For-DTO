@@ -116,18 +116,21 @@
         <tr>
           <th>RAW MATERIAL NAME</th>
           <th>QUANTITY</th>
-        
+          <th>INVOICE QUANTITY</th>
         </tr>
         <tr ng-repeat="rawmaterial in rawMaterialList">
-          <td>{{rawmaterial.name}}</td>
+          <td>{{rawmaterial.rawmaterial.name}}</td>
+          <td>{{rawmaterial.quantity}}</td>
           <td>
               <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANTITY</label>
-            <input type="text" ng-model="rawmaterial.quantity"  name="quantity"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-            <div ng-messages="securityInformation.quantity.$error">
+            <!-- <input type="number" ng-model="rawmaterial.invoiceQuantity" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> -->
+            <input type="number" ng-model="rawmaterial.invoiceQuantity" name="invoiceQuantity" max="{{rawmaterial.remainingQuantity}}" ng-change="toCompareQuantity(rawmaterial.remainingQuantity,rawmaterial.invoiceQuantity)">
+            <div ng-messages="securityInformation.invoiceQuantity.$error">
              <div ng-message="required">please enter quantity </div>
-            <div ng-message="pattern">Please enter Digit only</div>
+          
             </div>
+            <div ng-show=" securityInformation.invoiceQuantity.$error.max">The value must be in range 0 to {{rawmaterial.remainingQuantity}}!</div>
           </md-input-container>
           </td>
         </tr>
