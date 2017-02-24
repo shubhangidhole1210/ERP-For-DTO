@@ -1,5 +1,5 @@
 <div ng-controller="productionPlanCtrl">
-<div class="erp-information">
+<div class="erp-information" ng-init="getProductList()">
 <p style="font-weight: bold;font-size: 20px">PRODUCTION PLAN</p>
 <form  name="qualityInspectionForm" novalidate style="width: 900px">
 <fieldset>
@@ -25,8 +25,20 @@
        <th></th>
        <th></th>
    </tr> -->
-   <tr>
-      <th>abcd</th>
+   <tr ng-repeat="product in products">
+      <td>{{product.product_id}}</td>
+      <td ng-repeat="productionPlan in product.production_plan">
+         <input type="number" style="width: 80px" ng-model="productionPlan.product_quantity">
+      </td>
+     <!--  <th>
+      <input type="number" style="width: 80px">
+      </th> -->
+      <!-- <th>
+      <input type="number" style="width: 80px">
+      </th>
+      <th>
+         <input type="number" style="width: 80px">
+      </th>
       <th>
          <input type="number" style="width: 80px">
       </th>
@@ -35,19 +47,7 @@
       </th>
       <th>
       <input type="number" style="width: 80px">
-      </th>
-      <th>
-         <input type="number" style="width: 80px">
-      </th>
-      <th>
-         <input type="number" style="width: 80px">
-      </th>
-      <th>
-      <input type="number" style="width: 80px">
-      </th>
-      <th>
-      <input type="number" style="width: 80px">
-      </th>
+      </th> -->
    </tr>
 </table>
 </div>
