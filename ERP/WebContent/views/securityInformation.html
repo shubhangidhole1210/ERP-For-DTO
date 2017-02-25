@@ -116,11 +116,12 @@
         <tr>
           <th>RAW MATERIAL NAME</th>
           <th>QUANTITY</th>
-          <th>INVOICE QUANTITY</th>
+          <th>REMAINING QUANTITY</th>
         </tr>
         <tr ng-repeat="rawmaterial in rawMaterialList">
           <td>{{rawmaterial.rawmaterial.name}}</td>
           <td>{{rawmaterial.quantity}}</td>
+          <td>{{rawmaterial.remainingQuantity}}</td>
           <td>
               <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANTITY</label>
@@ -128,9 +129,10 @@
             <input type="number" ng-model="rawmaterial.invoiceQuantity" name="invoiceQuantity" max="{{rawmaterial.remainingQuantity}}" ng-change="toCompareQuantity(rawmaterial.remainingQuantity,rawmaterial.invoiceQuantity)">
             <div ng-messages="securityInformation.invoiceQuantity.$error">
              <div ng-message="required">please enter quantity </div>
-          
+              
             </div>
-            <div ng-show=" securityInformation.invoiceQuantity.$error.max">The value must be in range 0 to {{rawmaterial.remainingQuantity}}!</div>
+            <div ng-show=" securityInformation.invoiceQuantity.$error.max" style="color: red;">The value must be in range 0 to {{rawmaterial.remainingQuantity}}!</div>
+             
           </md-input-container>
           </td>
         </tr>

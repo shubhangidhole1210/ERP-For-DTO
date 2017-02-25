@@ -36,7 +36,7 @@
 	padding: 10px;
 	border-radius: 2px;
 }
-@media screen and (min-width: 100px)
+/* @media screen and (min-width: 100px)
 {
 	.erp-menubar
 {
@@ -53,7 +53,7 @@
     height: 100%;
     padding-top: 100px;
 }
-}
+} */
 .erp-menubar
 {
 	background-color:  #106CC8;
@@ -68,6 +68,10 @@
 	position: fixed;
     height: 100%;
     padding-top: 100px;
+}
+.erp-menubar li
+{
+	list-style: none;
 }
 .erp-menubar a
 {
@@ -213,6 +217,15 @@ tr:nth-child(even) {
     display: inline-block;
     height: 100%;
 }
+.qualityCheck-form
+{
+	  width: 400px;
+    margin: 0 auto;
+    padding: 50px 50px;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
 .security-Form
 {
 	 width: 400px;
@@ -248,3 +261,100 @@ tr:nth-child(even) {
 {
 	padding: 20px;
 }
+.loginClass
+{
+	padding-left: 35%;
+	padding-top: 20%;
+}
+
+/* @media only screen and (max-width: 768px)
+{
+	.erp-menubar
+{
+	background-color:  #106CC8;
+	width: 15%;
+	color: white;
+	font-weight: bold;
+	height: 800px;
+	
+	font-size: 15px;
+	cursor: pointer;
+	float: left;
+	position: fixed;
+    height: 100%;
+    padding-top: 100px;
+}
+} */
+
+.quantity-input
+{
+     width: 80px;
+	}
+ @media screen and (max-width: 408px) {
+
+  .erp-headder
+{
+	display: flex;
+	background-color:  #106CC8;
+	padding-top: 6px;
+	padding-left: 6px;
+	padding-bottom: 3px;
+	height: 90px;
+	position: fixed;
+    width: 100%;
+    z-index: 60;
+}
+.quantity-input
+{
+     width: 40px;
+	}
+.erp-menubar
+{
+	background-color:  #106CC8;
+	width: 30%;
+	color: white;
+	font-weight: bold;
+	height: 800px;
+	font-size: 15px;
+	cursor: pointer;
+	float: left;
+	position: fixed;
+    height: 100%;
+    padding-top: 100px;
+    display: none;
+}
+.erp-information {
+    padding-left: 5%;
+    padding-top: 100px
+}
+.login-form
+{
+	
+    width: 260px;
+    margin: 0 auto;
+   padding-top:50px;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
+.loginClass
+{
+	padding-left: 1px;
+	padding-top: 20%;
+}
+.qualityCheck-form
+{
+	 width: 260px;
+    margin: 0 auto;
+   padding-top:80px;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
+.erp-security
+{
+	padding-left: 1px;
+	padding-top: 100px;
+}
+ }
+ 

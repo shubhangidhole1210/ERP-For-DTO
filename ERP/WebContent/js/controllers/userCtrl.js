@@ -15,10 +15,18 @@ erpApp.controller(
 
 					$scope.populateUserList = function() {
 						utils.showProgressBar();
-						$http({
+						/*$http({
 							method : 'GET',
 							url : SERVER_URL + "user/list"
-						}).then(function successCallback(response) {
+						})*/
+						var httpparams = {};
+						httpparams.method = 'GET';
+						httpparams.url = SERVER_URL + "unit/list";
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						
+						$http(httpparams).then(function successCallback(response) {
 
 											$scope.data = response.data;
 											$scope.users = response.data;
@@ -278,10 +286,17 @@ erpApp.controller(
 											});
 						};
 
-						$http({
+						/*$http({
 							method : 'GET',
 							url : SERVER_URL + "usertype/list"
-						}).then(function successCallback(response) {
+						})*/
+						var httpparams = {};
+						httpparams.method = 'GET';
+						httpparams.url = SERVER_URL + "usertype/list";
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						$http(httpparams).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.users = response.data;
 
@@ -303,9 +318,16 @@ erpApp.controller(
 						/* $scope.user = $scope.users[index].id; */
 						console.log($scope.user);
 
-						$http({ method : 'delete',
+						/*$http({ method : 'delete',
 								url : SERVER_URL + "user/delete/" + $scope.users[index].id
-							}).then(function successCallback(data) {
+							})*/
+						var httpparams = {};
+						httpparams.method = 'delete';
+						httpparams.url = SERVER_URL + "user/delete/" + $scope.users[index].id;
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						$http(httpparams).then(function successCallback(data) {
 								$mdDialog.hide();
 								$rootScope.$emit("CallPopulateUserList", {});
 								console.log(data);

@@ -2,9 +2,8 @@
 <div class="erp-information" ng-init="getProductList()">
 <p style="font-weight: bold;font-size: 20px">PRODUCTION PLAN</p>
 <form  name="qualityInspectionForm" novalidate style="width: 900px">
-<fieldset>
 <div class="">
-<table>
+<table >
    <tr>
        <th>Product</th>
        <th>{{today | date:'dd-MM-yyyy'}}</th>
@@ -28,7 +27,7 @@
    <tr ng-repeat="product in products">
       <td>{{product.product_id}}</td>
       <td ng-repeat="productionPlan in product.production_plan">
-         <input type="number" style="width: 80px" ng-model="productionPlan.product_quantity">
+         <input type="number" class="quantity-input" ng-model="productionPlan.product_quantity">
       </td>
      <!--  <th>
       <input type="number" style="width: 80px">
@@ -59,7 +58,6 @@
       <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
     </md-dialog-actions>
     </div>
-</fieldset>
 
 </form>
 </div>
