@@ -22,7 +22,7 @@ erpApp.config(function($locationProvider) {
 erpApp.config(function ($httpProvider) {
 	  $httpProvider.interceptors.push('httpRequestInterceptor');
 });*/
-erpApp.value('SERVER_URL', 'http://192.168.2.108:8080/ERP/');
+erpApp.value('SERVER_URL', 'http://localhost:8080/ERP-BackEnd/');
 erpApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/home.html',
@@ -31,6 +31,11 @@ erpApp.config(function($routeProvider) {
 		}
 	}).when('/product', {
 		templateUrl : 'views/product.html',
+		data : {
+			loginRequired : true
+		}
+	}).when('/userType', {
+		templateUrl : 'views/userType.html',
 		data : {
 			loginRequired : true
 		}
@@ -151,10 +156,10 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
  	                console.log('loginRequired = ' + loginRequired);
  	                if(!Auth.isLoggedIn() && loginRequired){
  	                	$location.path('/login');
- 	                 }else if(next.$$route.originalPath !=='/' && !Auth.isPageAccessible(next)){
+ 	                 }/*else if(next.$$route.originalPath !=='/' && !Auth.isPageAccessible(next)){
  	                	 console.log('page is not accessible');
  	                	$location.path('/unAuthorized');
- 	                 }else{
+ 	                 }*/else{
  	                	 //do nothing
  	                 }
  	            }

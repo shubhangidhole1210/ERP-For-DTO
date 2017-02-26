@@ -238,8 +238,6 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 					updatedBy: 3,
 					updated_date: null,
 					isactive:true
-
-				
 			};
 			var httpparams = {};
 			if ($scope.flag == 0) {
@@ -280,7 +278,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 									$scope.showToast();
 								}else{
 									$scope.displayProgressBar = false;
-									$scope.message = 'User Information saved successfully.';
+									$scope.message = 'Raw Material Order Created successfully.';
 									$scope.showToast();
 									$rootScope.$emit("CallPopulateRMOrderList",{});
 								}

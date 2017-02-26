@@ -7,7 +7,6 @@ erpApp.controller(
 					
 					$rootScope.$on("CallPopulateUserList", function($event) {
 						$scope.populateUserList();
-
 					});
 					$rootScope.$on("saveUserError", function() {
 						$scope.showAddNewUser();
@@ -15,10 +14,14 @@ erpApp.controller(
 
 					$scope.populateUserList = function() {
 						utils.showProgressBar();
-						$http({
-							method : 'GET',
-							url : SERVER_URL + "user/list"
-						}).then(function successCallback(response) {
+						httpparams = {
+								method : 'GET',
+								url : SERVER_URL + "user/list",
+							};
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						$http(httpparams).then(function successCallback(response) {
 
 											$scope.data = response.data;
 											$scope.users = response.data;
@@ -27,8 +30,8 @@ erpApp.controller(
 											utils.hideProgressBar();
 										},
 										function errorCallback(response) {
-											$scope.message = "We are Sorry. Something went wrong. Please try again later."
-											$scope.showToast();
+											$scope.message = 
+											utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 											console.log("Error");
 											utils.hideProgressBar();
 
@@ -36,34 +39,7 @@ erpApp.controller(
 					};
 
 					$scope.isUserInformation = function() {
-						if ($scope.data.length == 0) {
-							$scope.isUserUnavailable = true;
-						} else {
-							$scope.isUserUnavailable = false;
-						}
-					};
-					$scope.showProgressBarOne = function() {
-						$mdDialog
-								.show({
-									controller : ProgressBarController,
-									templateUrl : 'views/progressBar.html',
-									parent : angular.element(document.body),
-									clickOutsideToClose : false,
-									fullscreen : $scope.customFullscreen
-									})
-								.then( function(answer) {}, function() {});
-					};
-
-					$scope.showToast = function() {
-						$mdToast.show({
-							hideDelay : 3000,
-							position : 'top right',
-							controller : 'ToastCtrl',
-							templateUrl : 'views/toast.html',
-							locals : {
-								message : $scope.message
-							}
-						});
+						$scope.isUserUnavailable = $scope.data.length === 0 ? true : false;
 					};
 
 					$scope.user = {};
@@ -141,9 +117,9 @@ erpApp.controller(
 								usertype : $scope.user.usertype.id,
 								doj : $scope.user.doj,
 								dob : $scope.user.dob,
-								createdBy : "123",
+								createdBy : "123",//TODO Change this to currently logged in user id
 								created_date : null,
-								updatedBy : "456",
+								updatedBy : "456",//TODO Change this to currently logged in user id
 								updated_date : null,
 								isactive : true
 							};
@@ -164,9 +140,7 @@ erpApp.controller(
 								"auth_token" : Auth.getAuthToken()
 							};
 							httpparams.data = data;
-							$http(httpparams)
-									.then(
-											function successCallback(data) {
+							$http(httpparams).then(function successCallback(data) {
 												$mdDialog.hide();
 												console.log(data);
 												if (data.data.code === 0) {
@@ -179,7 +153,7 @@ erpApp.controller(
 													console.log(data);
 													$scope.hide();
 													$scope.message = 'Something went worng. Please try again later.';
-													$scope.showToast();
+													utils.showToast();
 												} 
 												
 												else if(data.data.code === 2)
@@ -195,21 +169,15 @@ erpApp.controller(
 												
 												else {
 													$scope.displayProgressBar = false;
-													$scope.message = 'User Information saved successfully.';
-													$scope.showToast();
-													$rootScope
-															.$emit(
-																	"CallPopulateUserList",
-																	{});
+													utils.showToast('User Information saved successfully.');
+													$rootScope.$emit("CallPopulateUserList",{});
 												}
 											},
 											function errorCallback(data) {
-												$rootScope.$emit(
-														"saveUserError", {});
+												$rootScope.$emit("saveUserError", {});
 												console.log(data);
 												$scope.hide();
-												$scope.message = 'Something went worng. Please try again later.';
-												$scope.showToast();
+												utils.showToast('Something went worng. Please try again later.');
 											});
 							
 						}
@@ -223,65 +191,21 @@ erpApp.controller(
 							}
 						};
 
-						$scope.checkDate=function(dob,doj)
-						{
+						$scope.checkDate=function(dob,doj){
 							   $scope.errorMessage='';
 							   var currentDate=new Date();
-							 
-							   if(new  Date(dob) > new Date(doj))
-								   {
+							   if(new  Date(dob) > new Date(doj)){
 								     console.log('its if condition')
-								   }
-							   else
-								   {
+							   }else{
 								      console.log('its else condition')
-								      
-								   }
-						}
-						$scope.showToast = function() {
-							$mdToast.show({
-								hideDelay : 3000,
-								position : 'top right',
-								controller : 'ToastCtrl',
-								templateUrl : 'views/toast.html',
-								locals : {
-									message : $scope.message
-								}
-							});
+							   }
 						};
-
-						$scope.showProgressBar = function(ev) {
-							$scope.displayProgressBar = true;
-							$mdDialog
-									.show(
-											{
-												controller : ProgressBarController,
-												templateUrl : 'views/progressBar.html',
-												parent : angular
-														.element(document.body),
-												targetEvent : ev,
-												clickOutsideToClose : false,
-												fullscreen : $scope.customFullscreen,
-												onComplete : function() {
-													$scope.saveUser(ev);
-												}
-
-											// Only for -xs, -sm breakpoints.
-											})
-									.then(
-											function(answer) {
-												$scope.status = 'You said the information was "'
-														+ answer + '".';
-											},
-											function() {
-												$scope.status = 'You cancelled the dialog.';
-											});
-						};
-
-						$http({
-							method : 'GET',
-							url : SERVER_URL + "usertype/list"
-						}).then(function successCallback(response) {
+						httpparams = {
+								method : 'GET',
+								url : SERVER_URL + "usertype/list"
+							};
+						httpparams.headers = { "auth_token" : Auth.getAuthToken() };
+						$http(httpparams).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.users = response.data;
 
@@ -292,15 +216,7 @@ erpApp.controller(
 
 						});
 
-						/*	$rootScope.$on("callProgressBar", function($event){
-								$scope.showProgressBar();
-							});*/
-
-					}
-					;
-
 					$scope.deleteUser = function(index) {
-						/* $scope.user = $scope.users[index].id; */
 						console.log($scope.user);
 
 						$http({ method : 'delete',
@@ -313,7 +229,7 @@ erpApp.controller(
 									console.log("Error");
 						});
 
-						$scope.showProgressBarOne();
+						utils.showProgressBar();
 					};
 
 					$scope.showEditUser = function(ev, index) {
@@ -382,4 +298,5 @@ erpApp.controller(
 										function() { });
 					};
 
-				});
+				}
+});
