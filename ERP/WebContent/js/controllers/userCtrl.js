@@ -1,5 +1,4 @@
-erpApp.controller(
-				'userCtrl',
+erpApp.controller('userCtrl',
 				function($scope, $http, $mdDialog, $mdToast, $rootScope,
 						SERVER_URL, utils, Auth) {
 					$scope.isReadOnly = false;
@@ -14,13 +13,14 @@ erpApp.controller(
 
 					$scope.populateUserList = function() {
 						utils.showProgressBar();
-						httpparams = {
-								method : 'GET',
-								url : SERVER_URL + "user/list",
-							};
+
+						var httpparams = {};
+						httpparams.method = 'GET';
+						httpparams.url = SERVER_URL + "unit/list";
 						httpparams.headers = {
 								auth_token : Auth.getAuthToken()
 							};
+						
 						$http(httpparams).then(function successCallback(response) {
 
 											$scope.data = response.data;
@@ -219,9 +219,16 @@ erpApp.controller(
 					$scope.deleteUser = function(index) {
 						console.log($scope.user);
 
-						$http({ method : 'delete',
+						/*$http({ method : 'delete',
 								url : SERVER_URL + "user/delete/" + $scope.users[index].id
-							}).then(function successCallback(data) {
+							})*/
+						var httpparams = {};
+						httpparams.method = 'delete';
+						httpparams.url = SERVER_URL + "user/delete/" + $scope.users[index].id;
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						$http(httpparams).then(function successCallback(data) {
 								$mdDialog.hide();
 								$rootScope.$emit("CallPopulateUserList", {});
 								console.log(data);
