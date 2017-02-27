@@ -98,12 +98,12 @@
               </div>
          </md-input-container>   
                       <md-input-container class="md-block" flex-gt-sm type="password">
-         <input type="date" placeholder="Enter date of birth" ng-model="user.doj" name="doj" required ng-disabled="isReadOnly" id="doj" ng-change="checkDate(dob,doj)">
+         <input type="date" placeholder="Enter date of birth" ng-model="user.doj" name="doj" required ng-disabled="isReadOnly" id="doj" ng-change="checkDate(dob,doj)" min="{{user.dob}}">
           <label class="input-filed-label">DATE OF JOINING[MM/DD/YYYY]*</label>
               <div ng-messages="userInformation.doj.$error">
                  <div ng-message="required">Please Enter Date of Joining</div>
               </div>
-              
+              <div ng-show=" userInformation.doj.$error.min" style="color: red;">joining Date should be greater than birth date</div>
          </md-input-container>   
         
         

@@ -16,7 +16,7 @@ erpApp.controller('userCtrl',
 
 						var httpparams = {};
 						httpparams.method = 'GET';
-						httpparams.url = SERVER_URL + "unit/list";
+						httpparams.url = SERVER_URL + "user/list";
 						httpparams.headers = {
 								auth_token : Auth.getAuthToken()
 							};
@@ -67,6 +67,111 @@ erpApp.controller('userCtrl',
 								.show(abc)
 								.then( function(answer) {}, function() {});
 					};
+					  
+					$scope.showEditUser = function(ev, index) {
+						$scope.flag = 1;
+						$scope.isReadOnly = false;
+						$scope.user = $scope.users[index];
+						$scope.information = "EDIT UNIT INFORMATION"
+						console.log($scope.user);
+						$mdDialog
+								.show({
+									controller : DialogController,
+									templateUrl : 'views/userInformation.html',
+									parent : angular.element(document.body),
+									targetEvent : ev,
+									clickOutsideToClose : true,
+									fullscreen : $scope.customFullscreen,
+									locals : {
+										user : $scope.user,
+										flag : $scope.flag,
+										action : $scope.isReadOnly,
+										information : $scope.information
+									}
+								})
+								.then(
+										function(answer) {
+											$scope.status = 'You said the information was "'
+													+ answer + '".';
+										},
+										function() {
+											$scope.status = 'You cancelled the dialog.';
+										});
+					};
+					$scope.viewUserInformation = function(ev, index) {
+						$scope.flag = 2;
+						$scope.isReadOnly = true;
+						$scope.user = $scope.users[index];
+						$scope.isSaving = false;
+						$scope.information = "VIEW UNIT INFORMATION"
+						console.log($scope.unit);
+						$mdDialog.show({
+									controller : DialogController,
+									templateUrl : 'views/userInformation.html',
+									parent : angular.element(document.body),
+									targetEvent : ev,
+									clickOutsideToClose : true,
+									fullscreen : $scope.customFullscreen,
+									locals : {
+										user : $scope.user,
+										flag : $scope.flag,
+										action : $scope.isReadOnly,
+										information : $scope.information
+									}
+								})
+								.then(
+										function(answer) {
+											$scope.status = 'You said the information was "'
+													+ answer + '".';
+										},
+										function() {
+											$scope.status = 'You cancelled the dialog.';
+										});
+					};
+					$scope.deleteUser = function(index) {
+						console.log($scope.user);
+
+						/*$http({ method : 'delete',
+								url : SERVER_URL + "user/delete/" + $scope.users[index].id
+							})*/
+						var httpparams = {};
+						httpparams.method = 'delete';
+						httpparams.url = SERVER_URL + "user/delete/" + $scope.users[index].id;
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						$http(httpparams).then(function successCallback(data) {
+								$mdDialog.hide();
+								$rootScope.$emit("CallPopulateUserList", {});
+								console.log(data);
+								}, function errorCallback(data) {
+									console.log("Error");
+						});
+
+						utils.showProgressBar();
+					};
+
+					
+
+				
+
+					$scope.showConfirm = function(ev, index) {
+						// Appending dialog to document.body to cover sidenav in docs app
+						var confirm = $mdDialog
+								.confirm()
+								.title(
+										'Are you sure you want to Delete User Information?')
+								.ariaLabel('Lucky day').targetEvent(ev).ok(
+										'YES').cancel('NO');
+
+						$mdDialog.show(confirm)
+								.then(function() {
+											$scope.deleteUser(index);
+											$scope.message = 'Delete Record sucessfully';
+											$scope.showToast();
+										},
+										function() { });
+					};
 
 					function DialogController($scope, $mdDialog, user,
 							$location, $rootScope, SERVER_URL, flag, action,
@@ -90,20 +195,6 @@ erpApp.controller('userCtrl',
 							$mdDialog.hide(answer);
 						};
                          
-						/* $scope.checkErr = function(doj,doj) {
-						        $scope.errMessage = '';
-						        var curDate = new Date();
-						        
-						        if(new Date(doj) > new Date(doj)){
-						          $scope.errMessage = 'End Date should be greater than start date';
-						          return false;
-						        }
-						        if(new Date(doj) < curDate){
-						           $scope.errMessage = 'Start date should not be before today.';
-						           return false;
-						        }
-						    };*/
-						
 						$scope.saveUser = function(ev) {
 
 							var data = {
@@ -191,15 +282,7 @@ erpApp.controller('userCtrl',
 							}
 						};
 
-						$scope.checkDate=function(dob,doj){
-							   $scope.errorMessage='';
-							   var currentDate=new Date();
-							   if(new  Date(dob) > new Date(doj)){
-								     console.log('its if condition')
-							   }else{
-								      console.log('its else condition')
-							   }
-						};
+						
 						httpparams = {
 								method : 'GET',
 								url : SERVER_URL + "usertype/list"
@@ -216,94 +299,7 @@ erpApp.controller('userCtrl',
 
 						});
 
-					$scope.deleteUser = function(index) {
-						console.log($scope.user);
-
-						/*$http({ method : 'delete',
-								url : SERVER_URL + "user/delete/" + $scope.users[index].id
-							})*/
-						var httpparams = {};
-						httpparams.method = 'delete';
-						httpparams.url = SERVER_URL + "user/delete/" + $scope.users[index].id;
-						httpparams.headers = {
-								auth_token : Auth.getAuthToken()
-							};
-						$http(httpparams).then(function successCallback(data) {
-								$mdDialog.hide();
-								$rootScope.$emit("CallPopulateUserList", {});
-								console.log(data);
-								}, function errorCallback(data) {
-									console.log("Error");
-						});
-
-						utils.showProgressBar();
-					};
-
-					$scope.showEditUser = function(ev, index) {
-						$scope.information = "EDIT USER INFORMATION"
-						$scope.flag = 1;
-						$scope.isReadOnly = false;
-						$scope.user = $scope.users[index];
-						console.log($scope.user);
-						$mdDialog
-								.show({
-									controller : DialogController,
-									templateUrl : 'views/userInformation.html',
-									parent : angular.element(document.body),
-									targetEvent : ev,
-									clickOutsideToClose : true,
-									fullscreen : $scope.customFullscreen,
-									locals : {
-										user : $scope.user,
-										flag : $scope.flag,
-										action : $scope.isReadOnly,
-										information : $scope.information
-									}
-								})
-								.then(function(answer) {}, function() {});
-					};
-
-					$scope.viewUserInformation = function(ev, index) {
-						$scope.flag = 2;
-						$scope.isReadOnly = true;
-						$scope.user = $scope.users[index];
-						$scope.isSaving = false;
-						$scope.information = "VIEW USER INFORMATION"
-						console.log($scope.user);
-						$mdDialog
-								.show({
-									controller : DialogController,
-									templateUrl : 'views/userInformation.html',
-									parent : angular.element(document.body),
-									targetEvent : ev,
-									clickOutsideToClose : true,
-									fullscreen : $scope.customFullscreen,
-									locals : {
-										user : $scope.user,
-										flag : $scope.flag,
-										action : $scope.isReadOnly,
-										information : $scope.information
-									}
-								}).then(function(){}, function() {});
-					};
-
-					$scope.showConfirm = function(ev, index) {
-						// Appending dialog to document.body to cover sidenav in docs app
-						var confirm = $mdDialog
-								.confirm()
-								.title(
-										'Are you sure you want to Delete User Information?')
-								.ariaLabel('Lucky day').targetEvent(ev).ok(
-										'YES').cancel('NO');
-
-						$mdDialog.show(confirm)
-								.then(function() {
-											$scope.deleteUser(index);
-											$scope.message = 'Delete Record sucessfully';
-											$scope.showToast();
-										},
-										function() { });
-					};
+					
 
 				}
 });

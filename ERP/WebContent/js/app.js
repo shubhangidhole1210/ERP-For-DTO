@@ -22,7 +22,7 @@ erpApp.config(function($locationProvider) {
 erpApp.config(function ($httpProvider) {
 	  $httpProvider.interceptors.push('httpRequestInterceptor');
 });*/
-erpApp.value('SERVER_URL', 'http://localhost:8080/ERP-BackEnd/');
+erpApp.value('SERVER_URL', 'http://192.168.2.109:8080/ERP/');
 erpApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/home.html',

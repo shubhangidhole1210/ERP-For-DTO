@@ -18,7 +18,7 @@
          
             <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">PRICE PER UNIT</label>
-            <input type="text" ng-model="rmOrderAssociation.pricePerUnit" value="rmOrderAssociation.pricePerUnit"  required name="pricePerUnit" ng-disabled="isReadOnly"  >
+            <input type="number" ng-model="rmOrderAssociation.pricePerUnit" value="rmOrderAssociation.pricePerUnit"  required name="pricePerUnit" ng-disabled="isReadOnly"  >
              <div ng-messages="rmVendorAssociation.pricePerUnit.$error">
             <div ng-message="required">Please Enter Price per Unit </div>
           </div>

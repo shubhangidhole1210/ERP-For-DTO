@@ -1,4 +1,4 @@
-erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast) {
+erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth) {
 	
 	$rootScope.$on("callPopulateVendorList", function() {
 		$scope.populateVendorList();
@@ -11,10 +11,19 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 	$scope.populateVendorList=function()
 	{
 		
-		 $http({
+		/* $http({
 				method : 'GET',
 				url : SERVER_URL + "vendor/list"
-			}).then(function successCallback(response) {
+			})*/
+			
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "vendor/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
 				$scope.isVendorInformation();
 				$scope.vendorUsers = response.data;
@@ -163,12 +172,18 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		    		 {
 		    		    httpparams.method='post',
 		    		    httpparams.url=SERVER_URL + "vendor/create"
+		    		    httpparams.headers = {
+		    					auth_token : Auth.getAuthToken()
+		    				};
 		    		 }
 		    	 else
 		    		 {
 		    		      data.id=$scope.vendorUser.id,
 		    		      httpparams.method='put',
 		    		      httpparams.url=SERVER_URL + "vendor/update"
+		    		      httpparams.headers = {
+			    					auth_token : Auth.getAuthToken()
+			    				};
 		    		 }
 		    	 
 		    	 httpparams.data=data;
@@ -300,13 +315,21 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			/* $scope.user = $scope.users[index].id; */
 			console.log($scope.vendoUser);
 
-			$http(
+			/*$http(
 					{
 						method : 'delete',
 						url : SERVER_URL + "vendor/delete/"
 								+ $scope.vendorUsers[index].id
 
-					}).then(function successCallback(data) {
+					})*/
+			
+			var httpparams = {};
+			httpparams.method = 'delete';
+			httpparams.url = SERVER_URL + "vendor/delete/" + + $scope.vendorUsers[index].id;
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			$http(httpparams).then(function successCallback(data) {
 						$mdDialog.hide();
 						$rootScope.$emit("callPopulateVendorList", {});
 				console.log(data);

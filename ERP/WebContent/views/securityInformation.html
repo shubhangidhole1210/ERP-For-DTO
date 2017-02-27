@@ -53,19 +53,19 @@
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">IN TIME</label>
-            <input type="time"  name="inTime" ng-model="intime" value="intime"  id="intime" step='1'  >
-             <!-- <div ng-messages="securityInformation.inTime.$error">
-            <div ng-message="required">Please enter exact IN Time</div> -->
+            <input type="time"  name="inTime" ng-model="intime" value="intime"  id="intime" step='1' required >
+             <div ng-messages="securityInformation.inTime.$error">
+            <div ng-message="required">Please enter exact IN Time</div>
           </div>
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm >
             <label class="input-filed-label">OUT TIME</label>
-            <input type="time"  name="outTime" ng-model="outtime" value="outtime" id="outtime"  step='1' >
+            <input type="time"  name="outTime" ng-model="outtime" value="outtime" id="outtime"  step='1' min="{{intime}}" required >
             <div ng-messages="securityInformation.outTime.$error">
               <div ng-message="required">Please Enter Out Time</div>
             </div>
+               <div ng-show=" securityInformation.outTime.$error.min" style="color: red;">Out time should be greater than in time</div>
           </md-input-container>
-          <span ng-show="inTime<=outTime" style="color:red;">out time should be greater than in time</span>
         </div>
          <md-input-container class="md-block" flex-gt-sm >
             <label class="input-filed-label">DESCRIPTION</label>
@@ -78,7 +78,7 @@
           <md-input-container class="md-block" flex-gt-sm type="password">
               <label class="input-filed-label">DATE[MM/DD/YYYY]*</label>
               
-              <input type="date" placeholder="Enter date of birth" ng-model="createDate "  name="createDate" >
+              <input type="date" placeholder="Enter date of birth" ng-model="createDate "  name="createDate" required >
               <div ng-messages="securityInformation.createDate.$error">
                  <div ng-message="required">Please Enter Date</div>
               </div>

@@ -35,14 +35,14 @@
           
  			 <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">TOTAL PRICE</label>
-            <input type="text" ng-model="rmOrder.totalprice" value="rmOrder.totalprice" required name="totalprice"  ng-disabled="isReadOnly">
+            <input type="number" ng-model="rmOrder.totalprice" value="rmOrder.totalprice" required name="totalprice"  ng-disabled="isReadOnly">
               <div ng-messages="RMOrderInformation.totalprice.$error">
                  <div ng-message="required">Please enter total price</div>
               </div>
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">TAX</label>
-            <input type="text" ng-model="rmOrder.tax" value="rmOrder.tax" required name="tax" ng-disabled="isReadOnly">
+            <input type="number" ng-model="rmOrder.tax" value="rmOrder.tax" required name="tax" ng-disabled="isReadOnly">
             <div ng-messages="RMOrderInformation.tax.$error">
              <div ng-message="required">please enter tax</div>
             </div>
@@ -54,14 +54,14 @@
 
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">ACTUAL PRICE</label>
-            <input type="text" ng-model="rmOrder.actualPrice" value="rmOrder.actualPrice" required name="actualPrice" ng-disabled="isReadOnly">
+            <input type="number" ng-model="rmOrder.actualPrice" value="rmOrder.actualPrice" required name="actualPrice" ng-disabled="isReadOnly">
             <div ng-messages="RMOrderInformation.actualPrice.$error">
             <div ng-message="required">Please enter actual price </div>
             </div>
           </md-input-container>
             <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">OTHER CHARG</label>
-            <input type="text" ng-model="rmOrder.otherCharges" value="rmOrder.otherCharges" required name="otherCharges"  ng-disabled="isReadOnly">
+            <input type="number" ng-model="rmOrder.otherCharges" value="rmOrder.otherCharges" required name="otherCharges"  ng-disabled="isReadOnly">
               <div ng-messages="RMOrderInformation.otherCharges.$error">
                  <div ng-message="required">Please enter charges</div>
               </div>

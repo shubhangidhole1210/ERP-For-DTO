@@ -1,7 +1,7 @@
 erpApp
 		.controller(
 				'RMInventaryCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL) {
+				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth) {
 					$scope.isReadOnly = false;
 					
 
@@ -13,10 +13,18 @@ erpApp
 					});
 
 					$scope.populateRMInventaryList = function() {
-						$http({
+						/*$http({
 							method : 'GET',
 							url : SERVER_URL + "rawmaterialinventory/list"
-						}).then(function successCallback(response) {
+						})*/
+						{
+							var httpparams = {};
+							httpparams.method = 'GET';
+							httpparams.url = SERVER_URL + "rawmaterialinventory/list";
+							httpparams.headers = {
+									auth_token : Auth.getAuthToken()
+								};
+							$http(httpparams).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.rmInventarys = response.data;
 							$scope.isRmInventoryInformation();

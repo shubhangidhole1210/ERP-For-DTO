@@ -1,3 +1,41 @@
 <div ng-controller="pageCtrl">
-
+<div class="erp-information">
+    <div>
+			<md-button class="md-raised" ng-click="showAddNewPage($event);"  ng-init="populatePageList();flag=0">ADD NEW UNIT</md-button>
+		</div>
+		<input type="text" ng-model="searchText" placeholder="Search by Name">
+		<md-content class="md-padding">
+    <form ng-submit="$event.preventDefault()">
+      <p style="font-weight: bold;font-size: 20px">PAGE LIST</p>
+     
+      <br/>
+    </form>
+  </md-content>
+  <table>
+			<tr>
+				<th>MENU</th>
+				<th>PAGE NAME</th>
+				<th>SUBMENU</th>
+				<th>Action</th>
+			</tr>
+			<tr ng-repeat="page in data">
+				<td>{{page.menu}}</td>
+				<td>{{page.pageName}}</td>
+				<td>{{page.submenu}}</td>
+				<!-- <td>{{units.createdDate}}</td>
+				<td>{{units.updatedDate}}</td> -->
+				<td>
+				     <md-button class="md-raised"  ng-click="showEditPage($event,$index)" ng-init="flag=1">EDIT</md-button>
+				<!-- <md-button class="md-raised" ng-click="showConfirm($event)">REMOVE</md-button> -->
+				<md-button class="md-raised"  ng-click="showConfirm($event,$index)">Remove</md-button>
+				
+				<md-button class="md-raised" ng-click="viewPageInformation($event,$index)">VIEW</md-button>
+				</td>
+				
+			</tr>
+		</table>
+		<div ng-show="isUnitInPresent">
+		   Currently there are no active Units.Please add new unit.
+		</div>
+</div>
 </div>

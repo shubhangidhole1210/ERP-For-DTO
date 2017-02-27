@@ -27,7 +27,7 @@
             <label class="input-filed-label">DESCRIPTION</label>
             <input type="text" ng-model="rawMaterial.description" value="rawMaterial.description" required name="description" ng-minlemgth="4" ng-maxlength="255"  ng-disabled="isReadOnly">
             <div ng-messages="rawMaterialInformation.description.$error">
-              <div ng-message="required">Please Enter Description</div>
+              <div ng-message="required">Please enter Description</div>
               <div ng-message="minlength">Raw material should be minimum 4 character and maximum 255 character</div>
            	  <div ng-message="maxlength">Raw material should be minimum 4 character and maximum 255 character</div>
             </div>
@@ -39,15 +39,15 @@
             <label class="input-filed-label">PART NUMBER</label>
             <input type="text" ng-model="rawMaterial.partNumber" value="rawMaterial.partNumber" required name="partNumber" ng-disabled="isReadOnly">
             <div ng-messages="rawMaterialInformation.partNumber.$error">
-             <div ng-message="required">Please Enter Raw Material part number</div>
+             <div ng-message="required">Please enter Raw Material part number</div>
             </div>
           </md-input-container>
 
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">PRICE PER UNIT</label>
-            <input type="text" ng-model="rawMaterial.pricePerUnit" value="rawMaterial.pricePerUnit" required name="pricePerUnit" ng-disabled="isReadOnly">
+            <input type="number" ng-model="rawMaterial.pricePerUnit" value="rawMaterial.pricePerUnit" required name="pricePerUnit" ng-disabled="isReadOnly">
             <div ng-messages="rawMaterialInformation.pricePerUnit.$error">
-             <div ng-message="required">Please Enter Unit</div>
+             <div ng-message="required">Please enter Unit</div>
             </div>
           </md-input-container>
         </div>

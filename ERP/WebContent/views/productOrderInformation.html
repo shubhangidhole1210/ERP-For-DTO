@@ -47,7 +47,7 @@
            <md-input-container class="md-block" flex-gt-sm type="password">
               <label class="input-filed-label">DATE OF DELIVERY[MM/DD/YYYY]*</label>
               
-              <input type="date" placeholder="Enter date of birth" ng-model="productOrder.expecteddeliveryDate"  name="dob" required ng-disabled="isReadOnly">
+              <input type="date" placeholder="Enter date of birth" ng-model="productOrder.expecteddeliveryDate"  name="expecteddeliveryDate" required ng-disabled="isReadOnly">
               <div ng-messages="productOrderInformation.expecteddeliveryDate.$error">
                  <div ng-message="required">Please Enter Expected Delivery Date</div>
               </div>
@@ -74,13 +74,13 @@
             <th>ACTION</th>
           </tr>
           <tr ng-repeat="orderProductAssociation in orderProductAssociations">
-          <td>{{orderProductAssociation.product.partNumber}}</td>
+          <td>{{orderProductAssociation.product}}</td>
           <td>{{orderProductAssociation.quantity}}</td>
-          <td>
+         <!--  <td>
              <button type="button" style="height: 40px">EDIT</button>
                <button type="button" style="height: 40px">VIEW</button>
-                 <!-- <button type="button" style="height: 40px">DELETE</button> -->
-          </td>
+                 <button type="button" style="height: 40px">DELETE</button>
+          </td> -->
           </tr>
         </table>
      

@@ -1,4 +1,4 @@
-erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast) {
+erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast) {
 	
 	$rootScope.$on("callPopulateVendorList", function() {
 		$scope.populateVendorList();
@@ -11,10 +11,19 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 	$scope.populateVendorList=function()
 	{
 		
-		 $http({
+		/* $http({
 				method : 'GET',
 				url : SERVER_URL + "vendor/list"
-			}).then(function successCallback(response) {
+			})*/
+		
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "unit/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
 				$scope.isVendorInformation();
 				$scope.vendorUsers = response.data;

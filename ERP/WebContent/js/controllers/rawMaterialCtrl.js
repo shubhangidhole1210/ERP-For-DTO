@@ -1,4 +1,4 @@
-erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL) {
+erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth) {
 	
 	$rootScope.$on("CallPopulateRawMaterial", function() {
 		$scope.populateRawMaterial();
@@ -9,10 +9,19 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 	
 	$scope.populateRawMaterial=function()
 {
-		$http({
+		/*$http({
 			method : 'GET',
 			url : SERVER_URL + "rawmaterial/list"
-		}).then(function successCallback(response) {
+		})*/
+		
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "rawmaterial/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.rawMaterials = response.data;
 			$scope.getRawMaterialInformation();
@@ -151,11 +160,17 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 				console.log($scope.data);
 				httpparams.method = 'post';
 				httpparams.url = SERVER_URL + "rawmaterial/create";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+					};
 			} else {
 				console.log($scope.rawMaterial);
 				data.id = $scope.rawMaterial.id;
 				httpparams.method = 'put';
 				httpparams.url = SERVER_URL + "rawmaterial/update";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+					};
 			}
 			httpparams.data = data;
 			$http(httpparams)
@@ -241,12 +256,20 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		
 		$scope.getUnitList= function()
 		{
-			$http({
+			/*$http({
 				method : 'GET',
 				url : SERVER_URL + "unit/list"
-			}).then(function successCallback(response) {
+			})*/
+			var httpparams = {};
+			httpparams.method = 'GET';
+			httpparams.url = SERVER_URL + "unit/list";
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			
+			$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
-			/*	$scope.users = response.data;*/
+			
 
 				console.log(response);
 
@@ -327,13 +350,21 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		/* $scope.user = $scope.users[index].id; */
 		console.log($scope.rawmaterial);
 
-		$http(
+		/*$http(
 				{
 					method : 'delete',
 					url : SERVER_URL + "rawmaterial/delete/"
 							+ $scope.rawMaterials[index].id
 
-				}).then(function successCallback(data) {
+				})*/
+		
+		var httpparams = {};
+		httpparams.method = 'delete';
+		httpparams.url = SERVER_URL + "rawmaterial/delete/" + $scope.rawMaterials[index].id;
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(data) {
 					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateRawMaterial", {});
 			console.log(data);

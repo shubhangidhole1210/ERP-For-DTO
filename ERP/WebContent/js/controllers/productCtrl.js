@@ -1,4 +1,4 @@
-erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,fileUpload) {
+erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,fileUpload,Auth) {
 	
 	$rootScope.$on("CallPopulateProductList", function() {
 		$scope.populteProductList();
@@ -9,10 +9,17 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	
 	$scope.populteProductList=function()
 	{
-		$http({
+		/*$http({
 			method : 'GET',
 			url : SERVER_URL + "product/list"
-		}).then(function successCallback(response) {
+		})*/
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "product/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.products = response.data;
 			$scope.isProductInformation();
@@ -113,7 +120,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 							$scope.status = 'You cancelled the dialog.';
 						});
 	};
-	function ProductController($scope, $mdDialog,product,action,flag,$mdToast,information,fileUpload) {
+	function ProductController($scope, $mdDialog,product,action,flag,$mdToast,information,fileUpload,Auth) {
 		$scope.isReadOnly = action;
 		$scope.flag = flag;
 		$scope.product = product;
@@ -154,11 +161,17 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 				console.log($scope.data);
 				httpparams.method = 'post';
 				httpparams.url = SERVER_URL + "product/create";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+					};
 			} else {
 				console.log($scope.product);
 				data.id = $scope.product.id;
 				httpparams.method = 'put';
 				httpparams.url = SERVER_URL + "product/update";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+					};
 			}
 			httpparams.data = data;
 			$http(httpparams)
@@ -332,16 +345,25 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	$scope.deleteProduct = function(index) {
 		console.log($scope.product);
 
-		$http(
+		/*$http(
 				{
 					method : 'delete',
 					url : SERVER_URL + "product/delete/"
 							+ $scope.products[index].id
 
-				}).then(function successCallback(data) {
+				})*/
+		
+		var httpparams = {};
+		httpparams.method = 'delete';
+		httpparams.url = SERVER_URL + "product/delete/" + $scope.products[index].id;
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(data) {
 					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateProductList", {});
 			console.log(data);
+			
 
 		}, function errorCallback(data) {
 			console.log("Error");

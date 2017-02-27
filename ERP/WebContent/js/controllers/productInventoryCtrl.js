@@ -1,4 +1,4 @@
-erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast) {
+erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth) {
 	
 	$rootScope.$on("callPopulateProductInventoryList", function() {
 		$scope.populateProductInventoryList();
@@ -11,10 +11,18 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 	$scope.populateProductInventoryList=function()
 	{
 		
-		 $http({
+		 /*$http({
 				method : 'GET',
 				url : SERVER_URL + "productinventory/list"
-			}).then(function successCallback(response) {
+			})*/
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "productinventory/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
 				$scope.productInventorys = response.data;
 				$scope.isProductInventoryinformation();
@@ -115,7 +123,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 							$scope.status = 'You cancelled the dialog.';
 						});
 	  };
-	  function DialogVendorController($scope, $mdDialog,productInventory,flag,action,$rootScope,$mdToast,information) {
+	  function DialogVendorController($scope, $mdDialog,productInventory,flag,action,$rootScope,$mdToast,information,Auth) {
 		    $scope.productInventory=productInventory;
 		    $scope.flag=flag;
 		    $scope.isReadOnly = action;
@@ -156,6 +164,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		    		    httpparams.method='post',
 		    		    httpparams.url=SERVER_URL + "productinventory/create"
 		    		 }
+		    	 
 		    	 else
 		    		 {
 		    		      data.id=$scope.productInventory.id,
