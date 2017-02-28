@@ -293,7 +293,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 	$scope.viewUserTypeInformation = function(ev, index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.userType = $scope.userTypes[index];
+		$scope.UserType = $scope.UserTypes[index];
 		$scope.isSaving = false;
 		$scope.information = "VIEW UserType INFORMATION"
 		console.log($scope.UserType);

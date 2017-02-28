@@ -287,8 +287,24 @@ erpApp.controller('ERPController', function($scope,$rootScope,Auth) {
 
 });
 */
+erpApp.directive("limitTo", [function() {
+    return {
+        restrict: "A",
+        link: function(scope, elem, attrs) {
+            var limit = parseInt(attrs.limitTo);
+            angular.element(elem).on("keypress", function(e) {
+                if (this.value.length == limit) e.preventDefault();
+            });
+        }
+    }
+}]);
 
-
+erpApp.directive('lettersOnly', function() {
+	  return {
+		    replace: true,
+		    template: '<input replace="[^a-zA-Z]" with="">'
+		  };
+		})
 
 erpApp.controller('finshedGoodctrl', function($scope) {
 

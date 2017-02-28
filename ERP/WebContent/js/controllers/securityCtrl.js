@@ -100,7 +100,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		var data = {
 
 			invoice_No : $scope.invoice_No,
-			vendorname : $scope.vendorname,
+			vendorname : $scope.vendor.id,
 			vehicleNo : $scope.vehicleNo,
 			driver_Name : $scope.driver_Name,
 			description : $scope.description,
@@ -159,7 +159,30 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		}
 			
 	};
-	
+	$scope.displayVendorId=function()
+	{
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "vendor/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		/*$http({
+			method : 'GET',
+			url : SERVER_URL + "vendor/list"
+		})*/
+		
+		$http(httpparams).then(function successCallback(response) {
+			$scope.vendorData = response.data;
+
+			console.log(response);
+
+		}, function errorCallback(response) {
+			console.log("Error");
+
+		})
+	};
 	
 	
 });
