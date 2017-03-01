@@ -112,23 +112,16 @@
         <div layout-gt-sm="row" >
            <md-input-container>
           <label style="color: black;">PRODUCT*</label>
-          <md-select ng-model="orderProductAssociation.product" name="product"  ng-disabled="isReadOnly"  ng-init="getProducts()">
-            <md-option ng-repeat="product in products" ng-value="product.partNumber" >
+          <md-select ng-model="orderProductAssociation.product" name="product" value="product.id"  ng-disabled="isReadOnly"  ng-init="getProducts()">
+            <md-option ng-repeat="product in products" ng-value="product.id" >
                {{product.name}}
             </md-option>
           </md-select>
-         <!--  <div ng-messages="productOrderInformation.product.$error">
-                 <div ng-message="required">Please Select Product</div>
-              </div> -->
         </md-input-container>
 		<md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">QUANTITY</label>
             <input type="number" ng-model="orderProductAssociation.quantity"   name="quantity"  ng-disabled="isReadOnly">
-            <!-- <div ng-messages="productOrderInformation.quantity.$error">
-              <div ng-message="required">Please Enter Product quantity</div>
-            </div> -->
           </md-input-container>
-           <!-- <md-button class="md-raised" ng-click="displayLogin()">Add Product</md-button> -->
            <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderProductAssociation()">Add Product</button>
         </div>
          </div>

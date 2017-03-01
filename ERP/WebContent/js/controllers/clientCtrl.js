@@ -211,7 +211,7 @@ erpApp
 													}
 												else{
 													$scope.displayProgressBar = false;
-													$scope.message = 'User Information saved successfully.';
+													$scope.message = 'Client Information saved successfully.';
 													$scope.showToast();
 													$rootScope.$emit("CallPopulateClientList",{});
 												}

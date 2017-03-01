@@ -56,7 +56,7 @@
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">CONTACT NUMBER</label>
-            <input type="text" ng-model="client.contactnumber"  required name="contactnumber" ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]+$/" ng-disabled="isReadOnly">
+            <input limit-to="10" type="text" ng-model="client.contactnumber"  required name="contactnumber" ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]+$/" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
               <div ng-messages="clientInformation.contactnumber.$error">
                  <div ng-message="required">Please enter client mobile number</div>
                  <div ng-message="minlength">mobile number must be 10 digit</div>

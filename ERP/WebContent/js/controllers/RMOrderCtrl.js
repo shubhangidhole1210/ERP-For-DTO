@@ -467,7 +467,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	$scope.showConfirm = function(ev,index) {
 		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm().title(
-				'Would you like to delete user informaton?')
+				'Are you sure you want to Delete Raw Material Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'Delete' ).cancel('Cancel');
 

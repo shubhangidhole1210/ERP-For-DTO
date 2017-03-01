@@ -156,7 +156,6 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 							
 							var data = {
 
-									/*"rawmaterial":8,*/
 									rawmaterial:$scope.rmInventary.rawmaterial.id,
 									quantityAvailable:$scope.rmInventary.quantityAvailable,
 									name:$scope.rmInventary.name,

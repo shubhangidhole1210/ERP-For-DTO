@@ -37,7 +37,7 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">FIRST NAME</label>
-            <input type="text" required name="firstName" ng-model="vendorUser.firstName" value="vendorUser.firstName" ng-minlength="2" ng-maxlength="255" ng-disabled="isReadOnly" >
+            <input type="text" required name="firstName" ng-model="vendorUser.firstName" value="vendorUser.firstName" ng-minlength="2" ng-maxlength="255" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 97 && event.charCode <= 123'>
             <div ng-messages="vendorInformation.firstName.$error">
              <div ng-message="required"> Please enter  first name</div>
               <div ng-message="minlength">First Name should be minimum 2 or Maximum 255 character</div>
@@ -46,7 +46,7 @@
 
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">LAST NAME</label>
-            <input type="text" required name="lastName" ng-model="vendorUser.lastName" value="vendorUser.lastName" ng-minlength="2" ng-maxlength="255" ng-disabled="isReadOnly" >
+            <input type="text" required name="lastName" ng-model="vendorUser.lastName" value="vendorUser.lastName" ng-minlength="2" ng-maxlength="255" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 97 && event.charCode <= 123' >
             <div ng-messages="vendorInformation.lastName.$error">
              <div ng-message="required"> Please enter  last name</div>
               <div ng-message="minlength">Last Name should be minimum 2 or Maximum 255 character</div>

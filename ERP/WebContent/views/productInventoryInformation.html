@@ -36,7 +36,7 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANITY AVAILABLE</label>
-            <input type="text" ng-model="productInventory.quantityavailable"  required name="quantityavailable" ng-disabled="isReadOnly">
+            <input type="text" ng-model="productInventory.quantityavailable"  required name="quantityavailable" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
             <div ng-messages="productInventoryInformation.quantityavailable.$error">
              <div ng-message="required">Please enter available quantity</div>
             </div>
@@ -44,7 +44,7 @@
 
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">RACK NUMBER</label>
-            <input type="text" ng-model="productInventory.racknumber"  required name="racknumber" ng-disabled="isReadOnly">
+            <input type="text" ng-model="productInventory.racknumber"  required name="racknumber" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
             <div ng-messages="productInventoryInformation.racknumber.$error">
              <div ng-message="required">Please Enter Rack Number</div>
             </div>

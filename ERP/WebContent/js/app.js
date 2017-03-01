@@ -22,7 +22,7 @@ erpApp.config(function($locationProvider) {
 erpApp.config(function ($httpProvider) {
 	  $httpProvider.interceptors.push('httpRequestInterceptor');
 });*/
-erpApp.value('SERVER_URL', 'http://192.168.2.109:8080/ERP/');
+erpApp.value('SERVER_URL', 'http://192.168.2.109:8085/ERP/');
 erpApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/home.html',
@@ -271,6 +271,26 @@ erpApp.controller('ERPController', function($scope,$rootScope,Auth) {
 		$scope.displayMenu=Auth.isLoggedIn();
 		$scope.menu = Auth.getMenu();
 	});
+	
+	$scope.logginButton=[];
+	$scope.displayLoginButton=Auth.isLoggedIn();
+	if($scope.displayLoginButton){
+		$scope.logginButton = Auth.getMenu();
+	}
+	$rootScope.$on('logout',function($event){
+		console.log('Inside logout event');
+		$scope.displayLoginButton=Auth.isLoggedIn();
+	});
+	$rootScope.$on('loginSuccess',function($event){
+		console.log('Inside login success event');
+		$scope.displayLoginButton=Auth.isLoggedIn();
+		$scope.logginButton = Auth.getMenu();
+	});
+	
+	$scope.displayLogin=function()
+	{
+		
+	}
 });
 
 /*erpApp.controller('homectrl', function($scope, $http,SERVER_URL) {

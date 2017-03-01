@@ -118,7 +118,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		    
 		    $scope.saveProductOrder=function(ev)
 		    {
-		    	 var data = {
+		    	/* var data = {
 		    			 orderproductassociations : $scope.orderProductAssociations,
 		    			 description:$scope.productOrder.description,
 		    			 status:$scope.productOrder.status.id,
@@ -166,7 +166,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 									$scope.message = 'Something went worng. Please try again later.';
 									$scope.showToast();
 								}else{
-									/*$scope.displayProgressBar = false;*/
+									$scope.displayProgressBar = false;
 									$scope.message = 'User Information saved successfully.';
 									$scope.showToast();
 									$rootScope.$emit("callPopulateProductOrderList",{});
@@ -179,7 +179,72 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 								$scope.hide();
 								$scope.message = 'Something went worng. Please try again later.';
 								$scope.showToast();
-							});
+							});*/
+		    	 
+		    	var data = {
+		    			 orderproductassociations : $scope.orderProductAssociations,
+		    			 description:$scope.productOrder.description,
+		    			 status:$scope.productOrder.status.id,
+		    			 expecteddeliveryDate:$scope.productOrder.expecteddeliveryDate ,
+		    			  client:$scope.productOrder.client.id,
+		    			 createdBy:2,
+		    			 created_date:null,
+		    			 updatedBy:1,
+		    			 updated_date:null,
+		    			 isactive:true
+						
+				};
+				var httpparams = {};
+				if ($scope.flag == 0) {
+					console.log($scope.productOrder);
+					console.log($scope.data);
+					httpparams.method = 'post';
+					httpparams.url = SERVER_URL + "productorder/createmultiple";
+					httpparams.headers = {
+							auth_token : Auth.getAuthToken()
+						};
+				} else {
+					 data.id=$scope.productOrder.id;
+					httpparams.method = 'put';
+					httpparams.url = SERVER_URL + "productorder/update";
+					httpparams.headers = {
+							auth_token : Auth.getAuthToken()
+						};
+				}
+				
+				httpparams.data = data;
+				$http(httpparams)
+						.then(
+								function successCallback(data) {
+									$mdDialog.hide();
+									console.log(data);
+									if(data.data.code === 0){
+										console.log(data.data.message);
+										$rootScope.$emit(
+												"saveRMOrderError", {});
+										console.log(data);
+										$scope.hide();
+										$scope.message = 'Something went worng. Please try again later.';
+										$scope.showToast();
+									}else{
+										$scope.displayProgressBar = false;
+										$scope.message = 'Product Order Created successfully.';
+										$scope.showToast();
+										$rootScope.$emit("callPopulateProductOrderList",{});
+									}
+								},
+								function errorCallback(data) {
+									$rootScope.$emit(
+											"saveRMOrderError", {});
+									console.log(data);
+									$scope.hide();
+									$scope.message = 'Something went worng. Please try again later.';
+									$scope.showToast();
+								});
+		    	
+		    	
+		    	 
+		    	 
 		    	 
 		    }
 		    
@@ -237,10 +302,6 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			
 			 $scope.getProducts=function()
 			    {
-			    	/*$http({
-						method : 'GET',
-						url : SERVER_URL + "product/list"
-					})*/
 				 var httpparams = {};
 					httpparams.method = 'GET';
 					httpparams.url = SERVER_URL + "product/list";
@@ -278,10 +339,6 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			    };
 			    
 			    $scope.getClient=function(){
-				/* $http({
-						method : 'GET',
-						url : SERVER_URL + "client/list"
-					})*/ 
 			    	var httpparams = {};
 					httpparams.method = 'GET';
 					httpparams.url = SERVER_URL + "client/list";
@@ -310,6 +367,8 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 						   console.log($scope.orderProductAssociations);
 					}
 			    };
+			    
+			  
 		  };
 	  
 	  

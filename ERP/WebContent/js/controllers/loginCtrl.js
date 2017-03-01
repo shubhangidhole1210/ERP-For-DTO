@@ -35,4 +35,5 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 			utils.showToast("We are sorry, Something went wrong. Please try again later ");
 		});
 	};
+	$scope.userName=" ";
 });

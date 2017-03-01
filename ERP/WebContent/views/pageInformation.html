@@ -27,7 +27,7 @@
             <label class="input-filed-label">SUB MENU</label>
             <input type="text" ng-model="page.submenu"  required name="submenu"  ng-disabled="isReadOnly">
             <div ng-messages="pageInformation.submenu.$error">
-              <div ng-message="required">Please Enter sub menu</div>
+              <div ng-message="required">Please enter sub menu</div>
             </div>
           </md-input-container>
         </div>
@@ -37,14 +37,14 @@
             <label class="input-filed-label">PAGE NAME</label>
             <input type="text" ng-model="page.pageName"  required name="pageName" ng-disabled="isReadOnly">
             <div ng-messages="pageInformation.pageName.$error">
-             <div ng-message="required">Please Enter Page name</div>
+             <div ng-message="required">Please enter Page name</div>
             </div>
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">URL</label>
             <input type="text" ng-model="page.url"  required name="url"  ng-disabled="isReadOnly">
             <div ng-messages="pageInformation.url.$error">
-             <div ng-message="required">Please Enter URL</div>
+             <div ng-message="required">Please enter URL</div>
             </div>
           </md-input-container>
         </div>
@@ -53,7 +53,7 @@
             <label class="input-filed-label">DESCRIPTION</label>
             <input type="text" ng-model="page.description"  required name="description" ng-minlength="4" ng-maxlength="255" ng-disabled="isReadOnly">
             <div ng-messages="pageInformation.description.$error">
-             <div ng-message="required">Please Enter Description</div>
+             <div ng-message="required">Please enter Description</div>
              <div ng-message="minlength">Description should be minimum 4 and maximum 255 character</div>
              <div ng-message="maxlength">Description should be minimum 4 and maximum 255 character</div>
             </div>

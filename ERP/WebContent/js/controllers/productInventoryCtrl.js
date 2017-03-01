@@ -163,6 +163,9 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		    		 {
 		    		    httpparams.method='post',
 		    		    httpparams.url=SERVER_URL + "productinventory/create"
+		    		    httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
 		    		 }
 		    	 
 		    	 else
@@ -170,6 +173,9 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		    		      data.id=$scope.productInventory.id,
 		    		      httpparams.method='put',
 		    		      httpparams.url=SERVER_URL + "productinventory/update"
+		    		      httpparams.headers = {
+		  						auth_token : Auth.getAuthToken()
+		  					};
 		    		 }
 		    	 
 		    	 httpparams.data=data;
@@ -259,10 +265,15 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			
 			$scope.getProduct=function()
 			{
-				$http({
-					method : 'GET',
-					url : SERVER_URL + "product/list"
-				}).then(function successCallback(response) {
+				
+				var httpparams = {};
+				httpparams.method = 'GET';
+				httpparams.url = SERVER_URL + "product/list";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+					};
+				
+				$http(httpparams).then(function successCallback(response) {
 					$scope.prducts = response.data;
 
 					console.log(response);
@@ -305,16 +316,23 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		  };
 	  
 	  $scope.deleteProductInventory = function(index) {
-			/* $scope.user = $scope.users[index].id; */
+		
 			console.log($scope.vendoUser);
 
-			$http(
+			/*$http(
 					{
 						method : 'delete',
 						url : SERVER_URL + "productinventory/delete/"
 								+ $scope.productInventorys[index].id
 
-					}).then(function successCallback(data) {
+					})*/
+			var httpparams = {};
+			httpparams.method = 'delete';
+			httpparams.url = SERVER_URL + "productinventory/delete/"  + $scope.productInventorys[index].id;
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			$http(httpparams).then(function successCallback(data) {
 						$mdDialog.hide();
 						$rootScope.$emit("callPopulateProductInventoryList", {});
 				console.log(data);

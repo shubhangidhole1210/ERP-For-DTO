@@ -90,7 +90,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 	$scope.showAddRawMaterial = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
-		/*$scope.rawMaterial = {};*/
+		$scope.rawMaterial = {};
 		$scope.information="ADD RAW MATERIAL INFORMATION"
 		var abc = {
 			controller : rawMaterialController,

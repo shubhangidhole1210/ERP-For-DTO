@@ -44,20 +44,17 @@
     <div>
    <div class="erp-headder">
       <div class="display-erp-img"> <img alt="" src="image/erp-logo.png" width="120px" height="70px"></div> 
-     <!--  <div style="margin-left: 80%">
-         <md-button class="md-raised"  ng-click="displayLogin()">User Login</md-button>
-      </div> -->
-       
-       
+     <!-- <h1 style="color: white;"> USER NAME{{userName}}</h1> -->
+      <div style="margin-left: 80%">
+         <md-button class="md-raised"  ng-click="displayLogin()" ng-show="displayLoginButton">Log Out</md-button>
+      </div>
     
    </div>
    </div>
-   
         <!--   <div class="hamburgerMenu">
 		<img alt="" src="images/menub.jpg" onclick="displayMenu()"
 			style="width: 30px;">
 	</div> -->
-   
         <div class="erp-menubar" ng-show="displayMenu">
         	<div class="erp-menu" id="{{menuItem.pageName}}" ng-repeat="menuItem in menu"   ng-click="selected='user'"><a href="#{{menuItem.url}}" >{{menuItem.submenu}}</a></div>
         

@@ -1,4 +1,4 @@
-erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast) {
+erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth) {
 	
 	$rootScope.$on("callPopulateUserTypePageAsso", function() {
 		$scope.populateuserTeypePageAsso();
@@ -11,10 +11,19 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 	$scope.populateuserTeypePageAsso=function()
 	{
 		
-		 $http({
+		/* $http({
 				method : 'GET',
 				url : SERVER_URL + "usertypepageassociation/list"
-			}).then(function successCallback(response) {
+			})*/
+		
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "usertypepageassociation/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
 				$scope.isVendorInformation();
 				$scope.userTypePageAssociations = response.data;
@@ -154,12 +163,18 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 		    		 {
 		    		    httpparams.method='post',
 		    		    httpparams.url=SERVER_URL + "usertypepageassociation/create"
+		    		    httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
 		    		 }
 		    	 else
 		    		 {
 		    		      data.id=$scope.userTypePageAsso.id,
 		    		      httpparams.method='put',
 		    		      httpparams.url=SERVER_URL + "usertypepageassociation/update"
+		    		      httpparams.headers = {
+									auth_token : Auth.getAuthToken()
+								};
 		    		 }
 		    	 
 		    	 httpparams.data=data;
@@ -246,10 +261,15 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 								});
 			};
 			  $scope.getUserType=function(){
-					 $http({
-							method : 'GET',
-							url : SERVER_URL + "usertype/list"
-						}).then(function successCallback(response) {
+
+				  var httpparams = {};
+					httpparams.method = 'GET';
+					httpparams.url = SERVER_URL + "usertype/list";
+					httpparams.headers = {
+							auth_token : Auth.getAuthToken()
+						};
+					
+					$http(httpparams).then(function successCallback(response) {
 							$scope.userTypes = response.data;
 
 							console.log(response);
@@ -261,10 +281,13 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 				    };
 		    
 				    $scope.getPage=function(){
-						 $http({
-								method : 'GET',
-								url : SERVER_URL + "page/list"
-							}).then(function successCallback(response) {
+				    	var httpparams = {};
+						httpparams.method = 'GET';
+						httpparams.url = SERVER_URL + "page/list";
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						 $http(httpparams).then(function successCallback(response) {
 								$scope.pages = response.data;
 
 								console.log(response);
@@ -306,13 +329,20 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 			/* $scope.user = $scope.users[index].id; */
 			console.log($scope.vendoUser);
 
-			$http(
+			/*$http(
 					{
 						method : 'delete',
 						url : SERVER_URL + "usertypepageassociation/delete/"
 								+ $scope.userTypePageAssociations[index].id
 
-					}).then(function successCallback(data) {
+					})*/
+			var httpparams = {};
+			httpparams.method = 'delete';
+			httpparams.url = SERVER_URL + "usertypepageassociation/delete/" +  $scope.userTypePageAssociations[index].id;
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			$http(httpparams).then(function successCallback(data) {
 						$mdDialog.hide();
 						$rootScope.$emit("callPopulateUserTypePageAsso", {});
 				console.log(data);
