@@ -168,6 +168,24 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
     });
 }]);
 
+/*erpApp.factory('mySharedService', function($rootScope) {
+    var sharedService = {};
+    
+    mySharedService.userid = '';
+
+    sharedService.prepForBroadcast = function(uid) {
+        this.userid = uid;
+        this.broadcastItem();
+    };
+
+    sharedService.broadcastItem = function() {
+        $rootScope.$broadcast('handleBroadcast');
+    };
+
+    return sharedService;
+});*/
+
+
 erpApp.factory('Auth', function(){
 	var user;
 
@@ -287,26 +305,29 @@ erpApp.controller('ERPController', function($scope,$rootScope,Auth) {
 		$scope.logginButton = Auth.getMenu();
 	});
 	
-	$scope.displayLogin=function()
-	{
-		
+	$scope.userID=[];
+	$scope.isUserName=Auth.isLoggedIn();
+	if($scope.isUserName){
+		$scope.userID = Auth.getMenu();
 	}
-});
-
-/*erpApp.controller('homectrl', function($scope, $http,SERVER_URL) {
-	$http({
-		method : 'GET',
-		url : SERVER_URL + 'user/list'
-	}).then(function successCallback(response) {
-		$scope.data = response.data;
-		
-	}, function errorCallback(response) {
-		console.log("Error");
-
+	$rootScope.$on('logout',function($event){
+		console.log('Inside logout event');
+		$scope.isUserName=Auth.isLoggedIn();
 	});
-
+	$rootScope.$on('loginSuccess',function($event){
+		console.log('Inside login success event');
+		$scope.isUserName=Auth.isLoggedIn();
+		$scope.userID = Auth.getMenu();
+	});
+	
+	
+	  /*$scope.$on('handleBroadcast', function() {
+	        $scope.userid = 'ONE: ' + sharedService.userid;
+	    });   */     
 });
-*/
+
+
+
 erpApp.directive("limitTo", [function() {
     return {
         restrict: "A",
@@ -357,3 +378,6 @@ erpApp.controller('ToastCtrl', function($scope, $mdToast, message) {
 	};
 
 });
+/*ERPController.$inject = ['$scope', 'mySharedService'];        
+
+loginCtrl.$inject = ['$scope', 'mySharedService'];*/

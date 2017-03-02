@@ -44,7 +44,7 @@
     <div>
    <div class="erp-headder">
       <div class="display-erp-img"> <img alt="" src="image/erp-logo.png" width="120px" height="70px"></div> 
-     <!-- <h1 style="color: white;"> USER NAME{{userName}}</h1> -->
+     <div style="color: white;" ng-show="isUserName" > USER NAME{{userid}}</div>
       <div style="margin-left: 80%">
          <md-button class="md-raised"  ng-click="displayLogin()" ng-show="displayLoginButton">Log Out</md-button>
       </div>

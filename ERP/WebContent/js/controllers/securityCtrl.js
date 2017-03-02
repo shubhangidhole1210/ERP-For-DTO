@@ -25,8 +25,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		utils.showProgressBar();
 	}
 
-	
-	
+		
 	$scope.displayRMList = function(index) {
 		console.log($scope.rawMaterials);
 		var httpparams = {};

@@ -5,14 +5,12 @@
 <div class="">
 <table >
    <tr>
-       <th>Product</th>
-        <th ng-repeat="days in alldays">{{days| date:'dd-MM-yyyy'}}</th>
-       
-      
+       <th style="font-size: 12px">Product</th>
+        <th ng-repeat="days in alldays" style="font-size: 10px">{{days| date:'dd-MM-yyyy'}}</th>
    </tr>
    
    <tr ng-repeat="product in products">
-      <td>{{product.id}}</td>
+      <td style="font-size: 10px">{{product.id}}</td>
       <!-- td>
          <input type="number" class="quantity-input" ng-model="productionPlan.product_quantity">
       </td> -->

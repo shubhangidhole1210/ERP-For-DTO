@@ -13,6 +13,7 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 			console.log(data);
 			console.log('in login function');
 			utils.hideProgressBar();
+			console.log($scope.userid)
 			if(data.data.code == 1){
 				
 				console.log(data.headers());
@@ -34,6 +35,12 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 			utils.hideProgressBar();
 			utils.showToast("We are sorry, Something went wrong. Please try again later ");
 		});
+		
+		/*mySharedService.prepForBroadcast(uid);*/
+		
 	};
-	$scope.userName=" ";
+	/* $scope.$on('handleBroadcast', function() {
+	        $scope.userid = sharedService.userid;
+	    });    */
+	
 });
