@@ -6,47 +6,16 @@
 <table >
    <tr>
        <th>Product</th>
-       <th>{{today | date:'dd-MM-yyyy'}}</th>
-       <th>{{tomorrow | date:'dd-MM-yyyy'}}</th>
-       <th>{{day_after_tomorrow | date:'dd-MM-yyyy'}}</th>
-       <th>{{fourt_day_date | date:'dd-MM-yyyy'}}</th>
-       <th>{{fifth_day_date | date:'dd-MM-yyyy'}}</th>
-       <th>{{sixth_day_date| date:'dd-MM-yyyy'}}</th>
-       <th>{{seventh_day_date| date:'dd-MM-yyyy'}}</th>
+        <th ng-repeat="days in alldays">{{days| date:'dd-MM-yyyy'}}</th>
+       
+      
    </tr>
-    <!--  <tr>
-       <th>Product</th>
-       <th>{{today | date:'dd-MM-yyyy'}}</th>
-       <th></th>
-       <th></th>
-       <th></th>
-       <th></th>
-       <th></th>
-       <th></th>
-   </tr> -->
+   
    <tr ng-repeat="product in products">
-      <td>{{product.product_id}}</td>
-      <td ng-repeat="productionPlan in product.production_plan">
+      <td>{{product.id}}</td>
+      <!-- td>
          <input type="number" class="quantity-input" ng-model="productionPlan.product_quantity">
-      </td>
-     <!--  <th>
-      <input type="number" style="width: 80px">
-      </th> -->
-      <!-- <th>
-      <input type="number" style="width: 80px">
-      </th>
-      <th>
-         <input type="number" style="width: 80px">
-      </th>
-      <th>
-         <input type="number" style="width: 80px">
-      </th>
-      <th>
-      <input type="number" style="width: 80px">
-      </th>
-      <th>
-      <input type="number" style="width: 80px">
-      </th> -->
+      </td> -->
    </tr>
 </table>
 </div>
