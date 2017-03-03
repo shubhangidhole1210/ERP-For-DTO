@@ -1,5 +1,5 @@
 erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Auth, SERVER_URL,utils) {
-	$scope.login = function() {
+	$scope.login = function(index) {
 		utils.showProgressBar();
 		var data = {
 			userid : $scope.userid,
@@ -12,6 +12,7 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 		}).then(function successCallback(data, headers) {
 			console.log(data);
 			console.log('in login function');
+			$rootScope.$emit("CallUserProfileList",{});
 			utils.hideProgressBar();
 			console.log($scope.userid)
 			if(data.data.code == 1){
@@ -35,12 +36,10 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 			utils.hideProgressBar();
 			utils.showToast("We are sorry, Something went wrong. Please try again later ");
 		});
+	
 		
-		/*mySharedService.prepForBroadcast(uid);*/
 		
 	};
-	/* $scope.$on('handleBroadcast', function() {
-	        $scope.userid = sharedService.userid;
-	    });    */
+	
 	
 });

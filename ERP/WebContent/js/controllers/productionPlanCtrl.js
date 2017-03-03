@@ -13,6 +13,8 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog, $mdTo
 		}
 		console.log('all days are' + $scope.alldays);
 	
+		
+		
 	
 	$scope.getProductList=function()
 	{
