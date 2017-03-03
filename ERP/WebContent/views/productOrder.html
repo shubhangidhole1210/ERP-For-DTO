@@ -14,12 +14,12 @@
   </md-content>
   <table>
 			<tr>
-			     <th>ID</th>
+			    <!--  <th>ID</th> -->
 				<th>STATUS</th>
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="productOrder in data" >
-				<td>{{productOrder.product.id}}</td>
+		<!-- 		<td>{{productOrder.product.id}}</td> -->
 				<td>{{productOrder.status.name}}</td>
 				<td>
 				     <md-button class="md-raised"  ng-click="showEditProductOrder($event,$index)" ng-init="flag=1">EDIT</md-button>

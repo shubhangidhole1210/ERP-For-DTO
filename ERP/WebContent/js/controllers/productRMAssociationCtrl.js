@@ -1,23 +1,26 @@
-erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast) {
+erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth) {
 	
-	$rootScope.$on("callPopulateVendorList", function() {
-		$scope.populateVendorList();
+	$rootScope.$on("callPopulateProductRmAssociationList", function() {
+		$scope.populateProductRmAssoList();
 	});
 	$rootScope.$on("saveVendorError", function() {
-		$scope.showAddNewVendor()
+		$scope.showAddNewProductRMAssociation()
 	});
 	
 	
-	$scope.populateVendorList=function()
+	$scope.populateProductRmAssoList=function()
 	{
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "productRMAsso/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
 		
-		 $http({
-				method : 'GET',
-				url : SERVER_URL + "vendor/list"
-			}).then(function successCallback(response) {
+		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
-				$scope.isVendorInformation();
-				$scope.vendorUsers = response.data;
+				/*$scope.isVendorInformation();*/
+				$scope.productRmAssociations = response.data;
 				$mdDialog.hide();
 				console.log(response);
 
@@ -43,7 +46,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		});
 	};
 	 
-	$scope.isVendorPredent =false;
+	/*$scope.isVendorPredent =false;
 	$scope.isVendorInformation=function()
 	{
 		if($scope.data.length==0)
@@ -55,7 +58,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			$scope.isVendorPredent =false;
 			}
 			
-	}
+	}*/
 	$scope.showProgressBarOne= function()
 	{
 		$mdDialog
@@ -84,23 +87,23 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 				});
 	};
 	
-	$scope.vendorUser={};
+	$scope.productRmAsso={};
 	
-	$scope.showAddNewVendor = function(ev) {
+	$scope.showAddNewProductRMAssociation = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
-		$scope.information="ADD NEW VENDOR";
-		$scope.vendorUser={};
+		$scope.information="ADD NEW PRODUCT RM ASSOCIATION";
+		$scope.productRmAsso={};
 		var abc = {
-			controller : DialogVendorController,
-			templateUrl : 'views/vendorInformation.html',
+			controller : DialogController,
+			templateUrl : 'views/productRMAssociationInformation.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
-				vendorUser : $scope.vendorUser,
+				productRmAsso : $scope.productRmAsso,
 				flag : $scope.flag,
 				action : $scope.isReadOnly,
 				information : $scope.information
@@ -117,8 +120,8 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 							$scope.status = 'You cancelled the dialog.';
 						});
 	  };
-	  function DialogVendorController($scope, $mdDialog,vendorUser,flag,action,$rootScope,$mdToast,information) {
-		    $scope.vendorUser=vendorUser;
+	  function DialogController($scope, $mdDialog,productRmAsso,flag,action,$rootScope,$mdToast,information) {
+		    $scope.productRmAsso=productRmAsso;
 		    $scope.flag=flag;
 		    $scope.isReadOnly = action;
 		    $scope.information = information;
@@ -134,27 +137,19 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		      $mdDialog.hide(answer);
 		    };
 		    
-		    $scope.saveVendorInfo=function(ev)
+		    $scope.saveProductRMAssociationInfo=function(ev)
 		    {
 		    	/* console.log($scope.data)*/
 		    	 var data = {
-
-		    		 companyName : $scope.vendorUser.companyName,
-		    		 email: $scope.vendorUser.email,
-		    		 firstName : $scope.vendorUser.firstName ,
-		    		 lastName : $scope.vendorUser.lastName,
-		    		 address : $scope.vendorUser.address, 
-		    		 contactNumberMobile : $scope.vendorUser.contactNumberMobile,
-		    		   "contactNumberOffice": 9403633306,
-		    		 city : $scope.vendorUser.city,
-		    		 state : $scope.vendorUser.state,
-		    		 postalcode : $scope.vendorUser.postalcode,
-		    		 "createdBy":2,
-		    		 "created_date":null,
-		    		 "updatedBy":1,
-		    		 "updated_date":null,
-		    		 "isactive":true,
-		    		 description: $scope.vendorUser.description
+		    		rawmaterial : $scope.productRmAsso.rawmaterial.id,
+		    		product : $scope.productRmAsso.product.id,
+		    		quantity : $scope.productRmAsso.quantity,
+		    		"createdBy": 33,
+		    		"created_date":  null,
+		    		"updatedBy":44,
+		    		"updated_date": null,
+		    		"isactive":true
+		    			 
 					};
 		    	 
 		    	
@@ -162,13 +157,19 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		    	 if($scope.flag==0)
 		    		 {
 		    		    httpparams.method='post',
-		    		    httpparams.url=SERVER_URL + "vendor/create"
+		    		    httpparams.url=SERVER_URL + "productRMAsso/create"
+		    		    httpparams.headers = {
+		    					auth_token : Auth.getAuthToken()
+		    				};
 		    		 }
 		    	 else
 		    		 {
-		    		      data.id=$scope.vendorUser.id,
+		    		      data.id=$scope.productRmAsso.id,
 		    		      httpparams.method='put',
-		    		      httpparams.url=SERVER_URL + "vendor/update"
+		    		      httpparams.url=SERVER_URL + "productRMAsso/update"
+		    		      httpparams.headers = {
+		    						auth_token : Auth.getAuthToken()
+		    					};
 		    		 }
 		    	 
 		    	 httpparams.data=data;
@@ -199,9 +200,9 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 								
 								else{
 									$scope.displayProgressBar = false;
-									$scope.message = 'Vendor Information saved successfully.';
+									$scope.message = 'Product RM Association Information saved successfully.';
 									$scope.showToast();
-									$rootScope.$emit("callPopulateVendorList",{});
+									$rootScope.$emit("callPopulateProductRmAssociationList",{});
 								}
 							},
 							function errorCallback(data) {
@@ -229,7 +230,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			};
 			
 			
-			$scope.submitVendorInformation = function(isvaliduser,$event) {
+			$scope.submitInformation = function(isvaliduser,$event) {
 				if (isvaliduser) {
 					$scope.showProgressBar($event);
 					
@@ -252,7 +253,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 									clickOutsideToClose : false,
 									fullscreen : $scope.customFullscreen,
 									onComplete : function() {
-										$scope.saveVendorInfo(ev);
+										$scope.saveProductRMAssociationInfo(ev);
 									}
 									
 								// Only for -xs, -sm breakpoints.
@@ -266,23 +267,73 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 									$scope.status = 'You cancelled the dialog.';
 								});
 			};
+			
+			$scope.rawMaterialId=function()
+			{
+				
+				var httpparams = {};
+				httpparams.method = 'GET';
+				httpparams.url = SERVER_URL + "rawmaterial/list";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+					};
+				
+				/*$http({
+					method : 'GET',
+					url : SERVER_URL + "rawmaterial/list"
+				})*/
+				$http(httpparams).then(function successCallback(response) {
+					$scope.RMData = response.data;
+
+					console.log(response);
+
+				}, function errorCallback(response) {
+					console.log("Error");
+
+				})
+				
+			};
+			 $scope.getProducts=function()
+			    {
+			    	/*$http({
+						method : 'GET',
+						url : SERVER_URL + "product/list"
+					})*/
+				 var httpparams = {};
+					httpparams.method = 'GET';
+					httpparams.url = SERVER_URL + "product/list";
+					httpparams.headers = {
+							auth_token : Auth.getAuthToken()
+						};
+				 $http(httpparams).then(function successCallback(response) {
+						$scope.products = response.data;
+				
+
+						console.log(response);
+
+					}, function errorCallback(response) {
+						console.log("Error");
+
+					});
+			    };
 		    
 		  }
 	  
 	  
-	  $scope.showEditVendor = function(ev , index) {
+	  $scope.showEditproductRMAssociation = function(ev , index) {
 		  $scope.flag = 1;
-		  $scope.vendorUser = $scope.vendorUsers[index];
-		  $scope.information="EDIT VENDOR INFORMATION"
+		  $scope.isReadOnly = false;
+		  $scope.productRmAsso = $scope.productRmAssociations[index];
+		  $scope.information="EDIT PRODUCT RM ASSOCIATION"
 		    $mdDialog.show({
-		      controller: DialogVendorController,
-		      templateUrl: 'views/vendorInformation.html',
+		      controller: DialogController,
+		      templateUrl: 'views/productRMAssociationInformation.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
 		      clickOutsideToClose:true,
 		      fullscreen: $scope.customFullscreen ,
 		      locals : {
-		    	  vendorUser : $scope.vendorUser,
+		    	  productRmAsso : $scope.productRmAsso,
 		    	  flag : $scope.flag,
 		    	  action : $scope.isReadOnly,
 		    	  information : $scope.information
@@ -295,19 +346,19 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		    });
 		  };
 	  
-	  $scope.deleteVendor = function(index) {
+	  $scope.deleteProductRMAssociation = function(index) {
 			/* $scope.user = $scope.users[index].id; */
 			console.log($scope.vendoUser);
 
-			$http(
-					{
-						method : 'delete',
-						url : SERVER_URL + "vendor/delete/"
-								+ $scope.vendorUsers[index].id
-
-					}).then(function successCallback(data) {
+			var httpparams = {};
+			httpparams.method = 'delete';
+			httpparams.url = SERVER_URL + "productRMAsso/delete/" + $scope.productRmAssociations[index].id;
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			$http(httpparams).then(function successCallback(data) {
 						$mdDialog.hide();
-						$rootScope.$emit("callPopulateVendorList", {});
+						$rootScope.$emit("callPopulateProductRmAssociationList", {});
 				console.log(data);
 
 			}, function errorCallback(data) {
@@ -317,22 +368,22 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			$scope.showProgressBarOne();
 		};
 		
-		$scope.viewVendarInformation = function(ev, index) {
+		$scope.viewproductRMAssociationInformation = function(ev, index) {
 			$scope.flag = 2;
 			$scope.isReadOnly = true;
-			$scope.vendorUser = $scope.vendorUsers[index];
+			 $scope.productRmAsso = $scope.productRmAssociations[index];
 			$scope.isSaving = false;
-			$scope.information="VIEW VENDOR INFORMATION"
+			$scope.information="VIEW PRODUCT RM ASSOCIATION"
 			console.log($scope.user);
 			$mdDialog.show({
-						controller : DialogVendorController,
-						templateUrl : 'views/vendorInformation.html',
+						controller : DialogController,
+						templateUrl : 'views/productRMAssociationInformation.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
 						clickOutsideToClose : true,
 						fullscreen : $scope.customFullscreen,
 						locals : {
-							  vendorUser : $scope.vendorUser,
+							productRmAsso : $scope.productRmAsso,
 							flag : $scope.flag,
 							action : $scope.isReadOnly,
 							information : $scope.information
@@ -359,9 +410,9 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 					.then(
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
-								$scope.deleteVendor(index);
+								$scope.deleteProductRMAssociation(index);
 								
-								$scope.message = 'Delete Vendor Record sucessfully';
+								$scope.message = 'Delete Product RM Asssociation  Record sucessfully';
 								$scope.showToast();
 								
 								

@@ -1,7 +1,7 @@
 erpApp
 		.controller(
 				'RMVendorCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL) {
+				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth) {
 					$scope.isReadOnly = false;
 					/*
 					 * $http.get("userList.json") .then(function(response) {
@@ -17,10 +17,19 @@ erpApp
 					});
 
 					$scope.populateRMVendorAssociationList = function() {
-						$http({
+						/*$http({
 							method : 'GET',
 							url : SERVER_URL + "rmvendorasso/list"
-						}).then(function successCallback(response) {
+						})*/
+						
+						var httpparams = {};
+						httpparams.method = 'GET';
+						httpparams.url = SERVER_URL + "rmvendorasso/list";
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						
+						$http(httpparams).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.rmOrderAssociations = response.data;
 							$scope.isRMVendorAssociationInformation();
@@ -169,11 +178,17 @@ erpApp
 								console.log($scope.data);
 								httpparams.method = 'post';
 								httpparams.url = SERVER_URL + "rmvendorasso/create";
+								httpparams.headers = {
+										auth_token : Auth.getAuthToken()
+									};
 							} else {
 								console.log($scope.rmOrderAssociation);
 								data.id = $scope.rmOrderAssociation.id;
 								httpparams.method = 'put';
 								httpparams.url = SERVER_URL + "rmvendorasso/update";
+								httpparams.headers = {
+										auth_token : Auth.getAuthToken()
+									};
 							}
 							httpparams.data = data;
 							$http(httpparams)
@@ -259,10 +274,19 @@ erpApp
 						
 						    $scope.getRawMaterials=function()
 						    {
-						    	$http({
+						    	/*$http({
 									method : 'GET',
 									url : SERVER_URL + "rawmaterial/list"
-								}).then(function successCallback(response) {
+								})*/
+						    	
+						    	var httpparams = {};
+								httpparams.method = 'GET';
+								httpparams.url = SERVER_URL + "rawmaterial/list";
+								httpparams.headers = {
+										auth_token : Auth.getAuthToken()
+									};
+								
+								$http(httpparams).then(function successCallback(response) {
 									$scope.rawmaterials = response.data;
 							
 
@@ -277,10 +301,14 @@ erpApp
 							
 						   $scope.getVendors=function()
 						   {
-							   $http({
-									method : 'GET',
-									url : SERVER_URL + "vendor/list"
-								}).then(function successCallback(response) {
+							   var httpparams = {};
+								httpparams.method = 'GET';
+								httpparams.url = SERVER_URL + "vendor/list";
+								httpparams.headers = {
+										auth_token : Auth.getAuthToken()
+									};
+								
+								$http(httpparams).then(function successCallback(response) {
 									$scope.venodrs = response.data;
 							
 
@@ -387,13 +415,20 @@ erpApp
 						/* $scope.user = $scope.users[index].id; */
 						
 
-						$http(
+					/*	$http(
 								{
 									method : 'delete',
 									url : SERVER_URL + "rmvendorasso/delete/"
 											+ $scope.rmOrderAssociations[index].id
 
-								}).then(function successCallback(data) {
+								})*/
+						var httpparams = {};
+						httpparams.method = 'delete';
+						httpparams.url = SERVER_URL + "unit/delete/" + $scope.units[index].id;
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						$http(httpparams).then(function successCallback(data) {
 									$mdDialog.hide();
 							$rootScope.$emit("CallPopulateRMVendorAssociationList", {});
 							console.log(data);

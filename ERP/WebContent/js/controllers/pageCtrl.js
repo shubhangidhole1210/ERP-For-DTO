@@ -1,47 +1,33 @@
-erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth)
-{
-	
-	$rootScope.$on("CallPopulateUnitList", function() {
-		$scope.populateUnitList();
+erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth) {
+
+	$rootScope.$on("CallPopulatePageList", function() {
+		$scope.populatePageList();
 	});
 	$rootScope.$on("saveUnitError", function() {
-		$scope.showAddNewUnit();
+		$scope.showAddNewPage();
 	});
-	$scope.populateUnitList=function()
+	$scope.populatePageList=function()
 	{
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "unit/list";
+		httpparams.url = SERVER_URL + "page/list";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
 		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
-			$scope.units=response.data;
-			$scope.isUnitInformation()
+			$scope.pages=response.data;
 			console.log(response)
 			$mdDialog.hide();
 		}, function errorCallback(response) {
 			$scope.message = "We are Sorry. Something went wrong. Please try again later."
 			$scope.showToast();
 			console.log("Error");
-			$mdDialog.hide();
 		});
 		$scope.showProgressBarOne();
 	}
-	$scope.isUnitInPresent=false; 
-	$scope.isUnitInformation=function()
-	{
-		if($scope.data.length==0)
-			{
-			$scope.isUnitInPresent=true; 
-			}
-		else
-			{
-			$scope.isUnitInPresent=false; 
-			}
-	}
+	
 	$scope.showProgressBarOne= function()
 	{
 		$mdDialog
@@ -81,22 +67,22 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 			}
 		});
 	};
-	$scope.unit={}
-	$scope.showAddNewUnit = function(ev) {
-		$scope.unit={};
+	$scope.page={}
+	$scope.showAddNewPage = function(ev) {
+		$scope.page={};
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
-		$scope.information = "ADD NEW UNIT"
+		$scope.information = "ADD NEW PAGE"
 		var abc = {
 			controller : UnitController,
-			templateUrl : 'views/unitInformation.html',
+			templateUrl : 'views/pageInformation.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
-				unit : $scope.unit,
+				page : $scope.page,
 				flag : $scope.flag,
 				action : $scope.isReadOnly,
 				information : $scope.information
@@ -115,13 +101,11 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 	};
 	
 	
-	function UnitController($scope, $mdDialog,unit,action,flag,$mdToast,information) {
+	function UnitController($scope, $mdDialog,page,action,flag,$mdToast,information) {
 		$scope.isReadOnly = action;
 		$scope.flag = flag;
-		$scope.unit = unit;
+		$scope.page = page;
 		$scope.information = information;
-		/*$scope.user.dob = new Date($scope.user.dob);
-		$scope.user.doj = new Date($scope.user.doj);*/
 		$scope.hide = function() {
 			console.log('hide DialogController');
 			$mdDialog.hide();
@@ -139,31 +123,28 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 			
 			
 			var data = {
-
-					name : $scope.unit.name,
-					description : $scope.unit.description,
-				     created_by : null,
-				     /*created_date : null,*/
-				     updated_by : null,
-				     /*updated_date : null,*/
-				     isactive : true
+      
+					menu : $scope.page.menu,
+					pageName : $scope.page.pageName,
+					submenu : $scope.page.submenu,
+					url : $scope.page.url,
+					description : $scope.page.description,
+				    isactive : true
 			};
 			var httpparams = {};
 			if ($scope.flag == 0) {
-				console.log($scope.unit);
+				console.log($scope.user);
 				console.log($scope.data);
 				httpparams.method = 'post';
-				httpparams.url = SERVER_URL + "unit/create";
+				httpparams.url = SERVER_URL + "page/create";
 				httpparams.headers = {
 						auth_token : Auth.getAuthToken()
 					};
 			} else {
 				console.log($scope.unit);
-				data.id = $scope.unit.id;
-				/*httpparams.method = 'put';
-				httpparams.url = SERVER_URL + "unit/update";*/
+				data.id = $scope.page.id;
 				httpparams.method = 'put';
-				httpparams.url = SERVER_URL + "unit/update";
+				httpparams.url = SERVER_URL + "page/update";
 				httpparams.headers = {
 						auth_token : Auth.getAuthToken()
 					};
@@ -184,9 +165,9 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 									$scope.showToast();
 								}else{
 									$scope.displayProgressBar = false;
-									$scope.message = 'Unit Information saved successfully.';
+									$scope.message = 'Page Information saved successfully.';
 									$scope.showToast();
-									$rootScope.$emit("CallPopulateUnitList",{});
+									$rootScope.$emit("CallPopulatePageList",{});
 								}
 							},
 							function errorCallback(data) {
@@ -200,7 +181,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 
 		}
 
-		$scope.submitUnitInformation = function(isvaliduser,$event) {
+		$scope.submitPageInformation = function(isvaliduser,$event) {
 			if (isvaliduser) {
 				$scope.showProgressBar($event);
 				
@@ -253,22 +234,22 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		
 	  }
 	
-	$scope.showEditUnit = function(ev, index) {
+	$scope.showEditPage = function(ev, index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
-		$scope.unit = $scope.units[index];
-		$scope.information = "EDIT UNIT INFORMATION"
+		$scope.page = $scope.pages[index];
+		$scope.information = "EDIT PAGE INFORMATION"
 		console.log($scope.user);
 		$mdDialog
 				.show({
 					controller : UnitController,
-					templateUrl : 'views/unitInformation.html',
+					templateUrl : 'views/pageInformation.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
 					fullscreen : $scope.customFullscreen,
 					locals : {
-						unit : $scope.unit,
+						page : $scope.page,
 						flag : $scope.flag,
 						action : $scope.isReadOnly,
 						information : $scope.information
@@ -284,22 +265,22 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 						});
 	};
 	
-	$scope.viewUnitInformation = function(ev, index) {
+	$scope.viewPageInformation = function(ev, index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.unit = $scope.units[index];
+		$scope.page = $scope.pages[index];
 		$scope.isSaving = false;
-		$scope.information = "VIEW UNIT INFORMATION"
+		$scope.information = "VIEW PAGE INFORMATION"
 		console.log($scope.unit);
 		$mdDialog.show({
 					controller : UnitController,
-					templateUrl : 'views/unitInformation.html',
+					templateUrl : 'views/pageInformation.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
 					fullscreen : $scope.customFullscreen,
 					locals : {
-						unit : $scope.unit,
+						page : $scope.page,
 						flag : $scope.flag,
 						action : $scope.isReadOnly,
 						information : $scope.information
@@ -315,19 +296,20 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 						});
 	};
 	
-	$scope.deleteUnit = function(index) {
-		/* $scope.user = $scope.users[index].id; */
-		console.log($scope.unit);
+	$scope.deletePage = function(index) {
+		 $scope.page = $scope.pages[index].id; 
+		console.log($scope.page);
 
+	
 		var httpparams = {};
 		httpparams.method = 'delete';
-		httpparams.url = SERVER_URL + "unit/delete/" + $scope.units[index].id;
+		httpparams.url = SERVER_URL + "page/delete/" + $scope.pages[index].id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(data) {
 					$mdDialog.hide();
-			$rootScope.$emit("CallPopulateUnitList", {});
+			$rootScope.$emit("CallPopulatePageList", {});
 			console.log(data);
 
 		}, function errorCallback(data) {
@@ -340,7 +322,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 	$scope.showConfirm = function(ev,index) {
 		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm().title(
-				'Are you sure you want to Delete Unit Information?')
+				'Are you sure you want to Delete page Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'YES' ).cancel('NO');
 
@@ -349,9 +331,8 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
-							$scope.deleteUnit(index);
-							
-							$scope.message = 'Delete unit sucessfully';
+							$scope.deletePage(index);
+							$scope.message = 'Delete page sucessfully';
 							$scope.showToast();
 						
 						},
@@ -374,7 +355,4 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 			$mdDialog.hide(answer);
 		};
 	}
-	
-	
-	
 });

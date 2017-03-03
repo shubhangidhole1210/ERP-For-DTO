@@ -21,8 +21,8 @@
          
          <md-input-container ng-init="getRawMaterials()">
           <label style="color: black;">RAW MATERIAL*</label>
-          <md-select ng-model="productRMAssociation.rawmaterial.id" name="rawmaterial"  ng-disabled="isReadOnly" ng-required="true" required>
-            <md-option ng-repeat="rawMaterial in rawMaterials" ng-value="rawMaterial.id" >
+          <md-select ng-model="productRmAsso.rawmaterial.id" name="rawmaterial"  ng-disabled="isReadOnly" ng-required="true"  ng-init="rawMaterialId()">
+            <md-option ng-repeat="rawMaterial in RMData" ng-value="rawMaterial.id" >
                {{rawMaterial.name}}
             </md-option>
           </md-select>
@@ -33,7 +33,7 @@
         
         <md-input-container ng-init="getProducts()">
           <label style="color: black;">PRODUCT*</label>
-          <md-select ng-model="productRMAssociation.product.id" name="product"  ng-disabled="isReadOnly" ng-required="true" required>
+          <md-select ng-model="productRmAsso.product.id" name="product"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getProducts()">
             <md-option ng-repeat="product in products" ng-value="product.id" >
                {{product.partNumber}}
             </md-option>
@@ -48,8 +48,8 @@
           <md-input-container class="md-block" flex-gt-sm type="password">
               <label class="input-filed-label">QUANTITY*</label>
               
-              <input type="number" placeholder="Enter quantity" ng-model="productRMAssociation.quantity "  name="quantity" required ng-disabled="isReadOnly">
-              <div ng-messages="productRMAssociationInformation.dob.$error">
+              <input type="number" placeholder="Enter quantity" ng-model="productRmAsso.quantity"  name="quantity" required ng-disabled="isReadOnly">
+              <div ng-messages="productRMAssociationInformation.quantity.$error">
                  <div ng-message="required">Please Enter Quantity</div>
               </div>
          </md-input-container>   

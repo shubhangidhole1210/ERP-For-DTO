@@ -1,7 +1,7 @@
 erpApp
 		.controller(
 				'clientCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL) {
+				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth) {
 					$scope.isReadOnly = false;
 					
 
@@ -13,10 +13,14 @@ erpApp
 					});
 
 					$scope.populateClientList = function() {
-						$http({
-							method : 'GET',
-							url : SERVER_URL + "client/list"
-						}).then(function successCallback(response) {
+						
+						var httpparams = {};
+						httpparams.method = 'GET';
+						httpparams.url = SERVER_URL + "client/list";
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+						};
+						$http(httpparams).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.clients = response.data;
 							$scope.isClientInfirmation();
@@ -127,7 +131,7 @@ erpApp
 					
 
 					function ClientController($scope, $mdDialog, client,
-							$location, $rootScope,SERVER_URL,flag,action,information) {
+							$location, $rootScope,SERVER_URL,flag,action,information,Auth) {
 						$scope.isReadOnly = action;
 						$scope.flag = flag;
 						$scope.client = client;
@@ -168,11 +172,17 @@ erpApp
 								console.log($scope.data);
 								httpparams.method = 'post';
 								httpparams.url = SERVER_URL + "client/create";
+								httpparams.headers = {
+										auth_token : Auth.getAuthToken()
+									};
 							} else {
 								console.log($scope.client);
 								data.id = $scope.client.id;
 								httpparams.method = 'put';
 								httpparams.url = SERVER_URL + "client/update";
+								httpparams.headers = {
+										auth_token : Auth.getAuthToken()
+									};
 							}
 							httpparams.data = data;
 							$http(httpparams)
@@ -201,7 +211,7 @@ erpApp
 													}
 												else{
 													$scope.displayProgressBar = false;
-													$scope.message = 'User Information saved successfully.';
+													$scope.message = 'Client Information saved successfully.';
 													$scope.showToast();
 													$rootScope.$emit("CallPopulateClientList",{});
 												}
@@ -288,14 +298,13 @@ erpApp
 					$scope.deleteClient = function(index) {
 						/* $scope.user = $scope.users[index].id; */
 						console.log($scope.client);
-
-						$http(
-								{
-									method : 'delete',
-									url : SERVER_URL + "client/delete/"
-											+ $scope.clients[index].id
-
-								}).then(function successCallback(data) {
+						var httpparams = {};
+						httpparams.method = 'delete';
+						httpparams.url = SERVER_URL + "client/delete/" + + $scope.clients[index].id;
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						$http(httpparams).then(function successCallback(data) {
 									$mdDialog.hide();
 							$rootScope.$emit("CallPopulateClientList", {});
 							console.log(data);

@@ -1,7 +1,6 @@
-erpApp
-		.controller(
-				'RMInventaryCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL) {
+
+erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth)
+{
 					$scope.isReadOnly = false;
 					
 
@@ -13,10 +12,15 @@ erpApp
 					});
 
 					$scope.populateRMInventaryList = function() {
-						$http({
-							method : 'GET',
-							url : SERVER_URL + "rawmaterialinventory/list"
-						}).then(function successCallback(response) {
+						
+						{
+							var httpparams = {};
+							httpparams.method = 'GET';
+							httpparams.url = SERVER_URL + "rawmaterialinventory/list";
+							httpparams.headers = {
+									auth_token : Auth.getAuthToken()
+								};
+							$http(httpparams).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.rmInventarys = response.data;
 							$scope.isRmInventoryInformation();
@@ -32,7 +36,7 @@ erpApp
 					}
 					
 					
-					
+					}
 					$scope.showToast = function() {
 						$mdToast.show({
 							hideDelay : 3000,
@@ -152,7 +156,6 @@ erpApp
 							
 							var data = {
 
-									/*"rawmaterial":8,*/
 									rawmaterial:$scope.rmInventary.rawmaterial.id,
 									quantityAvailable:$scope.rmInventary.quantityAvailable,
 									name:$scope.rmInventary.name,
@@ -171,11 +174,17 @@ erpApp
 								console.log($scope.data);
 								httpparams.method = 'post';
 								httpparams.url = SERVER_URL + "rawmaterialinventory/create";
+								httpparams.headers = {
+										auth_token : Auth.getAuthToken()
+									};
 							} else {
 								console.log($scope.rmInventary);
 								data.id = $scope.rmInventary.id;
 								httpparams.method = 'put';
 								httpparams.url = SERVER_URL + "rawmaterialinventory/update";
+								httpparams.headers = {
+										auth_token : Auth.getAuthToken()
+									};
 							}
 							httpparams.data = data;
 							$http(httpparams)
@@ -259,10 +268,19 @@ erpApp
 											});
 						};
 						
-						$http({
+						/*$http({
 							method : 'GET',
 							url : SERVER_URL + "rawmaterial/list"
-						}).then(function successCallback(response) {
+						})*/
+						
+						var httpparams = {};
+						httpparams.method = 'GET';
+						httpparams.url = SERVER_URL + "rawmaterial/list";
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						
+						$http(httpparams).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.users = response.data;
 
@@ -402,4 +420,4 @@ erpApp
 						};
 					}
 
-				});
+});
