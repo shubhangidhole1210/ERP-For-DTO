@@ -16,7 +16,7 @@ erpApp.controller('userCtrl',
 
 						var httpparams = {};
 						httpparams.method = 'GET';
-						httpparams.url = SERVER_URL + "unit/list";
+						httpparams.url = SERVER_URL + "user/list";
 						httpparams.headers = {
 								auth_token : Auth.getAuthToken()
 							};
@@ -48,9 +48,9 @@ erpApp.controller('userCtrl',
 						$scope.information = "ADD NEW USER"
 						$scope.flag = 0;
 						$scope.isReadOnly = false;
-						var abc = {
+						var addNewUserDialog = {
 								
-							controller : DialogController,
+							controller : 'userDialogCtrl',
 							templateUrl : 'views/userInformation.html',
 							parent : angular.element(document.body),
 							targetEvent : ev,
@@ -64,7 +64,7 @@ erpApp.controller('userCtrl',
 							}
 						};
 						$mdDialog
-								.show(abc)
+								.show(addNewUserDialog)
 								.then( function(answer) {}, function() {});
 					};
 
@@ -215,7 +215,7 @@ erpApp.controller('userCtrl',
 							console.log("Error");
 
 						});
-
+					};	
 					$scope.deleteUser = function(index) {
 						console.log($scope.user);
 
@@ -305,5 +305,5 @@ erpApp.controller('userCtrl',
 										function() { });
 					};
 
-				}
+				
 });
