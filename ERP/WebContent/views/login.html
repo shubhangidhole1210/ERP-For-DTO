@@ -6,7 +6,7 @@
 <div class="loginForm">
  <!-- <div class="form-group" ng-class="{ 'has-error' : myForm.userName.$invalid && !myForm.userName.$pristine }"> -->
 <div>
-		<md-input-container class="md-block" flex-gt-sm>
+		<md-input-container class="md-block" flex-gt-sm >
             <label>User name</label>
             <input type="text" ng-model="userid" name="userName" id="userName" required>
           </md-input-container>
@@ -21,9 +21,8 @@
       
 </div>
 
-<label style="color: red;">{{userid}}</label>
 <div layout-gt-sm="row">
-<div style="margin-left: 4%"><md-button class="md-raised md-primary" ng-click="login(userid)">LOGIN</md-button></div>
+<div style="margin-left: 4%"><md-button class="md-raised md-primary" ng-click="login()">LOGIN</md-button></div>
  <md-button class="md-primary" ng-href="{{googleUrl}}" target="_blank">New User? sign in</md-button>
 </div>
 </div>

@@ -134,8 +134,13 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	}).when('/page', {
-		templateUrl : 'views/page.html',
+	}).when('/productionPlan', {
+		templateUrl : 'views/productionPlan.html',
+		data : {
+			loginRequired : true
+		}
+	}).when('/status', {
+		templateUrl : 'views/status.html',
 		data : {
 			loginRequired : true
 		}
@@ -168,22 +173,6 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
     });
 }]);
 
-/*erpApp.factory('mySharedService', function($rootScope) {
-    var sharedService = {};
-    
-    mySharedService.userid = '';
-
-    sharedService.prepForBroadcast = function(uid) {
-        this.userid = uid;
-        this.broadcastItem();
-    };
-
-    sharedService.broadcastItem = function() {
-        $rootScope.$broadcast('handleBroadcast');
-    };
-
-    return sharedService;
-});*/
 
 
 erpApp.factory('Auth', function(){
@@ -267,14 +256,14 @@ erpApp.service('fileUpload', ['$http', function ($http) {
     }
 }]);
 
-erpApp.controller('ERPController', function($scope,$rootScope,Auth) {
+/*erpApp.controller('ERPController', function($scope,$rootScope,Auth,SERVER_URL,$http) {
 	
-	/*$scope.isLoginButton = true;
+	$scope.isLoginButton = true;
 	$scope.isuserName = false;
 	$scope.displayLogin = function() {
 		$scope.isLoginButton = false;
 		$scope.isuserName = true;
-	}*/
+	}
 	$scope.menu = [];
 	$scope.displayMenu=Auth.isLoggedIn();
 	if($scope.displayMenu){
@@ -320,11 +309,36 @@ erpApp.controller('ERPController', function($scope,$rootScope,Auth) {
 		$scope.userID = Auth.getMenu();
 	});
 	
+	$rootScope.$on("CallUserProfileList", function($event,$index,Auth) {
+		$scope.getUserProfile();
+	});
 	
-	  /*$scope.$on('handleBroadcast', function() {
-	        $scope.userid = 'ONE: ' + sharedService.userid;
-	    });   */     
-});
+	$scope.getUserProfile=function(index)
+	{
+		
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "user/userProfile/"+ $scope.id;
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
+		$scope.userProfile = response.data;
+         
+		console.log('user profile list' +response);
+		
+         console.log($scope.rawMaterialList)
+	}, function errorCallback(response) {
+		console.log("Error");
+
+	});
+	}
+	
+
+	
+	
+});*/
 
 
 
@@ -378,6 +392,3 @@ erpApp.controller('ToastCtrl', function($scope, $mdToast, message) {
 	};
 
 });
-/*ERPController.$inject = ['$scope', 'mySharedService'];        
-
-loginCtrl.$inject = ['$scope', 'mySharedService'];*/
