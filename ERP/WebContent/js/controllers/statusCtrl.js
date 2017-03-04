@@ -321,7 +321,7 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 	$scope.showConfirm = function(ev,index) {
 		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm().title(
-				'Are you sure you want to Delete Unit Information?')
+				'Are you sure you want to delete Status Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'YES' ).cancel('NO');
 

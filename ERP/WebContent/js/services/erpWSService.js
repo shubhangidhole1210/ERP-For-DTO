@@ -8,7 +8,7 @@ erpApp.service('erpWSService',function erpWSService(Auth,SERVER_URL){
 		requestBody.method = method;
 		requestBody.url = SERVER_URL + url;
 		requestBody.headers = this.getHTTPRequestHeader();
-		requestBody.data = this.getWSData();
+		requestBody.data = data;
 		return requestBody;
 	};
 	this.getHTTPRequestBody = function(){

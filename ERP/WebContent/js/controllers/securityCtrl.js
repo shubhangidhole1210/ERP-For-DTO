@@ -70,8 +70,17 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 
 	$scope.submitInformation = function($event) {
 			$scope.saveSecurityInformation();
+			
 	};
-	
+	$scope.resteData=function()
+	{
+		 $scope.invoice_No=null;
+		 $scope.vendor.id='';
+		 $scope.vehicleNo='';
+		 $scope.driver_Name='';
+		 $scope.description='';
+		 $scope.createDate='';
+	}
 	$scope.createDate = new Date($scope.createDate);
 	
 	$scope.saveSecurityInformation = function() {

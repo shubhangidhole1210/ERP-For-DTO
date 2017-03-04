@@ -4,53 +4,64 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
-    <script src="/node_modules/angular/angular.js"></script> 
-    <script src="/node_modules/angular-aria/angular-aria.js"></script> 
-    <script src="/node_modules/angular-animate/angular-animate.js"></script> 
-    <script src="/node_modules/angular-material/angular-material.js"></script> 
-    <script src="/node_modules/angular-route/angular-route.js"></script>
-    <script src="/node_modules/angular-messages/angular-messages.js"></script>
-    
-    <script type="text/javascript" src="js/app.js"></script>
+<script src="/node_modules/angular/angular.js"></script>
+<script src="/node_modules/angular-aria/angular-aria.js"></script>
+<script src="/node_modules/angular-animate/angular-animate.js"></script>
+<script src="/node_modules/angular-material/angular-material.js"></script>
+<script src="/node_modules/angular-route/angular-route.js"></script>
+<script src="/node_modules/angular-messages/angular-messages.js"></script>
+
+<script type="text/javascript" src="js/app.js"></script>
 <!--     <script type="text/javascript" src="js/angular-material.js"></script> -->
-    <script type="text/javascript" src="js/controllers/userCtrl.js"></script>
-     <script type="text/javascript" src="js/controllers/vendorCtrl.js"></script>
-     <script type="text/javascript" src="js/controllers/rawMaterialCtrl.js"></script>
-     <script type="text/javascript" src="js/controllers/unitCtrl.js"></script>
-     <script type="text/javascript" src="js/controllers/productCtrl.js"></script>
-     <script type="text/javascript" src="js/controllers/RMOrderCtrl.js"></script>
-      <script type="text/javascript" src="js/controllers/RMVendorAssociationCtrl.js"></script>
-       <script type="text/javascript" src="js/controllers/RMInventaryCtrl.js"></script>
-         <script type="text/javascript" src="js/controllers/clientCtrl.js"></script>
-         <script type="text/javascript" src="js/controllers/productRMAssociationCtrl.js"></script>
-         <script type="text/javascript" src="js/controllers/productOrderCtrl.js"></script>
-         <script type="text/javascript" src="js/controllers/productInventoryCtrl.js"></script>
-         <script type="text/javascript" src="js/controllers/ProgressBarController.js"></script>
-          <script type="text/javascript" src="js/controllers/homeCtrl.js"></script>
-         <script type="text/javascript" src="js/controllers/loginCtrl.js"></script>
-         <script type="text/javascript" src="js/controllers/userTypePageAssociationCtrl.js"></script>
-          <script type="text/javascript" src="js/controllers/securityCtrl.js"></script>
-          <script type="text/javascript" src="js/controllers/administrationCtrl.js"></script>
-           <script type="text/javascript" src="js/controllers/qualityInspectionCtrl.js"></script>
-           <script type="text/javascript" src="js/controllers/productionPlanCtrl.js"></script>
-           <script type="text/javascript" src="js/controllers/userTypeCtrl.js"></script>
-           <script type="text/javascript" src="js/controllers/pageCtrl.js"></script>
-           <script type="text/javascript" src="js/controllers/statusCtrl.js"></script>
-            <script type="text/javascript" src="js/controllers/erpCtrl.js"></script>
-           <!--  <script type="text/javascript" src="js/services/utils.js"></script> -->
-            <script type="text/javascript" src="js/services/utils.js"></script>
+<script type="text/javascript" src="js/controllers/userCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/userDialogCtrl.js"></script>
+
+<script type="text/javascript" src="js/controllers/vendorCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/rawMaterialCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/unitCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/unitDialogCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/productCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/RMOrderCtrl.js"></script>
+<script type="text/javascript"
+	src="js/controllers/RMVendorAssociationCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/RMInventaryCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/clientCtrl.js"></script>
+<script type="text/javascript"
+	src="js/controllers/productRMAssociationCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/productOrderCtrl.js"></script>
+<script type="text/javascript"
+	src="js/controllers/productInventoryCtrl.js"></script>
+<script type="text/javascript"
+	src="js/controllers/ProgressBarController.js"></script>
+<script type="text/javascript" src="js/controllers/homeCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/loginCtrl.js"></script>
+<script type="text/javascript"
+	src="js/controllers/userTypePageAssociationCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/securityCtrl.js"></script>
+<script type="text/javascript"
+	src="js/controllers/administrationCtrl.js"></script>
+<script type="text/javascript"
+	src="js/controllers/qualityInspectionCtrl.js"></script>
+<script type="text/javascript"
+	src="js/controllers/productionPlanCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/userTypeCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/pageCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/statusCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/erpCtrl.js"></script>
+<!--  <script type="text/javascript" src="js/services/utils.js"></script> -->
+<script type="text/javascript" src="js/services/utils.js"></script>
 </head>
     <body ng-app="ERPApp">
       
-    <div ng-controller="ERPController">
+    <div ng-controller="ERPController" >
     <div>
-   <div class="erp-headder" ng-init="getUserProfile($index)">
+   <div class="erp-headder">
       <div class="display-erp-img"> <img alt="" src="image/erp-logo.png" width="120px" height="70px"></div> 
-     <div style="color: white;" ng-show="isUserName" > USER NAME{{userid}}</div>
-      <div style="margin-left: 80%">
-         <md-button class="md-raised"  ng-click="displayLogin()" ng-show="displayLoginButton">Log Out</md-button>
-      </div>
-    
+     
+      <div style="display: flex;position: absolute;right: 10px">
+      <div style="color: white;margin-top: 17px" ng-show="displayUserName" >{{user.userid}}</div>
+         <div><md-button class="md-raised"  ng-click="logOut()" ng-show="displayLoginButton" >Log Out</md-button></div>
+    </div>
    </div>
    </div>
         <!--   <div class="hamburgerMenu">

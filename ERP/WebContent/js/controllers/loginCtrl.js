@@ -1,4 +1,4 @@
-erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Auth, SERVER_URL,utils) {
+erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Auth, SERVER_URL,utils,User) {
 	$scope.login = function(index) {
 		utils.showProgressBar();
 		var data = {
@@ -12,7 +12,7 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 		}).then(function successCallback(data, headers) {
 			console.log(data);
 			console.log('in login function');
-			$rootScope.$emit("CallUserProfileList",{});
+			
 			utils.hideProgressBar();
 			console.log($scope.userid)
 			if(data.data.code == 1){
@@ -24,7 +24,7 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 				Auth.setUser(userInfo);
 				Auth.setMenu(data.data.data);
 				$scope.$emit('loginSuccess',{});
-				
+				$rootScope.$emit("CallUserProfileList",{});
 				$location.path('/');
 				
 			}else{
@@ -36,8 +36,10 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 			utils.hideProgressBar();
 			utils.showToast("We are sorry, Something went wrong. Please try again later ");
 		});
-	
-		
+	     console.log($scope.userid);
+		 $scope.user = User;
+		 $scope.user.userid = $scope.userid;
+	     console.log($scope.user.userid);
 		
 	};
 	

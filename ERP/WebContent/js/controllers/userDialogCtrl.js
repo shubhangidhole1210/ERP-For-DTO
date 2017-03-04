@@ -96,8 +96,7 @@ erpApp.controller('userDialogCtrl',
 													{});
 											console.log(data);
 											$scope.hide();
-											utils
-													.showToast('Something went worng. Please try again later.');
+											utils.showToast('Something went worng. Please try again later.');
 										});
 					}
 
