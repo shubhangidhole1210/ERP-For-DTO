@@ -1,7 +1,7 @@
 erpApp
 		.controller(
 				'clientCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth) {
+				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 					$scope.isReadOnly = false;
 					
 
@@ -13,7 +13,7 @@ erpApp
 					});
 
 					$scope.populateClientList = function() {
-						
+						utils.showProgressBar();
 						var httpparams = {};
 						httpparams.method = 'GET';
 						httpparams.url = SERVER_URL + "client/list";
@@ -25,15 +25,17 @@ erpApp
 							$scope.clients = response.data;
 							$scope.isClientInfirmation();
 							console.log(response);
-							$mdDialog.hide();
+							/*$mdDialog.hide();*/
+							utils.hideProgressBar();
 
 						}, function errorCallback(response) {
-							$scope.message = "We are Sorry. Something went wrong. Please try again later."
-							$scope.showToast();
+							/*$scope.message = "We are Sorry. Something went wrong. Please try again later."
+							$scope.showToast();*/
+							utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 							console.log("Error");
-							$mdDialog.hide();
+							/*$mdDialog.hide();*/
+							utils.hideProgressBar();
 						});
-						$scope.showProgressBarOne();
 					}
 					
 					$scope.isClientPresent=false;
@@ -47,7 +49,7 @@ erpApp
 							$scope.isClientPresent=false;
 						}
 					}
-					$scope.showProgressBarOne= function()
+					/*$scope.showProgressBarOne= function()
 					{
 						$mdDialog
 						.show(
@@ -56,11 +58,11 @@ erpApp
 									templateUrl : 'views/progressBar.html',
 									parent : angular
 											.element(document.body),
-									/*targetEvent : ev,*/
+									targetEvent : ev,
 									clickOutsideToClose : false,
 									fullscreen : $scope.customFullscreen,
 									onComplete : function() {
-									/*	$scope.populateUserList(ev);*/
+										$scope.populateUserList(ev);
 									}
 									
 								
@@ -74,9 +76,9 @@ erpApp
 									$scope.status = 'You cancelled the dialog.';
 								});
 					};
+					*/
 					
-					
-					$scope.showToast = function() {
+					/*$scope.showToast = function() {
 						$mdToast.show({
 							hideDelay : 3000,
 							position : 'top right',
@@ -86,7 +88,7 @@ erpApp
 								message : $scope.message
 							}
 						});
-					};
+					};*/
 					
 					$scope.client = {};
 					$scope.showAddNewClient = function(ev) {
@@ -94,8 +96,8 @@ erpApp
 						$scope.information="ADD NEW CLIENT"
 						$scope.flag = 0;
 						$scope.isReadOnly = false;
-						var abc = {
-							controller : ClientController,
+						var addNewClientDialog = {
+							controller : 'ClientController',
 							templateUrl : 'views/clientInformation.html',
 							parent : angular.element(document.body),
 							targetEvent : ev,
@@ -110,27 +112,11 @@ erpApp
 							}
 						};
 						$mdDialog
-								.show(abc)
-								.then(
-										function(answer) {
-											$scope.status = 'You said the information was "'
-													+ answer + '".';
-										},
-										function() {
-											$scope.status = 'You cancelled the dialog.';
-										});
+						.show(addNewClientDialog)
+						.then(function(answer) {},
+								function() {});
 					};
-					
-					
-					
-					
-					
-					
-					
-					
-					
-
-					function ClientController($scope, $mdDialog, client,
+		   /*function ClientController($scope, $mdDialog, client,
 							$location, $rootScope,SERVER_URL,flag,action,information,Auth) {
 						$scope.isReadOnly = action;
 						$scope.flag = flag;
@@ -282,7 +268,7 @@ erpApp
 							url : SERVER_URL + "usertype/list"
 						}).then(function successCallback(response) {
 							$scope.data = response.data;
-						/*	$scope.users = response.data;*/
+							$scope.users = response.data;
 
 							console.log(response);
 
@@ -294,7 +280,7 @@ erpApp
 						
 
 					};
-
+*/
 					$scope.deleteClient = function(index) {
 						/* $scope.user = $scope.users[index].id; */
 						console.log($scope.client);

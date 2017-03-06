@@ -13,12 +13,13 @@
       <td style="font-size: 17px; text-align: center;">{{product.product_id}}</td>
       <td ng-repeat="productProductionPlanItem in product.productProductionPlan">
          <table>
+         <th>target</th><th>achived</th><th>dispatch</th>
          <tr>
          <td>
          <input type="number" class="quantity-input" ng-model="productProductionPlanItem.target_quantity">
          </td>
          <td>
-         <input type="number" class="quantity-input" ng-model="productProductionPlanItem.achived_quantity">
+         <input type="number" class="  " ng-model="productProductionPlanItem.achived_quantity">
          </td>
          <td>
          <input type="number" class="quantity-input" ng-model="productProductionPlanItem.dispatch_quantity">
@@ -28,6 +29,23 @@
       </td> 
    </tr>
 </table>
+<!-- <table class="tableOne">
+ <tr>
+    <thead>
+    <th>product</th>
+    </thead>
+ </tr>
+ <tr ng-repeat="product in products">
+   <td>{{product.product_id}}</td>
+ </tr>
+</table>
+ <table class="table2">
+     <tr>
+        <thead>
+          <th  ng-repeat="days in alldays" style="font-size: 17px; text-align: center;">{{days| date:'dd-MM-yyyy'}}</th>
+        </thead>
+     </tr>
+ </table> -->
 </div>
 <div style="margin-left: 70%;margin-top: 2%">
   <md-dialog-actions layout="row">

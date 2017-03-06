@@ -1,5 +1,5 @@
 erpApp.controller('qualityInspectionCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,
-		SERVER_URL,utils,Auth) {
+		SERVER_URL,utils,Auth,$location) {
 $scope.getRMOrderInvoiceInformation=function()
 	
 	{
@@ -9,10 +9,6 @@ $scope.getRMOrderInvoiceInformation=function()
 	httpparams.headers = {
 			auth_token : Auth.getAuthToken()
 		};
-		/*$http({
-			method : 'GET',
-			url : SERVER_URL + "rawmaterialorderinvoice/security-in-invoices"
-		})*/
 	$http(httpparams).then(function successCallback(response) {
 			$scope.invoiceList = response.data;
 			console.log(response);
@@ -32,11 +28,6 @@ $scope.invoiceRawMaterialList=function(index)
 	httpparams.headers = {
 			auth_token : Auth.getAuthToken()
 		};
-	/*$http({
-		method : 'GET',
-		url : SERVER_URL + "qualitycheckrawmaterial/listrm/"
-		                 + $scope.invoiceList.id
-	})*/
 	$http(httpparams).then(function successCallback(response) {
 		$scope.rmInvoiceList = response.data;
 		console.log($scope.rmInvoiceList)
@@ -66,14 +57,10 @@ $scope.invoiceRawMaterialList=function(index)
 					templateUrl : 'views/progressBar.html',
 					parent : angular
 							.element(document.body),
-					/*targetEvent : ev,*/
 					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					onComplete : function() {
-					/*	$scope.populateUserList(ev);*/
 					}
-					
-				
 				})
 		.then(
 				function(answer) {
@@ -106,23 +93,14 @@ $scope.invoiceRawMaterialList=function(index)
 				auth_token : Auth.getAuthToken()
 			};
 		httpparams.data = data;
-	   /*$http({
-			method : 'post',
-			url : SERVER_URL + "qualitycheckrawmaterial/qualitycheck",
-			data : data
-		})*/
-		
 		$http(httpparams).then(function successCallback(data) {
-			
 			if(data.data.code === 1){
 				console.log(data.data.message);
 				console.log(data);
-			
-				/*$scope.hide();*/
+				$location.path('/')
 				$scope.message = 'Qualitycheckrawmaterial added Successfully !';
 				$scope.showToast();
 				$mdDialog.hide();
-				
 			}
 			else
 				{
@@ -134,15 +112,12 @@ $scope.invoiceRawMaterialList=function(index)
 			
 		}, function errorCallback(response) {
 			console.log("Error");
-			/*$scope.hide();*/
 			$mdDialog.hide();
 			$scope.message = 'Something went worng. Please try again later.';
 			$scope.showToast();
-			
 		});
 	   $scope.showProgressBarOne();
    }
-   
    $scope.showToast = function() {
 		$mdToast.show({
 			hideDelay : 3000,
@@ -154,17 +129,14 @@ $scope.invoiceRawMaterialList=function(index)
 			}
 		});
 	};
-   
    function ProgressBarController($scope, $mdDialog) {
 		
 		$scope.hide = function() {
 			$mdDialog.hide();
 		};
-
 		$scope.cancel = function() {
 			$mdDialog.cancel();
 		};
-
 		$scope.answer = function(answer) {
 			$mdDialog.hide(answer);
 		};

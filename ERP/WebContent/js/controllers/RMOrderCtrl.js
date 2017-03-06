@@ -165,7 +165,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.isReadOnly = true;
 		$scope.rmOrder = $scope.rmOrders[index];
 		$scope.isSaving = false;
-		$scope.title = "VIEW RAW MATERIAL INFORMATION"
+		$scope.title = "VIEW RAW MATERIAL ORDER INFORMATION"
 		console.log($scope.rmOrder);
 		$mdDialog.show({
 					controller : RMOrderController,
@@ -228,7 +228,10 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 					status:$scope.rmOrder.status.id,
 					quantity:$scope.rmOrder.quantity,
 					expectedDeliveryDate:$scope.rmOrder.expectedDeliveryDate,
-					vendor:$scope.rmOrder.vendor.id,
+					/*vendor:$scope.rmOrder.vendor.id,*/
+					/*vendor:$scope.vendorRmList.id,*/
+					/*vendor:$scope.vendorRmList.id,*/
+					vendor:$scope.vendorData.id,
 					totalprice:$scope.rmOrder.totalprice,
 					tax:$scope.rmOrder.tax,
 					otherCharges:$scope.rmOrder.otherCharges,
@@ -352,10 +355,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
-			/*$http({
-				method : 'GET',
-				url : SERVER_URL + "status/list"
-			})*/
+			
 			
 			$http(httpparams).then(function successCallback(response) {
 				$scope.statusData = response.data;
@@ -368,7 +368,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			})
 		};
 		
-		$scope.rawMaterialId=function()
+		/*$scope.rawMaterialId=function()
 		{
 			
 			var httpparams = {};
@@ -378,10 +378,6 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 					auth_token : Auth.getAuthToken()
 				};
 			
-			/*$http({
-				method : 'GET',
-				url : SERVER_URL + "rawmaterial/list"
-			})*/
 			$http(httpparams).then(function successCallback(response) {
 				$scope.RMData = response.data;
 
@@ -392,6 +388,26 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 
 			})
 			
+		};*/
+		
+		$scope.vendorRmList=function(index)
+		{
+			var httpparams = {};
+			httpparams.method = 'GET';
+			httpparams.url = SERVER_URL + "rawmaterial/getRMaterial/"+$scope.vendorData.id;
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			
+			$http(httpparams).then(function successCallback(response) {
+				$scope.vendorRmList = response.data;
+
+				console.log(response);
+
+			}, function errorCallback(response) {
+				console.log("Error");
+
+			})
 		};
 		
 		$scope.displayVendorId=function()
@@ -402,11 +418,6 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
-			
-			/*$http({
-				method : 'GET',
-				url : SERVER_URL + "vendor/list"
-			})*/
 			
 			$http(httpparams).then(function successCallback(response) {
 				$scope.vendorData = response.data;
@@ -435,16 +446,6 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	};
 
 	$scope.deleteRmOrder = function(index) {
-		/* $scope.user = $scope.users[index].id; */
-		/*console.log($scope.user);*/
-
-	/*	$http(
-				{
-					method : 'delete',
-					url : SERVER_URL + "rawmaterialorder/delete/"
-							+ $scope.rmOrders[index].id
-
-				})*/
 		var httpparams = {};
 		httpparams.method = 'delete';
 		httpparams.url = SERVER_URL + "rawmaterialorder/delete/" +  $scope.rmOrders[index].id;
@@ -465,7 +466,6 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	};
 
 	$scope.showConfirm = function(ev,index) {
-		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete Raw Material Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -487,11 +487,6 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 							$scope.status = 'You decided to keep your debt.';
 						});
 	};
-	
-
-
-	
-
 	function ProgressBarController($scope, $mdDialog) {
 		
 		$scope.hide = function() {

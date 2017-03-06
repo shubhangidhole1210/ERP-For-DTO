@@ -1,4 +1,4 @@
-erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth) {
+erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
 	
 	$rootScope.$on("callPopulateVendorList", function() {
 		$scope.populateVendorList();
@@ -10,12 +10,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 	
 	$scope.populateVendorList=function()
 	{
-		
-		/* $http({
-				method : 'GET',
-				url : SERVER_URL + "vendor/list"
-			})*/
-			
+		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "vendor/list";
@@ -27,20 +22,20 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 				$scope.data = response.data;
 				$scope.isVendorInformation();
 				$scope.vendorUsers = response.data;
-				$mdDialog.hide();
+				utils.hideProgressBar();
 				console.log(response);
 
 			}, function errorCallback(response) {
-				$scope.showToast();
-				$scope.message = "We are Sorry. Something went wrong. Please try again later."
+				/*$scope.showToast();
+				$scope.message = "We are Sorry. Something went wrong. Please try again later."*/
+				utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 				console.log("Error");
-				$mdDialog.hide();
+				utils.hideProgressBar();
 
 			});
-		 $scope.showProgressBarOne();
 	}
 	
-	$scope.showToast = function() {
+	/*$scope.showToast = function() {
 		$mdToast.show({
 			hideDelay : 3000,
 			position : 'top right',
@@ -50,7 +45,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 				message : $scope.message
 			}
 		});
-	};
+	};*/
 	 
 	$scope.isVendorPredent =false;
 	$scope.isVendorInformation=function()
@@ -65,7 +60,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			}
 			
 	}
-	$scope.showProgressBarOne= function()
+	/*$scope.showProgressBarOne= function()
 	{
 		$mdDialog
 		.show(
@@ -74,11 +69,11 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 					templateUrl : 'views/progressBar.html',
 					parent : angular
 							.element(document.body),
-					/*targetEvent : ev,*/
+					targetEvent : ev,
 					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					onComplete : function() {
-					/*	$scope.populateUserList(ev);*/
+						$scope.populateUserList(ev);
 					}
 					
 				
@@ -92,7 +87,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 					$scope.status = 'You cancelled the dialog.';
 				});
 	};
-	
+	*/
 	$scope.vendorUser={};
 	
 	$scope.showAddNewVendor = function(ev) {
@@ -100,8 +95,8 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		$scope.isReadOnly = false;
 		$scope.information="ADD NEW VENDOR";
 		$scope.vendorUser={};
-		var abc = {
-			controller : DialogVendorController,
+		var addNewVendorDialog = {
+			controller : 'DialogVendorController',
 			templateUrl : 'views/vendorInformation.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
@@ -116,17 +111,11 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			}
 		};
 		$mdDialog
-				.show(abc)
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+		.show(addNewVendorDialog)
+		.then(function(answer) {},
+				function() {});
 	  };
-	  function DialogVendorController($scope, $mdDialog,vendorUser,flag,action,$rootScope,$mdToast,information) {
+	 /* function DialogVendorController($scope, $mdDialog,vendorUser,flag,action,$rootScope,$mdToast,information) {
 		    $scope.vendorUser=vendorUser;
 		    $scope.flag=flag;
 		    $scope.isReadOnly = action;
@@ -145,7 +134,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		    
 		    $scope.saveVendorInfo=function(ev)
 		    {
-		    	/* console.log($scope.data)*/
+		    	 console.log($scope.data)
 		    	 var data = {
 
 		    		 companyName : $scope.vendorUser.companyName,
@@ -284,14 +273,14 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			};
 		    
 		  }
-	  
+	  */
 	  
 	  $scope.showEditVendor = function(ev , index) {
 		  $scope.flag = 1;
 		  $scope.vendorUser = $scope.vendorUsers[index];
 		  $scope.information="EDIT VENDOR INFORMATION"
 		    $mdDialog.show({
-		      controller: DialogVendorController,
+		      controller: 'DialogVendorController',
 		      templateUrl: 'views/vendorInformation.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
@@ -304,11 +293,8 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		    	  information : $scope.information
 				}
 		    })
-		    .then(function(answer) {
-		      $scope.status = 'You said the information was "' + answer + '".';
-		    }, function() {
-		      $scope.status = 'You cancelled the dialog.';
-		    });
+		    .then(function(answer) {},
+					function() {});
 		  };
 	  
 	  $scope.deleteVendor = function(index) {
@@ -330,7 +316,8 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 					auth_token : Auth.getAuthToken()
 				};
 			$http(httpparams).then(function successCallback(data) {
-						$mdDialog.hide();
+/*						$mdDialog.hide();*/
+				utils.hideProgressBar();
 						$rootScope.$emit("callPopulateVendorList", {});
 				console.log(data);
 
@@ -338,7 +325,8 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 				console.log("Error");
 
 			});
-			$scope.showProgressBarOne();
+			/*$scope.showProgressBarOne();*/
+			utils.showProgressBar();
 		};
 		
 		$scope.viewVendarInformation = function(ev, index) {
@@ -349,7 +337,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			$scope.information="VIEW VENDOR INFORMATION"
 			console.log($scope.user);
 			$mdDialog.show({
-						controller : DialogVendorController,
+						controller : 'DialogVendorController',
 						templateUrl : 'views/vendorInformation.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
@@ -362,14 +350,8 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 							information : $scope.information
 						}
 					})
-					.then(
-							function(answer) {
-								$scope.status = 'You said the information was "'
-										+ answer + '".';
-							},
-							function() {
-								$scope.status = 'You cancelled the dialog.';
-							});
+					.then(function(answer) {},
+							function() {});
 		};
 		$scope.showConfirm = function(ev,index) {
 			// Appending dialog to document.body to cover sidenav in docs app
@@ -384,18 +366,16 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
 								$scope.deleteVendor(index);
-								
+								/*
 								$scope.message = 'Delete Vendor Record sucessfully';
-								$scope.showToast();
-								
+								$scope.showToast();*/
+								utils.showToast('Vendor Deleted Sucessfully!');
 								
 							},
-							function() {
-								$scope.status = 'You decided to keep your debt.';
-							});
+							function() { });
 		};
 		
-		function ProgressBarController($scope, $mdDialog) {
+		/*function ProgressBarController($scope, $mdDialog) {
 			
 			$scope.hide = function() {
 				$mdDialog.hide();
@@ -408,7 +388,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			$scope.answer = function(answer) {
 				$mdDialog.hide(answer);
 			};
-		}
+		}*/
 	
 });
 

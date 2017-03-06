@@ -1,5 +1,5 @@
 erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
-		$rootScope, SERVER_URL,$filter,utils,Auth) {
+		$rootScope, SERVER_URL,$filter,utils,Auth,$location) {
 
 	$scope.getRMInformation = function()
 
@@ -72,7 +72,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			$scope.saveSecurityInformation();
 			
 	};
-	$scope.resteData=function()
+	/*$scope.resteData=function()
 	{
 		 $scope.invoice_No=null;
 		 $scope.vendor.id='';
@@ -80,7 +80,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		 $scope.driver_Name='';
 		 $scope.description='';
 		 $scope.createDate='';
-	}
+	}*/
 	$scope.createDate = new Date($scope.createDate);
 	
 	$scope.saveSecurityInformation = function() {
@@ -140,6 +140,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			
 			if(data.data.code === 1){
 				utils.showToast("Rawmaterial Order Invoice added Successfully !");
+				$location.path('/');
 			}else{
 				utils.showToast("Something went wrong. Please try again later.");
 			}

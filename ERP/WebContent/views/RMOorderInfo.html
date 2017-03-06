@@ -72,7 +72,8 @@
       
                <md-input-container>
           <label style="color: black;">STATUS*</label>
-          <md-select ng-model="rmOrder.status.id" name="statusId" value="statusId.id" ng-disabled="isReadOnly" ng-init="displayStatusId()" name="statusId" ng-required="true" required>
+          <!-- <md-select ng-model="rmOrder.status.id" name="statusId" value="statusId.id" ng-disabled="isReadOnly" ng-init="displayStatusId()" name="statusId" ng-required="true" required> -->
+            <md-select ng-model="rmOrder.status.id" name="statusId" value="statusId.id" ng-disabled="isReadOnly" ng-init="displayStatusId()" name="statusId" ng-required="true" required >
             <md-option ng-repeat="statusId in statusData" ng-value="statusId.id" >
                {{statusId.name}}
             </md-option>
@@ -83,7 +84,7 @@
         </md-input-container>
          <md-input-container>
           <label style="color: black;">VENDOR </label>
-          <md-select ng-model="rmOrder.vendor.id" name="vendorId" value="vendorId.id" ng-disabled="isReadOnly" ng-init="displayVendorId()" name="vendorId" required>
+          <md-select ng-model="vendorData.id" name="vendorId" value="vendorId.id" ng-disabled="isReadOnly" ng-init="displayVendorId()" name="vendorId" required ng-change="vendorRmList($index)">
             <md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id" >
                {{vendorId.companyName}}
             </md-option>
@@ -95,29 +96,6 @@
         
         </div>
           
-        <!--  <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label class="input-filed-label">QUANTITY</label>
-            <input type="text" ng-model="rmOrder.quantity" value="rmOrder.quantity" required name="quantity" ng-disabled="isReadOnly">
-            <div ng-messages="RMOrderInformation.quantity.$error">
-             <div ng-message="required">please enter quantity </div>
-            </div>
-          </md-input-container>
-           <md-input-container>
-          <label style="color: black;">RAW MATERIAL</label>
-          <md-select ng-model="rmOrder.rawmaterial.id" name="rawMaterialId" value="rawMaterialId.id" ng-disabled="isReadOnly" ng-init="rawMaterialId()" name="rawMaterialId" required>
-            <md-option ng-repeat="rawMaterialId in RMData" ng-value="rawMaterialId.id" >
-               {{rawMaterialId.partNumber}}
-            </md-option>
-          </md-select>
-          <div ng-messages="RMOrderInformation.rawMaterialId.$error">
-                 <div ng-message="required">Please select Raw Material </div>
-              </div>
-        </md-input-container>
-         <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderProductAssociation()">Add Raw Material</button>
-       
-         </div>
- -->
          <h2>Raw Material List</h2>
         <table>
           <tr>
@@ -136,16 +114,21 @@
           </tr>
         </table>
            <div layout-gt-sm="row">
-             <md-input-container ng-init="rawMaterialId()">
+            <!--  <md-input-container ng-init="rawMaterialId()">
           <label style="color: black;">RAW MATERIAL</label>
           <md-select ng-model="orderRawMaterial.rawmaterial" name="rawmaterial" value="rawmaterial.id" ng-disabled="isReadOnly"  name="rawMaterialId" >
             <md-option ng-repeat="rawmaterial in RMData" ng-value="rawmaterial" >
                {{rawmaterial.partNumber}}
             </md-option>
           </md-select>
-        <!--   <div ng-messages="RMOrderInformation.rawMaterialId.$error">
-                 <div ng-message="required">Please select Raw Material </div>
-              </div> -->
+        </md-input-container> -->
+         <md-input-container >
+          <label style="color: black;">RAW MATERIAL</label>
+          <md-select ng-model="orderRawMaterial.rawmaterial" name="rawmaterial" value="rawmaterial.id" ng-disabled="isReadOnly"  name="rawMaterialId" >
+            <md-option ng-repeat="rawmaterial in vendorRmList" ng-value="rawmaterial.rawmaterial" >
+               {{rawmaterial.rawmaterial.partNumber}}
+            </md-option>
+          </md-select>
         </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANTITY</label>
