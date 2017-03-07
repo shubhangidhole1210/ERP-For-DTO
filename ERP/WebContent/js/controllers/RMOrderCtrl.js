@@ -84,6 +84,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	};
 		
 	
+	
 	$scope.showToast = function() {
 		$mdToast.show({
 			hideDelay : 3000,
@@ -231,7 +232,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 					/*vendor:$scope.rmOrder.vendor.id,*/
 					/*vendor:$scope.vendorRmList.id,*/
 					/*vendor:$scope.vendorRmList.id,*/
-					vendor:$scope.vendorData.id,
+					vendor:$scope.selectedVendor,
 					totalprice:$scope.rmOrder.totalprice,
 					tax:$scope.rmOrder.tax,
 					otherCharges:$scope.rmOrder.otherCharges,
@@ -394,7 +395,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		{
 			var httpparams = {};
 			httpparams.method = 'GET';
-			httpparams.url = SERVER_URL + "rawmaterial/getRMaterial/"+$scope.vendorData.id;
+			httpparams.url = SERVER_URL + "rawmaterial/getRMaterial/"+$scope.selectedVendor;
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
@@ -441,8 +442,33 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				}
 		    };
 		
-		
-
+		$scope.isDuplicateRM=function(index)
+		{
+			  console.log($scope.orderRawMaterials)
+			var i;
+			var j;
+							for (i = 0; i < $scope.orderRawMaterials.length; i++) {
+								for (j = 0; i < $scope.orderRawMaterials.length; j++) {
+									if (i != j) {
+										if ($scope.orderRawMaterials[i].id == $scope.orderRawMaterials[j].id) {
+											$scope.orderRawMaterials = $scope.orderRawMaterials.splice(j,1);
+											return true;
+										}
+									}
+								}
+							}
+							return false;
+		}
+		    
+		    $scope.deleteRM=function(index)
+		    {
+		    	/*$scope.displayVendorId();
+		    	console.log('in delete Rm' +$scope.vendorData)*/
+		    	console.log('in delete RM'+ $scope.orderRawMaterials)
+		    	var lastItem = $scope.orderRawMaterials.length;
+			    $scope.orderRawMaterials.splice(index,1);
+		    }
+		    
 	};
 
 	$scope.deleteRmOrder = function(index) {

@@ -1,0 +1,50 @@
+<div ng-controller="todaysPlanCtrl">
+<div class="erp-information">
+     <h1>TODAYS PRODUCTION PLAN</h1>
+     <form name="todaysProductionPlanInformation"  novalidate>
+      <md-input-container>
+          <label style="color: black;">product</label>
+          <md-select ng-model=" products.product.id" name="vendorId"  ng-disabled="isReadOnly" ng-init="getProducts()" ng-change="getTidaysProductionPlan($index)"  >
+            <md-option  ng-repeat="product in products" ng-value=" product.product.id" >
+               {{product.product.name}}
+            </md-option>
+           <!--   <div ng-messages="todaysProductionPlanInformationvendorId.$error">
+                 <div ng-message="required">Please select product </div>
+              </div> -->
+          </md-select>
+        </md-input-container>
+        <table>
+        <tr>
+       <th style="font-size: 17px; text-align: center;">Product</th>
+   </tr>
+   <tr >
+    
+      <td >
+         <table>
+         <th>target</th><th>achived</th><th>dispatch</th>
+         <tr>
+         <td>
+         <input type="number" class="quantity-input" ng-model="productsPlan.targetQuantity" >
+         </td>
+         <td>
+         <input type="number" class="  " ng-model="productsPlan.achivedQuantity">
+         </td>
+         <td>
+         <input type="number" class="quantity-input" ng-model="productsPlan.dispatchQuantity">
+         </td>
+         </tr>
+         </table>
+      </td> 
+   </tr>
+        </table>
+        <div style="margin-left: 70%;margin-top: 2%">
+  <md-dialog-actions layout="row">
+      
+      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitTodayProductionPlan()" ng-disabled="isReadOnly" >SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+    </md-dialog-actions>
+    </div>
+        </form>
+</div>
+</div>

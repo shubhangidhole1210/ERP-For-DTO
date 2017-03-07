@@ -53,5 +53,7 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 			utils.hideProgressBar();
 		});
 	};
+	
+	
 
 });

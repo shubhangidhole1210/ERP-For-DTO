@@ -139,6 +139,11 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
+	}).when('/todaysProductionPlan', {
+		templateUrl : 'views/todaysProductionPlan.html',
+		data : {
+			loginRequired : true
+		}
 	}).when('/status', {
 		templateUrl : 'views/status.html',
 		data : {
