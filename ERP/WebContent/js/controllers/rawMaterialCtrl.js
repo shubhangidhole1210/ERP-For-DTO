@@ -1,4 +1,4 @@
-erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth) {
+erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 	
 	$rootScope.$on("CallPopulateRawMaterial", function() {
 		$scope.populateRawMaterial();
@@ -9,11 +9,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 	
 	$scope.populateRawMaterial=function()
 {
-		/*$http({
-			method : 'GET',
-			url : SERVER_URL + "rawmaterial/list"
-		})*/
-		
+		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "rawmaterial/list";
@@ -26,42 +22,16 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 			$scope.rawMaterials = response.data;
 			$scope.getRawMaterialInformation();
 			console.log(response);
-			$mdDialog.hide();
+			utils.hideProgressBar();
 		}, function errorCallback(response) {
-			$scope.message = "We are Sorry. Something went wrong. Please try again later."
-			$scope.showToast();
+			/*$scope.message = "We are Sorry. Something went wrong. Please try again later."
+			$scope.showToast();*/
+			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 			console.log("Error");
-			$mdDialog.hide();
+			utils.hideProgressBar();
 		});
-		$scope.showProgressBarOne();
 }
-	$scope.showProgressBarOne= function()
-	{
-		$mdDialog
-		.show(
-				{
-					controller : ProgressBarController,
-					templateUrl : 'views/progressBar.html',
-					parent : angular
-							.element(document.body),
-					/*targetEvent : ev,*/
-					clickOutsideToClose : false,
-					fullscreen : $scope.customFullscreen,
-					onComplete : function() {
-					/*	$scope.populateUserList(ev);*/
-					}
-					
-				
-				})
-		.then(
-				function(answer) {
-					$scope.status = 'You said the information was "'
-							+ answer + '".';
-				},
-				function() {
-					$scope.status = 'You cancelled the dialog.';
-				});
-	};
+	
 	$scope.isRmPresent=false;
 	$scope.getRawMaterialInformation=function()
 	{
@@ -75,25 +45,15 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 			}
 	}
 	
-	$scope.showToast = function() {
-		$mdToast.show({
-			hideDelay : 3000,
-			position : 'top right',
-			controller : 'ToastCtrl',
-			templateUrl : 'views/toast.html',
-			locals : {
-				message : $scope.message
-			}
-		});
-	};
+	
 	$scope.rawMaterial = {};
 	$scope.showAddRawMaterial = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
 		$scope.rawMaterial = {};
 		$scope.information="ADD RAW MATERIAL INFORMATION"
-		var abc = {
-			controller : rawMaterialController,
+		var addNewrawmaterialDialog = {
+			controller : 'rawMaterialDialogCtrl',
 			templateUrl : 'views/rawMaterialInformation.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
@@ -108,18 +68,12 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 			}
 		};
 		$mdDialog
-				.show(abc)
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+		.show(addNewrawmaterialDialog)
+		.then(function(answer) {},
+				function() {});
 	};
 	
-	function rawMaterialController($scope, $mdDialog, rawMaterial,
+	/*function rawMaterialController($scope, $mdDialog, rawMaterial,
 			$location, $rootScope,SERVER_URL,flag,action,information) {
 		$scope.isReadOnly = action;
 		$scope.flag = flag;
@@ -256,10 +210,10 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		
 		$scope.getUnitList= function()
 		{
-			/*$http({
+			$http({
 				method : 'GET',
 				url : SERVER_URL + "unit/list"
-			})*/
+			})
 			var httpparams = {};
 			httpparams.method = 'GET';
 			httpparams.url = SERVER_URL + "unit/list";
@@ -283,7 +237,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		
 		
 		
-	  }
+	  }*/
 	$scope.showEditRM = function(ev, index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
@@ -292,7 +246,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		$scope.information = "EDIT RAW MATERIAL INFORMATION"
 		$mdDialog
 				.show({
-					controller : rawMaterialController,
+					controller : 'rawMaterialDialogCtrl',
 					templateUrl : 'views/rawMaterialInformation.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
@@ -305,14 +259,8 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 						information : $scope.information
 					}
 				})
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+				.then(function(answer) {},
+						function() {});
 	};
 	$scope.viewRMInformation = function(ev, index) {
 		$scope.flag = 2;
@@ -322,7 +270,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		console.log($scope.rawMaterial);
 		$scope.information="VIEW RAW MATERIAL INFORMATION"
 		$mdDialog.show({
-					controller : rawMaterialController,
+					controller : 'rawMaterialDialogCtrl',
 					templateUrl : 'views/rawMaterialInformation.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
@@ -335,29 +283,13 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 						information : $scope.information
 					}
 				})
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+				.then(function(answer) {},
+						function() {});
 	};
 	
 	
 	$scope.deleteraeMaterial= function(index) {
-		/* $scope.user = $scope.users[index].id; */
 		console.log($scope.rawmaterial);
-
-		/*$http(
-				{
-					method : 'delete',
-					url : SERVER_URL + "rawmaterial/delete/"
-							+ $scope.rawMaterials[index].id
-
-				})*/
-		
 		var httpparams = {};
 		httpparams.method = 'delete';
 		httpparams.url = SERVER_URL + "rawmaterial/delete/" + $scope.rawMaterials[index].id;
@@ -365,7 +297,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(data) {
-					$mdDialog.hide();
+			 utils.hideProgressBar();;
 			$rootScope.$emit("CallPopulateRawMaterial", {});
 			console.log(data);
 
@@ -373,11 +305,10 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 			console.log("Error");
 
 		});
-		$scope.showProgressBarOne();
+		utils.showProgressBar();
 	};
 	
 	$scope.showConfirm = function(ev,index) {
-		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete Raw Material Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -389,32 +320,14 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteraeMaterial(index);
-							
-							$scope.message = 'Delete Raw material Record sucessfully';
-							$scope.showToast();
+							utils.showToast('Raw Material Deleted Sucessfully!');
 							
 							
 						},
-						function() {
-							$scope.status = 'You decided to keep your debt.';
-						});
+						function() { });
 	};
 	
-	function ProgressBarController($scope, $mdDialog) {
-		
-		$scope.hide = function() {
-			$mdDialog.hide();
-		};
-
-		$scope.cancel = function() {
-			$mdDialog.cancel();
-		};
-
-		$scope.answer = function(answer) {
-			$mdDialog.hide(answer);
-		};
-	}
-
+	
 	
 	
 });

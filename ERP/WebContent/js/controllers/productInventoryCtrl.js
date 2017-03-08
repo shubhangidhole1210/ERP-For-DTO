@@ -1,4 +1,4 @@
-erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth) {
+erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
 	
 	$rootScope.$on("callPopulateProductInventoryList", function() {
 		$scope.populateProductInventoryList();
@@ -10,11 +10,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 	
 	$scope.populateProductInventoryList=function()
 	{
-		
-		 /*$http({
-				method : 'GET',
-				url : SERVER_URL + "productinventory/list"
-			})*/
+		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "productinventory/list";
@@ -27,13 +23,12 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 				$scope.productInventorys = response.data;
 				$scope.isProductInventoryinformation();
 				console.log(response);
-				$mdDialog.hide();
+				utils.hideProgressBar();
 			}, function errorCallback(response) {
 				$scope.showToast();
 				console.log("Error");
-				$mdDialog.hide();
+				utils.hideProgressBar();
 			});
-		 $scope.showProgressBarOne();
 	}
 	
 	
@@ -49,46 +44,9 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		}
 	}
 	
-	$scope.showProgressBarOne= function()
-	{
-		$mdDialog
-		.show(
-				{
-					controller : ProgressBarController,
-					templateUrl : 'views/progressBar.html',
-					parent : angular
-							.element(document.body),
-					/*targetEvent : ev,*/
-					clickOutsideToClose : false,
-					fullscreen : $scope.customFullscreen,
-					onComplete : function() {
-					/*	$scope.populateUserList(ev);*/
-					}
-					
-				
-				})
-		.then(
-				function(answer) {
-					$scope.status = 'You said the information was "'
-							+ answer + '".';
-				},
-				function() {
-					$scope.status = 'You cancelled the dialog.';
-				});
-	};
 	
-	$scope.showToast = function() {
-		$mdToast.show({
-			hideDelay : 3000,
-			position : 'top right',
-			controller : 'ToastCtrl',
-			templateUrl : 'views/toast.html',
-			locals : {
-				message : $scope.message
-			}
-		});
-	};
-	 
+	
+	
 	 
 	$scope.productInventory={};
 	
@@ -97,8 +55,8 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		$scope.isReadOnly = false;
 		$scope.information="ADD NEW PRODUCT INVENTORY";
 		$scope.productInventory={};
-		var abc = {
-			controller : DialogVendorController,
+		var addNewProductInventoryDialog = {
+			controller : 'productInventoryDialogController',
 			templateUrl : 'views/productInventoryInformation.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
@@ -113,17 +71,11 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			}
 		};
 		$mdDialog
-				.show(abc)
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+		.show(addNewProductInventoryDialog)
+		.then(function(answer) {},
+				function() {});
 	  };
-	  function DialogVendorController($scope, $mdDialog,productInventory,flag,action,$rootScope,$mdToast,information,Auth) {
+	/*  function DialogVendorController($scope, $mdDialog,productInventory,flag,action,$rootScope,$mdToast,information,Auth) {
 		    $scope.productInventory=productInventory;
 		    $scope.flag=flag;
 		    $scope.isReadOnly = action;
@@ -142,7 +94,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		    
 		    $scope.saveProductInventory=function(ev)
 		    {
-		    	/* console.log($scope.data)*/
+		    	 console.log($scope.data)
 		    	 var data = {
 
 		    			 product:$scope.productInventory.product.id,
@@ -193,7 +145,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 									$scope.message = 'Something went worng. Please try again later.';
 									$scope.showToast();
 								}else{
-									/*$scope.displayProgressBar = false;*/
+									$scope.displayProgressBar = false;
 									$scope.message = 'User Information saved successfully.';
 									$scope.showToast();
 									$rootScope.$emit("callPopulateProductInventoryList",{});
@@ -287,7 +239,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			
 			
 		    
-		  }
+		  }*/
 	  
 	  
 	  $scope.showEditProductInventory = function(ev , index) {
@@ -295,7 +247,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		  $scope.productInventory = $scope.productInventorys[index];
 		  $scope.information="EDIT PRODUCT INVENTORY INFORMATION"
 		    $mdDialog.show({
-		      controller: DialogVendorController,
+		      controller: 'productInventoryDialogController',
 		      templateUrl: 'views/productInventoryInformation.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
@@ -308,24 +260,15 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		    	  information : $scope.information
 				}
 		    })
-		    .then(function(answer) {
-		      $scope.status = 'You said the information was "' + answer + '".';
-		    }, function() {
-		      $scope.status = 'You cancelled the dialog.';
-		    });
+		    .then(function(answer) {},
+					function() {});
 		  };
 	  
 	  $scope.deleteProductInventory = function(index) {
 		
 			console.log($scope.vendoUser);
 
-			/*$http(
-					{
-						method : 'delete',
-						url : SERVER_URL + "productinventory/delete/"
-								+ $scope.productInventorys[index].id
-
-					})*/
+			
 			var httpparams = {};
 			httpparams.method = 'delete';
 			httpparams.url = SERVER_URL + "productinventory/delete/"  + $scope.productInventorys[index].id;
@@ -353,7 +296,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			$scope.information="VIEW PRODUCT INVENTORY INFORMATION"
 			console.log($scope.user);
 			$mdDialog.show({
-						controller : DialogVendorController,
+						controller : 'productInventoryDialogController',
 						templateUrl : 'views/productInventoryInformation.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
@@ -366,14 +309,8 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 							information : $scope.information
 						}
 					})
-					.then(
-							function(answer) {
-								$scope.status = 'You said the information was "'
-										+ answer + '".';
-							},
-							function() {
-								$scope.status = 'You cancelled the dialog.';
-							});
+					.then(function(answer) {},
+							function() {});
 		};
 		$scope.showConfirm = function(ev,index) {
 			// Appending dialog to document.body to cover sidenav in docs app

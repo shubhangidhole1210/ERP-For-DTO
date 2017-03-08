@@ -1,6 +1,5 @@
 erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Auth, SERVER_URL,utils,User) {
 	$scope.login = function(index) {
-		utils.showProgressBar();
 		var data = {
 			userid : $scope.userid,
 			password : $scope.password
@@ -11,7 +10,6 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 			data : data
 		}).then(function successCallback(data, headers) {
 			console.log(data);
-			console.log('in login function');
 			
 			utils.hideProgressBar();
 			console.log($scope.userid)
@@ -30,6 +28,12 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 			}else{
 				
 			}
+			if(data.data.message!=='User logged in Successfully !')
+				{
+				$scope.message = data.data.message;
+				$scope.loginForm.userName.$setValidity("apierror", false);
+				$scope.loginForm.password.$setValidity("apierror", false);
+				}
 			utils.showToast(data.data.message);
 		}, function errorCallback(data) {
 			console.log("Error");
@@ -43,5 +47,13 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 		
 	};
 	
-	
+	$scope.submitLogin = function(isvaliduser) {
+		if (isvaliduser) {
+			utils.showProgressBar();
+			$scope.login();
+		} else {
+			console.log('its else block');
+		}
+
+	};
 });

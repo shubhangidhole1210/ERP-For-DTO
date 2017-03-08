@@ -19,19 +19,28 @@
 <script type="text/javascript" src="js/controllers/vendorCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/vendorDialogCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/rawMaterialCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/rawMaterialDialogController.js"></script>
 <script type="text/javascript" src="js/controllers/unitCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/unitDialogCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/productCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/productDialogController.js"></script>
 <script type="text/javascript" src="js/controllers/RMOrderCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/rmOrderDialog.js"></script>
 <script type="text/javascript"
 	src="js/controllers/RMVendorAssociationCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/rmVendorAssociationDialogCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/RMInventaryCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/clientCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/clientDialogCtrl.js"></script>
 <script type="text/javascript"
 	src="js/controllers/productRMAssociationCtrl.js"></script>
+	<script type="text/javascript" src="js/controllers/productRmAssociationDialogController.js"></script>
 <script type="text/javascript" src="js/controllers/productOrderCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/productOrderDialogController.js"></script>
 <script type="text/javascript"
 	src="js/controllers/productInventoryCtrl.js"></script>
+	<script type="text/javascript"
+	src="js/controllers/productInventoryDialogController.js"></script>
 <script type="text/javascript"
 	src="js/controllers/ProgressBarController.js"></script>
 <script type="text/javascript" src="js/controllers/homeCtrl.js"></script>
@@ -48,9 +57,10 @@
 <script type="text/javascript" src="js/controllers/userTypeCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/todaysProductionPlanCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/pageCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/pageDialogCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/statusCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/statusDialogCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/erpCtrl.js"></script>
-<!--  <script type="text/javascript" src="js/services/utils.js"></script> -->
 <script type="text/javascript" src="js/services/utils.js"></script>
 </head>
     <body ng-app="ERPApp">
@@ -71,7 +81,7 @@
 			style="width: 30px;">
 	</div> -->
         <div class="erp-menubar" ng-show="displayMenu">
-        	<div class="erp-menu" id="{{menuItem.pageName}}" ng-repeat="menuItem in menu"   ng-click="selected='user'"><a href="#{{menuItem.url}}" >{{menuItem.submenu}}</a></div>
+        	<div class="erp-menu" id="{{menuItem.pageName}}" ng-repeat="menuItem in menu"   ng-click="selected='user'"    ><a href="#{{menuItem.url}}" >{{menuItem.submenu}}</a></div>
         
            <!-- <div class="erp-menu" id="user"  ng-class="{changeERPMenu : selected=='user'}" ng-click="selected='user'"><a href="#/user" >USER</a></div>
            <div class="erp-menu" id="unit"  ng-class="{changeERPMenu : selected=='unit'}" ng-click="selected='unit'"><a href="#/unit" >UNIT</a></div>

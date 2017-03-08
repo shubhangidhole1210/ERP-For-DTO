@@ -128,7 +128,7 @@ erpApp.controller('userCtrl',
 								auth_token : Auth.getAuthToken()
 							};
 						$http(httpparams).then(function successCallback(data) {
-								$mdDialog.hide();
+							    utils.hideProgressBar();
 								$rootScope.$emit("CallPopulateUserList", {});
 								console.log(data);
 								}, function errorCallback(data) {

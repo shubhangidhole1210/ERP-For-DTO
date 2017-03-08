@@ -1,6 +1,6 @@
 <div ng-controller="loginCtrl">
 <div class="loginClass" >
-   <form class="login-form" name="myForm"  novalidate>
+   <form class="login-form" name="loginForm"  novalidate>
 <fieldset>
 <div >
 <div class="loginForm">
@@ -8,22 +8,32 @@
 <div>
 		<md-input-container class="md-block" flex-gt-sm >
             <label>User name</label>
-            <input type="text" ng-model="userid" name="userName" id="userName" required>
+            <input type="text" ng-model="userid" name="userName" id="userName" required ng-minlength="5">
+            <div ng-messages="loginForm.userName.$error">
+             <div ng-message="required">Please enter user name</div>
+             <div ng-message="minlength">User name should be minimum 5 character</div>
+             <div ng-message="apierror">{{message}}</div>
+            </div>
           </md-input-container>
 
 </div>
 <div class="password-container">
              <md-input-container class="md-block" flex-gt-sm>
             <label>Password</label>
-            <input type="password" ng-model="password" name="password" id="password" required> 
+            <input type="password" ng-model="password" name="password" id="password" required ng-minlength="5"> 
+             <div ng-messages="loginForm.password.$error">
+             <div ng-message="apierror">{{message}}</div>
+             <div ng-message="required">Please enter password</div>
+             <div ng-message="minlength">password should be minimum 5 character</div>
+            </div>
           </md-input-container>
 <span class="forgot"><a href="" class="forgotLink" style="color: blue">Forgot?</a></span>
       
 </div>
 
 <div layout-gt-sm="row">
-<div style="margin-left: 4%"><md-button class="md-raised md-primary" ng-click="login()">LOGIN</md-button></div>
- <md-button class="md-primary" ng-href="{{googleUrl}}" target="_blank">New User? sign in</md-button>
+<div style="margin-left: 4%"><md-button class="md-raised md-primary" ng-click="submitLogin(loginForm.$valid)" type="submit">LOGIN</md-button></div>
+ <md-button class="md-primary"  target="_blank">New User? Sign-Up</md-button>
 </div>
 </div>
 </div>

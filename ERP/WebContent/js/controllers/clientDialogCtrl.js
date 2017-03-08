@@ -1,4 +1,4 @@
-erpApp.controller('clientCtrl',function($scope, $mdDialog, client,
+erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 		$location, $rootScope,SERVER_URL,flag,action,information,Auth,$http,utils)
 {
 	$scope.isReadOnly = action;
@@ -65,10 +65,7 @@ erpApp.controller('clientCtrl',function($scope, $mdDialog, client,
 										"saveClientError", {});
 								console.log(data);
 								$scope.hide();
-								/*$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();*/
-								$scope.message = 'Something went worng. Please try again later.';
-								utils.showToast();
+								utils.showToast('Something went worng. Please try again later.');
 							}
 							else if(data.data.code === 2)
 								{
@@ -77,8 +74,8 @@ erpApp.controller('clientCtrl',function($scope, $mdDialog, client,
 										"saveClientError", {});
 								console.log(data);
 								$scope.hide();
-								$scope.message = data.data.message;
-								utils.showToast();
+								/*$scope.message = data.data.message;*/
+								utils.showToast(data.data.message);
 								}
 							else{
 								$scope.displayProgressBar = false;
@@ -93,8 +90,6 @@ erpApp.controller('clientCtrl',function($scope, $mdDialog, client,
 									"saveClientError", {});
 							console.log(data);
 							$scope.hide();
-							/*$scope.message = 'Something went worng. Please try again later.';
-							$scope.showToast();*/
 							utils.showToast('Something went worng. Please try again later.');
 						});
 
@@ -111,53 +106,11 @@ erpApp.controller('clientCtrl',function($scope, $mdDialog, client,
 
 	}
 
-	/*$scope.showToast = function() {
-		$mdToast.show({
-			hideDelay : 3000,
-			position : 'top right',
-			controller : 'ToastCtrl',
-			templateUrl : 'views/toast.html',
-			locals : {
-				message : $scope.message
-			}
-		});
-	};*/
-	
-	/*$scope.showProgressBar = function(ev) {
-		$scope.displayProgressBar = true;
-		$mdDialog
-				.show(
-						{
-							controller : ProgressBarController,
-							templateUrl : 'views/progressBar.html',
-							parent : angular
-									.element(document.body),
-							targetEvent : ev,
-							clickOutsideToClose : false,
-							fullscreen : $scope.customFullscreen,
-							onComplete : function() {
-								$scope.saveClient(ev);
-							}
-							
-						// Only for -xs, -sm breakpoints.
-						})
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
-	};*/
-	
 	$http({
 		method : 'GET',
 		url : SERVER_URL + "usertype/list"
 	}).then(function successCallback(response) {
 		$scope.data = response.data;
-	/*	$scope.users = response.data;*/
-
 		console.log(response);
 
 	}, function errorCallback(response) {

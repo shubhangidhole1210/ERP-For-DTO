@@ -25,15 +25,11 @@ erpApp
 							$scope.clients = response.data;
 							$scope.isClientInfirmation();
 							console.log(response);
-							/*$mdDialog.hide();*/
 							utils.hideProgressBar();
 
 						}, function errorCallback(response) {
-							/*$scope.message = "We are Sorry. Something went wrong. Please try again later."
-							$scope.showToast();*/
 							utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 							console.log("Error");
-							/*$mdDialog.hide();*/
 							utils.hideProgressBar();
 						});
 					}
@@ -49,47 +45,7 @@ erpApp
 							$scope.isClientPresent=false;
 						}
 					}
-					/*$scope.showProgressBarOne= function()
-					{
-						$mdDialog
-						.show(
-								{
-									controller : ProgressBarController,
-									templateUrl : 'views/progressBar.html',
-									parent : angular
-											.element(document.body),
-									targetEvent : ev,
-									clickOutsideToClose : false,
-									fullscreen : $scope.customFullscreen,
-									onComplete : function() {
-										$scope.populateUserList(ev);
-									}
-									
-								
-								})
-						.then(
-								function(answer) {
-									$scope.status = 'You said the information was "'
-											+ answer + '".';
-								},
-								function() {
-									$scope.status = 'You cancelled the dialog.';
-								});
-					};
-					*/
-					
-					/*$scope.showToast = function() {
-						$mdToast.show({
-							hideDelay : 3000,
-							position : 'top right',
-							controller : 'ToastCtrl',
-							templateUrl : 'views/toast.html',
-							locals : {
-								message : $scope.message
-							}
-						});
-					};*/
-					
+				
 					$scope.client = {};
 					$scope.showAddNewClient = function(ev) {
 						$scope.client = {};
@@ -97,7 +53,7 @@ erpApp
 						$scope.flag = 0;
 						$scope.isReadOnly = false;
 						var addNewClientDialog = {
-							controller : 'ClientController',
+							controller : 'clientDialogCtrl',
 							templateUrl : 'views/clientInformation.html',
 							parent : angular.element(document.body),
 							targetEvent : ev,
@@ -291,7 +247,7 @@ erpApp
 								auth_token : Auth.getAuthToken()
 							};
 						$http(httpparams).then(function successCallback(data) {
-									$mdDialog.hide();
+							utils.hideProgressBar();
 							$rootScope.$emit("CallPopulateClientList", {});
 							console.log(data);
 
@@ -299,7 +255,7 @@ erpApp
 							console.log("Error");
 
 						});
-						$scope.showProgressBarOne
+						utils.showProgressBar();
 
 					};
 
@@ -311,7 +267,7 @@ erpApp
 						console.log($scope.client);
 						$mdDialog
 								.show({
-									controller : ClientController,
+									controller : 'clientDialogCtrl',
 									templateUrl : 'views/clientInformation.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
@@ -324,14 +280,8 @@ erpApp
 										information : $scope.information
 									}
 								})
-								.then(
-										function(answer) {
-											$scope.status = 'You said the information was "'
-													+ answer + '".';
-										},
-										function() {
-											$scope.status = 'You cancelled the dialog.';
-										});
+								.then(function(answer) {},
+										function() {});
 					};
 
 					$scope.viewClientInformation = function(ev, index) {
@@ -342,7 +292,7 @@ erpApp
 						$scope.information ="VIEW CLIENT INFORMATION"
 						console.log($scope.user);
 						$mdDialog.show({
-									controller : ClientController,
+									controller : 'clientDialogCtrl',
 									templateUrl : 'views/clientInformation.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
@@ -355,19 +305,11 @@ erpApp
 										information : $scope.information
 									}
 								})
-								.then(
-											function(answer) {
-											$scope.status = 'You said the information was "'
-													+ answer + '".';
-											
-										},
-										function() {
-											$scope.status = 'You cancelled the dialog.';
-										});
+								.then(function(answer) {},
+										function() {});
 					};
 
 					$scope.showConfirm = function(ev,index) {
-						// Appending dialog to document.body to cover sidenav in docs app
 						var confirm = $mdDialog.confirm().title(
 								'Are you sure you want to Delete Client Information?')
 								.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -377,32 +319,14 @@ erpApp
 								.show(confirm)
 								.then(
 										function() {
-											$scope.status = 'You decided to get rid of your debt.';
 											$scope.deleteClient(index);
-											
-											$scope.message = 'Delete Record sucessfully';
-											$scope.showToast();
-											
-											
+											utils.showToast('Client Deleted Sucessfully!');
 										},
-										function() {
-											$scope.status = 'You decided to keep your debt.';
-										});
+										function() { });
+
+
 					};
 
-					function ProgressBarController($scope, $mdDialog) {
-						
-						$scope.hide = function() {
-							$mdDialog.hide();
-						};
-
-						$scope.cancel = function() {
-							$mdDialog.cancel();
-						};
-
-						$scope.answer = function(answer) {
-							$mdDialog.hide(answer);
-						};
-					}
+				
 
 				});

@@ -1,4 +1,4 @@
-erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth) {
+erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
 
 	$rootScope.$on("CallPopulatePageList", function() {
 		$scope.populatePageList();
@@ -8,6 +8,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 	});
 	$scope.populatePageList=function()
 	{
+		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "page/list";
@@ -19,16 +20,15 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 			$scope.data = response.data;
 			$scope.pages=response.data;
 			console.log(response)
-			$mdDialog.hide();
+			utils.hideProgressBar();
 		}, function errorCallback(response) {
-			$scope.message = "We are Sorry. Something went wrong. Please try again later."
-			$scope.showToast();
+			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
+			utils.hideProgressBar();
 			console.log("Error");
 		});
-		$scope.showProgressBarOne();
 	}
 	
-	$scope.showProgressBarOne= function()
+	/*$scope.showProgressBarOne= function()
 	{
 		$mdDialog
 		.show(
@@ -37,11 +37,11 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 					templateUrl : 'views/progressBar.html',
 					parent : angular
 							.element(document.body),
-					/*targetEvent : ev,*/
+					targetEvent : ev,
 					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					onComplete : function() {
-					/*	$scope.populateUserList(ev);*/
+						$scope.populateUserList(ev);
 					}
 					
 				
@@ -54,9 +54,9 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 				function() {
 					$scope.status = 'You cancelled the dialog.';
 				});
-	};
+	};*/
 	
-	$scope.showToast = function() {
+	/*$scope.showToast = function() {
 		$mdToast.show({
 			hideDelay : 3000,
 			position : 'top right',
@@ -66,7 +66,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 				message : $scope.message
 			}
 		});
-	};
+	};*/
 	$scope.page={}
 	$scope.showAddNewPage = function(ev) {
 		$scope.page={};
@@ -74,7 +74,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		$scope.isReadOnly = false;
 		$scope.information = "ADD NEW PAGE"
 		var abc = {
-			controller : UnitController,
+			controller : 'pageDialogController',
 			templateUrl : 'views/pageInformation.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
@@ -101,7 +101,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 	};
 	
 	
-	function UnitController($scope, $mdDialog,page,action,flag,$mdToast,information) {
+	/*function UnitController($scope, $mdDialog,page,action,flag,$mdToast,information) {
 		$scope.isReadOnly = action;
 		$scope.flag = flag;
 		$scope.page = page;
@@ -232,7 +232,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		};
 		
 		
-	  }
+	  }*/
 	
 	$scope.showEditPage = function(ev, index) {
 		$scope.flag = 1;
@@ -242,7 +242,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		console.log($scope.user);
 		$mdDialog
 				.show({
-					controller : UnitController,
+					controller : 'pageDialogController',
 					templateUrl : 'views/pageInformation.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
@@ -273,7 +273,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		$scope.information = "VIEW PAGE INFORMATION"
 		console.log($scope.unit);
 		$mdDialog.show({
-					controller : UnitController,
+					controller : 'pageDialogController',
 					templateUrl : 'views/pageInformation.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
@@ -341,7 +341,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 						});
 	};
 	
-	function ProgressBarController($scope, $mdDialog) {
+	/*function ProgressBarController($scope, $mdDialog) {
 		
 		$scope.hide = function() {
 			$mdDialog.hide();
@@ -354,5 +354,5 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		$scope.answer = function(answer) {
 			$mdDialog.hide(answer);
 		};
-	}
+	}*/
 });

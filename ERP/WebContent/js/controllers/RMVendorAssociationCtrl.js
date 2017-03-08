@@ -1,13 +1,9 @@
 erpApp
 		.controller(
 				'RMVendorCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth) {
+				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 					$scope.isReadOnly = false;
-					/*
-					 * $http.get("userList.json") .then(function(response) {
-					 * $scope.data = response.data; $scope.rmOrderAssociations =
-					 * response.data.data; console.log(response); });
-					 */
+					
 
 					$rootScope.$on("CallPopulateRMVendorAssociationList", function() {
 						$scope.populateRMVendorAssociationList();
@@ -17,11 +13,8 @@ erpApp
 					});
 
 					$scope.populateRMVendorAssociationList = function() {
-						/*$http({
-							method : 'GET',
-							url : SERVER_URL + "rmvendorasso/list"
-						})*/
-						
+					
+						utils.showProgressBar();
 						var httpparams = {};
 						httpparams.method = 'GET';
 						httpparams.url = SERVER_URL + "rmvendorasso/list";
@@ -34,18 +27,18 @@ erpApp
 							$scope.rmOrderAssociations = response.data;
 							$scope.isRMVendorAssociationInformation();
 							console.log(response);
-							$mdDialog.hide();
+							utils.hideProgressBar();
 
 						}, function errorCallback(response) {
 							$scope.message = "We are Sorry. Something went wrong. Please try again later."
 							$scope.showToast();
 							console.log("Error");
-							$mdDialog.hide();
+							utils.hideProgressBar();
 						});
-						$scope.showProgressBarOne()
+						
 					}
 					
-					$scope.showProgressBarOne= function()
+					/*$scope.showProgressBarOne= function()
 					{
 						$mdDialog
 						.show(
@@ -54,11 +47,11 @@ erpApp
 									templateUrl : 'views/progressBar.html',
 									parent : angular
 											.element(document.body),
-									/*targetEvent : ev,*/
+									targetEvent : ev,
 									clickOutsideToClose : false,
 									fullscreen : $scope.customFullscreen,
 									onComplete : function() {
-									/*	$scope.populateUserList(ev);*/
+										$scope.populateUserList(ev);
 									}
 									
 								
@@ -71,7 +64,7 @@ erpApp
 								function() {
 									$scope.status = 'You cancelled the dialog.';
 								});
-					};
+					};*/
 					
 					$scope.isPresentvenodrAsso=false;
 					$scope.isRMVendorAssociationInformation=function()
@@ -86,7 +79,7 @@ erpApp
 						
 					}
 					
-					$scope.showToast = function() {
+					/*$scope.showToast = function() {
 						$mdToast.show({
 							hideDelay : 3000,
 							position : 'top right',
@@ -96,7 +89,7 @@ erpApp
 								message : $scope.message
 							}
 						});
-					};
+					};*/
 					
 					$scope.rmOrderAssociation = {};
 					$scope.showAddNewRMVendorAssociation = function(ev) {
@@ -104,8 +97,8 @@ erpApp
 						$scope.isReadOnly = false;
 						$scope.rmOrderAssociation = {};
 						$scope.title="ADD RAW MATERIAL VENDOR ASSOCIATION INFORMATION"
-						var abc = {
-							controller : RMVendorAssociationController,
+						var addNewRMVendorAsso = {
+							controller : 'RMVendorAssociationDialogCtrl',
 							templateUrl : 'views/RMVendorInfo.html',
 							parent : angular.element(document.body),
 							targetEvent : ev,
@@ -120,15 +113,9 @@ erpApp
 							}
 						};
 						$mdDialog
-								.show(abc)
-								.then(
-										function(answer) {
-											$scope.status = 'You said the information was "'
-													+ answer + '".';
-										},
-										function() {
-											$scope.status = 'You cancelled the dialog.';
-										});
+						.show(addNewRMVendorAsso)
+						.then(function(answer) {},
+								function() {});
 					};
 					
 					
@@ -139,7 +126,7 @@ erpApp
 					
 					
 					
-
+/*
 					function RMVendorAssociationController($scope, $mdDialog, rmOrderAssociation,
 							$location, $rootScope,SERVER_URL,flag,action,title) {
 						$scope.isReadOnly = action;
@@ -274,10 +261,10 @@ erpApp
 						
 						    $scope.getRawMaterials=function()
 						    {
-						    	/*$http({
+						    	$http({
 									method : 'GET',
 									url : SERVER_URL + "rawmaterial/list"
-								})*/
+								})
 						    	
 						    	var httpparams = {};
 								httpparams.method = 'GET';
@@ -327,15 +314,14 @@ erpApp
 						
 
 					};
-
+*/
 					$scope.deleteUser = function(index) {
-						/* $scope.user = $scope.rmOrderAssociations[index].id; */
 						console.log($scope.user);
 
 						$http(
 								{
 									method : 'delete',
-									url : SERVER_URL + "user/delete/"
+									url : SERVER_URL + "rmvendorasso/delete/"
 											+ $scope.rmOrderAssociations[index].id
 
 								}).then(function successCallback(data) {
@@ -357,7 +343,7 @@ erpApp
 						$scope.title= "EDIT RAW MATERIAL VENDOR ASSOCIATION INFORMATION"
 						$mdDialog
 								.show({
-									controller : RMVendorAssociationController,
+									controller : 'RMVendorAssociationDialogCtrl',
 									templateUrl : 'views/RMVendorInfo.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
@@ -370,14 +356,8 @@ erpApp
 										title : $scope.title
 									}
 								})
-								.then(
-										function(answer) {
-											$scope.status = 'You said the information was "'
-													+ answer + '".';
-										},
-										function() {
-											$scope.status = 'You cancelled the dialog.';
-										});
+								.then(function(answer) {},
+										function() {});
 					};
 
 					$scope.viewRMVendorAssociation = function(ev, index) {
@@ -388,7 +368,7 @@ erpApp
 						$scope.title= "VIEW RAW MATERIAL VENDOR ASSOCIATION INFORMATION"
 					
 						$mdDialog.show({
-									controller : RMVendorAssociationController,
+									controller : 'RMVendorAssociationDialogCtrl',
 									templateUrl : 'views/RMVendorInfo.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
@@ -401,35 +381,20 @@ erpApp
 										title : $scope.title
 									}
 								})
-								.then(
-										function(answer) {
-											$scope.status = 'You said the information was "'
-													+ answer + '".';
-										},
-										function() {
-											$scope.status = 'You cancelled the dialog.';
-										});
+								.then(function(answer) {},
+										function() {});
 					};
 
 					$scope.deleteRMVendorAssociation = function(index) {
-						/* $scope.user = $scope.users[index].id; */
-						
-
-					/*	$http(
-								{
-									method : 'delete',
-									url : SERVER_URL + "rmvendorasso/delete/"
-											+ $scope.rmOrderAssociations[index].id
-
-								})*/
+					
 						var httpparams = {};
 						httpparams.method = 'delete';
-						httpparams.url = SERVER_URL + "unit/delete/" + $scope.units[index].id;
+						httpparams.url = SERVER_URL + "unit/delete/" + $scope.rmOrderAssociations[index].id;
 						httpparams.headers = {
 								auth_token : Auth.getAuthToken()
 							};
 						$http(httpparams).then(function successCallback(data) {
-									$mdDialog.hide();
+							utils.hideProgressBar();
 							$rootScope.$emit("CallPopulateRMVendorAssociationList", {});
 							console.log(data);
 
@@ -437,10 +402,10 @@ erpApp
 							console.log("Error");
 
 						});
+						utils.showProgressBar();
 
 					};
 					$scope.showConfirm = function(ev,index) {
-						// Appending dialog to document.body to cover sidenav in docs app
 						var confirm = $mdDialog.confirm().title(
 								'Are you sure you want to Delete Raw Material Vendor Association Information?')
 								.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -452,30 +417,14 @@ erpApp
 										function() {
 											$scope.status = 'You decided to get rid of your debt.';
 											$scope.deleteRMVendorAssociation(index);
-											
-											$scope.message = 'Delete Record sucessfully';
-											$scope.showToast();
-											
-											
+											utils.showToast('Rm Vendor Association Deleted Sucessfully!');
+										
 										},
 										function() {
 											$scope.status = 'You decided to keep your debt.';
 										});
 					};
 
-					function ProgressBarController($scope, $mdDialog) {
-						
-						$scope.hide = function() {
-							$mdDialog.hide();
-						};
-
-						$scope.cancel = function() {
-							$mdDialog.cancel();
-						};
-
-						$scope.answer = function(answer) {
-							$mdDialog.hide(answer);
-						};
-					}
+					
 
 				});

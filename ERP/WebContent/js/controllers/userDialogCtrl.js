@@ -68,24 +68,16 @@ erpApp.controller('userDialogCtrl',
 														"saveUserError", {});
 												console.log(data);
 												$scope.hide();
-												$scope.message = 'Something went worng. Please try again later.';
-												utils.showToast();
+												/*$scope.message = 'Something went worng. Please try again later.';*/
+												utils.showToast('Something went worng. Please try again later.');
 											}
 
-											else if (data.data.code === 2) {
-												console.log(data.data.message);
-												$rootScope.$emit(
-														"saveVendorError", {});
-												console.log(data);
-												$scope.hide();
-												$scope.message = data.data.message;
-												$scope.showToast();
-											}
 
 											else {
 												$scope.displayProgressBar = false;
 												utils
-														.showToast('User Information saved successfully.');
+														.showToast(data.data.message);
+												
 												$rootScope.$emit(
 														"CallPopulateUserList",
 														{});

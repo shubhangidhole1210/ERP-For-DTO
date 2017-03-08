@@ -1,4 +1,4 @@
-erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth) {
+erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 	
 	$scope.isReadOnly = false;
 	/*
@@ -15,31 +15,26 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	});
 
 	$scope.populateRMOrderList = function() {
+		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "rawmaterialorder/list";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		/*$http({
-			method : 'GET',
-			url : SERVER_URL + "rawmaterialorder/list"
-		})*/
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.rmOrders = response.data;
 			$scope.isRMOrderInformation();
-			$mdDialog.hide();
+			utils.hideProgressBar();
 			console.log(response);
 
 		}, function errorCallback(response) {
 			$scope.message = "We are Sorry. Something went wrong. Please try again later."
 			$scope.showToast();
 			console.log("Error");
-			$mdDialog.hide();
+			utils.hideProgressBar();
 		});
-		$scope.showProgressBarOne();
 	}
 	
 	$scope.isRMOrderPresent=false;
@@ -55,7 +50,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			}
 	}
 	
-	$scope.showProgressBarOne= function()
+	/*$scope.showProgressBarOne= function()
 	{
 		$mdDialog
 		.show(
@@ -64,11 +59,11 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 					templateUrl : 'views/progressBar.html',
 					parent : angular
 							.element(document.body),
-					/*targetEvent : ev,*/
+					targetEvent : ev,
 					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					onComplete : function() {
-					/*	$scope.populateUserList(ev);*/
+						$scope.populateUserList(ev);
 					}
 					
 				
@@ -81,11 +76,11 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				function() {
 					$scope.status = 'You cancelled the dialog.';
 				});
-	};
+	};*/
 		
 	
 	
-	$scope.showToast = function() {
+	/*$scope.showToast = function() {
 		$mdToast.show({
 			hideDelay : 3000,
 			position : 'top right',
@@ -95,7 +90,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				message : $scope.message
 			}
 		});
-	};
+	};*/
 	
 	$scope.rmOrder = {};
 	$scope.showAddNewRMOrder = function(ev) {
@@ -103,8 +98,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.isReadOnly = false;
 		$scope.rmOrder = {};
 		$scope.title= "ADD RAW MATERIAL INFORMATION";
-		var abc = {
-			controller : RMOrderController,
+		var addNewRmDialog = {
+			controller : 'rmOrderDialogCtrl',
 			templateUrl : 'views/RMOorderInfo.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
@@ -118,7 +113,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				title : $scope.title
 			}
 		};
-		$mdDialog
+	/*	$mdDialog
 				.show(abc)
 				.then(
 						function(answer) {
@@ -127,7 +122,12 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 						},
 						function() {
 							$scope.status = 'You cancelled the dialog.';
-						});
+						});*/
+		
+		$mdDialog
+		.show(addNewRmDialog)
+		.then(function(answer) {},
+				function() {})
 	};
 	
 	$scope.showRMOrder = function(ev, index) {
@@ -138,7 +138,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.title="EDIT RAW MATERIAL INFORMATION"
 		$mdDialog
 				.show({
-					controller : RMOrderController,
+					controller : 'rmOrderDialogCtrl',
 					templateUrl : 'views/RMOorderInfo.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
@@ -152,13 +152,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 					}
 				})
 				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+						function(answer) {},
+						function() {});
 	};
 	
 	$scope.viewRmOrder = function(ev, index) {
@@ -169,7 +164,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.title = "VIEW RAW MATERIAL ORDER INFORMATION"
 		console.log($scope.rmOrder);
 		$mdDialog.show({
-					controller : RMOrderController,
+					controller : 'rmOrderDialogCtrl',
 					templateUrl : 'views/RMOorderInfo.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
@@ -183,13 +178,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 					}
 				})
 				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+						function(answer) {},
+						function() {});
 	};
 
 	
@@ -198,7 +188,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	
 	
 
-	function RMOrderController($scope, $mdDialog, rmOrder,
+	/*function RMOrderController($scope, $mdDialog, rmOrder,
 			$location, $rootScope,SERVER_URL,flag,action,title) {
 		$scope.isReadOnly = action;
 		$scope.flag = flag;
@@ -222,16 +212,16 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			
 			
 			var data = {
-					/*rawmaterial: $scope.rmOrder.rawmaterial.id,*/
+					rawmaterial: $scope.rmOrder.rawmaterial.id,
 					rawmaterialorderassociations:$scope.orderRawMaterials,
 					name:$scope.rmOrder.name,
 					description:$scope.rmOrder.description,
 					status:$scope.rmOrder.status.id,
 					quantity:$scope.rmOrder.quantity,
 					expectedDeliveryDate:$scope.rmOrder.expectedDeliveryDate,
-					/*vendor:$scope.rmOrder.vendor.id,*/
-					/*vendor:$scope.vendorRmList.id,*/
-					/*vendor:$scope.vendorRmList.id,*/
+					vendor:$scope.rmOrder.vendor.id,
+					vendor:$scope.vendorRmList.id,
+					vendor:$scope.vendorRmList.id,
 					vendor:$scope.selectedVendor,
 					totalprice:$scope.rmOrder.totalprice,
 					tax:$scope.rmOrder.tax,
@@ -247,8 +237,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			if ($scope.flag == 0) {
 				console.log($scope.rmOrder);
 				console.log($scope.data);
-				/*httpparams.method = 'post';
-				httpparams.url = SERVER_URL + "rawmaterialorder/createmultiple";*/
+				httpparams.method = 'post';
+				httpparams.url = SERVER_URL + "rawmaterialorder/createmultiple";
 				httpparams.method = 'post';
 				httpparams.url = SERVER_URL + "rawmaterialorder/createmultiple";
 				httpparams.headers = {
@@ -257,8 +247,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			} else {
 				console.log($scope.rmOrder);
 				data.id = $scope.rmOrder.id;
-				/*httpparams.method = 'put';
-				httpparams.url = SERVER_URL + "rawmaterialorder/update";*/
+				httpparams.method = 'put';
+				httpparams.url = SERVER_URL + "rawmaterialorder/update";
 				httpparams.method = 'put';
 				httpparams.url = SERVER_URL + "rawmaterialorder/update";
 				httpparams.headers = {
@@ -369,7 +359,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			})
 		};
 		
-		/*$scope.rawMaterialId=function()
+		$scope.rawMaterialId=function()
 		{
 			
 			var httpparams = {};
@@ -389,7 +379,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 
 			})
 			
-		};*/
+		};
 		
 		$scope.vendorRmList=function(index)
 		{
@@ -462,14 +452,14 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		    
 		    $scope.deleteRM=function(index)
 		    {
-		    	/*$scope.displayVendorId();
-		    	console.log('in delete Rm' +$scope.vendorData)*/
+		    	$scope.displayVendorId();
+		    	console.log('in delete Rm' +$scope.vendorData)
 		    	console.log('in delete RM'+ $scope.orderRawMaterials)
 		    	var lastItem = $scope.orderRawMaterials.length;
 			    $scope.orderRawMaterials.splice(index,1);
 		    }
 		    
-	};
+	};*/
 
 	$scope.deleteRmOrder = function(index) {
 		var httpparams = {};
@@ -479,7 +469,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(data) {
-					$mdDialog.hide();
+			utils.hideProgressBar();
 			$rootScope.$emit("CallPopulateRMOrderList", {});
 			console.log(data);
 
@@ -487,7 +477,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			console.log("Error");
 
 		});
-		$scope.showProgressBarOne();
+		utils.showProgressBar();
 
 	};
 
@@ -503,17 +493,12 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteRmOrder(index);
-							
-							$scope.message = 'Delete Record sucessfully';
-							$scope.showToast();
-							
+							utils.showToast('RM Order Deleted Sucessfully!');
 							
 						},
-						function() {
-							$scope.status = 'You decided to keep your debt.';
-						});
+						function() { });
 	};
-	function ProgressBarController($scope, $mdDialog) {
+	/*function ProgressBarController($scope, $mdDialog) {
 		
 		$scope.hide = function() {
 			$mdDialog.hide();
@@ -526,5 +511,5 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.answer = function(answer) {
 			$mdDialog.hide(answer);
 		};
-	}
+	}*/
 });

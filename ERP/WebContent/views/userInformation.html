@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango (Fruit)" >
+<md-dialog aria-label="Mango (Fruit)" style="min-width: 1100px;margin-left: 13%">
   <form name="userInformation"  novalidate>
   
     <md-toolbar>
@@ -37,7 +37,7 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">FIRST NAME</label>
-            <input type="text" ng-model="user.firstName"  required name="firstName" ng-disabled="isReadOnly" ng-minlength="2" onkeypress='return event.charCode >= 97 && event.charCode <= 123'>
+            <input type="text" ng-model="user.firstName"  required name="firstName" ng-disabled="isReadOnly" ng-minlength="2">
             <div ng-messages="userInformation.firstName.$error">
              <div ng-message="required">Please enter valid user name</div>
              <div ng-message="minlength">User Name Should be minimum two character</div>
@@ -46,7 +46,7 @@
 
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">LAST NAME</label>
-            <input type="text" ng-model="user.lastName"  required name="lastName" ng-minlength="2" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 97 && event.charCode <= 123'>
+            <input type="text" ng-model="user.lastName"  required name="lastName" ng-minlength="2" ng-disabled="isReadOnly">
             <div ng-messages="userInformation.lastName.$error">
              <div ng-message="required">Please enter user last name</div>
              <div ng-message="minlength">Last Name Should be minimum two character</div>

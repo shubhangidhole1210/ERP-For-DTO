@@ -321,7 +321,7 @@ tr:nth-child(even) {
 	position: fixed;
     height: 100%;
     padding-top: 100px;
-    display: none;
+    /* display: none; */
 }
 .erp-information {
     padding-left: 5%;

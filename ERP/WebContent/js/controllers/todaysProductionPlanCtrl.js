@@ -63,22 +63,15 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 				auth_token : Auth.getAuthToken()
 			};
 
-			$http(httpparams).then(function successCallback(response) {
-				$mdDialog.hide();
-				console.log(data);
-				if(data.data.code === 0){
-					console.log(data.data.message);
-					console.log(data);
-					$scope.message = 'Something went worng. Please try again later.';
-					$scope.showToast();
-				}else{
-					$scope.displayProgressBar = false;
-					$scope.message = 'Status Information saved successfully.';
-					$scope.showToast();
-					$rootScope.$emit("callPopulateStatusList",{});
-				}
+			$http(httpparams).then(function successCallback(data) {
 				utils.hideProgressBar();
-				console.log(response);
+				console.log(data.data.message);
+				if(data.data.code === 1){
+					utils.showToast("Todays production plan update sucessfully !");
+				}else{
+					utils.showToast("Something went wrong. Please try again later.");
+				}
+				
 			}, function errorCallback(response) {
 				console.log("Error");
 				utils.hideProgressBar();
