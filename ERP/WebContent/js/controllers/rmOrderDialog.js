@@ -91,7 +91,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 
 	$scope.submitRMOrderInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			utils.showProgressBar();
+			/*utils.showProgressBar();*/
 			$scope.saveRMOrder();
 			
 		} else {
@@ -172,7 +172,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				   $scope.orderRawMaterial = {isActive : true};
 				   console.log($scope.orderRawMaterials);
 			}
-	    	$scope.isDuplicateRM();
+	    	/*$scope.isDuplicateRM();*/
 	    };
 	
 	$scope.isDuplicateRM=function()

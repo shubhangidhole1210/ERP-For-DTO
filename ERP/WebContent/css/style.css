@@ -286,6 +286,17 @@ tr:nth-child(even) {
 }
 } */
 
+.productQualityCheck
+{
+	padding-top: 10px;
+    padding-left: 40px;
+}
+.product-quality-row
+{
+	padding-top: 12px;
+	font-size: 17px;
+	font-weight: bold;
+}
 .quantity-input
 {
      width: 80px;

@@ -108,7 +108,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		var data = {
 
 			invoice_No : $scope.invoice_No,
-			vendorname : $scope.vendor.id,
+			vendorname : $scope.selectedVendor,
 			vehicleNo : $scope.vehicleNo,
 			driver_Name : $scope.driver_Name,
 			description : $scope.description,
@@ -192,6 +192,26 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 
 		})
 	};
+	
+	$scope.vendorRmOrder=function(index)
+	{
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "rawmaterialorder/getVendorOrder/"+$scope.selectedVendor;
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
+			$scope.vendorRmList = response.data;
+
+			console.log(response);
+
+		}, function errorCallback(response) {
+			console.log("Error");
+
+		})
+	}
 	
 	
 });

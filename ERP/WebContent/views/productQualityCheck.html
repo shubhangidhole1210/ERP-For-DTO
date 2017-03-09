@@ -1,0 +1,48 @@
+<div ng-controller="prodcutQualityCheckCtrl">
+  <div class="erp-information">
+    <h1>Check Product Quality</h1>
+     <form name="productQualityCheckInformation"  novalidate class="login-form" style="width: 70%">
+       <fieldset>
+       <div class="productQualityCheck">
+          <div style="text-align: right;font-weight: bold;">
+             <span>Date</span>
+             <span>9-3-2017</span>
+          </div>
+          <!-- <div class="product-quality-row"> -->
+              <md-input-container class="md-block product-quality-row" flex-gt-sm>
+             <span>Product ID</span>
+             <span style="margin-left: 20%">
+             <select  ng-model=" products.product.id" ng-init="getProducts()" ng-change="getTidaysProductionPlan($index)" style="width: 220px" name="productName" required>
+             <option ng-repeat="product in products" ng-value=" product.product.id"> {{product.product.name}}</option>
+             </select>
+             </span>
+             <div ng-messages="productQualityCheckInformation.productName.$error">
+            <div ng-message="required">Please select product ID</div>
+          </div>
+          </md-input-container>
+         <!--  </div> -->
+          <div class="product-quality-row">
+          <span>Product Quantity</span>
+          <span style="margin-left: 12%"><input type="text" ng-model="productsPlan.achivedQuantity" name="achivedQuantity"  ng-disabled="true"></span>
+          </div>
+          <div class="product-quality-row">
+              <span>Pass quantity</span>
+              <span style="margin-left: 16%"><input type="text" ng-model="productsPlan.excessQuantity"></span>
+          </div>
+          <div class="product-quality-row">
+            <span>Fail Quantity</span>
+            <span style="margin-left: 17%"><input type="text" ng-model="productsPlan.lagQuantity"></span>
+          </div>
+           <div style="margin-top: 5%;margin-left: 70%">
+         <md-dialog-actions layout="row">
+      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="submitProductQualityCheckInformation(productQualityCheckInformation.$valid)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+    </md-dialog-actions>
+        </div>
+          </div>
+       </fieldset>
+       
+     </form>
+  </div>
+</div>

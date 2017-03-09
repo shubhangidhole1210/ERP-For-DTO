@@ -154,6 +154,11 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
+	}).when('/productQualityCheck', {
+		templateUrl : 'views/productQualityCheck.html',
+		data : {
+			loginRequired : true
+		}
 	})
 	.when('/notFound', {
 		templateUrl : 'views/notFound.html',
@@ -294,8 +299,27 @@ erpApp.directive('lettersOnly', function() {
 		    replace: true,
 		    template: '<input replace="[^a-zA-Z]" with="">'
 		  };
-		})
+		});
 
+erpApp.directive('capitalize', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attrs, modelCtrl) {
+        var capitalize = function(inputValue) {
+          if (inputValue == undefined) inputValue = '';
+          var capitalized = inputValue.toUpperCase();
+          if (capitalized !== inputValue) {
+            modelCtrl.$setViewValue(capitalized);
+            modelCtrl.$render();
+          }
+          return capitalized;
+        }
+        modelCtrl.$parsers.push(capitalize);
+        capitalize(scope[attrs.ngModel]); // capitalize initial value
+      }
+    };
+  });	
+		
 erpApp.controller('finshedGoodctrl', function($scope) {
 
 });
@@ -325,5 +349,7 @@ erpApp.controller('ToastCtrl', function($scope, $mdToast, message) {
 
 		});
 	};
+	
+
 
 });

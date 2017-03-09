@@ -71,17 +71,30 @@ erpApp.controller('userDialogCtrl',
 												/*$scope.message = 'Something went worng. Please try again later.';*/
 												utils.showToast('Something went worng. Please try again later.');
 											}
-
+                                             
+											else if(data.data.message !== 'User added Successfully !')
+											{
+												$rootScope.$emit("saveUserError",
+														{});
+												$scope.message = data.data.message;
+												$scope.userInformation.userid.$setValidity("apierror", false);
+												$scope.userInformation.mobile.$setValidity("apierror", false);
+												$scope.userInformation.email.$setValidity("apierror", false);
+												console.log($scope.message);
+											}
 
 											else {
 												$scope.displayProgressBar = false;
 												utils
-														.showToast(data.data.message);
+														.showToast('user information save sucessfully');
 												
 												$rootScope.$emit(
 														"CallPopulateUserList",
 														{});
 											}
+											
+											
+											
 										},
 										function errorCallback(data) {
 											$rootScope.$emit("saveUserError",
@@ -125,3 +138,4 @@ erpApp.controller('userDialogCtrl',
 					});
 					
 });
+

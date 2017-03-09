@@ -20,7 +20,7 @@
               <div ng-message="required">Please Enter Vendor name</div>
             </div> -->
              <label style="color: black;">VENDOR </label>
-          <md-select ng-model="vendor.id" name="vendorId" value="vendorId.id" ng-disabled="isReadOnly" ng-init="displayVendorId()" name="vendorId" required>
+          <md-select ng-model="selectedVendor" name="vendorId" value="vendorId.id" ng-disabled="isReadOnly" ng-init="displayVendorId()" name="vendorId" required ng-change="vendorRmOrder($index)">
             <md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id" >
                {{vendorId.companyName}}
             </md-option>
@@ -86,13 +86,10 @@
          <md-input-container>
           <label style="color: black;">RM Order</label>
           <md-select ng-model="rawMaterialOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayRMList($index)">
-            <md-option ng-repeat="rawMaterial in rawMaterialOrders" ng-value="rawMaterial.id"  >
-               {{rawMaterial.name}}
+            <md-option ng-repeat="rawMaterialOrder in vendorRmList" ng-value="rawMaterialOrder.id"  >
+               {{rawMaterialOrder.name}}
             </md-option>
           </md-select>
-         <!--  <div ng-messages="securityInformation.rawMaterial.$error" >
-                 <div ng-message="required">Please Select P.O number</div>
-              </div> -->
         </md-input-container>
         </div>
         <div layout-gt-sm="row">
