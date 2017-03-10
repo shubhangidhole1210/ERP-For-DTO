@@ -117,7 +117,7 @@
 .erp-information
 {
 	padding-left: 17%;
-	padding-top: 100px;
+	padding-top: 120px;
 }
 .erp-security
 {
@@ -158,7 +158,7 @@ table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    margin-top: 2%;
+    /* margin-top: 2%; */
 }
 
 td, th {
@@ -212,7 +212,7 @@ tr:nth-child(even) {
 	
     width: 400px;
     margin: 0 auto;
-    padding: 50px 50px;
+    padding: 20px 50px;
     overflow: hidden;
     display: inline-block;
     height: 100%;
@@ -301,6 +301,14 @@ tr:nth-child(even) {
 {
      width: 80px;
 	}
+	
+.search-text
+{
+	margin-top: 2%;
+	width: 250px;
+	height: 25px;
+	padding-left: 5px
+}	
  @media screen and (max-width: 408px) {
 
   .erp-headder
@@ -343,7 +351,7 @@ tr:nth-child(even) {
 	
     width: 260px;
     margin: 0 auto;
-   padding-top:50px;
+   padding-top:10px;
     overflow: hidden;
     display: inline-block;
     height: 100%;

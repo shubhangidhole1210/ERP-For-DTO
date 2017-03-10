@@ -63,26 +63,26 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 										"saveProductError", {});
 								console.log(data);
 								$scope.hide();
-								$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();
+								utils.showToast('Something went worng. Please try again later.');
 							}
-							else if(data.data.code === 2)
+							/*else if(data.data.code === 2)
 								{
 								console.log(data.data.message);
 								$rootScope.$emit(
 										"saveProductError", {});
 								console.log(data);
 								$scope.hide();
-								/*$scope.message = 'Product  Name already Exist.';*/
+								$scope.message = 'Product  Name already Exist.';
 								$scope.message=data.data.message;
 								$scope.showToast();
-								}
+								}*/
 							
 							else
 							{
 								$scope.displayProgressBar = false;
-								$scope.message = 'Product Information saved successfully.';
-								$scope.showToast();
+								/*$scope.message = 'Product Information saved successfully.';
+								$scope.showToast();*/
+								utils.showToast('Product Information saved successfully.');
 								$rootScope.$emit("CallPopulateProductList",{});
 								
 							}
@@ -92,8 +92,7 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 									"saveProductError", {});
 							console.log(data);
 							$scope.hide();
-							$scope.message = 'Something went worng. Please try again later.';
-							$scope.showToast();
+							utils.showToast('Something went worng. Please try again later.');
 						});
 
 	}
@@ -107,7 +106,8 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 
 	$scope.submitProductInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			$scope.showProgressBar($event);
+			/*$scope.showProgressBar($event);*/
+			$scope.saveProduct($event);
 			
 		} else {
 			console.log('its else block');
@@ -115,43 +115,7 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 
 	}
 
-	$scope.showToast = function() {
-		$mdToast.show({
-			hideDelay : 3000,
-			position : 'top right',
-			controller : 'ToastCtrl',
-			templateUrl : 'views/toast.html',
-			locals : {
-				message : $scope.message
-			}
-		});
-	};
 	
-	$scope.showProgressBar = function(ev) {
-		$scope.displayProgressBar = true;
-		$mdDialog
-				.show(
-						{
-							controller : ProgressBarController,
-							templateUrl : 'views/progressBar.html',
-							parent : angular
-									.element(document.body),
-							targetEvent : ev,
-							clickOutsideToClose : false,
-							fullscreen : $scope.customFullscreen,
-							onComplete : function() {
-								$scope.saveProduct(ev);
-							}
-							
-						// Only for -xs, -sm breakpoints.
-						})
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
-	};
+	
+	
 });

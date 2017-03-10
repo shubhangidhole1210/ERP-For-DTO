@@ -1,4 +1,4 @@
-<md-dialog aria-label=""  >
+<md-dialog aria-label="" style="min-width: 80%; margin-left: 10%;margin-top:2%" >
   <form name="vendorInformation" novalidate>
   
     <md-toolbar>
@@ -66,7 +66,19 @@
               </div>
           </md-input-container>
 
-          <md-input-container class="md-block" flex-gt-sm type="password">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">OFFICE NO</label>
+            <input type="text" limit-to="10" ng-model="vendorUser.contactNumberOffice" value="vendorUser.contactNumberMobile"  required name="contactNumberMobile" ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]+$/" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+              <div ng-messages="vendorInformation.contactNumberMobile.$error">
+                 <div ng-message="required">Please enter user mobile or Phone number</div>
+                 <div ng-message="minlength">mobile number must be 10 digit</div>
+                 <div ng-message="maxlength">mobile number must be 10 digit</div>
+                 <div ng-message="pattern">Please enter valid mobile number</div>
+              </div>
+          </md-input-container>
+        </div>
+        
+         <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">ADDRESS</label>
             <input type="text" required name="address" ng-model="vendorUser.address" value="vendorUser.address" ng-disabled="isReadOnly" >
             <div ng-messages="vendorInformation.address.$error">
@@ -74,7 +86,6 @@
             
             </div>
           </md-input-container>
-        </div>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">CITY</label>

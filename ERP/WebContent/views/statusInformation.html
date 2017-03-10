@@ -1,4 +1,4 @@
-<md-dialog  >
+<md-dialog style="min-width: 82%;margin-left: 11%;" >
   <form name="statusInformation"  novalidate>
   
     <md-toolbar>
@@ -23,16 +23,18 @@
             <div ng-message="minlength">status should be minimum 2 character</div>
           </div>
           </md-input-container>
-
-          <md-input-container class="md-block" flex-gt-sm type="password">
+         
+        </div>
+          <div layout-gt-sm="row">
+             <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">TYPE</label>
             <input type="text" ng-model="status.type" value="status.type" required name="type"  ng-disabled="isReadOnly">
             <div ng-messages="statusInformation.type.$error">
               <div ng-message="required">Please enter status type</div>
             </div>
           </md-input-container>
-        </div>
-      
+          
+          </div>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">DESCRIPTION</label>

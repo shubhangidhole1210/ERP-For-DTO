@@ -28,52 +28,13 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		});
 	}
 	
-	/*$scope.showProgressBarOne= function()
-	{
-		$mdDialog
-		.show(
-				{
-					controller : ProgressBarController,
-					templateUrl : 'views/progressBar.html',
-					parent : angular
-							.element(document.body),
-					targetEvent : ev,
-					clickOutsideToClose : false,
-					fullscreen : $scope.customFullscreen,
-					onComplete : function() {
-						$scope.populateUserList(ev);
-					}
-					
-				
-				})
-		.then(
-				function(answer) {
-					$scope.status = 'You said the information was "'
-							+ answer + '".';
-				},
-				function() {
-					$scope.status = 'You cancelled the dialog.';
-				});
-	};*/
-	
-	/*$scope.showToast = function() {
-		$mdToast.show({
-			hideDelay : 3000,
-			position : 'top right',
-			controller : 'ToastCtrl',
-			templateUrl : 'views/toast.html',
-			locals : {
-				message : $scope.message
-			}
-		});
-	};*/
 	$scope.page={}
 	$scope.showAddNewPage = function(ev) {
 		$scope.page={};
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
 		$scope.information = "ADD NEW PAGE"
-		var abc = {
+		var addNewPageDialog = {
 			controller : 'pageDialogController',
 			templateUrl : 'views/pageInformation.html',
 			parent : angular.element(document.body),
@@ -89,15 +50,9 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 			}
 		};
 		$mdDialog
-				.show(abc)
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+		.show(addNewPageDialog)
+		.then(function(answer) {},
+				function() {});
 	};
 	
 	
@@ -256,13 +211,8 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 					}
 				})
 				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+						function(answer) {},
+						function() {});
 	};
 	
 	$scope.viewPageInformation = function(ev, index) {
@@ -287,20 +237,14 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 					}
 				})
 				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+						function(answer) {},
+						function() {});
 	};
 	
 	$scope.deletePage = function(index) {
+		utils.showProgressBar();
 		 $scope.page = $scope.pages[index].id; 
 		console.log($scope.page);
-
-	
 		var httpparams = {};
 		httpparams.method = 'delete';
 		httpparams.url = SERVER_URL + "page/delete/" + $scope.pages[index].id;
@@ -308,7 +252,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(data) {
-					$mdDialog.hide();
+			utils.hideProgressBar();
 			$rootScope.$emit("CallPopulatePageList", {});
 			console.log(data);
 
@@ -316,7 +260,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 			console.log("Error");
 
 		});
-		$scope.showProgressBarOne();
+		
 
 	};
 	$scope.showConfirm = function(ev,index) {
@@ -341,18 +285,5 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 						});
 	};
 	
-	/*function ProgressBarController($scope, $mdDialog) {
-		
-		$scope.hide = function() {
-			$mdDialog.hide();
-		};
-
-		$scope.cancel = function() {
-			$mdDialog.cancel();
-		};
-
-		$scope.answer = function(answer) {
-			$mdDialog.hide(answer);
-		};
-	}*/
+	
 });

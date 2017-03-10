@@ -18,7 +18,7 @@
 				<th>FIRST NAME</th>
 				<th>LAST NAME</th>
 				<th>MOBILE</th>
-				<th>EMAIL</th>
+				<!-- <th>EMAIL</th> -->
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="data in data |  filter:{ firstName: searchText } " >
@@ -26,7 +26,7 @@
 				<td>{{data.firstName}}</td>
 				<td>{{data.lastName}}</td>
 				<td>{{data.contactNumberOffice}}</td>
-				<td>{{data.contactNumberMobile}}</td>
+				<!-- <td>{{data.contactNumberMobile}}</td> -->
 				<td>
 				     <md-button class="md-raised"  ng-click="showEditVendor($event,$index)" ng-init="flag=1">EDIT</md-button>
 				<!-- <md-button class="md-raised" ng-click="showConfirm($event)">REMOVE</md-button> -->

@@ -69,7 +69,7 @@
     <div ng-controller="ERPController" >
     <div>
    <div class="erp-headder">
-      <div class="display-erp-img"> <img alt="" src="image/erp-logo.png" width="120px" height="70px"></div> 
+      <div class="display-erp-img"> <img alt="" src="image/ek-solution-logo.jpg" width="120px" height="70px"></div> 
      
       <div style="display: flex;position: absolute;right: 10px">
       <div style="color: white;margin-top: 17px" ng-show="displayUserName" >{{user.userid}}</div>
@@ -82,7 +82,7 @@
 			style="width: 30px;">
 	</div> -->
         <div class="erp-menubar" ng-show="displayMenu">
-        	<div class="erp-menu" id="{{menuItem.pageName}}" ng-repeat="menuItem in menu"   ng-click="selected='user'"    ><a href="#{{menuItem.url}}" >{{menuItem.submenu}}</a></div>
+        	<div class="erp-menu" id="{{menuItem.pageName}}" ng-repeat="menuItem in menu"   ng-click="menuClicked($index)" ng-class="{'changeERPMenu': $index == selectedIndex }"><a href="#{{menuItem.url}}" >{{menuItem.submenu}}</a></div>
         
            <!-- <div class="erp-menu" id="user"  ng-class="{changeERPMenu : selected=='user'}" ng-click="selected='user'"><a href="#/user" >USER</a></div>
            <div class="erp-menu" id="unit"  ng-class="{changeERPMenu : selected=='unit'}" ng-click="selected='unit'"><a href="#/unit" >UNIT</a></div>

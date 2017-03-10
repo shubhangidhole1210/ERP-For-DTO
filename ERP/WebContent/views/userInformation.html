@@ -1,132 +1,147 @@
-<md-dialog aria-label="Mango (Fruit)" style="min-width: 1100px;margin-left: 13%">
-  <form name="userInformation"  novalidate>
-  
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>{{information}}</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
+<md-dialog aria-label="Mango (Fruit)"
+	style="min-width: 1100px;margin-left: 13%">
+<form name="userInformation" novalidate>
 
-    <md-dialog-content >
-      <div class="md-dialog-content" >
-       
-      <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label  class="input-filed-label">USER ID</label>
-            <input type="text" ng-model="user.userid"  required name="userid" ng-minlength="5"  ng-disabled="isReadOnly"  >
-             <div ng-messages="userInformation.userid.$error">
-            <div ng-message="required">Please enter user ID</div>
-            <div ng-message="minlength">User ID should be minimum 5 character or Digit</div>
-            <div ng-message="apierror">User ID should be minimum 5 character or Digit</div>
-          </div>
-          </md-input-container>
+	<md-toolbar>
+	<div class="md-toolbar-tools">
+		<h2>{{information}}</h2>
+		<span flex></span>
+		<md-button class="md-icon-button" ng-click="cancel()"> <md-icon
+			md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+		</md-button>
+	</div>
+	</md-toolbar>
 
-          <md-input-container class="md-block" flex-gt-sm type="password">
-            <label class="input-filed-label">PASSWORD</label>
-            <input type="password" ng-model="user.password"  required name="password" ng-minlength="5" ng-disabled="isReadOnly">
-            <div ng-messages="userInformation.password.$error">
-              <div ng-message="required">Password is required</div>
-              <div ng-message="minlength">password is too short</div>
-            </div>
-          </md-input-container>
-        </div>
-      
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label class="input-filed-label">FIRST NAME</label>
-            <input type="text" ng-model="user.firstName"  required name="firstName" ng-disabled="isReadOnly" ng-minlength="2" onkeypress='return event.charCode >= 65 && event.charCode <= 120'>
-            <div ng-messages="userInformation.firstName.$error">
-             <div ng-message="required">Please enter valid user name</div>
-             <div ng-message="minlength">User Name Should be minimum two character</div>
-            </div>
-          </md-input-container>
+	<md-dialog-content>
+	<div class="md-dialog-content">
 
-          <md-input-container class="md-block" flex-gt-sm type="password">
-            <label class="input-filed-label">LAST NAME</label>
-            <input type="text" ng-model="user.lastName"  required name="lastName" ng-minlength="2" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 65 && event.charCode <= 120'>
-            <div ng-messages="userInformation.lastName.$error">
-             <div ng-message="required">Please enter user last name</div>
-             <div ng-message="minlength">Last Name Should be minimum two character</div>
-            </div>
-          </md-input-container>
-        </div>
-        
-         <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label class="input-filed-label">MOBILE</label>
-            <!-- <input limit-to="10" type="number" ng-model="user.mobile"  required name="mobile" ng-minlength="10"  ng-disabled="isReadOnly"> -->
-             <input type="text" limit-to="10" ng-model="user.mobile" value="user.mobile" id="mobile"  required name="mobile" ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]+$/" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-              <div ng-messages="userInformation.mobile.$error">
-                 <div ng-message="required">Please enter user mobile number</div>
-                 <div ng-message="apierror">{{message}}</div>
-                 <div ng-message="minlength">mobile number must be 10 digit</div>
-                 <div ng-message="maxlength">mobile number must be 10 digit</div>
-                 <div ng-message="pattern">Please enter valid mobile number</div>
-                 
-              </div>
-          </md-input-container>
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">USER ID</label> <input type="text"
+				ng-model="user.userid" required name="userid" ng-minlength="5"
+				ng-disabled="isReadOnly">
+			<div ng-messages="userInformation.userid.$error">
+				<div ng-message="required">Please enter user ID</div>
+				<div ng-message="minlength">User ID should be minimum 5
+					character or Digit</div>
+				<div ng-message="apierror">User ID should be minimum 5
+					character or Digit</div>
+			</div>
+			</md-input-container>
 
-          <md-input-container class="md-block" flex-gt-sm type="password">
-            <label class="input-filed-label">EMAIL</label>
-            <input type="email" ng-model="user.email"  required name="email" ng-disabled="isReadOnly" placeholder="user@gmail.com">
-            <div ng-messages="userInformation.email.$error">
-            <div ng-message="required">Please enter user email id </div>
-            <div ng-message="email">Please enter valid email id</div>
-            <div ng-message="apierror">{{message}}</div>
-            </div>
-          </md-input-container>
-        </div>
-         <md-input-container>
-          <label style="color: black;">USER TYPE*</label>
-          <md-select ng-model="user.usertype.id" name="userType"  ng-disabled="isReadOnly" ng-required="true" required>
-            <md-option ng-repeat="userType in data" ng-value="userType.id" >
-               {{userType.usertypeName}}
-            </md-option>
-          </md-select>
-          <div ng-messages="userInformation.userType.$error" >
-                 <div ng-message="required">Please Select User Type</div>
-              </div>
-        </md-input-container>
-        
-      
-         
-          <md-input-container class="md-block" flex-gt-sm type="password">
-              <label class="input-filed-label">DATE OF BIRTH[MM/DD/YYYY]*</label>
-              
-              <input type="date" placeholder="Enter date of birth" ng-model="user.dob "  name="dob" required id="dob" ng-disabled="isReadOnly"  >
-              <div ng-messages="userInformation.dob.$error">
-                 <div ng-message="required">Please Enter Date of Birth</div>
-              </div>
-         </md-input-container>   
-                      <md-input-container class="md-block" flex-gt-sm type="password">
-         <input type="date" placeholder="Enter date of birth" ng-model="user.doj" name="doj" required ng-disabled="isReadOnly" id="doj" ng-change="checkDate(dob,doj)" min="{{user.dob}}">
-          <label class="input-filed-label">DATE OF JOINING[MM/DD/YYYY]*</label>
-              <div ng-messages="userInformation.doj.$error">
-                 <div ng-message="required">Please Enter Date of Joining</div>
-              </div>
-              <div ng-show=" userInformation.doj.$error.min" style="color: red;">joining Date should be greater than birth date</div>
-         </md-input-container>   
-        
-        
-         </div>
-          
-          
-         <h4 style="color: red;margin-left: 40px">{{errorMessage}}</h4>
-      
-    </md-dialog-content>
+			<md-input-container class="md-block" flex-gt-sm type="password">
+			<label class="input-filed-label">PASSWORD</label> <input
+				type="password" ng-model="user.password" required name="password"
+				ng-minlength="5" ng-disabled="isReadOnly">
+			<div ng-messages="userInformation.password.$error">
+				<div ng-message="required">Password is required</div>
+				<div ng-message="minlength">password is too short</div>
+			</div>
+			</md-input-container>
+		</div>
 
-    <md-dialog-actions layout="row">
-      
-      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
-      <md-button class="md-raised" ng-click="submitInformation(userInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
-      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
-    </md-dialog-actions>
-    
-  </form>
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">FIRST NAME</label> <input
+				type="text" ng-model="user.firstName" required name="firstName"
+				ng-disabled="isReadOnly" ng-minlength="2"
+				onkeypress='return event.charCode >= 65 && event.charCode <= 120'>
+			<div ng-messages="userInformation.firstName.$error">
+				<div ng-message="required">Please enter valid user name</div>
+				<div ng-message="minlength">User Name Should be minimum two
+					character</div>
+			</div>
+			</md-input-container>
+
+			<md-input-container class="md-block" flex-gt-sm type="password">
+			<label class="input-filed-label">LAST NAME</label> <input type="text"
+				ng-model="user.lastName" required name="lastName" ng-minlength="2"
+				ng-disabled="isReadOnly"
+				onkeypress='return event.charCode >= 65 && event.charCode <= 120'>
+			<div ng-messages="userInformation.lastName.$error">
+				<div ng-message="required">Please enter user last name</div>
+				<div ng-message="minlength">Last Name Should be minimum two
+					character</div>
+			</div>
+			</md-input-container>
+		</div>
+
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">MOBILE</label> <!-- <input limit-to="10" type="number" ng-model="user.mobile"  required name="mobile" ng-minlength="10"  ng-disabled="isReadOnly"> -->
+			<input type="text" limit-to="10" ng-model="user.mobile"
+				value="user.mobile" id="mobile" required name="mobile"
+				ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]+$/"
+				ng-disabled="isReadOnly"
+				onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+			<div ng-messages="userInformation.mobile.$error">
+				<div ng-message="required">Please enter user mobile number</div>
+				<div ng-message="apierror">{{message}}</div>
+				<div ng-message="minlength">mobile number must be 10 digit</div>
+				<div ng-message="maxlength">mobile number must be 10 digit</div>
+				<div ng-message="pattern">Please enter valid mobile number</div>
+
+			</div>
+			</md-input-container>
+
+			<md-input-container class="md-block" flex-gt-sm type="password">
+			<label class="input-filed-label">EMAIL</label> <input type="email"
+				ng-model="user.email" required name="email" ng-disabled="isReadOnly"
+				placeholder="user@gmail.com">
+			<div ng-messages="userInformation.email.$error">
+				<div ng-message="required">Please enter user email id</div>
+				<div ng-message="email">Please enter valid email id</div>
+				<div ng-message="apierror">{{message}}</div>
+			</div>
+			</md-input-container>
+		</div>
+		<md-input-container> <label style="color: black;">USER
+			TYPE*</label> <md-select ng-model="user.usertype.id" name="userType"
+			ng-disabled="isReadOnly" ng-required="true" required> <md-option
+			ng-repeat="userType in data" ng-value="userType.id">
+		{{userType.usertypeName}} </md-option> </md-select>
+		<div ng-messages="userInformation.userType.$error">
+			<div ng-message="required">Please Select User Type</div>
+		</div>
+		</md-input-container>
+
+
+
+		<md-input-container class="md-block" flex-gt-sm type="password">
+		<label class="input-filed-label">DATE OF BIRTH[MM/DD/YYYY]*</label> <input
+			type="date" placeholder="Enter date of birth" ng-model="user.dob "
+			name="dob" required id="dob" ng-disabled="isReadOnly">
+		<div ng-messages="userInformation.dob.$error">
+			<div ng-message="required">Please Enter Date of Birth</div>
+		</div>
+		</md-input-container>
+		<md-input-container class="md-block" flex-gt-sm type="password">
+		<input type="date" placeholder="Enter date of birth"
+			ng-model="user.doj" name="doj" required ng-disabled="isReadOnly"
+			id="doj" ng-change="checkDate(dob,doj)" min="{{user.dob}}"> <label
+			class="input-filed-label">DATE OF JOINING[MM/DD/YYYY]*</label>
+		<div ng-messages="userInformation.doj.$error">
+			<div ng-message="required">Please Enter Date of Joining</div>
+		</div>
+		<div ng-show=" userInformation.doj.$error.min" style="color: red;">joining
+			Date should be greater than birth date</div>
+		</md-input-container>
+
+
+	</div>
+
+
+	<h4 style="color: red; margin-left: 40px">{{errorMessage}}</h4>
+
+	</md-dialog-content>
+
+	<md-dialog-actions layout="row"> <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+	<md-button class="md-raised"
+		ng-click="submitInformation(userInformation.$valid,$event)"
+		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions>
+
+</form>
 </md-dialog>
 
 

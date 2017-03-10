@@ -1,13 +1,13 @@
 <div ng-controller="securityCtrl">
 <div class="erp-security">
- <p style="font-weight: bold;font-size: 20px">SECURITY CHECK</p>
+ <p style="font-weight: bold;font-size: 20px;margin-left: 30%">SECURITY CHECK</p>
 <form  class="login-form" name="securityInformation" novalidate style="width: 900px">
 <fieldset>
 <div class="loginForm" >
    <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">INVOICE NUMBER </label>
-            <input type="text" required name="invoiceNumber" ng-model="invoice_No" value="invoice_No">
+            <input type="text" required name="invoiceNumber" ng-model="invoice_No" >
              <div ng-messages="securityInformation.invoiceNumber.$error">
             <div ng-message="required">Please enter Invoice Number</div>
            
@@ -20,7 +20,7 @@
               <div ng-message="required">Please Enter Vendor name</div>
             </div> -->
              <label style="color: black;">VENDOR </label>
-          <md-select ng-model="selectedVendor" name="vendorId" value="vendorId.id" ng-disabled="isReadOnly" ng-init="displayVendorId()" name="vendorId" required ng-change="vendorRmOrder($index)">
+          <md-select ng-model="selectedVendor" name="vendorId" ng-disabled="isReadOnly" ng-init="displayVendorId()" name="vendorId" required ng-change="vendorRmOrder($index)">
             <md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id" >
                {{vendorId.companyName}}
             </md-option>
@@ -42,7 +42,7 @@
 
           <md-input-container class="md-block" flex-gt-sm >
             <label class="input-filed-label">DRIVER NAME</label>
-            <input type="text" required name="driverName" ng-model="driver_Name" value="driver_Name" >
+            <input type="text" required name="driverName" ng-model="driver_Name" >
             <div ng-messages="securityInformation.driverName.$error">
               <div ng-message="required">Please Enter Driver Name</div>
             </div>
@@ -51,14 +51,14 @@
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">IN TIME</label>
-            <input type="time"  name="inTime" ng-model="intime" value="intime"  id="intime" step='1' required >
+            <input type="time"  name="inTime" ng-model="intime"   id="intime" step='1' required >
              <div ng-messages="securityInformation.inTime.$error">
             <div ng-message="required">Please enter exact IN Time</div>
           </div>
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm >
             <label class="input-filed-label">OUT TIME</label>
-            <input type="time"  name="outTime" ng-model="outtime" value="outtime" id="outtime"  step='1' min="{{intime}}" required >
+            <input type="time"  name="outTime" ng-model="outtime"  id="outtime"  step='1' min="{{intime}}" required >
             <div ng-messages="securityInformation.outTime.$error">
               <div ng-message="required">Please Enter Out Time</div>
             </div>
@@ -67,7 +67,7 @@
         </div>
          <md-input-container class="md-block" flex-gt-sm >
             <label class="input-filed-label">DESCRIPTION</label>
-            <input type="text" required name="description" ng-model="description" value="description" >
+            <input type="text" required name="description" ng-model="description"  >
             <div ng-messages="securityInformation.description.$error">
               <div ng-message="required">Please Enter Description</div>
             </div>
@@ -153,7 +153,7 @@
          <md-dialog-actions layout="row">
       <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
       <md-button class="md-raised" ng-click="submitInformation(securityInformation.$valid,$event);resteData()" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
-      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
+      <md-button class="md-raised" >CANCEL</md-button>
     </md-dialog-actions>
         </div>
         

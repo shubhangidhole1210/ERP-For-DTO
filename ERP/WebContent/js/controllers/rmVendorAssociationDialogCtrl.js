@@ -86,7 +86,7 @@ erpApp
 
 					$scope.submitRMVendorAssociationInformation = function(isvaliduser,$event) {
 						if (isvaliduser) {
-							utils.showProgressBar();
+						
 							$scope.saveRMOrderAssociation();
 							
 						} else {

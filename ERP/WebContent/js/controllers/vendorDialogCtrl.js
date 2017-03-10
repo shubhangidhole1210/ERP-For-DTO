@@ -26,7 +26,7 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 	    		 lastName : $scope.vendorUser.lastName,
 	    		 address : $scope.vendorUser.address, 
 	    		 contactNumberMobile : $scope.vendorUser.contactNumberMobile,
-	    		   "contactNumberOffice": 9403633306,
+	    		 contactNumberOffice: $scope.vendorUser.contactNumberOffice,
 	    		 city : $scope.vendorUser.city,
 	    		 state : $scope.vendorUser.state,
 	    		 postalcode : $scope.vendorUser.postalcode,

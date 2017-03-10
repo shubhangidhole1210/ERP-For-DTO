@@ -212,7 +212,12 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 
 		})
 	}
-	
+	var original = $scope.user;
+	$scope.restInformation=function()
+	{
+		$scope.user= angular.copy(original);
+		$scope.securityInformation.$setPristine();
+	}
 	
 });
 

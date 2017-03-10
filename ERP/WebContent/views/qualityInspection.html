@@ -1,6 +1,6 @@
 <div ng-controller="qualityInspectionCtrl">
 <div class="erp-security">
- <p style="font-weight: bold;font-size: 20px">QUALITY INSPECTION</p>
+ <p style="font-weight: bold;font-size: 20px;margin-left: 30%">QUALITY INSPECTION</p>
  <form  class="login-form" name="qualityInspectionForm" novalidate style="width: 900px">
  <fieldset>
  <div class="loginForm">
@@ -12,7 +12,7 @@
                {{invoice.invoice_No}}
             </md-option>
           </md-select>
-          <div ng-messages="qualityInspectionForm.rawMaterial.$error" >
+          <div ng-messages="qualityInspectionForm.invoice.$error" >
                  <div ng-message="required">Please Select Invoice number</div>
               </div>
         </md-input-container>
