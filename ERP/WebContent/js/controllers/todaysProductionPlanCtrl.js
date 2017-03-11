@@ -17,7 +17,7 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 		  utils.showProgressBar();
 			var httpparams = {};
 			httpparams.method = 'GET';
-			httpparams.url = SERVER_URL + "productionplanning/getProductionPlanDate/"+ $scope.currentDate;
+			httpparams.url = SERVER_URL + "productionplanning/getProductionPlanByDate/"+ $scope.currentDate;
 			httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -37,7 +37,7 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 		  utils.showProgressBar();
 			var httpparams = {};
 			httpparams.method = 'GET';
-			httpparams.url = SERVER_URL + "productionplanning/getProductionPlanDateAndPId/" + $scope.currentDate + '/' + $scope.products.product.id;
+			httpparams.url = SERVER_URL + "productionplanning/getProductionPlanByDateAndPId/" + $scope.currentDate + '/' + $scope.products.product.id;
 			httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};

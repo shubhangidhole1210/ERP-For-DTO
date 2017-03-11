@@ -22,6 +22,24 @@
 {
 	display: inline-block;
 }
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background: rgb(120, 129, 178);
+    color: white;
+}
 .erp-user-name
 {
 	margin-left: 80%;
@@ -36,6 +54,14 @@
 	padding: 10px;
 	border-radius: 2px;
 }
+/* .displayScroll
+{
+	border: none;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 80%;
+} */
+
 /* @media screen and (min-width: 100px)
 {
 	.erp-menubar
@@ -54,6 +80,8 @@
     padding-top: 100px;
 }
 } */
+
+
 .erp-menubar
 {
 	background-color:  #106CC8;
@@ -154,21 +182,23 @@
 	color: black;
 	font-size: 14px;
 }
+
 table {
     font-family: arial, sans-serif;
-    border-collapse: collapse;
+   
     width: 100%;
-    /* margin-top: 2%; */
 }
 
 td, th {
-    border-bottom: 1px solid #dddddd;
+    border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-tr:nth-child(even) {
-    background-color: #dddddd;
+th
+{
+	background: rgb(120, 129, 178);
+    color: white;
 }
 
 .erp-vendor
@@ -376,5 +406,11 @@ tr:nth-child(even) {
 	padding-top: 100px;
 }
  }
+ 
+ .scroll-table
+ {
+  overflow-x: scroll;
+ }
+ 
  
  

@@ -113,7 +113,7 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 		$scope.submitVendorInformation = function(isvaliduser,$event) {
 			if (isvaliduser) {
 				/*$scope.showProgressBar($event);*/
-				utils.showProgressBar();
+			/*	utils.showProgressBar();*/
 				$scope.saveVendorInfo();
 				
 			} else {

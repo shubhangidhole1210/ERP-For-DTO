@@ -1,51 +1,54 @@
 <div ng-controller="productionPlanCtrl">
-<div class="erp-information" ng-init="getProductionPlanList()">
+<div class="erp-information displayScroll" ng-init="getProductionPlanList()">
 <p style="font-weight: bold;font-size: 20px">PRODUCTION PLAN</p>
 <form  name="qualityInspectionForm" novalidate style="width: 900px">
 <div class="">
-<table>
-   <tr>
-       <th style="font-size: 17px; text-align: center;">Product</th>
-        <th ng-repeat="days in alldays" style="font-size: 17px; text-align: center;">{{days| date:'dd-MM-yyyy'}}</th>
-   </tr>
-   
-   <tr ng-repeat="product in products">
-      <td style="font-size: 17px; text-align: center;">{{product.product_id}}</td>
-      <td ng-repeat="productProductionPlanItem in product.productProductionPlan">
-         <table>
-         <th>target</th><th>achived</th><th>dispatch</th>
-         <tr>
-         <td>
-         <input type="number" class="quantity-input" ng-model="productProductionPlanItem.target_quantity">
-         </td>
-         <td>
-         <input type="number" class="  " ng-model="productProductionPlanItem.achived_quantity">
-         </td>
-         <td>
-         <input type="number" class="quantity-input" ng-model="productProductionPlanItem.dispatch_quantity">
-         </td>
-         </tr>
-         </table>
-      </td> 
-   </tr>
-</table>
-<!-- <table class="tableOne">
+
+<table id="customers" class="">
  <tr>
-    <thead>
-    <th>product</th>
-    </thead>
+   <th>PRODUCTION PLAN</th>
+   <th ng-repeat="days in alldays" style="font-size: 17px; text-align: center;">{{days| date:'dd-MM-yyyy'}}</th>
  </tr>
- <tr ng-repeat="product in products">
-   <td>{{product.product_id}}</td>
+ <tr ng-repeat="product in products" >
+    <td style="font-size: 17px; text-align: center;">
+      <table >
+      <th>Part Number</th>
+      <th>Inventory Qty</th>
+      <th> Pending Qty</th>
+      <tr>
+        <td>{{product.productId}}</td>
+        <td>{{product.productBalanceQty}}</td>
+        <td>{{product.productTargetQty}}</td>
+        
+      </tr>
+      </table>
+    </td>
+<!--     <div style="overflow-x: scroll;"> -->
+      <td ng-repeat="productProductionPlanItem in product.productProductionPlan">
+    
+    <table >
+      <th>Target</th>
+      <th>Achived</th>
+      <tr>
+        <td>
+        <input type="number" class="quantity-input" ng-model="productProductionPlanItem.target_quantity">
+        </td>
+        <td>
+         <input type="number" class="quantity-input" ng-model="productProductionPlanItem.achived_quantity">
+        </td>
+      </tr>
+      
+    </table>
+   
+    
+  </td>
+<!--   </div> -->
  </tr>
 </table>
- <table class="table2">
-     <tr>
-        <thead>
-          <th  ng-repeat="days in alldays" style="font-size: 17px; text-align: center;">{{days| date:'dd-MM-yyyy'}}</th>
-        </thead>
-     </tr>
- </table> -->
+
+
+
+
 </div>
 <div style="margin-left: 70%;margin-top: 2%">
   <md-dialog-actions layout="row">

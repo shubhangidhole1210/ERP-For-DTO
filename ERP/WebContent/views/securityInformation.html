@@ -14,11 +14,7 @@
           </div>
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm type="password">
-          <!--   <label class="input-filed-label">VENODR NAME</label>
-            <input type="text" required name="vendorName" ng-model="vendorname" value="vendorname" >
-            <div ng-messages="securityInformation.vendorName.$error">
-              <div ng-message="required">Please Enter Vendor name</div>
-            </div> -->
+          
              <label style="color: black;">VENDOR </label>
           <md-select ng-model="selectedVendor" name="vendorId" ng-disabled="isReadOnly" ng-init="displayVendorId()" name="vendorId" required ng-change="vendorRmOrder($index)">
             <md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id" >

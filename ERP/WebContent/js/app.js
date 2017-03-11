@@ -159,6 +159,11 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
+	}).when('/dispatchquantity', {
+		templateUrl : 'views/dispatchQuantity.html',
+		data : {
+			loginRequired : true
+		}
 	})
 	.when('/notFound', {
 		templateUrl : 'views/notFound.html',

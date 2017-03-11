@@ -82,9 +82,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		 $scope.createDate='';
 	}*/
 	$scope.createDate = new Date($scope.createDate);
-	
 	$scope.saveSecurityInformation = function() {
-		
 		console.log('Saving saveSecurityInformation');
 		var index=0;
 		var rmorderinvoiceintakquantities = [];

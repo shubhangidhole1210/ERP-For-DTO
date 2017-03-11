@@ -61,6 +61,7 @@
 <script type="text/javascript" src="js/controllers/statusCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/statusDialogCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/erpCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/dispatchQuantity.js"></script>
 <script type="text/javascript" src="js/controllers/productQualityCheckCtrl.js"></script>
 <script type="text/javascript" src="js/services/utils.js"></script>
 </head>
@@ -83,20 +84,6 @@
 	</div> -->
         <div class="erp-menubar" ng-show="displayMenu">
         	<div class="erp-menu" id="{{menuItem.pageName}}" ng-repeat="menuItem in menu"   ng-click="menuClicked($index)" ng-class="{'changeERPMenu': $index == selectedIndex }"><a href="#{{menuItem.url}}" >{{menuItem.submenu}}</a></div>
-        
-           <!-- <div class="erp-menu" id="user"  ng-class="{changeERPMenu : selected=='user'}" ng-click="selected='user'"><a href="#/user" >USER</a></div>
-           <div class="erp-menu" id="unit"  ng-class="{changeERPMenu : selected=='unit'}" ng-click="selected='unit'"><a href="#/unit" >UNIT</a></div>
-            <div class="erp-menu" id="page"  ng-class="{changeERPMenu : selected=='page'}" ng-click="selected='user'"><a href="#/page" >PAGE</a></div>
-            <div class="erp-menu" id="product"  ng-class="{changeERPMenu : selected=='product'}" ng-click="selected='product'"><a href="#/product" >PRODUCT</a></div>
-           <div class="erp-menu" id="home"  ng-class="{changeERPMenu : selected=='home'}" ng-click="selected='home'"><a href="#/home" >HOME</a></div>
-           <div class="erp-menu" id="vendor" ng-class="{changeERPMenu : selected=='vendor'}" ng-click="selected='vendor'"><a href="#/vendor">VENDOR</a></div>
-           <div class="erp-menu" id="rawMaterial"  ng-class="{changeERPMenu : selected=='rawMaterial'}" ng-click="selected='rawMaterial'"><a href="#/rawMaterial">RAW MATERIAL</a></div>
-           <div class="erp-menu" id="finishGood" ng-class="{changeERPMenu : selected=='finishGood'}" ng-click="selected='finishGood'"><a href="#/finishedGood" >FINISHED GOOD</a></div>
-           <div class="erp-menu" id="orders" ng-class="{changeERPMenu : selected=='orders'}" ng-click="selected='orders'"><a href="#/order">ORDERS</a></div>
-           <div class="erp-menu" id="administration" ng-class="{changeERPMenu : selected=='administration'}" ng-click="selected='administration'"><a href="#/administration" >ADMINISTRATION</a></div>
-           <div class="erp-menu" id="report"  ng-class="{changeERPMenu : selected=='report'}" ng-click="selected='report'"><a href="#/securityInformation">SECURITY</a></div>
-            <div class="erp-menu" id="qualityInspection"  ng-class="{changeERPMenu : selected=='qualityInspection'}" ng-click="selected='qualityInspection'"><a href="#/qualityInspection">QUALITY INSPECTION</a></div>
-           <div class="erp-menu" id="norification" ng-class="{changeERPMenu : selected=='norification'}" ng-click="selected='norification'"><a href="#/notification">NOTIFICATION</a></div> -->
         </div>
         </div>
  <div ng-view class="main-class"></div>

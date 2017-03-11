@@ -54,9 +54,9 @@
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-sm type="password">
-			<label class="input-filed-label">LAST NAME</label> <input type="text"
-				ng-model="user.lastName" required name="lastName" ng-minlength="2"
-				ng-disabled="isReadOnly"
+			<label class="input-filed-label">LAST NAME</label> <input
+				type="text" ng-model="user.lastName" required name="lastName"
+				ng-minlength="2" ng-disabled="isReadOnly"
 				onkeypress='return event.charCode >= 65 && event.charCode <= 120'>
 			<div ng-messages="userInformation.lastName.$error">
 				<div ng-message="required">Please enter user last name</div>
