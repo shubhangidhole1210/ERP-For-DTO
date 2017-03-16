@@ -1,9 +1,9 @@
 <div ng-controller="qualityInspectionCtrl">
-<div class="erp-security">
- <p style="font-weight: bold;font-size: 20px;margin-left: 30%">QUALITY INSPECTION</p>
+<!-- <div class="erp-security">
+ <p style="font-weight: bold;font-size: 20px;margin-left: 35%">QUALITY INSPECTION</p>
  <form  class="login-form" name="qualityInspectionForm" novalidate style="width: 900px">
  <fieldset>
- <div class="loginForm">
+ <div class="loginForm" style="background: rgb(238,238,238);">
   <div layout-gt-sm="row">
  <md-input-container>
           <label style="color: black;">Invoice No*</label>
@@ -63,7 +63,7 @@
           <td>
               <md-input-container class="md-block" flex-gt-sm>
             
-            <!-- <input type="text" ng-model="orderRawMaterial.quantity1"  name="returnInvoice" required> -->
+            <input type="text" ng-model="orderRawMaterial.quantity1"  name="returnInvoice" required>
              <md-checkbox ng-model="invoiceList.isReturnInvoiceInitated" aria-label="Checkbox 1">
             <div ng-messages="qualityInspectionForm.returnInvoice.$error">
              <div ng-message="required">please enter is return invoice </div>
@@ -74,7 +74,7 @@
     </table>
      <div style="margin-top: 5%;margin-left: 70%">
          <md-dialog-actions layout="row">
-      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button>
       <md-button class="md-raised" ng-click="submitInformation(qualityInspectionForm.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
     </md-dialog-actions>
@@ -82,5 +82,93 @@
  </div>
  </fieldset>
  </form>
+</div> -->
+<div class="erp-security">
+   <div class="qualitycheck">
+      <div class="header">QUALITY INSPECTION</div>
+      <div class="qualityInspection">
+        <form   name="qualityInspectionForm" novalidate >
+
+ <div  >
+  <div layout-gt-sm="row">
+ <md-input-container>
+          <label style="color: black;">Invoice No*</label>
+          <md-select ng-model="invoiceList.id" name="invoice" ng-init="getRMOrderInvoiceInformation()" ng-change="invoiceRawMaterialList($index)" required>
+            <md-option ng-repeat="invoice in invoiceList" ng-value="invoice.id" >
+               {{invoice.invoice_No}}
+            </md-option>
+          </md-select>
+          <div ng-messages="qualityInspectionForm.invoice.$error" >
+                 <div ng-message="required">Please Select Invoice number</div>
+              </div>
+        </md-input-container>
+          
+  </div>
+   <div layout-gt-sm="row">
+     <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">DESCRIPTION</label>
+            <input type="text" required name="description" ng-model="description" value="vendorUser.companyName" ng-minlength="4" ng-maxlength="255">
+             <div ng-messages="qualityInspectionForm.description.$error">
+            <div ng-message="required">Please enter  Description</div>
+            <div ng-message="minlength">Description should be minimum 4 character and maximum 255 character</div>
+            <div ng-message="maxlength">Description should be minimum 4 character and maximum 255 character</div>
+          </div>
+          </md-input-container>
+   </div>
+    <h3>Raw Material List</h3>
+    <table>
+      <tr>
+        <th>RAW MATERIAL NAME</th>
+        <th>INVOICE QUANTITY</th>
+        <th>RECEIVED OK</th>
+        <th>REMARK</th>
+        <th>IS RETURN INVOICE</th>
+      </tr>
+      <tr ng-repeat="invoiceList in rmInvoiceList">
+        <td>{{invoiceList.rawmaterial.name}}</td>
+        <td>{{invoiceList.quantity}}</td>
+         <td>
+              <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">RECEIVED OK</label>
+            <input type="text" ng-model="invoiceList.goodQuantity"  name="recivedOk"  >
+            <div ng-messages="qualityInspectionForm.recivedOk.$error">
+             <div ng-message="required">please enter receive ok    </div>
+            </div>
+          </md-input-container>
+          </td>
+          <td>
+              <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">REMARK</label>
+            <input type="text" ng-model="invoiceList.remark"  name="remark"  >
+            <div ng-messages="qualityInspectionForm.remark.$error">
+             <div ng-message="required">please enter remark </div>
+           
+            </div>
+          </md-input-container>
+          </td>
+          <td>
+              <md-input-container class="md-block" flex-gt-sm>
+            
+           
+             <md-checkbox ng-model="invoiceList.isReturnInvoiceInitated" aria-label="Checkbox 1">
+            <div ng-messages="qualityInspectionForm.returnInvoice.$error">
+             <div ng-message="required">please enter is return invoice </div>
+            </div>
+          </md-input-container>
+          </td>
+      </tr>
+    </table>
+     <div style="margin-top: 5%;margin-left: 70%">
+         <md-dialog-actions layout="row">
+      <md-button class="md-raised" ng-click="submitInformation(qualityInspectionForm.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="resetQualityInspection()" type="reset" >CANCEL</md-button>
+    </md-dialog-actions>
+        </div>
+ </div>
+ 
+ </form>
+      
+      </div>
+   </div>
 </div>
 </div>

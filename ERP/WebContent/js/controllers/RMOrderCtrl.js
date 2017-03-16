@@ -50,54 +50,14 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			}
 	}
 	
-	/*$scope.showProgressBarOne= function()
-	{
-		$mdDialog
-		.show(
-				{
-					controller : ProgressBarController,
-					templateUrl : 'views/progressBar.html',
-					parent : angular
-							.element(document.body),
-					targetEvent : ev,
-					clickOutsideToClose : false,
-					fullscreen : $scope.customFullscreen,
-					onComplete : function() {
-						$scope.populateUserList(ev);
-					}
-					
-				
-				})
-		.then(
-				function(answer) {
-					$scope.status = 'You said the information was "'
-							+ answer + '".';
-				},
-				function() {
-					$scope.status = 'You cancelled the dialog.';
-				});
-	};*/
-		
-	
-	
-	/*$scope.showToast = function() {
-		$mdToast.show({
-			hideDelay : 3000,
-			position : 'top right',
-			controller : 'ToastCtrl',
-			templateUrl : 'views/toast.html',
-			locals : {
-				message : $scope.message
-			}
-		});
-	};*/
+
 	
 	$scope.rmOrder = {};
 	$scope.showAddNewRMOrder = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
 		$scope.rmOrder = {};
-		$scope.title= "ADD RAW MATERIAL INFORMATION";
+		$scope.title= "ADD RAW MATERIAL ORDER INFORMATION";
 		var addNewRmDialog = {
 			controller : 'rmOrderDialogCtrl',
 			templateUrl : 'views/RMOorderInfo.html',
@@ -113,16 +73,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				title : $scope.title
 			}
 		};
-	/*	$mdDialog
-				.show(abc)
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});*/
+	
 		
 		$mdDialog
 		.show(addNewRmDialog)
@@ -135,7 +86,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.isReadOnly = false;
 		$scope.rmOrder = $scope.rmOrders[index];
 		console.log($scope.rmOrder);
-		$scope.title="EDIT RAW MATERIAL INFORMATION"
+		$scope.title="EDIT RAW MATERIAL ORDER INFORMATION"
 		$mdDialog
 				.show({
 					controller : 'rmOrderDialogCtrl',

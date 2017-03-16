@@ -1,18 +1,11 @@
 <div ng-controller="clientCtrl">
 	<div class="erp-information">
+	<input type="text" ng-model="searchText" placeholder="Search by company Name" class="search-text">
 		<div>
 			<md-button class="md-raised" ng-click="showAddNewClient($event);"  ng-init="populateClientList();flag=0">ADD
 			NEW CLIENT</md-button>
 		</div>
-		
-		<input type="text" ng-model="searchText" placeholder="Search by Name">
-		<md-content class="md-padding">
-    <form ng-submit="$event.preventDefault()">
-      <p style="font-weight: bold;font-size: 20px">CLIENT LIST</p>
-     
-      <br/>
-    </form>
-  </md-content>
+		  <h1 style="margin-left: 35%">CLIENT LIST</h1>
 		<table>
 			<tr>
 				<th>COMPANY NAME</th>

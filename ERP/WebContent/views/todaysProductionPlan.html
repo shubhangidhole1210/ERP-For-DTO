@@ -1,5 +1,5 @@
 <div ng-controller="todaysPlanCtrl">
-<div class="erp-information">
+<!-- <div class="erp-information">
      <h1>TODAYS PRODUCTION PLAN</h1>
  
          <form name="todaysProductionPlanInformation"  novalidate class="login-form" style="width: 70%">
@@ -19,20 +19,30 @@
           </div>
           <div class="product-quality-row">
           <span>Target Quantity</span>
-          <span style="position: absolute;margin-left: 8%" ><input type="number" ng-model="productsPlan.targetQuantity" ng-disabled="true"> </span>
+          <span style="position: absolute;margin-left: 8%" ><input type="number" ng-model="productsPlan.targetQuantity" ng-disabled="true" name="targetQuantity"> </span>
+           <div ng-show="todaysProductionPlanInformation.$submitted || todaysProductionPlanInformation.targetQuantity.$touched" style="color: red">
+                  <div ng-show="todaysProductionPlanInformation.targetQuantity.$error.required" class="">phone number required.</div>
+               </div>
           </div>
           <div class="product-quality-row">
               <span>Achived quantity</span>
-              <span style="position: absolute;right: 40%"><input type="text"  ng-model="productsPlan.achivedQuantity"  ></span>
+              <span style="position: absolute;right: 40%"><input type="text"  ng-model="productsPlan.achivedQuantity" required name="achivedQuantity"></span>
+               <div ng-show="todaysProductionPlanInformation.$submitted || todaysProductionPlanInformation.achivedQuantity.$touched" style="color: red">
+                  <div ng-show="todaysProductionPlanInformation.achivedQuantity.$error.required" class="">phone number required.</div>
+               </div>
           </div>
           <div class="product-quality-row">
             <span>Remark</span>
-            <span style="position: absolute;right: 40%"><input type="text" ng-model=""></span>
+            <span style="position: absolute;right: 40%"><input type="text" ng-model="productsPlan.REMARK" required name="remark"></span>
+             <div ng-show="todaysProductionPlanInformation.$submitted || todaysProductionPlanInformation.remark.$touched" style="color: red">
+                  <div ng-show="todaysProductionPlanInformation.remark.$error.required" class="">phone number required.</div>
+               </div>
           </div>
+          
+          
            <div style="margin-top: 5%;margin-left: 70%">
              <md-dialog-actions layout="row">
-      
-      <md-button class="md-raised" ng-click="submitTodayProductionPlan()" ng-disabled="isReadOnly" >SAVE</md-button>
+      <md-button class="md-raised" ng-click="submitTodayProductionPlan(todaysProductionPlanInformation.$valid)" ng-disabled="isReadOnly" >SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
     </md-dialog-actions>
         </div>
@@ -40,5 +50,59 @@
        </fieldset>
        
      </form>
+</div> -->
+<div class="erp-security">
+   <div class="qualitycheck">
+      <div class="header">TODAYS PRODUCTION PLAN</div>
+      <div class="qualityInspection">
+        <form name="todaysProductionPlanInformation"  novalidate  >
+       <div class="productQualityCheck">
+          <div style="text-align: right;font-weight: bold;">
+             <span>Date</span>
+             <span>{{currentDate}}</span>
+          </div>
+          <div class="product-quality-row">
+             <span>Product ID</span>
+             <span style="position: absolute;right: 35%">
+             <select  ng-model=" products.product.id" ng-init="getProducts()" ng-change="getTidaysProductionPlan($index)" style="width: 220px" >
+             <option ng-repeat="product in products" ng-value=" product.product.id"> {{product.product.name}}</option>
+             </select>
+             </span>
+          </div>
+          <div class="product-quality-row">
+          <span>Target Quantity</span>
+          <span style="position: absolute;right: 35%" ><input type="number" ng-model="productsPlan.targetQuantity" ng-disabled="true" name="targetQuantity"> </span>
+           <div ng-show="todaysProductionPlanInformation.$submitted || todaysProductionPlanInformation.targetQuantity.$touched" style="color: red">
+                  <div ng-show="todaysProductionPlanInformation.targetQuantity.$error.required" class="">Please enter target quantity</div>
+               </div>
+          </div>
+          <div class="product-quality-row">
+              <span>Achived quantity</span>
+              <span style="position: absolute;right: 35%"><input type="text"  ng-model="productsPlan.achivedQuantity" required name="achivedQuantity"></span>
+               <div ng-show="todaysProductionPlanInformation.$submitted || todaysProductionPlanInformation.achivedQuantity.$touched" style="color: red">
+                  <div ng-show="todaysProductionPlanInformation.achivedQuantity.$error.required" class="">Please enter achived quantity.</div>
+               </div>
+          </div>
+          <div class="product-quality-row">
+            <span>Remark</span>
+            <span style="position: absolute;right: 35%"><input type="text" ng-model="productsPlan.REMARK" required name="remark"></span>
+             <div ng-show="todaysProductionPlanInformation.$submitted || todaysProductionPlanInformation.remark.$touched" style="color: red">
+                  <div ng-show="todaysProductionPlanInformation.remark.$error.required" class="">Please enter remark.</div>
+               </div>
+          </div>
+          
+          
+           <div style="margin-top: 5%;margin-left: 70%">
+             <md-dialog-actions layout="row">
+      <md-button class="md-raised" ng-click="submitTodayProductionPlan(todaysProductionPlanInformation.$valid)" ng-disabled="isReadOnly" >SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+    </md-dialog-actions>
+        </div>
+          </div>
+       
+     </form>
+      
+      </div>
+   </div>
 </div>
 </div>

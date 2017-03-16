@@ -58,8 +58,6 @@ erpApp.controller('unitDialogCtrl',
 										"saveUnitError", {});
 								console.log(data);
 								$scope.hide();
-								/*$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();*/
 								$scope.message = 'Something went worng. Please try again later.';
 								utils.showToast();
 							}else{

@@ -1,17 +1,11 @@
 <div ng-controller="productOrderCtrl">
 <div class="erp-information">
+ <input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text">
 <div>
     <md-button class="md-raised" ng-click="showAddNewProductOrder($event);" ng-init="populateProductOrderList();flag=0">ADD
 			NEW PRODUCT ORDER</md-button>
 </div>
-          <input type="text" ng-model="searchText" placeholder="Search by Name">
-<md-content class="md-padding">
-    <form ng-submit="$event.preventDefault()">
-      <p style="font-weight: bold;font-size: 20px">PRODUCT ORDER LIST</p>
-     
-      <br/>
-    </form>
-  </md-content>
+  <h1 style="margin-left: 32%">PRODUCT ORDER LIST</h1>
   <table>
 			<tr>
 			    <!--  <th>ID</th> -->

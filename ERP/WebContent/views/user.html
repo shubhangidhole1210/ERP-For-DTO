@@ -4,11 +4,9 @@
 			<md-button class="md-raised" ng-click="showAddNewUser($event);" >ADD
 			NEW USER</md-button>
 		</div>
-		
-		<input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text">
 		  <p style="font-weight: bold;font-size: 20px">USER LIST</p>
-		<table class="">
-			<tr>
+		<table>
+		   <tr>
 				<th>FIRST NAME</th>
 				<th>LAST NAME</th>
 				<th>MOBILE</th>
@@ -16,7 +14,14 @@
 				<th>EMAIL</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="users in data |  filter:{ firstName: searchText } " >
+			<tr>
+			  <td><input type="text" ng-model="f.firstName" style="width: 100px;font-size: 12px" placeholder="Search By Name"></td>
+			  <td><input type="text" ng-model="f.lastName" style="width: 100px;font-size: 12px" placeholder="search By Last Name"></td>
+			  <td><input type="text" ng-model="f.mobile" style="width: 100px;font-size: 12px" placeholder="seacrch By Mobile"></td>
+			  <td><input type="text" ng-model="f.mobile" style="width: 100px;font-size: 12px" placeholder="Search By UserType"></td>
+			  <td><input type="text" ng-model="f.email" style="width: 100px;font-size: 12px" placeholder="search By Email"></td>
+			</tr>
+			<tr ng-repeat="users in data |  filter:f" >
 				<td>{{users.firstName}}</td>
 				<td>{{users.lastName}}</td>
 				<td>{{users.mobile}}</td>

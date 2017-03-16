@@ -1,18 +1,18 @@
 <div ng-controller="rawMaterialCtrl">
 <div class="erp-information">
+  <input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text">
    <div>
 			<md-button class="md-raised" ng-click="showAddRawMaterial($event);"  ng-init="populateRawMaterial();flag=0">ADD
 			RAW MATERIAL INFORMATION</md-button>
 		</div>
-		 <input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text">
-      <p style="font-weight: bold;font-size: 20px">RAW MATERIAL LIST</p>
+      <h1 style="margin-left: 35%">RAW MATERIAL LIST</h1>
   
   <table>
 			<tr>
 				<th> NAME</th>
 				<th>DESCRIPTION</th>
 				<th>PART NUMBER</th>
-				<th>action</th>
+				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="rawMaterials in data |  filter:{ name: searchText }" >
 				<td>{{rawMaterials.name}}</td>

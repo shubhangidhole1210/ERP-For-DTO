@@ -48,6 +48,12 @@ $scope.invoiceRawMaterialList=function(index)
 			console.log('its else block');
 	}
    };
+   
+   $scope.resetQualityInspection=function()
+   {
+	   $scope.user= angular.copy(original);
+		$scope.qualityInspectionForm.$setPristine();
+   }
    $scope.showProgressBarOne= function()
 	{
 		$mdDialog

@@ -1,7 +1,7 @@
 <div ng-controller="productionPlanCtrl">
 <div class="erp-information displayScroll" ng-init="getProductionPlanList()">
-<p style="font-weight: bold;font-size: 20px">PRODUCTION PLAN</p>
-<form  name="qualityInspectionForm" novalidate style="width: 900px">
+<p style="font-weight: bold;font-size: 20px;position: fixed;">PRODUCTION PLAN</p>
+<form  name="qualityInspectionForm" novalidate style="width: 900px;margin-top: 5%">
 <div class="">
 
 <table id="customers" class="">
@@ -50,12 +50,13 @@
 
 
 </div>
-<div style="margin-left: 70%;margin-top: 2%">
+<div style="margin-top: 2%;margin-left: 40%;position: fixed;">
   <md-dialog-actions layout="row">
       
-      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+      <md-button class="md-raised" ng-click="answer('not useful')">CREATE DEFAULT PRODUCTION PLAN</md-button>
       <md-button class="md-raised" ng-click="submitProductionPlan()" ng-disabled="isReadOnly" >SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+       
     </md-dialog-actions>
     </div>
 

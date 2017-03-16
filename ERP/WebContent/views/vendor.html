@@ -1,17 +1,11 @@
 <div ng-controller="vedorCtrl">
 <div class="erp-information">
+<input type="text" ng-model="searchText" placeholder="Search by Company Name" class="search-textr">
 <div>
     <md-button class="md-raised" ng-click="showAddNewVendor($event);" ng-init="populateVendorList();flag=0">ADD
 			NEW VENDOR</md-button>
 </div>
-          <input type="text" ng-model="searchText" placeholder="Search by Name">
-<md-content class="md-padding">
-    <form ng-submit="$event.preventDefault()">
-      <p style="font-weight: bold;font-size: 20px">VENDOR LIST</p>
-     
-      <br/>
-    </form>
-  </md-content>
+      <h1 style="margin-left: 35%">VENDOR LIST</h1>
   <table>
 			<tr>
 			     <th>COMPANY NAME</th>
@@ -21,7 +15,7 @@
 				<!-- <th>EMAIL</th> -->
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="data in data |  filter:{ firstName: searchText } " >
+			<tr ng-repeat="data in data |  filter:{ companyName: searchText } " >
 				<td>{{data.companyName}}</td>
 				<td>{{data.firstName}}</td>
 				<td>{{data.lastName}}</td>

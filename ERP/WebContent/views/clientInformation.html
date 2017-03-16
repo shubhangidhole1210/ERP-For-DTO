@@ -1,95 +1,113 @@
-<md-dialog aria-label="Mango (Fruit)" >
-  <form name="clientInformation"  novalidate>
-  
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>{{information}}</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
+<md-dialog aria-label="Mango (Fruit)"
+	style="min-width: 83%;
+    margin-left: 13%;margin-top:2%">
+<form name="clientInformation" novalidate>
 
-    <md-dialog-content >
-      <div class="md-dialog-content" >
-       
-      <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label  class="input-filed-label">COMPANY NAME</label>
-            <input type="text" ng-model="client.companyname"  required name="companyname" ng-disabled="isReadOnly"  >
-             <div ng-messages="clientInformation.companyname.$error">
-            <div ng-message="required">Please enter Company Name</div>
-          </div>
-          </md-input-container>
+	<md-toolbar>
+	<div class="md-toolbar-tools">
+		<h2>{{information}}</h2>
+		<span flex></span>
+		<md-button class="md-icon-button" ng-click="cancel()"> <md-icon
+			md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+		</md-button>
+	</div>
+	</md-toolbar>
 
-          <md-input-container class="md-block" flex-gt-sm type="password">
-            <label class="input-filed-label">DESCRIPTION</label>
-            <input type="text" ng-model="client.description"  required name="description" ng-minlength="4" ng-maxlength="255" ng-disabled="isReadOnly">
-            <div ng-messages="clientInformation.description.$error">
-              <div ng-message="required">Please enter Description</div>
-               <div ng-message="minlength">Description should be minimum 4 and maximum 255 character  </div>
-                 <div ng-message="maxlength">Description should be minimum 4 and maximum 255 character  </div>
-            </div>
-          </md-input-container>
-        </div>
-      
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label class="input-filed-label">ADDRESS</label>
-            <input type="text" ng-model="client.address"  required name="address" ng-disabled="isReadOnly">
-            <div ng-messages="clientInformation.address.$error">
-             <div ng-message="required">Please enter Client Address</div>
-            </div>
-          </md-input-container>
+	<md-dialog-content>
+	<div class="md-dialog-content">
 
-          <md-input-container class="md-block" flex-gt-sm type="password">
-            <label class="input-filed-label">EMAIL ID</label>
-            <input type="email" ng-model="client.emailid"  required name="emailid" ng-disabled="isReadOnly">
-            <div ng-messages="clientInformation.emailid.$error">
-             <div ng-message="required">Please enter Email Id</div>
-              <div ng-message="email">Please enter valid Email Id</div>
-            </div>
-          </md-input-container>
-        </div>
-        
-         <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label class="input-filed-label">CONTACT NUMBER</label>
-            <input limit-to="10" type="text" ng-model="client.contactnumber"  required name="contactnumber" ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]+$/" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-              <div ng-messages="clientInformation.contactnumber.$error">
-                 <div ng-message="required">Please enter client mobile number</div>
-                 <div ng-message="minlength">mobile number must be 10 digit</div>
-                 <div ng-message="maxlength">mobile number must be 10 digit</div>
-                 <div ng-message="pattern">Please enter valid mobile number</div>
-              </div>
-          </md-input-container>
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">COMPANY NAME</label> <input
+				type="text" ng-model="client.companyname" required
+				name="companyname" ng-disabled="isReadOnly">
+			<div ng-messages="clientInformation.companyname.$error">
+				<div ng-message="required">Please enter Company Name</div>
+			</div>
+			</md-input-container>
+		</div>
 
-          <md-input-container class="md-block" flex-gt-sm type="password">
-            <label class="input-filed-label">CONTACT PERSON NAME</label>
-            <input type="type" ng-model="client.contactpersonname" required   name="contactpersonname" ng-disabled="isReadOnly">
-           <div ng-messages="clientInformation.contactpersonname.$error">
-             <div ng-message="required">Please enter Contact  Person name</div>
-            </div>
-          </md-input-container>
-         
-        </div>
-        
-         </div>
-          
-          
-         
-      
-    </md-dialog-content>
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm type="password">
+			<label class="input-filed-label">DESCRIPTION</label> <input
+				type="text" ng-model="client.description" required
+				name="description" ng-minlength="4" ng-maxlength="255"
+				ng-disabled="isReadOnly">
+			<div ng-messages="clientInformation.description.$error">
+				<div ng-message="required">Please enter Description</div>
+				<div ng-message="minlength">Description should be minimum 4
+					and maximum 255 character</div>
+				<div ng-message="maxlength">Description should be minimum 4
+					and maximum 255 character</div>
+			</div>
+			</md-input-container>
+		</div>
 
-    <md-dialog-actions layout="row">
-      
-      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
-      <md-button class="md-raised" ng-click="submitClientInformation(clientInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
-      <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
-    </md-dialog-actions>
-    
-  </form>
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">ADDRESS</label> <input type="text"
+				ng-model="client.address" required name="address"
+				ng-disabled="isReadOnly">
+			<div ng-messages="clientInformation.address.$error">
+				<div ng-message="required">Please enter Client Address</div>
+			</div>
+			</md-input-container>
+		</div>
+
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm type="password">
+			<label class="input-filed-label">EMAIL ID</label> <input type="email"
+				ng-model="client.emailid" required name="emailid"
+				ng-disabled="isReadOnly">
+			<div ng-messages="clientInformation.emailid.$error">
+				<div ng-message="required">Please enter Email Id</div>
+				<div ng-message="email">Please enter valid Email Id</div>
+			</div>
+			</md-input-container>
+		</div>
+
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">CONTACT NUMBER</label> <input
+				limit-to="10" type="text" ng-model="client.contactnumber" required
+				name="contactnumber" ng-minlength="10" ng-maxlength="10"
+				ng-pattern="/^[0-9]+$/" ng-disabled="isReadOnly"
+				onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+			<div ng-messages="clientInformation.contactnumber.$error">
+				<div ng-message="required">Please enter client mobile number</div>
+				<div ng-message="minlength">mobile number must be 10 digit</div>
+				<div ng-message="maxlength">mobile number must be 10 digit</div>
+				<div ng-message="pattern">Please enter valid mobile number</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm type="password">
+			<label class="input-filed-label">CONTACT PERSON NAME</label> <input
+				type="type" ng-model="client.contactpersonname" required
+				name="contactpersonname" ng-disabled="isReadOnly">
+			<div ng-messages="clientInformation.contactpersonname.$error">
+				<div ng-message="required">Please enter Contact Person name</div>
+			</div>
+			</md-input-container>
+		</div>
+
+
+	</div>
+
+
+
+
+	</md-dialog-content>
+
+	<md-dialog-actions layout="row"> <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
+	<md-button class="md-raised"
+		ng-click="submitClientInformation(clientInformation.$valid,$event)"
+		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+	</md-dialog-actions>
+
+</form>
 </md-dialog>
 
 

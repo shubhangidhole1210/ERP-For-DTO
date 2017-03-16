@@ -1,22 +1,16 @@
 <div ng-controller="pageCtrl">
 <div class="erp-information">
+	<input type="text" ng-model="searchText" placeholder="Search by page Name" class="search-text">
     <div>
 			<md-button class="md-raised" ng-click="showAddNewPage($event);"  ng-init="populatePageList();flag=0">ADD NEW PAGE</md-button>
 		</div>
-		<input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text">
-		<md-content class="md-padding">
-    <form ng-submit="$event.preventDefault()">
-      <p style="font-weight: bold;font-size: 20px">PAGE LIST</p>
-     
-      <br/>
-    </form>
-  </md-content>
+      <h1 style="margin-left: 35%">PAGE LIST</h1>
   <table>
 			<tr>
 				<th>MENU</th>
 				<th>PAGE NAME</th>
 				<th>SUBMENU</th>
-				<th>Action</th>
+				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="page in data |  filter:{ pageName: searchText }">
 				<td>{{page.menu}}</td>

@@ -1,18 +1,11 @@
 <div ng-controller="RMVendorCtrl">
 	<div class="erp-information">
+	<input type="text" ng-model="searchText" placeholder="Search by Unit" class="search-text">
 		<div>
 			<md-button class="md-raised" ng-click="showAddNewRMVendorAssociation($event);"  ng-init="populateRMVendorAssociationList();flag=0">ADD
 			NEW RMVendor Association</md-button>
 		</div>
-		
-		<input type="text" ng-model="searchText" placeholder="Search by Name">
-		<md-content class="md-padding">
-    <form ng-submit="$event.preventDefault()">
-      <p style="font-weight: bold;font-size: 20px">RAW MATERIAL VENDOR LIST</p>
-     
-      <br/>
-    </form>
-  </md-content>
+		<h1 style="margin-left: 10%">RAW MATERIAL VENDOR ASSOCIATION LIST</h1>
 		<table>
 			<tr>
 				<th>Raw Material</th>
@@ -21,7 +14,7 @@
 				
 				<th>action</th>
 			</tr>
-			<tr ng-repeat="rmOrderAssociations in data |  filter:{ pricePerUnit: searchText } " >
+			<tr ng-repeat="rmOrderAssociations in data |  filter:{name: searchText } " >
 				<td>{{rmOrderAssociations.rawmaterial.name}}</td>
 				<td>{{rmOrderAssociations.vendor.companyName}}</td>
 				<td>{{rmOrderAssociations.pricePerUnit}}</td>

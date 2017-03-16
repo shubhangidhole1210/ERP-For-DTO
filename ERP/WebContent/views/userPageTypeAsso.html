@@ -1,17 +1,11 @@
 <div ng-controller="userTypePageAssoCtrl">
 <div class="erp-information">
+<input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text">
 <div>
     <md-button class="md-raised" ng-click="showAddNewUserTypePage($event);" ng-init="populateuserTeypePageAsso();flag=0">ADD
 			NEW USER TYPE PAGE</md-button>
 </div>
-          <input type="text" ng-model="searchText" placeholder="Search by Name">
-<md-content class="md-padding">
-    <form ng-submit="$event.preventDefault()">
-      <p style="font-weight: bold;font-size: 20px">USER TYPE PAGE ASSOCIATION</p>
-     
-      <br/>
-    </form>
-  </md-content>
+       <h1 style="margin-left: 15%">USER TYPE PAGE ASSOCIATION LIST</h1>   
   <table>
 			<tr>
 			     <th>USER TYPE</th>

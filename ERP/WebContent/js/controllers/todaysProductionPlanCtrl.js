@@ -25,11 +25,25 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 			$http(httpparams).then(function successCallback(response) {
 				utils.hideProgressBar();
 				$scope.products = response.data;
+				 $scope.displayNone();
 				console.log(response);
 			}, function errorCallback(response) {
 				console.log("Error");
 				utils.hideProgressBar();
 			});
+	  }
+	  
+	  $scope.isNone=false;
+	  $scope.displayNone=function()
+	  {
+		  if($scope.products.length==0)
+			{
+			$scope.isNone=true; 
+			}
+		else
+			{
+			$scope.isNone=false; 
+			}
 	  }
 	  
 	  $scope.getTidaysProductionPlan=function(index)
@@ -53,6 +67,13 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 	  }
 	  
 	  $scope.submitTodayProductionPlan=function(){
+		  if ($scope.todaysProductionPlanInformation.$valid) {
+			  $scope.updateProductionPlan();
+		  }
+	  };
+	  
+	  $scope.updateProductionPlan=function()
+	  {
 		  console.log($scope.products);
 			utils.showProgressBar();
 			var httpparams = {};

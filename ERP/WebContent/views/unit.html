@@ -1,32 +1,21 @@
 <div ng-controller="unitCtrl">
 <div class="erp-information">
+    <input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text">
     <div>
 			<md-button class="md-raised" ng-click="showAddNewUnit($event);"  ng-init="populateUnitList();flag=0">ADD NEW UNIT</md-button>
 		</div>
-		<input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text">
-		<md-content class="md-padding">
-    <form ng-submit="$event.preventDefault()">
-      <p style="font-weight: bold;font-size: 20px">UNIT LIST</p>
-     
-      <br/>
-    </form>
-  </md-content>
+     <h1 style="margin-left: 35%">UNIT LIST</h1>
   <table>
 			<tr>
 				<th>NAME</th>
 				<th>DESCRIPTION</th>
-				<!-- <th>CREATE DATEA</th>
-				<th>UPDATE DATE</th> -->
-				<th>Action</th>
+				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="units in data |  filter:{ name: searchText } " >
 				<td>{{units.name}}</td>
 				<td>{{units.description}}</td>
-				<!-- <td>{{units.createdDate}}</td>
-				<td>{{units.updatedDate}}</td> -->
 				<td>
 				     <md-button class="md-raised"  ng-click="showEditUnit($event,$index)" ng-init="flag=1">EDIT</md-button>
-				<!-- <md-button class="md-raised" ng-click="showConfirm($event)">REMOVE</md-button> -->
 				<md-button class="md-raised"  ng-click="showConfirm($event,$index)">Remove</md-button>
 				
 				<md-button class="md-raised" ng-click="viewUnitInformation($event,$index)">VIEW</md-button>
