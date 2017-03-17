@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango (Fruit)" >
+<md-dialog aria-label="Mango (Fruit)" style="min-width: 85%;margin-left: 13%;height: 100%;margin-top:2%">
   <form name="productInventoryInformation"  novalidate>
   
     <md-toolbar>
@@ -22,8 +22,10 @@
             <div ng-message="required">Please enter Name</div>
           </div>
           </md-input-container>
-
-          <md-input-container class="md-block" flex-gt-sm type="password">
+       </div>
+       
+       <div layout-gt-sm="row">
+       <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">DESCRIPTION</label>
             <input type="text" ng-model="productInventory.description"  required name="description" ng-minlength="4" ng-maxlength="255" ng-disabled="isReadOnly">
             <div ng-messages="productInventoryInformation.description.$error">
@@ -31,17 +33,18 @@
               <div ng-message="minlength">Description must be grater than 4 or less than 255 characters </div>
             </div>
           </md-input-container>
-        </div>
-      
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
+       
+       </div>
+          <div layout-gt-sm="row">
+           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANITY AVAILABLE</label>
             <input type="text" ng-model="productInventory.quantityavailable"  required name="quantityavailable" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
             <div ng-messages="productInventoryInformation.quantityavailable.$error">
              <div ng-message="required">Please enter available quantity</div>
             </div>
           </md-input-container>
-
+          </div>
+        <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">RACK NUMBER</label>
             <input type="text" ng-model="productInventory.racknumber"  required name="racknumber" ng-disabled="isReadOnly" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>

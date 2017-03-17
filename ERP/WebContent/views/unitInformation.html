@@ -17,7 +17,7 @@
       <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">NAME</label>
-            <input type="text" ng-model="unit.name"   required name="name" ng-disabled="isReadOnly"  >
+            <input type="text" ng-model="unit.name"    name="name" ng-disabled="isReadOnly"  >
              <div ng-messages="unitInformation.name.$error">
             <div ng-message="required">Please enter Unit</div>
           </div>
@@ -26,7 +26,7 @@
         </div>
        <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">DESCRIPTION</label>
-            <input type="text" ng-model="unit.description" required name="description" ng-minlength="4" ng-maxlength="255" ng-disabled="isReadOnly">
+            <input type="text" ng-model="unit.description"  name="description" ng-minlength="4" ng-maxlength="255" ng-disabled="isReadOnly">
             <div ng-messages="unitInformation.description.$error">
               <div ng-message="required">Unit Description Required</div>
               <div ng-message="minlength">Unit Description should be minimum 4 character 255 character</div>

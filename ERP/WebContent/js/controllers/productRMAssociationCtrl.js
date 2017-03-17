@@ -21,6 +21,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
 				$scope.productRmAssociations = response.data;
+				$scope.productRmAssociationInformation();
 				utils.hideProgressBar();
 				console.log(response);
 
@@ -31,6 +32,18 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 			});
 	}
 	
+	$scope.isProductRmAssociationPresent=false; 
+	$scope.productRmAssociationInformation=function()
+	{
+		if($scope.data.length==0)
+			{
+			$scope.isProductRmAssociationPresent=true; 
+			}
+		else
+			{
+			$scope.isProductRmAssociationPresent=false; 
+			}
+	}
 	
 	
 	$scope.productRmAsso={};

@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango (Fruit)" >
+<md-dialog aria-label="Mango (Fruit)" style="min-width: 85%;margin-left: 13%;height: 100%;margin-top:2%">
   <form name="RMInventaryInformation"  novalidate>
   
     <md-toolbar>
@@ -14,14 +14,15 @@
     <md-dialog-content >
       <div class="md-dialog-content" >
              <div layout-gt-sm="row">
-        
-                 <md-input-container class="md-block" flex-gt-sm>
+               <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">NAME</label>
             <input type="text" ng-model="rmInventary.name" value="rmInventary.name"  required name="name" ng-disabled="isReadOnly"  >
              <div ng-messages="RMInventaryInformation.name.$error">
             <div ng-message="required">Please enter Name</div>
           </div>
           </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">DESCRIPTION</label>
             <input type="text" ng-model="rmInventary.description" value="rmInventary.description" required name="description" ng-minlength="4" ng-maxlength="255" ng-disabled="isReadOnly">
@@ -39,8 +40,10 @@
              <div ng-message="required">Please enter available quantity</div>
             </div>
           </md-input-container>
-
-          <md-input-container>
+        </div>
+        
+          <div layout-gt-sm="row">
+            <md-input-container>
           <label style="color: black;">RAW MATERIAL</label>
           <md-select ng-model="rmInventary.rawmaterial.id" name="RMInventory" value="RMInventory.id" ng-disabled="isReadOnly" ng-required="true" rrquired>
             <md-option ng-repeat="RMInventory in data" ng-value="RMInventory.id" >
@@ -51,7 +54,9 @@
                  <div ng-message="required">Please Select Raw Material </div>
               </div>
         </md-input-container>
-        </div>
+          </div>
+          
+        
             <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">RACK NUMBER</label>

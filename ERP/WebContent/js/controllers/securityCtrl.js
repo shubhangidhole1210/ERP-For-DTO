@@ -59,13 +59,15 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		
 		$http(httpparams).then(function successCallback(response) {
 		$scope.statusInformationList = response.data;
-
+		utils.hideProgressBar();
 		console.log(response);
          console.log($scope.rawMaterialList)
 	}, function errorCallback(response) {
 		console.log("Error");
-
+		utils.hideProgressBar();
 	});
+		utils.showProgressBar();
+		
 	}
 
 	$scope.submitInformation = function($event) {
@@ -202,12 +204,10 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.vendorRmList = response.data;
-
 			console.log(response);
 
 		}, function errorCallback(response) {
 			console.log("Error");
-
 		})
 	}
 	var original = $scope.user;

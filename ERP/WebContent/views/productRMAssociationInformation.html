@@ -1,4 +1,4 @@
-<md-dialog aria-label="" >
+<md-dialog aria-label="" style="min-width: 85%;margin-left: 13%;height: 100%;margin-top:2%" >
   <form name="productRMAssociationInformation"  novalidate>
   
     <md-toolbar>
@@ -15,11 +15,8 @@
       <div class="md-dialog-content" >
        
       
-      
-       
-        
-         
-         <md-input-container ng-init="getRawMaterials()">
+      <div layout-gt-sm="row">
+          <md-input-container ng-init="getRawMaterials()">
           <label style="color: black;">RAW MATERIAL*</label>
           <md-select ng-model="productRmAsso.rawmaterial.id" name="rawmaterial"  ng-disabled="isReadOnly" ng-required="true"  ng-init="rawMaterialId()">
             <md-option ng-repeat="rawMaterial in RMData" ng-value="rawMaterial.id" >
@@ -30,8 +27,9 @@
                  <div ng-message="required">Please Select Raw Material</div>
               </div>
         </md-input-container>
-        
-        <md-input-container ng-init="getProducts()">
+        </div>
+         <div layout-gt-sm="row">
+          <md-input-container ng-init="getProducts()">
           <label style="color: black;">PRODUCT*</label>
           <md-select ng-model="productRmAsso.product.id" name="product"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getProducts()">
             <md-option ng-repeat="product in products" ng-value="product.id" >
@@ -42,9 +40,9 @@
                  <div ng-message="required">Please Select Product</div>
               </div>
         </md-input-container>
+        </div>
         
-      
-         
+          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm type="password">
               <label class="input-filed-label">QUANTITY*</label>
               
@@ -53,21 +51,18 @@
                  <div ng-message="required">Please Enter Quantity</div>
               </div>
          </md-input-container>   
-                      
-        
+          </div>
+      
          </div>
           
-          
-         
+   
       
     </md-dialog-content>
-
-    <md-dialog-actions layout="row">
-      
-      <!-- <md-button class="md-raised" ng-click="saveproductRMAssociation($event)" >SAVE</md-button> -->
+        <md-dialog-actions layout="row">
       <md-button class="md-raised" ng-click="submitInformation(productRMAssociationInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
     </md-dialog-actions>
+   
     
   </form>
 </md-dialog>
