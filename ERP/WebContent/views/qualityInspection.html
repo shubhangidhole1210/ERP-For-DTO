@@ -9,7 +9,7 @@
   <div layout-gt-sm="row">
  <md-input-container>
           <label style="color: black;">Invoice No*</label>
-          <md-select ng-model="invoiceList.id" name="invoice" ng-init="getRMOrderInvoiceInformation()" ng-change="invoiceRawMaterialList($index)" required>
+          <md-select ng-model="invoiceList.id" name="invoice" ng-init="getRMOrderInvoiceInformation()" ng-change="invoiceRawMaterialList($index)"  md-autofocus required>
             <md-option ng-repeat="invoice in invoiceList" ng-value="invoice.id" >
                {{invoice.invoice_No}}
             </md-option>
@@ -47,19 +47,21 @@
               <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">RECEIVED</label>
             <input type="number" ng-model="rmInvoiceItem.goodQuantity" ng-change="checkReceivedQuantity($index)" name="recivedOk{{$index}}" max="{{rmInvoiceItem.quantity}}">
-            <div ng-messages="qualityInspectionForm.recivedOk{{$index}}.$error">
+            <div ng-messages="qualityInspectionForm.recivedOk.$error">
              <div ng-message="required">Please enter Received Quantity</div>
-             <div></div>
+             <!-- <div ng-message="number">The value must be in range 0 to {{rmInvoiceItem.quantity}}!</div> -->
             </div>
-             
+              <!-- <span class="error" ng-show="qualityInspectionForm.recivedOk($index).$error.number">
+              The value must be in range 0 to {{rmInvoiceItem.quantity}}!      
+               </span> -->
              <div ng-show="qualityInspectionForm.recivedOk{{$index}}.$error.max" class="error-msg">The value must be in range 0 to {{rmInvoiceItem.quantity}}!</div>
           </md-input-container>
           </td>
           <td>
               <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">REMARK</label>
-            <input type="text" ng-model="rmInvoiceItem.remark"  name="remark{{$index}}"  >
-            <div ng-messages="qualityInspectionForm.remark{{$index}}.$error">
+            <input type="text" ng-model="rmInvoiceItem.remark"  name="remark"  >
+            <div ng-messages="qualityInspectionForm.remark.$error">
              <div ng-message="required">please enter remark </div>
            
             </div>
@@ -77,7 +79,7 @@
           </td>
       </tr>
     </table>
-     <div style="margin-top: 5%;margin-left: 70%">
+     <div  class="btn-class">
          <md-dialog-actions layout="row">
       <md-button class="md-raised" ng-click="submitInformation(qualityInspectionForm.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
       <md-button class="md-raised" ng-click="resetQualityInspection()" type="reset" >CANCEL</md-button>

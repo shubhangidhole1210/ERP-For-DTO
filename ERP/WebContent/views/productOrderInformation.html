@@ -1,4 +1,4 @@
-<md-dialog style="min-width: 85%;margin-left: 13%;height: 100%;margin-top:2%">
+<md-dialog class="statusInfo">
   <form name="productOrderInformation"  novalidate>
   
     <md-toolbar>
@@ -47,20 +47,6 @@
               </div>
          </md-input-container>  
            </div>
-        <div layout-gt-sm="row">
-          <md-input-container>
-          <label style="color: black;">STATUS*</label>
-          <md-select ng-model="productOrder.status.id" name="status"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getStatus()">
-            <md-option ng-repeat="status in statusData" ng-value="status.id" >
-               {{status.name}}
-            </md-option>
-          </md-select>
-          <div ng-messages="productOrderInformation.status.$error">
-                 <div ng-message="required">Please Select Status</div>
-              </div>
-        </md-input-container>
-        
-        </div>
         
         <h2>Product Order List</h2>
         <table>
@@ -75,11 +61,6 @@
        
           </tr>
         </table>
-     
-        
-      
-        
-        
         <div layout-gt-sm="row" >
            <md-input-container>
           <label style="color: black;">PRODUCT*</label>

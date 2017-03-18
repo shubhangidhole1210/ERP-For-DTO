@@ -66,30 +66,40 @@
 <script type="text/javascript" src="js/controllers/productQualityCheckCtrl.js"></script>
 <script type="text/javascript" src="js/services/utils.js"></script>
 </head>
-    <body ng-app="ERPApp">
-      
-    <div ng-controller="ERPController" >
-    <div>
-   <div class="erp-headder">
-      <div class="display-erp-img"> <img alt="" src="image/ek-solution-logo.jpg" width="120px" height="70px"></div> 
-     
-      <div style="display: flex;position: absolute;right: 10px">
-      <div style="color: white;margin-top: 17px" ng-show="displayUserName" >{{user.userid}}</div>
-         <div><md-button class="md-raised"  ng-click="logOut()" ng-show="displayLoginButton" >Log Out</md-button></div>
-    </div>
-   </div>
-   </div>
-        <!--   <div class="hamburgerMenu">
-		<img alt="" src="images/menub.jpg" onclick="displayMenu()"
-			style="width: 30px;">
-	</div> -->
-        
-        </div>
- <div ng-controller="menuController" class="erp-menubar" ng-show="displayMenu">
-        	<div class="erp-menu" id="{{menuItem.pageName}}" ng-repeat="menuItem in menu"   ng-click="menuClicked($index)" ng-class="{'changeERPMenu': $index == selectedIndex }"><a href="#{{menuItem.url}}" >{{menuItem.submenu}}</a></div>
- </div>
- <div ng-view class="main-class"></div>
-  
- 
+<body ng-app="ERPApp">
+
+	<div ng-controller="ERPController">
+		<div>
+			<div class="erp-headder">
+				<div class="display-erp-img">
+					<img alt="" src="image/ek-solution-logo.jpg" width="120px"
+						height="70px">
+				</div>
+
+				<div style="display: flex; position: absolute; right: 10px">
+					<div style="color: white; margin-top: 17px"
+						ng-show="displayUserName">{{user.userid}}</div>
+					<div>
+						<md-button class="md-raised" ng-click="logOut()"
+							ng-show="displayLoginButton">Log Out</md-button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div ng-controller="menuController" class="erp-menubar"
+		ng-show="displayMenu">
+		
+		<div class="erp-menu" id="{{menuItem.pageName}}"
+			ng-repeat="menuItem in menu" ng-click="menuClicked($index)"
+			ng-class="{'changeERPMenu': $index == selectedIndex }">
+			<a href="#{{menuItem.url}}">{{menuItem.submenu}}</a>
+		</div>
+	</div>
+	
+	<div ng-view class="main-class"></div>
+
+
 </body>
 </html>

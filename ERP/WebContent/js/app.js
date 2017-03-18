@@ -194,6 +194,9 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
     });
 }]);
 
+
+
+
 erpApp.service('User', function () {
     return {};
 })
@@ -324,7 +327,15 @@ erpApp.directive('capitalize', function() {
       }
     };
   });	
-		
+
+erpApp.controller('menuController', function($scope) {
+	$scope.selectedIndex = 0;
+	$scope.menuClicked=function($index)
+	{
+		 $scope.selectedIndex = $index;
+		 console.log('selected index is' + $scope.selectedIndex);
+	};
+});		
 erpApp.controller('finshedGoodctrl', function($scope) {
 
 });

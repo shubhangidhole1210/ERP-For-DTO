@@ -22,7 +22,6 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
     	var data = {
     			 orderproductassociations : $scope.orderProductAssociations,
     			 description:$scope.productOrder.description,
-    			 status:$scope.productOrder.status.id,
     			 expecteddeliveryDate:$scope.productOrder.expecteddeliveryDate ,
     			  client:$scope.productOrder.client.id,
     			 createdBy:2,
@@ -114,7 +113,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 
 			});
 	    };
-	 $scope.getStatus=function()
+	/* $scope.getStatus=function()
 	    {
 		 var httpparams = {};
 			httpparams.method = 'GET';
@@ -131,7 +130,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 				console.log("Error");
 
 			});
-	    };
+	    };*/
 	    
 	    $scope.getClient=function(){
 	    	var httpparams = {};

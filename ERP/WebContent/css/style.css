@@ -339,10 +339,11 @@ th
 {
 	width: 250px;
 	height: 25px;
-	padding-left: 5px;
+	/* padding-left: 5px; */
 	position: absolute;
 	right: 20px;
 	margin-top: 16px;
+	padding: 5px;
 }	
  @media screen and (max-width: 408px) {
 
@@ -446,4 +447,23 @@ th
  {
    color: red;
    font-size: 12px;
+ }
+ 
+ .btn-class
+ {
+   margin-top: 5%;
+   margin-left: 70%;
+   padding-bottom: 50px;
+ }
+ .statusInfo
+ {
+   min-width: 1050px;
+   margin-left: 15%;
+   height: 100%;
+ }
+ 
+ .dialogueInfo
+ {
+    min-width: 1050px;
+    margin-left: 15%
  }
