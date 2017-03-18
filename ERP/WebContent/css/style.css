@@ -438,3 +438,12 @@ th
    padding: 10px 80px 0;
     box-shadow: 0 5px 15px #888;
  }
+ .table-header
+ {
+     text-align: center;
+ }
+ .error-msg
+ {
+   color: red;
+   font-size: 12px;
+ }
