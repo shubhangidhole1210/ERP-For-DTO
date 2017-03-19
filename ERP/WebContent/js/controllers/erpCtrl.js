@@ -45,10 +45,4 @@ $scope.logOut=function()
 	Auth.logout();
 	$rootScope.$emit("logout",{});
 };
-/*$scope.selectedIndex = 0;
-$scope.menuClicked=function($index)
-{
-	 $scope.selectedIndex = $index;
-};*/
-	
 });

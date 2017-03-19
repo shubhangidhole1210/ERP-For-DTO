@@ -1,6 +1,6 @@
 <div ng-controller="clientCtrl">
 	<div class="erp-information">
-	<input type="text" ng-model="searchText" placeholder="Search by company Name" class="search-text">
+	<input type="text" ng-model="searchText" placeholder="Search by company Name" class="search-text" autofocus>
 		<div>
 			<md-button class="md-raised" ng-click="showAddNewClient($event);"  ng-init="populateClientList();flag=0">ADD
 			NEW CLIENT</md-button>

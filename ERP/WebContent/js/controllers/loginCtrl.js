@@ -28,8 +28,7 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 			}else{
 				
 			}
-			if(data.data.message!=='User added Successfully !')
-				{
+			if(data.data.message!=='User logged in Successfully !'){
 				$scope.message = data.data.message;
 				$scope.loginForm.userName.$setValidity("apierror", false);
 				$scope.loginForm.password.$setValidity("apierror", false);
