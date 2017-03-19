@@ -3,6 +3,7 @@ erpApp
 				'qualityInspectionCtrl',
 				function($scope, $http, $mdDialog, $mdToast, $rootScope,
 						SERVER_URL, utils, Auth, $location) {
+					document.getElementById('invoiceNumber').focus();
 					$scope.getRMOrderInvoiceInformation = function()
 
 					{
@@ -113,6 +114,7 @@ erpApp
 					$scope.checkReceivedQuantity = function(index) {
 
 						console.log('checkReceivedQuantity');
+						
 						if ($scope.rmInvoiceList[index].quantity === parseInt($scope.rmInvoiceList[index].goodQuantity)) {
 							$scope.rmInvoiceList[index].isReturnInvoiceInitated = false;
 							$scope.rmInvoiceList[index].ischeckBoxDisabled = true;
@@ -124,6 +126,7 @@ erpApp
 							$scope.rmInvoiceList[index].ischeckBoxDisabled = false;
 
 						}
+						
 
 					};
 

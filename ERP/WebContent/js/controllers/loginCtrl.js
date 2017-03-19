@@ -56,4 +56,15 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 		}
 
 	};
+	
+	$scope.onUserIdChange = function(){
+		$scope.loginForm.userName.$setValidity("apierror", true);
+		$scope.loginForm.password.$setValidity("apierror", true);
+	};
+	
+	$scope.onPasswordChange = function(){
+		$scope.loginForm.userName.$setValidity("apierror", true);
+		$scope.loginForm.password.$setValidity("apierror", true);
+	};
+	
 });
