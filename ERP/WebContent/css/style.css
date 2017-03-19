@@ -81,11 +81,40 @@
 } */
 
 .main-class {
-	margin-left: 15%;
-	padding-left: 20px;
-	padding-right: 20px;
+	display: inline-block;
+	width: 81%;
+	padding-left: 2%;
+	padding-right: 2%;
 }
-
+.main-class-full-screen {
+	display: inline-block;
+	width: 96%;
+	padding-left: 2%;
+	padding-right: 2%;
+}
+.erp-table-row{
+	border: none;
+	border: 1px solid gray;
+}
+body::-webkit-scrollbar{
+    width: 1em;
+}
+.erp-menubar::-webkit-scrollbar{
+    width: 6px;
+}
+body::-webkit-scrollbar-track, .erp-menubar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+body::-webkit-scrollbar-thumb, .erp-menubar::-webkit-scrollbar-thumb {
+  background-color: #c1eeed;
+  outline: 1px solid #0000ff;
+}
+.erp-table-column, .erp-table-row td{
+	border: none;
+	border-left: 1px solid gray;
+	border-bottom: 1px solid gray;
+}
 .erp-menubar
 {
 	background-color:  #106CC8;
@@ -93,13 +122,13 @@
 	color: white;
 	font-weight: bold;
 	height: 800px;
-	
+	overflow-y: scroll;
 	font-size: 15px;
 	cursor: pointer;
 	float: left;
-	position: fixed;
     height: 100%;
     padding-top: 100px;
+    display: inline-block;
 }
 .erp-menubar li
 {
@@ -109,6 +138,9 @@
 {
 	color: white;
 	text-decoration: none;
+	    width: 100%;
+    height: 100%;
+    display: block;
 }
 .erp-menubar a:HOVER{
 	color: white;
@@ -296,8 +328,21 @@ th
 }
 .loginClass
 {
-	padding-left: 35%;
+	display: inline-block;
+	vertical-align:top;
+	width: 35%;
+	height: 100%;
+	/* padding-left: 35%; */
+	padding-top: 10%;
+}
+
+.erp-info{
+	display: inline-block;
+	width: 60%;
+	height: 100%;
 	padding-top: 20%;
+	/* background: url("../image/erp_1.png") no-repeat; */
+	
 }
 
 /* @media only screen and (max-width: 768px)
@@ -365,17 +410,16 @@ th
 .erp-menubar
 {
 	background-color:  #106CC8;
-	width: 30%;
+	width: 15%;
 	color: white;
 	font-weight: bold;
 	height: 800px;
 	font-size: 15px;
 	cursor: pointer;
 	float: left;
-	position: fixed;
-    height: 100%;
+	height: 100%;
     padding-top: 100px;
-    /* display: none; */
+    display: inline-block;
 }
 .erp-information {
     padding-left: 5%;
@@ -442,6 +486,20 @@ th
  .table-header
  {
      text-align: center;
+     background: #03A9F4;
+    color: white;
+    padding: 20px;
+    font-weight: 500;
+ }
+ table{
+ 	border-spacing: 0;
+ }
+ 
+ th{
+ 	background-color: #03A9F4;
+ 	text-align: center;
+ 	padding-top: 25px;
+ 	padding-bottom: 25px;
  }
  .error-msg
  {

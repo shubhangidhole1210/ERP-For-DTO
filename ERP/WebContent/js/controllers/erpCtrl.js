@@ -1,3 +1,14 @@
+erpApp.controller('mainViewController', function($scope,$rootScope,Auth,SERVER_URL,$http,$location,User) {
+	console.log('mainViewController');
+	$scope.mainClass = Auth.isLoggedIn() ? 'main-class' : 'main-class-full-screen';
+		$rootScope.$on('logout',function($event){
+			$scope.mainClass = Auth.isLoggedIn() ? 'main-class' : 'main-class-full-screen';
+		});
+		$rootScope.$on('loginSuccess',function($event){
+			$scope.mainClass = Auth.isLoggedIn() ? 'main-class' : 'main-class-full-screen';
+		});
+});
+
 erpApp.controller('ERPController', function($scope,$rootScope,Auth,SERVER_URL,$http,$location,User) {
 	
 	$rootScope.$on('logout',function($event){
