@@ -28,12 +28,7 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 				address: $scope.client.address,
 				emailid: $scope.client.emailid,
 				contactnumber:$scope.client.contactnumber ,
-				contactpersonname: $scope.client.contactpersonname,
-				createdBy:2,
-				created_date:null,
-				updatedBy:1,
-				updated_date:null,
-				isactive:true
+				contactpersonname: $scope.client.contactpersonname
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {

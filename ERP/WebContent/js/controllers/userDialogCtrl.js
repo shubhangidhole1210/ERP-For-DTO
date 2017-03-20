@@ -31,14 +31,7 @@ erpApp.controller('userDialogCtrl',
 							email : $scope.user.email,
 							usertype : $scope.user.usertype.id,
 							doj : $scope.user.doj,
-							dob : $scope.user.dob,
-							createdBy : "123",// TODO Change this to currently
-												// logged in user id
-							created_date : null,
-							updatedBy : "456",// TODO Change this to currently
-												// logged in user id
-							updated_date : null,
-							isactive : true
+							dob : $scope.user.dob
 						};
 						var httpparams = {};
 						if ($scope.flag == 0) {

@@ -160,11 +160,6 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 									quantityAvailable:$scope.rmInventary.quantityAvailable,
 									name:$scope.rmInventary.name,
 									description:$scope.rmInventary.description,
-									createdBy:1,
-									created_date:  null,
-									updatedBy:3,
-									updated_date: null,
-									isactive:true,
 									racknumber: $scope.rmInventary.racknumber
 									
 							};

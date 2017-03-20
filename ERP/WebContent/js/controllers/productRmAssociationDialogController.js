@@ -17,17 +17,10 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    
 	    $scope.saveProductRMAssociationInfo=function(ev)
 	    {
-	    	/* console.log($scope.data)*/
 	    	 var data = {
 	    		rawmaterial : $scope.productRmAsso.rawmaterial.id,
 	    		product : $scope.productRmAsso.product.id,
-	    		quantity : $scope.productRmAsso.quantity,
-	    		"createdBy": 33,
-	    		"created_date":  null,
-	    		"updatedBy":44,
-	    		"updated_date": null,
-	    		"isactive":true
-	    			 
+	    		quantity : $scope.productRmAsso.quantity
 				};
 	    	 
 	    	

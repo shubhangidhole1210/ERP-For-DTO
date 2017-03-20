@@ -26,12 +26,8 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 				partNumber: $scope.product.partNumber,
 				clientpartnumber: $scope.product.clientpartnumber,
 				description: $scope.product.description,
-				design: 'Design will be added later on',
-				"createdBy": 2,
-				"created_date":  null,
-				"updatedBy":3,
-				"updated_date": null,
-				"isactive":true
+				design: 'Design will be added later on'
+				
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {

@@ -24,19 +24,13 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				rawmaterialorderassociations:$scope.orderRawMaterials,
 				name:$scope.rmOrder.name,
 				description:$scope.rmOrder.description,
-				status:$scope.rmOrder.status.id,
 				quantity:$scope.rmOrder.quantity,
 				expectedDeliveryDate:$scope.rmOrder.expectedDeliveryDate,
 				vendor:$scope.selectedVendor,
 				totalprice:$scope.rmOrder.totalprice,
 				tax:$scope.rmOrder.tax,
 				otherCharges:$scope.rmOrder.otherCharges,
-				actualPrice:$scope.rmOrder.actualPrice,
-				createdBy: 2,
-				created_date:  null,
-				updatedBy: 3,
-				updated_date: null,
-				isactive:true
+				actualPrice:$scope.rmOrder.actualPrice
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -69,8 +63,8 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 										"saveRMOrderError", {});
 								console.log(data);
 								$scope.hide();
-								$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();
+								utils.showToast('Something went worng. Please try again later.');
+								
 							}else{
 								$scope.displayProgressBar = false;
 								/*$scope.message = 'Raw Material Order Created successfully.';
@@ -101,26 +95,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	}
 
 	
-	$scope.displayStatusId=function()
-	{
-		var httpparams = {};
-		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "status/list";
-		httpparams.headers = {
-				auth_token : Auth.getAuthToken()
-			};
-		
-		
-		$http(httpparams).then(function successCallback(response) {
-			$scope.statusData = response.data;
-
-			console.log(response);
-
-		}, function errorCallback(response) {
-			console.log("Error");
-
-		})
-	};
 	
 	
 	$scope.vendorRmList=function(index)

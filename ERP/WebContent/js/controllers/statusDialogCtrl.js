@@ -25,9 +25,7 @@ erpApp.controller('StatusDialogueController',
 
 				name : $scope.status.name,
 		        description : $scope.status.description,
-		        type : $scope.status.type,
-		        isactive : true
-				
+		        type : $scope.status.type
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {

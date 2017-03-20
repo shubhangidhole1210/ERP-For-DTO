@@ -17,19 +17,13 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 	    
 	    $scope.saveProductInventory=function(ev)
 	    {
-	    	/* console.log($scope.data)*/
 	    	 var data = {
 
 	    			 product:$scope.productInventory.product.id,
 	    			 description:$scope.productInventory.description,
 	    			 name:$scope.productInventory.name,
 	    			 quantityavailable:$scope.productInventory.quantityavailable,
-	    			 racknumber:$scope.productInventory.racknumber,
-	    			 createdBy:2,
-	    			 created_date:null,
-	    			 updatedBy:1,
-	    			 updated_date:null,
-	    			 isactive:true
+	    			 racknumber:$scope.productInventory.racknumber
 				};
 	    	 
 	    	

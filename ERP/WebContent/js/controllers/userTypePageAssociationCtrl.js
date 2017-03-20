@@ -149,12 +149,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 		    	 var data = {
 
 		    			 page:$scope.userTypePageAsso.page.id,
-		    			 usertype:$scope.userTypePageAsso.usertype.id,
-		    			 created_by:null,
-		    			 created_date:null,
-		    			 updated_by:null,
-		    			 updated_date:null,
-		    			 isactive:true
+		    			 usertype:$scope.userTypePageAsso.usertype.id
 					};
 		    	 
 		    	

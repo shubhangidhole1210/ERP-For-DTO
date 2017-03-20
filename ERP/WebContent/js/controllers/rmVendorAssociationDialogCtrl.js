@@ -26,11 +26,7 @@ erpApp
 
 								rawmaterial:$scope.rmOrderAssociation.rawmaterial.id,
 								vendor:$scope.rmOrderAssociation.vendor.id,
-								pricePerUnit:$scope.rmOrderAssociation.pricePerUnit,
-								created_date:  null,
-								updatedBy:3,
-								updated_date: null,
-								isactive:true
+								pricePerUnit:$scope.rmOrderAssociation.pricePerUnit
 						};
 						var httpparams = {};
 						if ($scope.flag == 0) {

@@ -27,9 +27,10 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 								utils.hideProgressBar();
 							},
 							function errorCallback(response) {
-								$scope.showToast();
+								/*$scope.showToast();*/
 								console.log("Error");
-								$scope.message = "We are Sorry. Something went wrong. Please try again later."
+								/*$scope.message = "We are Sorry. Something went wrong. Please try again later."*/
+								utils.showToast('We are Sorry. Something went wrong. Please try again later.');
 								utils.hideProgressBar();
 			});
 	};

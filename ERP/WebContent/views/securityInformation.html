@@ -108,7 +108,7 @@
               <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANTITY</label>
             <input type="number" ng-model="rawmaterial.invoiceQuantity" name="invoiceQuantity{{$index}}" max="{{rawmaterial.remainingQuantity}}" ng-change="toCompareQuantity(rawmaterial.remainingQuantity,rawmaterial.invoiceQuantity)">
-            <div ng-messages="securityInformation.invoiceQuantity{{$index}}.$error">
+            <div ng-messages="securityInformation.invoiceQuantity.$error">
              <div ng-message="required">please enter quantity </div>
               
             </div>

@@ -26,8 +26,7 @@ erpApp.controller('pageDialogController', function($scope,$http, $mdDialog,SERVE
 				pageName : $scope.page.pageName,
 				submenu : $scope.page.submenu,
 				url : $scope.page.url,
-				description : $scope.page.description,
-			    isactive : true
+				description : $scope.page.description
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {

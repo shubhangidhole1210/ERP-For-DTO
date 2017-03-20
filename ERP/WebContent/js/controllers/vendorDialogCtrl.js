@@ -30,11 +30,6 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 	    		 city : $scope.vendorUser.city,
 	    		 state : $scope.vendorUser.state,
 	    		 postalcode : $scope.vendorUser.postalcode,
-	    		 "createdBy":2,
-	    		 "created_date":null,
-	    		 "updatedBy":1,
-	    		 "updated_date":null,
-	    		 "isactive":true,
 	    		 description: $scope.vendorUser.description
 				};
 	    	 

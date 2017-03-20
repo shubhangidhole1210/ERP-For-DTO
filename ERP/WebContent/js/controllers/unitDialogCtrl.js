@@ -23,10 +23,7 @@ erpApp.controller('unitDialogCtrl',
 		var data = {
 
 				name : $scope.unit.name,
-				description : $scope.unit.description,
-			     created_by : null,
-			     updated_by : null,
-			     isactive : true
+				description : $scope.unit.description
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
