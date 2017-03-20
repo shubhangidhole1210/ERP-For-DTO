@@ -91,11 +91,25 @@
 	<div ng-controller="menuController" class="erp-menubar"
 		ng-show="displayMenu">
 		
-		<div class="erp-menu" id="{{menuItem.pageName}}"
+		<!-- <div class="erp-menu" id="{{menuItem.pageName}}"
 			ng-repeat="menuItem in menu" ng-click="menuClicked($index)"
 			ng-class="{'changeERPMenu': $index == selectedIndex }">
 			<a href="#{{menuItem.url}}">{{menuItem.submenu}}</a>
+		</div> -->
+		
+		<div class="erp-menu" id="{{menuItem.pageName}}"
+			ng-repeat="menuItem in cascadedMenu"
+			ng-class="{'changeERPMenu': $index == selectedIndex }"
+			ng-init="menuItem.displaySubmenu = false" >
+			<div ng-click="menuClicked($index); menuItem.displaySubmenu = !menuItem.displaySubmenu;">{{menuItem.menu}}</div>
+			<div ng-show="menuItem.displaySubmenu" >
+				<div ng-repeat="submenu in menuItem.submenu" class="erp-menu">
+					<a href="#{{submenu.url}}">{{submenu.submenu}}</a>
+				</div>
+			</div>
 		</div>
+		
+		
 	</div>
 	
 	<div ng-view ng-class="mainClass" ng-controller="mainViewController"></div>
