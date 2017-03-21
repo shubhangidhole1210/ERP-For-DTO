@@ -15,11 +15,6 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		/*$http({
-			method : 'GET',
-			url : SERVER_URL + 'UserType/list',
-			headers : {"auth_token" : Auth.getAuthToken()}
-		})*/	
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.UserTypes=response.data;
@@ -145,19 +140,12 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 			var data = {
 
 					usertypeName : $scope.userType.usertypeName,
-					description : $scope.userType.description,
-				     created_by : null,
-				     /*created_date : null,*/
-				     updated_by : null,
-				     /*updated_date : null,*/
-				     isactive : true
+					description : $scope.userType.description
 			};
 			var httpparams = {};
 			if ($scope.flag == 0) {
 				console.log($scope.user);
 				console.log($scope.data);
-				/*httpparams.method = 'post';
-				httpparams.url = SERVER_URL + "UserType/create";*/
 				httpparams.method = 'post';
 				httpparams.url = SERVER_URL + "usertype/create";
 				httpparams.headers = {
@@ -165,9 +153,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 					};
 			} else {
 				console.log($scope.UserType);
-				data.id = $scope.UserType.id;
-				/*httpparams.method = 'put';
-				httpparams.url = SERVER_URL + "UserType/update";*/
+				/*data.id = $scope.UserType.id;*/
 				httpparams.method = 'put';
 				httpparams.url = SERVER_URL + "usertype/update";
 				httpparams.headers = {
@@ -264,7 +250,6 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 		$scope.isReadOnly = false;
 		$scope.UserType = $scope.UserTypes[index];
 		$scope.information = "EDIT UserType INFORMATION"
-		console.log($scope.user);
 		$mdDialog
 				.show({
 					controller : userTypeController,
@@ -322,16 +307,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 	};
 	
 	$scope.deleteUserType = function(index) {
-		/* $scope.user = $scope.users[index].id; */
 		console.log($scope.userType);
-
-		/*$http(
-				{
-					method : 'delete',
-					url : SERVER_URL + "UserType/delete/"
-							+ $scope.UserTypes[index].id
-
-				})*/
 		var httpparams = {};
 		httpparams.method = 'delete';
 		httpparams.url = SERVER_URL + "userType/delete/" + $scope.userTypes[index].id;

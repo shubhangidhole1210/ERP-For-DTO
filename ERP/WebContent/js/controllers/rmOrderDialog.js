@@ -93,10 +93,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		}
 
 	}
-
-	
-	
-	
 	$scope.vendorRmList=function(index)
 	{
 		var httpparams = {};
@@ -172,5 +168,27 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	    	console.log('in delete RM'+ $scope.orderRawMaterials)
 	    	var lastItem = $scope.orderRawMaterials.length;
 		    $scope.orderRawMaterials.splice(index,1);
+	    }
+	    
+	    
+	    
+	    $scope.getRmForOrder=function(index)
+	    {
+	    	var httpparams = {};
+			httpparams.method = 'GET';
+			httpparams.url = SERVER_URL + "rawmaterialorderassociation/getRMForRMOrder/"+ $scope.rmOrder.id;
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			
+			$http(httpparams).then(function successCallback(response) {
+				$scope.rmOrderList = response.data;
+				console.log(response);
+	             console.log($scope.rmOrderList);
+	             utils.hideProgressBar();
+			}, function errorCallback(response) {
+				console.log("Error");
+
+			});
 	    }
 });

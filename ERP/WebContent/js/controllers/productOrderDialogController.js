@@ -23,13 +23,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
     			 orderproductassociations : $scope.orderProductAssociations,
     			 description:$scope.productOrder.description,
     			 expecteddeliveryDate:$scope.productOrder.expecteddeliveryDate ,
-    			  client:$scope.productOrder.client.id,
-    			 createdBy:2,
-    			 created_date:null,
-    			 updatedBy:1,
-    			 updated_date:null,
-    			 isactive:true
-				
+    			  client:$scope.productOrder.client.id
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -113,24 +107,6 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 
 			});
 	    };
-	/* $scope.getStatus=function()
-	    {
-		 var httpparams = {};
-			httpparams.method = 'GET';
-			httpparams.url = SERVER_URL + "status/list";
-			httpparams.headers = {
-					auth_token : Auth.getAuthToken()
-				};
-		 $http(httpparams).then(function successCallback(response) {
-				$scope.statusData = response.data;
-
-				console.log(response);
-
-			}, function errorCallback(response) {
-				console.log("Error");
-
-			});
-	    };*/
 	    
 	    $scope.getClient=function(){
 	    	var httpparams = {};
@@ -161,4 +137,24 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 				   console.log($scope.orderProductAssociations);
 			}
 	    };
+	    
+	    $scope.getProductOrderId=function(index)
+	    {
+	    	var httpparams = {};
+			httpparams.method = 'GET';
+			httpparams.url = SERVER_URL + "productorder/productorderId/"+ $scope.productOrder.id;
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			
+			$http(httpparams).then(function successCallback(response) {
+				$scope.productOrderList = response.data;
+				console.log(response);
+	             console.log($scope.productOrderList);
+	             utils.hideProgressBar();
+			}, function errorCallback(response) {
+				console.log("Error");
+
+			});
+	    }
 });

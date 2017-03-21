@@ -90,13 +90,6 @@
 	</div>
 	<div ng-controller="menuController" class="erp-menubar"
 		ng-show="displayMenu">
-		
-		<!-- <div class="erp-menu" id="{{menuItem.pageName}}"
-			ng-repeat="menuItem in menu" ng-click="menuClicked($index)"
-			ng-class="{'changeERPMenu': $index == selectedIndex }">
-			<a href="#{{menuItem.url}}">{{menuItem.submenu}}</a>
-		</div> -->
-		
 		<div class="erp-menu" id="{{menuItem.pageName}}"
 			ng-repeat="menuItem in cascadedMenu"
 			ng-class="{'changeERPMenu': $index == selectedIndex }"

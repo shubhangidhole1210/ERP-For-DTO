@@ -1,4 +1,5 @@
-<md-dialog aria-label="Mango (Fruit)" class="dialogueInfo">
+<md-dialog aria-label="Mango (Fruit)" class="dialogueInfo" ng-init="getRmForOrder($index)">
+<!-- <md-dialog aria-label="Mango (Fruit)" class="dialogueInfo"> -->
   <form name="RMOrderInformation"  novalidate>
   
     <md-toolbar>
@@ -69,19 +70,6 @@
           
         </div>
         <div layout-gt-sm="row">
-      
-             <!--   <md-input-container>
-          <label style="color: black;">STATUS*</label>
-          <md-select ng-model="rmOrder.status.id" name="statusId" value="statusId.id" ng-disabled="isReadOnly" ng-init="displayStatusId()" name="statusId" ng-required="true" required>
-            <md-select ng-model="rmOrder.status.id" name="statusId" value="statusId.id" ng-disabled="isReadOnly" ng-init="displayStatusId()" name="statusId" ng-required="true" required >
-            <md-option ng-repeat="statusId in statusData" ng-value="statusId.id" >
-               {{statusId.name}}
-            </md-option>
-          </md-select>
-          <div ng-messages="RMOrderInformation.statusId.$error">
-                 <div ng-message="required">Please select status </div>
-              </div>
-        </md-input-container> -->
          <md-input-container>
           <label style="color: black;">VENDOR </label>
           <md-select ng-model="selectedVendor" name="vendorId" ng-disabled="isReadOnly" ng-init="displayVendorId()" name="vendorId" required ng-change="vendorRmList($index)">
@@ -110,7 +98,6 @@
           <td>
              <button type="button" style="height: 40px" ng-click="deleteRM($index)">Delete</button>
                
-                 <!-- <button type="button" style="height: 40px">DELETE</button> -->
           </td>
           </tr>
         </table>

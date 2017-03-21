@@ -83,11 +83,16 @@
           <div layout-gt-sm="row">
          <md-input-container>
           <label style="color: black;">RM Order</label>
-          <md-select ng-model="rawMaterialOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayRMList($index)">
+          <md-select ng-model="rawMaterialOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayRMList($index)"  required>
             <md-option ng-repeat="rawMaterialOrder in vendorRmList" ng-value="rawMaterialOrder.id"  >
                {{rawMaterialOrder.name}}
             </md-option>
           </md-select>
+          <div ng-messages="securityInformation.rawMaterial.$error">
+                 <!-- <div ng-message="required">Please Select RM Order</div> -->
+                <!--  <div ng-message="apierror">Please select Vendor first</div> -->
+                <p ng-show="isRMOrderpresent" style="color: red;">Please select venodr first</p>
+              </div>
         </md-input-container>
         </div>
         <div layout-gt-sm="row">

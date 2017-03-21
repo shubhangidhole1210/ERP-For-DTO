@@ -13,7 +13,6 @@ erpApp.controller('ERPController', function($scope,$rootScope,Auth,SERVER_URL,$h
 	
 	$rootScope.$on('logout',function($event){
 		console.log('Inside logout event');
-		$scope.displayLoginButton = Auth.isLoggedIn();
 		console.log('logging out');
 		$location.path('/login');
 

@@ -3,26 +3,7 @@ var erpApp = angular
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-
-/*erpApp.factory('httpRequestInterceptor', function (Auth) {
-	  return {
-	    request: function (config) {
-	    	console.log(Auth.getAuthToken());
-	    	if( Auth.getAuthToken()){
-	    		config.headers['auth_token'] = Auth.getAuthToken();
-	    		
-	    	}
-	      config.headers['Accept'] = 'application/json;odata=verbose';
-	    	
-	    	return config;
-	    }
-	  };
-	});
-
-erpApp.config(function ($httpProvider) {
-	  $httpProvider.interceptors.push('httpRequestInterceptor');
-});*/
-erpApp.value('SERVER_URL', 'http://192.168.2.102:8085/ERP/');
+erpApp.value('SERVER_URL', 'http://192.168.2.104:8085/ERP/');
 erpApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/home.html',
@@ -55,10 +36,8 @@ erpApp.config(function($routeProvider) {
 		templateUrl : 'views/user.html',
 		data : {
 			loginRequired : true,
-			
 		}
 	
-		
 	}).when('/vendor', {
 		templateUrl : 'views/vendor.html',
 		data : {

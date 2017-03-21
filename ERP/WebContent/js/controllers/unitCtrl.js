@@ -70,17 +70,6 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 				});
 	};
 	
-	/*$scope.showToast = function() {
-		$mdToast.show({
-			hideDelay : 3000,
-			position : 'top right',
-			controller : 'ToastCtrl',
-			templateUrl : 'views/toast.html',
-			locals : {
-				message : $scope.message
-			}
-		});
-	};*/
 	$scope.unit={}
 	$scope.showAddNewUnit = function(ev) {
 		$scope.unit={};
@@ -108,104 +97,6 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		.then(function(answer) {},
 				function() {});
 	};
-	
-	
-/*	function UnitController($scope, $mdDialog,unit,action,flag,$mdToast,information) {
-		$scope.isReadOnly = action;
-		$scope.flag = flag;
-		$scope.unit = unit;
-		$scope.information = information;
-		$scope.user.dob = new Date($scope.user.dob);
-		$scope.user.doj = new Date($scope.user.doj);
-		$scope.hide = function() {
-			console.log('hide DialogController');
-			$mdDialog.hide();
-		};
-
-		$scope.cancel = function() {
-			$mdDialog.cancel();
-		};
-
-		$scope.answer = function(answer) {
-			$mdDialog.hide(answer);
-		};
-
-		$scope.saveUnitInformation = function(ev) {
-			
-			
-			var data = {
-
-					name : $scope.unit.name,
-					description : $scope.unit.description,
-				     created_by : null,
-				     created_date : null,
-				     updated_by : null,
-				     updated_date : null,
-				     isactive : true
-			};
-			var httpparams = {};
-			if ($scope.flag == 0) {
-				console.log($scope.unit);
-				console.log($scope.data);
-				httpparams.method = 'post';
-				httpparams.url = SERVER_URL + "unit/create";
-				httpparams.headers = {
-						auth_token : Auth.getAuthToken()
-					};
-			} else {
-				console.log($scope.unit);
-				data.id = $scope.unit.id;
-				httpparams.method = 'put';
-				httpparams.url = SERVER_URL + "unit/update";
-				httpparams.method = 'put';
-				httpparams.url = SERVER_URL + "unit/update";
-				httpparams.headers = {
-						auth_token : Auth.getAuthToken()
-					};
-			}
-			httpparams.data = data;
-			$http(httpparams)
-					.then(
-							function successCallback(data) {
-								$mdDialog.hide();
-								console.log(data);
-								if(data.data.code === 0){
-									console.log(data.data.message);
-									$rootScope.$emit(
-											"saveUnitError", {});
-									console.log(data);
-									$scope.hide();
-									$scope.message = 'Something went worng. Please try again later.';
-									$scope.showToast();
-								}else{
-									$scope.displayProgressBar = false;
-									$scope.message = 'Unit Information saved successfully.';
-									$scope.showToast();
-									$rootScope.$emit("CallPopulateUnitList",{});
-								}
-							},
-							function errorCallback(data) {
-								$rootScope.$emit(
-										"saveUnitError", {});
-								console.log(data);
-								$scope.hide();
-								$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();
-							});
-
-		};
-
-		$scope.submitUnitInformation = function(isvaliduser,$event) {
-			if (isvaliduser) {
-				utils.showProgressBar();
-			} else {
-				console.log('its else block');
-			}
-
-		};
-		
-	  }*/
-	
 	$scope.showEditUnit = function(ev, index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;

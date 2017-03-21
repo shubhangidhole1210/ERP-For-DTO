@@ -14,6 +14,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		$http(httpparams).then(function successCallback(response) {
 			$scope.rawMaterialOrders = response.data;
 			$scope.rawMaterials = response.data;
+			/*$scope.getRmOrderInfo()*/
 			utils.hideProgressBar();
 			console.log(response);
 
@@ -74,15 +75,6 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			$scope.saveSecurityInformation();
 			
 	};
-	/*$scope.resteData=function()
-	{
-		 $scope.invoice_No=null;
-		 $scope.vendor.id='';
-		 $scope.vehicleNo='';
-		 $scope.driver_Name='';
-		 $scope.description='';
-		 $scope.createDate='';
-	}*/
 	$scope.createDate = new Date($scope.createDate);
 	$scope.saveSecurityInformation = function() {
 		console.log('Saving saveSecurityInformation');
@@ -115,13 +107,6 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			createDate : $scope.createDate,
 			intime : $scope.intime.toLocaleTimeString().split(" ")[0],
 			outtime : $scope.outtime.toLocaleTimeString().split(" ")[0],
-			status:9,
-			po_No : $scope.rawMaterialOrders.id,
-			createdBy : 2,
-			created_date : null,
-			updatedBy : 1,
-			updated_date : null,
-			isactive : true,
 			rmorderinvoiceintakquantities : rmorderinvoiceintakquantities
 		};
 		var httpparams = {
@@ -177,10 +162,6 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 				auth_token : Auth.getAuthToken()
 			};
 		
-		/*$http({
-			method : 'GET',
-			url : SERVER_URL + "vendor/list"
-		})*/
 		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.vendorData = response.data;
@@ -205,11 +186,43 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		$http(httpparams).then(function successCallback(response) {
 			$scope.vendorRmList = response.data;
 			console.log(response);
+			
 
 		}, function errorCallback(response) {
 			console.log("Error");
 		})
 	}
+	
+	$scope.getRmOrderInfo=function()
+	{ 
+		
+		console.log('rmlist'+$scope.vendorRmList);
+		if($scope.vendorRmList.length==0)
+			{
+			  $scope.securityInformation.rawMaterial.$setValidity("apierror", false);
+			  
+			}
+		else {
+			
+		}
+	}
+	
+	/*$scope.isRMOrderpresent=false;
+	$scope.getRmOrderInfo=function()
+	{ 
+		
+		console.log('rmlist'+$scope.vendorRmList);
+		if($scope.vendorRmList.length==0)
+			{
+			  
+			$scope.isRMOrderpresent=true;
+			}
+		else {
+			$scope.isRMOrderpresent=false;
+		}
+	}*/
+	
+	
 	var original = $scope.user;
 	$scope.restInformation=function()
 	{

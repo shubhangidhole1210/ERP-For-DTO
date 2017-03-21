@@ -57,12 +57,10 @@ erpApp.controller('StatusDialogueController',
 										"saveUnitError", {});
 								console.log(data);
 								$scope.hide();
-								$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();
+								utils.showToast('Something went worng. Please try again later.')
 							}else{
 								$scope.displayProgressBar = false;
-								$scope.message = 'Status Information saved successfully.';
-								$scope.showToast();
+								utils.showToast('Status Information saved successfully.')
 								$rootScope.$emit("callPopulateStatusList",{});
 							}
 						},
@@ -71,15 +69,14 @@ erpApp.controller('StatusDialogueController',
 									"saveUnitError", {});
 							console.log(data);
 							$scope.hide();
-							$scope.message = 'Something went worng. Please try again later.';
-							$scope.showToast();
+							utils.showToast('Something went worng. Please try again later.')
 						});
 
 	}
 
 	$scope.submitStatusInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			$scope.showProgressBar($event);
+			$scope.saveStatusInformation(event)
 			
 		} else {
 			console.log('its else block');
@@ -87,43 +84,4 @@ erpApp.controller('StatusDialogueController',
 
 	}
 
-	$scope.showToast = function() {
-		$mdToast.show({
-			hideDelay : 3000,
-			position : 'top right',
-			controller : 'ToastCtrl',
-			templateUrl : 'views/toast.html',
-			locals : {
-				message : $scope.message
-			}
-		});
-	};
-	
-	$scope.showProgressBar = function(ev) {
-		$scope.displayProgressBar = true;
-		$mdDialog
-				.show(
-						{
-							controller : ProgressBarController,
-							templateUrl : 'views/progressBar.html',
-							parent : angular
-									.element(document.body),
-							targetEvent : ev,
-							clickOutsideToClose : false,
-							fullscreen : $scope.customFullscreen,
-							onComplete : function() {
-								$scope.saveStatusInformation(ev);
-							}
-							
-						// Only for -xs, -sm breakpoints.
-						})
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
-	};
 });
