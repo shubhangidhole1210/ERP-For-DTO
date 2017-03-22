@@ -107,6 +107,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			createDate : $scope.createDate,
 			intime : $scope.intime.toLocaleTimeString().split(" ")[0],
 			outtime : $scope.outtime.toLocaleTimeString().split(" ")[0],
+			po_No :  $scope.rawMaterialOrders.id,
 			rmorderinvoiceintakquantities : rmorderinvoiceintakquantities
 		};
 		var httpparams = {
@@ -193,7 +194,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		})
 	}
 	
-	$scope.getRmOrderInfo=function()
+	/*$scope.getRmOrderInfo=function()
 	{ 
 		
 		console.log('rmlist'+$scope.vendorRmList);
@@ -205,7 +206,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		else {
 			
 		}
-	}
+	}*/
 	
 	/*$scope.isRMOrderpresent=false;
 	$scope.getRmOrderInfo=function()

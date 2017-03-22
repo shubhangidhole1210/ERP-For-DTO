@@ -62,20 +62,18 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 								$scope.hide();
 								utils.showToast('Something went worng. Please try again later.');
 							}
-							else if(data.data.code === 2)
+							/*else if(data.data.code === 2)
 								{
 								console.log(data.data.message);
 								$rootScope.$emit(
 										"saveClientError", {});
 								console.log(data);
 								$scope.hide();
-								/*$scope.message = data.data.message;*/
 								utils.showToast(data.data.message);
-								}
+								}*/
 							else{
+								console.log(data.data.message);
 								$scope.displayProgressBar = false;
-								/*$scope.message = 'Client Information saved successfully.';
-								$scope.showToast();*/
 								utils.showToast('User Information saved successfully.');
 								$rootScope.$emit("CallPopulateClientList",{});
 							}
@@ -92,8 +90,7 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 
 	$scope.submitClientInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			$scope.saveClient();
-			$scope.showProgressBar($event);
+			$scope.saveClient(event);
 			
 		} else {
 			console.log('its else block');
@@ -101,7 +98,7 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 
 	}
 
-	$http({
+	/*$http({
 		method : 'GET',
 		url : SERVER_URL + "usertype/list"
 	}).then(function successCallback(response) {
@@ -111,5 +108,5 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 	}, function errorCallback(response) {
 		console.log("Error");
 
-	});
+	});*/
 });

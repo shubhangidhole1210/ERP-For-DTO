@@ -23,6 +23,15 @@
           </div>
           </md-input-container>
      </div>
+          <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">INVOICE NO</label>
+            <input type="text" ng-model="productOrder.invoiceNo"  required name="invoiceNo" ng-disabled="isReadOnly"  >
+             <div ng-messages="productOrderInformation.invoiceNo.$error">
+            <div ng-message="required">Please enter Invoice No</div>
+          </div>
+          </md-input-container>
+     </div>
            <div layout-gt-sm="row">
                <md-input-container>
           <label style="color: black;">CLIENT*</label>
@@ -60,6 +69,11 @@
           <td>{{orderProductAssociation.quantity}}</td>
        
           </tr>
+          <!-- <tr ng-repeat="orderProductAssociation in productOrderList">
+          <td>{{orderProductAssociation.product}}</td>
+          <td>{{orderProductAssociation.quantity}}</td>
+       
+          </tr> -->
         </table>
         <div layout-gt-sm="row" >
            <md-input-container>

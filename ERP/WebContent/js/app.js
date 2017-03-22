@@ -143,8 +143,12 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	})
-	.when('/notFound', {
+	}).when('/fileUpload', {
+		templateUrl : 'views/fileUpload.html',
+		data : {
+			loginRequired : true
+		}
+	}).when('/notFound', {
 		templateUrl : 'views/notFound.html',
 	}).otherwise({
 		redirectTo : '/notFound'
@@ -173,7 +177,39 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
     });
 }]);
 
+erpApp.directive("fileread", [
+                           function() {
+                             return {
+                               scope: {
+                                 fileread: "="
+                               },
+                               link: function(scope, element, attributes) {
+                                 element.bind("change", function(changeEvent) {
+                                   var reader = new FileReader();
+                                   reader.onload = function(loadEvent) {
+                                     scope.$apply(function() {
+                                       scope.fileread = loadEvent.target.result;
+                                     });
+                                   }
+                                   reader.readAsDataURL(changeEvent.target.files[0]);
+                                 });
+                               }
+                             }
+                           }
+                         ]);
+erpApp.directive('ngFiles', ['$parse', function ($parse) {
 
+    function fn_link(scope, element, attrs) {
+        var onChange = $parse(attrs.ngFiles);
+        element.on('change', function (event) {
+            onChange(scope, { $files: event.target.files });
+        });
+    };
+
+    return {
+        link: fn_link
+    }
+} ])
 
 
 erpApp.service('User', function () {

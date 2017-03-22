@@ -44,7 +44,7 @@ erpApp.controller('userCtrl',
 
 					$scope.user = {};
 					$scope.showAddNewUser = function(ev) {
-						$scope.user = {};
+						/*$scope.user = {};*/
 						$scope.information = "ADD NEW USER"
 						$scope.flag = 0;
 						$scope.isReadOnly = false;
@@ -150,5 +150,11 @@ erpApp.controller('userCtrl',
 										},
 										function() { });
 					};
+					/*var original = $scope.user;
+					$scope.resetUserData=function()
+					{
+						$scope.user= angular.copy(original);
+						$scope.userInformation.$setPristine();
+					}*/
 
 });

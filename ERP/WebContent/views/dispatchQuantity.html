@@ -11,7 +11,7 @@
              <label style="color: black;font-weight: bold;">Product Order </label>
           <md-select ng-model="order.id"  ng-disabled="isReadOnly" ng-init="populateProductOrderPendingList()" name="productOrder"  ng-change="getDispatchquantity($index)" required>
             <md-option ng-repeat="order in productOrders" ng-value="order.id" >
-               {{order.id}}
+               {{order.invoiceNo}}
             </md-option>
              <div ng-messages="dispatchQuantityInformation.productOrder.$error">
                  <div ng-message="required">Please select Product </div>
@@ -25,6 +25,16 @@
             <input type="text" required name="invoiceid" ng-model="invoice" >
              <div ng-messages="dispatchQuantityInformation.invoiceid.$error">
             <div ng-message="required">Please enter Invoice ID</div>
+           
+          </div>
+          </md-input-container>
+    </div>
+     <div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">DESCRIPTION</label>
+            <input type="text" required name="description" ng-model="description" >
+             <div ng-messages="dispatchQuantityInformation.description.$error">
+            <div ng-message="required">Please enter Description</div>
            
           </div>
           </md-input-container>

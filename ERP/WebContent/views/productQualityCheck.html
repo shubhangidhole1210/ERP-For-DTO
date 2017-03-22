@@ -1,57 +1,4 @@
 <div ng-controller="prodcutQualityCheckCtrl">
- <!--  <div class="erp-security">
-   <div class="qualitycheck">
-      <div class="header">QUALITY INSPECTION</div>
-      <div class="qualityInspection">
-        <form name="productQualityCheckInformation"  novalidate  style="width: 70%">
-       <div class="productQualityCheck">
-       <div align="right">
-       <div style="font-weight: bold;">
-             <span>Date</span>
-             <span>{{currentDate}}</span>
-          </div>
-       </div> 
-          
-              <md-input-container class="md-block product-quality-row" flex-gt-sm>
-             <span>Product ID</span>
-             <span style="position: absolute;right: 10%">
-             <select  ng-model="selectedProductionPlan" ng-init="getProductionPlanByDate()" ng-change="getTodaysProductionPlan($index)" style="width: 220px" name="productName" required>
-             <option ng-repeat="productionPlan in productionPlans" ng-value="productionPlan"> {{productionPlan.product.name}}</option>
-             </select>
-             </span>
-             <div ng-messages="productQualityCheckInformation.productName.$error">
-            <div ng-message="required">Please select product ID</div>
-          </div>
-          </md-input-container>
-          </div>
-          <div class="product-quality-row">
-          <span>Product Quantity</span>
-          <span style="position: absolute;right: 35%"><input type="number" ng-model="selectedProductionPlan.targetQuantity" name="targetQuantity"  ng-disabled="true"></span>
-          </div>
-          <div class="product-quality-row">
-              <span>Pass quantity</span>
-              <span style="margin-left: 16%"><input type="number" ng-model="QCPassQuantity"></span>
-          </div>
-          <div class="product-quality-row">
-            <span>Fail Quantity</span>
-            <span style="position: absolute;right: 35%"><input type="number" ng-model="QCFailQuantity"></span>
-          </div>
-          <div class="product-quality-row">
-            <span>Remark</span>
-            <span style="position: absolute;right: 35%"><input type="text" ng-model="remark"></span>
-          </div>
-           <div style="margin-top: 5%;margin-left: 70%">
-         <md-dialog-actions layout="row">
-      <md-button class="md-raised" ng-click="submitProductQualityCheckInformation(productQualityCheckInformation.$valid)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
-      <md-button class="md-raised" ng-click="" >CANCEL</md-button>
-    </md-dialog-actions>
-        </div>
-          </div>
-       
-     </form>
-      </div>
-   </div>
-</div> -->
 <div class="erp-security">
     <div class="qualitycheck">
      <div class="header">QUALITY INSPECTION</div>
@@ -64,7 +11,7 @@
             		 <span>{{currentDate}}</span>
           			</div>
        			</div> 
-       			  <div layout-gt-sm="row">
+       			<!--   <div layout-gt-sm="row">
       				 <md-input-container class="md-block product-quality-row" flex-gt-sm>
              <span>Product ID</span>
              <span style="position: absolute;right: 10%">
@@ -72,11 +19,24 @@
              <option ng-repeat="productionPlan in productionPlans" ng-value="productionPlan"> {{productionPlan.product.name}}</option>
              </select>
              </span>
+             
              <div ng-messages="productQualityCheckInformation.productName.$error">
             <div ng-message="required">Please select product ID</div>
           </div>
           </md-input-container>
-   				 </div>
+   				 </div> -->
+   				 
+   				  <div layout-gt-sm="row">
+      <md-input-container> <label style="color: black;">Product Id
+			</label> <md-select ng-model="selectedProductionPlan" name="productName"
+			 ng-required="true" required ng-init="getProductionPlanByDate()" ng-change="getTodaysProductionPlan($index)"> <md-option
+			ng-repeat="productionPlan in productionPlans" ng-value="productionPlan">
+		{{productionPlan.product.name}}</md-option> </md-select>
+		<div ng-messages="productQualityCheckInformation.productName.$error">
+			<div ng-message="required">Please Select Product Id</div>
+		</div>
+		</md-input-container>
+    </div>
    				 <div layout-gt-sm="row">
    				   <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">Product Quantity</label> <input
@@ -97,7 +57,7 @@
    				 </div>
    				 <div layout-gt-sm="row">
    				   <md-input-container class="md-block" flex-gt-sm>
-			<label class="input-filed-label">Pass Quantity</label> <input
+			<label class="input-filed-label">Fail Quantity</label> <input
 				type="number" ng-model="QCFailQuantity" name="failQuantity">
 			<div ng-messages="productQualityCheckInformation.failQuantity.$error">
 				<div ng-message="required">Please enter Fail Quantity</div>

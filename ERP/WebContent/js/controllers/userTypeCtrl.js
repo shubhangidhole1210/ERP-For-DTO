@@ -20,14 +20,13 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 			$scope.UserTypes=response.data;
 			$scope.isUserTypeInformation()
 			console.log(response)
-			$mdDialog.hide();
+			utils.hideProgressBar();
 		}, function errorCallback(response) {
-			$scope.message = "We are Sorry. Something went wrong. Please try again later."
-			$scope.showToast();
+			$scope.showToast('We are Sorry. Something went wrong. Please try again later.');
 			console.log("Error");
-			$mdDialog.hide();
+			utils.hideProgressBar();
 		});
-		$scope.showProgressBarOne();
+		utils.showProgressBar();
 	}
 	$scope.isUserTypeInPresent=false; 
 	$scope.isUserTypeInformation=function()
@@ -41,53 +40,14 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 			$scope.isUserTypeInPresent=false; 
 			}
 	}
-	$scope.showProgressBarOne= function()
-	{
-		$mdDialog
-		.show(
-				{
-					controller : ProgressBarController,
-					templateUrl : 'views/progressBar.html',
-					parent : angular
-							.element(document.body),
-					/*targetEvent : ev,*/
-					clickOutsideToClose : false,
-					fullscreen : $scope.customFullscreen,
-					onComplete : function() {
-					/*	$scope.populateUserList(ev);*/
-					}
-					
-				
-				})
-		.then(
-				function(answer) {
-					$scope.status = 'You said the information was "'
-							+ answer + '".';
-				},
-				function() {
-					$scope.status = 'You cancelled the dialog.';
-				});
-	};
-	
-	$scope.showToast = function() {
-		$mdToast.show({
-			hideDelay : 3000,
-			position : 'top right',
-			controller : 'ToastCtrl',
-			templateUrl : 'views/toast.html',
-			locals : {
-				message : $scope.message
-			}
-		});
-	};
 	$scope.UserType={}
 	$scope.showAddNewUserType = function(ev) {
 		$scope.UserType={};
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
 		$scope.information = "ADD NEW UserType"
-		var abc = {
-			controller : userTypeController,
+		var addNewUserTypeDialog = {
+			controller : 'userTypeDialogCtrl',
 			templateUrl : 'views/userTypeInformation.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
@@ -102,149 +62,11 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 			}
 		};
 		$mdDialog
-				.show(abc)
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+		$mdDialog
+		.show(addNewUserTypeDialog)
+		.then(function(answer) {},
+				function() {});
 	};
-	
-	
-	function userTypeController($scope, $mdDialog,userType,action,flag,$mdToast,information) {
-		$scope.isReadOnly = action;
-		$scope.flag = flag;
-		$scope.userType = userType;
-		$scope.information = information;
-		/*$scope.user.dob = new Date($scope.user.dob);
-		$scope.user.doj = new Date($scope.user.doj);*/
-		$scope.hide = function() {
-			console.log('hide DialogController');
-			$mdDialog.hide();
-		};
-
-		$scope.cancel = function() {
-			$mdDialog.cancel();
-		};
-
-		$scope.answer = function(answer) {
-			$mdDialog.hide(answer);
-		};
-
-		$scope.saveUserTypeInformation = function(ev) {
-			
-			
-			var data = {
-
-					usertypeName : $scope.userType.usertypeName,
-					description : $scope.userType.description
-			};
-			var httpparams = {};
-			if ($scope.flag == 0) {
-				console.log($scope.user);
-				console.log($scope.data);
-				httpparams.method = 'post';
-				httpparams.url = SERVER_URL + "usertype/create";
-				httpparams.headers = {
-						auth_token : Auth.getAuthToken()
-					};
-			} else {
-				console.log($scope.UserType);
-				/*data.id = $scope.UserType.id;*/
-				httpparams.method = 'put';
-				httpparams.url = SERVER_URL + "usertype/update";
-				httpparams.headers = {
-						auth_token : Auth.getAuthToken()
-					};
-			}
-			httpparams.data = data;
-			$http(httpparams)
-					.then(
-							function successCallback(data) {
-								$mdDialog.hide();
-								console.log(data);
-								if(data.data.code === 0){
-									console.log(data.data.message);
-									$rootScope.$emit(
-											"saveUserTypeError", {});
-									console.log(data);
-									$scope.hide();
-									$scope.message = 'Something went worng. Please try again later.';
-									$scope.showToast();
-								}else{
-									$scope.displayProgressBar = false;
-									$scope.message = 'UserType Information saved successfully.';
-									$scope.showToast();
-									$rootScope.$emit("CallPopulateUserTypeList",{});
-								}
-							},
-							function errorCallback(data) {
-								$rootScope.$emit(
-										"saveUserTypeError", {});
-								console.log(data);
-								$scope.hide();
-								$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();
-							});
-
-		}
-
-		$scope.submitUserTypeInformation = function(isvaliduser,$event) {
-			if (isvaliduser) {
-				$scope.showProgressBar($event);
-				
-			} else {
-				console.log('its else block');
-			}
-
-		}
-
-		$scope.showToast = function() {
-			$mdToast.show({
-				hideDelay : 3000,
-				position : 'top right',
-				controller : 'ToastCtrl',
-				templateUrl : 'views/toast.html',
-				locals : {
-					message : $scope.message
-				}
-			});
-		};
-		
-		$scope.showProgressBar = function(ev) {
-			$scope.displayProgressBar = true;
-			$mdDialog
-					.show(
-							{
-								controller : ProgressBarController,
-								templateUrl : 'views/progressBar.html',
-								parent : angular
-										.element(document.body),
-								targetEvent : ev,
-								clickOutsideToClose : false,
-								fullscreen : $scope.customFullscreen,
-								onComplete : function() {
-									$scope.saveUserTypeInformation(ev);
-								}
-								
-							// Only for -xs, -sm breakpoints.
-							})
-					.then(
-							function(answer) {
-								$scope.status = 'You said the information was "'
-										+ answer + '".';
-							},
-							function() {
-								$scope.status = 'You cancelled the dialog.';
-							});
-		};
-		
-		
-	  }
-	
 	$scope.showEditUserType = function(ev, index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
@@ -252,7 +74,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 		$scope.information = "EDIT UserType INFORMATION"
 		$mdDialog
 				.show({
-					controller : userTypeController,
+					controller : 'userTypeDialogCtrl',
 					templateUrl : 'views/userTypeInformation.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
@@ -265,14 +87,8 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 						information : $scope.information
 					}
 				})
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+				.then(function(answer) {},
+						function() {});
 	};
 	
 	$scope.viewUserTypeInformation = function(ev, index) {
@@ -283,7 +99,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 		$scope.information = "VIEW UserType INFORMATION"
 		console.log($scope.UserType);
 		$mdDialog.show({
-					controller : userTypeController,
+					controller : 'userTypeDialogCtrl',
 					templateUrl : 'views/UserTypeInformation.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
@@ -296,14 +112,8 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 						information : $scope.information
 					}
 				})
-				.then(
-						function(answer) {
-							$scope.status = 'You said the information was "'
-									+ answer + '".';
-						},
-						function() {
-							$scope.status = 'You cancelled the dialog.';
-						});
+				.then(function(answer) {},
+						function() {});
 	};
 	
 	$scope.deleteUserType = function(index) {
@@ -323,47 +133,23 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 			console.log("Error");
 
 		});
-		$scope.showProgressBarOne();
-
+     utils.showProgressBar()
 	};
 	$scope.showConfirm = function(ev,index) {
-		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete UserType Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'YES' ).cancel('NO');
-
 		$mdDialog
 				.show(confirm)
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteUserType(index);
-							
-							$scope.message = 'Delete UserType sucessfully';
-							$scope.showToast();
-						
+							utils.showToast('Delete UserType sucessfully');
 						},
-						function() {
-							$scope.status = 'You decided to keep your debt.';
-						});
+						function() {});
 	};
-	
-	function ProgressBarController($scope, $mdDialog) {
-		
-		$scope.hide = function() {
-			$mdDialog.hide();
-		};
-
-		$scope.cancel = function() {
-			$mdDialog.cancel();
-		};
-
-		$scope.answer = function(answer) {
-			$mdDialog.hide(answer);
-		};
-	}
-	
 	
 	
 });

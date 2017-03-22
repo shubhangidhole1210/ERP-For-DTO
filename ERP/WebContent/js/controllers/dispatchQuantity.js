@@ -69,6 +69,7 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 			{
 				orderId: $scope.order.id,
 				invoiceNo: $scope.invoice,
+				description:$scope.description,
 				parts:productsList
 			};
 		var httpparams = {

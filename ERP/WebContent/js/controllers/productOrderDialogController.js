@@ -22,6 +22,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
     	var data = {
     			 orderproductassociations : $scope.orderProductAssociations,
     			 description:$scope.productOrder.description,
+    			 invoiceNo:$scope.productOrder.invoiceNo,
     			 expecteddeliveryDate:$scope.productOrder.expecteddeliveryDate ,
     			  client:$scope.productOrder.client.id
 		};
