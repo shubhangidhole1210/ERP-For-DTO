@@ -1,4 +1,4 @@
-erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,fileUpload,Auth,utils,product,action,flag,information,fileUpload){
+erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,product,action,flag,information){
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
 	$scope.product = product;
@@ -92,13 +92,13 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 						});
 
 	}
-	  $scope.uploadFile = function(){
+	 /* $scope.uploadFile = function(){
 	        var file = $scope.myFile;
 	        console.log('file is ' );
 	        console.dir(file);
 	        var uploadUrl = "/fileUpload";
 	        fileUpload.uploadFileToUrl(file, uploadUrl);
-	    };
+	    };*/
 
 	$scope.submitProductInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {

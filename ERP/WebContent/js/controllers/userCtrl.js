@@ -150,11 +150,5 @@ erpApp.controller('userCtrl',
 										},
 										function() { });
 					};
-					/*var original = $scope.user;
-					$scope.resetUserData=function()
-					{
-						$scope.user= angular.copy(original);
-						$scope.userInformation.$setPristine();
-					}*/
-
+					
 });

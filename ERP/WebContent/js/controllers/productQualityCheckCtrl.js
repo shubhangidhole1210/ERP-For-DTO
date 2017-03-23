@@ -51,7 +51,7 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 	  
 	  $scope.submitProductQualityCheckInformation = function(isvaliduser, $event) {
 			if (isvaliduser) {
-				utils.showProgressBar();
+				/*utils.showProgressBar();*/
 				$scope.updateProductQuality();
 			} else {
 				console.log('its else block');
@@ -94,10 +94,16 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 				});
 		}
 		
-		$scope.checkProductQuanitity=function()
+		$scope.toCompareQuantity=function()
+		{
+			console.log('in to compare function')
+			console.log($scope.productsPlan)
+		}
+		
+		/*$scope.checkProductQuanitity=function()
 		{
 			
-		}
+		}*/
 	
 });
 		

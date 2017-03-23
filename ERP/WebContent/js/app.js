@@ -177,40 +177,6 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
     });
 }]);
 
-erpApp.directive("fileread", [
-                           function() {
-                             return {
-                               scope: {
-                                 fileread: "="
-                               },
-                               link: function(scope, element, attributes) {
-                                 element.bind("change", function(changeEvent) {
-                                   var reader = new FileReader();
-                                   reader.onload = function(loadEvent) {
-                                     scope.$apply(function() {
-                                       scope.fileread = loadEvent.target.result;
-                                     });
-                                   }
-                                   reader.readAsDataURL(changeEvent.target.files[0]);
-                                 });
-                               }
-                             }
-                           }
-                         ]);
-erpApp.directive('ngFiles', ['$parse', function ($parse) {
-
-    function fn_link(scope, element, attrs) {
-        var onChange = $parse(attrs.ngFiles);
-        element.on('change', function (event) {
-            onChange(scope, { $files: event.target.files });
-        });
-    };
-
-    return {
-        link: fn_link
-    }
-} ])
-
 
 erpApp.service('User', function () {
     return {};
@@ -252,6 +218,41 @@ erpApp.factory('Auth', function(){
 	    	}
 	    	return user.menu;
 	    },
+	    
+	    setLogginButton : function()
+	    {
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
+	    	user.displayButton = displayButton;
+	    	sessionStorage.user =JSON.stringify(user);
+	    },
+	    getLogginButton : function(){
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
+	    	return user.displayButton;
+	    },
+	    
+	    setUserName : function()
+	    {
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
+	    	user.userId = userId;
+	    	sessionStorage.user =JSON.stringify(user);
+	    },
+	    
+	    getUserName : function()
+	    {
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
+	    	return user.userId;
+	    },
+	    
+	    
+	    
 	    isPageAccessible : function(next){
 	    	if(!user && sessionStorage.user){
 	    		user = JSON.parse(sessionStorage.user);
@@ -273,7 +274,7 @@ erpApp.factory('Auth', function(){
 	  }
 	});
 
-erpApp.directive('fileModel', ['$parse', function ($parse) {
+/*erpApp.directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
@@ -287,9 +288,9 @@ erpApp.directive('fileModel', ['$parse', function ($parse) {
             });
         }
     };
-}]);
+}]);*/
 
-erpApp.service('fileUpload', ['$http', function ($http) {
+/*erpApp.service('fileUpload', ['$http', function ($http) {
     this.uploadFileToUrl = function(file, uploadUrl){
         var fd = new FormData();
         fd.append('file', file);
@@ -302,7 +303,44 @@ erpApp.service('fileUpload', ['$http', function ($http) {
         .error(function(){
         });
     }
-}]);
+}]);*/
+
+/*erpApp.directive("fileread", [
+                           function() {
+                             return {
+                               scope: {
+                                 fileread: "="
+                               },
+                               link: function(scope, element, attributes) {
+                                 element.bind("change", function(changeEvent) {
+                                   var reader = new FileReader();
+                                   reader.onload = function(loadEvent) {
+                                     scope.$apply(function() {
+                                       scope.fileread = loadEvent.target.result;
+                                     });
+                                   }
+                                   reader.readAsDataURL(changeEvent.target.files[0]);
+                                 });
+                               }
+                             }
+                           }
+                         ]);*/
+
+erpApp.directive('uploadFiles', function () {  
+    return {  
+        scope: true,        //create a new scope  
+        link: function (scope, el, attrs) {  
+            el.bind('change', function (event) {  
+                var files = event.target.files;  
+                //iterate files since 'multiple' may be specified on the element  
+                for (var i = 0; i < files.length; i++) {  
+                    //emit event upward  
+                    scope.$emit("seletedFile", { file: files[i] });  
+                }  
+            });  
+        }  
+    };  
+});  
 
 
 erpApp.directive("limitTo", [function() {

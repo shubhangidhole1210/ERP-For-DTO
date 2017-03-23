@@ -152,7 +152,6 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 				$scope.productOrderList = response.data;
 				console.log(response);
 	             console.log($scope.productOrderList);
-	             utils.hideProgressBar();
 			}, function errorCallback(response) {
 				console.log("Error");
 

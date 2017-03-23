@@ -102,7 +102,7 @@
           </tr>
           <tr ng-repeat="orderRawMaterial in rmOrderList">
            <td>{{orderRawMaterial.rawmaterial.partNumber}}</td>
-           <td>{{orderRawMaterial.quantity}}</td>
+           <!-- <td>{{orderRawMaterial.quantity}}</td> -->
           <td><input type="number" ng-value="{{orderRawMaterial.quantity}}" ></td>
           <td>
              <button type="button" style="height: 40px" ng-click="deleteRM($index)">Delete</button>

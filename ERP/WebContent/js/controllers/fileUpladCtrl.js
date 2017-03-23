@@ -1,13 +1,12 @@
 erpApp.controller('fileUplodCtrl',function($scope,$http,SERVER_URL,Auth)
 {
-	  $scope.uploadme;
+	/* $scope.uploadme;
 
 	    $scope.uploadImage = function() {
 	      var fd = new FormData();
 	      var imgBlob = dataURItoBlob($scope.uploadme);
 	      fd.append('file', imgBlob);
 	      $http.post(
-	          /*'imageURL',*/
 	    		  SERVER_URL + "fileupload",
 	          fd, {
 	            transformRequest: angular.identity,
@@ -25,6 +24,7 @@ erpApp.controller('fileUplodCtrl',function($scope,$http,SERVER_URL,Auth)
 	    }
 
 
+	    //you need this function to convert the dataURI
 	    function dataURItoBlob(dataURI) {
 	      var binary = atob(dataURI.split(',')[1]);
 	      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -36,4 +36,13 @@ erpApp.controller('fileUplodCtrl',function($scope,$http,SERVER_URL,Auth)
 	        type: mimeString
 	      });
 	    }
+*/
+	
+	
+	
+	
+	
+	
+	
+	
 });	

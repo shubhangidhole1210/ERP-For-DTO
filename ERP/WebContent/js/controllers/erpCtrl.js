@@ -10,45 +10,64 @@ erpApp.controller('mainViewController', function($scope,$rootScope,Auth,SERVER_U
 });
 
 erpApp.controller('ERPController', function($scope,$rootScope,Auth,SERVER_URL,$http,$location,User) {
+	$scope.displayButton = [];
+	$scope.userId= [];
+	$scope.displayLoginButton=Auth.isLoggedIn();
+	$scope.displayUserName=Auth.isLoggedIn();
+	
+	
+	if($scope.displayLoginButton){
+		$scope.displayButton = Auth.getLogginButton();
+	}
+	
+	
+	if($scope.displayUserName){
+		$scope.userId = Auth.getLogginButton();
+	}
+	
 	
 	$rootScope.$on('logout',function($event){
 		console.log('Inside logout event');
-		console.log('logging out');
+		
+		$scope.displayLoginButton=Auth.isLoggedIn();
+		
+		$scope.displayUserName=Auth.isLoggedIn();
 		$location.path('/login');
-
 	});
+	
+	
 	$rootScope.$on('loginSuccess',function($event){
 		console.log('Inside login success event');
 		$scope.user = User;
 		$scope.displayUserName=Auth.isLoggedIn();
-		$scope.userId = Auth.getMenu();
 		$scope.displayLoginButton=Auth.isLoggedIn();
-		$scope.logginButton = Auth.getMenu();
-		
-		
+		$scope.displayButton = Auth.getLogginButton();
+		$scope.userId = Auth.getUserName();
 	});
 	
-	$rootScope.$on("CallUserProfileList", function($event,$index) {
-		$scope.getUserProfile();
+	/*$scope.userId= [];
+	$scope.displayUserName=Auth.isLoggedIn();
+	if($scope.displayUserName)
+		{
+		    $scope.userId = Auth.getUserName();
+		}
+	
+	$rootScope.$on('logout',function($event){
+		$scope.displayUserName=Auth.isLoggedIn();
+		$location.path('/login');
 	});
 	
-	$scope.getUserProfile=function(index)
-	{
-		var httpparams = {};
-		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "user/userProfile/"+ $scope.userid;
-		httpparams.headers = {
-				auth_token : Auth.getAuthToken()
-			};
-		
-		$http(httpparams).then(function successCallback(response) {
-			$scope.userProfile = response.data;
-			console.log(response);
-		    console.log($scope.rawMaterialList)
-		}, function errorCallback(response) {
-			console.log("Error");
-		});
-	};
+	$rootScope.$on('loginSuccess',function($event){
+		$scope.user = User;
+		$scope.displayUserName=Auth.isLoggedIn();
+		$scope.userId = Auth.getUserName();
+	});
+	
+	*/
+	
+
+	
+	
 	
 $scope.logOut=function()
 {

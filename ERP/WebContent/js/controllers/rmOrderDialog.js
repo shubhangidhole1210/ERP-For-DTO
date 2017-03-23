@@ -185,7 +185,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				$scope.rmOrderList = response.data;
 				console.log(response);
 	             console.log($scope.rmOrderList);
-	             utils.hideProgressBar();
+	             /*utils.hideProgressBar();*/
 			}, function errorCallback(response) {
 				console.log("Error");
 

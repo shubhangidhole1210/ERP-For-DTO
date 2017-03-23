@@ -11,21 +11,7 @@
             		 <span>{{currentDate}}</span>
           			</div>
        			</div> 
-       			<!--   <div layout-gt-sm="row">
-      				 <md-input-container class="md-block product-quality-row" flex-gt-sm>
-             <span>Product ID</span>
-             <span style="position: absolute;right: 10%">
-             <select  ng-model="selectedProductionPlan" ng-init="getProductionPlanByDate()" ng-change="getTodaysProductionPlan($index)" style="width: 220px" name="productName" required>
-             <option ng-repeat="productionPlan in productionPlans" ng-value="productionPlan"> {{productionPlan.product.name}}</option>
-             </select>
-             </span>
-             
-             <div ng-messages="productQualityCheckInformation.productName.$error">
-            <div ng-message="required">Please select product ID</div>
-          </div>
-          </md-input-container>
-   				 </div> -->
-   				 
+       			
    				  <div layout-gt-sm="row">
       <md-input-container> <label style="color: black;">Product Id
 			</label> <md-select ng-model="selectedProductionPlan" name="productName"
@@ -49,7 +35,7 @@
    				  <div layout-gt-sm="row">
    				   <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">Pass Quantity</label> <input
-				type="number" ng-model="QCPassQuantity" name="passQuantity">
+				type="number" ng-model="QCPassQuantity" name="passQuantity" ng-change="">
 			<div ng-messages="productQualityCheckInformation.productQuantity.$error">
 				<div ng-message="required">Please enter pass Quantity</div>
 			</div>
