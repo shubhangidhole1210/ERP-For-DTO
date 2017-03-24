@@ -92,13 +92,15 @@
 	</div>
 	<div ng-controller="menuController" class="erp-menubar"
 		ng-show="displayMenu">
-		<div class="erp-menu" id="{{menuItem.pageName}}"
-			ng-repeat="menuItem in cascadedMenu"
-			ng-class="{'changeERPMenu': $index == selectedIndex }"
+		<div 
+			ng-repeat="menuItem in cascadedMenu track by $index"
+			
 			ng-init="menuItem.displaySubmenu = false" >
-			<div ng-click="menuClicked($index); menuItem.displaySubmenu = !menuItem.displaySubmenu;">{{menuItem.menu}}</div>
+			
+			
+			<div ng-click="menuClicked($index); menuItem.displaySubmenu = !menuItem.displaySubmenu;" class=" mainMenu" id="{{menuItem.pageName}}" ng-class="{'changeERPMenu': $index == selectedIndex }" >&#x25BA;{{menuItem.menu}}</div>
 			<div ng-show="menuItem.displaySubmenu" >
-				<div ng-repeat="submenu in menuItem.submenu" class="erp-menu">
+				<div ng-repeat="submenu in menuItem.submenu" class="erp-menu" >
 					<a href="#{{submenu.url}}">{{submenu.submenu}}</a>
 				</div>
 			</div>
@@ -108,7 +110,10 @@
 	</div>
 	
 	<div ng-view ng-class="mainClass" ng-controller="mainViewController"></div>
-
+  <div class="company-information">
+  <!-- <span><img alt="" src="image/unnamed.png" width="30px" height="30px"></span> -->
+  <!-- <span ><a href="http://www.nextechservices.in/#/">www.nextechservices.in</a></span> -->
+  </div>
 
 </body>
 </html>

@@ -141,6 +141,7 @@ body::-webkit-scrollbar-thumb, .erp-menubar::-webkit-scrollbar-thumb {
 	    width: 100%;
     height: 100%;
     display: block;
+    padding-left: 10px
 }
 .erp-menubar a:HOVER{
 	color: white;
@@ -161,7 +162,7 @@ body::-webkit-scrollbar-thumb, .erp-menubar::-webkit-scrollbar-thumb {
 {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	padding-left: 10px;
+	padding-left: 20px;
 	color: white;
 	font-weight: bold;
 	font-size: 15px;
@@ -531,4 +532,23 @@ th
  {
     min-width: 1050px;
     margin-left: 15%
+ }
+ 
+ .mainMenu
+ {
+   font-size: 18px;
+   padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	color: white;
+	font-weight: bold;
+ }
+ .company-information
+ {
+ }
+ 
+ .erp-btn
+ {
+    color: rgba(255,255,255,0.87);
+   
  }

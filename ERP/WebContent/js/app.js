@@ -239,7 +239,8 @@ erpApp.factory('Auth', function(){
 	    	if(!user && sessionStorage.user){
 	    		user = JSON.parse(sessionStorage.user);
 	    	}
-	    	user.userId = userId;
+	    	/*user.userId = userId;*/
+	    	user.user.userid=userid;
 	    	sessionStorage.user =JSON.stringify(user);
 	    },
 	    
@@ -248,7 +249,9 @@ erpApp.factory('Auth', function(){
 	    	if(!user && sessionStorage.user){
 	    		user = JSON.parse(sessionStorage.user);
 	    	}
-	    	return user.userId;
+	    	/*return user.userId;*/
+	    	return user.user.userid;
+	    	
 	    },
 	    
 	    

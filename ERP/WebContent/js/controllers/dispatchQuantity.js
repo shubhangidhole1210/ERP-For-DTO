@@ -84,8 +84,8 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 		$http(httpparams).then(function successCallback(data) {
 			console.log(data);
 			if(data.data.code === 1){
-				utils.showToast("Dispatch Quality check Successfully !");
-				$location.path('/');
+				utils.showToast(data.data.message);
+				/*$location.path('/');*/
 			}else{
 				utils.showToast("Something went wrong. Please try again later.");
 			}

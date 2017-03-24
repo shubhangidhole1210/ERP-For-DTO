@@ -6,38 +6,39 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 		var cascadedMenu = [];
 		for (var index=0; index < $scope.menu.length ; index++){
 			var cascadedMenuItem = {};
+			var isMenuAdded = false;
+			var indexAdded = 0;
 			for (var subindex=0; subindex < cascadedMenu.length ; subindex++){console.log('menu subindex : '+ subindex);
 				console.log('menu subindex : '+ subindex + " : " , $scope.menu[subindex].menu);
 				if(cascadedMenu[subindex].menu === $scope.menu[index].menu ){
-					//match found for menu
-					//add submenu
 					var subMenu = {};
 					subMenu.submenu = $scope.menu[index].submenu;
 					subMenu.url = $scope.menu[index].url;
 					cascadedMenu[subindex].submenu.push(subMenu);
+					isMenuAdded = true;
+					indexAdded = subindex+1;
 					break;
-				}else{
-					//new menu
-					cascadedMenuItem.menu = $scope.menu[index].menu;
-					
-						var subMenu = {};
-						cascadedMenuItem.submenu = [];
-						subMenu.submenu = $scope.menu[index].submenu;
-						subMenu.url = $scope.menu[index].url;
-						cascadedMenuItem.submenu.push(subMenu);
-						cascadedMenu.push(cascadedMenuItem);
 				}
+//				else{
+//					cascadedMenuItem.menu = $scope.menu[index].menu;
+//					var subMenu = {};
+//					cascadedMenuItem.submenu = [];
+//					subMenu.submenu = $scope.menu[index].submenu;
+//					subMenu.url = $scope.menu[index].url;
+//					cascadedMenuItem.submenu.push(subMenu);
+//					cascadedMenu.push(cascadedMenuItem);
+//					break;
+//				}
 			}
-			if(cascadedMenu.length == 0){
+			if(cascadedMenu.length == 0 || !isMenuAdded){
 				cascadedMenuItem.menu = $scope.menu[index].menu;
-				
-					var subMenu = {};
-					cascadedMenuItem.submenu = [];
-					subMenu.submenu = $scope.menu[index].submenu;
-					subMenu.url = $scope.menu[index].url;
-					cascadedMenuItem.submenu.push(subMenu);
-					cascadedMenu.push(cascadedMenuItem);
-					console.log('Added first cascaded menu',cascadedMenu);
+				var subMenu = {};
+				cascadedMenuItem.submenu = [];
+				subMenu.submenu = $scope.menu[index].submenu;
+				subMenu.url = $scope.menu[index].url;
+				cascadedMenuItem.submenu.push(subMenu);
+				cascadedMenu.push(cascadedMenuItem);
+				console.log('Added first cascaded menu',cascadedMenu);
 			}
 		}
 		return cascadedMenu;
