@@ -21,7 +21,7 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 
 	    			 product:$scope.productInventory.product.id,
 	    			 description:$scope.productInventory.description,
-	    			 name:$scope.productInventory.name,
+	    			/* name:$scope.productInventory.name,*/
 	    			 quantityavailable:$scope.productInventory.quantityavailable,
 	    			 racknumber:$scope.productInventory.racknumber
 				};

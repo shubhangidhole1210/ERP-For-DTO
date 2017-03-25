@@ -14,14 +14,14 @@
 			<tr>
 				<th>PRODUCT</th>
 				<th>AVAILBLE QUANTITY</th>
-				<th>NAME</th>
+				<!-- <th>NAME</th> -->
 				<th>RACK NUMBER</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="productInventory in data">
+			<tr ng-repeat="productInventory in data.data">
 				<td>{{productInventory.product.name}}</td>
 				<td>{{productInventory.quantityavailable}}</td>
-				<td>{{productInventory.name}}</td>
+				<!-- <td>{{productInventory.name}}</td> -->
 				<td>{{productInventory.racknumber}}</td>
 				<td><md-button class="md-raised"
 						ng-click="showEditProductInventory($event,$index)"
