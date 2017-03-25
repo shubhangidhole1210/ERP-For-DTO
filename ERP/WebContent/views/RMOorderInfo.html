@@ -92,7 +92,7 @@
             <th>ACTION</th>
           </tr>
           <tr ng-repeat="orderRawMaterial in orderRawMaterials">
-           <td>{{orderRawMaterial.rawmaterial.partNumber}}</td>
+           <td >{{orderRawMaterial.rawmaterial.partNumber}}</td>
           <!--  <td>{{orderRawMaterial.quantity}}</td> -->
           <td><input type="number" ng-value="{{orderRawMaterial.quantity}}" ></td>
           <td>
@@ -103,15 +103,15 @@
           <tr ng-repeat="orderRawMaterial in rmOrderList">
            <td>{{orderRawMaterial.rawmaterial.partNumber}}</td>
            <!-- <td>{{orderRawMaterial.quantity}}</td> -->
-          <td><input type="number" ng-value="{{orderRawMaterial.quantity}}" ></td>
+          <td ><input type="number" ng-value="{{orderRawMaterial.quantity}}" ng-disabled="isReadOnly"></td>
           <td>
-             <button type="button" style="height: 40px" ng-click="deleteRM($index)">Delete</button>
+             <button type="button" style="height: 40px" ng-click="deleteRM($index)" ng-disabled="isReadOnly">Delete</button>
                
           </td>
           </tr> 
           
         </table>
-           <div layout-gt-sm="row">
+           <div layout-gt-sm="row" ng-show="displayAddRM">
          <md-input-container >
           <label style="color: black;">RAW MATERIAL</label>
           <md-select ng-model="orderRawMaterial.rawmaterial" name="rawmaterial" value="rawmaterial.id" ng-disabled="isReadOnly"  name="rawMaterialId" >
@@ -126,7 +126,7 @@
            
           </md-input-container>
          
-         <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderRawMaterial()">Add Raw Material</button>
+         <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderRawMaterial()" >Add Raw Material</button>
        
          </div>
           

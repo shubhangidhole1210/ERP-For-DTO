@@ -1,8 +1,9 @@
-erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,flag,action,title,rmOrder,utils){
+erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,flag,action,title,rmOrder,utils,hideAction){
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
 	$scope.rmOrder = rmOrder;
 	$scope.title = title;
+	$scope.displayAddRM = hideAction;
 	$scope.rmOrder.expectedDeliveryDate = new Date($scope.rmOrder.expectedDeliveryDate);
 	$scope.hide = function() {
 		console.log('hide DialogController');
@@ -25,7 +26,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				name:$scope.rmOrder.name,
 				description:$scope.rmOrder.description,
 				quantity:$scope.rmOrder.quantity,
-				expectedDeliveryDate:$scope.rmOrder.expectedDeliveryDate,
+				/*expectedDeliveryDate:$scope.rmOrder.expectedDeliveryDate,*/
 				vendor:$scope.selectedVendor,
 				totalprice:$scope.rmOrder.totalprice,
 				tax:$scope.rmOrder.tax,
@@ -185,7 +186,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				$scope.rmOrderList = response.data;
 				console.log(response);
 	             console.log($scope.rmOrderList);
-	             /*utils.hideProgressBar();*/
 			}, function errorCallback(response) {
 				console.log("Error");
 

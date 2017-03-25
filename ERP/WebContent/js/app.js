@@ -253,9 +253,6 @@ erpApp.factory('Auth', function(){
 	    	return user.user.userid;
 	    	
 	    },
-	    
-	    
-	    
 	    isPageAccessible : function(next){
 	    	if(!user && sessionStorage.user){
 	    		user = JSON.parse(sessionStorage.user);
@@ -276,58 +273,6 @@ erpApp.factory('Auth', function(){
 	    }
 	  }
 	});
-
-/*erpApp.directive('fileModel', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            var model = $parse(attrs.fileModel);
-            var modelSetter = model.assign;
-            
-            element.bind('change', function(){
-                scope.$apply(function(){
-                    modelSetter(scope, element[0].files[0]);
-                });
-            });
-        }
-    };
-}]);*/
-
-/*erpApp.service('fileUpload', ['$http', function ($http) {
-    this.uploadFileToUrl = function(file, uploadUrl){
-        var fd = new FormData();
-        fd.append('file', file);
-        $http.post(uploadUrl, fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
-        })
-        .success(function(){
-        })
-        .error(function(){
-        });
-    }
-}]);*/
-
-/*erpApp.directive("fileread", [
-                           function() {
-                             return {
-                               scope: {
-                                 fileread: "="
-                               },
-                               link: function(scope, element, attributes) {
-                                 element.bind("change", function(changeEvent) {
-                                   var reader = new FileReader();
-                                   reader.onload = function(loadEvent) {
-                                     scope.$apply(function() {
-                                       scope.fileread = loadEvent.target.result;
-                                     });
-                                   }
-                                   reader.readAsDataURL(changeEvent.target.files[0]);
-                                 });
-                               }
-                             }
-                           }
-                         ]);*/
 
 erpApp.directive('uploadFiles', function () {  
     return {  

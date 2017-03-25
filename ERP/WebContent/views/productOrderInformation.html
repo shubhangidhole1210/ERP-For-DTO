@@ -67,15 +67,16 @@
           <tr ng-repeat="orderProductAssociation in orderProductAssociations">
           <td>{{orderProductAssociation.product}}</td>
           <td>{{orderProductAssociation.quantity}}</td>
-       
+          <td><button type="button" style="height: 40px" ng-click="deleteProduct($index)">Delete</button></td>
           </tr>
           <tr ng-repeat="orderProductAssociation in productOrderList">
           <td>{{orderProductAssociation.product.name}}</td>
-          <td>{{orderProductAssociation.quantity}}</td>
-       
+          <!-- <td>{{orderProductAssociation.quantity}}</td> -->
+          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}"></td>
+          <td><button type="button" style="height: 40px" ng-click="deleteProduct($index)">Delete</button></td>
           </tr>
         </table>
-        <div layout-gt-sm="row" >
+        <div layout-gt-sm="row" ng-show="isProductOrderAdd" >
            <md-input-container>
           <label style="color: black;">PRODUCT*</label>
           <md-select ng-model="orderProductAssociation.product" name="product" value="product.id"  ng-disabled="isReadOnly"  ng-init="getProducts()">
@@ -88,7 +89,7 @@
             <label class="input-filed-label">QUANTITY</label>
             <input type="number" ng-model="orderProductAssociation.quantity"   name="quantity"  ng-disabled="isReadOnly">
           </md-input-container>
-           <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderProductAssociation()">Add Product</button>
+           <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderProductAssociation()" >Add Product</button>
         </div>
          </div>
        

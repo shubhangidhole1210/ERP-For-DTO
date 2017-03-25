@@ -42,8 +42,10 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			$scope.isProductOrderPresent=false;
 	};
 	$scope.showAddNewProductOrder = function(ev) {
+		 $rootScope.isAddButtonDisplay=true;
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
+		$scope.isProductOrderAdd = true;
 		$scope.information="ADD NEW PRODUCT ORDER";
 		$scope.productOrder={};
 		var addNewProductOrderDialog = {
@@ -58,7 +60,8 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				productOrder : $scope.productOrder,
 				flag : $scope.flag,
 				action : $scope.isReadOnly,
-				information : $scope.information
+				information : $scope.information,
+				hideAction : $scope.isProductOrderAdd,
 			}
 		};
 		$mdDialog
@@ -70,6 +73,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 	  $scope.showEditProductOrder = function(ev , index) {
 		  $scope.flag = 1;
 		  $scope.productOrder = $scope.productOrders[index];
+		  $scope.isProductOrderAdd = false;
 		  $scope.information="EDIT PRODUCT ORDER INFORMATION"
 		    $mdDialog.show({
 		      controller: 'productOrderDialogCtrl',
@@ -82,7 +86,8 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		    	  productOrder : $scope.productOrder,
 		    	  flag : $scope.flag,
 		    	  action : $scope.isReadOnly,
-		    	  information : $scope.information
+		    	  information : $scope.information,
+		    	  hideAction : $scope.isProductOrderAdd,
 				}
 		    })
 		    .then(function(answer) {},
@@ -112,9 +117,10 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		$scope.viewProductOrderrInformation = function(ev, index) {
 			$scope.flag = 2;
 			$scope.isReadOnly = true;
+			$scope.isProductOrderAdd = false;	
 			$scope.productOrder = $scope.productOrders[index];
 			$scope.isSaving = false;
-			$scope.information="VIEW VENDOR INFORMATION"
+			$scope.information="VIEW PRODUCT ORDER INFORMATION"
 			console.log($scope.user);
 			$mdDialog.show({
 						controller : 'productOrderDialogCtrl',
@@ -127,7 +133,8 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 							  productOrder : $scope.productOrder,
 							flag : $scope.flag,
 							action : $scope.isReadOnly,
-							information : $scope.information
+							information : $scope.information,
+							hideAction : $scope.isProductOrderAdd,
 						}
 					})
 					.then(function(answer) {},

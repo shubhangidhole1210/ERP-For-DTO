@@ -1,5 +1,6 @@
 erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 	$scope.isReadOnly = false;
+	$scope.displayAddRM = true;
 	$rootScope.$on("CallPopulateRMOrderList", function() {
 		$scope.populateRMOrderList();
 	});
@@ -23,8 +24,6 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			console.log(response);
 
 		}, function errorCallback(response) {
-			/*$scope.message = "We are Sorry. Something went wrong. Please try again later."
-			$scope.showToast();*/
 			utils.showToast('We are Sorry. Something went wrong. Please try again later.');
 			console.log("Error");
 			utils.hideProgressBar();
@@ -50,6 +49,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	$scope.showAddNewRMOrder = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
+		$scope.displayAddRM = true;
 		$scope.rmOrder = {};
 		$scope.title= "ADD RAW MATERIAL ORDER INFORMATION";
 		var addNewRmDialog = {
@@ -65,6 +65,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				flag : $scope.flag,
 				action : $scope.isReadOnly,
 				title : $scope.title,
+				hideAction : $scope.displayAddRM,
 			}
 		};
 	
@@ -78,6 +79,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	$scope.showRMOrder = function(ev, index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
+		$scope.displayAddRM = false;
 		$scope.rmOrder = $scope.rmOrders[index];
 		console.log($scope.rmOrder);
 		$scope.title="EDIT RAW MATERIAL ORDER INFORMATION"
@@ -94,6 +96,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 						flag : $scope.flag,
 						action : $scope.isReadOnly,
 						title : $scope.title,
+						hideAction : $scope.displayAddRM,
 					}
 				})
 				.then(
@@ -104,6 +107,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	$scope.viewRmOrder = function(ev, index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
+		$scope.displayAddRM = false;
 		$scope.rmOrder = $scope.rmOrders[index];
 		$scope.isSaving = false;
 		$scope.title = "VIEW RAW MATERIAL ORDER INFORMATION"
@@ -120,6 +124,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 						flag : $scope.flag,
 						action : $scope.isReadOnly,
 						title : $scope.title,
+						hideAction : $scope.displayAddRM,
 					}
 				})
 				.then(

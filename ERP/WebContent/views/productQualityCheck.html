@@ -33,8 +33,8 @@
    				  <div layout-gt-sm="row">
    				   <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">Pass Quantity</label> <input
-				type="number" ng-model="QCPassQuantity" name="passQuantity" ng-change="">
-			<div ng-messages="productQualityCheckInformation.productQuantity.$error">
+				type="number" ng-model="QCPassQuantity" name="passQuantity" required>
+			<div ng-messages="productQualityCheckInformation.passQuantity.$error">
 				<div ng-message="required">Please enter pass Quantity</div>
 			</div>
 			</md-input-container>
@@ -42,7 +42,7 @@
    				 <div layout-gt-sm="row">
    				   <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">Fail Quantity</label> <input
-				type="number" ng-model="QCFailQuantity" name="failQuantity">
+				type="number" ng-model="QCFailQuantity" name="failQuantity" required>
 			<div ng-messages="productQualityCheckInformation.failQuantity.$error">
 				<div ng-message="required">Please enter Fail Quantity</div>
 			</div>
@@ -51,15 +51,15 @@
    				 <div layout-gt-sm="row">
    				   <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">Remark</label> <input
-				type="text" ng-model="remark" name="remark">
+				type="text" ng-model="remark" name="remark" required>
 			<div ng-messages="productQualityCheckInformation.remark.$error">
 				<div ng-message="required">Please enter Remark</div>
 			</div>
 			</md-input-container>
    				 </div>
-   				   <div style="margin-top: 5%;margin-left: 70%;padding-bottom: 20px">
+   				   <div style="margin-top: 5%;margin-left: 90%;padding-bottom: 20px">
              <md-dialog-actions layout="row">
-      <md-button class="md-raised" ng-click="submitProductQualityCheckInformation(productQualityCheckInformation.$valid)" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
+      <md-button class="md-raised" ng-click="submitProductQualityCheckInformation(productQualityCheckInformation.$valid,$event)" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
     </md-dialog-actions>
         </div>

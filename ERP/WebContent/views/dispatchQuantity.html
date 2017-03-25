@@ -48,8 +48,8 @@
         <tr ng-repeat="orderProduct in orderProductList">
           <td>{{orderProduct.product.partNumber}}</td>
           <td>{{orderProduct.remainingQuantity}}</td>
-          <td><input type="number" ng-model="orderProduct.quantity" max="{{orderProduct.remainingQuantity}}" name="quantity">
-             <div ng-show="dispatchQuantityInformation.quantity.$error.max" style="color: red;">The value must be in range 0 to {{orderProduct.remainingQuantity}}!</div>
+          <td><input type="number" ng-model="orderProduct.quantity" max="{{orderProduct.remainingQuantity}}" name="quantity{{$index}}">
+             <div ng-show="dispatchQuantityInformation.quantity{{$index}}.$error.max"  class="error-msg">The value must be in range 0 to {{orderProduct.remainingQuantity}}!</div>
           </td>
         </tr>
          

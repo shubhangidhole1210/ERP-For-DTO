@@ -1,8 +1,9 @@
-erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,productOrder,utils,flag,action,information) {
+erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,productOrder,utils,flag,action,information,hideAction) {
 	$scope.productOrder=productOrder;
     $scope.flag=flag;
     $scope.isReadOnly = action;
     $scope.information = information;
+    $scope.isProductOrderAdd = hideAction
     $scope.productOrder.expecteddeliveryDate = new Date($scope.productOrder.expecteddeliveryDate);
     $scope.hide = function() {
       $mdDialog.hide();
@@ -139,6 +140,14 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 			}
 	    };
 	    
+	    $scope.deleteProduct=function(index)
+	    {
+	    	console.log('delted products' +  $scope.orderProductAssociations)
+	    	var lastItem = $scope.orderProductAssociations.length;
+		    $scope.orderProductAssociations.splice(index,1);
+	    }
+	    
+	    $rootScope.isAddButtonDisplay=true;
 	    $scope.getProductOrderId=function(index)
 	    {
 	    	var httpparams = {};
@@ -154,7 +163,6 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 	             console.log($scope.productOrderList);
 			}, function errorCallback(response) {
 				console.log("Error");
-
 			});
 	    }
 });

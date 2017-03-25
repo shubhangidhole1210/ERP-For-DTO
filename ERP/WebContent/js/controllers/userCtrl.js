@@ -74,7 +74,7 @@ erpApp.controller('userCtrl',
 						$scope.flag = 1;
 						$scope.isReadOnly = false;
 						$scope.user = $scope.users[index];
-						$scope.information = "EDIT UNIT INFORMATION"
+						$scope.information = "EDIT USER INFORMATION"
 						console.log($scope.user);
 						$mdDialog
 								.show({
@@ -99,7 +99,7 @@ erpApp.controller('userCtrl',
 						$scope.isReadOnly = true;
 						$scope.user = $scope.users[index];
 						$scope.isSaving = false;
-						$scope.information = "VIEW UNIT INFORMATION"
+						$scope.information = "VIEW USER INFORMATION"
 						console.log($scope.unit);
 						$mdDialog.show({
 									controller : 'userDialogCtrl',
