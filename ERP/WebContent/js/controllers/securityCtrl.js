@@ -85,7 +85,6 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			rmorderinvoiceintakquantity.rawmaterial= $scope.rawMaterialList[index].rawmaterial.id;
 			rmorderinvoiceintakquantity.quantity = $scope.rawMaterialList[index].invoiceQuantity;
 			rmorderinvoiceintakquantity.isactive=true;
-			/*rmorderinvoiceintakquantity.remainingQuantity = $scope.rawMaterialList[index].remainingQuantity;*/
 			rmorderinvoiceintakquantities.push(rmorderinvoiceintakquantity);
 		}
 		console.log('intime : ' + $scope.intime.getTime());

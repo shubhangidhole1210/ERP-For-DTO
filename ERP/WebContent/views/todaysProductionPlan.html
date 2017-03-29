@@ -1,4 +1,4 @@
-<div ng-controller="todaysPlanCtrl">
+<!-- <div ng-controller="todaysPlanCtrl">
 <div class="erp-security">
 <div class="qualitycheck">
  <div class="header">TODAYS PRODUCTION PLAN</div>
@@ -58,4 +58,64 @@
  </div>
 </div>
 </div>
+</div> -->
+
+<div ng-controller="todaysPlanCtrl">
+  <div class="erp-information">
+    <div class="table-header">TODAYS PRODUCTION PLAN</div>
+    <div style="margin-top: 4%" ng-init="getProducts()">
+     <div style="text-align: right;font-weight: bold;">
+             <span>Date</span>
+             <span>{{currentDate}}</span>
+          </div>
+    <table>
+       <tr>
+       <th>PRODUCT</th>
+       <th>TARGET QUANTITY</th>
+       <th>ACHIVED QUANTITY</th>
+       <th>REMARK</th>
+       </tr>
+       <tr ng-repeat="product in productList">
+         <td>{{product.product.id}}</td>
+         <td>{{product.targetQuantity}}</td>
+         <td><md-input-container class="md-block" flex-gt-sm>
+				<input type="number" ng-model="product.achivedQuantity" name="achivedQuantity">
+				</md-input-container>
+		</td>
+		<td>
+		  <md-input-container class="md-block" flex-gt-sm>
+				<input type="text" ng-model="product.remark" name="remark">
+				</md-input-container>
+		</td>
+       </tr>
+    </table>
+    </div>
+       <div class="todayPlan-save-btn">
+             <md-dialog-actions layout="row">
+      <md-button class="md-raised" ng-click="saveTodaysProductionPlan()" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+    </md-dialog-actions>
+        </div>
+    
+  </div>
+  
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

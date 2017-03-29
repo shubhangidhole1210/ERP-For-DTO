@@ -72,8 +72,8 @@
           <tr ng-repeat="orderProductAssociation in productOrderList">
           <td>{{orderProductAssociation.product.name}}</td>
           <!-- <td>{{orderProductAssociation.quantity}}</td> -->
-          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}"></td>
-          <td><button type="button" style="height: 40px" ng-click="deleteProduct($index)">Delete</button></td>
+          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-disabled="isReadOnly"></td>
+          <td><button type="button" style="height: 40px" ng-click="deleteProduct($index)" ng-disabled="isReadOnly">Delete</button></td>
           </tr>
         </table>
         <div layout-gt-sm="row" ng-show="isProductOrderAdd" >

@@ -1,10 +1,10 @@
 <div ng-controller="productionPlanCtrl">
 <div class="erp-information displayScroll" ng-init="getProductionPlanList()">
 <!-- <p style="font-weight: bold;font-size: 20px;position: fixed;">PRODUCTION PLAN</p> -->
-<h1 class="table-header">PRODUCTION PLAN</h1>
-<form  name="qualityInspectionForm" novalidate style="width: 900px;margin-top: 5%">
-<div class="">
-
+<h1 class="table-header" style="position: fixed;width: 78%">PRODUCTION PLAN</h1>
+<form  name="qualityInspectionForm " novalidate style="width: 900px;margin-top: 13%">
+<!-- <div class="display-scroll"> -->
+<ion-content delegate-handle="mainScroll" has-bouncing="true" scroll="true">
 <table id="customers" class="">
  <tr>
    <th>PRODUCTION PLAN</th>
@@ -25,6 +25,7 @@
       </table>
     </td>
 <!--     <div style="overflow-x: scroll;"> -->
+
       <td ng-repeat="productProductionPlanItem in product.productProductionPlan">
     <table >
       <th>Target</th>
@@ -37,19 +38,17 @@
          <input type="number" class="quantity-input" ng-model="productProductionPlanItem.achived_quantity">
         </td>
       </tr>
-      
     </table>
-   
-    
   </td>
+  
 <!--   </div> -->
  </tr>
 </table>
 
 
 
-
-</div>
+</ion-content>
+<!-- </div> -->
 <div style="margin-top: 2%;margin-left: 40%;position: fixed;">
   <md-dialog-actions layout="row">
       

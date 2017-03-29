@@ -1,4 +1,4 @@
-<div ng-controller="prodcutQualityCheckCtrl">
+<!-- <div ng-controller="prodcutQualityCheckCtrl">
 <div class="erp-security">
     <div class="qualitycheck">
      <div class="header">PRODUCT QUALITY INSPECTION</div>
@@ -67,5 +67,48 @@
            </form>
         </div>
     </div>
+</div>
+</div> -->
+
+
+<div ng-controller="prodcutQualityCheckCtrl">
+<div class="erp-security" ng-init="getProductionPlanByDate()" >
+ <div class="header">PRODUCT QUALITY INSPECTION</div>
+  <div style="text-align: right;font-weight: bold;">
+             <span>Date</span>
+             <span>{{currentDate}}</span>
+          </div>
+     <table>
+        <tr >
+          <th>PRODUCT ID</th>
+          <th>PRODUCT QUANTITY</th>
+          <th>PASS QUANTITY</th>
+          <th>FAIL QUANTITY</th>
+          <th>REMARK</th>
+        </tr>
+        <tr ng-repeat="productionplan in productionPlans">
+           <td>{{productionplan.product.id}}</td>
+           <td>{{productionplan.targetQuantity}}</td>
+           <td><md-input-container class="md-block" flex-gt-sm>
+				<input type="number" ng-model="rmInvoiceItem.remark" name="remark">
+				</md-input-container></td>
+			<td>
+			   <md-input-container class="md-block" flex-gt-sm>
+				<input type="number" ng-model="rmInvoiceItem.remark" name="remark">
+				</md-input-container>
+			</td>	
+			<td>
+			   <md-input-container class="md-block" flex-gt-sm>
+				<input type="number" ng-model="rmInvoiceItem.remark" name="remark">
+				</md-input-container>
+			</td>
+        </tr>
+     </table>
+      <div style="margin-top: 5%;margin-left: 70%;padding-bottom: 20px">
+             <md-dialog-actions layout="row">
+      <md-button class="md-raised" ng-click="saveProductQuality()" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+    </md-dialog-actions>
+        </div>
 </div>
 </div>

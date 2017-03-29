@@ -15,7 +15,7 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 		  utils.showProgressBar();
 			var httpparams = {};
 			httpparams.method = 'GET';
-			httpparams.url = SERVER_URL + "productionplanning/getProductionPlanByDate/"+ $scope.currentDate;
+			httpparams.url = SERVER_URL + "productionplanning/getProductionPlanListByDate/"+ $scope.currentDate;
 			
 			httpparams.headers = {
 				auth_token : Auth.getAuthToken()
@@ -30,7 +30,7 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 				utils.hideProgressBar();
 			});
 	  };
-	  $scope.getProductionPlanByDateAndPId=function(index) {
+	 /* $scope.getProductionPlanByDateAndPId=function(index) {
 		  utils.showProgressBar();
 			var httpparams = {};
 			httpparams.method = 'GET';
@@ -47,31 +47,21 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 				console.log("Error");
 				utils.hideProgressBar();
 			});
-	  };
+	  };*/
 	  
-	  $scope.submitProductQualityCheckInformation = function(isvaliduser, $event) {
+	  $/*scope.submitProductQualityCheckInformation = function(isvaliduser, $event) {
 			if (isvaliduser) {
-				/*utils.showProgressBar();*/
+				utils.showProgressBar();
 				$scope.updateProductQuality();
 			} else {
 				console.log('its else block');
 			}
-		};
+		};*/
 		
-		$scope.updateProductQuality=function()
+		$scope.saveProductQuality=function()
 		{
 			 var data = {
-					 product: $scope.selectedProductionPlan.product.id,
-					 productionplanning: $scope.selectedProductionPlan.id,
-					 checkQuantity: $scope.selectedProductionPlan.targetQuantity,
-					 goodQuantity: $scope.QCPassQuantity,
-					 rejectedQuantity: $scope.QCFailQuantity,
-					 remark: $scope.remark,
-					 createdBy: 2,
-					 created_date: null,
-					 updatedBy: 1,
-					 updated_date: null,
-					 isactive: true
+					
 			 };
 			 console.log("Data",data);
 			 
@@ -94,12 +84,12 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 				});
 		}
 		
-		$scope.toCompareQuantity=function()
+	/*	$scope.toCompareQuantity=function()
 		{
 			console.log('in to compare function')
 			console.log($scope.productsPlan)
 		}
-		
+		*/
 		/*$scope.checkProductQuanitity=function()
 		{
 			
