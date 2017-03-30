@@ -92,7 +92,7 @@
 												console.log(data);
 												$location.path('/')
 												utils
-														.showToast('Stores information  added Successfully !')
+														.showToast('Qualitycheckrawmaterial added Successfully !')
 												utils.hideProgressBar();
 											} else {
 												console.log(data);

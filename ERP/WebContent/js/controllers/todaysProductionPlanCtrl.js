@@ -1,4 +1,4 @@
-erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,$)
+erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,$location)
 {
 	
 	  
@@ -114,6 +114,7 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 				product.targetQuantity = $scope.productList[index].targetQuantity;
 				product.achivedQuantity = $scope.productList[index].achivedQuantity;
 				product.remark = $scope.productList[index].remark;
+				product.productionPlanId = $scope.productList[index].id;
 				productinPlanCurrentDateLists.push(product);
 			}
 			
@@ -123,8 +124,8 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 					
 				};
 				var httpparams = {
-						method : 'put',
-						url : SERVER_URL + "productionplanning/update",
+						method : 'post',
+						url : SERVER_URL + "dailyproduction/dailyproductionSave",
 						data : data
 					};
 				

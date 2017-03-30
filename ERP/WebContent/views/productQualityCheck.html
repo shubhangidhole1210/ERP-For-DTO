@@ -90,16 +90,16 @@
            <td>{{productionplan.product.id}}</td>
            <td>{{productionplan.targetQuantity}}</td>
            <td><md-input-container class="md-block" flex-gt-sm>
-				<input type="number" ng-model="rmInvoiceItem.remark" name="remark">
+				<input type="number" ng-model="productionplan.passQuantity" name="remark">
 				</md-input-container></td>
 			<td>
 			   <md-input-container class="md-block" flex-gt-sm>
-				<input type="number" ng-model="rmInvoiceItem.remark" name="remark">
+				<input type="number" ng-model="productionplan.failQuantity" name="remark">
 				</md-input-container>
 			</td>	
 			<td>
 			   <md-input-container class="md-block" flex-gt-sm>
-				<input type="number" ng-model="rmInvoiceItem.remark" name="remark">
+				<input type="text" ng-model="productionplan.remark" name="remark">
 				</md-input-container>
 			</td>
         </tr>

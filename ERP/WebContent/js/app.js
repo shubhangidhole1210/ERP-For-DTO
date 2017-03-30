@@ -148,6 +148,12 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
+	}).when('/productStore',{
+		templateUrl : 'views/productStore.html',
+		data :{
+			loginRequired : true
+		}
+			
 	}).when('/fileUpload', {
 		templateUrl : 'views/fileUpload.html',
 		data : {

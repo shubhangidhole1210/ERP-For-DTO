@@ -1,4 +1,4 @@
-erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils){
+erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils){
 	 $scope.currentDate = new Date();
 	 
 	  $scope.selectedProductionPlan = {};
