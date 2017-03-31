@@ -130,11 +130,11 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 	    
     
 	    
-	    $scope.orderProductAssociations=[];
+	    $scope.orderProduct=[];
 	    $scope.orderProductAssociation={isActive : true};
 	    $scope.addOrderProductAssociation=function(){
 	    	if(!angular.equals($scope.orderProductAssociation,{})){
-				   $scope.orderProductAssociations.push($scope.orderProductAssociation);	
+				   $scope.orderProduct.push($scope.orderProductAssociation);	
 				   $scope.orderProductAssociation = {isActive : true};
 				   console.log($scope.orderProductAssociations);
 			}
@@ -142,9 +142,9 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 	    
 	    $scope.deleteProduct=function(index)
 	    {
-	    	console.log('delted products' +  $scope.orderProductAssociations)
-	    	var lastItem = $scope.orderProductAssociations.length;
-		    $scope.orderProductAssociations.splice(index,1);
+	    	console.log('delted products' +  $scope.orderProduct)
+	    	var lastItem = $scope.orderProduct.length;
+		    $scope.orderProduct.splice(index,1);
 	    }
 	    
 	    $rootScope.isAddButtonDisplay=true;
@@ -160,7 +160,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 			$http(httpparams).then(function successCallback(response) {
 				$scope.productOrderList = response.data;
 				console.log(response);
-	             console.log($scope.productOrderList);
+	             console.log('product order list' + $scope.productOrderList);
 			}, function errorCallback(response) {
 				console.log("Error");
 			});

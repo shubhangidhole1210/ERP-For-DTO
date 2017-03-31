@@ -53,7 +53,7 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 			 utils.showProgressBar();
 				var httpparams = {};
 				httpparams.method = 'POST';
-				httpparams.url = SERVER_URL + "productquality/productQualityCheck";
+				httpparams.url = SERVER_URL + "productquality/productQualityCheckStore";
 				httpparams.data = data;
 				httpparams.headers = {
 					auth_token : Auth.getAuthToken()

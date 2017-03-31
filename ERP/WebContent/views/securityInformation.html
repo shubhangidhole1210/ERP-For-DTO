@@ -83,7 +83,7 @@
           <div layout-gt-sm="row">
          <md-input-container>
           <label style="color: black;">RM Order</label>
-          <md-select ng-model="rawMaterialOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayRMList($index)"  required>
+          <md-select ng-model="rawMaterialOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayRMList($index)" >
             <md-option ng-repeat="rawMaterialOrder in vendorRmList" ng-value="rawMaterialOrder.id"  >
                {{rawMaterialOrder.name}}
             </md-option>

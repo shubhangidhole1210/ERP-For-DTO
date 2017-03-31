@@ -112,7 +112,7 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 				var product = {};
 				product.productId= $scope.productList[index].product.id;
 				product.targetQuantity = $scope.productList[index].targetQuantity;
-				product.achivedQuantity = $scope.productList[index].achivedQuantity;
+				product.achivedQuantity = $scope.productList[index].achived;
 				product.remark = $scope.productList[index].remark;
 				product.productionPlanId = $scope.productList[index].id;
 				productinPlanCurrentDateLists.push(product);
@@ -138,7 +138,7 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 					console.log(data);
 					
 					if(data.data.code === 1){
-						utils.showToast("Rawmaterial Order Invoice added Successfully !");
+						utils.showToast("Todays production Plan Update sucessfully!");
 						$location.path('/');
 					}else{
 						utils.showToast("Something went wrong. Please try again later.");

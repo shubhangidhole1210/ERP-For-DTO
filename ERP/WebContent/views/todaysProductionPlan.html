@@ -10,14 +10,16 @@
        <tr>
        <th>PRODUCT</th>
        <th>TARGET QUANTITY</th>
+       <th>COMPLETED QUANTITY</th>
        <th>ACHIVED QUANTITY</th>
        <th>REMARK</th>
        </tr>
        <tr ng-repeat="product in productList">
          <td>{{product.product.id}}</td>
          <td>{{product.targetQuantity}}</td>
+         <td>{{product.achivedQuantity}}</td>
          <td><md-input-container class="md-block" flex-gt-sm>
-				<input type="number" ng-model="product.achivedQuantity" name="achivedQuantity">
+				<input type="number" ng-model="product.achived" name="achivedQuantity">
 				</md-input-container>
 		</td>
 		<td>

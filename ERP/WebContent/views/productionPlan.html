@@ -11,7 +11,7 @@
    <th ng-repeat="days in alldays" style="font-size: 17px; text-align: center;">{{days| date:'dd-MM-yyyy'}}</th>
  </tr>
  <tr ng-repeat="product in products" >
-    <td style="font-size: 17px; text-align: center;">
+    <td style="font-size: 17px; text-align: center">
       <table >
       <th>Part Number</th>
       <th>Inventory Qty</th>
@@ -26,7 +26,7 @@
     </td>
 <!--     <div style="overflow-x: scroll;"> -->
 
-      <td ng-repeat="productProductionPlanItem in product.productProductionPlan">
+      <td ng-repeat="productProductionPlanItem in product.productProductionPlan" >
     <table >
       <th>Target</th>
       <th>Achived</th>

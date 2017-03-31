@@ -1,4 +1,4 @@
-erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils){
+erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,$location){
 	 $scope.currentDate = new Date();
 	 
 	  $scope.selectedProductionPlan = {};
@@ -15,7 +15,7 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 		  utils.showProgressBar();
 			var httpparams = {};
 			httpparams.method = 'GET';
-			httpparams.url = SERVER_URL + "productionplanning/getProductionPlanListByDate/"+ $scope.currentDate;
+			httpparams.url = SERVER_URL + "productquality/getQualityPendingListByDate/"+ $scope.currentDate;
 			
 			httpparams.headers = {
 				auth_token : Auth.getAuthToken()
@@ -59,11 +59,18 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 					auth_token : Auth.getAuthToken()
 				};
 
-				$http(httpparams).then(function successCallback(response) {
+				$http(httpparams).then(function successCallback(data) {
+					if(data.data.code === 1){
+						utils.showToast("Product Quality Check sucessfully!");
+						$location.path('/');
+					}else{
+						utils.showToast("Something went wrong. Please try again later.");
+					}
 					utils.hideProgressBar();
-					console.log("productQualityCheck response : ",response);
+					
 				}, function errorCallback(response) {
 					console.log("Error");
+					utils.showToast("Something went wrong. Please try again later.");
 					utils.hideProgressBar();
 				});
 		}

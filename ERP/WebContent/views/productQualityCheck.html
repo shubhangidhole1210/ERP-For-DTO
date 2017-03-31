@@ -84,6 +84,7 @@
           <th>PRODUCT QUANTITY</th>
           <th>PASS QUANTITY</th>
           <th>FAIL QUANTITY</th>
+          <th>STATUS</th>
           <th>REMARK</th>
         </tr>
         <tr ng-repeat="productionplan in productionPlans">
@@ -97,6 +98,7 @@
 				<input type="number" ng-model="productionplan.failQuantity" name="remark">
 				</md-input-container>
 			</td>	
+			<td>{{productionplan.status.name}}</td>
 			<td>
 			   <md-input-container class="md-block" flex-gt-sm>
 				<input type="text" ng-model="productionplan.remark" name="remark">
