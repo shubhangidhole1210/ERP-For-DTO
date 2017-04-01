@@ -1,5 +1,6 @@
 <div ng-controller="prodcutQualityCheckCtrl">
 <div class="erp-security" ng-init="getProductionPlanByDate()" >
+<form name="productQualityForm" novalidate>
  <div class="header">PRODUCT QUALITY INSPECTION</div>
   <div style="text-align: right;font-weight: bold;">
              <span>Date</span>
@@ -20,12 +21,12 @@
            <td>{{productionplan.qualityPendingQuantity}}</td>
            <td>
            		<md-input-container class="md-block" flex-gt-sm>
-					<input type="number" ng-model="productionplan.passQuantity" ng-change="comparePassQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" name="QC PASS QTY">
+					<input type="number" ng-model="productionplan.passQuantity"  name="passQuantity">
 				</md-input-container>
 			</td>
 			<td>
 			   	<md-input-container class="md-block" flex-gt-sm>
-					<input type="number" ng-model="productionplan.failQuantity"  name="QC FAIL QTY">
+					<input type="number" ng-model="productionplan.failQuantity" ng-change="comparePassQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" name="failQuantity">
 				</md-input-container>
 			</td>	
 			<td>
@@ -37,9 +38,11 @@
      </table>
       <div style="margin-top: 5%;margin-left: 70%;padding-bottom: 20px">
              <md-dialog-actions layout="row">
-      <md-button class="md-raised" ng-click="saveProductQuality()" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
+      <md-button class="md-raised" ng-click="submitInformation(productQualityForm.$valid,$event)" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
     </md-dialog-actions>
         </div>
+      </form>  
+        
 </div>
 </div>

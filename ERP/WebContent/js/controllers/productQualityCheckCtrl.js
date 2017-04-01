@@ -30,9 +30,22 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 	$scope.comparePassQuantity = function(qualityPendingQuantity, passQuantity, failQuantity){
 		if(qualityPendingQuantity !== (passQuantity + failQuantity)){
 			
+			$scope.prodcutQualityCheckCtrl.failQuantity.$setValidity("customMsg", false);
+			console.log('pending quantity is not equal to pass and fail quantity');
+		}else{
+			console.log('else block');
 		}
 		
 	}
+	
+	$scope.submitInformation = function(isvaliduser, $event) {
+		if (isvaliduser) {
+			$scope.saveProductQuality();
+		} else {
+			console.log('its else block');
+		}
+	};
+	
 		$scope.saveProductQuality=function()
 		{
 			 var index=0;
