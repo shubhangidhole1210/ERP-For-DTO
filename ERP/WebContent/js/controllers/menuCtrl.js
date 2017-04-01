@@ -9,7 +9,7 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 			var isMenuAdded = false;
 			var indexAdded = 0;
 			for (var subindex=0; subindex < cascadedMenu.length ; subindex++){console.log('menu subindex : '+ subindex);
-				console.log('menu subindex : '+ subindex + " : " , $scope.menu[subindex].menu);
+				/*console.log('menu subindex : '+ subindex + " : " , $scope.menu[subindex].menu);*/
 				if(cascadedMenu[subindex].menu === $scope.menu[index].menu ){
 					var subMenu = {};
 					subMenu.submenu = $scope.menu[index].submenu;
@@ -38,7 +38,7 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 				subMenu.url = $scope.menu[index].url;
 				cascadedMenuItem.submenu.push(subMenu);
 				cascadedMenu.push(cascadedMenuItem);
-				console.log('Added first cascaded menu',cascadedMenu);
+				/*console.log('Added first cascaded menu',cascadedMenu);*/
 			}
 		}
 		return cascadedMenu;

@@ -64,8 +64,8 @@
             <th>QUANTITY</th>
             <th>ACTION</th>
           </tr>
-          <tr ng-repeat="orderProductAssociation in orderProduct">
-          <td>{{orderProductAssociation.product.nmae}}</td>
+          <tr ng-repeat="orderProductAssociation in orderproductassociations">
+          <td>{{orderProductAssociation.product.name}}</td>
           <td>{{orderProductAssociation.quantity}}</td>
           <td><button type="button" style="height: 40px" ng-click="deleteProduct($index)">Delete</button></td>
           </tr>
@@ -79,7 +79,7 @@
            <md-input-container>
           <label style="color: black;">PRODUCT*</label>
           <md-select ng-model="orderProductAssociation.product" name="product" value="product.id"  ng-disabled="isReadOnly"  ng-init="getProducts()">
-            <md-option ng-repeat="product in products" ng-value="product.id" >
+            <md-option ng-repeat="product in products" ng-value="product" >
                {{product.name}}
             </md-option>
           </md-select>

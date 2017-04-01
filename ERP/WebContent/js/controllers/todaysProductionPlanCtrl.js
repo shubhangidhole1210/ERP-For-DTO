@@ -1,16 +1,15 @@
 erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,$location)
 {
 	
+	 $scope.currentDate = utils.getCurrentDate();
 	  
-	 $scope.currentDate = new Date();
-	 
-	  
-	  $scope.curr_date = $scope.currentDate.getDate();
-	  $scope.curr_month = $scope.currentDate.getMonth() + 1; //Months are zero based
-	  $scope.curr_year = $scope.currentDate.getFullYear();
+	/*  $scope.curr_year = $scope.currentDate.getFullYear();
+	  $scope.curr_date = $scope.currentDate.getDate() < 10 ? "0" + $scope.currentDate.getDate() : $scope.currentDate.getDate();
+	  $scope.curr_month = ($scope.currentDate.getMonth() + 1)< 10 ? ("0" + ($scope.currentDate.getMonth() + 1)) : ($scope.currentDate.getMonth() + 1);
 	  $scope.currentDate =  $scope.curr_year + "-" + $scope.curr_month + "-" +  $scope.curr_date;
-	  console.log( $scope.currentDate); 
+	  console.log( $scope.currentDate); */
 	  
+	
 	  
 	  $scope.getProducts=function()
 	  {
@@ -26,6 +25,7 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 				utils.hideProgressBar();
 				$scope.productList = response.data;
 				/* $scope.displayNone();*/
+				/*$scope.isTodaysProductionPlan();*/
 				console.log(response);
 			}, function errorCallback(response) {
 				console.log("Error");
@@ -34,7 +34,18 @@ erpApp.controller('todaysPlanCtrl', function($scope,$http, $mdDialog, $mdToast, 
 	  }
 	  
 	  
-	  
+	 /* $scope.isTodaysProductionPlanPresent=false; 
+		$scope.isTodaysProductionPlan=function()
+		{
+			if($scope.data.length==0)
+				{
+				$scope.isTodaysProductionPlanPresent=true; 
+				}
+			else
+				{
+				$scope.isTodaysProductionPlanPresent=false; 
+				}
+		}*/
 	  
 	  /*$scope.isNone=false;
 	  $scope.displayNone=function()
