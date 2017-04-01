@@ -1,76 +1,3 @@
-<!-- <div ng-controller="prodcutQualityCheckCtrl">
-<div class="erp-security">
-    <div class="qualitycheck">
-     <div class="header">PRODUCT QUALITY INSPECTION</div>
-        <div class="qualityInspection">
-           <form name="productQualityCheckInformation"  novalidate  style="width: 70%">
-              <div class="productQualityCheck">
-      				 <div style="font-weight: bold;position: absolute; right: 15%;">
-             		<span>Date</span>
-            		 <span>{{currentDate}}</span>
-       			</div> 
-       			
-   				  <div layout-gt-sm="row">
-      <md-input-container> <label style="color: black;">Product Id
-			</label> <md-select ng-model="selectedProductionPlan" name="productName"
-			 ng-required="true" required ng-init="getProductionPlanByDate()" ng-change="getTodaysProductionPlan($index)"> <md-option
-			ng-repeat="productionPlan in productionPlans" ng-value="productionPlan">
-		{{productionPlan.product.name}}</md-option> </md-select>
-		<div ng-messages="productQualityCheckInformation.productName.$error">
-			<div ng-message="required">Please Select Product Id</div>
-		</div>
-		</md-input-container>
-    </div>
-   				 <div layout-gt-sm="row">
-   				   <md-input-container class="md-block" flex-gt-sm>
-			<label class="input-filed-label">Product Quantity</label> <input
-				type="number" ng-model="selectedProductionPlan.targetQuantity" name="productQuantity"  ng-disabled="true">
-			<div ng-messages="productQualityCheckInformation.productQuantity.$error">
-				<div ng-message="required">Please enter Target Quantity</div>
-			</div>
-			</md-input-container>
-   				 </div>
-   				  <div layout-gt-sm="row">
-   				   <md-input-container class="md-block" flex-gt-sm>
-			<label class="input-filed-label">Pass Quantity</label> <input
-				type="number" ng-model="QCPassQuantity" name="passQuantity" required>
-			<div ng-messages="productQualityCheckInformation.passQuantity.$error">
-				<div ng-message="required">Please enter pass Quantity</div>
-			</div>
-			</md-input-container>
-   				 </div>
-   				 <div layout-gt-sm="row">
-   				   <md-input-container class="md-block" flex-gt-sm>
-			<label class="input-filed-label">Fail Quantity</label> <input
-				type="number" ng-model="QCFailQuantity" name="failQuantity" required>
-			<div ng-messages="productQualityCheckInformation.failQuantity.$error">
-				<div ng-message="required">Please enter Fail Quantity</div>
-			</div>
-			</md-input-container>
-   				 </div>
-   				 <div layout-gt-sm="row">
-   				   <md-input-container class="md-block" flex-gt-sm>
-			<label class="input-filed-label">Remark</label> <input
-				type="text" ng-model="remark" name="remark" required>
-			<div ng-messages="productQualityCheckInformation.remark.$error">
-				<div ng-message="required">Please enter Remark</div>
-			</div>
-			</md-input-container>
-   				 </div>
-   				   <div style="margin-top: 5%;margin-left: 90%;padding-bottom: 20px">
-             <md-dialog-actions layout="row">
-      <md-button class="md-raised" ng-click="submitProductQualityCheckInformation(productQualityCheckInformation.$valid,$event)" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
-      <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
-    </md-dialog-actions>
-        </div>
-              </div>
-           </form>
-        </div>
-    </div>
-</div>
-</div> -->
-
-
 <div ng-controller="prodcutQualityCheckCtrl">
 <div class="erp-security" ng-init="getProductionPlanByDate()" >
  <div class="header">PRODUCT QUALITY INSPECTION</div>
@@ -79,29 +6,31 @@
              <span>{{currentDate}}</span>
           </div>
      <table>
-        <tr >
+        <tr>
           <th>PRODUCT ID</th>
-          <th>PRODUCT QUANTITY</th>
-          <th>PASS QUANTITY</th>
-          <th>FAIL QUANTITY</th>
-          <th>STATUS</th>
+          <th>TARGET QUANTITY</th>
+          <th>QC PENDING QUANTITY</th>
+          <th>QC PASS QUANTITY</th>
+          <th>QC FAIL QUANTITY</th>
           <th>REMARK</th>
         </tr>
         <tr ng-repeat="productionplan in productionPlans">
            <td>{{productionplan.product.id}}</td>
            <td>{{productionplan.targetQuantity}}</td>
-           <td><md-input-container class="md-block" flex-gt-sm>
-				<input type="number" ng-model="productionplan.passQuantity" name="remark">
-				</md-input-container></td>
+           <td>{{productionplan.qualityPendingQuantity}}</td>
+           <td>
+           		<md-input-container class="md-block" flex-gt-sm>
+					<input type="number" ng-model="productionplan.passQuantity" ng-change="comparePassQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" name="QC PASS QTY">
+				</md-input-container>
+			</td>
 			<td>
-			   <md-input-container class="md-block" flex-gt-sm>
-				<input type="number" ng-model="productionplan.failQuantity" name="remark">
+			   	<md-input-container class="md-block" flex-gt-sm>
+					<input type="number" ng-model="productionplan.failQuantity"  name="QC FAIL QTY">
 				</md-input-container>
 			</td>	
-			<td>{{productionplan.status.name}}</td>
 			<td>
 			   <md-input-container class="md-block" flex-gt-sm>
-				<input type="text" ng-model="productionplan.remark" name="remark">
+					<input type="text" ng-model="productionplan.remark" name="REMARK">
 				</md-input-container>
 			</td>
         </tr>

@@ -8,7 +8,8 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 			var cascadedMenuItem = {};
 			var isMenuAdded = false;
 			var indexAdded = 0;
-			for (var subindex=0; subindex < cascadedMenu.length ; subindex++){console.log('menu subindex : '+ subindex);
+			for (var subindex=0; subindex < cascadedMenu.length ; subindex++){
+//				console.log('menu subindex : '+ subindex);
 				/*console.log('menu subindex : '+ subindex + " : " , $scope.menu[subindex].menu);*/
 				if(cascadedMenu[subindex].menu === $scope.menu[index].menu ){
 					var subMenu = {};
