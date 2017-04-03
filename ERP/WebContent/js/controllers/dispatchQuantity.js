@@ -30,14 +30,14 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 	{
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "productorder/productorderId/" +$scope.order.id;
+		httpparams.url = SERVER_URL + "productorderassociation/list/" +$scope.order.id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
 		
 		$http(httpparams).then(function successCallback(response) {
 			console.log(response);
-			$scope.orderProductList = response.data;
+			$scope.orderProductList = response.data.productinventories;
 			
 		}, function errorCallback(response) {
 			console.log("Error");

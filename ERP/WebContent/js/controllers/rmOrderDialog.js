@@ -114,6 +114,17 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		})
 	};
 	
+	$scope.calculateTotalPrice=function(){
+		 $scope.productSubTotal=0;
+		console.log($scope.orderRawMaterials);
+		var i;
+		for (i = 0; i < $scope.orderRawMaterials.length; i++)
+			{
+			   $scope.totalPrice=$scope.orderRawMaterials[i].rawmaterial.pricePerUnit * $scope.orderRawMaterials[i].quantity;
+			   $scope.productSubTotal += $scope.totalPrice
+			}
+	}
+	
 	$scope.displayVendorId=function()
 	{
 		var httpparams = {};
@@ -143,7 +154,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				   $scope.orderRawMaterial = {isActive : true};
 				   console.log($scope.orderRawMaterials);
 			}
-	    	/*$scope.isDuplicateRM();*/
+	    	$scope.calculateTotalPrice();
 	    };
 	
 	$scope.isDuplicateRM=function()

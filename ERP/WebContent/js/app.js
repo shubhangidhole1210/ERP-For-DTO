@@ -3,7 +3,7 @@ var erpApp = angular
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-erpApp.value('SERVER_URL', 'http://192.168.2.103:8085/ERP/');
+erpApp.value('SERVER_URL', 'http://192.168.2.102:8085/ERP/');
 
 erpApp.config(function ($provide, $httpProvider) {
 	  
@@ -260,7 +260,12 @@ erpApp.factory('Auth', function(){
 
 	return{
 	    setUser : function(aUser){
-	        user = aUser;
+	    	if(sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}else{
+	    		user = {};
+	    	}
+	        user.auth_token = aUser.auth_token;
         	sessionStorage.user =JSON.stringify(user);
         	console.log('setting sessionstorage : '+ sessionStorage.user);
 	    },

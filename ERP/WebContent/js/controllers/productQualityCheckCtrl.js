@@ -1,4 +1,4 @@
-erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,$location){
+erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope, SERVER_URL, Auth, utils, $location){
 	 $scope.currentDate = new Date();
 	 
 	  $scope.selectedProductionPlan = {};
@@ -28,12 +28,12 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 			});
 	  };
 	$scope.comparePassQuantity = function(qualityPendingQuantity, passQuantity, failQuantity){
-		if(qualityPendingQuantity !== (passQuantity + failQuantity)){
-			
-			$scope.prodcutQualityCheckCtrl.failQuantity.$setValidity("customMsg", false);
-			console.log('pending quantity is not equal to pass and fail quantity');
+		if(qualityPendingQuantity >= (passQuantity + failQuantity)){
+			$scope.productQualityForm.failQuantity.$setValidity("customMsg", true);
+			$scope.errorMsg="";
 		}else{
-			console.log('else block');
+			$scope.productQualityForm.failQuantity.$setValidity("customMsg", false);
+			$scope.errorMsg="pending quantity is not equal to pass and fail quantity";
 		}
 		
 	}

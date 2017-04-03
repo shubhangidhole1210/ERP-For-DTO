@@ -35,7 +35,7 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 				}
 			utils.showToast(data.data.message);
 		}, function errorCallback(data) {
-			console.log("Error");
+			console.log("Error",data);
 			utils.hideProgressBar();
 			utils.showToast("We are sorry, Something went wrong. Please try again later ");
 		});

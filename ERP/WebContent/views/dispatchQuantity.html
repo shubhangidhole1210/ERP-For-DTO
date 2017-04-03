@@ -45,7 +45,7 @@
           <th>REMAINING QUANTITY</th>
           <th>QUANTITY</th>
         </tr>
-        <tr ng-repeat="orderProduct in orderProductList">
+        <tr ng-repeat="orderProduct in productinventories.orderProductList">
           <td>{{orderProduct.product.partNumber}}</td>
           <td>{{orderProduct.remainingQuantity}}</td>
           <td><input type="number" ng-model="orderProduct.quantity" max="{{orderProduct.remainingQuantity}}" name="quantity{{$index}}">

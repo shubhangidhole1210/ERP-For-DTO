@@ -22,12 +22,22 @@
            <td>
            		<md-input-container class="md-block" flex-gt-sm>
 					<input type="number" ng-model="productionplan.passQuantity"  name="passQuantity">
+					<div ng-messages="productQualityForm.passQuantity.$error">
+             	  <div ng-message="required">please enter Quantity </div>
+            	</div>
 				</md-input-container>
 			</td>
 			<td>
 			   	<md-input-container class="md-block" flex-gt-sm>
-					<input type="number" ng-model="productionplan.failQuantity" ng-change="comparePassQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" name="failQuantity">
+					<input type="number" ng-model="productionplan.failQuantity" name="failQuantity" id="failQuantity" 
+					ng-change="comparePassQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" >
+				
+            	<!-- <div ng-show="productQualityForm.failQuantity.$error.customMsg" class="error-msg">pending quantity should be equal to pass and fail quantity</div> -->
 				</md-input-container>
+				<div ng-messages="productQualityForm.failQuantity.$error">
+					<div ng-message="required">Please enter user name</div>
+             		<div ng-message="customMsg">{{errorMsg}}</div>
+            	</div>
 			</td>	
 			<td>
 			   <md-input-container class="md-block" flex-gt-sm>
