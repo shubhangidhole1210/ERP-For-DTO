@@ -47,7 +47,7 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 	
 	if($scope.displayMenu){
 		$scope.menu = Auth.getMenu();
-		console.log('Menu',$scope.menu);
+		/*console.log('Menu',$scope.menu);*/
 		$scope.cascadedMenu = $scope.createCascadedMenu();
 	}
 	

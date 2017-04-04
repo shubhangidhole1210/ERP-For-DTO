@@ -129,6 +129,11 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
+	}).when('/securityCheckOut', {
+		templateUrl : 'views/SecurityCheckOut.html',
+		data : {
+			loginRequired : true
+		}
 	}).when('/client', {
 		templateUrl : 'views/client.html',
 		data : {
@@ -215,6 +220,12 @@ erpApp.config(function($routeProvider) {
 			loginRequired : true
 		}
 			
+	}).when('/storeOut',{
+		templateUrl : 'views/storeOut.html',
+		data :{
+			loginRequired : true
+		}
+			
 	}).when('/fileUpload', {
 		templateUrl : 'views/fileUpload.html',
 		data : {
@@ -234,7 +245,7 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
  	        if ('data' in next) {
  	            if ('loginRequired' in next.data ) {
  	                var loginRequired = next.data.loginRequired;
- 	                console.log('loginRequired = ' + loginRequired);
+ 	                /*console.log('loginRequired = ' + loginRequired);*/
  	                if(!Auth.isLoggedIn() && loginRequired){
  	                	$location.path('/login');
  	                 }/*else if(next.$$route.originalPath !=='/' && !Auth.isPageAccessible(next)){
@@ -267,7 +278,7 @@ erpApp.factory('Auth', function(){
 	    	}
 	        user.auth_token = aUser.auth_token;
         	sessionStorage.user =JSON.stringify(user);
-        	console.log('setting sessionstorage : '+ sessionStorage.user);
+        	/*console.log('setting sessionstorage : '+ sessionStorage.user);*/
 	    },
 	    setMenu : function(menu){
 	    	if(!user && sessionStorage.user){
