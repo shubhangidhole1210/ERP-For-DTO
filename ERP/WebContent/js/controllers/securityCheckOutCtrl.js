@@ -58,5 +58,77 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 			});
 			utils.showProgressBar();
 		}
+	    
+	    
+	    $scope.submitInformation = function(isvaliduser, $event) {
+			if (isvaliduser) {
+				$scope.saveSecurityCheckOutInformation();
+			} else {
+				console.log('its else block');
+			}
+		};
+		
+		$scope.saveSecurityCheckOutInformation = function() {
+			console.log('Saving saveSecurityInformation');
+			var index=0;
+			var securityCheckOutParts = [];
+			for(index=0;index<$scope.productOtderList.length;index++){
+				var securityCheckOut = {};
+				securityCheckOut.productId= $scope.productOtderList[index].product.id;
+				securityCheckOutParts.push(securityCheckOut);
+			}
+			console.log('intime : ' + $scope.intime.getTime());
+			console.log('out : ' + $scope.outtime.getTime());
+			console.log('intime : ' + $scope.intime.toLocaleTimeString());
+			console.log('out : ' + $scope.outtime.toLocaleTimeString());
+			if($scope.intime.getTime() < $scope.outtime.getTime()){
+				console.log('intime is lesser than outtime')
+			}else{
+				console.log('intime is greater than outtime')
+			}
+			var data = {
+
+				invoice_No : $scope.invoice_No,
+				clientname : $scope.selectedClient,
+				vehicleNo : $scope.vehicleNo,
+				driver_Name : $scope.driver_Name,
+				description : $scope.description,
+				createDate : $scope.createDate,
+				intime : $scope.intime.toLocaleTimeString().split(" ")[0],
+				outtime : $scope.outtime.toLocaleTimeString().split(" ")[0],
+				poNo :  $scope.productOrders.id,
+				securityCheckOutParts : securityCheckOutParts
+			};
+			var httpparams = {
+					method : 'post',
+					url : SERVER_URL + "securitycheckout/productOrderCheckOut",
+					data : data
+				};
+			
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			$http(httpparams).then(function successCallback(data) {
+				
+				console.log(data.data.message);
+				console.log(data);
+				
+				if(data.data.code === 1){
+					utils.showToast("Rawmaterial Order Invoice added Successfully !");
+					$location.path('/');
+				}else{
+					utils.showToast("Something went wrong. Please try again later.");
+				}
+				utils.hideProgressBar();
+				
+			}, function errorCallback(response) {
+				console.log("Error");
+				utils.showToast("Something went wrong. Please try again later.");
+				utils.hideProgressBar();
+			});
+
+			utils.showProgressBar();
+			    	
+		};
 	
 });

@@ -28,7 +28,7 @@
         </md-input-container>
         </div>
       <div layout-gt-sm="row">
-          <md-input-container ng-init="getRawMaterials()">
+         <!--  <md-input-container ng-init="getRawMaterials()">
           <label style="color: black;">RAW MATERIAL*</label>
           <md-select ng-model="productRmAsso.rawmaterial.id" name="rawmaterial"  ng-disabled="isReadOnly" ng-required="true"  ng-init="rawMaterialId()">
             <md-option ng-repeat="rawMaterial in RMData" ng-value="rawMaterial.id" >
@@ -38,7 +38,7 @@
           <div ng-messages="productRMAssociationInformation.rawmaterial.$error">
                  <div ng-message="required">Please Select Raw Material</div>
               </div>
-        </md-input-container>
+        </md-input-container> -->
         </div>
         
         
@@ -54,7 +54,7 @@
           </div>
       
          </div>
-           <h2>Raw Material List</h2>
+             <h2>Raw Material List</h2>
           <table>
           <tr>
           <th>RAW MATERIAL</th>
@@ -62,21 +62,20 @@
             <th>ACTION</th>
           </tr>
           <tr ng-repeat="orderRawMaterial in orderRawMaterials">
-           <td >{{orderRawMaterial.rawmaterial.name}}</td>
-          <!--  <td>{{orderRawMaterial.quantity}}</td> -->
+           <td >{{rawMaterial.name}}</td>
           <td><input type="number" ng-value="{{orderRawMaterial.quantity}}" ></td>
           <td>
              <button type="button" style="height: 40px" ng-click="deleteRM($index)">Delete</button>
+               
           </td>
           </tr>
-          
         </table>
-         <div layout-gt-sm="row" ng-show="displayAddRM">
-         <md-input-container >
-          <label style="color: black;">RAW MATERIAL</label>
-          <md-select ng-model="orderRawMaterial.rawmaterial" name="rawmaterial" value="rawmaterial.id" ng-disabled="isReadOnly"  name="rawMaterialId" >
-            <md-option ng-repeat="rawmaterial in vendorRmList" ng-value="rawmaterial.rawmaterial" >
-               {{rawmaterial.rawmaterial.name}}
+          <div layout-gt-sm="row" >
+           <md-input-container ng-init="getRawMaterials()">
+          <label style="color: black;">RAW MATERIAL*</label>
+          <md-select ng-model="productRmAsso.rawmaterial.id" name="rawmaterial"  ng-disabled="isReadOnly" ng-required="true"  ng-init="rawMaterialId()">
+            <md-option ng-repeat="rawMaterial in RMData" ng-value="rawMaterial.rawMaterial" >
+               {{rawMaterial.name}}
             </md-option>
           </md-select>
         </md-input-container>

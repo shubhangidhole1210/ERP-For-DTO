@@ -93,25 +93,22 @@
           </tr>
           <tr ng-repeat="orderRawMaterial in orderRawMaterials">
            <td >{{orderRawMaterial.rawmaterial.name}}</td>
-          <!--  <td>{{orderRawMaterial.quantity}}</td> -->
           <td><input type="number" ng-value="{{orderRawMaterial.quantity}}" ></td>
           <td>
              <button type="button" style="height: 40px" ng-click="deleteRM($index)">Delete</button>
                
           </td>
           </tr>
-          <tr ng-repeat="orderRawMaterial in rmOrderList">
+          <!-- <tr ng-repeat="orderRawMaterial in rmOrderList">
            <td>{{orderRawMaterial.rawmaterial.name}}</td>
-           <!-- <td>{{orderRawMaterial.quantity}}</td> -->
           <td ><input type="number" ng-value="{{orderRawMaterial.quantity}}" ng-disabled="isReadOnly"></td>
           <td>
              <button type="button" style="height: 40px" ng-click="deleteRM($index)" ng-disabled="isReadOnly">Delete</button>
                
           </td>
-          </tr> 
+          </tr>  -->
           
         </table>
-       <!--  <h4>Total Price:</h4> -->
            <div layout-gt-sm="row" ng-show="displayAddRM">
          <md-input-container >
           <label style="color: black;">RAW MATERIAL</label>

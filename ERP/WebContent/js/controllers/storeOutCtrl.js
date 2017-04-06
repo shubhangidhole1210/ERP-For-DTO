@@ -8,12 +8,12 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "product/list";
+		httpparams.url = SERVER_URL + "productionplanning/getProductionPlanListByDate/" +$scope.currentDate;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(response) {
-			$scope.data = response.data;
+		/*	$scope.data = response.data;*/
 			$scope.products = response.data;
 			console.log(response);
 			utils.hideProgressBar();
@@ -33,13 +33,13 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "productRMAsso/productRMAssoList/" +$scope.productID.id;
+		httpparams.url = SERVER_URL + "productionplanning/getProductionPlanListForStoreOutByDateAndPId/" +$scope.currentDate;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
-			$scope.productRMList = response.data;
+			$scope.productRMList = response.data.data;
 			console.log(response);
 			utils.hideProgressBar();
 
@@ -55,13 +55,62 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		
 	}
 	
+	$scope.saveStoreOutInformation=function()
+	{
+		console.log($scope.data.data);
+		var index=0;
+		var rmList = [];
+		for(index=0;index<$scope.data.data.length;index++){
+			var storeOutProduct = {};
+			storeOutProduct.rawmaterial= $scope.data.data[index].rawmaterial;
+			storeOutProduct.quantityRequired = $scope.data.data[index].quantityRequired;
+			storeOutProduct.quantityDispatched = $scope.data.data[index].quantityDispatched;
+			rmList.push(storeOutProduct);
+		}
+		data=
+			{
+				productId: $scope.product.id,
+				quantityRequired: $scope.quantityRequired,
+				description:$scope.description,
+				storeOutParts:rmList
+			};
+		var httpparams = {
+				method : 'post',
+				url : SERVER_URL + "storeout/createStoreOut",
+				data : data
+			};
+		
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(data) {
+			console.log(data);
+			if(data.data.code === 1){
+				utils.showToast(data.data.message);
+				$location.path('/');
+			}else{
+				utils.showToast("Something went wrong. Please try again later.");
+			}
+			utils.hideProgressBar();
+			
+		}, function errorCallback(response) {
+			console.log("Error");
+			utils.showToast("Something went wrong. Please try again later.");
+			utils.hideProgressBar();
+		});
+		utils.showProgressBar();
+	}
+	
 	
 	$scope.submitInformation = function(isvaliduser, $event) {
 		if (isvaliduser) {
-			$scope.saveTodaysProductionPlan();
+			$scope.saveStoreOutInformation();
 		} else {
 			console.log('its else block');
 		}
 	};
+	
+	
+	
 	
 	});

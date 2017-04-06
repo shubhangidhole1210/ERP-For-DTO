@@ -25,7 +25,6 @@
             <input type="text" required name="invoiceid" ng-model="invoice" >
              <div ng-messages="dispatchQuantityInformation.invoiceid.$error">
             <div ng-message="required">Please enter Invoice ID</div>
-           
           </div>
           </md-input-container>
     </div>
@@ -42,14 +41,14 @@
     <table >
         <tr>
           <th>PART NUMBER</th>
-          <th>REMAINING QUANTITY</th>
           <th>QUANTITY</th>
+          <th>REMAINING QUANTITY</th>
         </tr>
-        <tr ng-repeat="orderProduct in productinventories.orderProductList">
-          <td>{{orderProduct.product.partNumber}}</td>
-          <td>{{orderProduct.remainingQuantity}}</td>
-          <td><input type="number" ng-model="orderProduct.quantity" max="{{orderProduct.remainingQuantity}}" name="quantity{{$index}}">
-             <div ng-show="dispatchQuantityInformation.quantity{{$index}}.$error.max"  class="error-msg">The value must be in range 0 to {{orderProduct.remainingQuantity}}!</div>
+        <tr ng-repeat="orderProduct in data.data">
+          <td>{{orderProduct.partNumber}}</td>
+          <td>{{orderProduct.availableQuantity}}</td>
+          <td><input type="number" ng-model="orderProduct.remainingQuantity" max="{{orderProduct.availableQuantity}}" name="quantity{{$index}}">
+             <div ng-show="dispatchQuantityInformation.quantity{{$index}}.$error.max"  class="error-msg">The value must be in range 0 to {{orderProduct.availableQuantity}}!</div>
           </td>
         </tr>
          

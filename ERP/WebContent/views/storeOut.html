@@ -10,9 +10,9 @@
           <md-input-container class="md-block" flex-gt-sm type="password">
           
              <label style="color: black;">PRODUCT</label>
-          <md-select ng-model="productID.id" name="vendorId" ng-disabled="isReadOnly" ng-init="getProducts()" name="product" required ng-change="getProductRMAssociation($index)">
+          <md-select ng-model="product.id" name="vendorId" ng-disabled="isReadOnly" ng-init="getProducts()" name="product" required ng-change="getProductRMAssociation($index)">
             <md-option ng-repeat="product in products" ng-value="product.id" >
-               {{product.name}}
+               {{product.product.name}}
             </md-option>
              <div ng-messages="storeOutInformation.product.$error">
                  <div ng-message="required">Please select Product </div>
@@ -24,14 +24,14 @@
          <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">DESCRIPTION</label>
-            <input type="text" required name="description" ng-model="vehicleNo"    >
+            <input type="text" required name="description" ng-model="description">
              <div ng-messages="storeOutInformation.description.$error">
             <div ng-message="required">Please enter Description</div>
           </div>
           </md-input-container>
         </div>
         
-         <div layout-gt-sm="row">
+        <!--  <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm type="password">
               <label class="input-filed-label">DATE[MM/DD/YYYY]*</label>
               
@@ -40,13 +40,13 @@
                  <div ng-message="required">Please Enter Date</div>
               </div>
          </md-input-container> 
-         </div>
+         </div> -->
           <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">QUANTITY TO MANUFACTURE</label>
-            <input type="number" required name="quantity" ng-model="frf"    >
+            <input type="number" required name="quantity" ng-model="quantityRequired"    >
              <div ng-messages="storeOutInformation.quantity.$error">
-            <div ng-message="required">Please enter Description</div>
+            <div ng-message="required">Please enter Quantity</div>
           </div>
           </md-input-container>
         </div>
@@ -58,21 +58,21 @@
           <th>RAW MATERIAL NAME</th>
           <th>QUANTITY REQUIRED</th>
           <th>QUANTITY DISPATCH</th>
-          <th>REMARK</th>
+          <!-- <th>REMARK</th> -->
         </tr>
-        <tr ng-repeat="rawMaterial in productRMList">
-          <td>{{rawMaterial.rawmaterial.name}}</td>
-          <td>{{rawMaterial.quantity}}</td>
+        <tr ng-repeat="rawMaterial in data.data">
+          <td>{{rawMaterial.name}}</td>
+          <td>{{rawMaterial.quantityRequired}}</td>
           <td>
              <md-input-container class="md-block" flex-gt-sm>
-             <input type="number" name="dispatchQuantity">
+             <input type="number" name="dispatchQuantity" ng-model="rawMaterial.quantityDispatched">
              </md-input-container>
           </td>
-          <td>
+        <!--   <td>
               <md-input-container class="md-block" flex-gt-sm>
             <input type="number" ng-model="rawmaterial.invoiceQuantity" name="remark">
           </md-input-container>
-          </td>
+          </td> -->
         </tr>
        
         </table>
