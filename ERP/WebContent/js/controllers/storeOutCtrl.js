@@ -2,6 +2,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		$rootScope, SERVER_URL,$filter,utils,Auth,$location)
 {
 	$scope.currentDate = utils.getCurrentDate();
+	$scope.manuFactureQuantity = 0;
 	
 	$scope.getProducts=function()
 	{
@@ -51,9 +52,11 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		});
 	}
 	
-	$scope.caluclateRequiredQuantity=function(){
-		
-	}
+	$scope.updateDispatchQuantity = function(){
+		for(index=0;index<$scope.data.data.length;index++){
+			$scope.data.data[index].dispatchQuantity = $scope.data.data[index].quantityRequired * $scope.manuFactureQuantity;
+		}
+	};
 	
 	$scope.saveStoreOutInformation=function()
 	{
@@ -70,7 +73,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		data=
 			{
 				productId: $scope.product.id,
-				quantityRequired: $scope.quantityRequired,
+				quantityRequired: $scope.manuFactureQuantity,
 				description:$scope.description,
 				storeOutParts:rmList
 			};

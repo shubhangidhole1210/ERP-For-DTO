@@ -114,7 +114,7 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 				console.log(data);
 				
 				if(data.data.code === 1){
-					utils.showToast("Rawmaterial Order Invoice added Successfully !");
+					utils.showToast("Security Check out Sucessfully!");
 					$location.path('/');
 				}else{
 					utils.showToast("Something went wrong. Please try again later.");
