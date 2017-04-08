@@ -26,7 +26,7 @@ erpApp
 									console.log("Error");
 									utils.hideProgressBar();
 								});
-					}
+					};
 
 				/*	$scope.isTodaysProductionPlanPresent = false;
 					$scope.isTodaysProductionPlan = function() {

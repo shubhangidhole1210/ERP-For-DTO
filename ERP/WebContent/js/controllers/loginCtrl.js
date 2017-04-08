@@ -1,4 +1,4 @@
-erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Auth, SERVER_URL,utils,User) {
+erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Auth, SERVER_URL,utils) {
 	$scope.login = function(index) {
 		var data = {
 			userid : $scope.userid,
@@ -10,40 +10,33 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 			data : data
 		}).then(function successCallback(data, headers) {
 			console.log(data);
-			
 			utils.hideProgressBar();
 			console.log($scope.userid)
 			if(data.data.code == 1){
-				
-				console.log(data.headers());
-				console.log(data.headers('auth_token'));
+				/*console.log(data.headers());
+				console.log(data.headers('auth_token'));*/
 				var userInfo = {};
 				userInfo.auth_token = data.headers('auth_token');
+				userInfo.user = data.data.user;
 				Auth.setUser(userInfo);
 				Auth.setMenu(data.data.data);
 				$scope.$emit('loginSuccess',{});
 				$rootScope.$emit("CallUserProfileList",{});
 				$location.path('/');
-				
 			}else{
-				
+				console.log('Login has different code');
 			}
 			if(data.data.message!=='User logged in Successfully !'){
 				$scope.message = data.data.message;
 				$scope.loginForm.userName.$setValidity("apierror", false);
 				$scope.loginForm.password.$setValidity("apierror", false);
-				}
+			}
 			utils.showToast(data.data.message);
 		}, function errorCallback(data) {
 			console.log("Error",data);
 			utils.hideProgressBar();
 			utils.showToast("We are sorry, Something went wrong. Please try again later ");
 		});
-	     console.log($scope.userid);
-		 $scope.user = User;
-		 $scope.user.userid = $scope.userid;
-	     console.log($scope.user.userid);
-		
 	};
 	
 	$scope.submitLogin = function(isvaliduser) {
@@ -51,9 +44,8 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 			utils.showProgressBar();
 			$scope.login();
 		} else {
-			console.log('its else block');
+			console.log('User Form is not valid');
 		}
-
 	};
 	
 	$scope.onUserIdChange = function(){

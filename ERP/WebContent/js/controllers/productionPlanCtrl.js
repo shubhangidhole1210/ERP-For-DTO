@@ -2,17 +2,12 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		 $rootScope, SERVER_URL, Auth) {
 
 	$scope.currentDate = new Date();
-//	console.log('todays date' + $scope.currentDate)
-	$scope.monthStart = new Date($scope.currentDate.getFullYear(),
-			$scope.currentDate.getMonth(), 1);
-//	console.log('monthStart' + $scope.monthStart)
+	$scope.monthStart = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), 1);
 	$scope.alldays = [];
 	while ($scope.monthStart.getMonth() === $scope.currentDate.getMonth()) {
 		$scope.alldays.push(new Date($scope.monthStart));
 		$scope.monthStart.setDate($scope.monthStart.getDate() + 1);
 	}
-//	console.log('all days are' + $scope.alldays);
-
 	$scope.getProductionPlanList = function() {
 		utils.showProgressBar();
 		var httpparams = {};
@@ -58,13 +53,13 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'PUT';
-		httpparams.data = $scope.products;
+		httpparams.data = $scope.products_copy;
 		httpparams.url = SERVER_URL + "productionplanning/updateProductionPlan";
 		httpparams.headers = {
 			auth_token : Auth.getAuthToken()
 		};
 
-		/*$http(httpparams).then(function successCallback(response) {
+		$http(httpparams).then(function successCallback(response) {
 			utils.hideProgressBar();
 			console.log(response);
 			if(data.data.code === 1){
@@ -77,9 +72,11 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 			console.log("Error");
 			utils.showToast("Something went wrong. Please try again later.");
 			utils.hideProgressBar();
-		});*/
+		});
 	};
 	
-	
+	// TODO Implement Web service call Create Default Production Plan
+	// TODO Implement Notification to tell user that new Product is added to the Product List and add it to the Production Plan.
+	// TODO Reload Production Plan after any change in Production Plan
 
 });

@@ -3,67 +3,9 @@ var erpApp = angular
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-erpApp.value('SERVER_URL', 'http://192.168.2.102:8086/ERP/');
+erpApp.value('SERVER_URL', 'http://192.168.2.105:8086/ERP/');
 
-erpApp.config(function ($provide, $httpProvider) {
-	  
-	  // Intercept http calls.
-	  $provide.factory('MyHttpInterceptor', function ($q,SERVER_URL,Auth) {
-	    return {
-	      // On request success
-	      request: function (config) {
-	        // console.log(config); // Contains the data about the request before it is sent.
 
-	        // Return the config or wrap it in a promise if blank.
-	        return config || $q.when(config);
-	      },
-
-	      // On request failure
-	      requestError: function (rejection) {
-	        // console.log(rejection); // Contains the data about the error on the request.
-	        
-	        // Return the promise rejection.
-	        return $q.reject(rejection);
-	      },
-
-	      // On response success
-	      response: function (response) {
-	        // console.log(response); // Contains the data from the response.
-	        
-	        // Return the response or promise.
-	    	  console.log("MyHttpInterceptor");
-	    	  if(response.config && response.config.url.includes(SERVER_URL)){
-	    		  if(response.config.headers){
-//	    			  var userInfo = {};
-//	    			  userInfo.auth_token = response.config.headers['auth_token'];
-//	    			  var header = response.headers["[[Scopes]]"]["0"].headersObj.auth_token;
-	    			  var header = response.headers('auth_token');
-	    			  var userInfo = {};
-	    			  userInfo.auth_token = header;
-//	    			  console.log("userInfo.auth_token : ",userInfo.auth_token);
-	    			  console.log("header : ",header);
-	    			  if(Auth){
-	    				  Auth.setUser(userInfo);
-	    			  }
-	    		  }
-	    	  }
-	        return response || $q.when(response);
-	      },
-
-	      // On response failture
-	      responseError: function (rejection) {
-	        // console.log(rejection); // Contains the data about the error.
-	        
-	        // Return the promise rejection.
-	        return $q.reject(rejection);
-	      }
-	    };
-	  });
-
-	  // Add the interceptor to the $httpProvider.
-	  $httpProvider.interceptors.push('MyHttpInterceptor');
-
-	});
 
 erpApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
@@ -261,106 +203,6 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
 }]);
 
 
-erpApp.service('User', function () {
-    return {};
-})
-
-
-erpApp.factory('Auth', function(){
-	var user;
-
-	return{
-	    setUser : function(aUser){
-	    	if(sessionStorage.user){
-	    		user = JSON.parse(sessionStorage.user);
-	    	}else{
-	    		user = {};
-	    	}
-	        user.auth_token = aUser.auth_token;
-        	sessionStorage.user =JSON.stringify(user);
-        	/*console.log('setting sessionstorage : '+ sessionStorage.user);*/
-	    },
-	    setMenu : function(menu){
-	    	if(!user && sessionStorage.user){
-	    		user = JSON.parse(sessionStorage.user);
-	    	}
-	    	user.menu = menu;
-	    	sessionStorage.user =JSON.stringify(user);
-	    },
-	    
-	    isLoggedIn : function(){
-	    	if(!user && sessionStorage.user){
-	    		user = JSON.parse(sessionStorage.user);
-	    	}
-	        return (user)? true : false;
-	    },
-	    getAuthToken : function(){
-	    	if(!user && sessionStorage.user){
-	    		user = JSON.parse(sessionStorage.user);
-	    	}
-	        return user.auth_token;
-	    },
-	    getMenu : function(){
-	    	if(!user && sessionStorage.user){
-	    		user = JSON.parse(sessionStorage.user);
-	    	}
-	    	return user.menu;
-	    },
-	    
-	    setLogginButton : function()
-	    {
-	    	if(!user && sessionStorage.user){
-	    		user = JSON.parse(sessionStorage.user);
-	    	}
-	    	user.displayButton = displayButton;
-	    	sessionStorage.user =JSON.stringify(user);
-	    },
-	    getLogginButton : function(){
-	    	if(!user && sessionStorage.user){
-	    		user = JSON.parse(sessionStorage.user);
-	    	}
-	    	return user.displayButton;
-	    },
-	    
-	    setUserName : function()
-	    {
-	    	if(!user && sessionStorage.user){
-	    		user = JSON.parse(sessionStorage.user);
-	    	}
-	    	/*user.userId = userId;*/
-	    	user.user.userid=userid;
-	    	sessionStorage.user =JSON.stringify(user);
-	    },
-	    
-	    getUserName : function()
-	    {
-	    	if(!user && sessionStorage.user){
-	    		user = JSON.parse(sessionStorage.user);
-	    	}
-	    	/*return user.userId;*/
-	    	return user.user.userid;
-	    	
-	    },
-	    isPageAccessible : function(next){
-	    	if(!user && sessionStorage.user){
-	    		user = JSON.parse(sessionStorage.user);
-	    	}
-	    	var index = 0;
-	    	var isPageAccessible = false;
-	    	for(index = 0; index<user.menu.length;index++){
-	    		if(user.menu[index].url == next.$$route.originalPath){
-	    			isPageAccessible = true;
-	    		}
-	    	}
-	    	return isPageAccessible;
-	    },
-	    logout : function(){
-	    	    sessionStorage.removeItem("user");
-	    	  user = undefined;
-	    	
-	    }
-	  }
-	});
 
 erpApp.directive('uploadFiles', function () {  
     return {  
@@ -417,14 +259,14 @@ erpApp.directive('capitalize', function() {
     };
   });	
 
-erpApp.controller('menuController', function($scope) {
+/*erpApp.controller('menuController', function($scope) {
 	$scope.selectedIndex = 0;
 	$scope.menuClicked=function($index)
 	{
 		 $scope.selectedIndex = $index;
 		 console.log('selected index is' + $scope.selectedIndex);
 	};
-});		
+});*/		
 erpApp.controller('finshedGoodctrl', function($scope) {
 
 });
@@ -443,18 +285,5 @@ erpApp.controller('notificationCtrl', function($scope) {
 });
 
 erpApp.controller('pageCtrl', function($scope) {
-
-});
-
-
-erpApp.controller('ToastCtrl', function($scope, $mdToast, message) {
-	$scope.message = message;
-	$scope.closeToast = function() {
-		$mdToast.hide().then(function() {
-
-		});
-	};
-	
-
 
 });

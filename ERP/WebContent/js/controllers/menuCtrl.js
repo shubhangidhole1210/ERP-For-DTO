@@ -1,4 +1,4 @@
-erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$http,$location,User) {
+erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$http,$location) {
 	$scope.menu = [];
 	$scope.displayMenu=Auth.isLoggedIn();
 	
@@ -39,16 +39,16 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 	}
 	
 	$rootScope.$on('logout',function($event){
-		console.log('Inside logout event');
+		console.log('Inside menuController logout event');
 		$scope.displayMenu=Auth.isLoggedIn();
 	});
 	
 	$rootScope.$on('loginSuccess',function($event){
-		console.log('Inside login success event');
+		console.log('Inside menuController login success event');
 		$scope.displayMenu=Auth.isLoggedIn();
 		$scope.menu = Auth.getMenu();
 		$scope.cascadedMenu =  $scope.createCascadedMenu();
-		$scope.user = User;
+		$scope.user = Auth.getUser();
 	});
 	$scope.selectedIndex = 0;
 	$scope.menuClicked=function($index)
