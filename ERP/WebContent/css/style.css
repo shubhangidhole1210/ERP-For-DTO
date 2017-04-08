@@ -162,6 +162,10 @@ body::-webkit-scrollbar-thumb, .erp-menubar::-webkit-scrollbar-thumb {
 	width: 100%;
 	margin-left: 20%;
 }
+.displayScroll{
+	overflow-y: hidden;
+    overflow-x: scroll;
+}
 .erp-security
 {
 	padding-top: 100px;

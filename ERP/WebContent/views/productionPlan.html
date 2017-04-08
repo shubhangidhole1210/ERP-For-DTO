@@ -12,7 +12,7 @@
  </tr>
  <tr ng-repeat="product in products" >
     <td style="font-size: 17px; text-align: center">
-      <table >
+      <table>
       <th>Part Number</th>
       <th>Inventory Qty</th>
       <th> Pending Qty</th>
@@ -29,7 +29,7 @@
       <td ng-repeat="productProductionPlanItem in product.productProductionPlan" >
     <table >
       <th>Target</th>
-      <th>Achived</th>
+      <th>Achieved</th>
       <tr>
         <td>
         <input type="number" class="quantity-input" ng-model="productProductionPlanItem.target_quantity">
