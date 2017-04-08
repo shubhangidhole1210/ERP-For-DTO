@@ -1,44 +1,54 @@
 <div ng-controller="todaysPlanCtrl">
   <div class="erp-information">
-    <div class="table-header">TODAYS PRODUCTION PLAN</div>
-    <div style="margin-top: 4%" ng-init="getProducts()">
-     <div style="text-align: right;font-weight: bold;">
-             <span>Date</span>
-             <span>{{currentDate}}</span>
-          </div>
-    <table>
-       <tr>
-       <th>PRODUCT</th>
-       <th>TARGET QUANTITY</th>
-       <th>COMPLETED QUANTITY</th>
-       <th>ACHIVED QUANTITY</th>
-       <th>REMARK</th>
-       </tr>
-       <tr ng-repeat="product in productList">
-         <td>{{product.product.id}}</td>
-         <td>{{product.targetQuantity}}</td>
-         <td>{{product.achivedQuantity}}</td>
-         <td><md-input-container class="md-block" flex-gt-sm>
-				<input type="number" ng-model="product.achived" name="achivedQuantity">
-				</md-input-container>
-		</td>
-		<td>
-		  <md-input-container class="md-block" flex-gt-sm>
-				<input type="text" ng-model="product.remark" name="remark">
-				</md-input-container>
-		</td>
-       </tr>
-    </table>
-    </div>
-       <div class="todayPlan-save-btn">
-             <md-dialog-actions layout="row">
-      <md-button class="md-raised" ng-click="saveTodaysProductionPlan()" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
-      <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
-    </md-dialog-actions>
-        </div>
-    <div ng-show="isTodaysProductionPlanPresent" class="active-information">
-		   Currently there are no Todays production plan.
+	  <form name="todaysProductionPlanForm" novalidate>
+	    <div class="table-header">TODAYS PRODUCTION PLAN</div>
+	    
+	    <div style="margin-top: 4%" ng-init="getProducts()">
+	        <div style="text-align: right;font-weight: bold;">
+		             <span>Date</span>
+		             <span>{{currentDate}}</span>
+		    </div>
+		    <table>
+		       <tr>
+		       <th>PRODUCT</th>
+		       <th>TARGET QUANTITY</th>
+		       <th>COMPLETED QUANTITY</th>
+		       <th>ACHIEVED QUANTITY</th>
+		       <th>REMARK</th>
+		       </tr>
+		       <tr ng-repeat="product in productList">
+		        	<td>{{product.product.id}}</td>
+		        	<td>{{product.targetQuantity}}</td>
+		        	<td>{{product.achivedQuantity}}</td>
+		        	<td>
+		         		<md-input-container class="md-block" flex-gt-sm>
+							<input type="number" ng-model="product.achived" name="achivedQuantity" required>
+							<div ng-messages="todaysProductionPlanForm.achivedQuantity.$error">
+             					<div ng-message="required">please enter Quantity </div>
+            				</div>
+						</md-input-container>
+					</td>
+					<td>
+				  		<md-input-container class="md-block" flex-gt-sm>
+							<input type="text" ng-model="product.remark" name="remark" required>
+							<div ng-messages="todaysProductionPlanForm.remark.$error">
+             					<div ng-message="required">please enter Remark </div>
+            				</div>
+						</md-input-container>
+					</td>
+		       </tr>
+		    </table>
+	    </div>
+	       <div class="todayPlan-save-btn">
+	             <md-dialog-actions layout="row">
+	      			<md-button class="md-raised" ng-click="submitInformation(todaysProductionPlanForm.$valid,$event)" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
+	      			<md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+	    		</md-dialog-actions>
+	       </div>
+	    <div ng-show="isTodaysProductionPlanPresent" class="active-information">
+			   Currently there are no Todays production plan.
 		</div>
+	</form>
   </div>
   
 </div>

@@ -1,15 +1,16 @@
-erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils){
+erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils, $location){
 	 $scope.currentDate = new Date();
 	 
 	  $scope.selectedProductionPlan = {};
 	  $scope.QCPassQuantity = 0;
 	  $scope.QCFailQuantity = 0;
 	  $scope.reamrk = '';
-	  $scope.curr_date = $scope.currentDate.getDate();
+	 /* $scope.curr_date = $scope.currentDate.getDate();
 	  $scope.curr_month = $scope.currentDate.getMonth() + 1; //Months are zero based
 	  $scope.curr_year = $scope.currentDate.getFullYear();
 	  $scope.currentDate =  $scope.curr_year + "-" + $scope.curr_month + "-" +  $scope.curr_date;
-	  console.log( $scope.currentDate); 
+	  console.log( $scope.currentDate);*/ 
+	  $scope.currentDate = utils.getCurrentDate();
 	  
 	  $scope.getProductionPlanByDate=function(){
 		  utils.showProgressBar();
@@ -31,6 +32,14 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 			});
 	  };
 	
+	  $scope.submitInformation = function(isvaliduser, $event) {
+			if (isvaliduser) {
+				$scope.saveProductQuality();
+			} else {
+				console.log('its else block');
+			}
+		};
+	  
 		$scope.saveProductQuality=function()
 		{
 			 var index=0;
@@ -59,10 +68,23 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 					auth_token : Auth.getAuthToken()
 				};
 
-				$http(httpparams).then(function successCallback(response) {
+				$http(httpparams).then(function successCallback(data) {
+					console.log(data.data.message);
+					console.log(data);
+
+					if (data.data.code === 1) {
+						utils
+								.showToast("Product Store sucessfully!");
+						$location.path('/');
+					} else {
+						utils
+								.showToast("Something went wrong. Please try again later.");
+					}
 					utils.hideProgressBar();
-					console.log("productQualityCheck response : ",response);
+					
 				}, function errorCallback(response) {
+					utils
+					.showToast("Something went wrong. Please try again later.");
 					console.log("Error");
 					utils.hideProgressBar();
 				});

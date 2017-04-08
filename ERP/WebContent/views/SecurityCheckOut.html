@@ -1,0 +1,140 @@
+<div ng-controller="securityCheckOutCtrl">
+
+<div class="erp-security">
+<div class="qualitycheck">
+<div class="header">SECURITY CHECK OUT</div>
+<div class="qualityInspection">
+<form   name="securityInformation" novalidate >
+<div >
+   <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">INVOICE NUMBER </label>
+            <input type="text" required name="invoiceNumber" ng-model="invoice_No" >
+             <div ng-messages="securityInformation.invoiceNumber.$error">
+            <div ng-message="required">Please enter Invoice Number</div>
+           
+          </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm type="password">
+          
+             <label style="color: black;">CLIENT </label>
+          <md-select ng-model="selectedClient" name="vendorId" ng-disabled="isReadOnly" ng-init="getClient()" name="vendorId" required ng-change="clientProductOrder($index)">
+            <md-option ng-repeat="client in clients" ng-value="client.id" >
+               {{client.companyname}}
+            </md-option>
+             <div ng-messages="RMOrderInformation.vendorId.$error">
+                 <div ng-message="required">Please select Client </div>
+              </div>
+          </md-select>
+          </md-input-container>
+          
+        </div>
+         <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">VEHICLE NUMBER</label>
+            <input type="text" required name="vehicleName" ng-model="vehicleNo"    >
+             <div ng-messages="securityInformation.vehicleName.$error">
+            <div ng-message="required">Please enter Vehicle Number</div>
+          </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm >
+            <label class="input-filed-label">DRIVER NAME</label>
+            <input type="text" required name="driverName" ng-model="driver_Name" >
+            <div ng-messages="securityInformation.driverName.$error">
+              <div ng-message="required">Please Enter Driver Name</div>
+            </div>
+          </md-input-container>
+        </div>
+         <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label  class="input-filed-label">IN TIME</label>
+            <input type="time"  name="inTime" ng-model="intime"   id="intime" step='1' required >
+             <div ng-messages="securityInformation.inTime.$error">
+            <div ng-message="required">Please enter exact IN Time</div>
+          </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm >
+            <label class="input-filed-label">OUT TIME</label>
+            <input type="time"  name="outtime" ng-model="outtime"  id="outtime"  step='1' min="{{intime}}" required >
+            <div ng-messages="securityInformation.outTime.$error">
+              <div ng-message="required">Please Enter Out Time</div>
+            </div>
+               <div ng-show=" securityInformation.outTime.$error.min" style="color: red;">Out time should be greater than in time</div>
+          </md-input-container>
+        </div>
+         <md-input-container class="md-block" flex-gt-sm >
+            <label class="input-filed-label">DESCRIPTION</label>
+            <input type="text" required name="description" ng-model="description"  >
+            <div ng-messages="securityInformation.description.$error">
+              <div ng-message="required">Please Enter Description</div>
+            </div>
+          </md-input-container>
+         <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm type="password">
+              <label class="input-filed-label">DATE[MM/DD/YYYY]*</label>
+              
+              <input type="date" placeholder="Enter date of birth" ng-model="createDate "  name="createDate" required >
+              <div ng-messages="securityInformation.createDate.$error">
+                 <div ng-message="required">Please Enter Date</div>
+              </div>
+         </md-input-container> 
+         </div>
+          <div layout-gt-sm="row">
+         <md-input-container>
+          <label style="color: black;">Product Order</label>
+          <md-select ng-model="productOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayProductList($index)" >
+            <md-option ng-repeat="productOrder in clientProductList" ng-value="productOrder.id"  >
+               {{productOrder.invoiceNo}}
+            </md-option>
+          </md-select>
+          <div ng-messages="securityInformation.rawMaterial.$error">
+                 <!-- <div ng-message="required">Please Select RM Order</div> -->
+                <!--  <div ng-message="apierror">Please select Vendor first</div> -->
+                <p ng-show="isRMOrderpresent" style="color: red;">Please select venodr first</p>
+              </div>
+        </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+        </div>
+        <h3>Product List</h3>
+        <table >
+        <tr>
+          <th>PRODUCT NAME</th>
+          <th>QUANTITY</th>
+          <th>REMAINING QUANTITY</th>
+          <th>INVOICE QUANTITY</th>
+        </tr>
+        <tr ng-repeat="product in productOtderList">
+          <td>{{product.product.name}}</td>
+          <td>{{product.quantity}}</td>
+          <td>{{product.remainingQuantity}}</td>
+          <td>
+              <md-input-container class="md-block" flex-gt-sm>
+            <label class="input-filed-label">QUANTITY</label>
+            <input type="number" ng-model="rawmaterial.invoiceQuantity" name="invoiceQuantity{{$index}}" max="{{rawmaterial.remainingQuantity}}" ng-change="toCompareQuantity(rawmaterial.remainingQuantity,rawmaterial.invoiceQuantity)">
+            <div ng-messages="securityInformation.invoiceQuantity.$error">
+             <div ng-message="required">please enter quantity </div>
+              
+            </div>
+            <div ng-show=" securityInformation.invoiceQuantity{{$index}}.$error.max" class="error-msg">The value must be in range 0 to {{rawmaterial.remainingQuantity}}!</div>
+             
+          </md-input-container>
+          </td>
+        </tr>
+       
+        </table>
+         
+        <div style="margin-top: 5%;margin-left: 70%">
+         <md-dialog-actions layout="row">
+      <md-button class="md-raised" ng-click="submitInformation(securityInformation.$valid,$event);resteData()" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="restInformation()" type="reset" >CANCEL</md-button>
+    </md-dialog-actions>
+        </div>
+        
+     </div>   
+</form>
+</div>
+</div>
+</div>
+</div>

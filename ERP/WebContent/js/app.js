@@ -3,7 +3,68 @@ var erpApp = angular
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-erpApp.value('SERVER_URL', 'http://192.168.2.103:8085/ERP/');
+erpApp.value('SERVER_URL', 'http://192.168.2.102:8086/ERP/');
+
+erpApp.config(function ($provide, $httpProvider) {
+	  
+	  // Intercept http calls.
+	  $provide.factory('MyHttpInterceptor', function ($q,SERVER_URL,Auth) {
+	    return {
+	      // On request success
+	      request: function (config) {
+	        // console.log(config); // Contains the data about the request before it is sent.
+
+	        // Return the config or wrap it in a promise if blank.
+	        return config || $q.when(config);
+	      },
+
+	      // On request failure
+	      requestError: function (rejection) {
+	        // console.log(rejection); // Contains the data about the error on the request.
+	        
+	        // Return the promise rejection.
+	        return $q.reject(rejection);
+	      },
+
+	      // On response success
+	      response: function (response) {
+	        // console.log(response); // Contains the data from the response.
+	        
+	        // Return the response or promise.
+	    	  console.log("MyHttpInterceptor");
+	    	  if(response.config && response.config.url.includes(SERVER_URL)){
+	    		  if(response.config.headers){
+//	    			  var userInfo = {};
+//	    			  userInfo.auth_token = response.config.headers['auth_token'];
+//	    			  var header = response.headers["[[Scopes]]"]["0"].headersObj.auth_token;
+	    			  var header = response.headers('auth_token');
+	    			  var userInfo = {};
+	    			  userInfo.auth_token = header;
+//	    			  console.log("userInfo.auth_token : ",userInfo.auth_token);
+	    			  console.log("header : ",header);
+	    			  if(Auth){
+	    				  Auth.setUser(userInfo);
+	    			  }
+	    		  }
+	    	  }
+	        return response || $q.when(response);
+	      },
+
+	      // On response failture
+	      responseError: function (rejection) {
+	        // console.log(rejection); // Contains the data about the error.
+	        
+	        // Return the promise rejection.
+	        return $q.reject(rejection);
+	      }
+	    };
+	  });
+
+	  // Add the interceptor to the $httpProvider.
+	  $httpProvider.interceptors.push('MyHttpInterceptor');
+
+	});
+
 erpApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/home.html',
@@ -65,6 +126,11 @@ erpApp.config(function($routeProvider) {
 		}
 	}).when('/userTypeAsso', {
 		templateUrl : 'views/userPageTypeAsso.html',
+		data : {
+			loginRequired : true
+		}
+	}).when('/securityCheckOut', {
+		templateUrl : 'views/SecurityCheckOut.html',
 		data : {
 			loginRequired : true
 		}
@@ -154,6 +220,12 @@ erpApp.config(function($routeProvider) {
 			loginRequired : true
 		}
 			
+	}).when('/storeOut',{
+		templateUrl : 'views/storeOut.html',
+		data :{
+			loginRequired : true
+		}
+			
 	}).when('/fileUpload', {
 		templateUrl : 'views/fileUpload.html',
 		data : {
@@ -173,7 +245,7 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
  	        if ('data' in next) {
  	            if ('loginRequired' in next.data ) {
  	                var loginRequired = next.data.loginRequired;
- 	                console.log('loginRequired = ' + loginRequired);
+ 	                /*console.log('loginRequired = ' + loginRequired);*/
  	                if(!Auth.isLoggedIn() && loginRequired){
  	                	$location.path('/login');
  	                 }/*else if(next.$$route.originalPath !=='/' && !Auth.isPageAccessible(next)){
@@ -199,9 +271,14 @@ erpApp.factory('Auth', function(){
 
 	return{
 	    setUser : function(aUser){
-	        user = aUser;
+	    	if(sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}else{
+	    		user = {};
+	    	}
+	        user.auth_token = aUser.auth_token;
         	sessionStorage.user =JSON.stringify(user);
-        	console.log('setting sessionstorage : '+ sessionStorage.user);
+        	/*console.log('setting sessionstorage : '+ sessionStorage.user);*/
 	    },
 	    setMenu : function(menu){
 	    	if(!user && sessionStorage.user){

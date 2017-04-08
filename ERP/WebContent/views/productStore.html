@@ -1,5 +1,6 @@
 <div ng-controller="productStoreCtrl">
 <div class="erp-security" ng-init="getProductionPlanByDate()" >
+<form name="productStoreForm" novalidate>
  <div class="header">PRODUCT STORE</div>
   <div style="text-align: right;font-weight: bold;">
              <span>Date</span>
@@ -8,34 +9,37 @@
      <table>
         <tr >
           <th>PRODUCT ID</th>
-          <th>PRODUCT QUANTITY</th>
+          <th>TARGET QUANTITY</th>
+          <th>QC PASS QUANTITY</th>
           <th>PASS QUANTITY</th>
-          <th>FAIL QUANTITY</th>
           <th>REMARK</th>
         </tr>
         <tr ng-repeat="productionplan in productionPlans">
            <td>{{productionplan.product.id}}</td>
            <td>{{productionplan.targetQuantity}}</td>
+           <td>{{productionplan.qualityCheckedQuantity}}</td>
            <td><md-input-container class="md-block" flex-gt-sm>
-				<input type="number" ng-model="productionplan.passQuantity" name="remark">
+				<input type="number" ng-model="productionplan.passQuantity" name="passQuantity" required>
+				<div ng-messages="productStoreForm.passQuantity.$error">
+             		<div ng-message="required">please enter Pass Quantity </div>
+            	</div>
 				</md-input-container></td>
 			<td>
 			   <md-input-container class="md-block" flex-gt-sm>
-				<input type="number" ng-model="productionplan.failQuantity" name="remark">
-				</md-input-container>
-			</td>	
-			<td>
-			   <md-input-container class="md-block" flex-gt-sm>
 				<input type="text" ng-model="productionplan.remark" name="remark">
+				<div ng-messages="productStoreForm.remark.$error">
+             		<div ng-message="required">please enter Remark </div>
+            	</div>
 				</md-input-container>
 			</td>
         </tr>
      </table>
       <div style="margin-top: 5%;margin-left: 70%;padding-bottom: 20px">
              <md-dialog-actions layout="row">
-      <md-button class="md-raised" ng-click="saveProductQuality()" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
+      <md-button class="md-raised"  ng-disabled="isReadOnly" ng-click="submitInformation(productStoreForm.$valid,$event)"  type="submit">SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
     </md-dialog-actions>
         </div>
+      </form>  
 </div>
 </div>

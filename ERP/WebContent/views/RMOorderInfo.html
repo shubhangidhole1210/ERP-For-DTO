@@ -36,7 +36,7 @@
           
  			 <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">TOTAL PRICE</label>
-            <input type="number" ng-model="rmOrder.totalprice" value="rmOrder.totalprice" required name="totalprice"  ng-disabled="isReadOnly">
+            <input type="number" ng-model="rmOrder.totalprice" value="rmOrder.totalprice"  required name="totalprice"  ng-disabled="isReadOnly">
               <div ng-messages="RMOrderInformation.totalprice.$error">
                  <div ng-message="required">Please enter total price</div>
               </div>
@@ -55,7 +55,7 @@
 
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">ACTUAL PRICE</label>
-            <input type="number" ng-model="rmOrder.actualPrice" value="rmOrder.actualPrice" required name="actualPrice" ng-disabled="isReadOnly">
+            <input type="number" ng-model="rmOrder.actualPrice" value="{{productSubTotal}}" required name="actualPrice" ng-disabled="isReadOnly">
             <div ng-messages="RMOrderInformation.actualPrice.$error">
             <div ng-message="required">Please enter actual price </div>
             </div>
@@ -93,7 +93,6 @@
           </tr>
           <tr ng-repeat="orderRawMaterial in orderRawMaterials">
            <td >{{orderRawMaterial.rawmaterial.name}}</td>
-          <!--  <td>{{orderRawMaterial.quantity}}</td> -->
           <td><input type="number" ng-value="{{orderRawMaterial.quantity}}" ></td>
           <td>
              <button type="button" style="height: 40px" ng-click="deleteRM($index)">Delete</button>
@@ -102,7 +101,6 @@
           </tr>
           <tr ng-repeat="orderRawMaterial in rmOrderList">
            <td>{{orderRawMaterial.rawmaterial.name}}</td>
-           <!-- <td>{{orderRawMaterial.quantity}}</td> -->
           <td ><input type="number" ng-value="{{orderRawMaterial.quantity}}" ng-disabled="isReadOnly"></td>
           <td>
              <button type="button" style="height: 40px" ng-click="deleteRM($index)" ng-disabled="isReadOnly">Delete</button>

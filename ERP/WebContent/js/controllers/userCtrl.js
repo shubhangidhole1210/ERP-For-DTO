@@ -32,7 +32,7 @@ erpApp.controller('userCtrl',
 										function errorCallback(response) {
 											$scope.message = 
 											utils.showToast("We are Sorry. Something went wrong. Please try again later.");
-											console.log("Error");
+											console.log("Error",response);
 											utils.hideProgressBar();
 
 										});

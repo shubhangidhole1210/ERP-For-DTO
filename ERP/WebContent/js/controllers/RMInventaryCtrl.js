@@ -28,7 +28,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 							$mdDialog.hide();
 						});
 					   }
-						utils.hideProgressBar();
+						utils.showProgressBar();
 					}
 					
 					$scope.isrmInventoryPresent=false;

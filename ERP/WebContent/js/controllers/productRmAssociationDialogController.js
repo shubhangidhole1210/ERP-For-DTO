@@ -119,6 +119,17 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			})
 			
 		};
+		
+		 $scope.orderRawMaterials=[];
+		    $scope.orderRawMaterial={};
+		    $scope.addOrderRawMaterial=function(){
+		    	if(!angular.equals($scope.orderRawMaterial,{})){
+					   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
+					   console.log($scope.orderRawMaterials);
+				}
+		    };
+		
+		
 		 $scope.getProducts=function()
 		    {
 		    	/*$http({

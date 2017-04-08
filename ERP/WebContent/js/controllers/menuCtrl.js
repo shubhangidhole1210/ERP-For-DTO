@@ -9,8 +9,6 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 			var isMenuAdded = false;
 			var indexAdded = 0;
 			for (var subindex=0; subindex < cascadedMenu.length ; subindex++){
-//				console.log('menu subindex : '+ subindex);
-				/*console.log('menu subindex : '+ subindex + " : " , $scope.menu[subindex].menu);*/
 				if(cascadedMenu[subindex].menu === $scope.menu[index].menu ){
 					var subMenu = {};
 					subMenu.submenu = $scope.menu[index].submenu;
@@ -20,16 +18,6 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 					indexAdded = subindex+1;
 					break;
 				}
-//				else{
-//					cascadedMenuItem.menu = $scope.menu[index].menu;
-//					var subMenu = {};
-//					cascadedMenuItem.submenu = [];
-//					subMenu.submenu = $scope.menu[index].submenu;
-//					subMenu.url = $scope.menu[index].url;
-//					cascadedMenuItem.submenu.push(subMenu);
-//					cascadedMenu.push(cascadedMenuItem);
-//					break;
-//				}
 			}
 			if(cascadedMenu.length == 0 || !isMenuAdded){
 				cascadedMenuItem.menu = $scope.menu[index].menu;
@@ -47,7 +35,6 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 	
 	if($scope.displayMenu){
 		$scope.menu = Auth.getMenu();
-//		console.log('Menu',$scope.menu);
 		$scope.cascadedMenu = $scope.createCascadedMenu();
 	}
 	
