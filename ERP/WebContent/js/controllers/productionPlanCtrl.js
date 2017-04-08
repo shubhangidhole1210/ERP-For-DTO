@@ -2,16 +2,16 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		 $rootScope, SERVER_URL, Auth) {
 
 	$scope.currentDate = new Date();
-	console.log('todays date' + $scope.currentDate)
+//	console.log('todays date' + $scope.currentDate)
 	$scope.monthStart = new Date($scope.currentDate.getFullYear(),
 			$scope.currentDate.getMonth(), 1);
-	console.log('monthStart' + $scope.monthStart)
+//	console.log('monthStart' + $scope.monthStart)
 	$scope.alldays = [];
 	while ($scope.monthStart.getMonth() === $scope.currentDate.getMonth()) {
 		$scope.alldays.push(new Date($scope.monthStart));
 		$scope.monthStart.setDate($scope.monthStart.getDate() + 1);
 	}
-	console.log('all days are' + $scope.alldays);
+//	console.log('all days are' + $scope.alldays);
 
 	$scope.getProductionPlanList = function() {
 		utils.showProgressBar();
@@ -25,6 +25,7 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		$http(httpparams).then(function successCallback(response) {
 			utils.hideProgressBar();
 			$scope.products = response.data;
+			$scope.products_copy = angular.copy(response.data);
 			console.log(response);
 		}, function errorCallback(response) {
 			console.log("Error");
@@ -32,9 +33,28 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		});
 
 	};
-	
+	function isProductionPlanEqual(productProductionPlan1, productProductionPlan2){
+		if(productProductionPlan1.target_quantity === productProductionPlan2.target_quantity && 
+				productProductionPlan1.achived_quantity === productProductionPlan2.achived_quantity && 
+				productProductionPlan1.dispatch_quantity === productProductionPlan2.dispatch_quantity){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	$scope.submitProductionPlan = function(){
 		console.log($scope.products);
+		for(var index =0; index < $scope.products.length; index++){
+			var productProductionPlan = [];
+			for(var index2 =0; index2 < $scope.products[index].productProductionPlan.length;index2++){
+				
+				if(!isProductionPlanEqual($scope.products[index].productProductionPlan[index2], $scope.products_copy[index].productProductionPlan[index2])){
+					productProductionPlan.push($scope.products[index].productProductionPlan[index2]);
+				}
+			}
+			$scope.products_copy[index].productProductionPlan = productProductionPlan;
+		}
+		console.log('modified', $scope.products_copy[index]);
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'PUT';
@@ -44,7 +64,7 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 			auth_token : Auth.getAuthToken()
 		};
 
-		$http(httpparams).then(function successCallback(response) {
+		/*$http(httpparams).then(function successCallback(response) {
 			utils.hideProgressBar();
 			console.log(response);
 			if(data.data.code === 1){
@@ -57,7 +77,7 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 			console.log("Error");
 			utils.showToast("Something went wrong. Please try again later.");
 			utils.hideProgressBar();
-		});
+		});*/
 	};
 	
 	
