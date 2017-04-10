@@ -44,7 +44,7 @@
           <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">QUANTITY TO MANUFACTURE</label>
-            <input type="number" required name="quantity" ng-model="manuFactureQuantity" ng-change="updateDispatchQuantity(oldValue,newValue)" >
+            <input type="number" required name="quantity" ng-model="manuFactureQuantity" ng-change="updateDispatchQuantity()" >
              <div ng-messages="storeOutInformation.quantity.$error">
             <div ng-message="required">Please enter Quantity</div>
           </div>
@@ -65,7 +65,7 @@
           <td>{{rawMaterial.quantityRequired}}</td>
           <td>
              <md-input-container class="md-block" flex-gt-sm>
-             <input type="number" name="dispatchQuantity" ng-model="rawMaterial.dispatchQuantity" ng-init="0">
+             <input type="number" name="dispatchQuantity" ng-model="rawMaterial.quantityDispatched" ng-init="0">
              </md-input-container>
           </td>
         <!--   <td>

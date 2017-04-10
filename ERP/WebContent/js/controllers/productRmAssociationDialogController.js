@@ -18,9 +18,10 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    $scope.saveProductRMAssociationInfo=function(ev)
 	    {
 	    	 var data = {
-	    		rawmaterial : $scope.productRmAsso.rawmaterial.id,
+	    		/*rawmaterial : $scope.productRmAsso.rawmaterial.id,*/
 	    		product : $scope.productRmAsso.product.id,
-	    		quantity : $scope.productRmAsso.quantity
+	    		quantity : $scope.productRmAsso.quantity,
+	    		productRMAssociationModelParts: $scope.orderproductRMassociations
 				};
 	    	 
 	    	
@@ -28,7 +29,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    	 if($scope.flag==0)
 	    		 {
 	    		    httpparams.method='post',
-	    		    httpparams.url=SERVER_URL + "productRMAsso/create"
+	    		    httpparams.url=SERVER_URL + "productRMAsso/createmultiple"
 	    		    httpparams.headers = {
 	    					auth_token : Auth.getAuthToken()
 	    				};
@@ -120,12 +121,13 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			
 		};
 		
-		 $scope.orderRawMaterials=[];
-		    $scope.orderRawMaterial={};
-		    $scope.addOrderRawMaterial=function(){
-		    	if(!angular.equals($scope.orderRawMaterial,{})){
-					   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
-					   console.log($scope.orderRawMaterials);
+		 $scope.orderproductRMassociations=[];
+		    $scope.orderProductRMAssociation={};
+		    $scope.addOrderProductRMAssociation=function(){
+		    	if(!angular.equals($scope.orderProductRMAssociation,{})){
+					   $scope.orderproductRMassociations.push($scope.orderProductRMAssociation);	
+					   /*$scope.orderProductAssociation = {isActive : true};*/
+					   console.log($scope.orderproductRMassociations);
 				}
 		    };
 		

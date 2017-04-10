@@ -54,7 +54,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 	
 	$scope.updateDispatchQuantity = function(){
 		for(index=0;index<$scope.data.data.length;index++){
-			$scope.data.data[index].dispatchQuantity = $scope.data.data[index].quantityRequired * $scope.manuFactureQuantity;
+			$scope.data.data[index].quantityDispatched = $scope.data.data[index].quantityRequired * $scope.manuFactureQuantity;
 		}
 	};
 	
