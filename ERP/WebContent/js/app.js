@@ -1,9 +1,9 @@
 var erpApp = angular
-		.module('ERPApp', [ 'ngRoute', 'ngMaterial', 'ngMessages' ]);
+		.module('ERPApp', [ 'ngRoute', 'ngMaterial', 'ngMessages', 'ngAnimate' ]);
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-erpApp.value('SERVER_URL', 'http://192.168.2.102:8086/ERP/');
+erpApp.value('SERVER_URL', 'http://192.168.2.104:8086/ERP/');
 
 
 

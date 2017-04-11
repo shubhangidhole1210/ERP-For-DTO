@@ -30,7 +30,7 @@
 			<td>
 			   	<md-input-container class="md-block" flex-gt-sm>
 					<input type="number" ng-model="productionplan.failQuantity" name="failQuantity" id="failQuantity" 
-					ng-change="comparePassQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" >
+					ng-change="comparePassQuantity(productionplan.qualityPendingQuantity{{$index}},productionplan.passQuantity{{$index}},productionplan.failQuantity{{$index}})" >
 				
             	<!-- <div ng-show="productQualityForm.failQuantity.$error.customMsg" class="error-msg">pending quantity should be equal to pass and fail quantity</div> -->
 				</md-input-container>

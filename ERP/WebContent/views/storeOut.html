@@ -11,7 +11,7 @@
           
              <label style="color: black;">PRODUCT</label>
           <md-select ng-model="product.id" name="vendorId" ng-disabled="isReadOnly" ng-init="getProducts()" name="product" required ng-change="getProductRMAssociation($index)">
-            <md-option ng-repeat="product in products" ng-value="product.id" >
+            <md-option ng-repeat="product in products" ng-value="product.product.id" >
                {{product.product.name}}
             </md-option>
              <div ng-messages="storeOutInformation.product.$error">
@@ -61,8 +61,8 @@
           <!-- <th>REMARK</th> -->
         </tr>
         <tr ng-repeat="rawMaterial in data.data">
-          <td>{{rawMaterial.name}}</td>
-          <td>{{rawMaterial.quantityRequired}}</td>
+          <td>{{rawMaterial.rawmaterial.name}}</td>
+          <td>{{rawMaterial.quantity}}</td>
           <td>
              <md-input-container class="md-block" flex-gt-sm>
              <input type="number" name="dispatchQuantity" ng-model="rawMaterial.quantityDispatched" ng-init="0">

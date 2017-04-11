@@ -1,4 +1,4 @@
-erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$http,$location) {
+erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$http,$location,$animate) {
 	$scope.menu = [];
 	$scope.displayMenu=Auth.isLoggedIn();
 	

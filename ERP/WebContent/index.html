@@ -83,12 +83,12 @@
 		</div>
 	</div>
 	<div ng-controller="menuController" class="erp-menubar" ng-show="displayMenu">
-		<div ng-repeat="menuItem in cascadedMenu track by $index" ng-init="menuItem.displaySubmenu = false" >
+		<div ng-repeat="menuItem in cascadedMenu track by $index" ng-init="menuItem.displaySubmenu = false" ng-animate=" 'animate' ">
 			<div ng-click="menuClicked($index); menuItem.displaySubmenu = !menuItem.displaySubmenu;" 
 				class=" mainMenu" id="{{menuItem.pageName}}" ng-class="{'changeERPMenu': $index == selectedIndex }">
 				&#x25BA;{{menuItem.menu}}</div>
 			<div ng-show="menuItem.displaySubmenu" >
-				<div ng-repeat="submenu in menuItem.submenu" class="erp-menu" >
+				<div ng-repeat="submenu in menuItem.submenu" class="erp-menu" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
 					<a href="#{{submenu.url}}">{{submenu.submenu}}</a>
 				</div>
 			</div>
