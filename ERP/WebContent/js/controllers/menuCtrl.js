@@ -48,7 +48,7 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 		$scope.displayMenu=Auth.isLoggedIn();
 		$scope.menu = Auth.getMenu();
 		$scope.cascadedMenu =  $scope.createCascadedMenu();
-		$scope.user = Auth.getUser();
+		$scope.user = Auth.getUserName();
 	});
 	$scope.selectedIndex = 0;
 	$scope.menuClicked=function($index)

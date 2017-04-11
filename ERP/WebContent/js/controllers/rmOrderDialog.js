@@ -2,6 +2,10 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
 	$scope.rmOrder = rmOrder;
+	$scope.rmOrder.actualPrice = $scope.rmOrder.actualPrice ? $scope.rmOrder.actualPrice : 0;
+	$scope.rmOrder.tax = $scope.rmOrder.tax ? $scope.rmOrder.tax : 0;
+	$scope.rmOrder.totalPrice = $scope.rmOrder.totalPrice ? $scope.rmOrder.totalPrice : 0;
+	$scope.rmOrder.otherCharges = $scope.rmOrder.otherCharges ? $scope.rmOrder.otherCharges : 0;
 	$scope.title = title;
 	$scope.displayAddRM = hideAction;
 	$scope.rmOrder.expectedDeliveryDate = new Date($scope.rmOrder.expectedDeliveryDate);
@@ -28,7 +32,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				quantity:$scope.rmOrder.quantity,
 				/*expectedDeliveryDate:$scope.rmOrder.expectedDeliveryDate,*/
 				vendor:$scope.selectedVendor,
-				totalprice:$scope.rmOrder.totalprice,
+				totalprice:$scope.rmOrder.totalPrice,
 				tax:$scope.rmOrder.tax,
 				otherCharges:$scope.rmOrder.otherCharges,
 				actualPrice:$scope.rmOrder.actualPrice
@@ -115,27 +119,27 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	};
 	$scope.otherCharges=0;
 	$scope.calculateTotalPrice=function(){
-		 $scope.productSubTotal=0;
+		var TAX = 0.18;
+		$scope.productSubTotal = 0;
 		console.log($scope.orderRawMaterials);
-		var i;
-		for (i = 0; i < $scope.orderRawMaterials.length; i++)
-			{
-			   $scope.totalPrice=$scope.orderRawMaterials[i].rawmaterial.pricePerUnit * $scope.orderRawMaterials[i].quantity;
-			   $scope.productSubTotal += $scope.totalPrice;
-			   console.log('product sub total'+$scope.productSubTotal);
-			   $scope.tax= $scope.productSubTotal*0.18;
-			   console.log('tax'+ $scope.tax);
-			   $scope.taxActualPrice=$scope.tax+ $scope.productSubTotal ;
-			   console.log('total Prices'+ $scope.taxActualPrice);
-			 
-			}
+		for (var i = 0; i < $scope.orderRawMaterials.length; i++){
+		   $scope.totalPrice = $scope.orderRawMaterials[i].rawmaterial.pricePerUnit * $scope.orderRawMaterials[i].quantity;
+		   $scope.productSubTotal += $scope.totalPrice;
+		}
+		console.log('Product Sub Total : '+$scope.productSubTotal);
+		$scope.rmOrder.actualPrice = $scope.productSubTotal;
+		$scope.rmOrder.tax = $scope.productSubTotal * TAX;
+		console.log('Tax Sub Total : '+$scope.rmOrder.tax);
+		$scope.rmOrder.totalPrice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
+		console.log('Total Price : '+ $scope.rmOrder.totalPrice);
 	}
 	
 	$scope.updateOtherCharges=function()
 	{
-		console.log('in update other charges')
-		$scope.totalPrices= $scope.taxActualPrice+$scope.otherCharges;
-		console.log('total prices'+$scope.totalPrices)
+		console.log('in update other charges');
+		console.log('Other Charges : '+$scope.rmOrder.otherCharges);
+		$scope.rmOrder.totalPrice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
+		console.log('Total Price : '+$scope.totalPrice);
 	}
 	
 	
@@ -194,6 +198,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	    	console.log('in delete RM'+ $scope.orderRawMaterials)
 	    	var lastItem = $scope.orderRawMaterials.length;
 		    $scope.orderRawMaterials.splice(index,1);
+		    $scope.calculateTotalPrice();
 	    }
 	    
 	    
