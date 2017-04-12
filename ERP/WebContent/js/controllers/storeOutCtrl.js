@@ -34,7 +34,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "productRMAsso/productRMAssoList/"+$scope.product.id;
+		httpparams.url = SERVER_URL + "productionplanning/getProductionPlanListForStoreOutByDateAndPId/"  +$scope.currentDate  + "/" + +$scope.product.id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -54,25 +54,27 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 	
 	$scope.updateDispatchQuantity = function(){
 		for(index=0;index<$scope.data.data.length;index++){
-			$scope.data.data[index].quantityDispatched = $scope.data.data[index].quantity * $scope.manuFactureQuantity;
+			$scope.data.data[index].quantityDispatched = $scope.data.data[index].quantityRequired * $scope.manuFactureQuantity;
 		}
 	};
 	
 	$scope.saveStoreOutInformation=function()
 	{
+		$scope.products.id;
 		console.log($scope.data.data);
 		var index=0;
 		var rmList = [];
 		for(index=0;index<$scope.data.data.length;index++){
 			var storeOutProduct = {};
-			storeOutProduct.rawmaterial= $scope.data.data[index].rawmaterial.id;
-			storeOutProduct.quantityRequired = $scope.data.data[index].quantity;
+			storeOutProduct.rawmaterial= $scope.data.data[index].rawmaterial;
+			storeOutProduct.quantityRequired = $scope.data.data[index].quantityRequired;
 			storeOutProduct.quantityDispatched = $scope.data.data[index].quantityDispatched;
 			rmList.push(storeOutProduct);
 		}
 		data=
 			{
 				productId: $scope.product.id,
+				productionPlanId :$scope.products.id,
 				quantityRequired: $scope.manuFactureQuantity,
 				description:$scope.description,
 				storeOutParts:rmList

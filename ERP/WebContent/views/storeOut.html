@@ -41,15 +41,14 @@
               </div>
          </md-input-container> 
          </div> -->
-          <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
+           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">QUANTITY TO MANUFACTURE</label>
             <input type="number" required name="quantity" ng-model="manuFactureQuantity" ng-change="updateDispatchQuantity()" >
              <div ng-messages="storeOutInformation.quantity.$error">
             <div ng-message="required">Please enter Quantity</div>
           </div>
           </md-input-container>
-        </div>
+         
         <div layout-gt-sm="row">
         </div>
         <h3>Raw Material List</h3>
@@ -61,8 +60,8 @@
           <!-- <th>REMARK</th> -->
         </tr>
         <tr ng-repeat="rawMaterial in data.data">
-          <td>{{rawMaterial.rawmaterial.name}}</td>
-          <td>{{rawMaterial.quantity}}</td>
+          <td>{{rawMaterial.name}}</td>
+          <td>{{rawMaterial.quantityRequired}}</td>
           <td>
              <md-input-container class="md-block" flex-gt-sm>
              <input type="number" name="dispatchQuantity" ng-model="rawMaterial.quantityDispatched" ng-init="0">
@@ -83,7 +82,7 @@
       <md-button class="md-raised" ng-click="restInformation()" type="reset" >CANCEL</md-button>
     </md-dialog-actions>
         </div>
-        
+       
      </div>   
 </form>
 </div>
