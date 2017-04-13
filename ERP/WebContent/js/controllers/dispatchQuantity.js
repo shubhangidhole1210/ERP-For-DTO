@@ -90,9 +90,9 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 			console.log(data);
 			if(data.data.code === 1){
 				utils.showToast(data.data.message);
-				$location.path('/');
 			}else{
-				utils.showToast("Something went wrong. Please try again later.");
+				utils.showToast(data.data.message);
+				$location.path('/');
 			}
 			utils.hideProgressBar();
 			

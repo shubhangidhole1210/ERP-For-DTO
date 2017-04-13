@@ -13,10 +13,10 @@
             <md-option ng-repeat="order in productOrders" ng-value="order.id" >
                {{order.invoiceNo}}
             </md-option>
-             <div ng-messages="dispatchQuantityInformation.productOrder.$error">
+          </md-select>
+          <div ng-messages="dispatchQuantityInformation.productOrder.$error">
                  <div ng-message="required">Please select Product </div>
               </div>
-          </md-select>
           </md-input-container>
    </div>
     <div layout-gt-sm="row">

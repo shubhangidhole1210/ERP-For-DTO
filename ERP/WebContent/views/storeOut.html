@@ -10,9 +10,9 @@
           <md-input-container class="md-block" flex-gt-sm type="password">
           
              <label style="color: black;">PRODUCT</label>
-          <md-select ng-model="product.id" name="vendorId" ng-disabled="isReadOnly" ng-init="getProducts()" name="product" required ng-change="getProductRMAssociation($index)">
-            <md-option ng-repeat="product in products" ng-value="product.product.id" >
-               {{product.product.name}}
+          <md-select ng-model="productionPlan" name="vendorId" ng-disabled="isReadOnly" ng-init="getProducts()" name="product" required ng-change="getProductRMAssociation($index)">
+            <md-option ng-repeat="productionPlan in productionPlans" ng-value="productionPlan" >
+               {{productionPlan.product.name}}
             </md-option>
              <div ng-messages="storeOutInformation.product.$error">
                  <div ng-message="required">Please select Product </div>
@@ -29,6 +29,7 @@
             <div ng-message="required">Please enter Description</div>
           </div>
           </md-input-container>
+          <div></div>
         </div>
         
         <!--  <div layout-gt-sm="row">
@@ -49,8 +50,8 @@
           </div>
           </md-input-container>
          
-        <div layout-gt-sm="row">
-        </div>
+       <!--  <div ng-repeat="product in products" ng-init="getProducts()">
+        </div> -->
         <h3>Raw Material List</h3>
         <table >
         <tr>
