@@ -1,7 +1,7 @@
 erpApp.config(function ($provide, $httpProvider) {
 	  
 	  // Intercept http calls.
-	  $provide.factory('erpHttpInterceptor', function ($q,SERVER_URL,Auth) {
+	  $provide.factory('erpHttpInterceptor', function ($q,SERVER_URL,Auth,$location,$rootScope) {
 	    return {
 	      // On request success
 	      request: function (config) {
@@ -39,10 +39,14 @@ erpApp.config(function ($provide, $httpProvider) {
 
 	      // On response failture
 	      responseError: function (rejection) {
-	         console.log(rejection); // Contains the data about the error.
-	        
-	        // Return the promise rejection.
-	        return $q.reject(rejection);
+	    	  console.log("Error : ", rejection); // Contains the data about the error.
+	    	  if(rejection.status === 403){
+	    		  $location.path = "/login";
+	    	  }
+	    	  Auth.logout();
+	    	  $rootScope.$emit("logout",{});
+	    	  // Return the promise rejection.
+	    	  return $q.reject(rejection);
 	      }
 	    };
 	  });
