@@ -27,68 +27,42 @@
               </div>
         </md-input-container>
         </div>
-      <div layout-gt-sm="row">
-         <!--  <md-input-container ng-init="getRawMaterials()">
-          <label style="color: black;">RAW MATERIAL*</label>
-          <md-select ng-model="productRmAsso.rawmaterial.id" name="rawmaterial"  ng-disabled="isReadOnly" ng-required="true"  ng-init="rawMaterialId()">
-            <md-option ng-repeat="rawMaterial in RMData" ng-value="rawMaterial.id" >
-               {{rawMaterial.name}}
+        <h2>Raw Material List</h2>
+		<table>
+			<tr>
+				<th>RAW MATERIAL</th>
+				<th>QUANTITY</th>
+			</tr>
+			<tr ng-repeat="orderRawMaterial in orderRawMaterials">
+				<td>{{orderRawMaterial.rawmaterial.name}}</td>
+				<td><input type="number"
+					ng-value="{{orderRawMaterial.quantity}}"></td>
+			</tr>
+		</table>
+
+		<div layout-gt-sm="row">
+			<md-input-container >
+          <label style="color: black;">RAW MATERIAL</label>
+          <md-select ng-model="orderRawMaterial.rawmaterial"   ng-disabled="isReadOnly"   ng-init="rawMaterialId()" >
+            <md-option ng-repeat="rawmaterial in RMData" ng-value="rawmaterial">
+               {{rawmaterial.name}}
             </md-option>
           </md-select>
-          <div ng-messages="productRMAssociationInformation.rawmaterial.$error">
-                 <div ng-message="required">Please Select Raw Material</div>
-              </div>
-        </md-input-container> -->
-        </div>
-        
-        
-          <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm type="password">
-              <label class="input-filed-label">QUANTITY*</label>
-              
-              <input type="number" placeholder="Enter quantity" ng-model="productRmAsso.quantity"  name="quantity" required ng-disabled="isReadOnly">
-              <div ng-messages="productRMAssociationInformation.quantity.$error">
-                 <div ng-message="required">Please Enter Quantity</div>
-              </div>
-         </md-input-container>   
-          </div>
-      
-         </div>
-         <h2>Raw Material List</h2>
-          <table>
-          <tr>
-            <th>RAW MATERIAL</th>
-            <th>QUANTITY</th>
-            <th>ACTION</th>
-          </tr>
-          <tr ng-repeat="orderProductRMAssociation in orderproductRMassociations">
-          <td>{{orderProductRMAssociation.rawMaterial.name}}</td>
-          <td>{{orderProductAssociation.quantity}}</td>
-          <td><button type="button" style="height: 40px" ng-click="deleteProduct($index)">Delete</button></td>
-          </tr>
-        </table>
-          <div layout-gt-sm="row">
-          <md-input-container ng-init="getRawMaterials()">
-          <label style="color: black;">RAW MATERIAL*</label>
-          <md-select ng-model="orderProductRMAssociation.rawMaterial.id" name="rawmaterial"  ng-disabled="isReadOnly" ng-required="true"  ng-init="rawMaterialId()">
-            <md-option ng-repeat="rawMaterial in RMData" ng-value="rawMaterial.id" >
-               {{rawMaterial.name}}
-            </md-option>
-          </md-select>
-        </md-input-container> 
-		<md-input-container class="md-block" flex-gt-sm type="password">
+        </md-input-container>
+			 <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANTITY</label>
-            <input type="number" ng-model="orderProductRMAssociation.quantity"   name="quantity"  ng-disabled="isReadOnly">
+            <input type="text" ng-model="orderRawMaterial.quantity"  name="quantity" ng-disabled="isReadOnly">
           </md-input-container>
-           <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderProductRMAssociation()" >Add Product</button>
-        </div>
+          <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderRawMaterial()" >Add Raw Material</button>
+		</div>
+	</div>
          
-          
+         
    
       
     </md-dialog-content>
         <md-dialog-actions layout="row">
-      <md-button class="md-raised" ng-click="submitInformation(productRMAssociationInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
+      <md-button class="md-raised" ng-click="saveProductRMAssociationInfo(productRMAssociationInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
     </md-dialog-actions>
    

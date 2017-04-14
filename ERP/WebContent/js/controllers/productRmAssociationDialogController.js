@@ -15,24 +15,22 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	      $mdDialog.hide(answer);
 	    };
 	    
-	    $scope.saveProductRMAssociationInfo=function(ev)
+	    $scope.saveProductRMAssociationInfo=function()
 	    {
 	    	 var data = {
-	    		/*rawmaterial : $scope.productRmAsso.rawmaterial.id,*/
 	    		product : $scope.productRmAsso.product.id,
-	    		quantity : $scope.productRmAsso.quantity,
-	    		productRMAssociationModelParts: $scope.orderproductRMassociations
+	    		productRMAssociationModelParts: $scope.orderRawMaterials
 				};
 	    	 
 	    	
 	    	 var httpparams = {};
 	    	 if($scope.flag==0)
 	    		 {
-	    		    httpparams.method='post',
-	    		    httpparams.url=SERVER_URL + "productRMAsso/createmultiple"
-	    		    httpparams.headers = {
-	    					auth_token : Auth.getAuthToken()
-	    				};
+	    		 httpparams.method = 'post';
+	 			httpparams.url = SERVER_URL + "productRMAsso/createmultiple";
+	 			httpparams.headers = {
+	 					auth_token : Auth.getAuthToken()
+	 				};
 	    		 }
 	    	 else
 	    		 {
@@ -56,15 +54,11 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 										"saveVendorError", {});
 								console.log(data);
 								$scope.hide();
-								/*$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();*/
 								utils.showToast('Something went worng. Please try again later.');
 							}
 							
 							else{
 								$scope.displayProgressBar = false;
-								/*$scope.message = 'Product RM Association Information saved successfully.';
-								$scope.showToast();*/
 								utils.showToast('Product RM Association Information saved successfully.');
 								$rootScope.$emit("callPopulateProductRmAssociationList",{});
 							}
@@ -74,26 +68,12 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 									"saveVendorError", {});
 							console.log(data);
 							$scope.hide();
-							/*$scope.message = 'Something went worng. Please try again later.';
-							$scope.showToast();*/
 							utils.showToast('Something went worng. Please try again later.');
 						});
 	    	 
 	    }
-	    
-	    
 	   
 		
-		$scope.submitInformation = function(isvaliduser,$event) {
-			if (isvaliduser) {
-				 $scope.saveProductRMAssociationInfo($event)
-				
-			} else {
-				console.log('its else block');
-			}
-
-		}
-	    
 		
 		$scope.rawMaterialId=function()
 		{
@@ -104,11 +84,6 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
-			
-			/*$http({
-				method : 'GET',
-				url : SERVER_URL + "rawmaterial/list"
-			})*/
 			$http(httpparams).then(function successCallback(response) {
 				$scope.RMData = response.data;
 
@@ -121,23 +96,19 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			
 		};
 		
-		 $scope.orderproductRMassociations=[];
-		    $scope.orderProductRMAssociation={};
-		    $scope.addOrderProductRMAssociation=function(){
-		    	if(!angular.equals($scope.orderProductRMAssociation,{})){
-					   $scope.orderproductRMassociations.push($scope.orderProductRMAssociation);	
-					   /*$scope.orderProductAssociation = {isActive : true};*/
-					   console.log($scope.orderproductRMassociations);
+		 $scope.orderRawMaterials=[];
+		    $scope.orderRawMaterial={};
+		    $scope.addOrderRawMaterial=function(){
+		    	if(!angular.equals($scope.orderRawMaterial,{})){
+					   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
+					   $scope.orderRawMaterial = {};
+					   console.log($scope.orderRawMaterials);
 				}
 		    };
 		
 		
 		 $scope.getProducts=function()
 		    {
-		    	/*$http({
-					method : 'GET',
-					url : SERVER_URL + "product/list"
-				})*/
 			 var httpparams = {};
 				httpparams.method = 'GET';
 				httpparams.url = SERVER_URL + "product/list";
