@@ -9,6 +9,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	$scope.title = title;
 	$scope.displayAddRM = hideAction;
 	$scope.rmOrder.expectedDeliveryDate = new Date($scope.rmOrder.expectedDeliveryDate);
+	
 	$scope.hide = function() {
 		console.log('hide DialogController');
 		$mdDialog.hide();
@@ -166,16 +167,27 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	
 	 $scope.orderRawMaterials=[];
 	    $scope.orderRawMaterial={isActive : true};
-	    $scope.addOrderRawMaterial=function(){
+	   /* $scope.addOrderRawMaterial=function(){
 	    	if(!angular.equals($scope.orderRawMaterial,{})){
 				   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
 				   $scope.orderRawMaterial = {isActive : true};
 				   console.log($scope.orderRawMaterials);
 			}
 	    	$scope.calculateTotalPrice();
+	    };*/
+	    
+	    $scope.addOrderRawMaterial = function(){
+	    	console.log('Adding RM : ', $scope.orderRawMaterial);
+	    	if( !angular.equals($scope.orderRawMaterial,{}) ){
+	    		if(!$scope.isDuplicateRM($scope.orderRawMaterial)){
+				   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
+				   $scope.orderRawMaterial = {};
+	    		}else{
+	    		}
+			}
 	    };
 	
-	$scope.isDuplicateRM=function()
+	/*$scope.isDuplicateRM=function()
 	{
 		  console.log($scope.orderRawMaterials)
 		var i;
@@ -191,7 +203,17 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 							}
 						}
 						return false;
-	}
+	}*/
+	    
+	    
+	    $scope.isDuplicateRM = function(orderRawMaterial) {
+			for (var i = 0; i < $scope.orderRawMaterials.length; i++) {
+				if ($scope.orderRawMaterials[i].rawmaterial.id === orderRawMaterial.rawmaterial.id) {
+					return true;
+				}
+			}
+			return false;
+		};
 	    
 	    $scope.deleteRM=function(index)
 	    {
@@ -203,22 +225,22 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	    
 	    
 	    
-	    $scope.getRmForOrder=function(index)
-	    {
-	    	var httpparams = {};
-			httpparams.method = 'GET';
-			httpparams.url = SERVER_URL + "rawmaterialorderassociation/getRMForRMOrder/"+ $scope.rmOrder.id;
-			httpparams.headers = {
-					auth_token : Auth.getAuthToken()
+	    $scope.getRmForOrder=function(){
+	    	if($scope.rmOrder.id){
+		    	var httpparams = {};
+				httpparams.method = 'GET';
+				httpparams.url = SERVER_URL + "rawmaterialorderassociation/getRMForRMOrder/"+ $scope.rmOrder.id;
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
 				};
-			
-			$http(httpparams).then(function successCallback(response) {
-				$scope.rmOrderList = response.data;
-				console.log(response);
-	             console.log($scope.rmOrderList);
-			}, function errorCallback(response) {
-				console.log("Error");
-
-			});
-	    }
+				
+				$http(httpparams).then(function successCallback(response) {
+					$scope.rmOrderList = response.data;
+					console.log(response);
+		            console.log($scope.rmOrderList);
+				}, function errorCallback(response) {
+					console.log("Error");
+				});
+	    	}
+	    };
 });

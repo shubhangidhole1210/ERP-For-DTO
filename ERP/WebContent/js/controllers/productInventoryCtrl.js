@@ -70,6 +70,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 	  };
 	  $scope.showEditProductInventory = function(ev , index) {
 		  $scope.flag = 1;
+		  $scope.isReadOnly = false;
 		  $scope.productInventory = $scope.productInventorys[index];
 		  $scope.information="EDIT PRODUCT INVENTORY INFORMATION"
 		    $mdDialog.show({
