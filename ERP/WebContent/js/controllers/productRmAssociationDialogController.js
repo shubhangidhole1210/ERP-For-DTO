@@ -43,8 +43,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    		 }
 	    	 
 	    	 httpparams.data=data;
-	    	 $http(httpparams)
-	    	 .then(
+	    	 $http(httpparams).then(
 						function successCallback(data) {
 							$mdDialog.hide();
 							console.log(data);

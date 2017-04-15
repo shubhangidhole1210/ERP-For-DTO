@@ -5,9 +5,9 @@
       <div class="md-toolbar-tools">
         <h2>{{information}}</h2>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
+       <!--  <md-button class="md-icon-button" ng-click="cancel()">
           <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-        </md-button>
+        </md-button> -->
       </div>
     </md-toolbar>
 
@@ -17,7 +17,7 @@
        <div layout-gt-sm="row">
           <md-input-container ng-init="getProducts()">
           <label style="color: black;">PRODUCT*</label>
-          <md-select ng-model="productRmAsso.product.id" name="product"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getProducts()">
+          <md-select ng-model="productRmAsso.product.id" name="product"  ng-disabled="isReadOnly" ng-required="true" required >
             <md-option ng-repeat="product in products" ng-value="product.id" >
                {{product.partNumber}}
             </md-option>
@@ -51,7 +51,7 @@
         </md-input-container>
 			 <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANTITY</label>
-            <input type="text" ng-model="orderRawMaterial.quantity"  name="quantity" ng-disabled="isReadOnly">
+            <input type="number" ng-model="orderRawMaterial.quantity"  name="quantity" ng-disabled="isReadOnly">
           </md-input-container>
           <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderRawMaterial()" >Add Raw Material</button>
 		</div>
