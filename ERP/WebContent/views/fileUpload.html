@@ -1,23 +1,19 @@
 <div ng-controller="fileUplodCtrl">
   <div class="erp-information">
-    <!--   <h1>upload file here</h1>
-       <input type="file" fileread="uploadme" />
+     <!--  <input type="file" fileread="uploadme" />
     <img src="{{uploadme}}" width="100" height="50" alt="Image preview...">
     <br/>
     <p>
       Image dataURI:
-      <pre>{{uploadme}}</pre>
+     
     </p>
     <br/>
-    <button ng-click="uploadImage()">upload image</button>
- -->    
- 
- 
- 
- 
- 
- 
-    
-    
+    <button ng-click="uploadImage()">upload image</button> -->
+   
+        <input type="file" id="file1" name="file" multiple
+            ng-files="getTheFiles($files)" />
+
+        <input type="button" ng-click="uploadFiles()" value="Upload" />
+   
   </div>
   </div>

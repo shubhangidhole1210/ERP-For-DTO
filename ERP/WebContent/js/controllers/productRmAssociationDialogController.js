@@ -33,7 +33,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
     	}else{
     		data.id=$scope.productRmAsso.id,
     		httpparams.method='put',
-    		httpparams.url=SERVER_URL + "productRMAsso/update"
+    		httpparams.url=SERVER_URL + "productRMAsso/update/multipleProductRMAssociation"
     		httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 			};
@@ -109,8 +109,10 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 				   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
 				   $scope.orderRawMaterial = {};
 				   $scope.productRMAssociationInformation.rawmaterial.$setValidity("message", true);
+				   console.log('setting validity true')
+				   $scope.message="";
 	    		}else{
-	    			$scope.message = 'Already added this Rawmaterial';
+	    			$scope.message = 'This Rawmaterial is already added';
 					$scope.productRMAssociationInformation.rawmaterial.$setValidity("message", false);
 	    		}
 			}

@@ -1,48 +1,49 @@
 erpApp.controller('fileUplodCtrl',function($scope,$http,SERVER_URL,Auth)
 {
-	/* $scope.uploadme;
+	var formdata = new FormData();
+    $scope.getTheFiles = function ($files) {
+        angular.forEach($files, function (value, key) {
+            formdata.append(key, value);
+            console.log($files);
+            console.log(formdata);
+        });
+    };
 
-	    $scope.uploadImage = function() {
-	      var fd = new FormData();
-	      var imgBlob = dataURItoBlob($scope.uploadme);
-	      fd.append('file', imgBlob);
-	      $http.post(
-	    		  SERVER_URL + "fileupload",
-	          fd, {
-	            transformRequest: angular.identity,
-	            headers: {
-	              'Content-Type': undefined
-	            }
-	          }
-	        )
-	        .success(function(response) {
-	          console.log('success', response);
-	        })
-	        .error(function(response) {
-	          console.log('error', response);
-	        });
-	    }
+    $scope.uploadFiles = function () {
 
-
-	    //you need this function to convert the dataURI
-	    function dataURItoBlob(dataURI) {
-	      var binary = atob(dataURI.split(',')[1]);
-	      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-	      var array = [];
-	      for (var i = 0; i < binary.length; i++) {
-	        array.push(binary.charCodeAt(i));
-	      }
-	      return new Blob([new Uint8Array(array)], {
-	        type: mimeString
-	      });
-	    }
+       /* var request = {
+            method: 'POST',
+            url: '/api/fileupload/',
+            data: formdata,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
 */
-	
-	
-	
-	
-	
-	
-	
-	
+    	var httpparams = {};
+    	httpparams.method = 'post';
+    	httpparams.url = SERVER_URL + "fileupload";
+    	httpparams.data = formdata;
+    	httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+    	
+    	$http(httpparams)
+		.then(
+				function successCallback(data) {
+				},
+				function errorCallback(data) {
+					
+				});
+    	
+    	
+    	
+        /*$http(request)
+            .success(function (d) {
+                alert(d);
+            })
+            .error(function () {
+            });*/
+    }
+
 });	

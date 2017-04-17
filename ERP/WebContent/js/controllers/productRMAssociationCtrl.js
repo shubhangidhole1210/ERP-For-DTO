@@ -13,17 +13,19 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "productRMAsso/list";
+		httpparams.url = SERVER_URL + "productRMAsso/list/multiple";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
 		
 		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
-				$scope.productRmAssociations = response.data;
+				$scope.productRmAssociations=response.data
+				$scope.productRMAssociationModelParts = response.data.productRMAssociationModelParts;
 				$scope.productRmAssociationInformation();
 				utils.hideProgressBar();
 				console.log(response);
+				console.log('productRMAssociationModelParts' + $scope.productRMAssociationModelParts)
 
 			}, function errorCallback(response) {
 				utils.showToast("We are Sorry. Something went wrong. Please try again later.");

@@ -61,26 +61,10 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 								$scope.hide();
 								utils.showToast('Something went worng. Please try again later.');
 							}
-							/*else if(data.data.code === 2)
-								{
-								console.log(data.data.message);
-								$rootScope.$emit(
-										"saveProductError", {});
-								console.log(data);
-								$scope.hide();
-								$scope.message = 'Product  Name already Exist.';
-								$scope.message=data.data.message;
-								$scope.showToast();
-								}*/
-							
-							else
-							{
+							else{
 								$scope.displayProgressBar = false;
-								/*$scope.message = 'Product Information saved successfully.';
-								$scope.showToast();*/
 								utils.showToast('Product Information saved successfully.');
 								$rootScope.$emit("CallPopulateProductList",{});
-								
 							}
 						},
 						function errorCallback(data) {
@@ -90,19 +74,10 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
 						});
-
 	}
-	 /* $scope.uploadFile = function(){
-	        var file = $scope.myFile;
-	        console.log('file is ' );
-	        console.dir(file);
-	        var uploadUrl = "/fileUpload";
-	        fileUpload.uploadFileToUrl(file, uploadUrl);
-	    };*/
-
+	
 	$scope.submitProductInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			/*$scope.showProgressBar($event);*/
 			$scope.saveProduct($event);
 			
 		} else {

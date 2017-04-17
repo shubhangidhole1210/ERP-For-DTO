@@ -11,20 +11,6 @@
    <th ng-repeat="days in alldays" style="font-size: 17px; text-align: center;">{{days| date:'dd-MM-yyyy'}}</th>
  </tr>
  <tr ng-repeat="product in products" >
-    <td style="font-size: 17px; text-align: center">
-      <table>
-      <th>Part Number</th>
-      <th>Inventory Qty</th>
-      <th> Pending Qty</th>
-      <tr>
-        <td>{{product.productId}}</td>
-        <td>{{product.productBalanceQty}}</td>
-        <td>{{product.productTargetQty}}</td>
-        
-      </tr>
-      </table>
-    </td>
-<!--     <div style="overflow-x: scroll;"> -->
 
       <td ng-repeat="productProductionPlanItem in product.productProductionPlan" >
     <table >

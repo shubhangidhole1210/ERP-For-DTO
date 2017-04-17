@@ -36,7 +36,7 @@
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="orderRawMaterial in orderRawMaterials">
-			    <td>{{orderRawMaterial.rawmaterial.id}}</td>
+			    <td>{{ $index + 1 }}</td>
 				<td>{{orderRawMaterial.rawmaterial.name}}</td>
 				<td><input type="number"
 					ng-value="{{orderRawMaterial.quantity}}"></td>
