@@ -5,6 +5,9 @@
 			<md-button class="md-raised md-primary" ng-click="showAddNewRMVendorAssociation($event);"  ng-init="populateRMVendorAssociationList();flag=0" style=" background-color: rgb(126, 137, 213);">ADD
 			NEW RMVendor Association</md-button>
 		</div>
+		 <md-input-container class="md-block" flex-gt-sm type="password">
+			<input type="text"  ng-model="searchText"  name="password" placeholder="Search by Raw Material" class="search-text">
+			</md-input-container>
 		<h1 class="table-header">RAW MATERIAL VENDOR ASSOCIATION LIST</h1>
 		<table>
 			<tr>

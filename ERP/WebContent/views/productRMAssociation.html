@@ -1,10 +1,12 @@
 <div ng-controller="productRMAssociationCtrl">
 	<div class="erp-information">
-	<input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text" autofocus>
 		<div>
 			<md-button class="md-raised md-primary" ng-click="showAddNewProductRMAssociation($event);"  ng-init="populateProductRmAssoList();flag=0" style=" background-color: rgb(126, 137, 213);">ADD
 			NEW PRODUCT RM ASSOCIATION LIST</md-button>
 		</div>
+		<md-input-container class="md-block" flex-gt-sm type="password">
+			<input type="text"  ng-model="searchText"  name="password" placeholder="Search by First Name" class="search-text">
+			</md-input-container>
 		<h1 class="table-header">PRODUCT RAW MATERIAL ASSOCIATION LIST</h1>
 		<table>
 			<tr>
@@ -14,7 +16,6 @@
 			</tr>
 			<tr ng-repeat="productRMAssociation in data" >
 				<td>{{productRMAssociation.product}}</td>
-				<!-- <td>{{productRMAssociation.rawmaterial.name}}</td> -->
 				<td >
 				   <table>
 				      <th>RAW MATERIAL</th>
@@ -27,7 +28,6 @@
 				</td>
 				<td>
 				     <md-button class="md-raised"  ng-click="showEditproductRMAssociation($event,$index)" ng-init="flag=1">EDIT</md-button>
-				<!-- <md-button class="md-raised" ng-click="showConfirm($event)">REMOVE</md-button> -->
 				<md-button class="md-raised"  ng-click="showConfirm($event,$index)">Remove</md-button>
 				
 				<md-button class="md-raised" ng-click="viewproductRMAssociationInformation($event,$index)">VIEW</md-button>

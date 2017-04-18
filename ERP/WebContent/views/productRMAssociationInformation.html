@@ -44,6 +44,21 @@
 				     <button type="button" style="height: 40px" ng-click="deleteRM($index)" ng-disabled="isReadOnly">Delete</button>
                </td>	
 			</tr>
+			
+			<tr ng-repeat="rm in productRMAssociation.productRMAssociationModelParts">
+			    <td>{{ $index + 1 }}</td>
+				  <td>{{rm.rawmaterial.name}}</td>
+				    <td>{{rm.quantity}}</td>
+				<td><input type="number"
+					ng-value="{{rm.quantity}}"></td>
+				<td>
+				     <button type="button" style="height: 40px" ng-click="deleteRM($index)" ng-disabled="isReadOnly">Delete</button>
+               </td>	
+			</tr>
+			
+			
+			
+			
 		</table>
 
         

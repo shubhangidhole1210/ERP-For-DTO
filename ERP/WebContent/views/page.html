@@ -1,10 +1,14 @@
 <div ng-controller="pageCtrl">
 <div class="erp-information">
-	<input type="text" ng-model="searchText" placeholder="Search by page Name" class="search-text" autofocus>
+	<!-- <input type="text" ng-model="searchText" placeholder="Search by page Name" class="search-text" autofocus> -->
     <div>
 			<md-button class="md-raised md-primary" ng-click="showAddNewPage($event);"  ng-init="populatePageList();flag=0" style=" background-color: rgb(126, 137, 213);">ADD NEW PAGE</md-button>
 		</div>
       <h1 class="table-header">PAGE LIST</h1>
+       <md-input-container class="md-block" flex-gt-sm type="password">
+			<input type="text"  ng-model="searchText"  name="password" placeholder="Search by Name" class="search-text">
+			</md-input-container>
+      
   <table>
 			<tr>
 				<th>MENU</th>

@@ -1,10 +1,12 @@
 <div ng-controller="vedorCtrl">
 <div class="erp-information">
-<input type="text" ng-model="searchText" placeholder="Search by Company Name" class="search-text" autofocus>
 <div>
     <md-button class="md-raised md-primary" ng-click="showAddNewVendor($event);" ng-init="populateVendorList();flag=0" style=" background-color: rgb(126, 137, 213);">ADD
 			NEW VENDOR</md-button>
 </div>
+ <md-input-container class="md-block" flex-gt-sm type="password">
+			<input type="text"  ng-model="searchText"  name="password" placeholder="Search by Company Name" class="search-text">
+			</md-input-container>
       <h1 class="table-header">VENDOR LIST</h1>
   <table>
 			<tr>

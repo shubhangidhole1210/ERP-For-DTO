@@ -167,25 +167,24 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	
 	 $scope.orderRawMaterials=[];
 	    $scope.orderRawMaterial={isActive : true};
-	   /* $scope.addOrderRawMaterial=function(){
-	    	if(!angular.equals($scope.orderRawMaterial,{})){
-				   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
-				   $scope.orderRawMaterial = {isActive : true};
-				   console.log($scope.orderRawMaterials);
-			}
-	    	$scope.calculateTotalPrice();
-	    };*/
-	    
 	    $scope.addOrderRawMaterial = function(){
 	    	console.log('Adding RM : ', $scope.orderRawMaterial);
 	    	if( !angular.equals($scope.orderRawMaterial,{}) ){
 	    		if(!$scope.isDuplicateRM($scope.orderRawMaterial)){
 				   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
-				   $scope.orderRawMaterial = {};
+				   $scope.orderRawMaterial = {isActive : true};
+				   $scope.RMOrderInformation.rawmaterial.$setValidity("message", true);
+				   console.log('setting validity true')
+				   $scope.message="";
 	    		}else{
+	    			$scope.message = 'This Rawmaterial is already added';
+					$scope.RMOrderInformation.rawmaterial.$setValidity("message", false);
 	    		}
 			}
+	    	$scope.calculateTotalPrice();
 	    };
+	    
+	    
 	
 	/*$scope.isDuplicateRM=function()
 	{
@@ -222,6 +221,16 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		    $scope.orderRawMaterials.splice(index,1);
 		    $scope.calculateTotalPrice();
 	    }
+	    
+	    $scope.addQuantity = function(quantity) {
+			if (quantity <= 0) {
+				console.log('if condition')
+				$scope.message = 'quantity should be greater than 0';
+				$scope.RMOrderInformation.quantity.$setValidity("message", false);
+			} else {
+				$scope.RMOrderInformation.quantity.$setValidity("message", true);
+			}
+		};
 	    
 	    
 	    

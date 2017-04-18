@@ -1,9 +1,12 @@
 <div ng-controller="userTypeCtrl">
 <div class="erp-information">
-        <input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text" autofocus>
+        <!-- <input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text" autofocus> -->
     <div>
 			<md-button class="md-raised md-primary" ng-click="showAddNewUserType($event);"  ng-init="populateUserTypeList();flag=0" style=" background-color: rgb(126, 137, 213);">ADD NEW USER TYPE</md-button>
 		</div>
+    <md-input-container class="md-block" flex-gt-sm type="password">
+			<input type="text"  ng-model="searchText"  name="password" placeholder="Search by Name" class="search-text">
+			</md-input-container>		
 		<h1 class="table-header">USER TYPE LIST</h1>
   <table>
 			<tr>
