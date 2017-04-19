@@ -1,7 +1,13 @@
 erpApp.controller('productRmAssociationDialogController', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils,flag,action,information,productRmAsso) {
 	  $scope.productRmAsso = productRmAsso;
-	  $scope.orderRawMaterials = [];
-	  $scope.orderRawMaterial = {};
+	  console.log(productRmAsso);
+	  if(productRmAsso.length === 0){
+		  $scope.productRmAsso.productRMAssociationModelParts = [];
+		  $scope.rawmaterialPart = {};
+	  }
+		
+	
+	  
 	  $scope.flag = flag;
 	  $scope.isReadOnly = action;
 	  $scope.information = information;
@@ -19,8 +25,8 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    
 	  $scope.saveProductRMAssociationInfo = function() {
     	var data = {
-    		product : $scope.productRmAsso.product.data.productId,
-    		productRMAssociationModelParts: $scope.orderRawMaterials
+    		product : $scope.productRmAsso.product,
+    		productRMAssociationModelParts: $scope.productRmAsso.productRMAssociationModelParts
 		};
     	 
     	var httpparams = {};
@@ -80,9 +86,8 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    
 	   
 	    $scope.deleteRM = function(index){
-	    	console.log('in delete RM'+ $scope.orderRawMaterials)
-	    	var lastItem = $scope.orderRawMaterials.length;
-		    $scope.orderRawMaterials.splice(index,1);
+	    	console.log('in delete RM'+ $scope.productRmAsso.productRMAssociationModelParts)
+		    $scope.productRmAsso.productRMAssociationModelParts.splice(index,1);
 	    };
 		
 		$scope.rawMaterialId = function(){
@@ -102,12 +107,12 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			
 		};
 		 
-	    $scope.addOrderRawMaterial = function(){
-	    	console.log('Adding RM : ', $scope.orderRawMaterial);
-	    	if( !angular.equals($scope.orderRawMaterial,{}) ){
-	    		if(!$scope.isDuplicateRM($scope.orderRawMaterial)){
-				   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
-				   $scope.orderRawMaterial = {};
+	    $scope.addRawMaterial = function(){
+	    	console.log('Adding RM : ', $scope.rawmaterialPart);
+	    	if( !angular.equals($scope.rawmaterialPart,{}) ){
+	    		if(!$scope.isDuplicateRM($scope.rawmaterialPart)){
+				   $scope.productRmAsso.productRMAssociationModelParts.push($scope.rawmaterialPart);	
+				   $scope.rawmaterialPart = {};
 				   $scope.productRMAssociationInformation.rawmaterial.$setValidity("message", true);
 				   console.log('setting validity true')
 				   $scope.message="";
@@ -145,8 +150,8 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 		};
 		
 		$scope.isDuplicateRM = function(orderRawMaterial) {
-			for (var i = 0; i < $scope.orderRawMaterials.length; i++) {
-				if ($scope.orderRawMaterials[i].rawmaterial.id === orderRawMaterial.rawmaterial.id) {
+			for (var i = 0; i < $scope.productRmAsso.productRMAssociationModelParts.length; i++) {
+				if ($scope.productRmAsso.productRMAssociationModelParts[i].rawmaterial.id === orderRawMaterial.rawmaterial.id) {
 					return true;
 				}
 			}

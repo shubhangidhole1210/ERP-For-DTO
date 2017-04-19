@@ -81,6 +81,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		  $scope.flag = 1;
 		  $scope.isReadOnly = false;
 		  $scope.productRmAsso = $scope.productRmAssociations[index];
+		  console.log("sending ..", $scope.productRmAsso);
 		  $scope.information="EDIT PRODUCT RM ASSOCIATION"
 		    $mdDialog.show({
 		      controller: 'productRmAssociationDialogController',
@@ -149,7 +150,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		$scope.showConfirm = function(ev,index) {
 			// Appending dialog to document.body to cover sidenav in docs app
 			var confirm = $mdDialog.confirm().title(
-					'Are you sure you want to Delete Vendor Information?')
+					'Are you sure you want to Delete Product RM Asssociation Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
 							'Delete' ).cancel('Cancel');
 

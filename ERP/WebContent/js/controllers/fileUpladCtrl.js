@@ -3,7 +3,7 @@ erpApp.controller('fileUplodCtrl',function($scope,$http,SERVER_URL,Auth)
 	var formdata = new FormData();
     $scope.getTheFiles = function ($files) {
         angular.forEach($files, function (value, key) {
-            formdata.append(key, value);
+            formdata.append('file', value);
             console.log($files);
             console.log(formdata);
         });
@@ -11,23 +11,17 @@ erpApp.controller('fileUplodCtrl',function($scope,$http,SERVER_URL,Auth)
 
     $scope.uploadFiles = function () {
 
-       /* var request = {
-            method: 'POST',
-            url: '/api/fileupload/',
-            data: formdata,
-            headers: {
-                'Content-Type': undefined
-            }
-        };
-*/
+    
     	var httpparams = {};
     	httpparams.method = 'post';
     	httpparams.url = SERVER_URL + "fileupload";
     	httpparams.data = formdata;
     	httpparams.headers = {
+    			"Content-Type" : undefined,
 				auth_token : Auth.getAuthToken()
 			};
-    	
+    	httpparams.transformRequest = angular.identity;
+    	httpparams.withCredentials = false;
     	$http(httpparams)
 		.then(
 				function successCallback(data) {
@@ -36,14 +30,7 @@ erpApp.controller('fileUplodCtrl',function($scope,$http,SERVER_URL,Auth)
 					
 				});
     	
-    	
-    	
-        /*$http(request)
-            .success(function (d) {
-                alert(d);
-            })
-            .error(function () {
-            });*/
+
     }
 
 });	
