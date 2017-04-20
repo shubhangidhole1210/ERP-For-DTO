@@ -54,7 +54,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
 		$scope.information="ADD NEW PRODUCT RM ASSOCIATION";
-		$scope.productRmAsso={};
+		$scope.productRmAsso = {};
 		var addNewProductRmAssoDialog = {
 			controller : 'productRmAssociationDialogController',
 			templateUrl : 'views/productRMAssociationInformation.html',

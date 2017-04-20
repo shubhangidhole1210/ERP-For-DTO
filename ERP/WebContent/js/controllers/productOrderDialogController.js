@@ -148,8 +148,9 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 	    }
 	    
 	    $rootScope.isAddButtonDisplay=true;
-	    $scope.getProductOrderId=function(index)
+	    $scope.getProductOrderId=function()
 	    {
+	    	if($scope.productOrder.id){
 	    	var httpparams = {};
 			httpparams.method = 'GET';
 			httpparams.url = SERVER_URL + "productorder/productorderId/"+ $scope.productOrder.id;
@@ -164,5 +165,6 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 			}, function errorCallback(response) {
 				console.log("Error");
 			});
+	   }
 	    }
 });

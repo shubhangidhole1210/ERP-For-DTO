@@ -104,4 +104,8 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 		utils.showProgressBar();
 	}
 	
+	$scope.cancelDispatchQuantityForm=function(){
+		$location.path('/');
+	}
+	
 });

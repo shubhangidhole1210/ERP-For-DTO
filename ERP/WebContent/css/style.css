@@ -582,3 +582,13 @@ div.panel {
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
+.erp-wlcome-label
+{
+	color: rgb(40,53,147);
+	font-weight: bold;
+	font-size: 40px;
+	/* margin-left: 3%; */
+	margin-top: 2%;
+	text-align: center;
+	
+}

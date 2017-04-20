@@ -30,14 +30,14 @@
 			<td>
 			   	<md-input-container class="md-block" flex-gt-sm>
 					<input type="number" ng-model="productionplan.failQuantity" name="failQuantity" id="failQuantity" 
-					ng-change="comparePassQuantity(productionplan.qualityPendingQuantity{{$index}},productionplan.passQuantity{{$index}},productionplan.failQuantity{{$index}})" >
+					ng-change="comparePassQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" >
 				
             	<!-- <div ng-show="productQualityForm.failQuantity.$error.customMsg" class="error-msg">pending quantity should be equal to pass and fail quantity</div> -->
 				</md-input-container>
 				<div ng-messages="productQualityForm.failQuantity.$error">
 					<div ng-message="required">Please enter user name</div>
-             		<div ng-message="customMsg">{{errorMsg}}</div>
             	</div>
+            	<div ng-show="productQualityForm.failQuantity{{$index}}.$error.customMsg" class="error-msg">pending quantity should be equal to pass and fail quantity</div>
 			</td>	
 			<td>
 			   <md-input-container class="md-block" flex-gt-sm>
@@ -49,7 +49,7 @@
       <div style="margin-top: 5%;margin-left: 70%;padding-bottom: 20px">
              <md-dialog-actions layout="row">
       <md-button class="md-raised" ng-click="submitInformation(productQualityForm.$valid,$event)" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
-      <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+      <md-button class="md-raised" ng-click="cancelProductQualityForm()">CANCEL</md-button>
     </md-dialog-actions>
         </div>
       </form>  

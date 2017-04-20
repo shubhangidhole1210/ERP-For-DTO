@@ -116,7 +116,9 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		}
 	};
 	
-	
+	$scope.restInformation=function(){
+		$location.path('/');
+	}
 	
 	
 	});

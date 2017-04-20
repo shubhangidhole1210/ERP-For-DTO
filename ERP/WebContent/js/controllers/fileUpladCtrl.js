@@ -24,10 +24,11 @@ erpApp.controller('fileUplodCtrl',function($scope,$http,SERVER_URL,Auth)
     	httpparams.withCredentials = false;
     	$http(httpparams)
 		.then(
-				function successCallback(data) {
+				function successCallback(response) {
+					console.log(response);
 				},
-				function errorCallback(data) {
-					
+				function errorCallback(response) {
+					console.log(error)
 				});
     	
 

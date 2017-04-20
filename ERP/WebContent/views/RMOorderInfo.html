@@ -95,7 +95,7 @@
           
  			 <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">TOTAL PRICE</label>
-            <input type="number" ng-model="rmOrder.totalPrice" value="{{totalPrices}}"   name="totalprice"  ng-disabled="isReadOnly">
+            <input type="number" ng-model="rmOrder.totalPrice" value="{{rmOrder.totalPrice}}"   name="totalprice"  ng-disabled="isReadOnly">
               <div ng-messages="RMOrderInformation.totalprice.$error">
                  <div ng-message="required">Please enter total price</div>
               </div>

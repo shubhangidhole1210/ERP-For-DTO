@@ -57,8 +57,7 @@
 					};
 
 					$scope.resetQualityInspection = function() {
-						$scope.user = angular.copy(original);
-						$scope.qualityInspectionForm.$setPristine();
+						$location.path('/');
 					};
 					
 

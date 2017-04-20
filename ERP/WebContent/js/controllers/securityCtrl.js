@@ -225,11 +225,15 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 	}*/
 	
 	
-	var original = $scope.user;
+	/*var original = $scope.user;
 	$scope.restInformation=function()
 	{
 		$scope.user= angular.copy(original);
 		$scope.securityInformation.$setPristine();
+	}*/
+	
+	$scope.restInformation=function(){
+		$location.path('/')
 	}
 	
 });

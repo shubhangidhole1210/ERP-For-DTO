@@ -28,15 +28,6 @@ erpApp
 								});
 					};
 
-				/*	$scope.isTodaysProductionPlanPresent = false;
-					$scope.isTodaysProductionPlan = function() {
-						if ($scope.data.length == 0) {
-							$scope.isTodaysProductionPlanPresent = true;
-						} else {
-							$scope.isTodaysProductionPlanPresent = false;
-						}
-					}*/
-
 					$scope.submitInformation = function(isvaliduser, $event) {
 						if (isvaliduser) {
 							$scope.saveTodaysProductionPlan();
@@ -100,5 +91,10 @@ erpApp
 
 						utils.showProgressBar();
 					}
+					
+					$scope.cancelTodaysProductionPlan=function(){
+						$location.path('/');
+					}
+				
 
 				});

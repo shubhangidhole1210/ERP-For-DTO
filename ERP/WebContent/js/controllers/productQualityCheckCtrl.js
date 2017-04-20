@@ -37,6 +37,8 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 		}
 		
 	}
+	  
+	 
 	
 	$scope.submitInformation = function(isvaliduser, $event) {
 		if (isvaliduser) {
@@ -88,6 +90,9 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 					utils.showToast("Something went wrong. Please try again later.");
 					utils.hideProgressBar();
 				});
+		}
+		$scope.cancelProductQualityForm = function(){
+			$location.path('/');
 		}
 		
 	

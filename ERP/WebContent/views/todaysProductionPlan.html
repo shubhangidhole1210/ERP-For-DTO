@@ -42,7 +42,7 @@
 	       <div class="todayPlan-save-btn">
 	             <md-dialog-actions layout="row">
 	      			<md-button class="md-raised" ng-click="submitInformation(todaysProductionPlanForm.$valid,$event)" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
-	      			<md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+	      			<md-button class="md-raised" ng-click="cancelTodaysProductionPlan()">CANCEL</md-button>
 	    		</md-dialog-actions>
 	       </div>
 	    <div ng-show="isTodaysProductionPlanPresent" class="active-information">

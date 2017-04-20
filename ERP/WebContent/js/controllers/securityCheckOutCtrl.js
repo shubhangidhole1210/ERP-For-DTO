@@ -130,5 +130,9 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 			utils.showProgressBar();
 			    	
 		};
+		
+		$scope.restInformation=function(){
+			$location.path('/');
+		}
 	
 });

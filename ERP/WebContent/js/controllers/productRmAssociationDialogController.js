@@ -1,13 +1,11 @@
 erpApp.controller('productRmAssociationDialogController', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils,flag,action,information,productRmAsso) {
 	  $scope.productRmAsso = productRmAsso;
 	  console.log(productRmAsso);
-	  if(productRmAsso.length === 0){
+	  if(angular.equals($scope.productRmAsso,{})){
 		  $scope.productRmAsso.productRMAssociationModelParts = [];
-		  $scope.rawmaterialPart = {};
 	  }
-		
-	
 	  
+	  $scope.rawmaterialPart = {};
 	  $scope.flag = flag;
 	  $scope.isReadOnly = action;
 	  $scope.information = information;
