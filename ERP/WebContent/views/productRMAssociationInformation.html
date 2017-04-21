@@ -18,7 +18,7 @@
           <md-input-container ng-init="getProducts()">
           <label style="color: black;">PRODUCT*</label>
           <md-select ng-model="productRmAsso.product" name="product" ng-disabled="isReadOnly" ng-required="true" required   >
-            <md-option ng-repeat="product in data.data" ng-value="product.productId" >
+            <md-option ng-repeat="product in products" ng-value="product.id" >
                {{product.partNumber}}
             </md-option>
           </md-select>

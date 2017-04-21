@@ -121,17 +121,25 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			}
 	    };
 		
+	    function getProductListURL(){
+	    	return ($scope.flag === 0) ? "product/list/newProductRMAssociation" : "product/list";
+	    }
+	    
 		$scope.getProducts = function() {
 			 var httpparams = {};
 				httpparams.method = 'GET';
-				httpparams.url = SERVER_URL + "product/list/newProductRMAssociation";
+				httpparams.url = SERVER_URL + getProductListURL()
 				httpparams.headers = {
 						auth_token : Auth.getAuthToken()
 				};
 			 $http(httpparams).then(function successCallback(response) {
 					$scope.data = response.data;
-					$scope.products = response.data.data;
-					console.log(response);
+					if($scope.flag === 0){
+						$scope.products = response.data.data;
+					}else{
+						$scope.products = response.data;
+					}
+					console.log(response.data);
 				}, function errorCallback(response) {
 					console.log("Error");
 				});

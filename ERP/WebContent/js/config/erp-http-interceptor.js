@@ -42,10 +42,11 @@ erpApp.config(function ($provide, $httpProvider) {
 	    	  console.log("Error : ", rejection); // Contains the data about the error.
 	    	  if(rejection.config && rejection.config.url.includes(SERVER_URL)){
 		    	  if(rejection.status === 403){
-		    		  $location.path = "/login";
+		    		  Auth.logout();
+			    	  $rootScope.$emit("logout",{});
+//		    		  $location.path = "/login";
 		    	  }
-		    	  Auth.logout();
-		    	  $rootScope.$emit("logout",{});
+		    	  
 	    	  }
 	    	  // Return the promise rejection.
 	    	  return $q.reject(rejection);
