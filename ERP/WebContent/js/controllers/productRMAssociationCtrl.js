@@ -53,6 +53,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 	$scope.showAddNewProductRMAssociation = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
+		$scope.productIdReadOnly = false;
 		$scope.information="ADD NEW PRODUCT RM ASSOCIATION";
 		$scope.productRmAsso = {};
 		var addNewProductRmAssoDialog = {
@@ -67,7 +68,8 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 				productRmAsso : $scope.productRmAsso,
 				flag : $scope.flag,
 				action : $scope.isReadOnly,
-				information : $scope.information
+				information : $scope.information,
+				productAction : $scope.productIdReadOnly
 			}
 		};
 		$mdDialog
@@ -80,6 +82,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 	  $scope.showEditproductRMAssociation = function(ev , index) {
 		  $scope.flag = 1;
 		  $scope.isReadOnly = false;
+		  $scope.productIdReadOnly = true;
 		  $scope.productRmAsso = $scope.productRmAssociations[index];
 		  console.log("sending ..", $scope.productRmAsso);
 		  $scope.information="EDIT PRODUCT RM ASSOCIATION"
@@ -94,7 +97,8 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		    	  productRmAsso : $scope.productRmAsso,
 		    	  flag : $scope.flag,
 		    	  action : $scope.isReadOnly,
-		    	  information : $scope.information
+		    	  information : $scope.information,
+		    	  productAction : $scope.productIdReadOnly
 				}
 		    })
 		    .then(function(answer) {},
@@ -102,7 +106,6 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		  };
 	  
 	  $scope.deleteProductRMAssociation = function(index) {
-			/* $scope.user = $scope.users[index].id; */
 			console.log($scope.vendoUser);
 
 			var httpparams = {};
@@ -118,7 +121,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 
 			}, function errorCallback(data) {
 				console.log("Error");
-
+				$mdDialog.hide();
 			});
 			utils.showProgressBar();
 		};
@@ -126,6 +129,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		$scope.viewproductRMAssociationInformation = function(ev, index) {
 			$scope.flag = 2;
 			$scope.isReadOnly = true;
+			$scope.productIdReadOnly = true;
 			 $scope.productRmAsso = $scope.productRmAssociations[index];
 			$scope.isSaving = false;
 			$scope.information="VIEW PRODUCT RM ASSOCIATION"
@@ -141,7 +145,8 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 							productRmAsso : $scope.productRmAsso,
 							flag : $scope.flag,
 							action : $scope.isReadOnly,
-							information : $scope.information
+							information : $scope.information,
+							productAction : $scope.productIdReadOnly
 						}
 					})
 					.then(function(answer) {},

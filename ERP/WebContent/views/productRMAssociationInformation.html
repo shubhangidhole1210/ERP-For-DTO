@@ -17,8 +17,8 @@
        <div layout-gt-sm="row">
           <md-input-container ng-init="getProducts()">
           <label style="color: black;">PRODUCT*</label>
-          <md-select ng-model="productRmAsso.product" name="product" ng-disabled="isReadOnly" ng-required="true" required   >
-            <md-option ng-repeat="product in products" ng-value="product.id" >
+          <md-select ng-model="productRmAsso.product" name="product" ng-disabled="productIdReadOnly" ng-required="true" required   >
+            <md-option ng-repeat="product in products" ng-value="product.productId" >
                {{product.partNumber}}
             </md-option>
           </md-select>
@@ -35,20 +35,10 @@
 				<th>QUANTITY</th>
 				<th>ACTION</th>
 			</tr>
-			<!-- <tr ng-repeat="orderRawMaterial in orderRawMaterials">
-			    <td>{{ $index + 1 }}</td>
-				<td>{{orderRawMaterial.rawmaterial.name}}</td>
-				<td><input type="number"
-					ng-value="{{orderRawMaterial.quantity}}"></td>
-				<td>
-				     <button type="button" style="height: 40px" ng-click="deleteRM($index)" ng-disabled="isReadOnly">Delete</button>
-               </td>	
-			</tr> -->
 			
 			<tr ng-repeat="rm in productRmAsso.productRMAssociationModelParts">
 			    <td>{{ $index + 1 }}</td>
 				  <td>{{rm.rawmaterial.name}}</td>
-				    <td>{{rm.quantity}}</td>
 				<td><input type="number"
 					ng-value="{{rm.quantity}}"></td>
 				<td>
@@ -61,24 +51,30 @@
 			
 		</table>
 
-        
-		<div layout-gt-sm="row">
+       <!--  <form novalidate name="form1"> -->
+           <div layout-gt-sm="row">
 			<md-input-container >
           <label style="color: black;">RAW MATERIAL</label>
-          <md-select ng-model="rawmaterialPart.rawmaterial"   ng-disabled="isReadOnly"  ng-init="rawMaterialId()" name="rawmaterial">
+          <md-select ng-model="rawmaterialPart.rawmaterial"   ng-disabled="isReadOnly"  ng-init="rawMaterialId()" name="rawmaterial" >
             <md-option ng-repeat="rawmaterial in RMData" ng-value="rawmaterial">
                {{rawmaterial.name}}
             </md-option>
           </md-select>
-           <div ng-show=" productRMAssociationInformation.rawmaterial.$error.message" class="error-msg">{{message}}</div>
+          <!--  <div ng-show=" productRMAssociationInformation.rawmaterial.$error.message" class="error-msg">{{message}}</div> -->
+           <div ng-messages="productRMAssociationInformation.$error" ng-show="productRMAssociationInformation.rawmaterial.$dirty">
+                <!--  <div ng-message="message">{{message}}</div> -->{{message}}
+              </div>
         </md-input-container>
 			 <md-input-container class="md-block" flex-gt-sm>
             <label class="input-filed-label">QUANTITY</label>
             <input type="number" ng-model="rawmaterialPart.quantity"  name="quantity" ng-disabled="isReadOnly" ng-change="addQuantity(rawmaterialPart.quantity)">
                 <div ng-show=" productRMAssociationInformation.quantity.$error.message" class="error-msg">{{message}}</div>
           </md-input-container>
-          <button type="button" style="height: 40px;margin-top: 2%" ng-click="addRawMaterial()" >Add Raw Material</button>
+          <button type="button" style="height: 40px;margin-top: 2%" ng-click="addRawMaterial()" ng-disabled="!(!!rawmaterialPart.rawmaterial && !!rawmaterialPart.quantity)" >Add Raw Material</button>
 		</div>
+        
+      <!--   </form> -->
+		
 	</div>
          
          

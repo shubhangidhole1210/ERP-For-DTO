@@ -1,4 +1,4 @@
-erpApp.controller('productRmAssociationDialogController', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils,flag,action,information,productRmAsso) {
+erpApp.controller('productRmAssociationDialogController', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils,flag,action,information,productRmAsso,productAction) {
 	  $scope.productRmAsso = productRmAsso;
 	  console.log(productRmAsso);
 	  if(angular.equals($scope.productRmAsso,{})){
@@ -8,6 +8,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	  $scope.rawmaterialPart = {};
 	  $scope.flag = flag;
 	  $scope.isReadOnly = action;
+	  $scope.productIdReadOnly = productAction;
 	  $scope.information = information;
 	  $scope.hide = function() {
 	      $mdDialog.hide();
@@ -82,6 +83,14 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 
 		};
 	    
+		$scope.submitRm=function(isvaliduser,$event){
+			if (isvaliduser) {
+				$scope.addRawMaterial();
+			} else {
+				console.log('its else block');
+			}
+		}
+		
 	   
 	    $scope.deleteRM = function(index){
 	    	console.log('in delete RM'+ $scope.productRmAsso.productRMAssociationModelParts)
@@ -104,42 +113,46 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			})
 			
 		};
-		 
+		  
 	    $scope.addRawMaterial = function(){
 	    	console.log('Adding RM : ', $scope.rawmaterialPart);
 	    	if( !angular.equals($scope.rawmaterialPart,{}) ){
 	    		if(!$scope.isDuplicateRM($scope.rawmaterialPart)){
 				   $scope.productRmAsso.productRMAssociationModelParts.push($scope.rawmaterialPart);	
 				   $scope.rawmaterialPart = {};
-				   $scope.productRMAssociationInformation.rawmaterial.$setValidity("message", true);
 				   console.log('setting validity true')
+				   $scope.productRMAssociationInformation.rawmaterial.$setValidity("message", true);
+				   /* $scope.productRMAssociationInformation.rawmaterial.errors.youAreFat == true;*/
 				   $scope.message="";
 	    		}else{
 	    			$scope.message = 'This Rawmaterial is already added';
 					$scope.productRMAssociationInformation.rawmaterial.$setValidity("message", false);
 	    		}
+	    		 
 			}
 	    };
-		
+	    
 	    function getProductListURL(){
 	    	return ($scope.flag === 0) ? "product/list/newProductRMAssociation" : "product/list";
 	    }
-	    
+		
 		$scope.getProducts = function() {
 			 var httpparams = {};
 				httpparams.method = 'GET';
-				httpparams.url = SERVER_URL + getProductListURL()
+				httpparams.url = SERVER_URL + getProductListURL();
 				httpparams.headers = {
 						auth_token : Auth.getAuthToken()
 				};
 			 $http(httpparams).then(function successCallback(response) {
-					$scope.data = response.data;
-					if($scope.flag === 0){
-						$scope.products = response.data.data;
-					}else{
-						$scope.products = response.data;
-					}
-					console.log(response.data);
+					/*$scope.data = response.data;*/
+					$scope.products = response.data.data;
+					console.log(response);
+									if ($scope.flag === 0) {
+										$scope.products = response.data.data;
+									} else {
+										$scope.products = response.data;
+									}
+						 					console.log(response.data);
 				}, function errorCallback(response) {
 					console.log("Error");
 				});
