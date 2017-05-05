@@ -72,7 +72,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		  $scope.information="EDIT VENDOR INFORMATION"
 		    $mdDialog.show({
 		      controller: 'DialogVendorController',
-		      templateUrl: 'views/vendorInformation.html',
+		      templateUrl: 'views/vendorDialog.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
 		      clickOutsideToClose:true,
@@ -118,7 +118,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			console.log($scope.user);
 			$mdDialog.show({
 						controller : 'DialogVendorController',
-						templateUrl : 'views/vendorInformation.html',
+						templateUrl : 'views/vendorDialog.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
 						clickOutsideToClose : true,
@@ -145,44 +145,11 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
 								$scope.deleteVendor(index);
-								/*
-								$scope.message = 'Delete Vendor Record sucessfully';
-								$scope.showToast();*/
 								utils.showToast('Vendor Deleted Sucessfully!');
 								
 							},
 							function() { });
 		};
-		
-		/*function ProgressBarController($scope, $mdDialog) {
-			
-			$scope.hide = function() {
-				$mdDialog.hide();
-			};
-
-			$scope.cancel = function() {
-				$mdDialog.cancel();
-			};
-
-			$scope.answer = function(answer) {
-				$mdDialog.hide(answer);
-			};
-		}*/
 	
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

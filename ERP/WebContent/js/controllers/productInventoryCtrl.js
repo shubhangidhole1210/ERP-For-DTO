@@ -30,17 +30,6 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			});
 	}
 
-	/*$scope.isProductInventoryPresent=false;
-	$scope.isProductInventoryinformation=function()
-	{
-		if($scope.data.length==0)
-			{
-			$scope.isProductInventoryPresent=true;
-			}
-		else{
-			$scope.isProductInventoryPresent=false;
-		}
-	}*/
 	
 	$scope.isProductInventoryinformation=function(){
 		$scope.isProductInventoryPresent= $scope.data.length === 0  ? true:false;
@@ -56,7 +45,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		$scope.productInventory={};
 		var addNewProductInventoryDialog = {
 			controller : 'productInventoryDialogController',
-			templateUrl : 'views/productInventoryInformation.html',
+			templateUrl : 'views/productInventoryDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
@@ -81,7 +70,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		  $scope.information="EDIT PRODUCT INVENTORY INFORMATION"
 		    $mdDialog.show({
 		      controller: 'productInventoryDialogController',
-		      templateUrl: 'views/productInventoryInformation.html',
+		      templateUrl: 'views/productInventoryDialog.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
 		      clickOutsideToClose:true,
@@ -130,7 +119,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			console.log($scope.user);
 			$mdDialog.show({
 						controller : 'productInventoryDialogController',
-						templateUrl : 'views/productInventoryInformation.html',
+						templateUrl : 'views/productInventoryDialog.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
 						clickOutsideToClose : true,
@@ -146,7 +135,6 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 							function() {});
 		};
 		$scope.showConfirm = function(ev,index) {
-			// Appending dialog to document.body to cover sidenav in docs app
 			var confirm = $mdDialog.confirm().title(
 					'Are you sure you want to Delete Product Inventory Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -169,19 +157,4 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		};
 		
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

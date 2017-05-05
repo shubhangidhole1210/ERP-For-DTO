@@ -42,7 +42,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		$scope.information = "ADD NEW UNIT"
 		var addNewUnitDialog = {
 			controller : 'unitDialogCtrl',
-			templateUrl : 'views/unitInformation.html',
+			templateUrl : 'views/unitDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
@@ -70,7 +70,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		$mdDialog
 				.show({
 					controller : 'unitDialogCtrl',
-					templateUrl : 'views/unitInformation.html',
+					templateUrl : 'views/unitDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
@@ -95,7 +95,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		console.log($scope.unit);
 		$mdDialog.show({
 					controller : 'unitDialogCtrl',
-					templateUrl : 'views/unitInformation.html',
+					templateUrl : 'views/unitDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,

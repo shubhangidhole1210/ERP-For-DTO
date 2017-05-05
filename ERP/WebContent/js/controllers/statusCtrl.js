@@ -40,7 +40,7 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		$scope.information = "ADD NEW STATUS"
 		var addNewStatusDialog = {
 			controller : 'StatusDialogueController',
-			templateUrl : 'views/statusInformation.html',
+			templateUrl : 'views/statusDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
@@ -70,7 +70,7 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		$mdDialog
 				.show({
 					controller : 'StatusDialogueController',
-					templateUrl : 'views/statusInformation.html',
+					templateUrl : 'views/statusDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
@@ -94,7 +94,7 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		console.log($scope.status);
 		$mdDialog.show({
 					controller : 'StatusDialogueController',
-					templateUrl : 'views/statusInformation.html',
+					templateUrl : 'views/statusDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,

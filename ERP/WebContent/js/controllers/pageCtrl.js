@@ -40,7 +40,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		$scope.information = "ADD NEW PAGE"
 		var addNewPageDialog = {
 			controller : 'pageDialogController',
-			templateUrl : 'views/pageInformation.html',
+			templateUrl : 'views/pageDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
@@ -70,7 +70,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		$mdDialog
 				.show({
 					controller : 'pageDialogController',
-					templateUrl : 'views/pageInformation.html',
+					templateUrl : 'views/pageDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
@@ -96,7 +96,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		console.log($scope.unit);
 		$mdDialog.show({
 					controller : 'pageDialogController',
-					templateUrl : 'views/pageInformation.html',
+					templateUrl : 'views/pageDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,

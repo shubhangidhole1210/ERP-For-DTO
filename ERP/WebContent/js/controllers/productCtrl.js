@@ -29,18 +29,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 
 		});
 	}
-	/*$scope.isProductPresent=false;
-	$scope.isProductInformation= function()
-	{
-		if($scope.data.length==0)
-			{
-			$scope.isProductPresent=true;
-			}
-		else
-			{
-			$scope.isProductPresent=false;
-			}
-	}*/
+	
 	
 	$scope.isProductInformation = function() {
 		$scope.isProductPresent = $scope.data.length === 0 ? true : false;
@@ -55,7 +44,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		$scope.information="ADD NEW PRODUCT"
 		var addNewProductDialog = {
 			controller : 'productDialogCtrl',
-			templateUrl : 'views/productInformation.html',
+			templateUrl : 'views/productDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
@@ -84,7 +73,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		$mdDialog
 				.show({
 					controller : 'productDialogCtrl',
-					templateUrl : 'views/productInformation.html',
+					templateUrl : 'views/productDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
@@ -114,7 +103,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		console.log($scope.product);
 		$mdDialog.show({
 					controller : 'productDialogCtrl',
-					templateUrl : 'views/productInformation.html',
+					templateUrl : 'views/productDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
@@ -140,13 +129,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	$scope.deleteProduct = function(index) {
 		console.log($scope.product);
 
-		/*$http(
-				{
-					method : 'delete',
-					url : SERVER_URL + "product/delete/"
-							+ $scope.products[index].id
-
-				})*/
+	
 		
 		var httpparams = {};
 		httpparams.method = 'delete';
@@ -168,7 +151,6 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	};
 
 	$scope.showConfirm = function(ev,index) {
-		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete Product Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(

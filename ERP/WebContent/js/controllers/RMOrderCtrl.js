@@ -31,18 +31,6 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		});
 	}
 	
-	/*$scope.isRMOrderPresent=false;
-	$scope.isRMOrderInformation=function()
-	{
-		if($scope.data.length==0)
-			{
-			$scope.isRMOrderPresent=true;
-			}
-		else
-			{
-			$scope.isRMOrderPresent=false;
-			}
-	}*/
 	
 	$scope.isRMOrderInformation = function() {
 		$scope.isRMOrderPresent = $scope.data.length === 0 ? true : false;
@@ -58,7 +46,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.title= "ADD RAW MATERIAL ORDER INFORMATION";
 		var addNewRmDialog = {
 			controller : 'rmOrderDialogCtrl',
-			templateUrl : 'views/RMOorderInfo.html',
+			templateUrl : 'views/RMOrderDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
@@ -90,7 +78,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$mdDialog
 				.show({
 					controller : 'rmOrderDialogCtrl',
-					templateUrl : 'views/RMOorderInfo.html',
+					templateUrl : 'views/RMOrderDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
@@ -118,7 +106,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		console.log($scope.rmOrder);
 		$mdDialog.show({
 					controller : 'rmOrderDialogCtrl',
-					templateUrl : 'views/RMOorderInfo.html',
+					templateUrl : 'views/RMOrderDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,

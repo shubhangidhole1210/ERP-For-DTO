@@ -34,18 +34,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 			});
 	}
 	
-	/*$scope.isProductRmAssociationPresent=false; 
-	$scope.productRmAssociationInformation=function()
-	{
-		if($scope.data.length==0)
-			{
-			$scope.isProductRmAssociationPresent=true; 
-			}
-		else
-			{
-			$scope.isProductRmAssociationPresent=false; 
-			}
-	}*/
+
 	
 	$scope.productRmAssociationInformation = function() {
 		$scope.isProductRmAssociationPresent = $scope.data.length === 0 ? true : false;
@@ -62,7 +51,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		$scope.productRmAsso = {};
 		var addNewProductRmAssoDialog = {
 			controller : 'productRmAssociationDialogController',
-			templateUrl : 'views/productRMAssociationInformation.html',
+			templateUrl : 'views/productRMAssociationDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
@@ -92,7 +81,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		  $scope.information="EDIT PRODUCT RM ASSOCIATION"
 		    $mdDialog.show({
 		      controller: 'productRmAssociationDialogController',
-		      templateUrl: 'views/productRMAssociationInformation.html',
+		      templateUrl: 'views/productRMAssociationDialog.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
 		      clickOutsideToClose:true,
@@ -140,7 +129,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 			console.log($scope.user);
 			$mdDialog.show({
 						controller : 'productRmAssociationDialogController',
-						templateUrl : 'views/productRMAssociationInformation.html',
+						templateUrl : 'views/productRMAssociationDialog.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
 						clickOutsideToClose : true,
@@ -157,7 +146,6 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 							function() {});
 		};
 		$scope.showConfirm = function(ev,index) {
-			// Appending dialog to document.body to cover sidenav in docs app
 			var confirm = $mdDialog.confirm().title(
 					'Are you sure you want to Delete Product RM Asssociation Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -176,19 +164,4 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		
 	
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

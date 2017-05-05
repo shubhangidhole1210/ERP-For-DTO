@@ -32,15 +32,6 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						utils.showProgressBar();
 					}
 					
-					/*$scope.isrmInventoryPresent=false;
-					$scope.isRmInventoryInformation=function(){
-						if($scope.data.length==0){
-							$scope.isrmInventoryPresent=true;
-							}
-						else{
-							$scope.isrmInventoryPresent=false;
-							}
-					}*/
 					
 					$scope.isRmInventoryInformation = function() {
 						$scope.isrmInventoryPresent = $scope.data.length === 0 ? true : false;
@@ -54,7 +45,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						$scope.information = "ADD NEW RAW MATERIAL INVENTORY INFORMATION"
 						var addNewRMInventory = {
 							controller : 'RMInvenaryDialogeController',
-							templateUrl : 'views/RMInventaryInformation.html',
+							templateUrl : 'views/RMInventaryDialog.html',
 							parent : angular.element(document.body),
 							targetEvent : ev,
 							clickOutsideToClose : true,
@@ -123,7 +114,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						$mdDialog
 								.show({
 									controller : 'RMInvenaryDialogeController',
-									templateUrl : 'views/RMInventaryInformation.html',
+									templateUrl : 'views/RMInventaryDialog.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
 									clickOutsideToClose : true,
@@ -148,7 +139,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						console.log($scope.rmInventary);
 						$mdDialog.show({
 									controller : 'RMInvenaryDialogeController',
-									templateUrl : 'views/RMInventaryInformation.html',
+									templateUrl : 'views/RMInventaryDialog.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
 									clickOutsideToClose : true,

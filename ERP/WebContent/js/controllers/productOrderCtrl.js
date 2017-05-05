@@ -27,20 +27,13 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 								utils.hideProgressBar();
 							},
 							function errorCallback(response) {
-								/*$scope.showToast();*/
 								console.log("Error");
-								/*$scope.message = "We are Sorry. Something went wrong. Please try again later."*/
 								utils.showToast('We are Sorry. Something went wrong. Please try again later.');
 								utils.hideProgressBar();
 			});
 	};
 	
-	/*$scope.isProductOrderInformation=function()	{
-		if($scope.data.length==0)
-			$scope.isProductOrderPresent=true;
-		else
-			$scope.isProductOrderPresent=false;
-	};*/
+	
 	
 	$scope.isProductOrderInformation = function() {
 		$scope.isProductOrderPresent = $scope.data.length === 0 ? true : false;
@@ -55,7 +48,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		$scope.productOrder={};
 		var addNewProductOrderDialog = {
 			controller : 'productOrderDialogCtrl',
-			templateUrl : 'views/productOrderInformation.html',
+			templateUrl : 'views/productOrderDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
@@ -82,7 +75,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		  $scope.information="EDIT PRODUCT ORDER INFORMATION"
 		    $mdDialog.show({
 		      controller: 'productOrderDialogCtrl',
-		      templateUrl: 'views/productOrderInformation.html',
+		      templateUrl: 'views/productOrderDialog.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
 		      clickOutsideToClose:true,
@@ -129,7 +122,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			console.log($scope.user);
 			$mdDialog.show({
 						controller : 'productOrderDialogCtrl',
-						templateUrl : 'views/productOrderInformation.html',
+						templateUrl : 'views/productOrderDialog.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
 						clickOutsideToClose : true,
@@ -166,19 +159,3 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		
 	
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -45,7 +45,7 @@ erpApp
 						$scope.isReadOnly = false;
 						var addNewClientDialog = {
 							controller : 'clientDialogCtrl',
-							templateUrl : 'views/clientInformation.html',
+							templateUrl : 'views/clientDialog.html',
 							parent : angular.element(document.body),
 							targetEvent : ev,
 							clickOutsideToClose : true,
@@ -94,7 +94,7 @@ erpApp
 						$mdDialog
 								.show({
 									controller : 'clientDialogCtrl',
-									templateUrl : 'views/clientInformation.html',
+									templateUrl : 'views/clientDialog.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
 									clickOutsideToClose : true,
@@ -119,7 +119,7 @@ erpApp
 						console.log($scope.user);
 						$mdDialog.show({
 									controller : 'clientDialogCtrl',
-									templateUrl : 'views/clientInformation.html',
+									templateUrl : 'views/clientDialog.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
 									clickOutsideToClose : true,
