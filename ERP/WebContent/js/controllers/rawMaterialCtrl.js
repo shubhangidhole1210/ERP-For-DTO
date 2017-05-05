@@ -1,5 +1,5 @@
 erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
-	
+	$scope.isRmPresent=false;
 	$rootScope.$on("CallPopulateRawMaterial", function() {
 		$scope.populateRawMaterial();
 	});
@@ -32,19 +32,9 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		});
 }
 	
-	$scope.isRmPresent=false;
-	$scope.getRawMaterialInformation=function()
-	{
-		if($scope.data.length==0)
-		{
-			$scope.isRmPresent=true;
-		}
-		else
-			{
-				$scope.isRmPresent=false;
-			}
-	}
-	
+	$scope.getRawMaterialInformation = function() {
+		$scope.isRmPresent = $scope.data.length === 0 ? true : false;
+	};
 	
 	$scope.rawMaterial = {};
 	$scope.showAddRawMaterial = function(ev) {

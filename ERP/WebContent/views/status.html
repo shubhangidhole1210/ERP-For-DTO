@@ -1,34 +1,34 @@
 <div ng-controller="statusCtrl">
-<div class="erp-information">
-   <!-- <input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text" autofocus> -->
-    <div>
-			<md-button class="md-raised md-primary" ng-click="showAddNewStatus($event)"  ng-init="populateStatusList();flag=0" style=" background-color: rgb(126, 137, 213);">ADD NEW STATUS</md-button>
+	<div class="erp-information">
+		<div>
+			<md-button class="md-raised md-primary add-new-btn"
+				ng-click="showAddNewStatus($event)"
+				ng-init="populateStatusList();flag=0">ADD NEW STATUS</md-button>
 		</div>
-		 <md-input-container class="md-block" flex-gt-sm type="password">
-			<input type="text"  ng-model="searchText"  name="password" placeholder="Search by  Name" class="search-text">
-			</md-input-container>
-       <h1 class="table-header">STATUS LIST</h1>
-  <table>
+		<md-input-container class="md-block" flex-gt-sm type="password">
+		<input type="text" ng-model="searchText" name="password"
+			placeholder="Search by  Name" class="search-text"> </md-input-container>
+		<h1 class="table-header">STATUS LIST</h1>
+		<table>
 			<tr>
 				<th>NAME</th>
 				<th>TYPE</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="status in data |  filter:{ name: searchText }" >
+			<tr ng-repeat="status in data |  filter:{ name: searchText }">
 				<td>{{status.name}}</td>
 				<td>{{status.type}}</td>
-				<td>
-				     <md-button class="md-raised"  ng-click="showEditStatus($event,$index)" ng-init="flag=1">EDIT</md-button>
-				<!-- <md-button class="md-raised" ng-click="showConfirm($event)">REMOVE</md-button> -->
-				<md-button class="md-raised"  ng-click="showConfirm($event,$index)">Remove</md-button>
-				
-				<md-button class="md-raised" ng-click="viewStatusInformation($event,$index)">VIEW</md-button>
-				</td>
-				
+				<td><md-button class="md-raised"
+						ng-click="showEditStatus($event,$index)" ng-init="flag=1">EDIT</md-button>
+					<!-- <md-button class="md-raised" ng-click="showConfirm($event)">REMOVE</md-button> -->
+					<md-button class="md-raised" ng-click="showConfirm($event,$index)">Remove</md-button>
+
+					<md-button class="md-raised"
+						ng-click="viewStatusInformation($event,$index)">VIEW</md-button></td>
+
 			</tr>
 		</table>
-		<div ng-show="isUnitInPresent">
-		   Currently there are no active Units.Please add new unit.
-		</div>
-</div>
+		<div ng-show="isStatusPresent">Currently there are no active
+			Status.Please add new unit.</div>
+	</div>
 </div>

@@ -59,7 +59,6 @@ erpApp.controller('pageDialogController', function($scope,$http, $mdDialog,SERVE
 								console.log(data);
 								$scope.hide();
 								utils.showToast('Something went worng. Please try again later.');
-								/*$scope.showToast();*/
 							}else{
 								$scope.displayProgressBar = false;
 								utils.showToast('Page Information saved successfully.');
@@ -86,7 +85,4 @@ erpApp.controller('pageDialogController', function($scope,$http, $mdDialog,SERVE
 
 	}
 
-	
-	
-	
 });

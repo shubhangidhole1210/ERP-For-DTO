@@ -3,7 +3,7 @@ erpApp
 				'clientCtrl',
 				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 					$scope.isReadOnly = false;
-					
+					$scope.isClientPresent=false;
 
 					$rootScope.$on("CallPopulateClientList", function() {
 						$scope.populateClientList();
@@ -33,18 +33,9 @@ erpApp
 							utils.hideProgressBar();
 						});
 					}
-					
-					$scope.isClientPresent=false;
-					$scope.isClientInfirmation=function()
-					{
-						if($scope.data.length==0)
-							{
-							$scope.isClientPresent=true;
-							}
-						else{
-							$scope.isClientPresent=false;
-						}
-					}
+					$scope.isClientInfirmation = function() {
+						$scope.isClientPresent = $scope.data.length === 0 ? true : false;
+					};
 				
 					$scope.client = {};
 					$scope.showAddNewClient = function(ev) {
@@ -74,7 +65,6 @@ erpApp
 					};
 		   
 					$scope.deleteClient = function(index) {
-						/* $scope.user = $scope.users[index].id; */
 						console.log($scope.client);
 						var httpparams = {};
 						httpparams.method = 'delete';
@@ -159,7 +149,6 @@ erpApp
 											utils.showToast('Client Deleted Sucessfully!');
 										},
 										function() { });
-
 
 					};
 

@@ -1,5 +1,5 @@
 erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
-	
+	$scope.isProductPresent=false;
 	$rootScope.$on("CallPopulateProductList", function() {
 		$scope.populteProductList();
 	});
@@ -7,8 +7,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		$scope.showAddNewProduct();
 	});
 	
-	$scope.populteProductList=function()
-	{
+	$scope.populteProductList=function(){
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -30,10 +29,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 
 		});
 	}
-	
-	
-	
-	$scope.isProductPresent=false;
+	/*$scope.isProductPresent=false;
 	$scope.isProductInformation= function()
 	{
 		if($scope.data.length==0)
@@ -44,7 +40,11 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 			{
 			$scope.isProductPresent=false;
 			}
-	}
+	}*/
+	
+	$scope.isProductInformation = function() {
+		$scope.isProductPresent = $scope.data.length === 0 ? true : false;
+	};
 	
 	
 	$scope.product = {};

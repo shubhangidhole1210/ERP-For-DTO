@@ -5,12 +5,8 @@
 	<div class="md-toolbar-tools">
 		<h2>{{information}}</h2>
 		<span flex></span>
-		<md-button class="md-icon-button" ng-click="cancel()"> <md-icon
-			md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-		</md-button>
 	</div>
 	</md-toolbar>
-
 	<md-dialog-content>
 	<div class="md-dialog-content">
 
@@ -43,9 +39,6 @@
 			</div>
 			</md-input-container>
 		</div>
-
-
-
 		<div layout-gt-sm="row">
 
 			<md-input-container class="md-block" flex-gt-sm>
@@ -70,20 +63,14 @@
 			</div>
 			</md-input-container>
 		</div>
-
 	</div>
-
-
-
-
 	</md-dialog-content>
 
 	<md-dialog-actions layout="row"> <md-button
 		class="md-raised"
 		ng-click="submitPageInformation(pageInformation.$valid,$event)"
 		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
-		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
-	</md-dialog-actions>
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions>
 
 </form>
 </md-dialog>

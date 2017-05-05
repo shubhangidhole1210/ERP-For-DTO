@@ -1,13 +1,12 @@
 erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
-
+     $scope.isPagePresent=false;
 	$rootScope.$on("CallPopulatePageList", function() {
 		$scope.populatePageList();
 	});
 	$rootScope.$on("saveUnitError", function() {
 		$scope.showAddNewPage();
 	});
-	$scope.populatePageList=function()
-	{
+	$scope.populatePageList=function(){
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -19,6 +18,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.pages=response.data;
+			$scope.isPageformation();
 			console.log(response)
 			utils.hideProgressBar();
 		}, function errorCallback(response) {
@@ -27,6 +27,10 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 			console.log("Error");
 		});
 	}
+	
+	$scope.isPageformation = function() {
+		$scope.isPagePresent = $scope.data.length === 0 ? true : false;
+	};
 	
 	$scope.page={}
 	$scope.showAddNewPage = function(ev) {
@@ -55,139 +59,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 				function() {});
 	};
 	
-	
-	/*function UnitController($scope, $mdDialog,page,action,flag,$mdToast,information) {
-		$scope.isReadOnly = action;
-		$scope.flag = flag;
-		$scope.page = page;
-		$scope.information = information;
-		$scope.hide = function() {
-			console.log('hide DialogController');
-			$mdDialog.hide();
-		};
 
-		$scope.cancel = function() {
-			$mdDialog.cancel();
-		};
-
-		$scope.answer = function(answer) {
-			$mdDialog.hide(answer);
-		};
-
-		$scope.saveUnitInformation = function(ev) {
-			
-			
-			var data = {
-      
-					menu : $scope.page.menu,
-					pageName : $scope.page.pageName,
-					submenu : $scope.page.submenu,
-					url : $scope.page.url,
-					description : $scope.page.description,
-				    isactive : true
-			};
-			var httpparams = {};
-			if ($scope.flag == 0) {
-				console.log($scope.user);
-				console.log($scope.data);
-				httpparams.method = 'post';
-				httpparams.url = SERVER_URL + "page/create";
-				httpparams.headers = {
-						auth_token : Auth.getAuthToken()
-					};
-			} else {
-				console.log($scope.unit);
-				data.id = $scope.page.id;
-				httpparams.method = 'put';
-				httpparams.url = SERVER_URL + "page/update";
-				httpparams.headers = {
-						auth_token : Auth.getAuthToken()
-					};
-			}
-			httpparams.data = data;
-			$http(httpparams)
-					.then(
-							function successCallback(data) {
-								$mdDialog.hide();
-								console.log(data);
-								if(data.data.code === 0){
-									console.log(data.data.message);
-									$rootScope.$emit(
-											"saveUnitError", {});
-									console.log(data);
-									$scope.hide();
-									$scope.message = 'Something went worng. Please try again later.';
-									$scope.showToast();
-								}else{
-									$scope.displayProgressBar = false;
-									$scope.message = 'Page Information saved successfully.';
-									$scope.showToast();
-									$rootScope.$emit("CallPopulatePageList",{});
-								}
-							},
-							function errorCallback(data) {
-								$rootScope.$emit(
-										"saveUnitError", {});
-								console.log(data);
-								$scope.hide();
-								$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();
-							});
-
-		}
-
-		$scope.submitPageInformation = function(isvaliduser,$event) {
-			if (isvaliduser) {
-				$scope.showProgressBar($event);
-				
-			} else {
-				console.log('its else block');
-			}
-
-		}
-
-		$scope.showToast = function() {
-			$mdToast.show({
-				hideDelay : 3000,
-				position : 'top right',
-				controller : 'ToastCtrl',
-				templateUrl : 'views/toast.html',
-				locals : {
-					message : $scope.message
-				}
-			});
-		};
-		
-		$scope.showProgressBar = function(ev) {
-			$scope.displayProgressBar = true;
-			$mdDialog
-					.show(
-							{
-								controller : ProgressBarController,
-								templateUrl : 'views/progressBar.html',
-								parent : angular
-										.element(document.body),
-								targetEvent : ev,
-								clickOutsideToClose : false,
-								fullscreen : $scope.customFullscreen,
-								onComplete : function() {
-									$scope.saveUnitInformation(ev);
-								}
-								
-							// Only for -xs, -sm breakpoints.
-							})
-					.then(
-							function(answer) {
-								$scope.status = 'You said the information was "'
-										+ answer + '".';
-							},
-							function() {
-								$scope.status = 'You cancelled the dialog.';
-							});
-		};
-		
-		
-	  }*/
 	
 	$scope.showEditPage = function(ev, index) {
 		$scope.flag = 1;
@@ -264,7 +136,6 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 
 	};
 	$scope.showConfirm = function(ev,index) {
-		// Appending dialog to document.body to cover sidenav in docs app
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete page Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(

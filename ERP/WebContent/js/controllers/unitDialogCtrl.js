@@ -76,7 +76,6 @@ erpApp.controller('unitDialogCtrl',
 
 	$scope.submitUnitInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			utils.showProgressBar();
 			$scope.saveUnitInformation();
 		} else {
 			console.log('its else block');

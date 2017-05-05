@@ -12,7 +12,6 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 			        };
 		
 					$http(httpparams).then( function successCallback(response) {
-								/*$scope.data = response.data.data;*/
 								$scope.productOrders = response.data;
 								console.log(response);
 								utils.hideProgressBar();
@@ -52,13 +51,6 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 		$scope.saveDispatchQuantity();
 		
 };
-	
-/*$scope.saveDispatchQuantity=function()
-{
-	
-}*/
-	
-	
 	$scope.saveDispatchQuantity=function()
 	{
 		console.log($scope.data.data);
@@ -90,6 +82,7 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 			console.log(data);
 			if(data.data.code === 1){
 				utils.showToast(data.data.message);
+				$location.path('/');
 			}else{
 				utils.showToast(data.data.message);
 				$location.path('/');

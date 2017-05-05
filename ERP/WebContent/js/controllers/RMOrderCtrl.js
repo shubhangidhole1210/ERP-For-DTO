@@ -1,6 +1,7 @@
 erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 	$scope.isReadOnly = false;
 	$scope.displayAddRM = true;
+	$scope.isRMOrderPresent=false;
 	$rootScope.$on("CallPopulateRMOrderList", function() {
 		$scope.populateRMOrderList();
 	});
@@ -30,7 +31,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		});
 	}
 	
-	$scope.isRMOrderPresent=false;
+	/*$scope.isRMOrderPresent=false;
 	$scope.isRMOrderInformation=function()
 	{
 		if($scope.data.length==0)
@@ -41,8 +42,11 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			{
 			$scope.isRMOrderPresent=false;
 			}
-	}
+	}*/
 	
+	$scope.isRMOrderInformation = function() {
+		$scope.isRMOrderPresent = $scope.data.length === 0 ? true : false;
+	};
 
 	
 	$scope.rmOrder = {};

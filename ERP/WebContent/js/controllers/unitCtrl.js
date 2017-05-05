@@ -1,8 +1,9 @@
 erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils)
 {
-	
+	$scope.isUnitInPresent=false; 
 	$rootScope.$on("CallPopulateUnitList", function() {
 		$scope.populateUnitList();
+		
 	});
 	$rootScope.$on("saveUnitError", function() {
 		$scope.showAddNewUnit();
@@ -30,19 +31,9 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 			   utils.hideProgressBar();
 		});
 	}
-	$scope.isUnitInPresent=false; 
-	$scope.isUnitInformation=function()
-	{
-		if($scope.data.length==0)
-			{
-			$scope.isUnitInPresent=true; 
-			}
-		else
-			{
-			$scope.isUnitInPresent=false; 
-			}
-	}
-	
+	$scope.isUnitInformation = function() {
+		$scope.isUnitInPresent = $scope.data.length === 0 ? true : false;
+	};
 	$scope.unit={}
 	$scope.showAddNewUnit = function(ev) {
 		$scope.unit={};

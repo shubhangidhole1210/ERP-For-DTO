@@ -1,17 +1,13 @@
 <div ng-controller="productionPlanCtrl">
 <div class="erp-information displayScroll" ng-init="getProductionPlanList()">
-<!-- <p style="font-weight: bold;font-size: 20px;position: fixed;">PRODUCTION PLAN</p> -->
-<h1 class="table-header" style="width: 78%">PRODUCTION PLAN</h1>
-<form  name="qualityInspectionForm " novalidate style="width: 900px;margin-top: 13%">
-<!-- <div class="display-scroll"> -->
+<h1 class="table-header">PRODUCTION PLAN</h1>
+<form  name="qualityInspectionForm " novalidate >
 <ion-content delegate-handle="mainScroll" has-bouncing="true" scroll="true">
 <table id="customers" class="">
  <tr>
-   <!-- <th>PRODUCTION PLAN</th> -->
-   <th ng-repeat="days in alldays" style="font-size: 17px; text-align: center;">{{days| date:'dd-MM-yyyy'}}</th>
+   <th ng-repeat="days in alldays">{{days| date:'dd-MM-yyyy'}}</th>
  </tr>
  <tr ng-repeat="product in products" >
-
       <td ng-repeat="productProductionPlanItem in product.productProductionPlan" >
     <table >
       <th>Target</th>
@@ -26,22 +22,14 @@
       </tr>
     </table>
   </td>
-  
-<!--   </div> -->
  </tr>
 </table>
-
-
-
 </ion-content>
-<!-- </div> -->
-<div style="margin-top: 2%;margin-left: 40%;">
+<div class="production-plan-btn">
   <md-dialog-actions layout="row">
-      
       <md-button class="md-raised" ng-click="answer('not useful')">CREATE DEFAULT PRODUCTION PLAN</md-button>
       <md-button class="md-raised" ng-click="submitProductionPlan()" ng-disabled="isReadOnly" >SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
-       
     </md-dialog-actions>
     </div>
 

@@ -62,7 +62,7 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		$http(httpparams).then(function successCallback(response) {
 			utils.hideProgressBar();
 			console.log(response);
-			if(data.data.code === 1){
+			if(data.code === 1){
 				utils.showToast("Production Plan sucessfully!");
 				$location.path('/');
 			}else{

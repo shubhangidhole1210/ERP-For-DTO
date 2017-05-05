@@ -1,4 +1,5 @@
 erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils){
+	$scope.isStatusPresent=false;
 	$rootScope.$on("callPopulateStatusList", function() {
 		$scope.populateStatusList();
 	});
@@ -17,6 +18,7 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.statuss=response.data;
+			$scope.isStatusInformation();
 			console.log(response)
 			utils.hideProgressBar();
 		}, function errorCallback(response) {
@@ -26,7 +28,9 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		});
 		
 	};
-	
+	$scope.isStatusInformation = function() {
+		$scope.isStatusPresent = $scope.data.length === 0 ? true : false;
+	};
 	
 	$scope.status={};
 	$scope.showAddNewStatus = function(ev) {

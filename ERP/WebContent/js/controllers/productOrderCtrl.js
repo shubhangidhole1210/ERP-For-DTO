@@ -35,12 +35,17 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			});
 	};
 	
-	$scope.isProductOrderInformation=function()	{
+	/*$scope.isProductOrderInformation=function()	{
 		if($scope.data.length==0)
 			$scope.isProductOrderPresent=true;
 		else
 			$scope.isProductOrderPresent=false;
+	};*/
+	
+	$scope.isProductOrderInformation = function() {
+		$scope.isProductOrderPresent = $scope.data.length === 0 ? true : false;
 	};
+	
 	$scope.showAddNewProductOrder = function(ev) {
 		 $rootScope.isAddButtonDisplay=true;
 		$scope.flag = 0;

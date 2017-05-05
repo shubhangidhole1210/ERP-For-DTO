@@ -1,69 +1,77 @@
 <div ng-controller="dispatchQuantityCtrl">
-   <div class="erp-security">
-   <div class="qualitycheck">
-      <div class="header">DISPATCH QUANTITY</div>
-      <div class="qualityInspection">
-      <form  name="dispatchQuantityInformation" novalidate >
-   <div  >
-   <div layout-gt-sm="row">
-      <md-input-container class="md-block" flex-gt-sm type="password">
-          
-             <label style="color: black;font-weight: bold;">Product Order </label>
-          <md-select ng-model="order.id"  ng-disabled="isReadOnly" ng-init="populateProductOrderPendingList()" name="productOrder"  ng-change="getDispatchquantity($index)" required>
-            <md-option ng-repeat="order in productOrders" ng-value="order.id" >
-               {{order.invoiceNo}}
-            </md-option>
-          </md-select>
-          <div ng-messages="dispatchQuantityInformation.productOrder.$error">
-                 <div ng-message="required">Please select Product </div>
-              </div>
-          </md-input-container>
-   </div>
-    <div layout-gt-sm="row">
-      <md-input-container class="md-block" flex-gt-sm>
-            <label  class="input-filed-label">INVOICE ID</label>
-            <input type="text" required name="invoiceid" ng-model="invoice" >
-             <div ng-messages="dispatchQuantityInformation.invoiceid.$error">
-            <div ng-message="required">Please enter Invoice ID</div>
-          </div>
-          </md-input-container>
-    </div>
-     <div layout-gt-sm="row">
-      <md-input-container class="md-block" flex-gt-sm>
-            <label  class="input-filed-label">DESCRIPTION</label>
-            <input type="text" required name="description" ng-model="description" >
-             <div ng-messages="dispatchQuantityInformation.description.$error">
-            <div ng-message="required">Please enter Description</div>
-           
-          </div>
-          </md-input-container>
-    </div>
-    <table >
-        <tr>
-          <th>PART NUMBER</th>
-          <th>QUANTITY</th>
-          <th>REMAINING QUANTITY</th>
-        </tr>
-        <tr ng-repeat="orderProduct in data.data">
-          <td>{{orderProduct.partNumber}}</td>
-          <td>{{orderProduct.availableQuantity}}</td>
-          <td><input type="number" ng-model="orderProduct.remainingQuantity" max="{{orderProduct.availableQuantity}}" name="quantity{{$index}}">
-             <div ng-show="dispatchQuantityInformation.quantity{{$index}}.$error.max"  class="error-msg">The value must be in range 0 to {{orderProduct.availableQuantity}}!</div>
-          </td>
-        </tr>
-         
-        </table>
-         <div style="margin-top: 5%;margin-left: 75%;padding-bottom: 20px">
-         <md-dialog-actions layout="row">
-      <md-button class="md-raised" ng-click="submitInformation(dispatchQuantityInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
-      <md-button class="md-raised" ng-click="cancelDispatchQuantityForm()" >CANCEL</md-button>
-    </md-dialog-actions>
-        </div>
-   </div>
-   </form>
-      
-      </div>
-   </div>
-</div>
-   
+	<div class="erp-security">
+		<div class="qualitycheck">
+			<div class="header">DISPATCH QUANTITY</div>
+			<div class="qualityInspection">
+				<form name="dispatchQuantityInformation" novalidate>
+					<div>
+						<div layout-gt-sm="row">
+							<md-input-container class="md-block" flex-gt-sm type="password">
+
+							<label>Product Order </label> <md-select ng-model="order.id"
+								ng-disabled="isReadOnly"
+								ng-init="populateProductOrderPendingList()" name="productOrder"
+								ng-change="getDispatchquantity($index)" required> <md-option
+								ng-repeat="order in productOrders" ng-value="order.id">
+							{{order.invoiceNo}} </md-option> </md-select>
+							<div
+								ng-messages="dispatchQuantityInformation.productOrder.$error">
+								<div ng-message="required">Please select Product</div>
+							</div>
+							</md-input-container>
+						</div>
+						<div layout-gt-sm="row">
+							<md-input-container class="md-block" flex-gt-sm>
+							<label class="input-filed-label">INVOICE ID</label> <input
+								type="text" required name="invoiceid" ng-model="invoice">
+							<div ng-messages="dispatchQuantityInformation.invoiceid.$error">
+								<div ng-message="required">Please enter Invoice ID</div>
+							</div>
+							</md-input-container>
+						</div>
+						<div layout-gt-sm="row">
+							<md-input-container class="md-block" flex-gt-sm>
+							<label class="input-filed-label">DESCRIPTION</label> <input
+								type="text" required name="description" ng-model="description">
+							<div ng-messages="dispatchQuantityInformation.description.$error">
+								<div ng-message="required">Please enter Description</div>
+
+							</div>
+							</md-input-container>
+						</div>
+						<table>
+							<tr>
+								<th>PART NUMBER</th>
+								<th>QUANTITY</th>
+								<th>REMAINING QUANTITY</th>
+							</tr>
+							<tr ng-repeat="orderProduct in data.data">
+								<td>{{orderProduct.partNumber}}</td>
+								<td>{{orderProduct.availableQuantity}}</td>
+								<td><input type="number"
+									ng-model="orderProduct.remainingQuantity"
+									max="{{orderProduct.availableQuantity}}"
+									name="quantity{{$index}}">
+									<div
+										ng-show="dispatchQuantityInformation.quantity{{$index}}.$error.max"
+										class="error-msg">The value must be in range 0 to
+										{{orderProduct.availableQuantity}}!</div></td>
+							</tr>
+
+						</table>
+						<div class="dispatch-btn">
+							<md-dialog-actions layout="row"> <md-button
+								class="md-raised"
+								ng-click="submitInformation(dispatchQuantityInformation.$valid,$event)"
+								type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
+								class="md-raised" ng-click="cancelDispatchQuantityForm()">CANCEL</md-button>
+							</md-dialog-actions>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
 </div>

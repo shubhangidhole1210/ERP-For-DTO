@@ -6,7 +6,7 @@
  <form name="storeForm" novalidate>
  <div>
  <div layout-gt-sm="row">
- <md-input-container> 
+ <md-input-container class="drop-down"> 
 <label style="color: black;">Invoice No*</label> 
 <md-select id="invoiceNumber" ng-model="invoiceList.id" name="invoice" ng-init="getRMOrderInvoiceInformation()" ng-change="invoiceRawMaterialList($index)" required>
 	<md-option ng-repeat="invoice in invoiceList" ng-value="invoice.id"> {{invoice.invoice_No}} </md-option> 
@@ -78,7 +78,7 @@
 								</td>
 							</tr>
 						</table>
-			<div style="margin-top: 5%; margin-left: 70%">
+			<div style="" class="store-info-btn">
 							<md-dialog-actions layout="row"> 
 								<md-button class="md-raised" ng-click="submitInformation(storeForm.$valid,$event)"
 									type="submit" ng-disabled="isReadOnly">SAVE</md-button>

@@ -1,6 +1,5 @@
 erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
-		$location, $rootScope,SERVER_URL,flag,action,information,Auth,$http,utils)
-{
+		$location, $rootScope,SERVER_URL,flag,action,information,Auth,$http,utils){
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
 	$scope.client = client;
@@ -62,15 +61,6 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 								$scope.hide();
 								utils.showToast('Something went worng. Please try again later.');
 							}
-							/*else if(data.data.code === 2)
-								{
-								console.log(data.data.message);
-								$rootScope.$emit(
-										"saveClientError", {});
-								console.log(data);
-								$scope.hide();
-								utils.showToast(data.data.message);
-								}*/
 							else{
 								console.log(data.data.message);
 								$scope.displayProgressBar = false;
@@ -98,15 +88,4 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 
 	}
 
-	/*$http({
-		method : 'GET',
-		url : SERVER_URL + "usertype/list"
-	}).then(function successCallback(response) {
-		$scope.data = response.data;
-		console.log(response);
-
-	}, function errorCallback(response) {
-		console.log("Error");
-
-	});*/
 });

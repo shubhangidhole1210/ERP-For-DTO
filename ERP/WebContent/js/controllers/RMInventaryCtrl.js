@@ -1,7 +1,8 @@
 
-erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils)
-{
+erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils){
+	  
 					$scope.isReadOnly = false;
+					$scope.isrmInventoryPresent=false;
 					$rootScope.$on("CallPopulateRMInventaryList", function() {
 						$scope.populateRMInventaryList();
 					});
@@ -31,7 +32,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						utils.showProgressBar();
 					}
 					
-					$scope.isrmInventoryPresent=false;
+					/*$scope.isrmInventoryPresent=false;
 					$scope.isRmInventoryInformation=function(){
 						if($scope.data.length==0){
 							$scope.isrmInventoryPresent=true;
@@ -39,7 +40,11 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						else{
 							$scope.isrmInventoryPresent=false;
 							}
-					}
+					}*/
+					
+					$scope.isRmInventoryInformation = function() {
+						$scope.isrmInventoryPresent = $scope.data.length === 0 ? true : false;
+					};
 					
 					$scope.rmInventary = {};
 					$scope.showAddNewRMInventary = function(ev) {

@@ -1,7 +1,5 @@
-<md-dialog aria-label="Mango (Fruit)"
-	class="dialogueInfo">
+<md-dialog aria-label="Mango (Fruit)" class="dialogueInfo">
 <form name="userInformation" novalidate>
-
 	<md-toolbar>
 	<div class="md-toolbar-tools">
 		<h2>{{information}}</h2>
@@ -11,10 +9,8 @@
 		</md-button>
 	</div>
 	</md-toolbar>
-
 	<md-dialog-content>
 	<div class="md-dialog-content">
-
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">USER ID</label> <input type="text"
@@ -54,9 +50,9 @@
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-sm type="password">
-			<label class="input-filed-label">LAST NAME</label> <input
-				type="text" ng-model="user.lastName" required name="lastName"
-				ng-minlength="2" ng-disabled="isReadOnly"
+			<label class="input-filed-label">LAST NAME</label> <input type="text"
+				ng-model="user.lastName" required name="lastName" ng-minlength="2"
+				ng-disabled="isReadOnly"
 				onkeypress='return event.charCode >= 65 && event.charCode <= 120'>
 			<div ng-messages="userInformation.lastName.$error">
 				<div ng-message="required">Please enter user last name</div>
@@ -95,18 +91,15 @@
 			</div>
 			</md-input-container>
 		</div>
-		<md-input-container> <label style="color: black;">USER
-			TYPE*</label> <md-select ng-model="user.usertype.id" name="userType"
-			ng-disabled="isReadOnly" ng-required="true" required> <md-option
+		<md-input-container class="drop-down"> <label>USER TYPE*</label> <md-select
+			ng-model="user.usertype.id" name="userType" ng-disabled="isReadOnly"
+			ng-required="true" required ng-init="getUserType()"> <md-option
 			ng-repeat="userType in data" ng-value="userType.id">
 		{{userType.usertypeName}} </md-option> </md-select>
 		<div ng-messages="userInformation.userType.$error">
 			<div ng-message="required">Please Select User Type</div>
 		</div>
 		</md-input-container>
-
-
-
 		<md-input-container class="md-block" flex-gt-sm type="password">
 		<label class="input-filed-label">DATE OF BIRTH[MM/DD/YYYY]*</label> <input
 			type="date" placeholder="Enter date of birth" ng-model="user.dob "
@@ -123,20 +116,13 @@
 		<div ng-messages="userInformation.doj.$error">
 			<div ng-message="required">Please Enter Date of Joining</div>
 		</div>
-		<div ng-show=" userInformation.doj.$error.min" style="color: red;">joining
+		<div ng-show=" userInformation.doj.$error.min" class="error-msg">joining
 			Date should be greater than birth date</div>
 		</md-input-container>
-
-
 	</div>
-
-
-	<h4 style="color: red; margin-left: 40px">{{errorMessage}}</h4>
-
 	</md-dialog-content>
-
-	<md-dialog-actions layout="row"> <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
-	<md-button class="md-raised"
+	<md-dialog-actions layout="row"> <md-button
+		class="md-raised"
 		ng-click="submitInformation(userInformation.$valid,$event)"
 		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
 		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions>

@@ -1,6 +1,5 @@
-<md-dialog aria-label="Mango (Fruit)" class="dialogueInfo">
+<md-dialog class="dialogueInfo">
 <form name="clientInformation" novalidate>
-
 	<md-toolbar>
 	<div class="md-toolbar-tools">
 		<h2>{{information}}</h2>
@@ -89,22 +88,13 @@
 			</div>
 			</md-input-container>
 		</div>
-
-
 	</div>
-
-
-
-
 	</md-dialog-content>
-
-	<md-dialog-actions layout="row"> <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
-	<md-button class="md-raised"
+	<md-dialog-actions layout="row"> <md-button
+		class="md-raised"
 		ng-click="submitClientInformation(clientInformation.$valid,$event)"
 		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
-		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
-	</md-dialog-actions>
-
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions>
 </form>
 </md-dialog>
 

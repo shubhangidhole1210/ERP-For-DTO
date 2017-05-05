@@ -27,7 +27,6 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 				subMenu.url = $scope.menu[index].url;
 				cascadedMenuItem.submenu.push(subMenu);
 				cascadedMenu.push(cascadedMenuItem);
-				/*console.log('Added first cascaded menu',cascadedMenu);*/
 			}
 		}
 		return cascadedMenu;
@@ -56,20 +55,4 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 		 $scope.selectedIndex = $index;
 	};
 	
-	
-	/*var acc = document.getElementsByClassName("accordion");
-	var i;
-
-	for (i = 0; i < acc.length; i++) {
-	  acc[i].onclick = function() {
-	    this.classList.toggle("active");
-	    var panel = this.nextElementSibling;
-	    if (panel.style.maxHeight){
-	      panel.style.maxHeight = null;
-	    } else {
-	      panel.style.maxHeight = panel.scrollHeight + "px";
-	    } 
-	  }
-	}
-*/
 });

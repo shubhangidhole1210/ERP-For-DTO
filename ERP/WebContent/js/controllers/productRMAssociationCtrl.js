@@ -1,5 +1,5 @@
 erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
-	
+	$scope.isProductRmAssociationPresent=false; 
 	$rootScope.$on("callPopulateProductRmAssociationList", function() {
 		$scope.populateProductRmAssoList();
 	});
@@ -34,7 +34,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 			});
 	}
 	
-	$scope.isProductRmAssociationPresent=false; 
+	/*$scope.isProductRmAssociationPresent=false; 
 	$scope.productRmAssociationInformation=function()
 	{
 		if($scope.data.length==0)
@@ -45,7 +45,11 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 			{
 			$scope.isProductRmAssociationPresent=false; 
 			}
-	}
+	}*/
+	
+	$scope.productRmAssociationInformation = function() {
+		$scope.isProductRmAssociationPresent = $scope.data.length === 0 ? true : false;
+	};
 	
 	
 	$scope.productRmAsso={};

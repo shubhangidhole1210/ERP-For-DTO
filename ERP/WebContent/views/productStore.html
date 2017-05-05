@@ -2,7 +2,7 @@
 <div class="erp-security" ng-init="getProductionPlanByDate()" >
 <form name="productStoreForm" novalidate>
  <div class="header">PRODUCT STORE</div>
-  <div style="text-align: right;font-weight: bold;">
+  <div style="" class="product-store-date">
              <span>Date</span>
              <span>{{currentDate}}</span>
           </div>
@@ -34,7 +34,7 @@
 			</td>
         </tr>
      </table>
-      <div style="margin-top: 5%;margin-left: 70%;padding-bottom: 20px">
+      <div class="quality-btn">
              <md-dialog-actions layout="row">
       <md-button class="md-raised"  ng-disabled="isReadOnly" ng-click="submitInformation(productStoreForm.$valid,$event)"  type="submit">SAVE</md-button>
       <md-button class="md-raised" ng-click="cancelProductStore()">CANCEL</md-button>

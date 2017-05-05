@@ -1,8 +1,7 @@
 <div ng-controller="unitCtrl">
 <div class="erp-information">
-    <!-- <input type="text" ng-model="searchText" placeholder="Search by Name" class="search-text" autofocus> -->
     <div>
-			<md-button class="md-raised md-primary" ng-click="showAddNewUnit($event);"  ng-init="populateUnitList();flag=0" style=" background-color: rgb(126, 137, 213);">ADD NEW UNIT</md-button>
+			<md-button class="md-raised md-primary add-new-btn" ng-click="showAddNewUnit($event);"  ng-init="populateUnitList();flag=0" style="">ADD NEW UNIT</md-button>
 		</div>
 		 <md-input-container class="md-block" flex-gt-sm type="password">
 			<input type="text"  ng-model="searchText"  name="password" placeholder="Search by Unit Name" class="search-text">
@@ -23,7 +22,6 @@
 				
 				<md-button class="md-raised" ng-click="viewUnitInformation($event,$index)">VIEW</md-button>
 				</td>
-				
 			</tr>
 		</table>
 		<div ng-show="isUnitInPresent" class="active-information">

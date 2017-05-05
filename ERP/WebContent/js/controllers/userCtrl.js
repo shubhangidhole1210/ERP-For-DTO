@@ -44,14 +44,14 @@ erpApp.controller('userCtrl',
 
 					$scope.user = {};
 					$scope.showAddNewUser = function(ev) {
-						/*$scope.user = {};*/
+						$scope.user = {};
 						$scope.information = "ADD NEW USER"
 						$scope.flag = 0;
 						$scope.isReadOnly = false;
 						var addNewUserDialog = {
 								
 							controller : 'userDialogCtrl',
-							templateUrl : 'views/userInformation.html',
+							templateUrl : 'views/userDialog.html',
 							parent : angular.element(document.body),
 							targetEvent : ev,
 							clickOutsideToClose : true,
@@ -79,7 +79,7 @@ erpApp.controller('userCtrl',
 						$mdDialog
 								.show({
 									controller : 'userDialogCtrl',
-									templateUrl : 'views/userInformation.html',
+									templateUrl : 'views/userDialog.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
 									clickOutsideToClose : true,
@@ -103,7 +103,7 @@ erpApp.controller('userCtrl',
 						console.log($scope.unit);
 						$mdDialog.show({
 									controller : 'userDialogCtrl',
-									templateUrl : 'views/userInformation.html',
+									templateUrl : 'views/userDialog.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
 									clickOutsideToClose : true,

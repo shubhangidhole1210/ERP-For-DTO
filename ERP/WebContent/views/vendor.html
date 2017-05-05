@@ -1,40 +1,37 @@
 <div ng-controller="vedorCtrl">
-<div class="erp-information">
-<div>
-    <md-button class="md-raised md-primary" ng-click="showAddNewVendor($event);" ng-init="populateVendorList();flag=0" style=" background-color: rgb(126, 137, 213);">ADD
-			NEW VENDOR</md-button>
-</div>
- <md-input-container class="md-block" flex-gt-sm type="password">
-			<input type="text"  ng-model="searchText"  name="password" placeholder="Search by Company Name" class="search-text">
-			</md-input-container>
-      <h1 class="table-header">VENDOR LIST</h1>
-  <table>
+	<div class="erp-information">
+		<div>
+			<md-button class="md-raised md-primary add-new-btn"
+				ng-click="showAddNewVendor($event);"
+				ng-init="populateVendorList();flag=0">ADD NEW VENDOR</md-button>
+		</div>
+		<md-input-container class="md-block" flex-gt-sm type="password">
+		<input type="text" ng-model="searchText" name="password"
+			placeholder="Search by Company Name" class="search-text"> </md-input-container>
+		<h1 class="table-header">VENDOR LIST</h1>
+		<table>
 			<tr>
-			     <th>COMPANY NAME</th>
+				<th>COMPANY NAME</th>
 				<th>FIRST NAME</th>
 				<th>LAST NAME</th>
 				<th>MOBILE</th>
-				<!-- <th>EMAIL</th> -->
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="data in data |  filter:{ companyName: searchText } " >
+			<tr ng-repeat="data in data |  filter:{ companyName: searchText } ">
 				<td>{{data.companyName}}</td>
 				<td>{{data.firstName}}</td>
 				<td>{{data.lastName}}</td>
 				<td>{{data.contactNumberOffice}}</td>
-				<!-- <td>{{data.contactNumberMobile}}</td> -->
-				<td>
-				     <md-button class="md-raised"  ng-click="showEditVendor($event,$index)" ng-init="flag=1">EDIT</md-button>
-				<!-- <md-button class="md-raised" ng-click="showConfirm($event)">REMOVE</md-button> -->
-				<md-button class="md-raised"  ng-click="showConfirm($event,$index)">Remove</md-button>
-				
-				<md-button class="md-raised" ng-click="viewVendarInformation($event,$index)">VIEW</md-button>
-				</td>
-				
+				<td><md-button class="md-raised"
+						ng-click="showEditVendor($event,$index)" ng-init="flag=1">EDIT</md-button>
+					<md-button class="md-raised" ng-click="showConfirm($event,$index)">Remove</md-button>
+
+					<md-button class="md-raised"
+						ng-click="viewVendarInformation($event,$index)">VIEW</md-button></td>
+
 			</tr>
 		</table>
 		<div ng-show="isVendorPredent" class="active-information">
-		     Currently there are no active vendors.Please add new vendor.
-		</div>
-</div>
+			Currently there are no active vendors.Please add new vendor.</div>
+	</div>
 </div>

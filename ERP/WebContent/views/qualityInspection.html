@@ -6,12 +6,12 @@
 				<form name="qualityInspectionForm" novalidate>
 					<div>
 						<div layout-gt-sm="row">
-							<md-input-container> 
-								<label style="color: black;">Invoice No*</label> 
-								<md-select id="invoiceNumber" ng-model="invoiceList.id" name="invoice" ng-init="getRMOrderInvoiceInformation()" 
-									ng-change="invoiceRawMaterialList($index)" required>
-									<md-option ng-repeat="invoice in invoiceList" ng-value="invoice.id"> {{invoice.invoice_No}} </md-option> 
-								</md-select>
+							<md-input-container class="drop-down"> <label>Invoice
+								No*</label> <md-select id="invoiceNumber" ng-model="invoiceList.id"
+								name="invoice" ng-init="getRMOrderInvoiceInformation()"
+								ng-change="invoiceRawMaterialList($index)" required>
+							<md-option ng-repeat="invoice in invoiceList"
+								ng-value="invoice.id"> {{invoice.invoice_No}} </md-option> </md-select>
 							<div ng-messages="qualityInspectionForm.invoice.$error">
 								<div ng-message="required">Please Select Invoice number</div>
 							</div>
@@ -20,14 +20,17 @@
 						</div>
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
-								<label class="input-filed-label">DESCRIPTION</label> 
-								<input type="text" required name="description" ng-model="description" value="vendorUser.companyName" ng-minlength="4"
-									ng-maxlength="255">
-								<div ng-messages="qualityInspectionForm.description.$error">
-									<div ng-message="required">Please enter Description</div>
-									<div ng-message="minlength">Description should be minimum 4 character and maximum 255 character</div>
-									<div ng-message="maxlength">Description should be minimum 4 character and maximum 255 character</div>
-								</div>
+							<label class="input-filed-label">DESCRIPTION</label> <input
+								type="text" required name="description" ng-model="description"
+								value="vendorUser.companyName" ng-minlength="4"
+								ng-maxlength="255">
+							<div ng-messages="qualityInspectionForm.description.$error">
+								<div ng-message="required">Please enter Description</div>
+								<div ng-message="minlength">Description should be minimum
+									4 character and maximum 255 character</div>
+								<div ng-message="maxlength">Description should be minimum
+									4 character and maximum 255 character</div>
+							</div>
 							</md-input-container>
 						</div>
 						<h3>Raw Material List</h3>
@@ -42,46 +45,47 @@
 							<tr ng-repeat="rmInvoiceItem in rmInvoiceList">
 								<td>{{rmInvoiceItem.rawmaterial.name}}</td>
 								<td>{{rmInvoiceItem.quantity}}</td>
-								<td>
-									<ng>
-									<md-input-container class="md-block" flex-gt-sm>
-										<label class="input-filed-label">RECEIVED</label> 
-										<input type="number" ng-model="rmInvoiceItem.goodQuantity" ng-change="checkReceivedQuantity($index)"
-											name="recivedOk{{$index}}" max="{{rmInvoiceItem.quantity}}" required>
-										<div ng-messages="qualityInspectionForm['recivedOk' + $index].$error">
-											<div ng-message="required">Please enter Received Quantity</div>
-										</div>
-										<div ng-show="qualityInspectionForm.recivedOk{{$index}}.$error.max" class="error-msg">
-											The value must be in range 0 to {{rmInvoiceItem.quantity}}!</div>
-											
-									</md-input-container>
-								</td>
-								<td>
-									<md-input-container class="md-block" flex-gt-sm>
-										<label class="input-filed-label">REMARK</label> 
-										<input type="text" ng-model="rmInvoiceItem.remark" name="remark">
-										<div ng-messages="qualityInspectionForm.remark.$error">
-											<div ng-message="required">please enter remark</div>
-										</div>
-									</md-input-container>
-								</td>
-								<td>
-									<md-input-container class="md-block" flex-gt-sm>
-										<md-checkbox ng-model="rmInvoiceItem.isReturnInvoiceInitated" aria-label="Checkbox 1"
-										ng-checked="{{rmInvoiceItem.isReturnInvoiceInitated}}" ng-disabled="{{rmInvoiceItem.ischeckBoxDisabled}}">
-									<div ng-messages="qualityInspectionForm.returnInvoice.$error">
-										<div ng-message="required">please enter is return invoice</div>
+								<td><ng> <md-input-container class="md-block"
+										flex-gt-sm> <label
+										class="input-filed-label">RECEIVED</label> <input
+										type="number" ng-model="rmInvoiceItem.goodQuantity"
+										ng-change="checkReceivedQuantity($index)"
+										name="recivedOk{{$index}}" max="{{rmInvoiceItem.quantity}}"
+										required>
+									<div
+										ng-messages="qualityInspectionForm['recivedOk' + $index].$error">
+										<div ng-message="required">Please enter Received
+											Quantity</div>
 									</div>
-									</md-input-container>
-								</td>
+									<div
+										ng-show="qualityInspectionForm.recivedOk{{$index}}.$error.max"
+										class="error-msg">The value must be in range 0 to
+										{{rmInvoiceItem.quantity}}!</div>
+									</md-input-container></td>
+								<td><md-input-container class="md-block" flex-gt-sm>
+									<label class="input-filed-label">REMARK</label> <input
+										type="text" ng-model="rmInvoiceItem.remark" name="remark">
+									<div ng-messages="qualityInspectionForm.remark.$error">
+										<div ng-message="required">please enter remark</div>
+									</div>
+									</md-input-container></td>
+								<td><md-input-container class="md-block" flex-gt-sm>
+									<md-checkbox ng-model="rmInvoiceItem.isReturnInvoiceInitated"
+										aria-label="Checkbox 1"
+										ng-checked="{{rmInvoiceItem.isReturnInvoiceInitated}}"
+										ng-disabled="{{rmInvoiceItem.ischeckBoxDisabled}}">
+									<div ng-messages="qualityInspectionForm.returnInvoice.$error">
+										<div ng-message="required">please enter is return
+											invoice</div>
+									</div></md-input-container></td>
 							</tr>
 						</table>
-						<div style="margin-top: 5%; margin-left: 70%">
-							<md-dialog-actions layout="row"> 
-								<md-button class="md-raised" ng-click="submitInformation(qualityInspectionForm.$valid,$event)"
-									type="submit" ng-disabled="isReadOnly">SAVE</md-button>
-								<md-button class="md-raised" ng-click="resetQualityInspection()"
-									>CANCEL</md-button> 
+						<div class="store-info-btn">
+							<md-dialog-actions layout="row"> <md-button
+								class="md-raised"
+								ng-click="submitInformation(qualityInspectionForm.$valid,$event)"
+								type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
+								class="md-raised" ng-click="resetQualityInspection()">CANCEL</md-button>
 							</md-dialog-actions>
 						</div>
 					</div>

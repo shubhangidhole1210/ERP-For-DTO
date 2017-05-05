@@ -158,7 +158,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 				});
 		};
 		    
-		$scope.addQuantity = function(quantity) {
+		/*$scope.addQuantity = function(quantity) {
 			if (quantity <= 0) {
 				console.log('if condition')
 				$scope.message = 'quantity should be greater than 0';
@@ -166,7 +166,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			} else {
 				$scope.productRMAssociationInformation.quantity.$setValidity("message", true);
 			}
-		};
+		};*/
 		
 		$scope.isDuplicateRM = function(orderRawMaterial) {
 			for (var i = 0; i < $scope.productRmAsso.productRMAssociationModelParts.length; i++) {

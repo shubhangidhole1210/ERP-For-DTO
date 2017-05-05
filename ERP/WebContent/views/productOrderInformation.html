@@ -13,7 +13,6 @@
 
     <md-dialog-content >
       <div class="md-dialog-content" >
-       
       <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label  class="input-filed-label">DESCRIPTION</label>
@@ -33,8 +32,8 @@
           </md-input-container>
      </div>
            <div layout-gt-sm="row">
-               <md-input-container>
-          <label style="color: black;">CLIENT*</label>
+               <md-input-container class="drop-down">
+          <label>CLIENT*</label>
           <md-select ng-model="productOrder.client.id" name="client"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getClient()">
             <md-option ng-repeat="client in clients" ng-value="client.id" >
                {{client.companyname}}
@@ -67,12 +66,12 @@
           <tr ng-repeat="orderProductAssociation in orderproductassociations">
           <td>{{orderProductAssociation.product.name}}</td>
           <td>{{orderProductAssociation.quantity}}</td>
-          <td><button type="button" style="height: 40px" ng-click="deleteProduct($index)">Delete</button></td>
+          <td><button type="button"  ng-click="deleteProduct($index)" class="multiple-added-delete">Delete</button></td>
           </tr>
           <tr ng-repeat="orderProductAssociation in productOrderList">
           <td>{{orderProductAssociation.product.name}}</td>
           <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-disabled="isReadOnly"></td>
-          <td><button type="button" style="height: 40px" ng-click="deleteProduct($index)" ng-disabled="isReadOnly">Delete</button></td>
+          <td><button type="button" ng-click="deleteProduct($index)" ng-disabled="isReadOnly" class="multiple-added-delete">Delete</button></td>
           </tr>
         </table>
         <div layout-gt-sm="row" ng-show="isProductOrderAdd" >
@@ -88,15 +87,11 @@
             <label class="input-filed-label">QUANTITY</label>
             <input type="number" ng-model="orderProductAssociation.quantity"   name="quantity"  ng-disabled="isReadOnly">
           </md-input-container>
-           <button type="button" style="height: 40px;margin-top: 2%" ng-click="addOrderProductAssociation()" >Add Product</button>
+           <button type="button" class="added-multiple" ng-click="addOrderProductAssociation()" >Add Product</button>
         </div>
          </div>
-       
     </md-dialog-content>
-
     <md-dialog-actions layout="row">
-      
-      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
       <md-button class="md-raised" ng-click="submitInformation(productOrderInformation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
     </md-dialog-actions>

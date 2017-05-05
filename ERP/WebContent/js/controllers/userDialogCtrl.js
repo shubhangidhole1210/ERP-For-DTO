@@ -115,20 +115,26 @@ erpApp.controller('userDialogCtrl',
 							console.log('its else condition')
 						}
 					};
-					httpparams = {
-						method : 'GET',
-						url : SERVER_URL + "usertype/list"
-					};
-					httpparams.headers = {
-						"auth_token" : Auth.getAuthToken()
-					};
-					$http(httpparams).then(function successCallback(response) {
-						$scope.data = response.data;
-						$scope.users = response.data;
-						console.log(response);
-					}, function errorCallback(response) {
-						console.log("Error");
-					});
+					
+					$scope.getUserType=function(){
+						httpparams = {
+								method : 'GET',
+								url : SERVER_URL + "usertype/list"
+							};
+							httpparams.headers = {
+								"auth_token" : Auth.getAuthToken()
+							};
+							$http(httpparams).then(function successCallback(response) {
+								$scope.data = response.data;
+								$scope.users = response.data;
+								console.log(response);
+							}, function errorCallback(response) {
+								console.log("Error");
+							});
+						
+					}
+					
+					
 					
 					
 });

@@ -3,7 +3,7 @@ erpApp
 				'RMVendorCtrl',
 				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 					$scope.isReadOnly = false;
-					
+					$scope.isPresentvenodrAsso=false;
 
 					$rootScope.$on("CallPopulateRMVendorAssociationList", function() {
 						$scope.populateRMVendorAssociationList();
@@ -38,35 +38,9 @@ erpApp
 						
 					}
 					
-					/*$scope.showProgressBarOne= function()
-					{
-						$mdDialog
-						.show(
-								{
-									controller : ProgressBarController,
-									templateUrl : 'views/progressBar.html',
-									parent : angular
-											.element(document.body),
-									targetEvent : ev,
-									clickOutsideToClose : false,
-									fullscreen : $scope.customFullscreen,
-									onComplete : function() {
-										$scope.populateUserList(ev);
-									}
-									
-								
-								})
-						.then(
-								function(answer) {
-									$scope.status = 'You said the information was "'
-											+ answer + '".';
-								},
-								function() {
-									$scope.status = 'You cancelled the dialog.';
-								});
-					};*/
 					
-					$scope.isPresentvenodrAsso=false;
+					
+					/*$scope.isPresentvenodrAsso=false;
 					$scope.isRMVendorAssociationInformation=function()
 					{
 						if($scope.data.length==0)
@@ -77,19 +51,11 @@ erpApp
 							$scope.isPresentvenodrAsso=false;
 						}
 						
-					}
+					}*/
 					
-					/*$scope.showToast = function() {
-						$mdToast.show({
-							hideDelay : 3000,
-							position : 'top right',
-							controller : 'ToastCtrl',
-							templateUrl : 'views/toast.html',
-							locals : {
-								message : $scope.message
-							}
-						});
-					};*/
+					$scope.isRMVendorAssociationInformation = function() {
+						$scope.isPresentvenodrAsso = $scope.data.length === 0 ? true : false;
+					};
 					
 					$scope.rmOrderAssociation = {};
 					$scope.showAddNewRMVendorAssociation = function(ev) {

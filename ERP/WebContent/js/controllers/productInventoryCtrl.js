@@ -1,5 +1,5 @@
 erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
-	
+	$scope.isProductInventoryPresent=false;
 	$rootScope.$on("callPopulateProductInventoryList", function() {
 		$scope.populateProductInventoryList();
 	});
@@ -30,7 +30,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			});
 	}
 
-	$scope.isProductInventoryPresent=false;
+	/*$scope.isProductInventoryPresent=false;
 	$scope.isProductInventoryinformation=function()
 	{
 		if($scope.data.length==0)
@@ -40,7 +40,13 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		else{
 			$scope.isProductInventoryPresent=false;
 		}
+	}*/
+	
+	$scope.isProductInventoryinformation=function(){
+		$scope.isProductInventoryPresent= $scope.data.length === 0  ? true:false;
 	}
+	
+	
 	$scope.productInventory={};
 	
 	$scope.showAddNewProductInventory = function(ev) {

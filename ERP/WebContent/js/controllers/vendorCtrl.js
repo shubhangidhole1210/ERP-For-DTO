@@ -1,5 +1,5 @@
 erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
-	
+	$scope.isVendorPredent =false;
 	$rootScope.$on("callPopulateVendorList", function() {
 		$scope.populateVendorList();
 	});
@@ -26,8 +26,6 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 				console.log(response);
 
 			}, function errorCallback(response) {
-				/*$scope.showToast();
-				$scope.message = "We are Sorry. Something went wrong. Please try again later."*/
 				utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 				console.log("Error");
 				utils.hideProgressBar();
@@ -35,19 +33,9 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			});
 	}
 	
-	$scope.isVendorPredent =false;
-	$scope.isVendorInformation=function()
-	{
-		if($scope.data.length==0)
-			{
-			$scope.isVendorPredent =true;
-			}
-		else
-			{
-			$scope.isVendorPredent =false;
-			}
-			
-	}
+	$scope.isVendorInformation = function() {
+		$scope.isVendorPredent = $scope.data.length === 0 ? true : false;
+	};
 	
 	$scope.vendorUser={};
 	
@@ -58,7 +46,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		$scope.vendorUser={};
 		var addNewVendorDialog = {
 			controller : 'DialogVendorController',
-			templateUrl : 'views/vendorInformation.html',
+			templateUrl : 'views/vendorDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,

@@ -1,20 +1,18 @@
 <div ng-controller="userCtrl">
-	<div class="erp-information" ng-init="populateUserList($event); flag=1" >
-	  <!--  <input type="text" ng-model="searchText" placeholder="Search by First Name" class="search-text" autofocus> -->
-		
-		    <div>
-			<md-button class="md-raised md-primary" ng-click="showAddNewUser($event);resetUserData()" type="reset" style=" background-color: rgb(126, 137, 213)" >ADD
+	<div class="erp-information" ng-init="populateUserList($event); flag=1">
+		<div>
+			<md-button class="md-raised md-primary add-new-btn"
+				ng-click="showAddNewUser($event);resetUserData()" type="reset">ADD
 			NEW USER</md-button>
 		</div>
-	
-		    <md-input-container class="md-block" flex-gt-sm type="password">
-			<input type="text"  ng-model="searchText"  name="password" placeholder="Search by First Name" class="search-text">
-			</md-input-container>
-		 
-		
-		 <h1 class="table-header">USER LIST</h1>
+
+		<md-input-container class="md-block" flex-gt-sm type="password">
+		<input type="text" ng-model="searchText" name="password"
+			placeholder="Search by First Name" class="search-text"> </md-input-container>
+
+		<h1 class="table-header">USER LIST</h1>
 		<table>
-		   <tr>
+			<tr>
 				<th>FIRST NAME</th>
 				<th>LAST NAME</th>
 				<th>MOBILE</th>
@@ -22,27 +20,26 @@
 				<th>EMAIL</th>
 				<th>ACTION</th>
 			</tr>
-			<tr class="erp-table-row" ng-repeat="users in data |  filter:{ firstName: searchText } " >
+			<tr class="erp-table-row"
+				ng-repeat="users in data |  filter:{ firstName: searchText } ">
 				<td>{{users.firstName}}</td>
 				<td>{{users.lastName}}</td>
 				<td>{{users.mobile}}</td>
 				<td>{{users.usertype.usertypeName}}</td>
 				<td>{{users.email}}</td>
-				<td>
-				     <md-button class="md-raised"  ng-click="showEditUser($event,$index)" ng-init="flag=1">EDIT</md-button>
-				
-				<md-button class="md-raised"  ng-click="showConfirm($event,$index)">Remove</md-button>
-				
-				<md-button class="md-raised" ng-click="viewUserInformation($event,$index)">VIEW</md-button>
-				</td>
-				
+				<td><md-button class="md-raised"
+						ng-click="showEditUser($event,$index)" ng-init="flag=1">EDIT</md-button>
+
+					<md-button class="md-raised" ng-click="showConfirm($event,$index)">Remove</md-button>
+
+					<md-button class="md-raised"
+						ng-click="viewUserInformation($event,$index)">VIEW</md-button></td>
+
 			</tr>
 		</table>
-		
-    
-   <div class="active-information" ng-show="isUserUnavailable">
-       Currently there are no active users.Please add new user.
-   </div>
+
+		<div class="active-information" ng-show="isUserUnavailable">
+			Currently there are no active users.Please add new user.</div>
 
 
 

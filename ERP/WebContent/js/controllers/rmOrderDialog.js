@@ -33,7 +33,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				quantity:$scope.rmOrder.quantity,
 				/*expectedDeliveryDate:$scope.rmOrder.expectedDeliveryDate,*/
 				vendor:$scope.selectedVendor,
-				totalprice:$scope.rmOrder.totalPrice,
+				totalprice:$scope.rmOrder.totalprice,
 				tax:$scope.rmOrder.tax,
 				otherCharges:$scope.rmOrder.otherCharges,
 				actualPrice:$scope.rmOrder.actualPrice

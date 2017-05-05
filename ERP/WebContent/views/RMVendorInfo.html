@@ -27,8 +27,8 @@
           
         </div>
       <div>
-      <md-input-container>
-          <label style="color: black;">Raw material*</label>
+      <md-input-container style="width:100%">
+          <label>Raw material*</label>
           <md-select ng-model="rmOrderAssociation.rawmaterial.id" name="rawMaterial" value="rawMaterial.id" ng-disabled="isReadOnly" ng-init="getRawMaterials()" required>
             <md-option ng-repeat="rawMaterial in rawmaterials" ng-value="rawMaterial.id" >
                {{rawMaterial.name}}
@@ -42,7 +42,7 @@
           
         
         
-            <md-input-container>
+            <md-input-container class="drop-down">
           <label style="color: black;">VENDOR *</label>
           <md-select ng-model="rmOrderAssociation.vendor.id" name="vendor" value="vendor.id" ng-disabled="isReadOnly" ng-init="getVendors()" required>
             <md-option ng-repeat="vendor in venodrs" ng-value="vendor.id" >
@@ -65,7 +65,6 @@
 
     <md-dialog-actions layout="row">
       
-      <!-- <md-button class="md-raised" ng-click="saveUser($event)" >SAVE</md-button> -->
       <md-button class="md-raised" ng-click="submitRMVendorAssociationInformation(rmVendorAssociation.$valid,$event)" type="submit" ng-disabled="isReadOnly">SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')" >CANCEL</md-button>
     </md-dialog-actions>
