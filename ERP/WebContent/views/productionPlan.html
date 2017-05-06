@@ -1,4 +1,4 @@
-<div ng-controller="productionPlanCtrl">
+<!-- <div ng-controller="productionPlanCtrl">
 <div class="erp-information displayScroll" ng-init="getProductionPlanList()">
 <h1 class="table-header">PRODUCTION PLAN</h1>
 <form  name="qualityInspectionForm " novalidate >
@@ -30,6 +30,71 @@
       <md-button class="md-raised" ng-click="answer('not useful')">CREATE DEFAULT PRODUCTION PLAN</md-button>
       <md-button class="md-raised" ng-click="submitProductionPlan()" ng-disabled="isReadOnly" >SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+    </md-dialog-actions>
+    </div>
+
+</form>
+</div>
+</div> -->
+
+<div ng-controller="productionPlanCtrl">
+<div class="erp-information displayScroll" ng-init="getProductionPlanList()">
+<!-- <p style="font-weight: bold;font-size: 20px;position: fixed;">PRODUCTION PLAN</p> -->
+<h1 class="table-header" style="position: fixed;width: 78%">PRODUCTION PLAN</h1>
+<form  name="qualityInspectionForm " novalidate style="width: 900px;margin-top: 13%">
+<!-- <div class="display-scroll"> -->
+<ion-content delegate-handle="mainScroll" has-bouncing="true" scroll="true">
+<table id="customers" class="">
+ <tr>
+   <th>PRODUCTION PLAN</th>
+   <th ng-repeat="days in alldays" style="font-size: 17px; text-align: center;">{{days| date:'dd-MM-yyyy'}}</th>
+ </tr>
+ <tr ng-repeat="product in products" >
+    <td style="font-size: 17px; text-align: center">
+      <table >
+      <th>Part Number</th>
+      <th>Inventory Qty</th>
+      <th> Pending Qty</th>
+      <tr>
+        <td>{{product.productId}}</td>
+        <td>{{product.productBalanceQty}}</td>
+        <td>{{product.productTargetQty}}</td>
+        
+      </tr>
+      </table>
+    </td>
+<!--     <div style="overflow-x: scroll;"> -->
+
+      <td ng-repeat="productProductionPlanItem in product.productProductionPlan" >
+    <table >
+      <th>Target</th>
+      <th>Achived</th>
+      <tr>
+        <td>
+        <input type="number" class="quantity-input" ng-model="productProductionPlanItem.target_quantity">
+        </td>
+        <td>
+         <input type="number" class="quantity-input" ng-model="productProductionPlanItem.achived_quantity">
+        </td>
+      </tr>
+    </table>
+  </td>
+  
+<!--   </div> -->
+ </tr>
+</table>
+
+
+
+</ion-content>
+<!-- </div> -->
+<div style="margin-top: 2%;margin-left: 40%;position: fixed;">
+  <md-dialog-actions layout="row">
+      
+      <md-button class="md-raised" ng-click="answer('not useful')">CREATE DEFAULT PRODUCTION PLAN</md-button>
+      <md-button class="md-raised" ng-click="submitProductionPlan()" ng-disabled="isReadOnly" >SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+       
     </md-dialog-actions>
     </div>
 

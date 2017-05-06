@@ -14,9 +14,11 @@
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">NAME</label> <input type="text"
 				ng-model="userType.usertypeName" value="userType.usertypeName"
-				required name="usertypeName" ng-disabled="isReadOnly">
+				required name="usertypeName" ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255">
 			<div ng-messages="userTypeInformation.usertypeName.$error">
 				<div ng-message="required">Please enter User Type</div>
+				<div ng-message="minlength">User Type should be minimum two character</div>
+				<div ng-message="maxlength">User Type should be minimum 255 character</div>
 			</div>
 			</md-input-container>
 

@@ -5,6 +5,8 @@ erpApp.controller('userDialogCtrl',
 					$scope.flag = flag;
 					$scope.user = user;
 					$scope.information = information;
+					 var vm = this;
+					  vm.focusElementName = null;
 					$scope.user.dob = new Date($scope.user.dob);
 					$scope.user.doj = new Date($scope.user.doj);
 					$scope.hide = function() {
@@ -19,7 +21,43 @@ erpApp.controller('userDialogCtrl',
 					$scope.answer = function(answer) {
 						$mdDialog.hide(answer);
 					};
+					
+					
+					$scope.birtDateValidation=function(dob){
+						$scope.today=new Date();
+						var minAge = 18;
+						$scope.minAge = new Date($scope.today.getFullYear() - minAge, $scope.today.getMonth(), $scope.today.getDate());
+						console.log("currentDate" +$scope.today);
+						console.log("min age" + $scope.minAge);
+						console.log("date of birth" +dob);
+						if(dob>$scope.minAge){
+							$scope.msg="date of birth should be at least before 18 years of current year"
+							$scope.userInformation.dob.$setValidity("customeMsg", false);
+						}else{
+							$scope.userInformation.dob.$setValidity("customeMsg", true);
+						}
+						
+					}
+					
+					$scope.joiningDateValidation = function(doj){
+						$scope.currentDate = new Date();
+						console.log("current date" + $scope.currentDate);
+						console.log("doj" + doj);
+						if(doj>=$scope.currentDate){
+							console.log("if block");
+							$scope.msg="joining should not be in future"
+								$scope.userInformation.doj.$setValidity("customeMsg", false);
+						}else{
+							console.log("else block");
+							$scope.userInformation.doj.$setValidity("customeMsg", true);
+						}
+					}
 
+					/*
+					var today = new Date();
+					  var minAge = 18;
+					  $scope.minAge = new Date(today.getMonth(), today.getDate(), today.getFullYear() - minAge);*/
+					  
 					$scope.saveUser = function(ev) {
 
 						var data = {
@@ -97,12 +135,17 @@ erpApp.controller('userDialogCtrl',
 											utils.showToast('Something went worng. Please try again later.');
 										});
 					}
-
+                     
+					$scope.submitInformation = true;
+					$scope.userType = null;
 					$scope.submitInformation = function(isvaliduser, $event) {
+						
 						if (isvaliduser) {
 							$scope.saveUser($event);
 						} else {
 							console.log('its else block');
+							 $scope.userInformation.userType.$setTouched();
+							 $scope.submitInformation = true;
 						}
 					};
 
@@ -134,6 +177,12 @@ erpApp.controller('userDialogCtrl',
 						
 					}
 					
+					$scope.birthAndJoinDateValidation=function(dob,doj){
+						console.log("in birth join date validation function");
+						console.log("date of birth" + dob);
+						console.log("date of joining" + doj);
+						
+					}
 					
 					
 					

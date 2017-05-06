@@ -1,6 +1,5 @@
 <md-dialog class="statusInfo">
 <form name="pageInformation" novalidate>
-
 	<md-toolbar>
 	<div class="md-toolbar-tools">
 		<h2>{{information}}</h2>
@@ -71,7 +70,6 @@
 		ng-click="submitPageInformation(pageInformation.$valid,$event)"
 		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
 		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions>
-
 </form>
 </md-dialog>
 
