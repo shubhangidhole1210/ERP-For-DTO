@@ -1,7 +1,9 @@
-erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,flag,action,title,rmOrder,utils,hideAction){
+erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,flag,action,title,rmOrder,utils,hideAction,priceAction,vendorAction){
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
 	$scope.rmOrder = rmOrder;
+	$scope.isPriceReadOnly = priceAction;
+	$scope.isVendorId = vendorAction;
 	$scope.rmOrder.actualPrice = $scope.rmOrder.actualPrice ? $scope.rmOrder.actualPrice : 0;
 	$scope.rmOrder.tax = $scope.rmOrder.tax ? $scope.rmOrder.tax : 0;
 	$scope.rmOrder.totalPrice = $scope.rmOrder.totalPrice ? $scope.rmOrder.totalPrice : 0;
@@ -31,7 +33,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				name:$scope.rmOrder.name,
 				description:$scope.rmOrder.description,
 				quantity:$scope.rmOrder.quantity,
-				/*expectedDeliveryDate:$scope.rmOrder.expectedDeliveryDate,*/
 				vendor:$scope.selectedVendor,
 				totalprice:$scope.rmOrder.totalprice,
 				tax:$scope.rmOrder.tax,
@@ -73,8 +74,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 								
 							}else{
 								$scope.displayProgressBar = false;
-								/*$scope.message = 'Raw Material Order Created successfully.';
-								$scope.showToast();*/
 								utils.showToast('Raw Material Order Created successfully.');
 								$rootScope.$emit("CallPopulateRMOrderList",{});
 							}
@@ -88,10 +87,16 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 						});
 
 	}
+	
+	/* $scope.$watch('selectedVendor', function(newVal, oldVal) {
+		 $scope.rmOrder.totalPrice="";
+		 $scope.rmOrder.actualPrice="";
+		 $scope.rmOrder.tax="";
+		 $scope.rmOrder.otherCharges="";
+	 });*/
 
 	$scope.submitRMOrderInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			/*utils.showProgressBar();*/
 			$scope.saveRMOrder();
 			
 		} else {

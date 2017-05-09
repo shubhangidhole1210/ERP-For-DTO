@@ -2,6 +2,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	$scope.isReadOnly = false;
 	$scope.displayAddRM = true;
 	$scope.isRMOrderPresent=false;
+	$scope.isPriceReadOnly = false;
+	$scope.isVendorId = false;
 	$rootScope.$on("CallPopulateRMOrderList", function() {
 		$scope.populateRMOrderList();
 	});
@@ -42,6 +44,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
 		$scope.displayAddRM = true;
+		$scope.isVendorId = false;
+		$scope.isPriceReadOnly = true;
 		$scope.rmOrder = {};
 		$scope.title= "ADD RAW MATERIAL ORDER INFORMATION";
 		var addNewRmDialog = {
@@ -58,6 +62,9 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				action : $scope.isReadOnly,
 				title : $scope.title,
 				hideAction : $scope.displayAddRM,
+				priceAction : $scope.isPriceReadOnly,
+				vendorAction : $scope.isVendorId,
+				
 			}
 		};
 	
@@ -72,6 +79,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
 		$scope.displayAddRM = false;
+		$scope.isVendorId = true;
+		$scope.isPriceReadOnly = true;
 		$scope.rmOrder = $scope.rmOrders[index];
 		console.log($scope.rmOrder);
 		$scope.title="EDIT RAW MATERIAL ORDER INFORMATION"
@@ -89,6 +98,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 						action : $scope.isReadOnly,
 						title : $scope.title,
 						hideAction : $scope.displayAddRM,
+						priceAction : $scope.isPriceReadOnly,
+						vendorAction : $scope.isVendorId,
 					}
 				})
 				.then(
@@ -100,6 +111,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
 		$scope.displayAddRM = false;
+		$scope.isVendorId = true;
+		$scope.isPriceReadOnly = true;
 		$scope.rmOrder = $scope.rmOrders[index];
 		$scope.isSaving = false;
 		$scope.title = "VIEW RAW MATERIAL ORDER INFORMATION"
@@ -117,6 +130,9 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 						action : $scope.isReadOnly,
 						title : $scope.title,
 						hideAction : $scope.displayAddRM,
+						priceAction : $scope.isPriceReadOnly,
+						vendorAction : $scope.isVendorId,
+						
 					}
 				})
 				.then(

@@ -13,26 +13,31 @@
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">NAME</label> <input type="text"
 				ng-model="rmOrder.name" value="rmOrder.name" required name="name"
-				ng-disabled="isReadOnly">
+				ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255">
 			<div ng-messages="RMOrderInformation.name.$error">
-				<div ng-message="required">Please enter name</div>
+				<div ng-message="required">Please enter Name</div>
+				<div ng-message="minlength">Name should be minimum two character</div>
+				<div ng-message="maxlength">Name should be minimum 255 character</div>
 			</div>
 			</md-input-container>
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">DESCRIPTION</label> <input
 				type="text" ng-model="rmOrder.description"
 				value="rmOrder.description" required name="description"
-				ng-disabled="isReadOnly">
+				ng-disabled="isReadOnly" ng-minlength="4" ng-maxlength="255">
 			<div ng-messages="RMOrderInformation.description.$error">
-				<div ng-message="required">please enter description</div>
+				<div ng-message="required">Please enter Description</div>
+				<div ng-message="minlength">Description should be minimum 2 Character</div>
+				<div ng-message="maxlength">Description should be maximum 255 character</div>
 			</div>
 			</md-input-container>
 		</div>
 		<div layout-gt-sm="row">
-			<md-input-container class="drop-down"> <label>VENDOR
+			<md-input-container> <label>VENDOR
 			</label> <md-select ng-model="selectedVendor" name="vendorId"
-				ng-disabled="isReadOnly" ng-init="displayVendorId()" name="vendorId"
-				required ng-change="vendorRmList($index)">
+				ng-disabled="isVendorId" ng-init="displayVendorId()" name="vendorId"
+				required ng-change="vendorRmList($index);orderRawMaterial.rawmaterial=0;orderRawMaterial.quantity=0;rmOrder.totalPrice=0;
+				rmOrder.actualPrice=0;rmOrder.tax=0;rmOrder.otherCharges=0;">
 			<div ng-messages="RMOrderInformation.vendorId.$error">
 				<div ng-message="required">Please select Vendor</div>
 			</div>
@@ -87,17 +92,15 @@
 			<div ng-show="RMOrderInformation.quantity.$error.message"
 				class="error-msg">{{message}}</div>
 			</md-input-container>
-
 			<button type="button" class="added-multiple"
-				ng-click="addOrderRawMaterial()">Add Raw Material</button>
-
+				ng-click="addOrderRawMaterial()" ng-disabled="!(!!orderRawMaterial.rawmaterial && !!orderRawMaterial.quantity)">Add Raw Material</button>
 		</div>
 		<div layout-gt-sm="row">
 
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">TOTAL PRICE</label> <input
 				type="number" ng-model="rmOrder.totalPrice" value="{{totalprice}}"
-				name="totalprice" ng-disabled="isReadOnly">
+				name="totalprice" ng-disabled="isPriceReadOnly">
 			<div ng-messages="RMOrderInformation.totalprice.$error">
 				<div ng-message="required">Please enter total price</div>
 			</div>
@@ -105,7 +108,7 @@
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">TAX</label> <input type="number"
 				ng-model="rmOrder.tax" value="{{tax}}" name="tax"
-				ng-disabled="isReadOnly">
+				ng-disabled="isPriceReadOnly">
 			<div ng-messages="RMOrderInformation.tax.$error">
 				<div ng-message="required">please enter tax</div>
 			</div>
@@ -117,7 +120,7 @@
 			<label class="input-filed-label">ACTUAL PRICE</label> <input
 				type="number" ng-model="rmOrder.actualPrice"
 				value="{{productSubTotal}}" name="actualPrice"
-				ng-disabled="isReadOnly">
+				ng-disabled="isPriceReadOnly">
 			<div ng-messages="RMOrderInformation.actualPrice.$error">
 				<div ng-message="required">Please enter actual price</div>
 			</div>
