@@ -1,9 +1,11 @@
-erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,productOrder,utils,flag,action,information,hideAction) {
+erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,productOrder,utils,flag,action,information,hideAction,clientAction) {
+	  
 	$scope.productOrder=productOrder;
     $scope.flag=flag;
     $scope.isReadOnly = action;
     $scope.information = information;
-    $scope.isProductOrderAdd = hideAction
+    $scope.isProductOrderAdd = hideAction;
+    $scope.isClientReadOnly = clientAction;
     $scope.productOrder.expecteddeliveryDate = new Date($scope.productOrder.expecteddeliveryDate);
     $scope.hide = function() {
       $mdDialog.hide();
@@ -137,8 +139,18 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 				   $scope.orderproductassociations.push($scope.orderProductAssociation);	
 				   $scope.orderProductAssociation = {isActive : true};
 				   console.log($scope.orderProductAssociations);
+				   console.log($scope.orderProductAssociation);
 			}
 	    };
+	    
+	    $scope.isDuplicateRM = function(orderProductAssociation) {
+			for (var i = 0; i < $scope.orderproductassociations.length; i++) {
+				if ($scope.orderRawMaterials[i].rawmaterial.id === orderRawMaterial.rawmaterial.id) {
+					return true;
+				}
+			}
+			return false;
+		};
 	    
 	    $scope.deleteProduct=function(index)
 	    {
@@ -167,4 +179,23 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 			});
 	   }
 	    }
+	    
+	  $scope.orderDateValidation = function(expecteddeliveryDate){
+		  console.log("expected deliver date" + expecteddeliveryDate);
+		  $scope.currentDate = new Date();
+		  console.log("current date" +  $scope.currentDate);
+		  if(expecteddeliveryDate <= $scope.currentDate){
+			  console.log("its if condition")
+			  $scope.msg="Date should be greater then current date"
+			  $scope.productOrderInformation.expecteddeliveryDate.$setValidity("customeMsg", false);
+		  }else{
+			     console.log("its else block")
+			     $scope.productOrderInformation.expecteddeliveryDate.$setValidity("customeMsg", true);
+		  }
+			  
+			  
+	  }
+	    
+	    
+	   
 });

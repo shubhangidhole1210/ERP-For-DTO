@@ -168,7 +168,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			}
 		};*/
 		
-		$scope.isDuplicateRM = function(orderRawMaterial) {
+		$scope.isDuplicateRM = function(orderRawMaterial){
 			for (var i = 0; i < $scope.productRmAsso.productRMAssociationModelParts.length; i++) {
 				if ($scope.productRmAsso.productRMAssociationModelParts[i].rawmaterial.id === orderRawMaterial.rawmaterial.id) {
 					return true;

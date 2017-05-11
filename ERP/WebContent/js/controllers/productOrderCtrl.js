@@ -1,5 +1,5 @@
 erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
-	
+	$scope.isClientReadOnly = false;
 	$scope.isProductOrderPresent=false;
 	$scope.productOrder={};
 	
@@ -44,6 +44,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
 		$scope.isProductOrderAdd = true;
+		$scope.isClientReadOnly = false;
 		$scope.information="ADD NEW PRODUCT ORDER";
 		$scope.productOrder={};
 		var addNewProductOrderDialog = {
@@ -60,6 +61,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				action : $scope.isReadOnly,
 				information : $scope.information,
 				hideAction : $scope.isProductOrderAdd,
+				clientAction : $scope.isClientReadOnly,
 			}
 		};
 		$mdDialog
@@ -72,6 +74,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		  $scope.flag = 1;
 		  $scope.productOrder = $scope.productOrders[index];
 		  $scope.isProductOrderAdd = false;
+		  $scope.isClientReadOnly = true;
 		  $scope.information="EDIT PRODUCT ORDER INFORMATION"
 		    $mdDialog.show({
 		      controller: 'productOrderDialogCtrl',
@@ -86,6 +89,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		    	  action : $scope.isReadOnly,
 		    	  information : $scope.information,
 		    	  hideAction : $scope.isProductOrderAdd,
+		    	  clientAction : $scope.isClientReadOnly,
 				}
 		    })
 		    .then(function(answer) {},
@@ -118,6 +122,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			$scope.isProductOrderAdd = false;	
 			$scope.productOrder = $scope.productOrders[index];
 			$scope.isSaving = false;
+			$scope.isClientReadOnly = true;
 			$scope.information="VIEW PRODUCT ORDER INFORMATION"
 			console.log($scope.user);
 			$mdDialog.show({
@@ -133,6 +138,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 							action : $scope.isReadOnly,
 							information : $scope.information,
 							hideAction : $scope.isProductOrderAdd,
+							clientAction : $scope.isClientReadOnly,
 						}
 					})
 					.then(function(answer) {},

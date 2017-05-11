@@ -30,8 +30,9 @@ erpApp
 							utils.hideProgressBar();
 
 						}, function errorCallback(response) {
-							$scope.message = "We are Sorry. Something went wrong. Please try again later."
-							$scope.showToast();
+							/*$scope.message = "We are Sorry. Something went wrong. Please try again later."
+							$scope.showToast();*/
+							utils.showToast = "We are Sorry. Something went wrong. Please try again later."
 							console.log("Error");
 							utils.hideProgressBar();
 						});

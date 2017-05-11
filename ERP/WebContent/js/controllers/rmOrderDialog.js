@@ -34,7 +34,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				description:$scope.rmOrder.description,
 				quantity:$scope.rmOrder.quantity,
 				vendor:$scope.selectedVendor,
-				totalprice:$scope.rmOrder.totalprice,
+				totalprice:$scope.rmOrder.totalPrice,
 				tax:$scope.rmOrder.tax,
 				otherCharges:$scope.rmOrder.otherCharges,
 				actualPrice:$scope.rmOrder.actualPrice
@@ -189,27 +189,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	    	$scope.calculateTotalPrice();
 	    };
 	    
-	    
 	
-	/*$scope.isDuplicateRM=function()
-	{
-		  console.log($scope.orderRawMaterials)
-		var i;
-		var j;
-						for (i = 0; i < $scope.orderRawMaterials.length; i++) {
-							for (j = 0; i < $scope.orderRawMaterials.length; j++) {
-								if (i != j) {
-									if ($scope.orderRawMaterials[i].id == $scope.orderRawMaterials[j].id) {
-										$scope.orderRawMaterials = $scope.orderRawMaterials.splice(j,1);
-										return true;
-									}
-								}
-							}
-						}
-						return false;
-	}*/
-	    
-	    
 	    $scope.isDuplicateRM = function(orderRawMaterial) {
 			for (var i = 0; i < $scope.orderRawMaterials.length; i++) {
 				if ($scope.orderRawMaterials[i].rawmaterial.id === orderRawMaterial.rawmaterial.id) {

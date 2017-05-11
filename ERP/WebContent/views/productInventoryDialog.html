@@ -37,17 +37,7 @@
 			</div>
 			</md-input-container>
 		</div>
-		<div layout-gt-sm="row">
-			<md-input-container class="md-block" flex-gt-sm type="password">
-			<label class="input-filed-label">RACK NUMBER</label> <input
-				type="text" ng-model="productInventory.racknumber" required
-				name="racknumber" ng-disabled="isReadOnly"
-				onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-			<div ng-messages="productInventoryInformation.racknumber.$error">
-				<div ng-message="required">Please Enter Rack Number</div>
-			</div>
-			</md-input-container>
-		</div>
+		
 
 
 		<md-input-container style="width:100%"> <label>PRODUCT*</label>

@@ -4,8 +4,7 @@
 			<div class="header">QUALITY INSPECTION</div>
 			<div class="qualityInspection">
 				<form name="qualityInspectionForm" novalidate>
-					<div>
-						<div layout-gt-sm="row">
+						<!-- <div layout-gt-sm="row"> -->
 							<md-input-container class="drop-down"> <label>Invoice
 								No*</label> <md-select id="invoiceNumber" ng-model="invoiceList.id"
 								name="invoice" ng-init="getRMOrderInvoiceInformation()"
@@ -17,7 +16,7 @@
 							</div>
 							</md-input-container>
 
-						</div>
+						<!-- </div> -->
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
 							<label class="input-filed-label">DESCRIPTION</label> <input
@@ -88,7 +87,6 @@
 								class="md-raised" ng-click="resetQualityInspection()">CANCEL</md-button>
 							</md-dialog-actions>
 						</div>
-					</div>
 				</form>
 			</div>
 		</div>

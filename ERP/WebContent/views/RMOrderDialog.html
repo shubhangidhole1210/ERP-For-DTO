@@ -36,8 +36,7 @@
 			<md-input-container> <label>VENDOR
 			</label> <md-select ng-model="selectedVendor" name="vendorId"
 				ng-disabled="isVendorId" ng-init="displayVendorId()" name="vendorId"
-				required ng-change="vendorRmList($index);orderRawMaterial.rawmaterial=0;orderRawMaterial.quantity=0;rmOrder.totalPrice=0;
-				rmOrder.actualPrice=0;rmOrder.tax=0;rmOrder.otherCharges=0;">
+				required ng-change="vendorRmList($index)">
 			<div ng-messages="RMOrderInformation.vendorId.$error">
 				<div ng-message="required">Please select Vendor</div>
 			</div>
@@ -99,7 +98,7 @@
 
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">TOTAL PRICE</label> <input
-				type="number" ng-model="rmOrder.totalPrice" value="{{totalprice}}"
+				type="number" ng-model="rmOrder.totalPrice" value="{{totalPrice}}"
 				name="totalprice" ng-disabled="isPriceReadOnly">
 			<div ng-messages="RMOrderInformation.totalprice.$error">
 				<div ng-message="required">Please enter total price</div>

@@ -5,8 +5,6 @@ erpApp.controller('userDialogCtrl',
 					$scope.flag = flag;
 					$scope.user = user;
 					$scope.information = information;
-					 var vm = this;
-					  vm.focusElementName = null;
 					$scope.user.dob = new Date($scope.user.dob);
 					$scope.user.doj = new Date($scope.user.doj);
 					$scope.hide = function() {
@@ -136,16 +134,16 @@ erpApp.controller('userDialogCtrl',
 										});
 					}
                      
-					$scope.submitInformation = true;
-					$scope.userType = null;
-					$scope.submitInformation = function(isvaliduser, $event) {
+					/*$scope.submitInformation = true;
+					$scope.userType = null*/;
+					$scope.submitInformation = function(isvaliduser,$event) {
 						
 						if (isvaliduser) {
-							$scope.saveUser($event);
+							$scope.saveUser(event);
 						} else {
 							console.log('its else block');
-							 $scope.userInformation.userType.$setTouched();
-							 $scope.submitInformation = true;
+							/* $scope.userInformation.userType.$setTouched();
+							 $scope.submitInformation = true;*/
 						}
 					};
 

@@ -134,5 +134,18 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 		$scope.restInformation=function(){
 			$location.path('/');
 		}
+		
+		
+		$scope.dateValidation = function(createDate){
+			console.log("create date" + createDate);
+			$scope.currentDate = new Date();
+			console.log("currentDate" +$scope.currentDate);
+			if(createDate != $scope.currentDate){
+				console.log("if condition")
+			}else{
+				console.log("else condition")
+			}
+			
+		}
 	
 });

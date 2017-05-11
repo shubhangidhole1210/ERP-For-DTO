@@ -71,9 +71,9 @@
 				ng-pattern="/^[0-9]+$/" ng-disabled="isReadOnly"
 				onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
 			<div ng-messages="clientInformation.contactnumber.$error">
-				<div ng-message="required">Please enter client mobile number</div>
-				<div ng-message="minlength">mobile number must be 10 digit</div>
-				<div ng-message="maxlength">mobile number must be 10 digit</div>
+				<div ng-message="required">Please enter client Mobile Number</div>
+				<div ng-message="minlength">Mobile Number must be 10 digit</div>
+				<div ng-message="maxlength">Mobile Number must be 10 digit</div>
 				<div ng-message="pattern">Please enter valid mobile number</div>
 			</div>
 			</md-input-container>
@@ -82,9 +82,11 @@
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">CONTACT PERSON NAME</label> <input
 				type="type" ng-model="client.contactpersonname" required
-				name="contactpersonname" ng-disabled="isReadOnly">
+				name="contactpersonname" ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255">
 			<div ng-messages="clientInformation.contactpersonname.$error">
-				<div ng-message="required">Please enter Contact Person name</div>
+				<div ng-message="required">Please enter Contact Person Name</div>
+				<div ng-message="minlength">Name should be minimum 2 character</div>
+				<div ng-message="maxlength">Name should be maximum 255 charcater</div>
 			</div>
 			</md-input-container>
 		</div>
