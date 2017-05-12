@@ -37,11 +37,14 @@
 			</label> <md-select ng-model="selectedVendor" name="vendorId"
 				ng-disabled="isVendorId" ng-init="displayVendorId()" name="vendorId"
 				required ng-change="vendorRmList($index)">
-			<div ng-messages="RMOrderInformation.vendorId.$error">
+			<md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id">
+			{{vendorId.companyName}} </md-option> </md-select> 
+			 <div ng-messages="RMOrderInformation.vendorId.$error">
 				<div ng-message="required">Please select Vendor</div>
 			</div>
-			<md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id">
-			{{vendorId.companyName}} </md-option> </md-select> </md-input-container>
+			 <!--  <span ng-show="RMOrderInformation.vendorId.$error.required" class="error-msg">Select service</span> -->
+			
+			</md-input-container>
 		</div>
 		<h2>Raw Material List</h2>
 		<table>
@@ -53,11 +56,11 @@
 			<tr ng-repeat="orderRawMaterial in orderRawMaterials">
 				<td>{{orderRawMaterial.rawmaterial.name}}</td>
 				<td><input type="number"
-					ng-value="{{orderRawMaterial.quantity}}"></td>
+					ng-value="{{orderRawMaterial.quantity}}" ng-model="orderRawMaterial.quantity" ng-change="addQuantity(orderRawMaterial.quantity)"></td>
 				<td>
 					<button type="button" style="height: 40px"
 						ng-click="deleteRM($index)">Delete</button>
-
+						
 				</td>
 			</tr>
 			<tr ng-repeat="orderRawMaterial in rmOrderList">
@@ -67,7 +70,6 @@
 				<td>
 					<button type="button" class="multiple-added-delete"
 						ng-click="deleteRM($index)" ng-disabled="isReadOnly">Delete</button>
-
 				</td>
 			</tr>
 
@@ -76,7 +78,7 @@
 			<md-input-container> <label
 				style="color: black;">RAW MATERIAL</label> <md-select
 				ng-model="orderRawMaterial.rawmaterial" name="rawmaterial"
-				value="rawmaterial.id" ng-disabled="isReadOnly" name="rawMaterialId">
+				value="rawmaterial.id" ng-disabled="!(!!selectedVendor)" name="rawMaterialId">
 			<md-option ng-repeat="rawmaterial in vendorRmList"
 				ng-value="rawmaterial.rawmaterial">
 			{{rawmaterial.rawmaterial.name}} </md-option> </md-select>
@@ -86,8 +88,11 @@
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">QUANTITY</label> <input
 				type="number" ng-model="orderRawMaterial.quantity" name="quantity"
-				ng-disabled="isReadOnly"
-				ng-change="addQuantity(orderRawMaterial.quantity)">
+				ng-disabled="!selectedVendor"
+				ng-change="addQuantity(orderRawMaterial.quantity)" ng-maxlength="10">
+				<div ng-messages="RMOrderInformation.quantity.$error">
+				   <div ng-message="maxlength">You can enter only 10 digit</div>
+				</div>
 			<div ng-show="RMOrderInformation.quantity.$error.message"
 				class="error-msg">{{message}}</div>
 			</md-input-container>

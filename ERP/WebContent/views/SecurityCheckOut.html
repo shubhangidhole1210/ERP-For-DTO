@@ -80,8 +80,8 @@
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm type="password">
 							<label class="input-filed-label">DATE[MM/DD/YYYY]*</label> <input
-								type="date" placeholder="Enter date of birth"
-								ng-model="createDate " name="createDate" required ng-change="dateValidation(createDate)">
+								type="text" placeholder="Enter date of birth"
+								ng-model="createDate " name="createDate" required ng-value="{{currentDate}}">
 							<div ng-messages="securityInformation.createDate.$error">
 								<div ng-message="required">Please enter Date</div>
 							</div>

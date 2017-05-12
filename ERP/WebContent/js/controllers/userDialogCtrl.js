@@ -29,10 +29,28 @@ erpApp.controller('userDialogCtrl',
 						console.log("min age" + $scope.minAge);
 						console.log("date of birth" +dob);
 						if(dob>$scope.minAge){
-							$scope.msg="date of birth should be at least before 18 years of current year"
+							$scope.msg="Invalid date!! date of birth should be at least before 18 years of current year"
 							$scope.userInformation.dob.$setValidity("customeMsg", false);
 						}else{
 							$scope.userInformation.dob.$setValidity("customeMsg", true);
+						}
+						
+					}
+					
+					$scope.birthAndJoinDateValidation=function(dob,doj){
+						console.log("in birth join date validation function");
+						console.log("date of birth" + dob);
+						console.log("date of joining" + doj);
+						var maxAge= 18;
+						$scope.maxAge = new Date(dob.getFullYear() + maxAge, dob.getMonth(), dob.getDate());
+						console.log("min age" + $scope.maxAge);
+						if(doj <= $scope.maxAge){
+							$scope.msg="Invalid date!! Joining date should be 18 year greater then birth date"
+							console.log("if condition");
+							$scope.userInformation.doj.$setValidity("customeMsg1", false);
+						}else{
+							console.log("else condition")
+							$scope.userInformation.doj.$setValidity("customeMsg1", true);
 						}
 						
 					}
@@ -43,7 +61,7 @@ erpApp.controller('userDialogCtrl',
 						console.log("doj" + doj);
 						if(doj>=$scope.currentDate){
 							console.log("if block");
-							$scope.msg="joining should not be in future"
+							$scope.msg="Invalid date!! joining should not be in future"
 								$scope.userInformation.doj.$setValidity("customeMsg", false);
 						}else{
 							console.log("else block");
@@ -175,12 +193,12 @@ erpApp.controller('userDialogCtrl',
 						
 					}
 					
-					$scope.birthAndJoinDateValidation=function(dob,doj){
+					/*$scope.birthAndJoinDateValidation=function(dob,doj){
 						console.log("in birth join date validation function");
 						console.log("date of birth" + dob);
 						console.log("date of joining" + doj);
 						
-					}
+					}*/
 					
 					
 					

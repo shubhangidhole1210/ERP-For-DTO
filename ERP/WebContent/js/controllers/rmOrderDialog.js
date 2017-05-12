@@ -94,6 +94,18 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		 $scope.rmOrder.tax="";
 		 $scope.rmOrder.otherCharges="";
 	 });*/
+	 
+	 
+	 
+	/* if(flag==0)
+		 {
+		 $scope.$watch('selectedVendor', function(newVal, oldVal) {
+			 $scope.rmOrder.totalPrice="";
+			 $scope.rmOrder.actualPrice="";
+			 $scope.rmOrder.tax="";
+			 $scope.rmOrder.otherCharges="";
+		 });
+		 }*/
 
 	$scope.submitRMOrderInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
@@ -148,6 +160,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		console.log('Total Price : '+$scope.totalPrice);
 	}
 	
+	 
 	
 	$scope.displayVendorId=function()
 	{
@@ -168,6 +181,9 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 
 		})
 	};
+	
+	
+	
 	
 	
 	 $scope.orderRawMaterials=[];
@@ -207,6 +223,8 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		    $scope.calculateTotalPrice();
 	    }
 	    
+	  
+	    
 	    $scope.addQuantity = function(quantity) {
 			if (quantity <= 0) {
 				console.log('if condition')
@@ -217,6 +235,10 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 			}
 		};
 	    
+		$scope.$watch('vendorId', function(val)
+				{
+				    if (!val) $scope.vendorId = null;
+				});
 	    
 	    
 	    $scope.getRmForOrder=function(){

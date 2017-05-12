@@ -42,7 +42,7 @@
 				type="text" ng-model="user.firstName" required name="firstName"
 				ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255"
 				onkeypress='return event.charCode >= 65 && event.charCode <= 120'>
-			<div ng-messages="userInformation.firstName.$error" ng-if='myForm.myControl.$dirty'>
+			<div ng-messages="userInformation.firstName.$error">
 				<div ng-message="required">Please enter First Name</div>
 				<div ng-message="minlength">User Name Should be minimum two
 					character</div>
@@ -135,7 +135,7 @@
 		<div ng-show=" userInformation.doj.$error.min" class="error-msg">joining
 			Date should be greater than birth date</div>
 			<div ng-show=" userInformation.doj.$error.customeMsg" class="error-msg">{{msg}}</div>
-			
+			<div ng-show=" userInformation.doj.$error.customeMsg1" class="error-msg">{{msg}}</div>
 		</md-input-container>
 	</div>
 	</md-dialog-content>
