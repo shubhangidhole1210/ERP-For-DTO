@@ -1,6 +1,6 @@
 erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		$rootScope, SERVER_URL,$filter,utils,Auth,$location) {
-
+	$scope.createDate = $filter('date')(Date.now(), 'MM-dd-yyyy');
 	$scope.getRMInformation = function()
 
 	{

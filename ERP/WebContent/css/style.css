@@ -659,3 +659,12 @@ div.panel {
 	margin-top: 2%;
 	margin-left: 40%;
 }
+
+md-input-container.md-input-invalid .md-auto-hide .md-input-message-animation:not(.ng-animate) {
+  opacity: 1;
+  margin-top: 0;
+}
+
+md-input-container.md-input-invalid [ng-messages] {
+  max-height: 19px;
+}

@@ -33,7 +33,8 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				name:$scope.rmOrder.name,
 				description:$scope.rmOrder.description,
 				quantity:$scope.rmOrder.quantity,
-				vendor:$scope.selectedVendor,
+				/*vendor:$scope.selectedVendor,*/
+				vendor:$scope.rmOrder.vendor.id,
 				totalprice:$scope.rmOrder.totalPrice,
 				tax:$scope.rmOrder.tax,
 				otherCharges:$scope.rmOrder.otherCharges,
@@ -120,7 +121,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	{
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "rawmaterial/getRMaterial/"+$scope.selectedVendor;
+		httpparams.url = SERVER_URL + "rawmaterial/getRMaterial/" + $scope.rmOrder.vendor.id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -141,8 +142,8 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		$scope.productSubTotal = 0;
 		console.log($scope.orderRawMaterials);
 		for (var i = 0; i < $scope.orderRawMaterials.length; i++){
-		   $scope.totalPrice = $scope.orderRawMaterials[i].rawmaterial.pricePerUnit * $scope.orderRawMaterials[i].quantity;
-		   $scope.productSubTotal += $scope.totalPrice;
+		   $scope.productSubTotal = $scope.orderRawMaterials[i].rawmaterial.pricePerUnit * $scope.orderRawMaterials[i].quantity;
+		  /* $scope.productSubTotal += $scope.totalPrice;*/
 		}
 		console.log('Product Sub Total : '+$scope.productSubTotal);
 		$scope.rmOrder.actualPrice = $scope.productSubTotal;

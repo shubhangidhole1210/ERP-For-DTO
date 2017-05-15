@@ -21,53 +21,61 @@ erpApp.controller('userDialogCtrl',
 					};
 					
 					
-					$scope.birtDateValidation=function(dob){
+					$scope.birthDateValidation=function(dob){
 						$scope.today=new Date();
 						var minAge = 18;
 						$scope.minAge = new Date($scope.today.getFullYear() - minAge, $scope.today.getMonth(), $scope.today.getDate());
 						console.log("currentDate" +$scope.today);
 						console.log("min age" + $scope.minAge);
 						console.log("date of birth" +dob);
-						if(dob>$scope.minAge){
-							$scope.msg="Invalid date!! date of birth should be at least before 18 years of current year"
-							$scope.userInformation.dob.$setValidity("customeMsg", false);
+						if(dob > $scope.minAge){
+							$scope.invalidDOBMsg = "Invalid date!! date of birth should be at least before 18 years of current year";
+							$scope.userInformation.dob.$setValidity("customMsg", false);
 						}else{
-							$scope.userInformation.dob.$setValidity("customeMsg", true);
+							$scope.userInformation.dob.$setValidity("customMsg", true);
 						}
-						
-					}
+					};
 					
-					$scope.birthAndJoinDateValidation=function(dob,doj){
-						console.log("in birth join date validation function");
-						console.log("date of birth" + dob);
-						console.log("date of joining" + doj);
-						var maxAge= 18;
-						$scope.maxAge = new Date(dob.getFullYear() + maxAge, dob.getMonth(), dob.getDate());
-						console.log("min age" + $scope.maxAge);
-						if(doj <= $scope.maxAge){
-							$scope.msg="Invalid date!! Joining date should be 18 year greater then birth date"
-							console.log("if condition");
-							$scope.userInformation.doj.$setValidity("customeMsg1", false);
-						}else{
-							console.log("else condition")
-							$scope.userInformation.doj.$setValidity("customeMsg1", true);
-						}
-						
-					}
+//					$scope.birthAndJoinDateValidation = function( dob, doj){
+//						console.log("in birth join date validation function");
+//						console.log("date of birth" + dob);
+//						console.log("date of joining" + doj);
+//						var maxAge = 18;
+//						$scope.maxAge = new Date(dob.getFullYear() + maxAge, dob.getMonth(), dob.getDate());
+//						console.log("min age" + $scope.maxAge);
+//						if(doj <= $scope.maxAge){
+//							$scope.invalidDOJMsg = "Invalid date!! Joining date should be 18 year greater then Birth date";
+//							console.log("if condition");
+//							$scope.userInformation.doj.$setValidity("customMsg", false);
+//						}else{
+//							console.log("else condition")
+//							$scope.userInformation.doj.$setValidity("customMsg", true);
+//						}
+//						
+//					};
 					
-					$scope.joiningDateValidation = function(doj){
-						$scope.currentDate = new Date();
-						console.log("current date" + $scope.currentDate);
-						console.log("doj" + doj);
-						if(doj>=$scope.currentDate){
-							console.log("if block");
-							$scope.msg="Invalid date!! joining should not be in future"
-								$scope.userInformation.doj.$setValidity("customeMsg", false);
+					$scope.validateJoiningDate = function(doj){
+						var currentDate = new Date();
+						console.log("current date : " + $scope.currentDate);
+						console.log("doj : " + doj);
+						if( doj >= currentDate ){
+							$scope.invalidDOJMsg="Invalid date!! Joining should not be in future"
+							$scope.userInformation.doj.$setValidity("customMsg", false);
+						}else if( $scope.user.dob ){
+							console.log("$scope.user.dob : " + $scope.user.dob);
+							var minAge = 18;
+							var minAgeDate = new Date($scope.user.dob.getFullYear() + minAge, $scope.user.dob.getMonth(), $scope.user.dob.getDate());
+							console.log("minAgeDate : " + $scope.maxAgeDate);
+							if( doj < minAgeDate ){
+								$scope.invalidDOJMsg = "Invalid date!! Joining date should be 18 year greater then Birth date";
+								console.log("if condition");
+								$scope.userInformation.doj.$setValidity("customMsg", false);
+							}
 						}else{
 							console.log("else block");
-							$scope.userInformation.doj.$setValidity("customeMsg", true);
+							$scope.userInformation.doj.$setValidity("customMsg", true);
 						}
-					}
+					};
 
 					/*
 					var today = new Date();

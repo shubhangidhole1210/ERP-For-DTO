@@ -132,7 +132,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 	    
     
 	    
-	    $scope.orderproductassociations=[];
+	   /* $scope.orderproductassociations=[];
 	    $scope.orderProductAssociation={isActive : true};
 	    $scope.addOrderProductAssociation=function(){
 	    	if(!angular.equals($scope.orderProductAssociation,{})){
@@ -150,7 +150,41 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 				}
 			}
 			return false;
+		};*/
+	    
+	    $scope.orderproductassociations=[];
+	    $scope.orderProductAssociation={isActive : true};
+	    $scope.addOrderProductAssociation = function(){
+	    	console.log('Adding RM : ', $scope.orderProductAssociation);
+	    	if( !angular.equals($scope.orderProductAssociation,{}) ){
+	    		if(!$scope.isDuplicateRM($scope.orderProductAssociation)){
+				   $scope.orderproductassociations.push($scope.orderProductAssociation);	
+				   $scope.orderProductAssociation = {isActive : true};
+				   $scope.productOrderInformation.product.$setValidity("message", true);
+				   console.log('setting validity true')
+				   $scope.message="";
+	    		}else{
+	    			$scope.message = 'This Product is already added';
+					$scope.productOrderInformation.product.$setValidity("message", false);
+	    		}
+			}
+	    };
+	    
+	
+	    $scope.isDuplicateRM = function(orderProductAssociation) {
+			for (var i = 0; i < $scope.orderproductassociations.length; i++) {
+				if ($scope.orderproductassociations[i].product.id === orderProductAssociation.product.id) {
+					return true;
+				}
+			}
+			return false;
 		};
+	    
+	    
+	    
+	    
+	    
+	    
 	    
 	    $scope.deleteProduct=function(index)
 	    {

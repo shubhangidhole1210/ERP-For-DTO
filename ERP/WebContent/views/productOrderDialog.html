@@ -69,7 +69,8 @@
           </tr>
           <tr ng-repeat="orderProductAssociation in orderproductassociations">
           <td>{{orderProductAssociation.product.name}}</td>
-          <td>{{orderProductAssociation.quantity}}</td>
+          <!-- <td>{{orderProductAssociation.quantity}}</td> -->
+          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-model="orderProductAssociation.quantity"></td>
           <td><button type="button"  ng-click="deleteProduct($index)" class="multiple-added-delete">Delete</button></td>
           </tr>
           <tr ng-repeat="orderProductAssociation in productOrderList">
@@ -86,10 +87,16 @@
                {{product.name}}
             </md-option>
           </md-select>
+          <div ng-messages="productOrderInformation.product.$error">
+             <div ng-message="message">{{message}}</div>
+          </div>
         </md-input-container>
 		<md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">QUANTITY</label>
-            <input type="number" ng-model="orderProductAssociation.quantity"   name="quantity"  ng-disabled="isReadOnly">
+            <input type="number" ng-model="orderProductAssociation.quantity"   name="quantity"  ng-disabled="isReadOnly" ng-maxlength="8">
+            <div ng-messages="productOrderInformation.quantity.$error">
+                 <div ng-message="maxlength">You can enter only 8 digit</div>
+            </div>
           </md-input-container>
            <button type="button" class="added-multiple" ng-click="addOrderProductAssociation()" ng-disabled="!(!!orderProductAssociation.product && !!orderProductAssociation.quantity)">Add Product</button>
         </div>

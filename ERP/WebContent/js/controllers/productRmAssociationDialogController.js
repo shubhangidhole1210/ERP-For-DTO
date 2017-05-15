@@ -132,19 +132,19 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			}
 	    };
 	    
-	    function getProductListURL(){
+	   /* function getProductListURL(){
 	    	return ($scope.flag === 0) ? "product/list/newProductRMAssociation" : "product/list";
-	    }
+	    }*/
 		
-		$scope.getProducts = function() {
+		/*$scope.getProducts = function() {
 			 var httpparams = {};
 				httpparams.method = 'GET';
-				httpparams.url = SERVER_URL + getProductListURL();
+				httpparams.url = SERVER_URL + "product/list/newProductRMAssociation";
 				httpparams.headers = {
 						auth_token : Auth.getAuthToken()
 				};
 			 $http(httpparams).then(function successCallback(response) {
-					/*$scope.data = response.data;*/
+					$scope.data = response.data;
 					$scope.products = response.data.data;
 					console.log(response);
 									if ($scope.flag === 0) {
@@ -156,7 +156,26 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 				}, function errorCallback(response) {
 					console.log("Error");
 				});
+		};*/
+	    
+	    $scope.getProducts = function() {
+			 var httpparams = {};
+				httpparams.method = 'GET';
+				httpparams.url = SERVER_URL + "product/list/newProductRMAssociation";
+				httpparams.headers = {
+						auth_token : Auth.getAuthToken()
+				};
+			 $http(httpparams).then(function successCallback(response) {
+					$scope.data = response.data;
+					$scope.products = response.data.data;
+					console.log(response);
+									
+				}, function errorCallback(response) {
+					console.log("Error");
+				});
 		};
+	    
+	    
 		    
 		/*$scope.addQuantity = function(quantity) {
 			if (quantity <= 0) {

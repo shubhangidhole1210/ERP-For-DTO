@@ -23,10 +23,11 @@
 								required ng-change="clientProductOrder($index)"> <md-option
 								ng-repeat="client in clients" ng-value="client.id">
 							{{client.companyname}} </md-option>
-							<div ng-messages="RMOrderInformation.vendorId.$error">
+							</md-select> 
+							   <div ng-messages="securityInformation.vendorId.$error">
 								<div ng-message="required">Please select Client</div>
 							</div>
-							</md-select> </md-input-container>
+							</md-input-container>
 
 						</div>
 						<div layout-gt-sm="row">
@@ -89,17 +90,13 @@
 						</div>
 						<div layout-gt-sm="row">
 							<md-input-container style="width:100%"> <label
-								style="color: black;">Product Order</label> <md-select
-								ng-model="productOrders.id" name="rawMaterial"
-								ng-init="getRMInformation()"
-								ng-change="displayProductList($index)"> <md-option
-								ng-repeat="productOrder in clientProductList"
-								ng-value="productOrder.id">
-							{{productOrder.invoiceNo}} </md-option> </md-select>
-							<div ng-messages="securityInformation.rawMaterial.$error">
-								<p ng-show="isRMOrderpresent" class="error-msg">Please
-									select venodr first</p>
-							</div>
+								style="color: black;">Product Order</label> 
+								<md-select ng-model="productOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayProductList($index)"> 
+								<md-option ng-repeat="productOrder in clientProductList" ng-value="productOrder.id">{{productOrder.invoiceNo}} </md-option>
+								 </md-select>
+								 <div ng-messages="securityInformation.rawMaterial.$error">
+								    <div ng-message="required">Please Select Product</div>
+								 </div>
 							</md-input-container>
 						</div>
 						<div layout-gt-sm="row"></div>

@@ -23,10 +23,11 @@
 								ng-change="vendorRmOrder($index)"> <md-option
 								ng-repeat="vendorId in vendorData" ng-value="vendorId.id">
 							{{vendorId.companyName}} </md-option>
-							<div ng-messages="RMOrderInformation.vendorId.$error">
+							</md-select> 
+							   <div ng-messages="securityInformation.vendorId.$error">
 								<div ng-message="required">Please select Vendor</div>
 							</div>
-							</md-select> </md-input-container>
+							</md-input-container>
 						</div>
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
@@ -81,7 +82,7 @@
 							<md-input-container class="md-block" flex-gt-sm type="password">
 							<label class="input-filed-label">DATE[MM/DD/YYYY]*</label> <input
 								type="date" placeholder="Enter date of birth"
-								ng-model="createDate " name="createDate" required>
+								ng-model="createDate " name="createDate" required ng-disabled="true">
 							<div ng-messages="securityInformation.createDate.$error">
 								<div ng-message="required">Please Enter Date</div>
 							</div>
@@ -91,13 +92,12 @@
 							<md-input-container class="drop-down"> <label
 								style="color: black;">RM Order</label> <md-select
 								ng-model="rawMaterialOrders.id" name="rawMaterial"
-								ng-init="getRMInformation()" ng-change="displayRMList($index)">
+								ng-init="getRMInformation()" ng-change="displayRMList($index)" required>
 							<md-option ng-repeat="rawMaterialOrder in vendorRmList"
 								ng-value="rawMaterialOrder.id">
 							{{rawMaterialOrder.name}} </md-option> </md-select>
 							<div ng-messages="securityInformation.rawMaterial.$error">
-								<p ng-show="isRMOrderpresent" class="error-msg">Please
-									select venodr first</p>
+								<div ng-message="required">Please select Raw Material</div>
 							</div>
 							</md-input-container>
 						</div>

@@ -32,7 +32,7 @@
 			</div>
 			</md-input-container>
 		</div>
-		<div layout-gt-sm="row">
+		<!-- <div layout-gt-sm="row">
 			<md-input-container> <label>VENDOR
 			</label> <md-select ng-model="selectedVendor" name="vendorId"
 				ng-disabled="isVendorId" ng-init="displayVendorId()" name="vendorId"
@@ -42,10 +42,24 @@
 			 <div ng-messages="RMOrderInformation.vendorId.$error">
 				<div ng-message="required">Please select Vendor</div>
 			</div>
-			 <!--  <span ng-show="RMOrderInformation.vendorId.$error.required" class="error-msg">Select service</span> -->
-			
+			</md-input-container>
+		</div> -->
+		
+		<div layout-gt-sm="row">
+			<md-input-container> <label>VENDOR
+			</label> <md-select ng-model="rmOrder.vendor.id" name="vendorId"
+				ng-disabled="isVendorId" ng-init="displayVendorId()" name="vendorId"
+				required ng-change="vendorRmList($index)">
+			<md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id">
+			{{vendorId.companyName}} </md-option> </md-select> 
+			 <div ng-messages="RMOrderInformation.vendorId.$error">
+				<div ng-message="required">Please select Vendor</div>
+			</div>
 			</md-input-container>
 		</div>
+		
+		
+		
 		<h2>Raw Material List</h2>
 		<table>
 			<tr>
@@ -78,7 +92,7 @@
 			<md-input-container> <label
 				style="color: black;">RAW MATERIAL</label> <md-select
 				ng-model="orderRawMaterial.rawmaterial" name="rawmaterial"
-				value="rawmaterial.id" ng-disabled="!(!!selectedVendor)" name="rawMaterialId">
+				value="rawmaterial.id" ng-disabled="!rmOrder.vendor.id" name="rawMaterialId">
 			<md-option ng-repeat="rawmaterial in vendorRmList"
 				ng-value="rawmaterial.rawmaterial">
 			{{rawmaterial.rawmaterial.name}} </md-option> </md-select>
@@ -88,7 +102,7 @@
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">QUANTITY</label> <input
 				type="number" ng-model="orderRawMaterial.quantity" name="quantity"
-				ng-disabled="!selectedVendor"
+				ng-disabled="!rmOrder.vendor.id"
 				ng-change="addQuantity(orderRawMaterial.quantity)" ng-maxlength="10">
 				<div ng-messages="RMOrderInformation.quantity.$error">
 				   <div ng-message="maxlength">You can enter only 10 digit</div>
@@ -103,7 +117,7 @@
 
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">TOTAL PRICE</label> <input
-				type="number" ng-model="rmOrder.totalPrice" value="{{totalPrice}}"
+				type="number" ng-model="rmOrder.totalPrice" value="{{totalprice}}"
 				name="totalprice" ng-disabled="isPriceReadOnly">
 			<div ng-messages="RMOrderInformation.totalprice.$error">
 				<div ng-message="required">Please enter total price</div>

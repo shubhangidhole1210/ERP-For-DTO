@@ -15,7 +15,7 @@
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">USER ID</label> <input type="text"
 				ng-model="user.userid" required name="userid" ng-minlength="5"
-				ng-disabled="isReadOnly" autocomplete="off">
+				ng-disabled="isReadOnly" autocomplete="off" limit-to="255">
 			<div ng-messages="userInformation.userid.$error">
 				<div ng-message="required">Please enter user ID</div>
 				<div ng-message="minlength">User ID should be minimum 5
@@ -28,7 +28,7 @@
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">PASSWORD</label> <input
 				type="password" ng-model="user.password" required name="password"
-				ng-minlength="5" ng-disabled="isReadOnly">
+				ng-minlength="5" ng-disabled="isReadOnly" limit-to="255">
 			<div ng-messages="userInformation.password.$error">
 				<div ng-message="required">Password is required</div>
 				<div ng-message="minlength">password is too short</div>
@@ -40,8 +40,8 @@
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">FIRST NAME</label> <input
 				type="text" ng-model="user.firstName" required name="firstName"
-				ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255"
-				onkeypress='return event.charCode >= 65 && event.charCode <= 120'>
+				ng-disabled="isReadOnly"  ng-maxlength="255"
+				onkeypress='return event.charCode >= 65 && event.charCode <= 120' limit-to="255">
 			<div ng-messages="userInformation.firstName.$error">
 				<div ng-message="required">Please enter First Name</div>
 				<div ng-message="minlength">User Name Should be minimum two
@@ -53,9 +53,9 @@
 
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">LAST NAME</label> <input type="text"
-				ng-model="user.lastName" required name="lastName" ng-minlength="2" ng-maxlength="255"
+				ng-model="user.lastName" required name="lastName"  ng-maxlength="255"
 				ng-disabled="isReadOnly"
-				onkeypress='return event.charCode >= 65 && event.charCode <= 120'>
+				onkeypress='return event.charCode >= 65 && event.charCode <= 120' limit-to="255">
 			<div ng-messages="userInformation.lastName.$error">
 				<div ng-message="required">Please enter  last name</div>
 				<div ng-message="minlength">Last Name Should be minimum two
@@ -87,22 +87,21 @@
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">EMAIL</label> <input type="email"
 				ng-model="user.email" required name="email" ng-disabled="isReadOnly"
-				placeholder="user@gmail.com">
+				placeholder="user@gmail.com"  ng-maxLength="255" limit-to="255">
 			<div ng-messages="userInformation.email.$error">
 				<div ng-message="required">Please enter user email id</div>
 				<div ng-message="email">Please enter valid email id</div>
 				<div ng-message="apierror">{{message}}</div>
+				<div ng-message="minlength">Email id should be minimum 2 character</div>
+				<div ng-message="maxlength">Email id should be maximum 255 character</div>
 			</div>
 			</md-input-container>
 		</div>
-		<md-input-container class="drop-down"> <label>USER TYPE*</label> <md-select
+		<md-input-container> <label>USER TYPE*</label> <md-select
 			ng-model="user.usertype.id" name="userType" ng-disabled="isReadOnly"
 			ng-required="true" required ng-init="getUserType()" id="userType"> 
 			<md-option ng-repeat="userType in data" ng-value="userType.id">{{userType.usertypeName}} </md-option> </md-select>
-		<!-- <div ng-messages="userInformation.userType.$error">
-			<div ng-message="required">Please Select User Type</div>
-		</div> -->
-		 <div class="errors" ng-messages="userInformation.userType.$error" ng-show="submitInformation">
+		 <div  ng-messages="userInformation.userType.$error">
           <div ng-message="required">Please select user Type</div>
         </div>
 		
@@ -115,27 +114,27 @@
 		<md-input-container class="md-block" flex-gt-sm type="password">
 		<label class="input-filed-label">DATE OF BIRTH[MM/DD/YYYY]*</label> <input
 			type="date" placeholder="Enter date of birth" ng-model="user.dob"
-			name="dob" required id="dob" ng-disabled="isReadOnly" ng-change="birtDateValidation(user.dob)">
+			name="dob" required id="dob" ng-disabled="isReadOnly" ng-change="birthDateValidation(user.dob);">
 		<div ng-messages="userInformation.dob.$error">
 			<div ng-message="required">Please Enter Date of Birth</div>
 			<!-- <div ng-message="customeMsg">{{msg}}</div> -->
 		</div>
-		  <div ng-show=" userInformation.dob.$error.customeMsg" class="error-msg">{{msg}}</div>
+		  <div ng-show=" userInformation.dob.$error.customeMsg" class="error-msg">{{invalidDOBMsg}}</div>
 		
 		</md-input-container>
 		
 		<md-input-container class="md-block" flex-gt-sm type="password">
-		<input type="date" placeholder="Enter date of birth"
+		<input type="date" placeholder="Enter date of Joining"
 			ng-model="user.doj" name="doj" required ng-disabled="isReadOnly"
-			id="doj" ng-change="joiningDateValidation(user.doj); birthAndJoinDateValidation(user.dob,user.doj)" min="{{user.dob}}"> <label
+			id="doj" ng-change="validateJoiningDate(user.doj)" min="{{user.dob}}"> <label
 			class="input-filed-label">DATE OF JOINING[MM/DD/YYYY]*</label>
 		<div ng-messages="userInformation.doj.$error">
 			<div ng-message="required">Please Enter Date of Joining</div>
 		</div>
 		<div ng-show=" userInformation.doj.$error.min" class="error-msg">joining
 			Date should be greater than birth date</div>
-			<div ng-show=" userInformation.doj.$error.customeMsg" class="error-msg">{{msg}}</div>
-			<div ng-show=" userInformation.doj.$error.customeMsg1" class="error-msg">{{msg}}</div>
+			<div ng-show=" userInformation.doj.$error.customMsg" class="error-msg">{{invalidDOjMsg}}</div>
+			<div ng-show=" userInformation.doj.$error.customMsg" class="error-msg">{{invalidDOJMsg}}</div>
 		</md-input-container>
 	</div>
 	</md-dialog-content>

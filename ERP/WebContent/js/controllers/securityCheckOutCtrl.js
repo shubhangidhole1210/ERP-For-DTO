@@ -20,7 +20,7 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 	    };
 	    $scope.currentDate = utils.getCurrentDate();
 	   /* $scope.currentDate= new Date();*/
-	    /*$scope.createDate = $filter('date')(Date.now(), 'MM-dd-yyyy');*/
+	   /* $scope.createDate = $filter('date')(Date.now(), 'MM-dd-yyyy');*/
 	    
 	    $scope.clientProductOrder=function(index)
 		{
