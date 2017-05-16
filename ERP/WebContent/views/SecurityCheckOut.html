@@ -33,7 +33,7 @@
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
 							<label class="input-filed-label">VEHICLE NUMBER</label> <input
-								type="text" required name="vehicleName" ng-model="vehicleNo">
+								type="text" required name="vehicleName" ng-model="vehicleNo" ng-pattern="^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$">
 							<div ng-messages="securityInformation.vehicleName.$error">
 								<div ng-message="required">Please enter Vehicle Number</div>
 							</div>
@@ -41,7 +41,7 @@
 
 							<md-input-container class="md-block" flex-gt-sm>
 							<label class="input-filed-label">DRIVER NAME</label> <input
-								type="text" required name="driverName" ng-model="driver_Name" ng-minlngth="2" ng-maxlength="255">
+								type="text" required name="driverName" ng-model="driver_Name" ng-minlngth="2" limit-to="255">
 							<div ng-messages="securityInformation.driverName.$error">
 								<div ng-message="required">Please enter Driver Name</div>
 								<div ng-message="minlength">Driver Name should be minimum 2 character</div>
@@ -71,7 +71,7 @@
 						</div>
 						<md-input-container class="md-block" flex-gt-sm>
 						<label class="input-filed-label">DESCRIPTION</label> <input
-							type="text" required name="description" ng-model="description" ng-minlength="4" ng-maxlength="255">
+							type="text" required name="description" ng-model="description" ng-minlength="4" limit-to="255">
 						<div ng-messages="securityInformation.description.$error">
 							<div ng-message="required">Please enter Description</div>
 							<div ng-message="minlength">Description should be minimum 4 character</div>
@@ -81,8 +81,8 @@
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm type="password">
 							<label class="input-filed-label">DATE[MM/DD/YYYY]*</label> <input
-								type="text" placeholder="Enter date of birth"
-								ng-model="createDate " name="createDate" required ng-value="{{currentDate}}">
+								type="date" placeholder="Enter date of birth"
+								ng-model="createDate " name="createDate" required  ng-disabled=true>
 							<div ng-messages="securityInformation.createDate.$error">
 								<div ng-message="required">Please enter Date</div>
 							</div>
@@ -91,12 +91,13 @@
 						<div layout-gt-sm="row">
 							<md-input-container style="width:100%"> <label
 								style="color: black;">Product Order</label> 
-								<md-select ng-model="productOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayProductList($index)"> 
+								<md-select ng-model="productOrders.id" name="rawMaterial" ng-init="getRMInformation()" ng-change="displayProductList($index)" ng-disabled="!selectedClient"> 
 								<md-option ng-repeat="productOrder in clientProductList" ng-value="productOrder.id">{{productOrder.invoiceNo}} </md-option>
 								 </md-select>
 								 <div ng-messages="securityInformation.rawMaterial.$error">
 								    <div ng-message="required">Please Select Product</div>
 								 </div>
+								 <p ng-show="productOrderMsg" style="color: rgb(40,53,147) "">Please select Client first</p>
 							</md-input-container>
 						</div>
 						<div layout-gt-sm="row"></div>
@@ -113,14 +114,16 @@
 								<td>{{product.quantity}}</td>
 								<td>{{product.remainingQuantity}}</td>
 								<td><md-input-container class="md-block" flex-gt-sm>
-									<label class="input-filed-label">QUANTITY</label> <input
+									<label class="input-filed-label">QUANTITY</label><input
 										type="number" ng-model="rawmaterial.invoiceQuantity"
 										name="invoiceQuantity{{$index}}"
 										max="{{rawmaterial.remainingQuantity}}"
-										ng-change="toCompareQuantity(rawmaterial.remainingQuantity,rawmaterial.invoiceQuantity)">
+										ng-change="toCompareQuantity(rawmaterial.remainingQuantity,rawmaterial.invoiceQuantity)" min="1">
 									<div ng-messages="securityInformation.invoiceQuantity.$error">
 										<div ng-message="required">please enter quantity</div>
-
+									</div>
+									<div ng-show="securityInformation.invoiceQuantity{{$index}}.$error.min" class="error-msg">
+									  Quanity should be greater then 0
 									</div>
 									<div
 										ng-show=" securityInformation.invoiceQuantity{{$index}}.$error.max"

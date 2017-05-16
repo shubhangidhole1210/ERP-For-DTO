@@ -158,7 +158,8 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		console.log('in update other charges');
 		console.log('Other Charges : '+$scope.rmOrder.otherCharges);
 		$scope.rmOrder.totalPrice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
-		console.log('Total Price : '+$scope.totalPrice);
+		console.log('Total Price : '+$scope.rmOrder.totalPrice);
+		/*console.log('actual price : ' +)*/
 	}
 	
 	 
@@ -226,7 +227,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	    
 	  
 	    
-	    $scope.addQuantity = function(quantity) {
+	   /* $scope.addQuantity = function(quantity) {
 			if (quantity <= 0) {
 				console.log('if condition')
 				$scope.message = 'quantity should be greater than 0';
@@ -234,7 +235,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 			} else {
 				$scope.RMOrderInformation.quantity.$setValidity("message", true);
 			}
-		};
+		};*/
 	    
 		$scope.$watch('vendorId', function(val)
 				{

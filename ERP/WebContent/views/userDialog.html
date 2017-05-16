@@ -117,16 +117,16 @@
 			name="dob" required id="dob" ng-disabled="isReadOnly" ng-change="birthDateValidation(user.dob);">
 		<div ng-messages="userInformation.dob.$error">
 			<div ng-message="required">Please Enter Date of Birth</div>
-			<!-- <div ng-message="customeMsg">{{msg}}</div> -->
+			<div ng-message="customMsg1">{{invalidDOBMsg}}</div>
 		</div>
-		  <div ng-show=" userInformation.dob.$error.customeMsg" class="error-msg">{{invalidDOBMsg}}</div>
+		 <!--  <div ng-show=" userInformation.dob.$error.customeMsg" class="error-msg">{{invalidDOBMsg}}</div> -->
 		
 		</md-input-container>
 		
 		<md-input-container class="md-block" flex-gt-sm type="password">
 		<input type="date" placeholder="Enter date of Joining"
 			ng-model="user.doj" name="doj" required ng-disabled="isReadOnly"
-			id="doj" ng-change="validateJoiningDate(user.doj)" min="{{user.dob}}"> <label
+			id="doj" ng-change="validateJoiningDate(user.dob,user.doj)"> <label
 			class="input-filed-label">DATE OF JOINING[MM/DD/YYYY]*</label>
 		<div ng-messages="userInformation.doj.$error">
 			<div ng-message="required">Please Enter Date of Joining</div>

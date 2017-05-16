@@ -13,22 +13,20 @@
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">NAME</label> <input type="text"
 				ng-model="rmOrder.name" value="rmOrder.name" required name="name"
-				ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255">
+				ng-disabled="isReadOnly" ng-minlength="2" limit-to="255">
 			<div ng-messages="RMOrderInformation.name.$error">
 				<div ng-message="required">Please enter Name</div>
 				<div ng-message="minlength">Name should be minimum two character</div>
-				<div ng-message="maxlength">Name should be minimum 255 character</div>
 			</div>
 			</md-input-container>
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">DESCRIPTION</label> <input
 				type="text" ng-model="rmOrder.description"
 				value="rmOrder.description" required name="description"
-				ng-disabled="isReadOnly" ng-minlength="4" ng-maxlength="255">
+				ng-disabled="isReadOnly" ng-minlength="4" limit-to="255">
 			<div ng-messages="RMOrderInformation.description.$error">
 				<div ng-message="required">Please enter Description</div>
 				<div ng-message="minlength">Description should be minimum 2 Character</div>
-				<div ng-message="maxlength">Description should be maximum 255 character</div>
 			</div>
 			</md-input-container>
 		</div>
@@ -103,10 +101,12 @@
 			<label class="input-filed-label">QUANTITY</label> <input
 				type="number" ng-model="orderRawMaterial.quantity" name="quantity"
 				ng-disabled="!rmOrder.vendor.id"
-				ng-change="addQuantity(orderRawMaterial.quantity)" ng-maxlength="10">
+				ng-change="addQuantity(orderRawMaterial.quantity)" ng-maxlength="10" min="1">
 				<div ng-messages="RMOrderInformation.quantity.$error">
 				   <div ng-message="maxlength">You can enter only 10 digit</div>
 				</div>
+				<div ng-show="RMOrderInformation.quantity.$error.min"
+				class="error-msg">Quantity should be greater then 0</div>
 			<div ng-show="RMOrderInformation.quantity.$error.message"
 				class="error-msg">{{message}}</div>
 			</md-input-container>
@@ -117,7 +117,7 @@
 
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">TOTAL PRICE</label> <input
-				type="number" ng-model="rmOrder.totalPrice" value="{{totalprice}}"
+				type="number" ng-model="rmOrder.totalPrice" value="{{rmOrder.totalprice}}"
 				name="totalprice" ng-disabled="isPriceReadOnly">
 			<div ng-messages="RMOrderInformation.totalprice.$error">
 				<div ng-message="required">Please enter total price</div>
@@ -147,10 +147,13 @@
 			<label class="input-filed-label">OTHER CHARG</label> <input
 				type="number" ng-model="rmOrder.otherCharges"
 				ng-change="updateOtherCharges()" name="otherCharges"
-				ng-disabled="isReadOnly">
+				ng-disabled="isReadOnly" min="0" ng-maxlength="8" >
 			<div ng-messages="RMOrderInformation.otherCharges.$error">
 				<div ng-message="required">Please enter charges</div>
+				<div ng-message="min">Chrages should be greater then 0</div>
+				<div ng-message="maxlength">You can enter only 8 digit</div>
 			</div>
+			
 			</md-input-container>
 		</div>
 	</div>

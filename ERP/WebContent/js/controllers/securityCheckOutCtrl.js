@@ -1,6 +1,7 @@
 erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $mdToast,
 		$rootScope, SERVER_URL,$filter,utils,Auth,$location) {
-	
+	$scope.createDate = $filter('date')(Date.now(), 'MM-dd-yyyy');
+	 $scope.productOrderMsg= true;
 	 $scope.getClient=function(){
 	    	var httpparams = {};
 			httpparams.method = 'GET';
@@ -18,12 +19,10 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 
 			});
 	    };
-	    $scope.currentDate = utils.getCurrentDate();
-	   /* $scope.currentDate= new Date();*/
-	   /* $scope.createDate = $filter('date')(Date.now(), 'MM-dd-yyyy');*/
-	    
+	   
 	    $scope.clientProductOrder=function(index)
 		{
+	    	 $scope.productOrderMsg= false;
 			var httpparams = {};
 			httpparams.method = 'GET';
 			httpparams.url = SERVER_URL + "productorder/incompleteProductOrder/"+$scope.selectedClient;
@@ -70,7 +69,7 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 				console.log('its else block');
 			}
 		};
-		
+		$scope.createDate = new Date($scope.createDate);
 		$scope.saveSecurityCheckOutInformation = function() {
 			console.log('Saving saveSecurityInformation');
 			var index=0;

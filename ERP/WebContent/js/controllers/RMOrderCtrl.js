@@ -83,6 +83,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$scope.isPriceReadOnly = true;
 		$scope.rmOrder = $scope.rmOrders[index];
 		console.log($scope.rmOrder);
+		console.log("in edit Rm ordr" +$scope.rmOrder.totalprice)
 		$scope.title="EDIT RAW MATERIAL ORDER INFORMATION"
 		$mdDialog
 				.show({

@@ -1,6 +1,8 @@
 erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		$rootScope, SERVER_URL,$filter,utils,Auth,$location) {
+	 var date = new Date();
 	$scope.createDate = $filter('date')(Date.now(), 'MM-dd-yyyy');
+	$scope.rmMsg = true;
 	$scope.getRMInformation = function()
 
 	{
@@ -51,6 +53,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 	
 	$scope.displayStatusInformationList = function(index)
 	{
+
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "rawmaterialorderinvoice/liststatus/"+ $scope.rawmaterialorderinvoice.id;
@@ -176,6 +179,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 	
 	$scope.vendorRmOrder=function(index)
 	{
+		$scope.rmMsg = false;
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "rawmaterialorder/getVendorOrder/"+$scope.selectedVendor;
