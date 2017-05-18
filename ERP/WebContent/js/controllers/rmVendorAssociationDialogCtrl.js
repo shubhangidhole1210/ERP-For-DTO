@@ -1,11 +1,12 @@
 erpApp
 		.controller(
 				'RMVendorAssociationDialogCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,rmOrderAssociation,flag,action,title){
+				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,rmOrderAssociation,flag,action,title,dropdownAction){
 					$scope.isReadOnly = action;
 					$scope.flag = flag;
 					$scope.rmOrderAssociation = rmOrderAssociation;
 					$scope.title = title;
+					$scope.isDropDownreadOnly = dropdownAction;
 					$scope.hide = function() {
 						console.log('hide DialogController');
 						$mdDialog.hide();

@@ -1,8 +1,9 @@
-erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,flag,action,information,rawMaterial,$location) {
+erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,flag,action,information,rawMaterial,$location,unitAction) {
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
 	$scope.rawMaterial = rawMaterial;
 	$scope.information= information;
+	$scope.isUnitReadOnly = unitAction;
 	$scope.hide = function() {
 		console.log('hide DialogController');
 		$mdDialog.hide();

@@ -29,7 +29,7 @@
 			<label class="input-filed-label">DESCRIPTION</label> <input
 				type="text" ng-model="client.description" required
 				name="description" ng-minlength="4" ng-maxlength="255"
-				ng-disabled="isReadOnly">
+				ng-disabled="isReadOnly" limit-to="255">
 			<div ng-messages="clientInformation.description.$error">
 				<div ng-message="required">Please enter Description</div>
 				<div ng-message="minlength">Description should be minimum 4
@@ -55,7 +55,7 @@
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">EMAIL ID</label> <input type="email"
 				ng-model="client.emailid" required name="emailid"
-				ng-disabled="isReadOnly">
+				ng-disabled="isReadOnly" placeholder="client@gmail.com">
 			<div ng-messages="clientInformation.emailid.$error">
 				<div ng-message="required">Please enter Email Id</div>
 				<div ng-message="email">Please enter valid Email Id</div>
@@ -82,7 +82,7 @@
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">CONTACT PERSON NAME</label> <input
 				type="type" ng-model="client.contactpersonname" required
-				name="contactpersonname" ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255">
+				name="contactpersonname" ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255" limit-to="10">
 			<div ng-messages="clientInformation.contactpersonname.$error">
 				<div ng-message="required">Please enter Contact Person Name</div>
 				<div ng-message="minlength">Name should be minimum 2 character</div>

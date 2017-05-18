@@ -20,9 +20,10 @@
 			<label class="input-filed-label">PRICE PER UNIT</label> <input
 				type="number" ng-model="rmOrderAssociation.pricePerUnit"
 				value="rmOrderAssociation.pricePerUnit" required name="pricePerUnit"
-				ng-disabled="isReadOnly">
+				ng-disabled="isReadOnly" ng-maxlength="6">
 			<div ng-messages="rmVendorAssociation.pricePerUnit.$error">
 				<div ng-message="required">Please Enter Price Per Unit</div>
+				<div ng-message="maxlength">You can enter only 6 digit</div>
 			</div>
 			</md-input-container>
 
@@ -31,7 +32,7 @@
 		<div>
 			<md-input-container style="width:100%"> <label>Raw
 				material*</label> <md-select ng-model="rmOrderAssociation.rawmaterial.id"
-				name="rawMaterial" value="rawMaterial.id" ng-disabled="isReadOnly"
+				name="rawMaterial" value="rawMaterial.id" ng-disabled="isDropDownreadOnly"
 				ng-init="getRawMaterials()" required> <md-option
 				ng-repeat="rawMaterial in rawmaterials" ng-value="rawMaterial.id">
 			{{rawMaterial.name}} </md-option> </md-select>
@@ -42,9 +43,9 @@
 		</div>
 
 		<md-input-container class="drop-down"> <label
-			style="color: black;">VENDOR *</label> <md-select
+			style="color: black;">Vendor *</label> <md-select
 			ng-model="rmOrderAssociation.vendor.id" name="vendor"
-			value="vendor.id" ng-disabled="isReadOnly" ng-init="getVendors()"
+			value="vendor.id" ng-disabled="isDropDownreadOnly" ng-init="getVendors()"
 			required> <md-option ng-repeat="vendor in venodrs"
 			ng-value="vendor.id"> {{vendor.companyName}} </md-option> </md-select>
 		<div ng-messages="rmVendorAssociation.vendor.$error">

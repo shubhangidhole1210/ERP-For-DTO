@@ -26,7 +26,7 @@
 
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">EMAIL</label>
-            <input type="email" required name="email" ng-model="vendorUser.email" value="vendorUser.email" ng-disabled="isReadOnly" >
+            <input type="email" required name="email" placeholder="vendor@gmail.com" ng-model="vendorUser.email" value="vendorUser.email" ng-disabled="isReadOnly" >
             <div ng-messages="vendorInformation.email.$error">
               <div ng-message="required">Please enter Email ID</div>
               <div ng-message="email">Please enter Valid Email ID</div>
@@ -119,7 +119,7 @@
 
           <md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">DESCRIPTION</label>
-            <input type="text" required name="description" ng-model="vendorUser.description" value="vendorUser.description" ng-minlength="4" ng-maxlengt="255" ng-disabled="isReadOnly" >
+            <input type="text" required name="description" ng-model="vendorUser.description" value="vendorUser.description" ng-minlength="4"  ng-disabled="isReadOnly" limit-to="255">
             <div ng-messages="vendorInformation.description.$error">
             <div ng-message="required">Vendor Discription Required </div>
             <div ng-message="minlength">Discription Should be minimum 4 character and maximum 255 character</div>

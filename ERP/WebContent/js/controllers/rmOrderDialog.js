@@ -6,7 +6,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	$scope.isVendorId = vendorAction;
 	$scope.rmOrder.actualPrice = $scope.rmOrder.actualPrice ? $scope.rmOrder.actualPrice : 0;
 	$scope.rmOrder.tax = $scope.rmOrder.tax ? $scope.rmOrder.tax : 0;
-	$scope.rmOrder.totalPrice = $scope.rmOrder.totalPrice ? $scope.rmOrder.totalPrice : 0;
+	$scope.rmOrder.totalprice = $scope.rmOrder.totalprice ? $scope.rmOrder.totalprice : 0;
 	$scope.rmOrder.otherCharges = $scope.rmOrder.otherCharges ? $scope.rmOrder.otherCharges : 0;
 	$scope.title = title;
 	$scope.displayAddRM = hideAction;
@@ -35,7 +35,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				quantity:$scope.rmOrder.quantity,
 				/*vendor:$scope.selectedVendor,*/
 				vendor:$scope.rmOrder.vendor.id,
-				totalprice:$scope.rmOrder.totalPrice,
+				totalprice:$scope.rmOrder.totalprice,
 				tax:$scope.rmOrder.tax,
 				otherCharges:$scope.rmOrder.otherCharges,
 				actualPrice:$scope.rmOrder.actualPrice
@@ -107,6 +107,12 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 			 $scope.rmOrder.otherCharges="";
 		 });
 		 }*/
+	
+	$scope.updateQuantity = function(quantity){
+		console.log("in update quantity function");
+		console.log("upadted quantity : " + quantity);
+		console.log()
+	}
 
 	$scope.submitRMOrderInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
@@ -137,9 +143,10 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		})
 	};
 	$scope.otherCharges=0;
+	$scope.productSubTotal = 0;
+	var TAX = 0.18;
 	$scope.calculateTotalPrice=function(){
-		var TAX = 0.18;
-		$scope.productSubTotal = 0;
+		
 		console.log($scope.orderRawMaterials);
 		for (var i = 0; i < $scope.orderRawMaterials.length; i++){
 		   $scope.productSubTotal = $scope.orderRawMaterials[i].rawmaterial.pricePerUnit * $scope.orderRawMaterials[i].quantity;
@@ -149,17 +156,31 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		$scope.rmOrder.actualPrice = $scope.productSubTotal;
 		$scope.rmOrder.tax = $scope.productSubTotal * TAX;
 		console.log('Tax Sub Total : '+$scope.rmOrder.tax);
-		$scope.rmOrder.totalPrice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
-		console.log('Total Price : '+ $scope.rmOrder.totalPrice);
+		$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
+		console.log('Total Price : '+ $scope.rmOrder.totalprice);
 	}
 	
 	$scope.updateOtherCharges=function()
 	{
 		console.log('in update other charges');
 		console.log('Other Charges : '+$scope.rmOrder.otherCharges);
-		$scope.rmOrder.totalPrice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
-		console.log('Total Price : '+$scope.rmOrder.totalPrice);
+		$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
+		console.log('Total Price : '+$scope.rmOrder.totalprice);
 		/*console.log('actual price : ' +)*/
+	}
+	
+	$scope.updateQuantity = function(quantity){
+		console.log("in update quantity function");
+		console.log("upadted quantity : " + quantity);
+		console.log("total price : " +$scope.rmOrder.totalprice);
+		console.log("actual price : " + $scope.rmOrder.actualPrice);
+		console.log("tax price : " + $scope.rmOrder.tax);
+		console.log("other charges : " + $scope.rmOrder.otherCharges);
+		$scope.rmOrder.actualPrice = $scope.rmOrder.actualPrice * quantity;
+		console.log("after calculate total " + $scope.productSubTotal);
+		
+		
+		
 	}
 	
 	 

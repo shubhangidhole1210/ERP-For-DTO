@@ -1,5 +1,6 @@
 erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 	$scope.isRmPresent=false;
+	$scope.isUnitReadOnly = false;
 	$rootScope.$on("CallPopulateRawMaterial", function() {
 		$scope.populateRawMaterial();
 	});
@@ -37,6 +38,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 	$scope.showAddRawMaterial = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
+		$scope.isUnitReadOnly = false;
 		$scope.rawMaterial = {};
 		$scope.information="ADD RAW MATERIAL INFORMATION"
 		var addNewrawmaterialDialog = {
@@ -51,7 +53,8 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 				rawMaterial : $scope.rawMaterial,
 				flag : $scope.flag,
 				action : $scope.isReadOnly,
-				information : $scope.information
+				information : $scope.information,
+				unitAction : $scope.isUnitReadOnly
 			}
 		};
 		$mdDialog
@@ -63,6 +66,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 	$scope.showEditRM = function(ev, index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
+		$scope.isUnitReadOnly = true;
 		$scope.rawMaterial = $scope.rawMaterials[index];
 		console.log($scope.user);
 		$scope.information = "EDIT RAW MATERIAL INFORMATION"
@@ -78,7 +82,8 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 						rawMaterial : $scope.rawMaterial,
 						flag : $scope.flag,
 						action : $scope.isReadOnly,
-						information : $scope.information
+						information : $scope.information,
+						unitAction : $scope.isUnitReadOnly
 					}
 				})
 				.then(function(answer) {},
@@ -89,6 +94,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		$scope.isReadOnly = true;
 		$scope.rawMaterial = $scope.rawMaterials[index];
 		$scope.isSaving = false;
+		$scope.isUnitReadOnly = false;
 		console.log($scope.rawMaterial);
 		$scope.information="VIEW RAW MATERIAL INFORMATION"
 		$mdDialog.show({
@@ -102,7 +108,8 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 						rawMaterial : $scope.rawMaterial,
 						flag : $scope.flag,
 						action : $scope.isReadOnly,
-						information : $scope.information
+						information : $scope.information,
+						unitAction : $scope.isUnitReadOnly
 					}
 				})
 				.then(function(answer) {},

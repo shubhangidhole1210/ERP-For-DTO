@@ -15,11 +15,13 @@
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">NAME</label> <input type="text"
 				ng-model="product.name" value="product.name" required name="name"
-				ng-minlength="2" ng-disabled="isReadOnly">
+				ng-minlength="2" ng-disabled="isReadOnly" limit-to="255" ng-maxlength="255">
 			<div ng-messages="productInformation.name.$error">
 				<div ng-message="required">Please enter name of Product</div>
 				<div ng-message="minlength">Product name should be minimum 2
 					character</div>
+				<div ng-message="maxlength">Product name should be maximum 255
+					character</div>	
 			</div>
 			</md-input-container>
 		</div>
@@ -51,7 +53,7 @@
 			<label class="input-filed-label">DESCRIPTION</label> <input
 				type="text" ng-model="product.description"
 				value="product.description" required name="description"
-				ng-minlength="4" ng-maxlength="255" ng-disabled="isReadOnly">
+				ng-minlength="4" ng-maxlength="255" ng-disabled="isReadOnly" limit-to="255">
 			<div ng-messages="productInformation.description.$error">
 				<div ng-message="required">Please enter description</div>
 				<div ng-message="minlength">Product description Should be

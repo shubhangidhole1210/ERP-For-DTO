@@ -297,6 +297,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 	  
 	  $scope.editUserTypePage = function(ev , index) {
 		  $scope.flag = 1;
+		  $scope.isReadOnly = true;
 		  $scope.userTypePageAsso = $scope.userTypePageAssociations[index];
 		  $scope.information="EDIT USER TYPE PAGE ASSOCIATION"
 		    $mdDialog.show({

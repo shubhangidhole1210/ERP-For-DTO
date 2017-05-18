@@ -4,7 +4,7 @@ erpApp
 				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 					$scope.isReadOnly = false;
 					$scope.isPresentvenodrAsso=false;
-
+					$scope.isDropDownreadOnly = false;
 					$rootScope.$on("CallPopulateRMVendorAssociationList", function() {
 						$scope.populateRMVendorAssociationList();
 					});
@@ -50,6 +50,7 @@ erpApp
 					$scope.showAddNewRMVendorAssociation = function(ev) {
 						$scope.flag = 0;
 						$scope.isReadOnly = false;
+						$scope.isDropDownreadOnly = false;
 						$scope.rmOrderAssociation = {};
 						$scope.title="ADD RAW MATERIAL VENDOR ASSOCIATION INFORMATION"
 						var addNewRMVendorAsso = {
@@ -64,7 +65,8 @@ erpApp
 								rmOrderAssociation : $scope.rmOrderAssociation,
 								flag : $scope.flag,
 								action : $scope.isReadOnly,
-								title: $scope.title
+								title: $scope.title,
+								dropdownAction:$scope.isDropDownreadOnly
 							}
 						};
 						$mdDialog
@@ -105,6 +107,7 @@ erpApp
 					$scope.showRMVendorAssociation = function(ev, index) {
 						$scope.flag = 1;
 						$scope.isReadOnly = false;
+						$scope.isDropDownreadOnly = true;
 						$scope.rmOrderAssociation = $scope.rmOrderAssociations[index];
 						console.log($scope.rmOrderAssociation);
 						$scope.title= "EDIT RAW MATERIAL VENDOR ASSOCIATION INFORMATION"
@@ -120,7 +123,8 @@ erpApp
 										rmOrderAssociation : $scope.rmOrderAssociation,
 										flag : $scope.flag,
 										action : $scope.isReadOnly,
-										title : $scope.title
+										title : $scope.title,
+										dropdownAction:$scope.isDropDownreadOnly
 									}
 								})
 								.then(function(answer) {},
@@ -130,6 +134,7 @@ erpApp
 					$scope.viewRMVendorAssociation = function(ev, index) {
 						$scope.flag = 2;
 						$scope.isReadOnly = true;
+						$scope.isDropDownreadOnly = true;
 						$scope.rmOrderAssociation = $scope.rmOrderAssociations[index];
 						$scope.isSaving = false;
 						$scope.title= "VIEW RAW MATERIAL VENDOR ASSOCIATION INFORMATION"
@@ -145,7 +150,8 @@ erpApp
 										rmOrderAssociation : $scope.rmOrderAssociation,
 										flag : $scope.flag,
 										action : $scope.isReadOnly,
-										title : $scope.title
+										title : $scope.title,
+										dropdownAction:$scope.isDropDownreadOnly
 									}
 								})
 								.then(function(answer) {},

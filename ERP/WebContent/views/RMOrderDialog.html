@@ -68,7 +68,7 @@
 			<tr ng-repeat="orderRawMaterial in orderRawMaterials">
 				<td>{{orderRawMaterial.rawmaterial.name}}</td>
 				<td><input type="number"
-					ng-value="{{orderRawMaterial.quantity}}" ng-model="orderRawMaterial.quantity" ng-change="addQuantity(orderRawMaterial.quantity)"></td>
+					ng-value="{{orderRawMaterial.quantity}}" ng-model="orderRawMaterial.quantity" ng-change="updateQuantity(orderRawMaterial.quantity)"></td>
 				<td>
 					<button type="button" style="height: 40px"
 						ng-click="deleteRM($index)">Delete</button>
@@ -117,8 +117,8 @@
 
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">TOTAL PRICE</label> <input
-				type="number" ng-model="rmOrder.totalPrice" value="{{rmOrder.totalprice}}"
-				name="totalprice" ng-disabled="isPriceReadOnly">
+				type="number" ng-model="rmOrder.totalprice"
+				name="totalprice" ng-disabled="isPriceReadOnly" value="{{totalprice}}">
 			<div ng-messages="RMOrderInformation.totalprice.$error">
 				<div ng-message="required">Please enter total price</div>
 			</div>
