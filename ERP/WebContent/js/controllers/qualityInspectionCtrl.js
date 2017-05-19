@@ -120,6 +120,9 @@ erpApp
 						} else if ($scope.rmInvoiceList[index].quantity <= parseInt($scope.rmInvoiceList[index].goodQuantity)) {
 							$scope.rmInvoiceList[index].isReturnInvoiceInitated = false;
 							$scope.rmInvoiceList[index].ischeckBoxDisabled = true;
+						}else if ($scope.rmInvoiceList[index].goodQuantity > 0){
+							$scope.rmInvoiceList[index].isReturnInvoiceInitated = true;
+							$scope.rmInvoiceList[index].ischeckBoxDisabled = false;
 						}
 						
 						else {

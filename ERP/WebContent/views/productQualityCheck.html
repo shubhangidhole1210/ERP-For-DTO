@@ -29,14 +29,16 @@
 			</td>
 			<td>
 			   	<md-input-container class="md-block" flex-gt-sm>
-					<input type="number" ng-model="productionplan.failQuantity" name="failQuantity" id="failQuantity" 
-					ng-change="comparePassQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" >
+					<input type="number" ng-model="productionplan.failQuantity" name="failQuantity{{$index}}" id="failQuantity" 
+					ng-change="validatePassAndFailQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" >
 				
 				</md-input-container>
 				<div ng-messages="productQualityForm.failQuantity.$error">
 					<div ng-message="required">Please enter user name</div>
+					<!-- <div ng-message="customMsg" class="error-msg">{{errorMsg}}</div> -->
             	</div>
-            	<div ng-show="productQualityForm.failQuantity{{$index}}.$error.customMsg" class="error-msg">pending quantity should be equal to pass and fail quantity</div>
+            	<div ng-show="productQualityForm.failQuantity{{$index}}.$error.customMsg" class="error-msg">{{errorMsg}}</div>
+			 <!--  <div ng-show="productQualityForm.failQuantity.$error.customMsg" class="error-msg">errorMsg</div> -->
 			</td>	
 			<td>
 			   <md-input-container class="md-block" flex-gt-sm>

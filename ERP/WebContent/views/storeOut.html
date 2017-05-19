@@ -11,21 +11,24 @@
 							<label style="color: black;">PRODUCT</label> <md-select
 								ng-model="productionPlan" name="vendorId"
 								ng-disabled="isReadOnly" ng-init="getProducts()" name="product"
-								required ng-change="getProductRMAssociation($index)">
+								 ng-change="getProductRMAssociation($index)" required>
 							<md-option ng-repeat="productionPlan in productionPlans"
 								ng-value="productionPlan">
 							{{productionPlan.product.name}} </md-option>
-							<div ng-messages="storeOutInformation.product.$error">
-								<div ng-message="required">Please select Product</div>
+							</md-select> 
+							 <div ng-messages="storeOutInformation.product.$error">
+								<div ng-message="required">Please enter Description</div>
 							</div>
-							</md-select> </md-input-container>
+							</md-input-container>
 						</div>
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
 							<label class="input-filed-label">DESCRIPTION</label> <input
-								type="text" required name="description" ng-model="description">
+								type="text" required name="description" ng-model="description" ng-minlength="4" ng-maxlength="255">
 							<div ng-messages="storeOutInformation.description.$error">
 								<div ng-message="required">Please enter Description</div>
+								<div ng-message="minlength">Description should be minimum 4 and maximum 255 character</div>
+								<div ng-message="maxlength">Description should be minimum 4 and maximum 255 character</div>
 							</div>
 							</md-input-container>
 							<div></div>
@@ -34,9 +37,10 @@
 						<label class="input-filed-label">QUANTITY TO MANUFACTURE</label> <input
 							type="number" required name="quantity"
 							ng-model="manuFactureQuantity"
-							ng-change="updateDispatchQuantity()">
+							ng-change="updateDispatchQuantity()" min="1">
 						<div ng-messages="storeOutInformation.quantity.$error">
 							<div ng-message="required">Please enter Quantity</div>
+							<div ng-message="min">Manufacture Quantity should be greater then 0 </div>
 						</div>
 						</md-input-container>
 						<h3>Raw Material List</h3>
@@ -45,18 +49,17 @@
 								<th>RAW MATERIAL NAME</th>
 								<th>QUANTITY REQUIRED</th>
 								<th>QUANTITY DISPATCH</th>
-								<!-- <th>REMARK</th> -->
 							</tr>
 							<tr ng-repeat="rawMaterial in data.data">
 								<td>{{rawMaterial.name}}</td>
 								<td>{{rawMaterial.quantityRequired}}</td>
 								<td><md-input-container class="md-block" flex-gt-sm>
 									<input type="number" name="dispatchQuantity"
-										ng-model="rawMaterial.quantityDispatched" ng-init="0">
+										ng-model="rawMaterial.quantityDispatched" >
 									</md-input-container></td>
 							</tr>
 						</table>
-						<div class=""store-info-btn"">
+						<div class="store-info-btn">
 							<md-dialog-actions layout="row"> <md-button
 								class="md-raised"
 								ng-click="submitInformation(storeOutInformation.$valid,$event)"

@@ -176,8 +176,9 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		console.log("actual price : " + $scope.rmOrder.actualPrice);
 		console.log("tax price : " + $scope.rmOrder.tax);
 		console.log("other charges : " + $scope.rmOrder.otherCharges);
-		$scope.rmOrder.actualPrice = $scope.rmOrder.actualPrice * quantity;
-		console.log("after calculate total " + $scope.productSubTotal);
+		console.log("product sub total : " + $scope.productSubTotal);
+		$scope.productSubTotal = $scope.productSubTotal * quantity;
+		console.log("aftera added updated quantity : " + $scope.productSubTotal);
 		
 		
 		

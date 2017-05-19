@@ -17,9 +17,11 @@
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">COMPANY NAME</label> <input
 				type="text" ng-model="client.companyname" required
-				name="companyname" ng-disabled="isReadOnly">
+				name="companyname" ng-disabled="isReadOnly" limit-to="255" ng-minlength="2" ng-maxlength="255">
 			<div ng-messages="clientInformation.companyname.$error">
 				<div ng-message="required">Please enter Company Name</div>
+				<div ng-message="minlength">Company Name should be minimum 2 and maximum 255 character</div>
+				<div ng-message="maxlength">Company Name should be minimum 2 and maximum 255 character</div>
 			</div>
 			</md-input-container>
 		</div>
@@ -44,9 +46,11 @@
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">ADDRESS</label> <input type="text"
 				ng-model="client.address" required name="address"
-				ng-disabled="isReadOnly">
+				ng-disabled="isReadOnly" limit-to="255" ng-minlength="2" ng-maxlength="255">
 			<div ng-messages="clientInformation.address.$error">
 				<div ng-message="required">Please enter Client Address</div>
+				<div ng-message="minlength">Address should be minimum 2 and maximum 255 character</div>
+				<div ng-message="maxlength">Address should be minimum 2 and maximum 255 character</div>
 			</div>
 			</md-input-container>
 		</div>
@@ -55,7 +59,7 @@
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">EMAIL ID</label> <input type="email"
 				ng-model="client.emailid" required name="emailid"
-				ng-disabled="isReadOnly" placeholder="client@gmail.com">
+				ng-disabled="isReadOnly" placeholder="client@gmail.com" limit-to="255">
 			<div ng-messages="clientInformation.emailid.$error">
 				<div ng-message="required">Please enter Email Id</div>
 				<div ng-message="email">Please enter valid Email Id</div>
@@ -82,7 +86,7 @@
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">CONTACT PERSON NAME</label> <input
 				type="type" ng-model="client.contactpersonname" required
-				name="contactpersonname" ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255" limit-to="10">
+				name="contactpersonname" ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255" limit-to="255">
 			<div ng-messages="clientInformation.contactpersonname.$error">
 				<div ng-message="required">Please enter Contact Person Name</div>
 				<div ng-message="minlength">Name should be minimum 2 character</div>

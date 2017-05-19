@@ -32,10 +32,11 @@
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
 							<label class="input-filed-label">DESCRIPTION</label> <input
-								type="text" required name="description" ng-model="description">
+								type="text" required name="description" ng-model="description" limit-to="255" ng-minlength="4" ng-maxlength="255">
 							<div ng-messages="dispatchQuantityInformation.description.$error">
 								<div ng-message="required">Please enter Description</div>
-
+								<div ng-message="minlength">Description should be minimum 4 and maximum 255 character</div>
+								<div ng-message="maxlength">Description should be minimum 4 and maximum 255 character</div>
 							</div>
 							</md-input-container>
 						</div>
@@ -51,11 +52,16 @@
 								<td><input type="number"
 									ng-model="orderProduct.remainingQuantity"
 									max="{{orderProduct.availableQuantity}}"
-									name="quantity{{$index}}">
+									name="quantity{{$index}}" min="0">
+									
 									<div
 										ng-show="dispatchQuantityInformation.quantity{{$index}}.$error.max"
 										class="error-msg">The value must be in range 0 to
-										{{orderProduct.availableQuantity}}!</div></td>
+										{{orderProduct.availableQuantity}}!</div>
+										<div
+										ng-show="dispatchQuantityInformation.quantity{{$index}}.$error.min"
+										class="error-msg">Invalid quantity!! Remaining quantity should be 0 or more then 0</div>
+										</td>
 							</tr>
 
 						</table>

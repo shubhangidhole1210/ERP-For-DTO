@@ -2,7 +2,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		$rootScope, SERVER_URL,$filter,utils,Auth,$location)
 {
 	$scope.currentDate = utils.getCurrentDate();
-	$scope.manuFactureQuantity = 0;
+	/*$scope.manuFactureQuantity = 0;*/
 	$scope.productionPlan = {};
 	$scope.getProducts=function()
 	{

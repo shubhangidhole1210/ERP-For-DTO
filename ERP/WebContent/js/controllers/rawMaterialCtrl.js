@@ -94,7 +94,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		$scope.isReadOnly = true;
 		$scope.rawMaterial = $scope.rawMaterials[index];
 		$scope.isSaving = false;
-		$scope.isUnitReadOnly = false;
+		$scope.isUnitReadOnly = true;
 		console.log($scope.rawMaterial);
 		$scope.information="VIEW RAW MATERIAL INFORMATION"
 		$mdDialog.show({

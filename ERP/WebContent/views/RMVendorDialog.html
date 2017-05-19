@@ -20,10 +20,11 @@
 			<label class="input-filed-label">PRICE PER UNIT</label> <input
 				type="number" ng-model="rmOrderAssociation.pricePerUnit"
 				value="rmOrderAssociation.pricePerUnit" required name="pricePerUnit"
-				ng-disabled="isReadOnly" ng-maxlength="6">
+				ng-disabled="isReadOnly" ng-maxlength="6" min="1">
 			<div ng-messages="rmVendorAssociation.pricePerUnit.$error">
 				<div ng-message="required">Please Enter Price Per Unit</div>
 				<div ng-message="maxlength">You can enter only 6 digit</div>
+				<div ng-message="min">Price should be greater then 0</div>
 			</div>
 			</md-input-container>
 
