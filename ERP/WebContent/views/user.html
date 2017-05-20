@@ -1,9 +1,10 @@
 <div ng-controller="userCtrl">
 	<div class="erp-information" ng-init="populateUserList($event); flag=1">
-		<div>
+		<div class="tooltip">
 			<md-button class="md-raised md-primary add-new-btn"
 				ng-click="showAddNewUser($event);resetUserData()" type="reset">ADD
 			NEW USER</md-button>
+			<span class="tooltiptext">Add new User here</span>
 		</div>
 
 		<md-input-container class="md-block" flex-gt-sm type="password">
@@ -17,7 +18,7 @@
 				<th>LAST NAME</th>
 				<th>MOBILE</th>
 				<th>USER TYPE</th>
-				<th>EMAIL</th>
+				<!-- <th>EMAIL</th> -->
 				<th>ACTION</th>
 			</tr>
 			<tr class="erp-table-row"
@@ -26,14 +27,14 @@
 				<td>{{users.lastName}}</td>
 				<td>{{users.mobile}}</td>
 				<td>{{users.usertype.usertypeName}}</td>
-				<td>{{users.email}}</td>
-				<td><md-button class="md-raised"
-						ng-click="showEditUser($event,$index)" ng-init="flag=1">EDIT</md-button>
-
+			<!-- 	<td>{{users.email}}</td> -->
+				<td><md-button class="md-raised "
+						ng-click="showEditUser($event,$index)" ng-init="flag=1">EDIT
+						</md-button>
 					<md-button class="md-raised" ng-click="showConfirm($event,$index)">Remove</md-button>
-
 					<md-button class="md-raised"
-						ng-click="viewUserInformation($event,$index)">VIEW</md-button></td>
+						ng-click="viewUserInformation($event,$index)">VIEW</md-button>
+						</td>
 
 			</tr>
 		</table>

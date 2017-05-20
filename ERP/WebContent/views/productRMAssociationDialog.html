@@ -10,7 +10,7 @@
 	<md-dialog-content>
 	<div class="md-dialog-content">
 
-		<div layout-gt-sm="row">
+		<!-- <div layout-gt-sm="row">
 			<md-input-container  class="drop-down">
 			<label style="color: black;">PRODUCT*</label> <md-select
 				ng-model="productRmAsso.product" name="product"
@@ -21,7 +21,22 @@
 				<div ng-message="required">Please Select Product</div>
 			</div>
 			</md-input-container>
-		</div>
+		</div> -->
+		
+		
+		 <div layout-gt-sm="row">
+               <md-input-container class="drop-down">
+          <label>Product*</label>
+          <md-select ng-model="productRmAsso.product.productId" name="product"  ng-disabled="productIdReadOnly" ng-required="true" required ng-init="getProducts()">
+            <md-option ng-repeat="product in products" ng-value="product.productId">
+               {{product.partNumber}}
+            </md-option>
+          </md-select>
+          <div ng-messages="productOrderInformation.product.$error">
+                 <div ng-message="required">Please Select Product</div>
+              </div>
+        </md-input-container>
+           </div>
 		<h2>Raw Material List</h2>
 		<table>
 			<tr>

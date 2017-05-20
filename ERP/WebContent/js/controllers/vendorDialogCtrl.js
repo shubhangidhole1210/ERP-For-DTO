@@ -113,6 +113,7 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 				
 			} else {
 				console.log('its else block');
+				utils.showToast('Please fill all required information');
 			}
 
 		}

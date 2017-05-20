@@ -79,6 +79,7 @@ erpApp.controller('unitDialogCtrl',
 			$scope.saveUnitInformation();
 		} else {
 			console.log('its else block');
+			utils.showToast('Please fill all required information');
 		}
 
 	};

@@ -70,7 +70,7 @@
           <tr ng-repeat="orderProductAssociation in orderproductassociations">
           <td>{{orderProductAssociation.product.name}}</td>
           <!-- <td>{{orderProductAssociation.quantity}}</td> -->
-          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-model="orderProductAssociation.quantity"></td>
+          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-model="orderProductAssociation.quantity" ng-change="orderProductAssociation.quantity"></td>
           <td><button type="button"  ng-click="deleteProduct($index)" class="multiple-added-delete">Delete</button></td>
           </tr>
           <tr ng-repeat="orderProductAssociation in productOrderList">

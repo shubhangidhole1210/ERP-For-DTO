@@ -78,6 +78,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		  $scope.productIdReadOnly = true;
 		  $scope.productRmAsso = $scope.productRmAssociations[index];
 		  console.log("sending ..", $scope.productRmAsso);
+		  console.log("in edit function product id is : " +$scope.productRmAsso.product)
 		  $scope.information="EDIT PRODUCT RM ASSOCIATION"
 		    $mdDialog.show({
 		      controller: 'productRmAssociationDialogController',

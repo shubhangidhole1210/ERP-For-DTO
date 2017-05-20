@@ -86,6 +86,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 			$scope.saveProductOrder($event);
 		} else {
 			console.log('its else block');
+			utils.showToast('Please fill all required information');
 		}
 
 	}

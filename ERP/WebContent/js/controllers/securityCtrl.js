@@ -74,9 +74,18 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		
 	}
 
-	$scope.submitInformation = function($event) {
+	/*$scope.submitInformation = function($event) {
 			$scope.saveSecurityInformation();
 			
+	};*/
+	$scope.submitInformation = function(isvaliduser,$event) {
+		if (isvaliduser) {
+			$scope.saveSecurityInformation();
+		} else {
+			console.log('its else block');
+			utils.showToast('Please fill all required information');
+		}
+
 	};
 	$scope.createDate = new Date($scope.createDate);
 	$scope.saveSecurityInformation = function() {

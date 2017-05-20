@@ -88,6 +88,7 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 			
 		} else {
 			console.log('its else block');
+			utils.showToast('Please fill all required information');
 		}
 
 	}

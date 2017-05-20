@@ -24,7 +24,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    
 	  $scope.saveProductRMAssociationInfo = function() {
     	var data = {
-    		product : $scope.productRmAsso.product,
+    		product : $scope.productRmAsso.product.productId,
     		productRMAssociationModelParts: $scope.productRmAsso.productRMAssociationModelParts
 		};
     	 
@@ -78,7 +78,9 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			if (isvaliduser) {
 				$scope.saveProductRMAssociationInfo();
 			} else {
-				console.log('its else block');
+				/*console.log('its else block');*/
+				utils.showToast('Please fill all required information');
+				
 			}
 
 		};
@@ -88,6 +90,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 				$scope.addRawMaterial();
 			} else {
 				console.log('its else block');
+				utils.showToast('Please fill all required information');
 			}
 		}
 		

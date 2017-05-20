@@ -84,6 +84,7 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 			
 		} else {
 			console.log('its else block');
+			utils.showToast('Please fill all required information');
 		}
 
 	}

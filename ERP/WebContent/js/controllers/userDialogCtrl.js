@@ -164,8 +164,8 @@ erpApp.controller('userDialogCtrl',
 							$scope.saveUser(event);
 						} else {
 							console.log('its else block');
-							/* $scope.userInformation.userType.$setTouched();
-							 $scope.submitInformation = true;*/
+							utils.showToast('Please fill all required information');
+							
 						}
 					};
 

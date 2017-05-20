@@ -99,6 +99,7 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 				
 			} else {
 				console.log('its else block');
+				utils.showToast('Please fill all required information');
 			}
 
 		}

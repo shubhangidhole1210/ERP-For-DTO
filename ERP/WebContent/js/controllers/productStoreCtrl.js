@@ -32,6 +32,7 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 				$scope.saveProductQuality();
 			} else {
 				console.log('its else block');
+				utils.showToast('Please fill all required information');
 			}
 		};
 	  

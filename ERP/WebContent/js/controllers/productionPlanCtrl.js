@@ -62,12 +62,7 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		$http(httpparams).then(function successCallback(response) {
 			utils.hideProgressBar();
 			console.log(response);
-			if(data.code === 1){
-				utils.showToast("Production Plan sucessfully!");
-				$location.path('/');
-			}else{
-				utils.showToast("Something went wrong. Please try again later.");
-			}
+			utils.showToast("Production Plan Update sucessfully");
 		}, function errorCallback(response) {
 			console.log("Error");
 			utils.showToast("Something went wrong. Please try again later.");
