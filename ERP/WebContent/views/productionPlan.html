@@ -63,7 +63,7 @@
       </tr>
       </table>
     </td>
-<!--     <div style="overflow-x: scroll;"> -->
+     <div style="overflow-x: scroll;"> 
 
       <td ng-repeat="productProductionPlanItem in product.productProductionPlan" >
     <table >
@@ -79,8 +79,7 @@
       </tr>
     </table>
   </td>
-  
-<!--   </div> -->
+    </div> 
  </tr>
 </table>
 
@@ -91,7 +90,7 @@
 <div style="margin-top: 2%;margin-left: 40%;">
   <md-dialog-actions layout="row">
       
-      <md-button class="md-raised" ng-click="answer('not useful')">CREATE DEFAULT PRODUCTION PLAN</md-button>
+      <md-button class="md-raised" ng-click="createDefaultProductionPlan()">CREATE DEFAULT PRODUCTION PLAN</md-button>
       <md-button class="md-raised" ng-click="submitProductionPlan()" ng-disabled="isReadOnly" >SAVE</md-button>
       <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
        

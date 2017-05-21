@@ -39,10 +39,25 @@ erpApp.service('utils',function myutils($mdDialog, $rootScope,$mdToast) {
 					+ curr_month + "-" + curr_date;
 			return currentDateFormatted;
 		}
+		
+		function getCurrentMonthYearString(){
+			var currentDate = new Date();
+			var curr_year = currentDate.getFullYear();
+			var curr_date = currentDate.getDate() < 10 ? "0"
+					+ currentDate.getDate()
+					: currentDate.getDate();
+			var curr_month = (currentDate.getMonth() + 1) < 10 ? ("0" + (currentDate
+					.getMonth() + 1))
+					: (currentDate.getMonth() + 1);
+			var currentDateFormatted = curr_month + "-" + curr_year;
+			return currentDateFormatted;
+		}
+		
 		return {
 			hideProgressBar : hideProgressBar,
 			showProgressBar : showProgressBar,
 			showToast : showToast,
-			getCurrentDate : getCurrentDate
+			getCurrentDate : getCurrentDate,
+			getCurrentMonthYearString : getCurrentMonthYearString
 		};
 });

@@ -28,6 +28,28 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		});
 
 	};
+	
+	$scope.createDefaultProductionPlan = function() {
+		utils.showProgressBar();
+		var httpparams = {};
+		httpparams.method = 'POST';
+		httpparams.url = SERVER_URL + "productionplanning/createProductionPlanMonthYear/" + utils.getCurrentMonthYearString();
+		httpparams.headers = {
+			auth_token : Auth.getAuthToken()
+		};
+
+		$http(httpparams).then(function successCallback(response) {
+			utils.hideProgressBar();
+			$scope.products = response.data;
+			$scope.products_copy = angular.copy(response.data);
+			console.log(response);
+		}, function errorCallback(response) {
+			console.log("Error");
+			utils.hideProgressBar();
+		});
+
+	};
+	
 	function isProductionPlanEqual(productProductionPlan1, productProductionPlan2){
 		if(productProductionPlan1.target_quantity === productProductionPlan2.target_quantity && 
 				productProductionPlan1.achived_quantity === productProductionPlan2.achived_quantity && 
