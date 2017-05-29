@@ -265,10 +265,10 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 			}
 		};*/
 	    
-		$scope.$watch('vendorId', function(val)
+		/*$scope.$watch('vendorId', function(val)
 				{
 				    if (!val) $scope.vendorId = null;
-				});
+				});*/
 	    
 	    
 	    $scope.getRmForOrder=function(){

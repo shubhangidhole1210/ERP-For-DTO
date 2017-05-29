@@ -64,6 +64,41 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	};
 	
 	
+	/*$scope.showGenerateBom = function(ev) {
+		var addNewDomDialog = {
+			controller : 'domController',
+			templateUrl : 'views/domGenerateDialogue.html',
+			parent : angular.element(document.body),
+			targetEvent : ev,
+			clickOutsideToClose : true,
+			onRemoving : function(){console.log('Removing user dialog');},
+			fullscreen : $scope.customFullscreen,
+		};
+		$mdDialog
+		.show(addNewDomDialog)
+		.then(function(answer) {},
+				function() {});
+	};*/
+	
+	
+	$scope.showGenerateBom = function(ev) {
+	    $mdDialog.show({
+	      controller: 'bomDialogueController',
+	      templateUrl: 'views/bomGenerateDialogue.html',
+	      parent: angular.element(document.body),
+	      targetEvent: ev,
+	      clickOutsideToClose:true,
+	      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+	    })
+	    .then(function(answer) {
+	      $scope.status = 'You said the information was "' + answer + '".';
+	    }, function() {
+	      $scope.status = 'You cancelled the dialog.';
+	    });
+	  };
+	
+	
+	
 	$scope.showEditProduct = function(ev, index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;

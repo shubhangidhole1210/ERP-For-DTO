@@ -1,0 +1,72 @@
+<md-dialog class="statusInfo">
+<form name="pageInformation" novalidate>
+	
+	<md-dialog-content>
+	<div class="md-dialog-content">
+
+		 <div layout-gt-sm="row">
+               <md-input-container class="drop-down">
+          <label>Part No</label>
+          <md-select ng-model="product.product.id" name="product"  ng-disabled="productIdReadOnly" ng-init="getProducts()" ng-change="getRMVendor($index)">
+            <md-option ng-repeat="product in products" ng-value="product.product.id">
+               {{product.product.partNumber}}
+            </md-option>
+          </md-select>
+          <div ng-messages="productOrderInformation.product.$error">
+                 <div ng-message="required">Please Select Product</div>
+              </div>
+        </md-input-container>
+           </div>
+           
+           <table>
+              <tr>
+               <th>RAW MATERIAL</th>
+               <th>VENDOR</th>
+               <th>INPUT FIELD</th>
+              </tr>
+              <tr ng-repeat="rmVendor in rawMaterialVendorList">
+                 <td>
+                     <md-input-container class="drop-down">
+          <label>Raw Material</label>
+          <md-select ng-model="rawmaterial.id" name="product"  ng-disabled="productIdReadOnly">
+            <md-option ng-repeat="rawMaterials in data.data" ng-value="rawMaterials.rawmaterial.id">
+            {{rawMaterials.rawmaterial.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+                 </td>
+                 <td>
+                     <md-input-container class="drop-down">
+          <label>VENODR</label>
+          <md-select ng-model="vendor.id" name="product"  ng-disabled="productIdReadOnly">
+            <md-option ng-repeat="vendor in data.data" ng-value="vendor.vendor.id">
+            {{vendor.vendor.companyName}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+                 </td>
+                 <td>
+                <md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">Price</label> <input
+				type="number" ng-model="pricePerUnit" name="quantity">
+			</md-input-container>
+                 </td>
+              
+              </tr>
+           </table>
+	</div>
+	</md-dialog-content>
+
+	<md-dialog-actions layout="row"> <md-button
+		class="md-raised"
+		ng-click="saveBomData()"
+		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions>
+</form>
+</md-dialog>
+
+
+
+
+
+
