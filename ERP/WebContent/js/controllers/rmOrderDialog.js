@@ -185,9 +185,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
 		console.log("afte updating quantity total price is : " + $scope.rmOrder.totalprice);
 		
-		
-		
-		
 	}
 	
 	 

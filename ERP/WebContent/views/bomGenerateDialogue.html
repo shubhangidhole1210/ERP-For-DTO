@@ -1,18 +1,26 @@
 <md-dialog class="statusInfo">
-<form name="pageInformation" novalidate>
+<form name="bomGenerateForm" novalidate>
 	
 	<md-dialog-content>
 	<div class="md-dialog-content">
-
+			 <div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">BOM ID</label> <input type="text"
+				ng-model="bomId" name="bomId" ng-disabled="isReadOnly" required>
+				 <div ng-messages="bomGenerateForm.bomId.$error">
+                 <div ng-message="required">Please enter BOM Id</div>
+              </div>
+			</md-input-container>
+		</div>
 		 <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>Part No</label>
-          <md-select ng-model="product.product.id" name="product"  ng-disabled="productIdReadOnly" ng-init="getProducts()" ng-change="getRMVendor($index)">
+          <md-select ng-model="product.product.id" name="product"  ng-disabled="productIdReadOnly" ng-init="getProducts()" ng-change="getRMVendor($index)" required>
             <md-option ng-repeat="product in products" ng-value="product.product.id">
                {{product.product.partNumber}}
             </md-option>
           </md-select>
-          <div ng-messages="productOrderInformation.product.$error">
+          <div ng-messages="bomGenerateForm.product.$error">
                  <div ng-message="required">Please Select Product</div>
               </div>
         </md-input-container>
@@ -22,7 +30,8 @@
               <tr>
                <th>RAW MATERIAL</th>
                <th>VENDOR</th>
-               <th>INPUT FIELD</th>
+               <th>QUANTITY</th>
+               <th>PRICE</th>
               </tr>
               <tr ng-repeat="rmVendor in rawMaterialVendorList">
                  <td>
@@ -46,9 +55,15 @@
         </md-input-container>
                  </td>
                  <td>
+                    <md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">QUANTITY</label> <input
+				type="number" ng-model="rmVendor.quantity" name="quantity">
+			</md-input-container>
+                 </td>
+                 <td>
                 <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">Price</label> <input
-				type="number" ng-model="pricePerUnit" name="quantity">
+				type="number" ng-model="rmVendor.pricePerUnit" name="pricePerUnit">
 			</md-input-container>
                  </td>
               
@@ -57,11 +72,19 @@
 	</div>
 	</md-dialog-content>
 
-	<md-dialog-actions layout="row"> <md-button
+	<!-- <md-dialog-actions layout="row"> <md-button
 		class="md-raised"
 		ng-click="saveBomData()"
 		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
-		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions>
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions> -->
+		
+	<md-dialog-actions layout="row"> <md-button
+		class="md-raised"
+		ng-click="submitBomInformation(bomGenerateForm.$valid,$event)"
+		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+	</md-dialog-actions>	
+		
 </form>
 </md-dialog>
 

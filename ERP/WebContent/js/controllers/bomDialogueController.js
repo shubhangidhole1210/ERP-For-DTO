@@ -45,8 +45,15 @@ erpApp.controller('bomDialogueController', function($scope, $http, $mdDialog, $m
 		utils.showProgressBar();
 	}
 	
-	
-	
+	$scope.submitBomInformation = function(isvaliduser,$event) {
+		if (isvaliduser) {
+			$scope.saveBomData();
+		} else {
+			console.log('its else block');
+			utils.showToast('Please fill all required information');
+		}
+
+	};
 	
 	$scope.saveBomData=function(){
 		console.log("in save function")
@@ -58,54 +65,16 @@ erpApp.controller('bomDialogueController', function($scope, $http, $mdDialog, $m
 			rmVendor.rawmaterial= $scope.data.data[index].rawmaterial.id;
 			rmVendor.vendor = $scope.data.data[index].vendor.id;
 			rmVendor.pricePerUnit = $scope.data.data[index].pricePerUnit;
+			rmVendor.quantity = $scope.data.data[index].quantity;
 			rmVendorList.push(rmVendor)
 		
 		var data = {
 				product : $scope.product.product.id,
-				bomId:"BOM0001", 
+				bomId: $scope.bomId, 
 				bomModelParts : rmVendorList
 			};
 	    	 
-	    	/*var httpparams = {};
-	    	if($scope.flag === 0){
-	    		httpparams.method = 'post';
-	 			httpparams.url = SERVER_URL + "bom/createmultiple";
-	 			httpparams.headers = {
-	 					auth_token : Auth.getAuthToken()
-	 			};
-	    	}else{
-	    		data.id=$scope.productRmAsso.id,
-	    		httpparams.method='put',
-	    		httpparams.url=SERVER_URL + "productRMAsso/update/multipleProductRMAssociation"
-	    		httpparams.headers = {
-						auth_token : Auth.getAuthToken()
-				};
-	    	}
-	    	 
-	    	httpparams.data = data;
 	    	
-	    	$http(httpparams).then(
-				function successCallback(data) {
-					$mdDialog.hide();
-					console.log(data);
-					if(data.data.code === 0){
-						console.log(data.data.message);
-						console.log(data);
-						$scope.hide();
-						utils.showToast('Something went worng. Please try again later.');
-					}
-					
-					else{
-						$scope.displayProgressBar = false;
-						utils.showToast('Product RM Association Information saved successfully.');
-					}
-				},
-				function errorCallback(data) {
-					$rootScope.$emit("saveVendorError", {});
-					console.log(data);
-					$scope.hide();
-					utils.showToast('Something went worng. Please try again later.');
-				});*/
 			var httpparams = {
 					method : 'post',
 					url : SERVER_URL + "bom/createmultiple",
@@ -119,10 +88,8 @@ erpApp.controller('bomDialogueController', function($scope, $http, $mdDialog, $m
 				console.log(data);
 				if(data.data.code === 1){
 					utils.showToast(data.data.message);
-					/*$location.path('/');*/
 				}else{
 					utils.showToast(data.data.message);
-					/*$location.path('/');*/
 				}
 				utils.hideProgressBar();
 				
@@ -133,24 +100,20 @@ erpApp.controller('bomDialogueController', function($scope, $http, $mdDialog, $m
 			});
 			utils.showProgressBar();
 		}
-		
-		/*$scope.cancelDispatchQuantityForm=function(){
-			$location.path('/');
-		}*/
 	}
 	
-	
-	  $scope.cancel = function() {
-	      $mdDialog.cancel();
-	  };
+	$scope.hide = function() {
+		console.log('hide DialogController');
+		$mdDialog.hide();
+	};
 
-	  $scope.answer = function(answer) {
-	      $mdDialog.hide(answer);
-	  };
-	
-	  $scope.hide = function() {
-	      $mdDialog.hide();
-	  };
+	$scope.cancel = function() {
+		$mdDialog.cancel();
+	};
 
+	$scope.answer = function(answer) {
+		$mdDialog.hide(answer);
+	};
+	 
 	
 });

@@ -1,0 +1,49 @@
+<md-dialog class="statusInfo">
+<form name="pageInformation" novalidate>
+	
+	<md-dialog-content>
+	<div class="md-dialog-content">
+          
+		 <div layout-gt-sm="row">
+               <md-input-container class="drop-down">
+          <label>Product</label>
+          <md-select ng-model="product.product.id" name="product"  ng-disabled="productIdReadOnly" ng-init="getProducts()" ng-change="getBomInformation($index)">
+            <md-option ng-repeat="product in products" ng-value="product.product.id">
+               {{product.product.partNumber}}
+            </md-option>
+          </md-select>
+          <div ng-messages="productOrderInformation.product.$error">
+                 <div ng-message="required">Please Select Product</div>
+              </div>
+        </md-input-container>
+           </div>
+            <div layout-gt-sm="row">
+               <md-input-container class="drop-down">
+          <label>BOM</label>
+          <md-select ng-model="bom.id" name="product"  ng-disabled="productIdReadOnly"s>
+            <md-option ng-repeat="bom in bomData" ng-value="bom.id">
+               {{bom.id}}
+            </md-option>
+          </md-select>
+          <div ng-messages="productOrderInformation.product.$error">
+                 <div ng-message="required">Please Select Product</div>
+              </div>
+        </md-input-container>
+           </div>
+           <md-button class="md-raised md-primary add-new-btn"
+				ng-click="getPdf($event)">DOWNLOAD PDF</md-button>
+          
+           
+	</div>
+	</md-dialog-content>
+
+	<md-dialog-actions layout="row"> <md-button
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions>
+</form>
+</md-dialog>
+
+
+
+
+
+
