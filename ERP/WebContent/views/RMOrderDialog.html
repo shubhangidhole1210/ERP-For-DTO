@@ -68,7 +68,7 @@
 			<tr ng-repeat="orderRawMaterial in orderRawMaterials">
 				<td>{{orderRawMaterial.rawmaterial.name}}</td>
 				<td><input type="number"
-					ng-value="{{orderRawMaterial.quantity}}" ng-model="orderRawMaterial.quantity" ng-change="updateQuantity(orderRawMaterial.quantity)"></td>
+					ng-value="{{orderRawMaterial.quantity}}" ng-model="orderRawMaterial.quantity" ng-change="updateQuantity(orderRawMaterial.quantity,rmOrder.totalprice,rmOrder.actualPrice,rmOrder.tax)"></td>
 				<td>
 					<button type="button" style="height: 40px"
 						ng-click="deleteRM($index)">Delete</button>

@@ -67,57 +67,51 @@ erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDial
 		
 	}*/
 	
-	$scope.getPdf = function(){
+	/*$scope.getPdf = function(){
 		
 		 var httpparams = {};
          httpparams.method = 'GET';
-         httpparams.url = SERVER_URL + "bom/list";
+         httpparams.url = SERVER_URL + "bom/downloadBomPdf/1/7";
         httpparams.headers = {
 		      auth_token : Auth.getAuthToken()
 	        };
         
-        responseType:'arraybuffer',
 		$http(httpparams).then( function successCallback(response,data, status, headers, config) {
 					console.log(response);
+					console.log(response.data);
 					utils.hideProgressBar();
 					 var anchor = angular.element('<a/>');
 				     anchor.attr({
-				         href: 'data:attachment/pdf;charset=utf-8,' + encodeURI(data),
-				         target: '_blank',
+				         href: 'data:attachment/pdf;charset=utf-8,' +  encodeURIComponent(response.data),
+				         target: 'blank',
 				         download: 'ProductOrder.pdf'
 				     })[0].click();
 				})
-				/*function errorCallback(response) {
-					console.log("Error");
-					utils.showToast('We are Sorry. Something went wrong. Please try again later.');
-					utils.hideProgressBar();
-					
-}*/
 		 function errorCallback(response,data, status, headers, config){
 			
 		}
-	}
+	}*/
 	
 	
 	
-	/*$scope.getPdf = function () {
+	$scope.getPdf = function () {
 		
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "bom/list";
+		httpparams.url = SERVER_URL + "bom/downloadBomPdf/" +$scope.product.product.id + "/" +$scope.bom.id;
 		httpparams.responseType = 'arraybuffer';
 		httpparams.headers = {
 			      auth_token : Auth.getAuthToken()
 		        };
 		$http(httpparams).then( function successCallback(response,data, status, headers){
-	        headers = headers();
-	 
+			console.log(response.headers);
+	        headers = response.headers();
 	        var filename = headers['x-filename'];
 	        var contentType = headers['content-type'];
 	 
 	        var linkElement = document.createElement('a');
 	        try {
-	            var blob = new Blob([data], { type: contentType });
+	            var blob = new Blob([response.data], { type: contentType });
 	            var url = window.URL.createObjectURL(blob);
 	 
 	            linkElement.setAttribute('href', url);
@@ -139,7 +133,7 @@ erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDial
 			utils.hideProgressBar();
 	    });
 	    
-	};*/
+	};
 	
 	
 	

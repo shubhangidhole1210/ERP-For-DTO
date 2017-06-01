@@ -168,24 +168,32 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		/*console.log('actual price : ' +)*/
 	}
 	
-	$scope.updateQuantity = function(quantity){
-		console.log("in update quantity function");
-		console.log("upadted quantity : " + quantity);
-		console.log("total price : " +$scope.rmOrder.totalprice);
-		/*console.log("actual price : " + $scope.rmOrder.actualPrice);*/
-		/*console.log("tax price : " + $scope.rmOrder.tax);*/
-		console.log("other charges : " + $scope.rmOrder.otherCharges);
-		console.log("product sub total : " + $scope.productSubTotal);
-		$scope.productSubTotal = $scope.productSubTotal * quantity;
-		console.log("aftera added updated quantity : " + $scope.productSubTotal);
-		$scope.rmOrder.actualPrice = $scope.productSubTotal;
-		console.log("assign product sub total to acutal price :" + $scope.rmOrder.actualPrice);
+	$scope.updateQuantity= function(quantity,actualPrice,tax){
+		console.log("in update function");
+		console.log(quantity);
+		$scope.productSubTotal = actualPrice*quantity;
+		console.log("product sub total:-" +$scope.productSubTotal);
+		/*$scope.rmOrder.actualPrice = $scope.productSubTotal;*/
+		$scope.rmOrder.tax=$scope.productSubTotal*TAX
+		console.log("after quanity update tax price is:-" +$scope.rmOrder.tax);
+		$scope.rmOrder.totalprice = $scope.productSubTotal + $scope.rmOrder.tax + $scope.rmOrder.otherCharges ;
+		console.log("after quantity upadted total price is :-" + $scope.rmOrder.totalprice);
+		/*$scope.rmOrder.actualPrice = $scope.productSubTotal;
 		$scope.rmOrder.tax = $scope.productSubTotal * TAX;
-		console.log("after updating quantity tax is :" + $scope.rmOrder.tax);
-		$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
-		console.log("afte updating quantity total price is : " + $scope.rmOrder.totalprice);
+		$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax+ $scope.rmOrder.otherCharges;*/
 		
 	}
+	
+	
+	
+	
+	/*$scope.updateQuantity = function(quantity){
+		$scope.productSubTotal = $scope.productSubTotal * quantity;
+		$scope.rmOrder.actualPrice = $scope.productSubTotal;
+		$scope.rmOrder.tax = $scope.productSubTotal * TAX;
+		$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
+		
+	}*/
 	
 	 
 	
@@ -209,7 +217,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		})
 	};
 	
-	
+
 	
 	
 	
