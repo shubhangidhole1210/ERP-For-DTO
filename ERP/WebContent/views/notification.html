@@ -1,3 +1,33 @@
 <div ng-controller="notificationCtrl">
-<h1>its notification page</h1>
+	<div class="erp-information">
+		<div>
+			<md-button class="md-raised md-primary add-new-btn"
+				ng-click="addNewNotification($event);"
+				ng-init="populateNotificationList();flag=0">ADD NEW NOTIFICATION</md-button>
+		</div>
+		<md-input-container class="md-block" flex-gt-sm type="password">
+		<input type="text" ng-model="searchText" name="password"
+			placeholder="Search by Name" class="search-text"> </md-input-container>
+		<h1 class="table-header">NOTIFICATION LIST</h1>
+		<table>
+			<tr>
+				<th>NAME</th>
+				<th>TYPE</th>
+				<th>ACTION</th>
+			</tr>
+			<tr ng-repeat="notification in notificationList |  filter:{ pageName: searchText }">
+				<td>{{notification.name}}</td>
+				<td>{{notification.type}}</td>
+				<td><md-button class="md-raised"
+						ng-click="showEditNotification($event,$index)" ng-init="flag=1">EDIT</md-button>
+					<md-button class="md-raised" ng-click="showConfirm($event,$index)">Remove</md-button>
+
+					<md-button class="md-raised"
+						ng-click="viewNotificationInformation($event,$index)">VIEW</md-button></td>
+
+			</tr>
+		</table>
+		<div ng-show="isNotificationPresent">Currently there are no active
+			Page.Please add new Page.</div>
+	</div>
 </div>

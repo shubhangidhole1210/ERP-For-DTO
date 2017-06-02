@@ -173,6 +173,11 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
+	}).when('/notification', {
+		templateUrl : 'views/notification.html',
+		data : {
+			loginRequired : true
+		}
 	}).when('/notFound', {
 		templateUrl : 'views/notFound.html',
 	}).otherwise({

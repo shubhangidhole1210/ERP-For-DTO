@@ -22,7 +22,7 @@
           <label>BOM</label>
           <md-select ng-model="bom.id" name="product"  ng-disabled="productIdReadOnly"s>
             <md-option ng-repeat="bom in bomData" ng-value="bom.id">
-               {{bom.id}}
+               {{bom.bomId}}
             </md-option>
           </md-select>
           <div ng-messages="productOrderInformation.product.$error">

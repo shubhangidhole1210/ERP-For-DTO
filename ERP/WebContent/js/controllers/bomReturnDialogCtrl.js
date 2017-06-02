@@ -106,16 +106,17 @@ erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDial
 		$http(httpparams).then( function successCallback(response,data, status, headers){
 			console.log(response.headers);
 	        headers = response.headers();
-	        var filename = headers['x-filename'];
+	        var filename = "ProductOrder.pdf";
+	        var filename = headers['ProductOrder.pdf'];
 	        var contentType = headers['content-type'];
-	 
+	        console.log("file name:-" + filename)
 	        var linkElement = document.createElement('a');
 	        try {
 	            var blob = new Blob([response.data], { type: contentType });
 	            var url = window.URL.createObjectURL(blob);
 	 
 	            linkElement.setAttribute('href', url);
-	            linkElement.setAttribute("download", filename);
+	            linkElement.setAttribute("download", 'ProductOrder.pdf');
 	 
 	            var clickEvent = new MouseEvent("click", {
 	                "view": window,
