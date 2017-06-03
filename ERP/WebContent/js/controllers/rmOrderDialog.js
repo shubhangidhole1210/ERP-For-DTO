@@ -147,8 +147,9 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	$scope.calculateTotalPrice=function(){
 		
 		console.log($scope.orderRawMaterials);
+		$scope.productSubTotal = 0;
 		for (var i = 0; i < $scope.orderRawMaterials.length; i++){
-		   $scope.productSubTotal = $scope.orderRawMaterials[i].rawmaterial.pricePerUnit * $scope.orderRawMaterials[i].quantity;
+		   $scope.productSubTotal += $scope.orderRawMaterials[i].rawmaterial.pricePerUnit * $scope.orderRawMaterials[i].quantity;
 		  /* $scope.productSubTotal += $scope.totalPrice;*/
 		}
 		console.log('Product Sub Total : '+$scope.productSubTotal);
@@ -168,72 +169,11 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		/*console.log('actual price : ' +)*/
 	}
 	
-	/*$scope.updateQuantity= function(quantity,actualPrice,tax,totalprice){
-		console.log("in update function");
-		console.log(quantity);
-		$scope.productSubTotal = actualPrice*quantity;
-		console.log("product sub total:-" +$scope.productSubTotal);
-		$scope.rmOrder.tax=$scope.productSubTotal*TAX
-		console.log("after quanity update tax price is:-" +$scope.rmOrder.tax);
-		$scope.rmOrder.totalprice = $scope.productSubTotal + $scope.rmOrder.tax + $scope.rmOrder.otherCharges ;
-		console.log("after quantity upadted total price is :-" + $scope.rmOrder.totalprice);
-		
-		
-		
-		$scope.updateQuantity= function(quantity,actualPrice,tax,totalprice){
-			console.log("in update function");
-			console.log(quantity);
-			$scope.productSubTotal = actualPrice*quantity;
-			console.log("product sub total:-" +$scope.productSubTotal);
-			$scope.rmOrder.actualPrice = $scope.productSubTotal;
-			$scope.rmOrder.tax=$scope.productSubTotal*TAX
-			console.log("after quanity update tax price is:-" +$scope.rmOrder.tax);
-			$scope.rmOrder.totalprice = $scope.productSubTotal + $scope.rmOrder.tax + $scope.rmOrder.otherCharges ;
-			console.log("after quantity upadted total price is :-" + $scope.rmOrder.totalprice);
-			$scope.rmOrder.actualPrice = $scope.productSubTotal;
-			$scope.rmOrder.tax = $scope.productSubTotal * TAX;
-			$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax+ $scope.rmOrder.otherCharges;
-			
-		}
-		
+	$scope.updateQuantity = function(quantity,totalprice,tax,actualPrice,otherCharges){
+		$scope.calculateTotalPrice();
 	}
-	*/
-	/*$scope.quantityUpdate = function(quantity,productSubTotal){
-		$scope.productSubTotal = productSubTotal * quantity;
-		console.log("ater update quantity product sub total is :-" +$scope.productSubTotal);
-	}
-	*/
-/*	$scope.updateQuantity= function(quantity,actualPrice,tax,totalprice){
-			console.log("in update function");
-			console.log(quantity);
-			$scope.productSubTotal = actualPrice*quantity;
-			console.log("product sub total:-" +$scope.productSubTotal);
-			$scope.rmOrder.tax=$scope.productSubTotal*TAX
-			console.log("after quanity update tax price is:-" +$scope.rmOrder.tax);
-			$scope.rmOrder.totalprice = $scope.productSubTotal + $scope.rmOrder.tax + $scope.rmOrder.otherCharges ;
-			console.log("after quantity upadted total price is :-" + $scope.rmOrder.totalprice);
-			
-			
-			
-			$scope.updateQuantity= function(quantity,actualPrice,tax,totalprice){
-				console.log("in update function");
-				console.log(quantity);
-				$scope.productSubTotal = actualPrice*quantity;
-				console.log("product sub total:-" +$scope.productSubTotal);
-				$scope.rmOrder.actualPrice = $scope.productSubTotal;
-				$scope.rmOrder.tax=$scope.productSubTotal*TAX
-				console.log("after quanity update tax price is:-" +$scope.rmOrder.tax);
-				$scope.rmOrder.totalprice = $scope.productSubTotal + $scope.rmOrder.tax + $scope.rmOrder.otherCharges ;
-				console.log("after quantity upadted total price is :-" + $scope.rmOrder.totalprice);
-				$scope.rmOrder.actualPrice = $scope.productSubTotal;
-				$scope.rmOrder.tax = $scope.productSubTotal * TAX;
-				$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax+ $scope.rmOrder.otherCharges;
-				
-			}
-			
-		}
 	
-	*/
+	
 	
 	
 	
@@ -262,14 +202,15 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	
 	
 	 $scope.orderRawMaterials=[];
-	    $scope.orderRawMaterial={isActive : true};
+	    $scope.orderRawMaterial={};
 	    $scope.addOrderRawMaterial = function(){
 	    	console.log('Adding RM : ', $scope.orderRawMaterial);
 	    	if( !angular.equals($scope.orderRawMaterial,{}) ){
 	    		if(!$scope.isDuplicateRM($scope.orderRawMaterial)){
 				   $scope.orderRawMaterials.push($scope.orderRawMaterial);	
-				   $scope.orderRawMaterial = {isActive : true};
+				   console.log(" $scope.orderRawMaterials : " , $scope.orderRawMaterials);
 				   $scope.RMOrderInformation.rawmaterial.$setValidity("message", true);
+				   $scope.orderRawMaterial={};
 				   console.log('setting validity true')
 				   $scope.message="";
 	    		}else{
