@@ -4,6 +4,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	$scope.isRMOrderPresent=false;
 	$scope.isPriceReadOnly = false;
 	$scope.isVendorId = false;
+	$scope.isName = true;
 	$rootScope.$on("CallPopulateRMOrderList", function() {
 		$scope.populateRMOrderList();
 	});
@@ -64,6 +65,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				hideAction : $scope.displayAddRM,
 				priceAction : $scope.isPriceReadOnly,
 				vendorAction : $scope.isVendorId,
+				nameAction: $scope.isName
 				
 			}
 		};
@@ -101,6 +103,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 						hideAction : $scope.displayAddRM,
 						priceAction : $scope.isPriceReadOnly,
 						vendorAction : $scope.isVendorId,
+						nameAction: $scope.isName
 					}
 				})
 				.then(
@@ -133,6 +136,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 						hideAction : $scope.displayAddRM,
 						priceAction : $scope.isPriceReadOnly,
 						vendorAction : $scope.isVendorId,
+						nameAction: $scope.isName
 						
 					}
 				})

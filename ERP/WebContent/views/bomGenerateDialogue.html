@@ -1,6 +1,11 @@
 <md-dialog class="statusInfo">
 <form name="bomGenerateForm" novalidate>
-	
+	<md-toolbar>
+	<div class="md-toolbar-tools">
+		<h2>{{bomInformation}}</h2>
+		<span flex></span>
+	</div>
+	</md-toolbar>
 	<md-dialog-content>
 	<div class="md-dialog-content">
 			 <div layout-gt-sm="row">
@@ -72,18 +77,22 @@
 	</div>
 	</md-dialog-content>
 
+
+		
 	<!-- <md-dialog-actions layout="row"> <md-button
 		class="md-raised"
-		ng-click="saveBomData()"
+		ng-click="submitBomInformation(bomGenerateForm.$valid,$event)"
 		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
-		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions> -->
-		
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+
+	</md-dialog-actions>	 -->
+	
 	<md-dialog-actions layout="row"> <md-button
 		class="md-raised"
 		ng-click="submitBomInformation(bomGenerateForm.$valid,$event)"
 		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
-		class="md-raised" ng-click="cancelBom()">CANCEL</md-button>
-	</md-dialog-actions>	
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+	</md-dialog-actions>
 		
 </form>
 </md-dialog>

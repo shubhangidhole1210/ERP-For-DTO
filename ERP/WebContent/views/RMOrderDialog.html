@@ -12,22 +12,14 @@
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">NAME</label> <input type="text"
-				ng-model="rmOrder.name" value="rmOrder.name" required name="name"
-				ng-disabled="isReadOnly" ng-minlength="2" limit-to="255">
-			<div ng-messages="RMOrderInformation.name.$error">
-				<div ng-message="required">Please enter Name</div>
-				<div ng-message="minlength">Name should be minimum two character</div>
-			</div>
+				ng-model="rmOrder.name" value="rmOrder.name" name="name"
+				ng-disabled="isName">
 			</md-input-container>
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">DESCRIPTION</label> <input
 				type="text" ng-model="rmOrder.description"
-				value="rmOrder.description" required name="description"
-				ng-disabled="isReadOnly" ng-minlength="4" limit-to="255">
-			<div ng-messages="RMOrderInformation.description.$error">
-				<div ng-message="required">Please enter Description</div>
-				<div ng-message="minlength">Description should be minimum 2 Character</div>
-			</div>
+				value="rmOrder.description"  name="description"
+				ng-disabled="isReadOnly">
 			</md-input-container>
 		</div>
 		<!-- <div layout-gt-sm="row">
@@ -62,13 +54,16 @@
 		<table>
 			<tr>
 				<th>RAW MATERIAL</th>
+				<th>DESCRIPTION</th>
 				<th>QUANTITY</th>
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="orderRawMaterial in orderRawMaterials">
-				<td>{{orderRawMaterial.rawmaterial.name}}</td>
+				<td>{{orderRawMaterial.rawmaterial.partNumber}}</td>
+				<td>{{orderRawMaterial.rawmaterial.description}}</td>
 				<td><input type="number"
 					ng-value="{{orderRawMaterial.quantity}}" ng-model="orderRawMaterial.quantity" ng-change="updateQuantity(orderRawMaterial.quantity,rmOrder.totalprice,rmOrder.tax,rmOrder.actualPrice,rmOrder.otherCharges)"></td>
+				
 				<td>
 					<button type="button" style="height: 40px"
 						ng-click="deleteRM($index)">Delete</button>
@@ -93,7 +88,7 @@
 				value="rawmaterial.id" ng-disabled="!rmOrder.vendor.id" name="rawMaterialId">
 			<md-option ng-repeat="rawmaterial in vendorRmList"
 				ng-value="rawmaterial.rawmaterial">
-			{{rawmaterial.rawmaterial.name}} </md-option> </md-select>
+			{{rawmaterial.rawmaterial.partNumber}} </md-option> </md-select>
 			<div ng-show="RMOrderInformation.rawmaterial.$error.message"
 				class="error-msg">{{message}}</div>
 			</md-input-container>

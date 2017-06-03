@@ -66,7 +66,7 @@
 		<div layout-gt-sm="row">
 			<md-input-container class="drop-down"> <label>UNIT
 				ID*</label> <md-select ng-model="rawMaterial.unit.id" name="unitID"
-				value="unitID.id" ng-disabled="isUnitReadOnly" ng-init="getUnitList()"
+				value="unitID.id" ng-disabled="isReadOnly" ng-init="getUnitList()"
 				ng-required="true" rrquired> <md-option
 				ng-repeat="unitID in data" ng-value="unitID.id">
 			{{unitID.name}} </md-option> </md-select>

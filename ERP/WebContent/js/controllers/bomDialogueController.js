@@ -1,6 +1,17 @@
-erpApp.controller('bomDialogueController', function($scope, $http, $location, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils){
-		
+erpApp.controller('bomDialogueController', function($scope, $http, $location, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,bomInformation){
 	
+	 $scope.hide = function() {
+	      $mdDialog.hide();
+	    };
+
+	    $scope.cancel = function() {
+	      $mdDialog.cancel();
+	    };
+
+	    $scope.answer = function(answer) {
+	      $mdDialog.hide(answer);
+	    };	
+	$scope.bomInformation=bomInformation;
 	$scope.getProducts = function() {
 		utils.showProgressBar();
 		        var httpparams = {};
@@ -101,19 +112,4 @@ erpApp.controller('bomDialogueController', function($scope, $http, $location, $m
 			utils.showProgressBar();
 		}
 	}
-	
-	/*$scope.hide = function() {
-		console.log('hide DialogController');
-		$mdDialog.hide();
-	};
-
-	$scope.cancel = function() {
-		$mdDialog.cancel();
-	};
-*/
-	$scope.cancelBom = function() {
-		$location.path('/product');
-	};
-	 
-	
 });

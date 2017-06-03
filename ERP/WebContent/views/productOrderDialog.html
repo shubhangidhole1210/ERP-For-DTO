@@ -68,9 +68,11 @@
             <th>ACTION</th>
           </tr>
           <tr ng-repeat="orderProductAssociation in orderproductassociations">
-          <td>{{orderProductAssociation.product.name}}</td>
+          <td>{{orderProductAssociation.product.partNumber}}</td>
           <!-- <td>{{orderProductAssociation.quantity}}</td> -->
-          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-model="orderProductAssociation.quantity" ng-change="orderProductAssociation.quantity"></td>
+          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-model="orderProductAssociation.quantity" ng-change="orderProductAssociation.quantity" min="1">
+             
+          </td>
           <td><button type="button"  ng-click="deleteProduct($index)" class="multiple-added-delete">Delete</button></td>
           </tr>
           <tr ng-repeat="orderProductAssociation in productOrderList">
@@ -84,7 +86,7 @@
           <label style="color: black;">PRODUCT*</label>
           <md-select ng-model="orderProductAssociation.product" name="product" value="product.id"  ng-disabled="isReadOnly"  ng-init="getProducts()">
             <md-option ng-repeat="product in products" ng-value="product" >
-               {{product.name}}
+               {{product.partNumber}}
             </md-option>
           </md-select>
           <div ng-messages="productOrderInformation.product.$error">
@@ -93,10 +95,12 @@
         </md-input-container>
 		<md-input-container class="md-block" flex-gt-sm type="password">
             <label class="input-filed-label">QUANTITY</label>
-            <input type="number" ng-model="orderProductAssociation.quantity"   name="quantity"  ng-disabled="isReadOnly" ng-maxlength="8">
+            <input type="number" ng-model="orderProductAssociation.quantity"   name="quantity"  ng-disabled="isReadOnly" ng-maxlength="8" min="1">
             <div ng-messages="productOrderInformation.quantity.$error">
                  <div ng-message="maxlength">You can enter only 8 digit</div>
             </div>
+            <div ng-show="productOrderInformation.quantity.$error.min"
+				class="error-msg">Quantity should be greater than 0</div>
           </md-input-container>
            <button type="button" class="added-multiple" ng-click="addOrderProductAssociation()" ng-disabled="!(!!orderProductAssociation.product && !!orderProductAssociation.quantity)">Add Product</button>
         </div>

@@ -6,6 +6,9 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
     $scope.information = information;
     $scope.isProductOrderAdd = hideAction;
     $scope.isClientReadOnly = clientAction;
+    $rootScope.isAddButtonDisplay=true;
+    $scope.orderproductassociations=[];
+    $scope.orderProductAssociation={};
     $scope.productOrder.expecteddeliveryDate = new Date($scope.productOrder.expecteddeliveryDate);
     $scope.hide = function() {
       $mdDialog.hide();
@@ -19,9 +22,8 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
       $mdDialog.hide(answer);
     };
     
-    $scope.saveProductOrder=function(ev)
-    {
-    	
+    $scope.saveProductOrder=function(ev) {
+    	utils.showProgressBar();
     	var data = {
     			 orderproductassociations : $scope.orderproductassociations,
     			 description:$scope.productOrder.description,
@@ -51,50 +53,39 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 		$http(httpparams)
 				.then(
 						function successCallback(data) {
-							$mdDialog.hide();
 							console.log(data);
 							if(data.data.code === 0){
 								console.log(data.data.message);
-								$rootScope.$emit(
-										"saveRMOrderError", {});
 								console.log(data);
-								$scope.hide();
 								utils.showToast('Something went worng. Please try again later.');
+								utils.hideProgressBar();
 							}else{
 								$scope.displayProgressBar = false;
 								utils.showToast('Product Order Created successfully.');
 								$rootScope.$emit("callPopulateProductOrderList",{});
+								utils.hideProgressBar();
 							}
 						},
 						function errorCallback(data) {
 							$rootScope.$emit(
 									"saveRMOrderError", {});
 							console.log(data);
-							$scope.hide();
+							/*$scope.hide();*/
 							utils.showToast('Something went worng. Please try again later.');
+							utils.hideProgressBar();
 						});
-    	
-    	 
-    }
+    };
     
-  
-	
-	
 	$scope.submitInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			
 			$scope.saveProductOrder($event);
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-
-	}
+	};
     
-   
-	
-	 $scope.getProducts=function()
-	    {
+	 $scope.getProducts=function() {
 		 var httpparams = {};
 			httpparams.method = 'GET';
 			httpparams.url = SERVER_URL + "product/list";
@@ -103,13 +94,9 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 				};
 		 $http(httpparams).then(function successCallback(response) {
 				$scope.products = response.data;
-		
-
 				console.log(response);
-
 			}, function errorCallback(response) {
 				console.log("Error");
-
 			});
 	    };
 	    
@@ -122,45 +109,18 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 				};
 		 $http(httpparams).then(function successCallback(response) {
 				$scope.clients = response.data;
-
 				console.log(response);
-
 			}, function errorCallback(response) {
 				console.log("Error");
-
 			});
 	    };
 	    
-    
-	    
-	   /* $scope.orderproductassociations=[];
-	    $scope.orderProductAssociation={isActive : true};
-	    $scope.addOrderProductAssociation=function(){
-	    	if(!angular.equals($scope.orderProductAssociation,{})){
-				   $scope.orderproductassociations.push($scope.orderProductAssociation);	
-				   $scope.orderProductAssociation = {isActive : true};
-				   console.log($scope.orderProductAssociations);
-				   console.log($scope.orderProductAssociation);
-			}
-	    };
-	    
-	    $scope.isDuplicateRM = function(orderProductAssociation) {
-			for (var i = 0; i < $scope.orderproductassociations.length; i++) {
-				if ($scope.orderRawMaterials[i].rawmaterial.id === orderRawMaterial.rawmaterial.id) {
-					return true;
-				}
-			}
-			return false;
-		};*/
-	    
-	    $scope.orderproductassociations=[];
-	    $scope.orderProductAssociation={isActive : true};
 	    $scope.addOrderProductAssociation = function(){
 	    	console.log('Adding RM : ', $scope.orderProductAssociation);
 	    	if( !angular.equals($scope.orderProductAssociation,{}) ){
 	    		if(!$scope.isDuplicateRM($scope.orderProductAssociation)){
 				   $scope.orderproductassociations.push($scope.orderProductAssociation);	
-				   $scope.orderProductAssociation = {isActive : true};
+				   $scope.orderProductAssociation = {};
 				   $scope.productOrderInformation.product.$setValidity("message", true);
 				   console.log('setting validity true')
 				   $scope.message="";
@@ -171,7 +131,6 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 			}
 	    };
 	    
-	
 	    $scope.isDuplicateRM = function(orderProductAssociation) {
 			for (var i = 0; i < $scope.orderproductassociations.length; i++) {
 				if ($scope.orderproductassociations[i].product.id === orderProductAssociation.product.id) {
@@ -181,20 +140,12 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 			return false;
 		};
 	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    $scope.deleteProduct=function(index)
-	    {
+	    $scope.deleteProduct=function(index){
 	    	console.log('delted products' +  $scope.orderproductassociations)
 	    	var lastItem = $scope.orderproductassociations.length;
 		    $scope.orderproductassociations.splice(index,1);
-	    }
+	    };
 	    
-	    $rootScope.isAddButtonDisplay=true;
 	    $scope.getProductOrderId=function()
 	    {
 	    	if($scope.productOrder.id){
@@ -204,7 +155,6 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
-			
 			$http(httpparams).then(function successCallback(response) {
 				$scope.productOrderList = response.data;
 				console.log(response);
@@ -213,7 +163,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 				console.log("Error");
 			});
 	   }
-	    }
+	    };
 	    
 	  $scope.orderDateValidation = function(expecteddeliveryDate){
 		  console.log("expected deliver date" + expecteddeliveryDate);
@@ -227,10 +177,5 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 			     console.log("its else block")
 			     $scope.productOrderInformation.expecteddeliveryDate.$setValidity("customeMsg", true);
 		  }
-			  
-			  
 	  }
-	    
-	    
-	   
 });

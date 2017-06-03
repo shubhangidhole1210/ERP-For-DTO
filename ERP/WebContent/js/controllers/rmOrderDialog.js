@@ -1,5 +1,6 @@
-erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,flag,action,title,rmOrder,utils,hideAction,priceAction,vendorAction){
+erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,flag,action,title,rmOrder,utils,hideAction,priceAction,vendorAction,nameAction){
 	$scope.isReadOnly = action;
+	$scope.isName = nameAction;
 	$scope.flag = flag;
 	$scope.rmOrder = rmOrder;
 	$scope.isPriceReadOnly = priceAction;
@@ -34,7 +35,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				name:$scope.rmOrder.name,
 				description:$scope.rmOrder.description,
 				quantity:$scope.rmOrder.quantity,
-				/*vendor:$scope.selectedVendor,*/
 				vendor:$scope.rmOrder.vendor.id,
 				totalprice:$scope.rmOrder.totalprice,
 				tax:$scope.rmOrder.tax,
@@ -90,27 +90,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 
 	}
 	
-	/* $scope.$watch('selectedVendor', function(newVal, oldVal) {
-		 $scope.rmOrder.totalPrice="";
-		 $scope.rmOrder.actualPrice="";
-		 $scope.rmOrder.tax="";
-		 $scope.rmOrder.otherCharges="";
-	 });*/
-	 
-	 
-	 
-	/* if(flag==0)
-		 {
-		 $scope.$watch('selectedVendor', function(newVal, oldVal) {
-			 $scope.rmOrder.totalPrice="";
-			 $scope.rmOrder.actualPrice="";
-			 $scope.rmOrder.tax="";
-			 $scope.rmOrder.otherCharges="";
-		 });
-		 }*/
-	
-	
-
 	$scope.submitRMOrderInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.saveRMOrder();

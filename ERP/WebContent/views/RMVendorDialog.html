@@ -33,7 +33,7 @@
 		<div>
 			<md-input-container style="width:100%"> <label>Raw
 				material*</label> <md-select ng-model="rmOrderAssociation.rawmaterial.id"
-				name="rawMaterial" value="rawMaterial.id" ng-disabled="isDropDownreadOnly"
+				name="rawMaterial" value="rawMaterial.id" ng-disabled="isReadOnly"
 				ng-init="getRawMaterials()" required> <md-option
 				ng-repeat="rawMaterial in rawmaterials" ng-value="rawMaterial.id">
 			{{rawMaterial.name}} </md-option> </md-select>
@@ -46,7 +46,7 @@
 		<md-input-container class="drop-down"> <label
 			style="color: black;">Vendor *</label> <md-select
 			ng-model="rmOrderAssociation.vendor.id" name="vendor"
-			value="vendor.id" ng-disabled="isDropDownreadOnly" ng-init="getVendors()"
+			value="vendor.id" ng-disabled="isReadOnly" ng-init="getVendors()"
 			required> <md-option ng-repeat="vendor in venodrs"
 			ng-value="vendor.id"> {{vendor.companyName}} </md-option> </md-select>
 		<div ng-messages="rmVendorAssociation.vendor.$error">

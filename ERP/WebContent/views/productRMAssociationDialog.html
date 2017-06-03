@@ -27,7 +27,7 @@
 		 <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>Product*</label>
-          <md-select ng-model="productRmAsso.product.productId" name="product"  ng-disabled="productIdReadOnly" ng-required="true" required ng-init="getProducts()">
+          <md-select ng-model="productRmAsso.product.productId" name="product"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getProducts()">
             <md-option ng-repeat="product in products" ng-value="product.productId">
                {{product.partNumber}}
             </md-option>

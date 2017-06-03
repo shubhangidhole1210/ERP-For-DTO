@@ -64,31 +64,19 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	};
 	
 	
-	/*$scope.showGenerateBom = function(ev) {
-		var addNewDomDialog = {
-			controller : 'domController',
-			templateUrl : 'views/domGenerateDialogue.html',
-			parent : angular.element(document.body),
-			targetEvent : ev,
-			clickOutsideToClose : true,
-			onRemoving : function(){console.log('Removing user dialog');},
-			fullscreen : $scope.customFullscreen,
-		};
-		$mdDialog
-		.show(addNewDomDialog)
-		.then(function(answer) {},
-				function() {});
-	};*/
-	
-	
 	$scope.showGenerateBom = function(ev) {
+		$scope.bomInformation="GENERATE BOM"
 	    $mdDialog.show({
 	      controller: 'bomDialogueController',
 	      templateUrl: 'views/bomGenerateDialogue.html',
 	      parent: angular.element(document.body),
 	      targetEvent: ev,
 	      clickOutsideToClose:true,
-	      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+	      fullscreen: $scope.customFullscreen ,
+	      locals : {
+				
+	    	  bomInformation : $scope.bomInformation
+			}
 	    })
 	    .then(function(answer) {
 	      $scope.status = 'You said the information was "' + answer + '".';
@@ -98,13 +86,18 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	  };
 	  
 	  $scope.showReturnBom = function(ev) {
+		  $scope.bomInformation="DOWNLOAD BOM"
 		    $mdDialog.show({
 		      controller: 'bomReturnDialogueController',
 		      templateUrl: 'views/bomReturnDialog.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
 		      clickOutsideToClose:true,
-		      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+		      fullscreen: $scope.customFullscreen,
+		      locals : {
+					
+		    	  bomInformation : $scope.bomInformation
+				}
 		    })
 		    .then(function(answer) {
 		      $scope.status = 'You said the information was "' + answer + '".';

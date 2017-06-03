@@ -11,7 +11,7 @@
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">NAME</label> <input type="text"
-				ng-model="unit.name" name="name" ng-disabled="isReadOnly" required ng-minlength="2" ng-maxlength="4" limit-to="255">
+				ng-model="unit.name" name="name" ng-disabled="isReadOnly" required ng-minlength="2" ng-maxlength="255" limit-to="255">
 			<div ng-messages="unitInformation.name.$error">
 				<div ng-message="required">Please enter Unit</div>
 				<div ng-message="minlength">Unit Name should be minimum 2 character</div>
