@@ -41,7 +41,7 @@
 			<label class="input-filed-label">FIRST NAME</label> <input
 				type="text" ng-model="user.firstName" required name="firstName"
 				ng-disabled="isReadOnly"  ng-maxlength="255"
-				onkeypress='return event.charCode >= 65 && event.charCode <= 120' limit-to="255">
+				onkeypress='return event.charCode >= 65 && event.charCode <= 122' limit-to="255">
 			<div ng-messages="userInformation.firstName.$error">
 				<div ng-message="required">Please enter First Name</div>
 				<div ng-message="minlength">User Name Should be minimum two
@@ -55,7 +55,7 @@
 			<label class="input-filed-label">LAST NAME</label> <input type="text"
 				ng-model="user.lastName" required name="lastName"  ng-maxlength="255"
 				ng-disabled="isReadOnly"
-				onkeypress='return event.charCode >= 65 && event.charCode <= 120' limit-to="255">
+				onkeypress='return event.charCode >= 65 && event.charCode <= 122' limit-to="255">
 			<div ng-messages="userInformation.lastName.$error">
 				<div ng-message="required">Please enter  last name</div>
 				<div ng-message="minlength">Last Name Should be minimum two

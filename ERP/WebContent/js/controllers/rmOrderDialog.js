@@ -100,7 +100,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		}
 
 	}
-	$scope.vendorRmList=function(index)
+	$scope.getRMListByVendor = function()
 	{
 		$scope.rmMsg = false;
 		var httpparams = {};
@@ -229,11 +229,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				$scope.RMOrderInformation.quantity.$setValidity("message", true);
 			}
 		};*/
-	    
-		/*$scope.$watch('vendorId', function(val)
-				{
-				    if (!val) $scope.vendorId = null;
-				});*/
 	    
 	    
 	    $scope.getRmForOrder=function(){

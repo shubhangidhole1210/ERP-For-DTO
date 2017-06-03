@@ -39,7 +39,7 @@
 			<md-input-container> <label>VENDOR
 			</label> <md-select ng-model="rmOrder.vendor.id" name="vendorId"
 				ng-disabled="isVendorId" ng-init="displayVendorId()" name="vendorId"
-				required ng-change="vendorRmList($index)">
+				required ng-change="getRMListByVendor()">
 			<md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id">
 			{{vendorId.companyName}} </md-option> </md-select> 
 			 <div ng-messages="RMOrderInformation.vendorId.$error">

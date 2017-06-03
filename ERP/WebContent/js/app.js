@@ -3,7 +3,7 @@ var erpApp = angular
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-erpApp.value('SERVER_URL', 'http://192.168.2.103:8085/ERP/');
+erpApp.value('SERVER_URL', 'http://192.168.2.103:8086/ERP/');
 
 
 
