@@ -1,5 +1,5 @@
 erpApp.controller('bomDialogueController', function($scope, $http, $location, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,bomInformation){
-	
+	$scope.bomInformation=bomInformation;
 	 $scope.hide = function() {
 	      $mdDialog.hide();
 	    };
@@ -11,8 +11,9 @@ erpApp.controller('bomDialogueController', function($scope, $http, $location, $m
 	    $scope.answer = function(answer) {
 	      $mdDialog.hide(answer);
 	    };	
-	$scope.bomInformation=bomInformation;
-	$scope.getProducts = function() {
+
+	
+	/*$scope.getProductList = function() {
 		utils.showProgressBar();
 		        var httpparams = {};
 		         httpparams.method = 'GET';
@@ -22,7 +23,6 @@ erpApp.controller('bomDialogueController', function($scope, $http, $location, $m
 			        };
 		
 					$http(httpparams).then( function successCallback(response) {
-								/*$scope.data = response.data;*/
 								$scope.products = response.data;
 								console.log(response);
 								utils.hideProgressBar();
@@ -32,13 +32,41 @@ erpApp.controller('bomDialogueController', function($scope, $http, $location, $m
 								utils.showToast('We are Sorry. Something went wrong. Please try again later.');
 								utils.hideProgressBar();
 			});
-	};
+	};*/
+	    $scope.isDialogBoxvisible=true;
+	    $scope.cancel = function(){
+	    	 $scope.isDialogBoxvisible=false;
+	    }
+	    
+	    
+	    $scope.abc = function(){
+			console.log($scope.rawMaterials);
+			var httpparams = {};
+			httpparams.method = 'GET';
+			httpparams.url = SERVER_URL + "productRMAsso/list" ;
+			httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+				};
+			
+			$http(httpparams).then(function successCallback(response) {
+				$scope.products = response.data;
+				console.log(response);
+	             utils.hideProgressBar();
+			}, function errorCallback(response) {
+				console.log("Error");
+				utils.hideProgressBar();
+
+			});
+			utils.showProgressBar();
+		}
+	    
+	    
 	
-	$scope.getRMVendor = function(){
+	$scope.getRawMaterials = function(){
 		console.log($scope.rawMaterials);
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "productRMAsso/getRMVendorData/" + $scope.product.product.id;
+		httpparams.url = SERVER_URL + "productRMAsso/productRMAssoList/" + $scope.product.product.id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -56,6 +84,31 @@ erpApp.controller('bomDialogueController', function($scope, $http, $location, $m
 		utils.showProgressBar();
 	}
 	
+	$scope.getVenodrList = function(){
+		console.log($scope.rawMaterials);
+		var httpparams = {};
+		httpparams.method = 'GET';
+		/*console.log("$scope.rawmaterial.id" )*/
+		httpparams.url = SERVER_URL + "rmvendorasso/rmVendorList/1";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		
+		$http(httpparams).then(function successCallback(response) {
+			/*$scope.data = response.data;*/
+			$scope.vendorList = response.data;
+			console.log("$scope.vendorList" , $scope.vendorList)
+			console.log(response);
+             utils.hideProgressBar();
+		}, function errorCallback(response) {
+			console.log("Error");
+			utils.hideProgressBar();
+
+		});
+		utils.showProgressBar();
+	}
+	
+	
 	$scope.submitBomInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.saveBomData();
@@ -65,6 +118,19 @@ erpApp.controller('bomDialogueController', function($scope, $http, $location, $m
 		}
 
 	};
+	
+	$scope.caluculatePrice = function(quantity,index){
+		console.log(quantity);
+		console.log('$scope.vendorList' , $scope.vendorList)
+		for(var i=0; i < $scope.vendorList.length; i++){
+			$scope.data.data[index].pricePerUnit = $scope.vendorList[i].pricePerUnit * quantity;
+			console.log('$scope.pricePerUnitL :' , $scope.pricePerUnit);
+			
+		}
+		
+	}
+	
+	
 	
 	$scope.saveBomData=function(){
 		console.log("in save function")

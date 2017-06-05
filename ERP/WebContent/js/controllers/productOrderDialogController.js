@@ -22,8 +22,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
       $mdDialog.hide(answer);
     };
     
-    $scope.saveProductOrder=function(ev) {
-    	utils.showProgressBar();
+   /* $scope.saveProductOrder=function(ev) {
     	var data = {
     			 orderproductassociations : $scope.orderproductassociations,
     			 description:$scope.productOrder.description,
@@ -58,23 +57,79 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 								console.log(data.data.message);
 								console.log(data);
 								utils.showToast('Something went worng. Please try again later.');
-								utils.hideProgressBar();
 							}else{
 								$scope.displayProgressBar = false;
 								utils.showToast('Product Order Created successfully.');
 								$rootScope.$emit("callPopulateProductOrderList",{});
-								utils.hideProgressBar();
 							}
 						},
 						function errorCallback(data) {
 							$rootScope.$emit(
 									"saveRMOrderError", {});
 							console.log(data);
-							/*$scope.hide();*/
+							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
-							utils.hideProgressBar();
 						});
-    };
+    };*/
+    
+    $scope.saveProductOrder = function() {
+    	var data = {
+    			 orderproductassociations : $scope.orderproductassociations,
+    			 description:$scope.productOrder.description,
+    			 invoiceNo:$scope.productOrder.invoiceNo,
+    			 expecteddeliveryDate:$scope.productOrder.expecteddeliveryDate ,
+    			  client:$scope.productOrder.client.id
+		};
+    	 
+    	var httpparams = {};
+    	if($scope.flag === 0){
+    		httpparams.method = 'post';
+ 			httpparams.url = SERVER_URL + "productorder/createmultiple";
+ 			httpparams.headers = {
+ 					auth_token : Auth.getAuthToken()
+ 			};
+    	}else{
+    		 data.id=$scope.productOrder.id;
+    		httpparams.method='put',
+    		httpparams.url=SERVER_URL + "productorder/update"
+    		httpparams.headers = {
+					auth_token : Auth.getAuthToken()
+			};
+    	}
+    	 
+    	httpparams.data = data;
+    	
+    	$http(httpparams).then(
+			function successCallback(data) {
+				$mdDialog.hide();
+				console.log(data);
+				if(data.data.code === 0){
+					console.log(data.data.message);
+					$rootScope.$emit(
+							"saveVendorError", {});
+					console.log(data);
+					$scope.hide();
+					utils.showToast('Something went worng. Please try again later.');
+				}
+				
+				else{
+					$scope.displayProgressBar = false;
+					utils.showToast('Product RM Association Information saved successfully.');
+					$rootScope.$emit("callPopulateProductOrderList",{});
+				}
+			},
+			function errorCallback(data) {
+				$rootScope.$emit("saveVendorError", {});
+				console.log(data);
+				$scope.hide();
+				utils.showToast('Something went worng. Please try again later.');
+			});
+    	 
+    	};
+	    
+    
+    
+    
     
 	$scope.submitInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {

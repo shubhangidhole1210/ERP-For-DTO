@@ -139,19 +139,16 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		console.log('Total Price : '+ $scope.rmOrder.totalprice);
 	}
 	
-	$scope.updateOtherCharges=function()
-	{
+	$scope.updateOtherCharges=function(){
 		console.log('in update other charges');
 		console.log('Other Charges : '+$scope.rmOrder.otherCharges);
 		$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
 		console.log('Total Price : '+$scope.rmOrder.totalprice);
-		/*console.log('actual price : ' +)*/
 	}
 	
 	$scope.updateQuantity = function(quantity,totalprice,tax,actualPrice,otherCharges){
 		$scope.calculateTotalPrice();
 	}
-	
 	
 	
 	

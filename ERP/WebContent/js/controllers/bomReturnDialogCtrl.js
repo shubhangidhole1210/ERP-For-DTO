@@ -1,5 +1,19 @@
 erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,bomInformation){
-		
+	
+	
+	$scope.hide = function() {
+		console.log('hide DialogController');
+		$mdDialog.hide();
+	};
+
+	$scope.cancel = function() {
+		$mdDialog.cancel();
+	};
+
+	$scope.answer = function(answer) {
+		$mdDialog.hide(answer);
+	};
+	
 	$scope.bomInformation=bomInformation;
 	$scope.getProducts = function() {
 		utils.showProgressBar();
@@ -69,13 +83,13 @@ erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDial
 	        var contentType = headers['content-type'];
 	        console.log("file name:-" + filename)
 	        var linkElement = document.createElement('a');
-	        console.log("bom id is :" ,$scope.bom.id)
+	        console.log("bom id is :" ,$scope.bom.bomId)
 	        try {
 	            var blob = new Blob([response.data], { type: contentType });
 	            var url = window.URL.createObjectURL(blob);
 	 
 	            linkElement.setAttribute('href', url);
-	            linkElement.setAttribute("download", $scope.bom.id);
+	            linkElement.setAttribute("download", $scope.bom.bomId);
 	 
 	            var clickEvent = new MouseEvent("click", {
 	                "view": window,
@@ -96,25 +110,5 @@ erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDial
 	};
 	
 	
-	
-	
-	
-	
-	
-	  $scope.cancel = function() {
-	      $mdDialog.cancel(); 
-	      $mdDialog.hide();
-	  };
-
-	  $scope.answer = function(answer) {
-		  console.log("in answer function");
-	      $mdDialog.hide(answer);
-	      $mdDialog.cancel(); 
-	  };
-	
-	  $scope.hide = function() {
-	      $mdDialog.hide();
-	  };
-
 	
 });

@@ -22,19 +22,6 @@
 				ng-disabled="isReadOnly">
 			</md-input-container>
 		</div>
-		<!-- <div layout-gt-sm="row">
-			<md-input-container> <label>VENDOR
-			</label> <md-select ng-model="selectedVendor" name="vendorId"
-				ng-disabled="isVendorId" ng-init="displayVendorId()" name="vendorId"
-				required ng-change="vendorRmList($index)">
-			<md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id">
-			{{vendorId.companyName}} </md-option> </md-select> 
-			 <div ng-messages="RMOrderInformation.vendorId.$error">
-				<div ng-message="required">Please select Vendor</div>
-			</div>
-			</md-input-container>
-		</div> -->
-		
 		<div layout-gt-sm="row">
 			<md-input-container> <label>VENDOR
 			</label> <md-select ng-model="rmOrder.vendor.id" name="vendorId"
@@ -73,7 +60,7 @@
 			<tr ng-repeat="orderRawMaterial in rmOrderList">
 				<td>{{orderRawMaterial.rawmaterial.name}}</td>
 				<td><input type="number"
-					ng-value="{{orderRawMaterial.quantity}}" ng-disabled="isReadOnly"></td>
+					ng-value="{{orderRawMaterial.quantity}}" ng-disabled="isReadOnly" ></td>
 				<td>
 					<button type="button" class="multiple-added-delete"
 						ng-click="deleteRM($index)" ng-disabled="isReadOnly">Delete</button>

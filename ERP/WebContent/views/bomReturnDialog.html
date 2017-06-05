@@ -25,8 +25,8 @@
             <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>BOM</label>
-          <md-select ng-model="bom.id" name="bom"  ng-disabled="productIdReadOnly">
-            <md-option ng-repeat="bom in bomData" ng-value="bom.id" required>
+          <md-select ng-model="bom" name="bom"  ng-disabled="productIdReadOnly">
+            <md-option ng-repeat="bom in bomData" ng-value="bom" required>
                {{bom.bomId}}
             </md-option>
           </md-select>
@@ -42,13 +42,10 @@
 	</div>
 	</md-dialog-content>
 
-	<md-dialog-actions layout="row"> <md-button
-		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions>
+	<md-dialog-actions layout="row"> 
+	    <md-button
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+	</md-dialog-actions>
 </form>
 </md-dialog>
-
-
-
-
-
 
