@@ -47,11 +47,13 @@
 						<table>
 							<tr>
 								<th>RAW MATERIAL NAME</th>
+								<th>INVENTORY QUANTITY</th>
 								<th>QUANTITY REQUIRED</th>
 								<th>QUANTITY DISPATCH</th>
 							</tr>
 							<tr ng-repeat="rawMaterial in data.data">
 								<td>{{rawMaterial.name}}</td>
+								<td>{{rawMaterial.inventoryQuantity}}</td>
 								<td>{{rawMaterial.quantityRequired}}</td>
 								<td><md-input-container class="md-block" flex-gt-sm>
 									<input type="number" name="dispatchQuantity"
