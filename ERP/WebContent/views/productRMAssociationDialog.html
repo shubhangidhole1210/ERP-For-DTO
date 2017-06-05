@@ -48,7 +48,7 @@
 
 			<tr ng-repeat="rm in productRmAsso.productRMAssociationModelParts">
 				<td>{{ $index + 1 }}</td>
-				<td>{{rm.rawmaterial.name}}</td>
+				<td>{{rm.rawmaterial.partNumber}}</td>
 				<td><input type="number" ng-value="{{rm.quantity}}"></td>
 				<td>
 					<button type="button" class="multiple-added-delete"
@@ -62,7 +62,7 @@
 				ng-model="rawmaterialPart.rawmaterial" ng-disabled="isReadOnly"
 				ng-init="rawMaterialId()" name="rawmaterial"> <md-option
 				ng-repeat="rawmaterial in RMData" ng-value="rawmaterial">
-			{{rawmaterial.name}} </md-option> </md-select>
+			{{rawmaterial.partNumber}} </md-option> </md-select>
 			<div ng-messages="productRMAssociationInformation.$error"
 				ng-show="productRMAssociationInformation.rawmaterial.$dirty">
 				{{message}}</div>
