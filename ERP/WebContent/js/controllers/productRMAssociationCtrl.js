@@ -104,7 +104,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 
 			var httpparams = {};
 			httpparams.method = 'delete';
-			httpparams.url = SERVER_URL + "productRMAsso/delete/" + $scope.productRmAssociations[index].id;
+			httpparams.url = SERVER_URL + "productRMAsso/delete/" + $scope.productRmAssociations[index].product;
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
