@@ -1,15 +1,17 @@
 erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils)
 {
 	$scope.isUnitInPresent=false; 
+	$scope.unit={}
+	
 	$rootScope.$on("CallPopulateUnitList", function() {
 		$scope.populateUnitList();
-		
 	});
+	
 	$rootScope.$on("saveUnitError", function() {
 		$scope.showAddNewUnit();
 	});
-	$scope.populateUnitList=function()
-	{
+	
+	$scope.populateUnitList=function(){
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -17,7 +19,6 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.units=response.data;
@@ -30,11 +31,12 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 				console.log("Error");
 			   utils.hideProgressBar();
 		});
-	}
+	};
+	
 	$scope.isUnitInformation = function() {
 		$scope.isUnitInPresent = $scope.data.length === 0 ? true : false;
 	};
-	$scope.unit={}
+	
 	$scope.showAddNewUnit = function(ev) {
 		$scope.unit={};
 		$scope.flag = 0;
@@ -61,6 +63,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		.then(function(answer) {},
 				function() {});
 	};
+	
 	$scope.showEditUnit = function(ev, index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
@@ -86,7 +89,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 						function() {});
 	};
 	
-	$scope.viewUnitInformation = function(ev, index) {
+	$scope.viewUnitInformation = function(ev, index){
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
 		$scope.unit = $scope.units[index];
@@ -121,15 +124,16 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 			};
 		$http(httpparams).then(function successCallback(data) {
 					$mdDialog.hide();
+			utils.showToast('Unit Deleted Sucessfully!');
 			$rootScope.$emit("CallPopulateUnitList", {});
 			console.log(data);
 
 		}, function errorCallback(data) {
 			console.log("Error");
-
+			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
+			
 		});
 		utils.showProgressBar();
-
 	};
 	$scope.showConfirm = function(ev,index) {
 		var confirm = $mdDialog.confirm().title('Are you sure you want to Delete Unit Information?')
@@ -138,12 +142,6 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		$mdDialog.show(confirm)
 				.then(function() {
 					$scope.deleteUnit(index);
-					utils.showToast('Unit Deleted Sucessfully!');
 				}, function() {});
 	};
-	
-	
-	
-	
-	
 });

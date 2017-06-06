@@ -1,5 +1,7 @@
 erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 	$scope.isProductPresent=false;
+	$scope.product = {};
+	
 	$rootScope.$on("CallPopulateProductList", function() {
 		$scope.populteProductList();
 	});
@@ -26,17 +28,13 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 			console.log("Error");
 			utils.hideProgressBar();
-
 		});
-	}
-	
+	};
 	
 	$scope.isProductInformation = function() {
 		$scope.isProductPresent = $scope.data.length === 0 ? true : false;
 	};
 	
-	
-	$scope.product = {};
 	$scope.showAddNewProduct = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
@@ -63,7 +61,6 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 				function() {});
 	};
 	
-	
 	$scope.showGenerateBom = function(ev) {
 		$scope.bomInformation="GENERATE BOM"
 	    $mdDialog.show({
@@ -74,7 +71,6 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	      clickOutsideToClose:true,
 	      fullscreen: $scope.customFullscreen ,
 	      locals : {
-				
 	    	  bomInformation : $scope.bomInformation
 			}
 	    })
@@ -95,7 +91,6 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		      clickOutsideToClose:true,
 		      fullscreen: $scope.customFullscreen,
 		      locals : {
-					
 		    	  bomInformation : $scope.bomInformation
 				}
 		    })
@@ -105,8 +100,6 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		      $scope.status = 'You cancelled the dialog.';
 		    });
 		  };
-	
-	
 	
 	$scope.showEditProduct = function(ev, index) {
 		$scope.flag = 1;
@@ -138,6 +131,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 							$scope.status = 'You cancelled the dialog.';
 						});
 	};
+	
 	$scope.viewProductInformation = function(ev, index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
@@ -169,12 +163,8 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 						});
 	};
 	
-	
 	$scope.deleteProduct = function(index) {
 		console.log($scope.product);
-
-	
-		
 		var httpparams = {};
 		httpparams.method = 'delete';
 		httpparams.url = SERVER_URL + "product/delete/" + $scope.products[index].id;
@@ -185,13 +175,13 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateProductList", {});
 			console.log(data);
-			
-
+			$scope.message = 'Delete Product Record sucessfully';
+			$scope.showToast();
 		}, function errorCallback(data) {
 			console.log("Error");
+			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 		});
 		$scope.showProgressBarOne();
-
 	};
 
 	$scope.showConfirm = function(ev,index) {
@@ -199,37 +189,15 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 				'Are you sure you want to Delete Product Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'YES' ).cancel('NO');
-
 		$mdDialog
 				.show(confirm)
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteProduct(index);
-							
-							$scope.message = 'Delete Product Record sucessfully';
-							$scope.showToast();
-							
-							
 						},
 						function() {
 							$scope.status = 'You decided to keep your debt.';
 						});
 	};
-	
-	function ProgressBarController($scope, $mdDialog) {
-		
-		$scope.hide = function() {
-			$mdDialog.hide();
-		};
-
-		$scope.cancel = function() {
-			$mdDialog.cancel();
-		};
-
-		$scope.answer = function(answer) {
-			$mdDialog.hide(answer);
-		};
-	}
-
 });

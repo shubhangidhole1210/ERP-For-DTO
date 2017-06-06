@@ -3,6 +3,7 @@ erpApp.controller('userCtrl',
 						SERVER_URL, utils, Auth) {
 					$scope.isReadOnly = false;
 					$scope.isUserUnavailable = false;
+					$scope.user = {};
 					
 					$rootScope.$on("CallPopulateUserList", function($event) {
 						$scope.populateUserList();
@@ -13,16 +14,13 @@ erpApp.controller('userCtrl',
 
 					$scope.populateUserList = function() {
 						utils.showProgressBar();
-
 						var httpparams = {};
 						httpparams.method = 'GET';
 						httpparams.url = SERVER_URL + "user/list";
 						httpparams.headers = {
 								auth_token : Auth.getAuthToken()
 							};
-						
 						$http(httpparams).then(function successCallback(response) {
-
 											$scope.data = response.data;
 											$scope.users = response.data;
 											$scope.isUserInformation();
@@ -34,7 +32,6 @@ erpApp.controller('userCtrl',
 											utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 											console.log("Error",response);
 											utils.hideProgressBar();
-
 										});
 					};
 
@@ -42,7 +39,6 @@ erpApp.controller('userCtrl',
 						$scope.isUserUnavailable = $scope.data.length === 0 ? true : false;
 					};
 
-					$scope.user = {};
 					$scope.showAddNewUser = function(ev) {
 						$scope.user = {};
 						$scope.information = "ADD NEW USER"
@@ -63,7 +59,6 @@ erpApp.controller('userCtrl',
 								information : $scope.information
 							}
 						};
-						
 						$mdDialog
 						.show(addNewUserDialog)
 						.then(function(answer) {},
@@ -94,6 +89,7 @@ erpApp.controller('userCtrl',
 								.then(function(answer) {},
 										function() {});
 					};
+					
 					$scope.viewUserInformation = function(ev, index) {
 						$scope.flag = 2;
 						$scope.isReadOnly = true;
@@ -119,6 +115,7 @@ erpApp.controller('userCtrl',
 										function(answer) {},
 										function() {});
 					};
+					
 					$scope.deleteUser = function(index) {
 						console.log($scope.user);
 						var httpparams = {};
@@ -131,10 +128,11 @@ erpApp.controller('userCtrl',
 							    utils.hideProgressBar();
 								$rootScope.$emit("CallPopulateUserList", {});
 								console.log(data);
+								utils.showToast('User Deleted Sucessfully!');
 								}, function errorCallback(data) {
 									console.log("Error");
+									utils.showToast('We are Sorry. Something went wrong. Please try again later.');
 						});
-
 						utils.showProgressBar();
 					};
 
@@ -146,11 +144,8 @@ erpApp.controller('userCtrl',
 						$mdDialog.show(confirm)
 								.then(function() {
 											$scope.deleteUser(index);
-											utils.showToast('User Deleted Sucessfully!');
+											/*utils.showToast('User Deleted Sucessfully!');*/
 										},
 										function() { });
 					};
-					
-					
-					
 });

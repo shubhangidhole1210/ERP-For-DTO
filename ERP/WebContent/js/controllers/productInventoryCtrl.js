@@ -1,8 +1,10 @@
 erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
 	$scope.isProductInventoryPresent=false;
+	$scope.productInventory={};
 	$rootScope.$on("callPopulateProductInventoryList", function() {
 		$scope.populateProductInventoryList();
 	});
+	
 	$rootScope.$on("saveVendorError", function() {
 		$scope.showAddNewProductInventory()
 	});
@@ -28,15 +30,11 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 				console.log("Error");
 				utils.hideProgressBar();
 			});
-	}
-
+	};
 	
 	$scope.isProductInventoryinformation=function(){
 		$scope.isProductInventoryPresent= $scope.data.length === 0  ? true:false;
-	}
-	
-	
-	$scope.productInventory={};
+	};
 	
 	$scope.showAddNewProductInventory = function(ev) {
 		$scope.flag = 0;
@@ -63,6 +61,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		.then(function(answer) {},
 				function() {});
 	  };
+	  
 	  $scope.showEditProductInventory = function(ev , index) {
 		  $scope.flag = 1;
 		  $scope.isReadOnly = false;
@@ -87,10 +86,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		  };
 	  
 	  $scope.deleteProductInventory = function(index) {
-		
 			console.log($scope.vendoUser);
-
-			
 			var httpparams = {};
 			httpparams.method = 'delete';
 			httpparams.url = SERVER_URL + "productinventory/delete/"  + $scope.productInventorys[index].id;
@@ -101,13 +97,10 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 						$mdDialog.hide();
 						$rootScope.$emit("callPopulateProductInventoryList", {});
 				console.log(data);
-
 			}, function errorCallback(data) {
 				console.log("Error");
-
 			});
 			$scope.showProgressBarOne();
-
 		};
 		
 		$scope.viewProductInventoryInformation = function(ev, index) {
@@ -134,27 +127,22 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 					.then(function(answer) {},
 							function() {});
 		};
+		
 		$scope.showConfirm = function(ev,index) {
 			var confirm = $mdDialog.confirm().title(
 					'Are you sure you want to Delete Product Inventory Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
 							'YES' ).cancel('NO');
-
-			$mdDialog
-					.show(confirm)
-					.then(
+			$mdDialog.show(confirm).then(
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
 								$scope.deleteProductInventory(index);
-								
 								$scope.message = 'Delete Record sucessfully';
 								$scope.showToast();
-								
 							},
 							function() {
 								$scope.status = 'You decided to keep your debt.';
 							});
 		};
-		
 });
 

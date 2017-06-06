@@ -3,8 +3,8 @@ erpApp
 				'todaysPlanCtrl',
 				function($scope, $http, $mdDialog, $mdToast, $rootScope,
 						SERVER_URL, Auth, utils, $location) {
-
 					$scope.currentDate = utils.getCurrentDate();
+					
 					$scope.getProducts = function() {
 						utils.showProgressBar();
 						var httpparams = {};
@@ -15,12 +15,10 @@ erpApp
 						httpparams.headers = {
 							auth_token : Auth.getAuthToken()
 						};
-
 						$http(httpparams).then(
 								function successCallback(response) {
 									utils.hideProgressBar();
 									$scope.productList = response.data;
-//									$scope.isTodaysProductionPlan();
 									console.log(response);
 								}, function errorCallback(response) {
 									console.log("Error");
@@ -36,8 +34,8 @@ erpApp
 							utils.showToast('Please fill all required information');
 						}
 					};
+					
 					$scope.saveTodaysProductionPlan = function() {
-
 						var index = 0;
 						var productinPlanCurrentDateLists = [];
 						for (index = 0; index < $scope.productList.length; index++) {
@@ -49,11 +47,9 @@ erpApp
 							product.productionPlanId = $scope.productList[index].id;
 							productinPlanCurrentDateLists.push(product);
 						}
-
 						var data = {
 							createDate : $scope.currentDate,
 							productinPlanCurrentDateLists : productinPlanCurrentDateLists
-
 						};
 						var httpparams = {
 							method : 'post',
@@ -61,17 +57,14 @@ erpApp
 									+ "dailyproduction/dailyproductionSave",
 							data : data
 						};
-
 						httpparams.headers = {
 							auth_token : Auth.getAuthToken()
 						};
 						$http(httpparams)
 								.then(
 										function successCallback(data) {
-
 											console.log(data.data.message);
 											console.log(data);
-
 											if (data.data.code === 1) {
 												utils
 														.showToast("Todays production Plan Update sucessfully!");
@@ -81,7 +74,6 @@ erpApp
 														.showToast("Something went wrong. Please try again later.");
 											}
 											utils.hideProgressBar();
-
 										},
 										function errorCallback(response) {
 											console.log("Error");
@@ -89,13 +81,10 @@ erpApp
 													.showToast("Something went wrong. Please try again later.");
 											utils.hideProgressBar();
 										});
-
 						utils.showProgressBar();
-					}
+					};
 					
 					$scope.cancelTodaysProductionPlan=function(){
 						$location.path('/');
-					}
-				
-
+					};
 				});

@@ -1,15 +1,15 @@
 erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
 	$scope.isProductRmAssociationPresent=false; 
+	$scope.productRmAsso={};
+	
 	$rootScope.$on("callPopulateProductRmAssociationList", function() {
 		$scope.populateProductRmAssoList();
 	});
 	$rootScope.$on("saveVendorError", function() {
-		$scope.showAddNewProductRMAssociation()
+		$scope.showAddNewProductRMAssociation();
 	});
 	
-	
-	$scope.populateProductRmAssoList=function()
-	{
+	$scope.populateProductRmAssoList=function(){
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -17,31 +17,24 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
-				$scope.productRmAssociations=response.data
+				$scope.productRmAssociations=response.data;
 				$scope.productRMAssociationModelParts = response.data.productRMAssociationModelParts;
 				$scope.productRmAssociationInformation();
 				utils.hideProgressBar();
 				console.log(response);
-				console.log('productRMAssociationModelParts' + $scope.productRMAssociationModelParts)
-
+				console.log('productRMAssociationModelParts' + $scope.productRMAssociationModelParts);
 			}, function errorCallback(response) {
 				utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 				console.log("Error");
 				utils.hideProgressBar();
 			});
-	}
-	
-
+	};
 	
 	$scope.productRmAssociationInformation = function() {
 		$scope.isProductRmAssociationPresent = $scope.data.length === 0 ? true : false;
 	};
-	
-	
-	$scope.productRmAsso={};
 	
 	$scope.showAddNewProductRMAssociation = function(ev) {
 		$scope.flag = 0;
@@ -70,7 +63,6 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		.then(function(answer) {},
 				function() {});
 	  };
-	  
 	  
 	  $scope.showEditproductRMAssociation = function(ev , index) {
 		  $scope.flag = 1;
@@ -101,7 +93,6 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 	  
 	  $scope.deleteProductRMAssociation = function(index) {
 			console.log($scope.vendoUser);
-
 			var httpparams = {};
 			httpparams.method = 'delete';
 			httpparams.url = SERVER_URL + "productRMAsso/delete/" + $scope.productRmAssociations[index].product;
@@ -112,10 +103,11 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 						$mdDialog.hide();
 						$rootScope.$emit("callPopulateProductRmAssociationList", {});
 				console.log(data);
-
+				utils.showToast('Product Rm Association Deleted Sucessfully!');
 			}, function errorCallback(data) {
 				console.log("Error");
 				$mdDialog.hide();
+				utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 			});
 			utils.showProgressBar();
 		};
@@ -151,7 +143,6 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 					'Are you sure you want to Delete Product RM Asssociation Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
 							'Delete' ).cancel('Cancel');
-
 			$mdDialog
 					.show(confirm)
 					.then(
@@ -162,7 +153,5 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 							},
 							function() { });
 		};
-		
-	
 });
 

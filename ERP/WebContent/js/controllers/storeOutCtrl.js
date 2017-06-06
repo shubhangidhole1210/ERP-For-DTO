@@ -2,7 +2,6 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		$rootScope, SERVER_URL,$filter,utils,Auth,$location)
 {
 	$scope.currentDate = utils.getCurrentDate();
-	/*$scope.manuFactureQuantity = 0;*/
 	$scope.productionPlan = {};
 	$scope.getProducts=function()
 	{
@@ -14,23 +13,17 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(response) {
-		/*	$scope.data = response.data;*/
 			$scope.productionPlans = response.data;
 			console.log(response);
 			utils.hideProgressBar();
-
 		}, function errorCallback(response) {
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 			console.log("Error");
 			utils.hideProgressBar();
-
 		});
-	}
+	};
 	
-	
-	
-	$scope.getProductRMAssociation=function($index)
-	{
+	$scope.getProductRMAssociation=function($index){
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -48,9 +41,8 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 			console.log("Error");
 			utils.hideProgressBar();
-
 		});
-	}
+	};
 	
 	$scope.updateDispatchQuantity = function(){
 		for(index=0;index<$scope.data.data.length;index++){
@@ -58,9 +50,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		}
 	};
 	
-	$scope.saveStoreOutInformation=function()
-	{
-		
+	$scope.saveStoreOutInformation=function(){
 		console.log($scope.data.data);
 		var index=0;
 		var rmList = [];
@@ -69,11 +59,10 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 			storeOutProduct.rawmaterial= $scope.data.data[index].rawmaterial;
 			storeOutProduct.quantityRequired = $scope.data.data[index].quantityRequired;
 			storeOutProduct.quantityDispatched = $scope.data.data[index].quantityDispatched;
-			
 			rmList.push(storeOutProduct);
 		}
 		data=
-			{
+		      {
 				productId: $scope.productionPlan.product.id,
 				productionPlanId :$scope.productionPlan.id,
 				quantityRequired: $scope.manuFactureQuantity,
@@ -85,7 +74,6 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 				url : SERVER_URL + "storeout/createStoreOut",
 				data : data
 			};
-		
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -105,8 +93,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 			utils.hideProgressBar();
 		});
 		utils.showProgressBar();
-	}
-	
+	};
 	
 	$scope.submitInformation = function(isvaliduser, $event) {
 		if (isvaliduser) {
@@ -118,7 +105,6 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 	
 	$scope.restInformation=function(){
 		$location.path('/');
-	}
-	
+	};
 	
 	});

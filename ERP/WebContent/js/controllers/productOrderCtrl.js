@@ -33,8 +33,6 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			});
 	};
 	
-	
-	
 	$scope.isProductOrderInformation = function() {
 		$scope.isProductOrderPresent = $scope.data.length === 0 ? true : false;
 	};
@@ -108,10 +106,10 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				utils.hideProgressBar();
 						$rootScope.$emit("callPopulateProductOrderList", {});
 				console.log(data);
-
+				utils.showToast('Product Order Deleted Sucessfully!');
 			}, function errorCallback(data) {
 				console.log("Error");
-
+				utils.showToast('We are Sorry. Something went wrong. Please try again later.');
 			});
 			utils.showProgressBar();
 		};
@@ -144,24 +142,17 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 					.then(function(answer) {},
 							function() {});
 		};
+		
 		$scope.showConfirm = function(ev,index) {
 			var confirm = $mdDialog.confirm().title(
 					'Are you sure you want to Delete Product Order Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
 							'YES' ).cancel('NO');
-
-			$mdDialog
-					.show(confirm)
-					.then(
+			$mdDialog.show(confirm).then(
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
 								$scope.deleteProductOrder(index);
-								utils.showToast('Product Order Deleted Sucessfully!');
-								
-								
 							},
 							function() { });
 		};
-		
-	
 });

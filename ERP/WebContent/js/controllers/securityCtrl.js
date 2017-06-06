@@ -1,11 +1,11 @@
 erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
-		$rootScope, SERVER_URL,$filter,utils,Auth,$location) {
+	$rootScope, SERVER_URL,$filter,utils,Auth,$location) {
 	 var date = new Date();
 	$scope.createDate = $filter('date')(Date.now(), 'MM-dd-yyyy');
 	$scope.rmMsg = true;
-	$scope.getRMInformation = function()
-
-	{
+	$scope.createDate = new Date($scope.createDate);
+	
+	$scope.getRMInformation = function(){
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "rawmaterialorder/list/securityCheck";
@@ -16,18 +16,14 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		$http(httpparams).then(function successCallback(response) {
 			$scope.rawMaterialOrders = response.data;
 			$scope.rawMaterials = response.data;
-			/*$scope.getRmOrderInfo()*/
 			utils.hideProgressBar();
 			console.log(response);
-
 		}, function errorCallback(response) {
 			console.log("Error");
 			utils.hideProgressBar();
-
 		});
 		utils.showProgressBar();
-	}
-
+	};
 		
 	$scope.displayRMList = function(index) {
 		console.log($scope.rawMaterials);
@@ -37,7 +33,6 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.rawMaterialList = response.data;
 			console.log(response);
@@ -46,21 +41,17 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		}, function errorCallback(response) {
 			console.log("Error");
 			utils.hideProgressBar();
-
 		});
 		utils.showProgressBar();
-	}
+	};
 	
-	$scope.displayStatusInformationList = function(index)
-	{
-
+	$scope.displayStatusInformationList = function(index){
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "rawmaterialorderinvoice/liststatus/"+ $scope.rawmaterialorderinvoice.id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 		$scope.statusInformationList = response.data;
 		utils.hideProgressBar();
@@ -71,13 +62,8 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		utils.hideProgressBar();
 	});
 		utils.showProgressBar();
-		
-	}
+};
 
-	/*$scope.submitInformation = function($event) {
-			$scope.saveSecurityInformation();
-			
-	};*/
 	$scope.submitInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.saveSecurityInformation();
@@ -85,9 +71,8 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-
 	};
-	$scope.createDate = new Date($scope.createDate);
+	
 	$scope.saveSecurityInformation = function() {
 		console.log('Saving saveSecurityInformation');
 		var index=0;
@@ -109,7 +94,6 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			console.log('intime is greater than outtime')
 		}
 		var data = {
-
 			invoice_No : $scope.invoice_No,
 			vendorname : $scope.selectedVendor,
 			vehicleNo : $scope.vehicleNo,
@@ -131,10 +115,8 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(data) {
-			
 			console.log(data.data.message);
 			console.log(data);
-			
 			if(data.data.code === 1){
 				utils.showToast("Rawmaterial Order Invoice added Successfully !");
 				$location.path('/');
@@ -142,17 +124,13 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 				utils.showToast("Something went wrong. Please try again later.");
 			}
 			utils.hideProgressBar();
-			
 		}, function errorCallback(response) {
 			console.log("Error");
 			utils.showToast("Something went wrong. Please try again later.");
 			utils.hideProgressBar();
 		});
-
 		utils.showProgressBar();
-		    	
 	};
-	
 	
 	$scope.toCompareQuantity=function(remainingQuantity,invoiceQuantity){
 		console.log(remainingQuantity);
@@ -163,93 +141,40 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		}else{
 			console.log("In-Valid invoice quantity");
 		}
-			
 	};
-	$scope.displayVendorId=function()
-	{
+	
+	$scope.displayVendorId=function(){
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "vendor/list";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.vendorData = response.data;
-
 			console.log(response);
-
 		}, function errorCallback(response) {
 			console.log("Error");
-
 		})
 	};
 	
-	$scope.vendorRmOrder=function(index)
-	{
+	$scope.vendorRmOrder=function(index){
 		$scope.rmMsg = false;
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "rawmaterialorder/getVendorOrder/"+$scope.selectedVendor;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
-				
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.vendorRmList = response.data;
 			console.log(response);
-
 		}, function errorCallback(response) {
 			console.log("Error");
 		})
-	}
-	
+	};
 
-	
-	/*$scope.getRmOrderInfo=function()
-	{ 
-		
-		console.log('rmlist'+$scope.vendorRmList);
-		if($scope.vendorRmList.length==0)
-			{
-			  $scope.securityInformation.rawMaterial.$setValidity("apierror", false);
-			  
-			}
-		else {
-			
-		}
-	}*/
-	
-	/*$scope.isRMOrderpresent=false;
-	$scope.getRmOrderInfo=function()
-	{ 
-		
-		console.log('rmlist'+$scope.vendorRmList);
-		if($scope.vendorRmList.length==0)
-			{
-			  
-			$scope.isRMOrderpresent=true;
-			}
-		else {
-			$scope.isRMOrderpresent=false;
-		}
-	}*/
-	
-	
-	/*var original = $scope.user;
-	$scope.restInformation=function()
-	{
-		$scope.user= angular.copy(original);
-		$scope.securityInformation.$setPristine();
-	}*/
-	
 	$scope.restInformation=function(){
-		$location.path('/')
-	}
-	
+		$location.path('/');
+	};
 });
-
-
-

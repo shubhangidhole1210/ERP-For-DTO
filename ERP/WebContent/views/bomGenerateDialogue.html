@@ -1,91 +1,3 @@
-<!-- <md-dialog class="statusInfo">
-<form name="bomGenerateForm" novalidate>
-	<md-toolbar>
-	<div class="md-toolbar-tools">
-		<h2>{{bomInformation}}</h2>
-		<span flex></span>
-	</div>
-	</md-toolbar>
-	<md-dialog-content>
-	<div class="md-dialog-content">
-			 <div layout-gt-sm="row">
-			<md-input-container class="md-block" flex-gt-sm>
-			<label class="input-filed-label">BOM ID</label> <input type="text"
-				ng-model="bomId" name="bomId" ng-disabled="isReadOnly" required>
-				 <div ng-messages="bomGenerateForm.bomId.$error">
-                 <div ng-message="required">Please enter BOM Id</div>
-              </div>
-			</md-input-container>
-		</div>
-		 <div layout-gt-sm="row">
-               <md-input-container class="drop-down">
-          <label>Part No</label>
-          <md-select ng-model="product.product.id" name="product"  ng-disabled="productIdReadOnly" ng-init="getProducts()" ng-change="getRawMaterials($index)" required>
-            <md-option ng-repeat="product in products" ng-value="product.product.id">
-               {{product.product.partNumber}}
-            </md-option>
-          </md-select>
-          <div ng-messages="bomGenerateForm.product.$error">
-                 <div ng-message="required">Please Select Product</div>
-              </div>
-        </md-input-container>
-           </div>
-           
-           <table>
-              <tr>
-               <th>RAW MATERIAL</th>
-               <th>VENDOR</th>
-               <th>QUANTITY</th>
-               <th>PRICE</th>
-              </tr>
-              <tr>
-                 <td  ng-repeat="rmVendor in rawMaterialVendorList">
-                     <md-input-container class="drop-down">
-          <label>Raw Material</label>
-          <md-select ng-model="rawmaterial.id" name="product"  ng-disabled="productIdReadOnly" ng-change="getVenodrList($index)">
-            <md-option ng-repeat="rawMaterials in data.data" ng-value="rawMaterials.rawmaterial.id">
-            {{rawMaterials.rawmaterial.partNumber}}
-            </md-option>
-          </md-select>
-        </md-input-container>
-                 </td>
-                 <td>
-                     <md-input-container class="drop-down">
-          <label>VENODR</label>
-          <md-select ng-model="vendor.id" name="product"  ng-disabled="productIdReadOnly">
-            <md-option ng-repeat="vendor in vendorList" ng-value="vendor.vendor.id">
-            {{vendor.vendor.companyName}}
-            </md-option>
-          </md-select>
-        </md-input-container>
-                 </td>
-                 <td>
-                    <md-input-container class="md-block" flex-gt-sm>
-			<label class="input-filed-label">QUANTITY</label> <input
-				type="number" ng-model="rmVendor.quantity1" name="quantity" ng-change="caluculatePrice(rmVendor.quantity1,$index)">
-			</md-input-container>
-                 </td>
-                 <td>
-                <md-input-container class="md-block" flex-gt-sm>
-			<label class="input-filed-label">Price</label> <input
-				type="number" ng-model="rmVendor.pricePerUnit" name="pricePerUnit">
-			</md-input-container>
-                 </td>
-              </tr>
-           </table>
-	</div>
-	</md-dialog-content>
-	<md-dialog-actions layout="row"> <md-button
-		class="md-raised"
-		ng-click="submitBomInformation(bomGenerateForm.$valid,$event)"
-		type="submit" ng-disabled="isReadOnly">SAVE</md-button> 
-		<md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
-	</md-dialog-actions>
-</form>
-</md-dialog>
-
- -->
- 
  <md-dialog class="dialogueInfo" ng-show="isDialogBoxvisible">
   <form name="bomGenerateForm" novalidate>
   
@@ -144,7 +56,7 @@
                  <td>
                      <md-input-container class="drop-down">
           <label>VENODR</label>
-          <md-select ng-model="vendor.id" name="product"  ng-disabled="productIdReadOnly">
+          <md-select ng-model="rmVendor.vendor.id" name="product"  ng-disabled="productIdReadOnly">
             <md-option ng-repeat="vendor in vendorList" ng-value="vendor.vendor.id">
             {{vendor.vendor.companyName}}
             </md-option>

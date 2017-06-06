@@ -1,6 +1,4 @@
 erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,bomInformation){
-	
-	
 	$scope.hide = function() {
 		console.log('hide DialogController');
 		$mdDialog.hide();
@@ -45,7 +43,6 @@ erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDial
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.bomData = response.data;
 			console.log(response);
@@ -53,10 +50,9 @@ erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDial
 		}, function errorCallback(response) {
 			console.log("Error");
 			utils.hideProgressBar();
-
 		});
 		utils.showProgressBar();
-	}
+	};
 	
 	$scope.downloadPdf = function(isvaliduser,$event) {
 		if (isvaliduser) {
@@ -65,10 +61,9 @@ erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDial
 			console.log('its else block');
 			utils.showToast('Please select Product ID and BOM ID');
 		}
-
 	};
+	
 	$scope.getPdf = function () {
-		
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "bom/downloadBomPdf/" +$scope.product.product.id + "/" +$scope.bom.id;
@@ -87,10 +82,8 @@ erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDial
 	        try {
 	            var blob = new Blob([response.data], { type: contentType });
 	            var url = window.URL.createObjectURL(blob);
-	 
 	            linkElement.setAttribute('href', url);
 	            linkElement.setAttribute("download", $scope.bom.bomId);
-	 
 	            var clickEvent = new MouseEvent("click", {
 	                "view": window,
 	                "bubbles": true,
@@ -106,9 +99,5 @@ erpApp.controller('bomReturnDialogueController', function($scope, $http, $mdDial
 			utils.showToast('We are Sorry. Something went wrong. Please try again later.');
 			utils.hideProgressBar();
 	    });
-	    
 	};
-	
-	
-	
 });

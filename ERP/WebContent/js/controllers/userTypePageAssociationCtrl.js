@@ -1,5 +1,6 @@
 erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth) {
-	
+	$scope.isVendorPredent =false;
+	$scope.userTypePageAsso={};
 	$rootScope.$on("callPopulateUserTypePageAsso", function() {
 		$scope.populateuserTeypePageAsso();
 	});
@@ -10,19 +11,12 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 	
 	$scope.populateuserTeypePageAsso=function()
 	{
-		
-		/* $http({
-				method : 'GET',
-				url : SERVER_URL + "usertypepageassociation/list"
-			})*/
-		
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "usertypepageassociation/list";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
 				$scope.isVendorInformation();
@@ -35,7 +29,6 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 				$scope.message = "We are Sorry. Something went wrong. Please try again later."
 				console.log("Error");
 				$mdDialog.hide();
-
 			});
 		 $scope.showProgressBarOne();
 	}
@@ -52,19 +45,14 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 		});
 	};
 	 
-	$scope.isVendorPredent =false;
-	$scope.isVendorInformation=function()
-	{
-		if($scope.data.length==0)
-			{
+	$scope.isVendorInformation=function(){
+		if($scope.data.length==0){
 			$scope.isVendorPredent =true;
-			}
-		else
-			{
+		}else{
 			$scope.isVendorPredent =false;
-			}
-			
-	}
+		}
+	};
+	
 	$scope.showProgressBarOne= function()
 	{
 		$mdDialog
@@ -74,14 +62,10 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 					templateUrl : 'views/progressBar.html',
 					parent : angular
 							.element(document.body),
-					/*targetEvent : ev,*/
 					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					onComplete : function() {
-					/*	$scope.populateUserList(ev);*/
 					}
-					
-				
 				})
 		.then(
 				function(answer) {
@@ -92,8 +76,6 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 					$scope.status = 'You cancelled the dialog.';
 				});
 	};
-	
-	$scope.userTypePageAsso={};
 	
 	$scope.showAddNewUserTypePage = function(ev) {
 		$scope.flag = 0;
@@ -145,14 +127,11 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 		    
 		    $scope.saveUserTypePage=function(ev)
 		    {
-		    	/* console.log($scope.data)*/
 		    	 var data = {
-
 		    			 page:$scope.userTypePageAsso.page.id,
 		    			 usertype:$scope.userTypePageAsso.usertype.id
 					};
 		    	 
-		    	
 		    	 var httpparams = {};
 		    	 if($scope.flag==0)
 		    		 {
@@ -171,7 +150,6 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 									auth_token : Auth.getAuthToken()
 								};
 		    		 }
-		    	 
 		    	 httpparams.data=data;
 		    	 $http(httpparams)
 		    	 .then(
@@ -187,7 +165,6 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 									$scope.message = 'Something went worng. Please try again later.';
 									$scope.showToast();
 								}else{
-									/*$scope.displayProgressBar = false;*/
 									$scope.message = 'User Page Type Information saved successfully.';
 									$scope.showToast();
 									$rootScope.$emit("callPopulateUserTypePageAsso",{});
@@ -201,9 +178,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 								$scope.message = 'Something went worng. Please try again later.';
 								$scope.showToast();
 							});
-		    	 
 		    }
-		    
 		    
 		    $scope.showToast = function() {
 				$mdToast.show({
@@ -217,15 +192,12 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 				});
 			};
 			
-			
 			$scope.submitUserTypePageInformation = function(isvaliduser,$event) {
 				if (isvaliduser) {
 					$scope.showProgressBar($event);
-					
 				} else {
 					console.log('its else block');
 				}
-
 			}
 		    
 		    $scope.showProgressBar = function(ev) {
@@ -243,8 +215,6 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 									onComplete : function() {
 										$scope.saveUserTypePage(ev);
 									}
-									
-								// Only for -xs, -sm breakpoints.
 								})
 						.then(
 								function(answer) {
@@ -255,15 +225,14 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 									$scope.status = 'You cancelled the dialog.';
 								});
 			};
+			
 			  $scope.getUserType=function(){
-
 				  var httpparams = {};
 					httpparams.method = 'GET';
 					httpparams.url = SERVER_URL + "usertype/list";
 					httpparams.headers = {
 							auth_token : Auth.getAuthToken()
 						};
-					
 					$http(httpparams).then(function successCallback(response) {
 							$scope.userTypes = response.data;
 
@@ -271,7 +240,6 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 
 						}, function errorCallback(response) {
 							console.log("Error");
-
 						});
 				    };
 		    
@@ -284,16 +252,12 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 							};
 						 $http(httpparams).then(function successCallback(response) {
 								$scope.pages = response.data;
-
 								console.log(response);
-
 							}, function errorCallback(response) {
 								console.log("Error");
-
 							});
 					    };
-		  }
-	  
+		  };
 	  
 	  $scope.editUserTypePage = function(ev , index) {
 		  $scope.flag = 1;
@@ -322,16 +286,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 		  };
 	  
 	  $scope.deleteUserTypePage = function(index) {
-			/* $scope.user = $scope.users[index].id; */
 			console.log($scope.vendoUser);
-
-			/*$http(
-					{
-						method : 'delete',
-						url : SERVER_URL + "usertypepageassociation/delete/"
-								+ $scope.userTypePageAssociations[index].id
-
-					})*/
 			var httpparams = {};
 			httpparams.method = 'delete';
 			httpparams.url = SERVER_URL + "usertypepageassociation/delete/" +  $scope.userTypePageAssociations[index].id;
@@ -342,10 +297,8 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 						$mdDialog.hide();
 						$rootScope.$emit("callPopulateUserTypePageAsso", {});
 				console.log(data);
-
 			}, function errorCallback(data) {
 				console.log("Error");
-
 			});
 			$scope.showProgressBarOne();
 		};
@@ -380,24 +333,20 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 								$scope.status = 'You cancelled the dialog.';
 							});
 		};
+		
 		$scope.showConfirm = function(ev,index) {
-			// Appending dialog to document.body to cover sidenav in docs app
 			var confirm = $mdDialog.confirm().title(
 					'Are you sure you want to Delete User Type Page Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
 							'Delete' ).cancel('Cancel');
-
 			$mdDialog
 					.show(confirm)
 					.then(
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
 								$scope.deleteUserTypePage(index);
-								
 								$scope.message = 'Delete User Type Page Record sucessfully';
 								$scope.showToast();
-								
-								
 							},
 							function() {
 								$scope.status = 'You decided to keep your debt.';
@@ -405,7 +354,6 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 		};
 		
 		function ProgressBarController($scope, $mdDialog) {
-			
 			$scope.hide = function() {
 				$mdDialog.hide();
 			};
@@ -413,26 +361,8 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 			$scope.cancel = function() {
 				$mdDialog.cancel();
 			};
-
 			$scope.answer = function(answer) {
 				$mdDialog.hide(answer);
 			};
 		}
-	
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

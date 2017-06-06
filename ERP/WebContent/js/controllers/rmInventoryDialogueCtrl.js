@@ -1,6 +1,5 @@
 erpApp.controller('RMInvenaryDialogeController',
 				function($scope, $http, $mdDialog, $mdToast, $rootScope, SERVER_URL, utils, Auth, rmInventary, $location, flag, action, information) {
-	
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
 	$scope.rmInventary = rmInventary;
@@ -20,15 +19,11 @@ erpApp.controller('RMInvenaryDialogeController',
 	};
 
 	$scope.saveRMInventaryInformation = function(ev) {
-		
-		
 		var data = {
-
 				rawmaterial:$scope.rmInventary.rawmaterial.id,
 				quantityAvailable:$scope.rmInventary.quantityAvailable,
 				name:$scope.rmInventary.name,
 				description:$scope.rmInventary.description
-				
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -74,19 +69,16 @@ erpApp.controller('RMInvenaryDialogeController',
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
 						});
-
-	}
+	};
 
 	$scope.submitRMInventaryInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.saveRMInventaryInformation(event);
-			
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-
-	}
+	};
 
 	var httpparams = {};
 	httpparams.method = 'GET';
@@ -94,16 +86,12 @@ erpApp.controller('RMInvenaryDialogeController',
 	httpparams.headers = {
 			auth_token : Auth.getAuthToken()
 		};
-	
 	$http(httpparams).then(function successCallback(response) {
 		$scope.data = response.data;
 		$scope.users = response.data;
-
 		console.log(response);
-
 	}, function errorCallback(response) {
 		console.log("Error");
-
 	});
 	
 });

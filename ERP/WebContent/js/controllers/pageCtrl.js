@@ -1,11 +1,15 @@
 erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
      $scope.isPagePresent=false;
+     $scope.page={}
+     
 	$rootScope.$on("CallPopulatePageList", function() {
 		$scope.populatePageList();
 	});
+	
 	$rootScope.$on("saveUnitError", function() {
 		$scope.showAddNewPage();
 	});
+	
 	$scope.populatePageList=function(){
 		utils.showProgressBar();
 		var httpparams = {};
@@ -14,7 +18,6 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.pages=response.data;
@@ -26,13 +29,12 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 			utils.hideProgressBar();
 			console.log("Error");
 		});
-	}
+	};
 	
 	$scope.isPageformation = function() {
 		$scope.isPagePresent = $scope.data.length === 0 ? true : false;
 	};
 	
-	$scope.page={}
 	$scope.showAddNewPage = function(ev) {
 		$scope.page={};
 		$scope.flag = 0;
@@ -58,8 +60,6 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		.then(function(answer) {},
 				function() {});
 	};
-	
-
 	
 	$scope.showEditPage = function(ev, index) {
 		$scope.flag = 1;
@@ -127,34 +127,29 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 			utils.hideProgressBar();
 			$rootScope.$emit("CallPopulatePageList", {});
 			console.log(data);
+			$scope.message = 'Delete page sucessfully';
+			$scope.showToast();
 
 		}, function errorCallback(data) {
 			console.log("Error");
-
+			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 		});
-		
-
 	};
+	
 	$scope.showConfirm = function(ev,index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete page Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'YES' ).cancel('NO');
-
 		$mdDialog
 				.show(confirm)
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deletePage(index);
-							$scope.message = 'Delete page sucessfully';
-							$scope.showToast();
-						
 						},
 						function() {
 							$scope.status = 'You decided to keep your debt.';
 						});
 	};
-	
-	
 });

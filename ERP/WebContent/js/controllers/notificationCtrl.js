@@ -1,21 +1,23 @@
 erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
      $scope.isNotificationPresent=false;
+     $scope.notification={};
+     
 	$rootScope.$on("CallPopulateNotificationList", function() {
 		$scope.populateNotificationList();
 	});
+	
 	$rootScope.$on("saveUnitError", function() {
 		$scope.addNewNotification();
 	});
+	
 	$scope.populateNotificationList=function(){
 		utils.showProgressBar();
-		
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "notification/list";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.notificationList=response.data;
 			console.log(response)
@@ -25,13 +27,12 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			utils.hideProgressBar();
 			console.log("Error");
 		});
-	}
+	};
 	
 	$scope.isNotificationInformation = function() {
 		$scope.isNotificationPresent = $scope.data.length === 0 ? true : false;
 	};
 	
-	$scope.notification={}
 	$scope.addNewNotification = function(ev) {
 		$scope.notification={};
 		$scope.flag = 0;
@@ -57,9 +58,7 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		.then(function(answer) {},
 				function() {});
 	};
-	
 
-	
 	$scope.showEditNotification = function(ev, index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
@@ -126,34 +125,29 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			utils.hideProgressBar();
 			$rootScope.$emit("CallPopulateNotificationList", {});
 			console.log(data);
+			$scope.message = 'Delete Notification sucessfully';
+			$scope.showToast();
 
 		}, function errorCallback(data) {
 			console.log("Error");
-
+			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 		});
-		
-
 	};
+	
 	$scope.showConfirm = function(ev,index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete Notification Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'YES' ).cancel('NO');
-
 		$mdDialog
 				.show(confirm)
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteNotification(index);
-							$scope.message = 'Delete Notification sucessfully';
-							$scope.showToast();
-						
 						},
 						function() {
 							$scope.status = 'You decided to keep your debt.';
 						});
 	};
-	
-	
 });

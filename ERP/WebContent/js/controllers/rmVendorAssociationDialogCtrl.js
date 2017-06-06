@@ -21,10 +21,7 @@ erpApp
 					};
 
 					$scope.saveRMOrderAssociation = function() {
-						
-						
 						var data = {
-
 								rawmaterial:$scope.rmOrderAssociation.rawmaterial.id,
 								vendor:$scope.rmOrderAssociation.vendor.id,
 								pricePerUnit:$scope.rmOrderAssociation.pricePerUnit
@@ -59,13 +56,9 @@ erpApp
 														"saveRMOrderAssociationError", {});
 												console.log(data);
 												$scope.hide();
-												/*$scope.message = 'Something went worng. Please try again later.';
-												$scope.showToast();*/
 												utils.showToast('Something went worng. Please try again later.');
 											}else{
 												$scope.displayProgressBar = false;
-												/*$scope.message = ' Raw Material Vendor Association Information saved successfully.';
-												$scope.showToast();*/
 												utils.showToast('Raw Material Vendor Association Information saved successfully.');
 												$rootScope.$emit("CallPopulateRMVendorAssociationList",{});
 												utils.hideProgressBar();
@@ -78,69 +71,44 @@ erpApp
 											$scope.hide();
 											utils.showToast('Something went worng. Please try again later.');
 										});
-
-					}
+					};
 
 					$scope.submitRMVendorAssociationInformation = function(isvaliduser,$event) {
 						if (isvaliduser) {
-						
 							$scope.saveRMOrderAssociation();
-							
 						} else {
 							console.log('its else block');
 							utils.showToast('Please fill all required information');
 						}
-
-					}
-
+					};
 					
-					    $scope.getRawMaterials=function()
-					    {
-					    	/*$http({
-								method : 'GET',
-								url : SERVER_URL + "rawmaterial/list"
-							})*/
-					    	
+					    $scope.getRawMaterials=function(){
 					    	var httpparams = {};
 							httpparams.method = 'GET';
 							httpparams.url = SERVER_URL + "rawmaterial/list";
 							httpparams.headers = {
 									auth_token : Auth.getAuthToken()
 								};
-							
 							$http(httpparams).then(function successCallback(response) {
 								$scope.rawmaterials = response.data;
-						
-
 								console.log(response);
-
 							}, function errorCallback(response) {
 								console.log("Error");
-
 							});
-					    }
-					
-						
-					   $scope.getVendors=function()
-					   {
+					    };
+				
+					   $scope.getVendors=function(){
 						   var httpparams = {};
 							httpparams.method = 'GET';
 							httpparams.url = SERVER_URL + "vendor/list";
 							httpparams.headers = {
 									auth_token : Auth.getAuthToken()
 								};
-							
 							$http(httpparams).then(function successCallback(response) {
 								$scope.venodrs = response.data;
-						
-
 								console.log(response);
-
 							}, function errorCallback(response) {
 								console.log("Error");
-
 							});
-					   }
-					
-					
+					   };
 });

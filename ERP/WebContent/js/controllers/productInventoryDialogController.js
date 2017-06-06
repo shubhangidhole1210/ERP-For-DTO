@@ -15,18 +15,13 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 	      $mdDialog.hide(answer);
 	    };
 	    
-	    $scope.saveProductInventory=function(ev)
-	    {
+	    $scope.saveProductInventory=function(ev){
 	    	 var data = {
-
 	    			 product:$scope.productInventory.product.id,
 	    			 description:$scope.productInventory.description,
-	    			/* name:$scope.productInventory.name,*/
 	    			 quantityavailable:$scope.productInventory.quantityavailable,
 	    			 racknumber:$scope.productInventory.racknumber
 				};
-	    	 
-	    	
 	    	 var httpparams = {};
 	    	 if($scope.flag==0)
 	    		 {
@@ -36,9 +31,7 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 							auth_token : Auth.getAuthToken()
 						};
 	    		 }
-	    	 
-	    	 else
-	    		 {
+	    	 else{
 	    		      data.id=$scope.productInventory.id,
 	    		      httpparams.method='put',
 	    		      httpparams.url=SERVER_URL + "productinventory/update"
@@ -46,7 +39,6 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 	  						auth_token : Auth.getAuthToken()
 	  					};
 	    		 }
-	    	 
 	    	 httpparams.data=data;
 	    	 $http(httpparams)
 	    	 .then(
@@ -62,7 +54,6 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 								$scope.message = 'Something went worng. Please try again later.';
 								$scope.showToast();
 							}else{
-								/*$scope.displayProgressBar = false;*/
 								$scope.message = 'User Information saved successfully.';
 								$scope.showToast();
 								$rootScope.$emit("callPopulateProductInventoryList",{});
@@ -76,9 +67,7 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 							$scope.message = 'Something went worng. Please try again later.';
 							$scope.showToast();
 						});
-	    	 
-	    }
-	    
+	    };
 	    
 	    $scope.showToast = function() {
 			$mdToast.show({
@@ -92,17 +81,14 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 			});
 		};
 		
-		
 		$scope.submitInformation = function(isvaliduser,$event) {
 			if (isvaliduser) {
 				 $scope.saveProductInventory($event);
-				
 			} else {
 				console.log('its else block');
 				utils.showToast('Please fill all required information');
 			}
-
-		}
+		};
 	    
 	    $scope.showProgressBar = function(ev) {
 			$scope.displayProgressBar = true;
@@ -119,8 +105,6 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 								onComplete : function() {
 									$scope.saveProductInventory(ev);
 								}
-								
-							// Only for -xs, -sm breakpoints.
 							})
 					.then(
 							function(answer) {
@@ -132,27 +116,18 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 							});
 		};
 		
-		
-		$scope.getProduct=function()
-		{
-			
+		$scope.getProduct=function(){
 			var httpparams = {};
 			httpparams.method = 'GET';
 			httpparams.url = SERVER_URL + "product/list";
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
-			
 			$http(httpparams).then(function successCallback(response) {
 				$scope.prducts = response.data;
-
 				console.log(response);
-
 			}, function errorCallback(response) {
 				console.log("Error");
-
 			})
 		};
-		
-		
 });

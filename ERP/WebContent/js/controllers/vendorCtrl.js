@@ -1,12 +1,14 @@
 erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
 	$scope.isVendorPredent =false;
+	$scope.vendorUser={};
+	
 	$rootScope.$on("callPopulateVendorList", function() {
 		$scope.populateVendorList();
 	});
+	
 	$rootScope.$on("saveVendorError", function() {
 		$scope.showAddNewVendor()
 	});
-	
 	
 	$scope.populateVendorList=function()
 	{
@@ -17,28 +19,23 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
 				$scope.isVendorInformation();
 				$scope.vendorUsers = response.data;
 				utils.hideProgressBar();
 				console.log(response);
-
 			}, function errorCallback(response) {
 				utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 				console.log("Error");
 				utils.hideProgressBar();
-
 			});
 	}
 	
 	$scope.isVendorInformation = function() {
 		$scope.isVendorPredent = $scope.data.length === 0 ? true : false;
 	};
-	
-	$scope.vendorUser={};
-	
+
 	$scope.showAddNewVendor = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
@@ -65,7 +62,6 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 				function() {});
 	  };
 	
-	  
 	  $scope.showEditVendor = function(ev , index) {
 		  $scope.flag = 1;
 		  $scope.vendorUser = $scope.vendorUsers[index];
@@ -90,7 +86,6 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 	  
 	  $scope.deleteVendor = function(index) {
 			console.log($scope.vendoUser);
-
 			var httpparams = {};
 			httpparams.method = 'delete';
 			httpparams.url = SERVER_URL + "vendor/delete/" + + $scope.vendorUsers[index].id;
@@ -101,10 +96,10 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 				utils.hideProgressBar();
 						$rootScope.$emit("callPopulateVendorList", {});
 				console.log(data);
-
+				utils.showToast('We are Sorry. Something went wrong. Please try again later.!');
 			}, function errorCallback(data) {
 				console.log("Error");
-
+				utils.showToast('Vendor Deleted Sucessfully!');
 			});
 			utils.showProgressBar();
 		};
@@ -133,23 +128,20 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 					.then(function(answer) {},
 							function() {});
 		};
+		
 		$scope.showConfirm = function(ev,index) {
 			var confirm = $mdDialog.confirm().title(
 					'Are you sure you want to Delete Vendor Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
 							'Delete' ).cancel('Cancel');
-
 			$mdDialog
 					.show(confirm)
 					.then(
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
 								$scope.deleteVendor(index);
-								utils.showToast('Vendor Deleted Sucessfully!');
-								
 							},
 							function() { });
 		};
-	
 });
 

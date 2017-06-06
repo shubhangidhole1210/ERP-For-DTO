@@ -1,9 +1,7 @@
 erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils)
 {
-	
-
 	$scope.isReadOnly = false;
-	/*$scope.isUserUnavailable = false;*/
+	$scope.userType = {};
 	
 	$rootScope.$on("CallPopulateUserTypeList", function($event) {
 		$scope.populateUserTypeList	();
@@ -14,14 +12,12 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 
 	$scope.populateUserTypeList = function() {
 		utils.showProgressBar();
-
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "usertype/list";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 
 							$scope.data = response.data;
@@ -34,16 +30,14 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 							utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 							console.log("Error");
 							utils.hideProgressBar();
-
 						});
 	};
-	$scope.userType = {};
+
 	$scope.showAddNewUserType = function(ev) {
 		$scope.information = "ADD NEW USER TYPE"
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
 		var addNewUserTypeDialog = {
-				
 			controller : 'userTypeDialogCtrl',
 			templateUrl : 'views/userTypeInformation.html',
 			parent : angular.element(document.body),
@@ -57,7 +51,6 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 				information : $scope.information
 			}
 		};
-		
 		$mdDialog
 		.show(addNewUserTypeDialog)
 		.then(function(answer) {},
@@ -88,6 +81,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 				.then(function(answer) {},
 						function() {});
 	};
+	
 	$scope.viewUserTypeInformation = function(ev, index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
@@ -112,6 +106,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 						function(answer) {},
 						function() {});
 	};
+	
 	$scope.deleteUserType = function(index) {
 		console.log($scope.userType);
 		var httpparams = {};
@@ -124,13 +119,15 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateUserTypeList", {});
 			console.log(data);
+			utils.showToast('Delete UserType sucessfully');
 
 		}, function errorCallback(data) {
 			console.log("Error");
-
+			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 		});
      utils.showProgressBar()
 	};
+	
 	$scope.showConfirm = function(ev,index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete UserType Information?')
@@ -142,13 +139,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteUserType(index);
-							utils.showToast('Delete UserType sucessfully');
 						},
 						function() {});
 	};
-	
-	
-	
-	
-	
 });

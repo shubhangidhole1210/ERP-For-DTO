@@ -18,24 +18,13 @@ erpApp.controller('notificationDialogCtrl', function($scope,$http, $mdDialog,SER
 	};
 
 	$scope.saveNotificationInformation = function(ev) {
-		
-		
 		var data = {
-  
 				beanClass :  $scope.notification.beanClass ,
 				description: $scope.notification.description,
 				name: $scope.notification.name,
 				subject: $scope.notification.subject ,
 				template: $scope.notification.template,
 				type: $scope.notification.type,
-				status1:1,
-				status2:2,
-				createdBy:2,
-				created_date:null,
-				updatedBy:1,
-				updated_date:null,
-				isactive:true
-
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -81,18 +70,14 @@ erpApp.controller('notificationDialogCtrl', function($scope,$http, $mdDialog,SER
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
 						});
-
-	}
+	};
 
 	$scope.submitnotificationForm = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.saveNotificationInformation($event)
-			
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-
-	}
-
+	};
 });

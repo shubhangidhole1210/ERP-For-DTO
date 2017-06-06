@@ -4,6 +4,7 @@ erpApp.controller('unitDialogCtrl',
 	$scope.flag = flag;
 	$scope.unit = unit;
 	$scope.information = information;
+	
 	$scope.hide = function() {
 		console.log('hide DialogController');
 		$mdDialog.hide();
@@ -18,10 +19,7 @@ erpApp.controller('unitDialogCtrl',
 	};
 
 	$scope.saveUnitInformation = function(ev) {
-		
-		
 		var data = {
-
 				name : $scope.unit.name,
 				description : $scope.unit.description
 		};
@@ -71,17 +69,14 @@ erpApp.controller('unitDialogCtrl',
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
 						});
-
 	};
 
-	$scope.submitUnitInformation = function(isvaliduser,$event) {
+	$scope.submitUnitInformation = function(isvaliduser,$event){
 		if (isvaliduser) {
 			$scope.saveUnitInformation();
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-
 	};
-	
 });

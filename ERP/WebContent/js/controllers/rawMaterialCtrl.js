@@ -1,9 +1,12 @@
 erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 	$scope.isRmPresent=false;
 	$scope.isUnitReadOnly = false;
+	$scope.rawMaterial = {};
+	
 	$rootScope.$on("CallPopulateRawMaterial", function() {
 		$scope.populateRawMaterial();
 	});
+	
 	$rootScope.$on("saveRawmaterialError", function() {
 		$scope.showAddRawMaterial();
 	});
@@ -16,7 +19,6 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.rawMaterials = response.data;
@@ -28,13 +30,12 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 			console.log("Error");
 			utils.hideProgressBar();
 		});
-}
-	
+};
+
 	$scope.getRawMaterialInformation = function() {
 		$scope.isRmPresent = $scope.data.length === 0 ? true : false;
 	};
 	
-	$scope.rawMaterial = {};
 	$scope.showAddRawMaterial = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
@@ -89,6 +90,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 				.then(function(answer) {},
 						function() {});
 	};
+	
 	$scope.viewRMInformation = function(ev, index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
@@ -116,7 +118,6 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 						function() {});
 	};
 	
-	
 	$scope.deleteraeMaterial= function(index) {
 		console.log($scope.rawmaterial);
 		var httpparams = {};
@@ -129,10 +130,10 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 			 utils.hideProgressBar();;
 			$rootScope.$emit("CallPopulateRawMaterial", {});
 			console.log(data);
-
+			utils.showToast('Raw Material Deleted Sucessfully!');
 		}, function errorCallback(data) {
 			console.log("Error");
-
+			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 		});
 		utils.showProgressBar();
 	};
@@ -142,21 +143,14 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 				'Are you sure you want to Delete Raw Material Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'YES' ).cancel('NO');
-
 		$mdDialog
 				.show(confirm)
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteraeMaterial(index);
-							utils.showToast('Raw Material Deleted Sucessfully!');
-							
-							
 						},
 						function() { });
 	};
-	
-	
-	
-	
+
 });

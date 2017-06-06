@@ -7,7 +7,8 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 	while ($scope.monthStart.getMonth() === $scope.currentDate.getMonth()) {
 		$scope.alldays.push(new Date($scope.monthStart));
 		$scope.monthStart.setDate($scope.monthStart.getDate() + 1);
-	}
+	};
+	
 	$scope.getProductionPlanList = function() {
 		utils.showProgressBar();
 		var httpparams = {};
@@ -16,7 +17,6 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		httpparams.headers = {
 			auth_token : Auth.getAuthToken()
 		};
-
 		$http(httpparams).then(function successCallback(response) {
 			utils.hideProgressBar();
 			$scope.products = response.data;
@@ -26,7 +26,6 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 			console.log("Error");
 			utils.hideProgressBar();
 		});
-
 	};
 	
 	$scope.createDefaultProductionPlan = function() {
@@ -37,7 +36,6 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		httpparams.headers = {
 			auth_token : Auth.getAuthToken()
 		};
-
 		$http(httpparams).then(function successCallback(response) {
 			utils.hideProgressBar();
 			$scope.products = response.data;
@@ -47,7 +45,6 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 			console.log("Error");
 			utils.hideProgressBar();
 		});
-
 	};
 	
 	function isProductionPlanEqual(productProductionPlan1, productProductionPlan2){
@@ -59,12 +56,12 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 			return false;
 		}
 	}
+	
 	$scope.submitProductionPlan = function(){
 		console.log($scope.products);
 		for(var index =0; index < $scope.products.length; index++){
 			var productProductionPlan = [];
 			for(var index2 =0; index2 < $scope.products[index].productProductionPlan.length;index2++){
-				
 				if(!isProductionPlanEqual($scope.products[index].productProductionPlan[index2], $scope.products_copy[index].productProductionPlan[index2])){
 					productProductionPlan.push($scope.products[index].productProductionPlan[index2]);
 				}
@@ -80,7 +77,6 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 		httpparams.headers = {
 			auth_token : Auth.getAuthToken()
 		};
-
 		$http(httpparams).then(function successCallback(response) {
 			utils.hideProgressBar();
 			console.log(response);

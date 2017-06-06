@@ -18,16 +18,12 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 	};
 
 	$scope.saveProduct = function(ev) {
-		
-		
 		var data = {
-
 				name: $scope.product.name,
 				partNumber: $scope.product.partNumber,
 				clientpartnumber: $scope.product.clientpartnumber,
 				description: $scope.product.description,
 				design: 'Design will be added later on'
-				
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -74,18 +70,16 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
 						});
-	}
+	};
 	
 	$scope.submitProductInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.saveProduct($event);
-			
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-
-	}
+	};
 
 	var formdata = new FormData();
     $scope.getTheFiles = function ($files) {
@@ -97,8 +91,6 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
     };
 
     $scope.uploadFiles = function () {
-
-    
     	var httpparams = {};
     	httpparams.method = 'post';
     	httpparams.url = SERVER_URL + "fileupload";
@@ -117,11 +109,5 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 				function errorCallback(response) {
 					console.log(error)
 				});
-    	
-
     }
-
-	
-	
-	
 });

@@ -4,7 +4,8 @@ erpApp
 				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils) {
 					$scope.isReadOnly = false;
 					$scope.isClientPresent=false;
-
+					$scope.client = {};
+					
 					$rootScope.$on("CallPopulateClientList", function() {
 						$scope.populateClientList();
 					});
@@ -32,12 +33,12 @@ erpApp
 							console.log("Error");
 							utils.hideProgressBar();
 						});
-					}
+					};
+					
 					$scope.isClientInfirmation = function() {
 						$scope.isClientPresent = $scope.data.length === 0 ? true : false;
 					};
 				
-					$scope.client = {};
 					$scope.showAddNewClient = function(ev) {
 						$scope.client = {};
 						$scope.information="ADD NEW CLIENT"
@@ -75,14 +76,12 @@ erpApp
 						$http(httpparams).then(function successCallback(data) {
 							utils.hideProgressBar();
 							$rootScope.$emit("CallPopulateClientList", {});
-							console.log(data);
-
+							utils.showToast('Client Deleted Sucessfully!');
 						}, function errorCallback(data) {
 							console.log("Error");
-
+							utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 						});
 						utils.showProgressBar();
-
 					};
 
 					$scope.showEditClient = function(ev, index) {
@@ -140,18 +139,10 @@ erpApp
 								'Are you sure you want to Delete Client Information?')
 								.ariaLabel('Lucky day').targetEvent(ev).ok(
 										'YES' ).cancel('NO');
-
-						$mdDialog
-								.show(confirm)
-								.then(
+						$mdDialog.show(confirm).then(
 										function() {
 											$scope.deleteClient(index);
-											utils.showToast('Client Deleted Sucessfully!');
 										},
 										function() { });
-
 					};
-
-				
-
 				});

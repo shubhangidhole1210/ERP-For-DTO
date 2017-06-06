@@ -1,6 +1,5 @@
 erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils, $location){
 	 $scope.currentDate = new Date();
-	 
 	  $scope.selectedProductionPlan = {};
 	  $scope.QCPassQuantity = 0;
 	  $scope.QCFailQuantity = 0;
@@ -12,11 +11,9 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 			var httpparams = {};
 			httpparams.method = 'GET';
 			httpparams.url = SERVER_URL + "productionplanning/getProductionPlanListByDate/"+ $scope.currentDate;
-			
 			httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-
 			$http(httpparams).then(function successCallback(response) {
 				utils.hideProgressBar();
 				$scope.productionPlans = response.data;
@@ -36,8 +33,7 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 			}
 		};
 	  
-		$scope.saveProductQuality=function()
-		{
+		$scope.saveProductQuality=function(){
 			 var index=0;
 				var productQualityParts = [];
 				for(index=0;index<$scope.productionPlans.length;index++){
@@ -54,7 +50,6 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 					 productQualityParts:productQualityParts
 			 };
 			 console.log("Data",data);
-			 
 			 utils.showProgressBar();
 				var httpparams = {};
 				httpparams.method = 'POST';
@@ -63,33 +58,25 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 				httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
-
 				$http(httpparams).then(function successCallback(data) {
 					console.log(data.data.message);
 					console.log(data);
-
 					if (data.data.code === 1) {
-						utils
-								.showToast("Product Store sucessfully!");
+						utils.showToast("Product Store sucessfully!");
 						$location.path('/');
 					} else {
-						utils
-								.showToast("Something went wrong. Please try again later.");
+						utils.showToast("Something went wrong. Please try again later.");
 					}
 					utils.hideProgressBar();
-					
 				}, function errorCallback(response) {
-					utils
-					.showToast("Something went wrong. Please try again later.");
+					utils.showToast("Something went wrong. Please try again later.");
 					console.log("Error");
 					utils.hideProgressBar();
 				});
-		}
+		};
 		
 		$scope.cancelProductStore=function(){
 			$location.path('/');
-		}
-		
-	
+		};
 });
 		

@@ -1,11 +1,13 @@
 
 erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils){
-	  
 					$scope.isReadOnly = false;
 					$scope.isrmInventoryPresent=false;
+					$scope.rmInventary = {};
+					
 					$rootScope.$on("CallPopulateRMInventaryList", function() {
 						$scope.populateRMInventaryList();
 					});
+					
 					$rootScope.$on("saveRMInventaryError", function() {
 						$scope.showAddNewRMInventary();
 					});
@@ -30,14 +32,12 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						});
 					   }
 						utils.showProgressBar();
-					}
-					
+					};
 					
 					$scope.isRmInventoryInformation = function() {
 						$scope.isrmInventoryPresent = $scope.data.length === 0 ? true : false;
 					};
 					
-					$scope.rmInventary = {};
 					$scope.showAddNewRMInventary = function(ev) {
 						$scope.flag = 0;
 						$scope.isReadOnly = false;
@@ -64,46 +64,46 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 								function() {});
 					};
 	
+
 					$scope.deleteRMInventory = function(index) {
 						console.log($scope.rmInventary);
-
 						$http(
 								{
 									method : 'delete',
-									url : SERVER_URL + "rawmaterialinventory/delete/"
+									url : SERVER_URL
+											+ "rawmaterialinventory/delete/"
 											+ $scope.rmInventarys[index].id
 
-								}).then(function successCallback(data) {
+								}).then(
+								function successCallback(data) {
 									$mdDialog.hide();
-							$rootScope.$emit("CallPopulateRMInventaryList", {});
-							console.log(data);
-
-						}, function errorCallback(data) {
-							console.log("Error");
-
-						});
+									$rootScope.$emit(
+											"CallPopulateRMInventaryList", {});
+									console.log(data);
+									$scope.message = 'Delete Raw Material inventory Record sucessfully';
+									$scope.showToast();
+								}, function errorCallback(data) {
+									console.log("Error");
+									utils.showToast('We are Sorry. Something went wrong. Please try again later.');
+								});
 						$scope.showProgressBarOne();
 
 					};
+					
 					$scope.showConfirm = function(ev,index) {
 						var confirm = $mdDialog.confirm().title(
 								'Are you sure you want to Delete Raw Material Inventory Information?')
 								.ariaLabel('Lucky day').targetEvent(ev).ok(
 										'YES' ).cancel('NO');
-
 						$mdDialog
 								.show(confirm)
 								.then(
 										function() {
 											$scope.status = 'You decided to get rid of your debt.';
 											$scope.deleteRMInventory(index);
-											
-											$scope.message = 'Delete Raw Material inventory Record sucessfully';
-											$scope.showToast();
 										},
 										function() { });
 					};
-
 
 					$scope.showEditRMInventary = function(ev, index) {
 						$scope.flag = 1;
@@ -154,5 +154,4 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 								.then(function(answer) {},
 										function() {});
 					};
-
 });

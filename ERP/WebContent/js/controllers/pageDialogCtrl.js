@@ -1,5 +1,4 @@
 erpApp.controller('pageDialogController', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils,page,action,flag,information) {
-	
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
 	$scope.page = page;
@@ -18,10 +17,7 @@ erpApp.controller('pageDialogController', function($scope,$http, $mdDialog,SERVE
 	};
 
 	$scope.savePageInformation = function(ev) {
-		
-		
 		var data = {
-  
 				menu : $scope.page.menu,
 				pageName : $scope.page.pageName,
 				submenu : $scope.page.submenu,
@@ -72,18 +68,14 @@ erpApp.controller('pageDialogController', function($scope,$http, $mdDialog,SERVE
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
 						});
-
-	}
+	};
 
 	$scope.submitPageInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.savePageInformation($event)
-			
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-
-	}
-
+	};
 });

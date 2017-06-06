@@ -1,10 +1,10 @@
 erpApp.controller('StatusDialogueController',
 				function($scope, $http, $mdDialog, $mdToast, $rootScope, SERVER_URL, utils, Auth, status, $location, flag, action, information){
-	
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
 	$scope.status = status;
 	$scope.information = information;
+	
 	$scope.hide = function() {
 		console.log('hide DialogController');
 		$mdDialog.hide();
@@ -19,10 +19,7 @@ erpApp.controller('StatusDialogueController',
 	};
 
 	$scope.saveStatusInformation = function(ev) {
-		
-		
 		var data = {
-
 				name : $scope.status.name,
 		        description : $scope.status.description,
 		        type : $scope.status.type
@@ -71,18 +68,14 @@ erpApp.controller('StatusDialogueController',
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.')
 						});
-
 	}
 
 	$scope.submitStatusInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.saveStatusInformation(event)
-			
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-
 	}
-
 });

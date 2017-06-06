@@ -18,10 +18,7 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 	};
 
 	$scope.saveClient = function(ev) {
-		
-		
 		var data = {
-
 				companyname: $scope.client.companyname,
 				description: $scope.client.description,
 				address: $scope.client.address,
@@ -60,6 +57,11 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 								console.log(data);
 								$scope.hide();
 								utils.showToast('Something went worng. Please try again later.');
+							}else if(data.data.code === 2){
+								$rootScope.$emit(
+										"saveClientError", {});
+								$scope.message = data.data.message;
+								utils.showToast(data.data.message);
 							}
 							else{
 								console.log(data.data.message);
@@ -76,17 +78,14 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 							utils.showToast('Something went worng. Please try again later.');
 						});
 
-	}
+	};
 
 	$scope.submitClientInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.saveClient(event);
-			
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-
 	}
-
 });

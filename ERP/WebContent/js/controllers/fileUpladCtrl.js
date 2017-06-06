@@ -10,8 +10,6 @@ erpApp.controller('fileUplodCtrl',function($scope,$http,SERVER_URL,Auth)
     };
 
     $scope.uploadFiles = function () {
-
-    
     	var httpparams = {};
     	httpparams.method = 'post';
     	httpparams.url = SERVER_URL + "fileupload";
@@ -30,8 +28,5 @@ erpApp.controller('fileUplodCtrl',function($scope,$http,SERVER_URL,Auth)
 				function errorCallback(response) {
 					console.log(error)
 				});
-    	
-
     }
-
 });	

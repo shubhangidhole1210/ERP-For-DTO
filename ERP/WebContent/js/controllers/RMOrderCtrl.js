@@ -5,6 +5,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	$scope.isPriceReadOnly = false;
 	$scope.isVendorId = false;
 	$scope.isName = true;
+	$scope.rmOrder = {};
+	
 	$rootScope.$on("CallPopulateRMOrderList", function() {
 		$scope.populateRMOrderList();
 	});
@@ -34,13 +36,10 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		});
 	}
 	
-	
 	$scope.isRMOrderInformation = function() {
 		$scope.isRMOrderPresent = $scope.data.length === 0 ? true : false;
 	};
 
-	
-	$scope.rmOrder = {};
 	$scope.showAddNewRMOrder = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
@@ -66,11 +65,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				priceAction : $scope.isPriceReadOnly,
 				vendorAction : $scope.isVendorId,
 				nameAction: $scope.isName
-				
 			}
 		};
-	
-		
 		$mdDialog
 		.show(addNewRmDialog)
 		.then(function(answer) {},
@@ -137,13 +133,13 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 						priceAction : $scope.isPriceReadOnly,
 						vendorAction : $scope.isVendorId,
 						nameAction: $scope.isName
-						
 					}
 				})
 				.then(
 						function(answer) {},
 						function() {});
 	};
+	
 	$scope.deleteRmOrder = function(index) {
 		var httpparams = {};
 		httpparams.method = 'delete';
@@ -155,10 +151,10 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			utils.hideProgressBar();
 			$rootScope.$emit("CallPopulateRMOrderList", {});
 			console.log(data);
-
+			utils.showToast('RM Order Deleted Sucessfully!');
 		}, function errorCallback(data) {
 			console.log("Error");
-
+			utils.showToast('We are Sorry. Something went wrong. Please try again later.');
 		});
 		utils.showProgressBar();
 
@@ -169,17 +165,11 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				'Are you sure you want to Delete Raw Material Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'Delete' ).cancel('Cancel');
-
-		$mdDialog
-				.show(confirm)
-				.then(
+		$mdDialog.show(confirm).then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
 							$scope.deleteRmOrder(index);
-							utils.showToast('RM Order Deleted Sucessfully!');
-							
 						},
 						function() { });
 	};
-	
 });

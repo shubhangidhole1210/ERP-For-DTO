@@ -5,6 +5,7 @@ erpApp
 					$scope.isReadOnly = false;
 					$scope.isPresentvenodrAsso=false;
 					$scope.isDropDownreadOnly = false;
+					
 					$rootScope.$on("CallPopulateRMVendorAssociationList", function() {
 						$scope.populateRMVendorAssociationList();
 					});
@@ -13,7 +14,6 @@ erpApp
 					});
 
 					$scope.populateRMVendorAssociationList = function() {
-					
 						utils.showProgressBar();
 						var httpparams = {};
 						httpparams.method = 'GET';
@@ -21,7 +21,6 @@ erpApp
 						httpparams.headers = {
 								auth_token : Auth.getAuthToken()
 							};
-						
 						$http(httpparams).then(function successCallback(response) {
 							$scope.data = response.data;
 							$scope.rmOrderAssociations = response.data;
@@ -30,18 +29,12 @@ erpApp
 							utils.hideProgressBar();
 
 						}, function errorCallback(response) {
-							/*$scope.message = "We are Sorry. Something went wrong. Please try again later."
-							$scope.showToast();*/
 							utils.showToast = "We are Sorry. Something went wrong. Please try again later."
 							console.log("Error");
 							utils.hideProgressBar();
 						});
-						
 					}
-					
-					
-				
-					
+		
 					$scope.isRMVendorAssociationInformation = function() {
 						$scope.isPresentvenodrAsso = $scope.data.length === 0 ? true : false;
 					};
@@ -74,19 +67,9 @@ erpApp
 						.then(function(answer) {},
 								function() {});
 					};
-					
-					
-					
-					
-					
-					
-					
-					
-					
-
+		
 					$scope.deleteUser = function(index) {
 						console.log($scope.user);
-
 						$http(
 								{
 									method : 'delete',
@@ -99,7 +82,6 @@ erpApp
 
 						}, function errorCallback(data) {
 							console.log("Error");
-
 						});
 						$scope.showProgressBarOne()
 					};
@@ -159,7 +141,6 @@ erpApp
 					};
 
 					$scope.deleteRMVendorAssociation = function(index) {
-					
 						var httpparams = {};
 						httpparams.method = 'delete';
 						httpparams.url = SERVER_URL + "unit/delete/" + $scope.rmOrderAssociations[index].id;
@@ -176,14 +157,13 @@ erpApp
 
 						});
 						utils.showProgressBar();
-
 					};
+					
 					$scope.showConfirm = function(ev,index) {
 						var confirm = $mdDialog.confirm().title(
 								'Are you sure you want to Delete Raw Material Vendor Association Information?')
 								.ariaLabel('Lucky day').targetEvent(ev).ok(
 										'YES' ).cancel('NO');
-
 						$mdDialog
 								.show(confirm)
 								.then(
@@ -197,7 +177,4 @@ erpApp
 											$scope.status = 'You decided to keep your debt.';
 										});
 					};
-
-					
-
 				});

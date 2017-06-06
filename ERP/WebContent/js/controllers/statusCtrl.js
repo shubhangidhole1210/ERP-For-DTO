@@ -1,11 +1,13 @@
 erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils){
 	$scope.isStatusPresent=false;
+	
 	$rootScope.$on("callPopulateStatusList", function() {
 		$scope.populateStatusList();
 	});
 	$rootScope.$on("saveUnitError", function() {
 		$scope.showAddNewStatus();
 	});
+	
 	$scope.populateStatusList=function(){
 		utils.showProgressBar();
 		var httpparams = {};
@@ -14,7 +16,6 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			$scope.statuss=response.data;
@@ -26,8 +27,8 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 			console.log("Error");
 			utils.hideProgressBar();
 		});
-		
 	};
+	
 	$scope.isStatusInformation = function() {
 		$scope.isStatusPresent = $scope.data.length === 0 ? true : false;
 	};
@@ -57,9 +58,6 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		.then(function() {},
 				function() {});
 	};
-	
-	
-	
 	
 	$scope.showEditStatus = function(ev, index) {
 		$scope.flag = 1;
@@ -106,11 +104,9 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 						information : $scope.information
 					}
 				});
-				
 	};
 	
 	$scope.deleteStatus = function(index) {
-	
 		var httpparams = {};
 		httpparams.method = 'delete';
 		httpparams.url = SERVER_URL + "status/delete/" + $scope.statuss[index].id;
@@ -121,20 +117,17 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 					$mdDialog.hide();
 			$rootScope.$emit("callPopulateStatusList", {});
 			console.log(data);
-
 		}, function errorCallback(data) {
 			console.log("Error");
-
 		});
 		$scope.showProgressBarOne();
-
 	};
+	
 	$scope.showConfirm = function(ev,index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to delete Status Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'YES' ).cancel('NO');
-
 		$mdDialog
 				.show(confirm)
 				.then(
@@ -146,6 +139,4 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 							$scope.status = 'You decided to keep your debt.';
 						});
 	};
-	
-	
 });

@@ -13,6 +13,10 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	$scope.displayAddRM = hideAction;
 	$scope.rmMsg = true;
 	$scope.rmOrder.expectedDeliveryDate = new Date($scope.rmOrder.expectedDeliveryDate);
+	$scope.orderRawMaterials=[];
+	$scope.orderRawMaterial={};
+	$scope.otherCharges=0;
+	var TAX = 0.18;
 	
 	$scope.hide = function() {
 		console.log('hide DialogController');
@@ -28,8 +32,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	};
 
 	$scope.saveRMOrder = function(ev) {
-		
-		
 		var data = {
 				rawmaterialorderassociations:$scope.orderRawMaterials,
 				name:$scope.rmOrder.name,
@@ -59,7 +61,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 					auth_token : Auth.getAuthToken()
 				};
 		}
-		
 		httpparams.data = data;
 		$http(httpparams)
 				.then(
@@ -73,7 +74,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 								console.log(data);
 								$scope.hide();
 								utils.showToast('Something went worng. Please try again later.');
-								
 							}else{
 								$scope.displayProgressBar = false;
 								utils.showToast('Raw Material Order Created successfully.');
@@ -87,21 +87,18 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
 						});
-
 	}
 	
 	$scope.submitRMOrderInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.saveRMOrder();
-			
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-
-	}
-	$scope.getRMListByVendor = function()
-	{
+	};
+	
+	$scope.getRMListByVendor = function(){
 		$scope.rmMsg = false;
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -109,7 +106,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.vendorRmList = response.data;
 
@@ -120,16 +116,12 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 
 		})
 	};
-	$scope.otherCharges=0;
-	/*$scope.productSubTotal = 0;*/
-	var TAX = 0.18;
+	
 	$scope.calculateTotalPrice=function(){
-		
 		console.log($scope.orderRawMaterials);
 		$scope.productSubTotal = 0;
 		for (var i = 0; i < $scope.orderRawMaterials.length; i++){
 		   $scope.productSubTotal += $scope.orderRawMaterials[i].rawmaterial.pricePerUnit * $scope.orderRawMaterials[i].quantity;
-		  /* $scope.productSubTotal += $scope.totalPrice;*/
 		}
 		console.log('Product Sub Total : '+$scope.productSubTotal);
 		$scope.rmOrder.actualPrice = $scope.productSubTotal;
@@ -137,48 +129,34 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		console.log('Tax Sub Total : '+$scope.rmOrder.tax);
 		$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
 		console.log('Total Price : '+ $scope.rmOrder.totalprice);
-	}
+	};
 	
 	$scope.updateOtherCharges=function(){
 		console.log('in update other charges');
 		console.log('Other Charges : '+$scope.rmOrder.otherCharges);
 		$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
 		console.log('Total Price : '+$scope.rmOrder.totalprice);
-	}
+	};
 	
 	$scope.updateQuantity = function(quantity,totalprice,tax,actualPrice,otherCharges){
 		$scope.calculateTotalPrice();
-	}
+	};
 	
-	
-	
-	
-	$scope.displayVendorId=function()
-	{
+	$scope.displayVendorId=function(){
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "vendor/list";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.vendorData = response.data;
-
 			console.log(response);
-
 		}, function errorCallback(response) {
 			console.log("Error");
-
 		})
 	};
 	
-
-	
-	
-	
-	 $scope.orderRawMaterials=[];
-	    $scope.orderRawMaterial={};
 	    $scope.addOrderRawMaterial = function(){
 	    	console.log('Adding RM : ', $scope.orderRawMaterial);
 	    	if( !angular.equals($scope.orderRawMaterial,{}) ){
@@ -196,7 +174,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 			}
 	    	$scope.calculateTotalPrice();
 	    };
-	    
 	
 	    $scope.isDuplicateRM = function(orderRawMaterial) {
 			for (var i = 0; i < $scope.orderRawMaterials.length; i++) {
@@ -207,26 +184,12 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 			return false;
 		};
 	    
-	    $scope.deleteRM=function(index)
-	    {
+	    $scope.deleteRM=function(index) {
 	    	console.log('in delete RM'+ $scope.orderRawMaterials)
 	    	var lastItem = $scope.orderRawMaterials.length;
 		    $scope.orderRawMaterials.splice(index,1);
 		    $scope.calculateTotalPrice();
 	    }
-	    
-	  
-	    
-	   /* $scope.addQuantity = function(quantity) {
-			if (quantity <= 0) {
-				console.log('if condition')
-				$scope.message = 'quantity should be greater than 0';
-				$scope.RMOrderInformation.quantity.$setValidity("message", false);
-			} else {
-				$scope.RMOrderInformation.quantity.$setValidity("message", true);
-			}
-		};*/
-	    
 	    
 	    $scope.getRmForOrder=function(){
 	    	if($scope.rmOrder.id){
@@ -236,7 +199,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				httpparams.headers = {
 						auth_token : Auth.getAuthToken()
 				};
-				
 				$http(httpparams).then(function successCallback(response) {
 					$scope.rmOrderList = response.data;
 					console.log(response);

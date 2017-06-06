@@ -1,23 +1,17 @@
 erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $mdToast, $rootScope, SERVER_URL, Auth, utils, $location){
 	 $scope.currentDate = new Date();
-	 
 	  $scope.selectedProductionPlan = {};
-	 /* $scope.QCPassQuantity = 0;
-	  $scope.QCFailQuantity = 0;*/
 	  $scope.reamrk = '';
-	
 	  $scope.currentDate = utils.getCurrentDate();
-	  
+	 
 	  $scope.getProductionPlanByDate=function(){
 		  utils.showProgressBar();
 			var httpparams = {};
 			httpparams.method = 'GET';
 			httpparams.url = SERVER_URL + "productquality/getQualityPendingListByDate/"+ $scope.currentDate;
-			
 			httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-
 			$http(httpparams).then(function successCallback(response) {
 				utils.hideProgressBar();
 				$scope.productionPlans = response.data;
@@ -27,32 +21,21 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 				utils.hideProgressBar();
 			});
 	  };
-	/*$scope.comparePassQuantity = function(qualityPendingQuantity, passQuantity, failQuantity){
-		if(qualityPendingQuantity >= (passQuantity + failQuantity)){
-			$scope.productQualityForm.failQuantity.$setValidity("customMsg", true);
-			$scope.errorMsg="";
-		}else{
-			$scope.productQualityForm.failQuantity.$setValidity("customMsg", false);
-			$scope.errorMsg="pending quantity is not equal to pass and fail quantity";
-		}
-		
-	}*/
-	  
+	
 	$scope.validatePassAndFailQuantity = function(qualityPendingQuantity,passQuantity,failQuantity){
 		console.log("pending quantity : " + qualityPendingQuantity);
 		console.log("pass Quantity : " + passQuantity);
 		console.log("fail quantity : " + failQuantity);
 		if(qualityPendingQuantity == (passQuantity + failQuantity)){
 			console.log("if condition");
-			$scope.productQualityForm.failQuantity[index].$setValidity("customMsg", true)
+			$scope.productQualityForm.failQuantity[index].$setValidity("customMsg", true);
 		}else{
 			console.log("else condition");
 			$scope.productQualityForm.failQuantity[index].$setValidity("customMsg", false);
 			$scope.errorMsg="pending quantity is not equal to pass and fail quantity";
 		}
-	}  
+	};  
 	 
-	
 	$scope.submitInformation = function(isvaliduser, $event) {
 		if (isvaliduser) {
 			$scope.saveProductQuality();
@@ -60,8 +43,8 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 			console.log('its else block');
 		}
 	};
-	
-		$scope.saveProductQuality=function()
+
+	$scope.saveProductQuality=function()
 		{
 			 var index=0;
 				var productQualityParts = [];
@@ -79,7 +62,6 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 					 productQualityParts:productQualityParts
 			 };
 			 console.log("Data",data);
-			 
 			 utils.showProgressBar();
 				var httpparams = {};
 				httpparams.method = 'POST';
@@ -88,7 +70,6 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 				httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
-
 				$http(httpparams).then(function successCallback(data) {
 					if(data.data.code === 1){
 						utils.showToast("Product Quality Check sucessfully!");
@@ -103,11 +84,10 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 					utils.showToast("Something went wrong. Please try again later.");
 					utils.hideProgressBar();
 				});
-		}
+		};
+		
 		$scope.cancelProductQualityForm = function(){
 			$location.path('/');
-		}
-		
-	
+		};
 });
 		

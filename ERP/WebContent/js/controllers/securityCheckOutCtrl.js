@@ -2,6 +2,8 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 		$rootScope, SERVER_URL,$filter,utils,Auth,$location) {
 	$scope.createDate = $filter('date')(Date.now(), 'MM-dd-yyyy');
 	 $scope.productOrderMsg= true;
+	 $scope.createDate = new Date($scope.createDate);
+	 
 	 $scope.getClient=function(){
 	    	var httpparams = {};
 			httpparams.method = 'GET';
@@ -11,34 +13,29 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 				};
 		 $http(httpparams).then(function successCallback(response) {
 				$scope.clients = response.data;
-
 				console.log(response);
-
 			}, function errorCallback(response) {
 				console.log("Error");
-
 			});
 	    };
 	   
 	    $scope.clientProductOrder=function(index)
 		{
-	    	 $scope.productOrderMsg= false;
+	    	$scope.productOrderMsg= false;
 			var httpparams = {};
 			httpparams.method = 'GET';
 			httpparams.url = SERVER_URL + "productorder/incompleteProductOrder/"+$scope.selectedClient;
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
-					
 				};
-			
 			$http(httpparams).then(function successCallback(response) {
 				$scope.clientProductList = response.data;
 				console.log(response);
-
 			}, function errorCallback(response) {
 				console.log("Error");
 			})
-		}
+		};
+	    
 	    $scope.displayProductList = function(index) {
 			console.log($scope.rawMaterials);
 			var httpparams = {};
@@ -47,7 +44,6 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
-			
 			$http(httpparams).then(function successCallback(response) {
 				$scope.productOtderList = response.data;
 				console.log(response);
@@ -56,11 +52,9 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 			}, function errorCallback(response) {
 				console.log("Error");
 				utils.hideProgressBar();
-
 			});
 			utils.showProgressBar();
-		}
-	    
+		};
 	    
 	    $scope.submitInformation = function(isvaliduser, $event) {
 			if (isvaliduser) {
@@ -69,7 +63,7 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 				console.log('its else block');
 			}
 		};
-		$scope.createDate = new Date($scope.createDate);
+		
 		$scope.saveSecurityCheckOutInformation = function() {
 			console.log('Saving saveSecurityInformation');
 			var index=0;
@@ -89,7 +83,6 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 				console.log('intime is greater than outtime')
 			}
 			var data = {
-
 				invoice_No : $scope.invoice_No,
 				clientname : $scope.selectedClient,
 				vehicleNo : $scope.vehicleNo,
@@ -111,10 +104,8 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 					auth_token : Auth.getAuthToken()
 				};
 			$http(httpparams).then(function successCallback(data) {
-				
 				console.log(data.data.message);
 				console.log(data);
-				
 				if(data.data.code === 1){
 					utils.showToast("Security Check out Sucessfully!");
 					$location.path('/');
@@ -122,21 +113,17 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 					utils.showToast("Something went wrong. Please try again later.");
 				}
 				utils.hideProgressBar();
-				
 			}, function errorCallback(response) {
 				console.log("Error");
 				utils.showToast("Something went wrong. Please try again later.");
 				utils.hideProgressBar();
 			});
-
 			utils.showProgressBar();
-			    	
 		};
 		
 		$scope.restInformation=function(){
 			$location.path('/');
-		}
-		
+		};
 		
 		$scope.dateValidation = function(createDate){
 			console.log("create date" + createDate);
@@ -147,7 +134,6 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 			}else{
 				console.log("else condition")
 			}
-			
 		}
 	
 });

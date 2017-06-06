@@ -1,9 +1,9 @@
 erpApp.controller('userTypeDialogCtrl',function($scope, $http, $mdDialog, $mdToast, $rootScope, SERVER_URL, utils, Auth, userType, $location, flag, action, information){
-	
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
 	$scope.userType = userType;
 	$scope.information = information;
+	
 	$scope.hide = function() {
 		console.log('hide DialogController');
 		$mdDialog.hide();
@@ -18,10 +18,7 @@ erpApp.controller('userTypeDialogCtrl',function($scope, $http, $mdDialog, $mdToa
 	};
 
 	$scope.saveUserTypeInformation = function(ev) {
-		
-		
 		var data = {
-
 				usertypeName : $scope.userType.usertypeName,
 				description : $scope.userType.description
 		};
@@ -68,17 +65,14 @@ erpApp.controller('userTypeDialogCtrl',function($scope, $http, $mdDialog, $mdToa
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.')
 						});
-
 	}
 
-	$scope.submitUserTypeInformation = function(isvaliduser,$event) {
+	$scope.submitUserTypeInformation = function(isvaliduser,$event){
 		if (isvaliduser) {
 			$scope.saveUserTypeInformation($event);
-			
 		} else {
 			console.log('its else block');
 		}
-
 	}
 	
 });

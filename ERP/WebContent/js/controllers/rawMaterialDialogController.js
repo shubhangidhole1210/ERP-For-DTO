@@ -4,6 +4,7 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 	$scope.rawMaterial = rawMaterial;
 	$scope.information= information;
 	$scope.isUnitReadOnly = unitAction;
+	
 	$scope.hide = function() {
 		console.log('hide DialogController');
 		$mdDialog.hide();
@@ -18,10 +19,7 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 	};
 
 	$scope.saveRawMaterial = function(ev) {
-		
-		
 		var data = {
-
 				name:$scope.rawMaterial.name,
 				description:$scope.rawMaterial.description,
 				partNumber:$scope.rawMaterial.partNumber,
@@ -58,13 +56,9 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 										"saveRawmaterialError", {});
 								console.log(data);
 								$scope.hide();
-								/*$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();*/
 								utils.showToast('Something went worng. Please try again later.');
 							}else{
 								$scope.displayProgressBar = false;
-								/*$scope.message = 'Raw material Information saved successfully.';
-								$scope.showToast();*/
 								utils.showToast('Raw material Information saved successfully.');
 								$rootScope.$emit("CallPopulateRawMaterial",{});
 							}
@@ -74,46 +68,31 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 									"saveRawmaterialError", {});
 							console.log(data);
 							$scope.hide();
-							/*$scope.message = 'Something went worng. Please try again later.';
-							$scope.showToast();*/
 							utils.showToast('Something went worng. Please try again later.');
 						});
-
-	}
+	};
 
 	$scope.submitRMInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			/*utils.showProgressBar();*/
 			$scope.saveRawMaterial($event)
-			
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
+	};
 
-	}
-
-	$scope.getUnitList= function()
-	{
+	$scope.getUnitList= function(){
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "unit/list";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
-		
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
-		
-
 			console.log(response);
-
 		}, function errorCallback(response) {
 			console.log("Error");
-
 		});
 	}
-
-
-	
 });

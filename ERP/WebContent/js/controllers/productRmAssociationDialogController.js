@@ -27,7 +27,6 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
     		product : $scope.productRmAsso.product.productId,
     		productRMAssociationModelParts: $scope.productRmAsso.productRMAssociationModelParts
 		};
-    	 
     	var httpparams = {};
     	if($scope.flag === 0){
     		httpparams.method = 'post';
@@ -43,9 +42,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 					auth_token : Auth.getAuthToken()
 			};
     	}
-    	 
     	httpparams.data = data;
-    	
     	$http(httpparams).then(
 			function successCallback(data) {
 				$mdDialog.hide();
@@ -58,7 +55,6 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 					$scope.hide();
 					utils.showToast('Something went worng. Please try again later.');
 				}
-				
 				else{
 					$scope.displayProgressBar = false;
 					utils.showToast('Product RM Association Information saved successfully.');
@@ -71,18 +67,14 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 				$scope.hide();
 				utils.showToast('Something went worng. Please try again later.');
 			});
-    	 
     	};
-	    
-	    $scope.submitProductRMAssociationInformation = function(isvaliduser,$event) {
+	   
+    	$scope.submitProductRMAssociationInformation = function(isvaliduser,$event) {
 			if (isvaliduser) {
 				$scope.saveProductRMAssociationInfo();
 			} else {
-				/*console.log('its else block');*/
 				utils.showToast('Please fill all required information');
-				
 			}
-
 		};
 	    
 		$scope.submitRm=function(isvaliduser,$event){
@@ -92,8 +84,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 				console.log('its else block');
 				utils.showToast('Please fill all required information');
 			}
-		}
-		
+		};
 	   
 	    $scope.deleteRM = function(index){
 	    	console.log('in delete RM'+ $scope.productRmAsso.productRMAssociationModelParts)
@@ -101,7 +92,6 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    };
 		
 		$scope.rawMaterialId = function(){
-			
 			var httpparams = {};
 			httpparams.method = 'GET';
 			httpparams.url = SERVER_URL + "rawmaterial/list";
@@ -114,7 +104,6 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			}, function errorCallback(response) {
 				console.log("Error");
 			})
-			
 		};
 		  
 	    $scope.addRawMaterial = function(){
@@ -125,19 +114,17 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 				   $scope.rawmaterialPart = {};
 				   console.log('setting validity true')
 				   $scope.productRMAssociationInformation.rawmaterial.$setValidity("message", true);
-				    $scope.productRMAssociationInformation.rawmaterial.errors.youAreFat == true;
 				   $scope.message="";
 	    		}else{
 	    			$scope.message = 'This Rawmaterial is already added';
 					$scope.productRMAssociationInformation.rawmaterial.$setValidity("message", false);
 	    		}
-	    		 
 			}
 	    };
 	    
 	    function getProductListURL(){
 	    	return ($scope.flag === 0) ? "product/list/newProductRMAssociation" : "product/list";
-	    }
+	    };
 		
 		$scope.getProducts = function() {
 			 var httpparams = {};
@@ -177,9 +164,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 					console.log("Error");
 				});
 		};
-	    
-	    
-		    
+	   
 		$scope.addQuantity = function(quantity) {
 			if (quantity <= 0) {
 				console.log('if condition')
@@ -200,4 +185,3 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 		};
 								
 });
-
