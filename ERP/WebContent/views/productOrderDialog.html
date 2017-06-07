@@ -70,11 +70,14 @@
           <tr ng-repeat="orderProductAssociation in orderproductassociations">
           <td>{{orderProductAssociation.product.partNumber}}</td>
           <!-- <td>{{orderProductAssociation.quantity}}</td> -->
-          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-model="orderProductAssociation.quantity" ng-change="orderProductAssociation.quantity" min="1">
-             
+          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" name="quantity" ng-model="orderProductAssociation.quantity" ng-change="orderProductAssociation.quantity; updateQuantity(orderProductAssociation.quantity)">
+             <div ng-messages="productOrderInformation.quantity.$error">
+                  <div ng-message ="customMsg" class="error-msg">{{updateQuantityMsg}}</div>
+             </div>
           </td>
           <td><button type="button"  ng-click="deleteProduct($index)" class="multiple-added-delete">Delete</button></td>
           </tr>
+         
           <tr ng-repeat="orderProductAssociation in productOrderList">
           <td>{{orderProductAssociation.product.name}}</td>
           <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-disabled="isReadOnly"></td>
@@ -113,9 +116,3 @@
     
   </form>
 </md-dialog>
-
-
-
-
-
-

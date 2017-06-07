@@ -22,6 +22,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 
 							$scope.data = response.data;
 							$scope.UserTypes = response.data;
+							console.log('$scope.UserTypes' , $scope.UserTypes);
 							console.log(response);
 							utils.hideProgressBar();
 						},
@@ -37,6 +38,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 		$scope.information = "ADD NEW USER TYPE"
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
+		$scope.userType = {};
 		var addNewUserTypeDialog = {
 			controller : 'userTypeDialogCtrl',
 			templateUrl : 'views/userTypeInformation.html',
@@ -109,9 +111,10 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 	
 	$scope.deleteUserType = function(index) {
 		console.log($scope.userType);
+	/*	console.log('$scope.userTypes : ', data)*/
 		var httpparams = {};
 		httpparams.method = 'delete';
-		httpparams.url = SERVER_URL + "userType/delete/" + $scope.userTypes[index].id;
+		httpparams.url = SERVER_URL + "userType/delete/" + $scope.userType[index].id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -120,7 +123,6 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 			$rootScope.$emit("CallPopulateUserTypeList", {});
 			console.log(data);
 			utils.showToast('Delete UserType sucessfully');
-
 		}, function errorCallback(data) {
 			console.log("Error");
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");

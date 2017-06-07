@@ -116,6 +116,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 	
 	$scope.deleteUnit = function(index) {
 		console.log($scope.unit);
+		console.log('$scope.units' , $scope.units)
 		var httpparams = {};
 		httpparams.method = 'delete';
 		httpparams.url = SERVER_URL + "unit/delete/" + $scope.units[index].id;

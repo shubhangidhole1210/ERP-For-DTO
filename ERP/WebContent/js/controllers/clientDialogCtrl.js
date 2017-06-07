@@ -24,7 +24,13 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 				address: $scope.client.address,
 				emailid: $scope.client.emailid,
 				contactnumber:$scope.client.contactnumber ,
-				contactpersonname: $scope.client.contactpersonname
+				contactpersonname: $scope.client.contactpersonname,
+				commisionerate: $scope.client.commisionerate,
+	    		 cst: $scope.client.cst,
+	    		 customer_ECC_Number: $scope.client.customer_ECC_Number,
+	    		 division: $scope.client.division,
+	    		 vat_No: $scope.client.vat_No,
+	    		 range: $scope.client.range
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -77,7 +83,6 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
 						});
-
 	};
 
 	$scope.submitClientInformation = function(isvaliduser,$event) {
@@ -87,5 +92,5 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-	}
+	};
 });

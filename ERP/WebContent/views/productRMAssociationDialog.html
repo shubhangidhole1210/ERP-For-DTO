@@ -9,21 +9,6 @@
 
 	<md-dialog-content>
 	<div class="md-dialog-content">
-
-		<!-- <div layout-gt-sm="row">
-			<md-input-container  class="drop-down">
-			<label style="color: black;">PRODUCT*</label> <md-select
-				ng-model="productRmAsso.product" name="product"
-				 ng-required="true" required ng-init="getProducts()">
-			<md-option ng-repeat="product in products"
-				ng-value="product.productId"> {{product.partNumber}} </md-option> </md-select>
-			<div ng-messages="productRMAssociationInformation.product.$error">
-				<div ng-message="required">Please Select Product</div>
-			</div>
-			</md-input-container>
-		</div> -->
-		
-		
 		 <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>Product*</label>
@@ -32,7 +17,7 @@
                {{product.partNumber}}
             </md-option>
           </md-select>
-          <div ng-messages="productOrderInformation.product.$error">
+          <div ng-messages="productRMAssociationInformation.product.$error">
                  <div ng-message="required">Please Select Product</div>
               </div>
         </md-input-container>
@@ -49,7 +34,11 @@
 			<tr ng-repeat="rm in productRmAsso.productRMAssociationModelParts">
 				<td>{{ $index + 1 }}</td>
 				<td>{{rm.rawmaterial.partNumber}}</td>
-				<td><input type="number" ng-value="{{rm.quantity}}"></td>
+				<td><input type="number" ng-value="{{rm.quantity}}" ng-model="rm.quantity" ng-change="updateQuantity(rm.quantity)" name="quantity">
+				   <div mg-messages="productRMAssociationInformation.quantity.$error">
+				      <div ng-message="updateQuantityMsg">{{updateQuantityMsg}}</div>
+				   </div>
+				</td>
 				<td>
 					<button type="button" class="multiple-added-delete"
 						ng-click="deleteRM($index)" ng-disabled="isReadOnly">Delete</button>

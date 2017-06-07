@@ -164,6 +164,17 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 					console.log("Error");
 				});
 		};
+		
+	   $scope.updateQuantity = function(quantity){
+		   console.log(quantity);
+		   if(quantity > 0){
+			   console.log("its if block");
+			   $scope.updateQuantityMsg = 'quantity should be greater than 0';
+				$scope.productRMAssociationInformation.quantity.$setValidity("updateQuantityMsg", false);
+		   }else{
+			   console.log("its else block");
+		   }
+	   };
 	   
 		$scope.addQuantity = function(quantity) {
 			if (quantity <= 0) {
@@ -183,5 +194,4 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			}
 			return false;
 		};
-								
 });

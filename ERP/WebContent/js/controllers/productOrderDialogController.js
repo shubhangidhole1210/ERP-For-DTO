@@ -161,16 +161,28 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 	   }
 	    };
 	    
+	    $scope.updateQuantity = function(quantity){
+	    	console.log(quantity);
+	    	if(quantity < 0){
+	    		 $scope.updateQuantityMsg="Invalid price!! Price should be greater than 0";
+	   			  $scope.productOrderInformation.quantity.$setValidity("customMsg", false);
+	    		 console.log("its if block");
+	    	}else{
+	    		 $scope.productOrderInformation.quantity.$setValidity("customMsg", true);
+	    		 console.log("its else block")
+	    	}
+	    };
+	    
 	  $scope.orderDateValidation = function(expecteddeliveryDate){
 		  console.log("expected deliver date" + expecteddeliveryDate);
 		  $scope.currentDate = new Date();
 		  console.log("current date" +  $scope.currentDate);
 		  if(expecteddeliveryDate <= $scope.currentDate){
-			  console.log("its if condition")
-			  $scope.msg="Date should be greater then current date"
+			  console.log("its if condition");
+			  $scope.msg="Date should be greater then current date";
 			  $scope.productOrderInformation.expecteddeliveryDate.$setValidity("customeMsg", false);
 		  }else{
-			     console.log("its else block")
+			     console.log("its else block");
 			     $scope.productOrderInformation.expecteddeliveryDate.$setValidity("customeMsg", true);
 		  }
 	  };
