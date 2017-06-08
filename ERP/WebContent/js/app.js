@@ -1,5 +1,5 @@
 var erpApp = angular
-		.module('ERPApp', [ 'ngRoute', 'ngMaterial', 'ngMessages', 'ngAnimate' ]);
+		.module('ERPApp', [ 'ngRoute', 'ngMaterial', 'ngMessages', 'ngAnimate' , 'ngAria']);
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
@@ -164,6 +164,18 @@ erpApp.config(function($routeProvider) {
 			
 	}).when('/storeOut',{
 		templateUrl : 'views/storeOut.html',
+		data :{
+			loginRequired : true
+		}
+			
+	}).when('/getPdf',{
+		templateUrl : 'views/downloadPDF.html',
+		data :{
+			loginRequired : true
+		}
+			
+	}).when('/generateBOM',{
+		templateUrl : 'views/generateBom.html',
 		data :{
 			loginRequired : true
 		}

@@ -31,10 +31,10 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 	    		 description: $scope.vendorUser.description,
 	    		 commisionerate: $scope.vendorUser.commisionerate,
 	    		 cst: $scope.vendorUser.cst,
-	    		 customer_ECC_Number: $scope.vendorUser.customer_ECC_Number,
-	    		 division: $scope.vendorUser.division,
-	    		 vat_No: $scope.vendorUser.vat_No,
-	    		 range: $scope.vendorUser.range
+	    		 customerEccNumber: $scope.vendorUser.customerEccNumber,
+	    		 divison: $scope.vendorUser.division,
+	    		 vatNo: $scope.vendorUser.vatNo,
+	    		 renge: $scope.vendorUser.renge
 				};
 	    	 var httpparams = {};
 	    	 if($scope.flag==0){

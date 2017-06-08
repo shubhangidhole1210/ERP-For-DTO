@@ -1,18 +1,4 @@
-/*erpApp.controller('returnBomCtrl', function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,bomInformation){
-	$scope.hide = function() {
-		console.log('hide DialogController');
-		$mdDialog.hide();
-	};
-
-	$scope.cancel = function() {
-		$mdDialog.cancel();
-	};
-
-	$scope.answer = function(answer) {
-		$mdDialog.hide(answer);
-	};
-	
-	$scope.bomInformation=bomInformation;
+erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,$rootScope,SERVER_URL,Auth,$http,utils){
 	$scope.getProducts = function() {
 		utils.showProgressBar();
 		        var httpparams = {};
@@ -35,6 +21,22 @@
 			});
 	};
 	
+	$scope.submitData = function(id,bom){
+		console.log("in submit data function");
+		console.log("id" , id);
+		console.log("bom" , bom);
+		if(id == null && bom == null){
+			console.log("its if condition");
+			$scope.bomReturnForm.product.$setValidity("message", false);
+			$scope.bomReturnForm.bom.$setValidity("message", false);
+		}else{
+			$scope.bomReturnForm.product.$setValidity("message", true);
+			$scope.bomReturnForm.bom.$setValidity("message", true);
+			console.log("its else condition");
+			$scope.getPdf();
+		}
+	};
+	
 	$scope.getBomInformation = function(){
 		console.log($scope.rawMaterials);
 		var httpparams = {};
@@ -54,14 +56,14 @@
 		utils.showProgressBar();
 	};
 	
-	$scope.downloadPdf = function(isvaliduser,$event) {
+	/*$scope.downloadPdf = function(isvaliduser,$event) {
 		if (isvaliduser) {
 			$scope.getPdf();
 		} else {
 			console.log('its else block');
 			utils.showToast('Please select Product ID and BOM ID');
 		}
-	};
+	};*/
 	
 	$scope.getPdf = function () {
 		var httpparams = {};
@@ -100,4 +102,9 @@
 			utils.hideProgressBar();
 	    });
 	};
-});*/
+	
+	$scope.cancelBOM = function(){
+		$location.path('/home');
+	}
+	
+});

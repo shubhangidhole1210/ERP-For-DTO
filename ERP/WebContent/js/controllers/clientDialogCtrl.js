@@ -27,10 +27,10 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 				contactpersonname: $scope.client.contactpersonname,
 				commisionerate: $scope.client.commisionerate,
 	    		 cst: $scope.client.cst,
-	    		 customer_ECC_Number: $scope.client.customer_ECC_Number,
+	    		 customerEccNumber: $scope.client.customer_ECC_Number,
 	    		 division: $scope.client.division,
-	    		 vat_No: $scope.client.vat_No,
-	    		 range: $scope.client.range
+	    		 vatNo: $scope.client.vat_No,
+	    		 renge: $scope.client.range
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {

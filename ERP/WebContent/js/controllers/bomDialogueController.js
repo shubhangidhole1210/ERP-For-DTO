@@ -1,4 +1,4 @@
-erpApp
+/*erpApp
 		.controller(
 				'bomDialogueController',
 				function($scope, $http, $location, $mdDialog, $mdToast,
@@ -168,4 +168,4 @@ erpApp
 							utils.showProgressBar();
 						}
 					}
-				});
+				});*/
