@@ -41,6 +41,7 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 			utils.showToast("PDF download sucessfully");
 			console.log("its else  condition");
 			$scope.getPdf();
+			$location.path('/home');
 		}
 	};
 	

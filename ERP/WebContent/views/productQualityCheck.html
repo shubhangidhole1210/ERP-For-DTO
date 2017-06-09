@@ -21,28 +21,29 @@
            <td>{{productionplan.qualityPendingQuantity}}</td>
            <td>
            		<md-input-container class="md-block" flex-gt-sm>
-					<input type="number" ng-model="productionplan.passQuantity"  name="passQuantity">
+					<input type="number" ng-model="productionplan.passQuantity"  name="passQuantity" required>
 					<div ng-messages="productQualityForm.passQuantity.$error">
-             	  <div ng-message="required">please enter Quantity </div>
+             	  <div ng-message="required">please enter Pass Quantity </div>
             	</div>
 				</md-input-container>
 			</td>
 			<td>
 			   	<md-input-container class="md-block" flex-gt-sm>
-					<input type="number" ng-model="productionplan.failQuantity" name="failQuantity{{$index}}" id="failQuantity" 
-					ng-change="validatePassAndFailQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" >
-				
-				</md-input-container>
-				<div ng-messages="productQualityForm.failQuantity.$error">
-					<div ng-message="required">Please enter user name</div>
-					<!-- <div ng-message="customMsg" class="error-msg">{{errorMsg}}</div> -->
+					<input type="number" ng-model="productionplan.failQuantity1" name="failQuantity" id="failQuantity" 
+					ng-change="validatePassAndFailQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" required>
+				  <div ng-messages="productQualityForm.failQuantity.$error">
+					<div ng-message="required">Please enter Fail Quantity</div>
             	</div>
+				</md-input-container>
+				
             	<div ng-show="productQualityForm.failQuantity{{$index}}.$error.customMsg" class="error-msg">{{errorMsg}}</div>
-			 <!--  <div ng-show="productQualityForm.failQuantity.$error.customMsg" class="error-msg">errorMsg</div> -->
 			</td>	
 			<td>
 			   <md-input-container class="md-block" flex-gt-sm>
-					<input type="text" ng-model="productionplan.remark" name="REMARK">
+					<input type="text" ng-model="productionplan.remark" name="remark" required>
+					 <div ng-messages="productQualityForm.remark.$error">
+					<div ng-message="required">Please enter Remark</div>
+            	</div>
 				</md-input-container>
 			</td>
         </tr>

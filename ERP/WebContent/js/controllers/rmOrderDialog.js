@@ -100,6 +100,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	
 	$scope.getRMListByVendor = function(){
 		$scope.rmMsg = false;
+		/*utils.showProgressBar();*/
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "rawmaterial/getRMaterial/" + $scope.rmOrder.vendor.id;
@@ -108,12 +109,11 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 			};
 		$http(httpparams).then(function successCallback(response) {
 			$scope.vendorRmList = response.data;
-
 			console.log(response);
-
+		/*	utils.hideProgressBar();*/
 		}, function errorCallback(response) {
 			console.log("Error");
-
+			utils.hideProgressBar();
 		})
 	};
 	

@@ -3,10 +3,12 @@
 				'stroresCtrl',
 				function($scope, $http, $mdDialog, $mdToast, $rootScope,
 						SERVER_URL, utils, Auth, $location) {
+					
 					$scope.ischeckBoxDisabled = true;
 					document.getElementById('invoiceNumber').focus();
 					
 					$scope.getRMOrderInvoiceInformation = function(){
+						console.log("in getRmOrderInformation function");
 						var httpparams = {};
 						httpparams.method = 'GET';
 						httpparams.url = SERVER_URL
@@ -17,6 +19,7 @@
 						$http(httpparams).then(
 								function successCallback(response) {
 									$scope.invoiceList = response.data;
+									
 									console.log(response);
 									utils.hideProgressBar();
 								}, function errorCallback(response) {
@@ -88,7 +91,7 @@
 												console.log(data);
 												$location.path('/')
 												utils
-														.showToast('Qualitycheckrawmaterial added Successfully !')
+														.showToast('Raw Material information store sucessfully!');
 												utils.hideProgressBar();
 											} else {
 												console.log(data);

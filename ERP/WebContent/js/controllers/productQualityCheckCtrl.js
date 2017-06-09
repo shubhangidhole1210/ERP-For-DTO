@@ -28,10 +28,10 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 		console.log("fail quantity : " + failQuantity);
 		if(qualityPendingQuantity == (passQuantity + failQuantity)){
 			console.log("if condition");
-			$scope.productQualityForm.failQuantity[index].$setValidity("customMsg", true);
+			$scope.productQualityForm.failQuantity.$setValidity("customMsg", true);
 		}else{
 			console.log("else condition");
-			$scope.productQualityForm.failQuantity[index].$setValidity("customMsg", false);
+			$scope.productQualityForm.failQuantity.$setValidity("customMsg", false);
 			$scope.errorMsg="pending quantity is not equal to pass and fail quantity";
 		}
 	};  
@@ -53,7 +53,7 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 					product.productId= $scope.productionPlans[index].product.id;
 					product.productQuantity = $scope.productionPlans[index].targetQuantity;
 					product.passQuantity = $scope.productionPlans[index].passQuantity;
-					product.failQuantity = $scope.productionPlans[index].failQuantity;
+					product.failQuantity = $scope.productionPlans[index].failQuantity1;
 					product.remark = $scope.productionPlans[index].remark;
 					product.productionPlanId = $scope.productionPlans[index].id;
 					productQualityParts.push(product);

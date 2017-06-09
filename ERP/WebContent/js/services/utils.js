@@ -1,5 +1,4 @@
 erpApp.service('utils',function myutils($mdDialog, $rootScope,$mdToast) {
-
 		function hideProgressBar() {
 				$rootScope.$emit("hide_wait");
 		};

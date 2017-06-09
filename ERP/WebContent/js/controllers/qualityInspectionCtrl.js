@@ -88,7 +88,7 @@ erpApp
 												console.log(data);
 												$location.path('/')
 												utils
-														.showToast('Qualitycheckrawmaterial added Successfully !')
+														.showToast('Raw Material quality check Successfully !')
 												utils.hideProgressBar();
 											} else {
 												console.log(data);
