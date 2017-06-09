@@ -703,3 +703,7 @@ md-input-container.md-input-invalid [ng-messages] {
 	margin-top: 2%;
 	margin-bottom: 2%;
 }
+.toast-msg{
+
+	position: fixed;
+}

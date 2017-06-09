@@ -7,13 +7,12 @@
       <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>Product</label>
-          <md-select ng-model="product.product.id" name="product"  ng-disabled="productIdReadOnly" ng-init="getProducts()" ng-change="getBomInformation($index)" >
+          <md-select ng-model="product.product.id" name="product"  ng-disabled="productIdReadOnly" ng-init="getProducts()" ng-change="getBomInformation($index)" required>
             <md-option ng-repeat="product in data.data" ng-value="product.id">
                {{product.partNumber}}
             </md-option>
           </md-select>
           <div ng-messages="bomReturnForm.product.$error">
-                 <!-- <div ng-message="required">Please Select Product</div> -->
                  <div ng-message="message">Please select product</div>
               </div>
         </md-input-container>
@@ -21,15 +20,14 @@
             <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>BOM</label>
-          <md-select ng-model="bom" name="bom"  ng-disabled="productIdReadOnly">
+          <md-select ng-model="bom" name="bom"  ng-disabled="productIdReadOnly" >
             <md-option ng-repeat="bom in bomData" ng-value="bom" >
                {{bom.bomId}}
             </md-option>
           </md-select>
-          <div ng-messages="bomReturnForm.bom.$error">
-                 <!-- <div ng-message="required">Please Select Product</div> -->
+          <!-- <div ng-messages="bomReturnForm.bom.$error">
                  <div ng-message="message">please select bom</div>
-              </div>
+              </div> -->
         </md-input-container>
            </div>
            <div >

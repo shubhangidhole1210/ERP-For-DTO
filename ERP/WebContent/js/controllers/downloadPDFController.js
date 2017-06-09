@@ -26,13 +26,20 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 		console.log("id" , id);
 		console.log("bom" , bom);
 		if(id == null && bom == null){
+			  utils.showToast("please select Product and BOM");
+		   }else if(id == null){
 			console.log("its if condition");
-			$scope.bomReturnForm.product.$setValidity("message", false);
-			$scope.bomReturnForm.bom.$setValidity("message", false);
+			/*$scope.bomReturnForm.product.$setValidity("message", true);*/
+			/*$scope.bomReturnForm.bom.$setValidity("message", false);*/
+			utils.showToast("please select product ID");
+		}else if(bom == null){
+			/*$scope.bomReturnForm.product.$setValidity("message", false);*/
+			/*$scope.bomReturnForm.bom.$setValidity("message", true);*/
+			console.log("its else if condition");
+			utils.showToast("please select BOM ID");
 		}else{
-			$scope.bomReturnForm.product.$setValidity("message", true);
-			$scope.bomReturnForm.bom.$setValidity("message", true);
-			console.log("its else condition");
+			utils.showToast("PDF download sucessfully");
+			console.log("its else  condition");
 			$scope.getPdf();
 		}
 	};
@@ -105,6 +112,6 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 	
 	$scope.cancelBOM = function(){
 		$location.path('/home');
-	}
+	};
 	
 });

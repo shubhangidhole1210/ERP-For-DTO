@@ -49,7 +49,11 @@
 				<td>{{orderRawMaterial.rawmaterial.partNumber}}</td>
 				<td>{{orderRawMaterial.rawmaterial.description}}</td>
 				<td><input type="number"
-					ng-value="{{orderRawMaterial.quantity}}" ng-model="orderRawMaterial.quantity" ng-change="updateQuantity(orderRawMaterial.quantity,rmOrder.totalprice,rmOrder.tax,rmOrder.actualPrice,rmOrder.otherCharges)"></td>
+					ng-value="{{orderRawMaterial.quantity}}" ng-model="orderRawMaterial.quantity" ng-change="updateQuantity(orderRawMaterial.quantity)" name="quantity">
+					   <div ng-messages="RMOrderInformation.quantity.$error">
+					     <div ng-message="quantityUpdateMessage" class="error-msg">Invalid quantity!! </div>
+					   </div>
+					</td>
 				
 				<td>
 					<button type="button" style="height: 40px"
@@ -63,7 +67,7 @@
 					ng-value="{{orderRawMaterial.quantity}}" ng-disabled="isReadOnly" ></td>
 				<td>
 					<button type="button" class="multiple-added-delete"
-						ng-click="deleteRM($index)" ng-disabled="isReadOnly">Delete</button>
+						 ng-disabled="isReadOnly">Delete</button>
 				</td>
 			</tr>
 
