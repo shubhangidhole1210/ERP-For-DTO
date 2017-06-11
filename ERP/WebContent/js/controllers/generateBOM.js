@@ -43,12 +43,12 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 		utils.showProgressBar();
 	};
 
-	$scope.getVenodrList = function() {
+	$scope.getVenodrList = function(id) {
 		console.log($scope.rawMaterials);
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL
-				+ "rmvendorasso/rmVendorList/1";
+				+ "rmvendorasso/rmVendorList/" + id;
 		httpparams.headers = {
 			auth_token : Auth.getAuthToken()
 		};

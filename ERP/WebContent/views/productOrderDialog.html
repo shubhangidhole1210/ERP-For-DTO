@@ -19,7 +19,7 @@
             <input type="text" ng-model="productOrder.description"  required name="description" ng-disabled="isReadOnly" ng-minlength="4" ng-maxlength="255" >
              <div ng-messages="productOrderInformation.description.$error">
             <div ng-message="required">Please enter Description</div>
-            <div ng-message="minlength">Description should be minimum 2 character</div>
+            <div ng-message="minlength">Description should be minimum 4 character</div>
             <div ng-message="maxlength">Description should be maximum 255 character</div>
           </div>
           </md-input-container>

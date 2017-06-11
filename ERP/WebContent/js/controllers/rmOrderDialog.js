@@ -85,7 +85,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 									"saveRMOrderError", {});
 							console.log(data);
 							$scope.hide();
-							utils.showToast('Something went worng. Please try again later.');
+							utils.showToast('Please add atleast one raw material');
 						});
 	}
 	
@@ -100,6 +100,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	
 	$scope.getRMListByVendor = function(){
 		$scope.rmMsg = false;
+		/*utils.showProgressBar();*/
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "rawmaterial/getRMaterial/" + $scope.rmOrder.vendor.id;
@@ -108,12 +109,11 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 			};
 		$http(httpparams).then(function successCallback(response) {
 			$scope.vendorRmList = response.data;
-
 			console.log(response);
-
+		/*	utils.hideProgressBar();*/
 		}, function errorCallback(response) {
 			console.log("Error");
-
+			utils.hideProgressBar();
 		})
 	};
 	
@@ -138,8 +138,15 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		console.log('Total Price : '+$scope.rmOrder.totalprice);
 	};
 	
-	$scope.updateQuantity = function(quantity,totalprice,tax,actualPrice,otherCharges){
-		$scope.calculateTotalPrice();
+	$scope.updateQuantity = function(quantity){
+		if(quantity < 0){
+			console.log("its if block");
+			$scope.RMOrderInformation.quantity.$setValidity("quantityUpdateMessage" , false);
+		}else{
+			$scope.RMOrderInformation.quantity.$setValidity("quantityUpdateMessage" , true);
+			console.log("its else block");
+			$scope.calculateTotalPrice();
+		}
 	};
 	
 	$scope.displayVendorId=function(){

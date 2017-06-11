@@ -72,7 +72,7 @@
 						</div>
 						<md-input-container class="md-block" flex-gt-sm>
 						<label class="input-filed-label">DESCRIPTION</label> <input
-							type="text" required name="description" ng-model="description" ng-milength="4" limit-to="255">
+							type="text" required name="description" ng-model="description"ng-minlength="4" ng-maxlength="255" limit-to="255">
 						<div ng-messages="securityInformation.description.$error">
 							<div ng-message="required">Please enter Description</div>
 							<div ng-message="minlength">Description should be minimum 4 character</div>

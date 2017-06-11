@@ -37,7 +37,7 @@
                  <td >
             <md-input-container class="drop-down">
           <label>Raw Material</label>
-          <md-select ng-model="rawmaterial.id" name="product"  ng-disabled="productIdReadOnly" ng-change="getVenodrList()">
+          <md-select ng-model="rawmaterial.id" name="product"  ng-disabled="productIdReadOnly" ng-change="getVenodrList(rawmaterial.id)">
             <md-option ng-repeat="rawMaterials in data.data" ng-value="rawMaterials.rawmaterial.id">
             {{rawMaterials.rawmaterial.partNumber}}
             </md-option>
