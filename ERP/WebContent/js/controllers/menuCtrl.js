@@ -50,9 +50,13 @@ erpApp.controller('menuController', function($scope,$rootScope,Auth,SERVER_URL,$
 		$scope.user = Auth.getUserName();
 	});
 	$scope.selectedIndex = 0;
-	$scope.menuClicked=function($index)
-	{
-		 $scope.selectedIndex = $index;
+	$scope.menuClicked=function($index){
+		console.log('index : ',$index);
+		if($scope.selectedIndex !== $index)
+			$scope.cascadedMenu[$scope.selectedIndex].displaySubmenu = false;
+		$scope.selectedIndex = $index;
+		$scope.cascadedMenu[$index].displaySubmenu = !$scope.cascadedMenu[$index].displaySubmenu;
+		document.getElementById( 'menu' + $index).focus = true;
 	};
 	
 });
