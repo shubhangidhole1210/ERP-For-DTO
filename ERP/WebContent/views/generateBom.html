@@ -16,7 +16,7 @@
 			</div>
 			</md-input-container>
 		</div>       
-      <div layout-gt-sm="row">
+    <!--   <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
              <label class="input-filed-label">BOM ID</label> <input type="text"
 				ng-model="bomId" name="bomId" ng-disabled="isReadOnly" required>
@@ -24,7 +24,7 @@
                  <div ng-message="required">Please enter BOM Id</div>
               </div>
           </md-input-container>
-        </div>
+        </div> -->
        
     <table>
               <tr>
@@ -57,7 +57,7 @@
                  <td>
                     <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">QUANTITY</label> <input
-				type="number" ng-model="rmVendor.quantity1" name="quantity" ng-change="caluculatePrice(rmVendor.quantity1,$index)" min="1">
+				type="number" ng-model="rmVendor.quantity1" name="quantity" ng-change="caluculatePrice(rmVendor.vendor.id,rmVendor.quantity1,$index)" min="1">
 			</md-input-container>
                  </td>
                   <div ng-messages="bomGenerateForm.quantity.$error">

@@ -76,16 +76,24 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 		}
 	};
 
-	$scope.caluculatePrice = function(quantity, index) {
+	$scope.caluculatePrice = function(quantity, id, index) {
 		console.log(quantity);
-		console.log('$scope.vendorList', $scope.vendorList)
-		for (var i = 0; i < $scope.vendorList.length; i++) {
-			$scope.data.data[index].pricePerUnit = $scope.vendorList[i].pricePerUnit
-					* quantity;
-			console.log('$scope.pricePerUnitL :',
-					$scope.pricePerUnit);
+		console.log("vendor id : " ,id);
+		if(id){
+			console.log("in if condition: ", id);
+			console.log('$scope.vendorList', $scope.vendorList)
+			for (var i = 0; i < $scope.vendorList.length; i++) {
+				$scope.data.data[index].pricePerUnit = $scope.vendorList[i].pricePerUnit
+						* quantity;
+				console.log('$scope.pricePerUnitL :',
+						$scope.pricePerUnit);
+			}
 		}
 	};
+	
+	/*$scope.vendorChange = function(id){
+		console.log("ID :" , id);
+	}*/
 
 	$scope.duplicateRM = function(rawMaterialVendorList) {
 		console.log("in duplicate RM function");
@@ -113,7 +121,7 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 			rmVendorList.push(rmVendor)
 			var data = {
 				product : $scope.product.product.id,
-				bomId : $scope.bomId,
+			/*	bomId : $scope.bomId,*/
 				bomModelParts : rmVendorList
 			};
 			var httpparams = {

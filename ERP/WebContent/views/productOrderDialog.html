@@ -64,11 +64,13 @@
         <table>
           <tr>
             <th>PRODUCT</th>
+            <th>DESCRIPTION</th>
             <th>QUANTITY</th>
             <th>ACTION</th>
           </tr>
           <tr ng-repeat="orderProductAssociation in orderproductassociations">
           <td>{{orderProductAssociation.product.partNumber}}</td>
+          <td>{{orderProductAssociation.product.description}}</td>
           <!-- <td>{{orderProductAssociation.quantity}}</td> -->
           <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" name="quantity" ng-model="orderProductAssociation.quantity" ng-change="orderProductAssociation.quantity; updateQuantity(orderProductAssociation.quantity)">
              <div ng-messages="productOrderInformation.quantity.$error">
