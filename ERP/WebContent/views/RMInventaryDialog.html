@@ -23,7 +23,7 @@
 			<md-input-container class="drop-down"> <label
 				style="color: black;">RAW MATERIAL</label> <md-select
 				ng-model="rmInventary.rawmaterial.id" name="RMInventory"
-				value="RMInventory.id" ng-disabled="isReadOnly" ng-required="true"
+				value="RMInventory.id" ng-disabled="isRmVisible" ng-required="true"
 				rrquired> <md-option ng-repeat="RMInventory in data"
 				ng-value="RMInventory.id"> {{RMInventory.name}} </md-option> </md-select>
 			<div ng-messages="RMInventaryInformation.RMInventory.$error">

@@ -1,6 +1,7 @@
 erpApp.controller('RMInvenaryDialogeController',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope, SERVER_URL, utils, Auth, rmInventary, $location, flag, action, information) {
+				function($scope, $http, $mdDialog, $mdToast, $rootScope, SERVER_URL, utils, Auth, rmInventary, $location, flag, action, information, rmAction) {
 	$scope.isReadOnly = action;
+	$scope.isRmVisible = rmAction;
 	$scope.flag = flag;
 	$scope.rmInventary = rmInventary;
 	$scope.information = information

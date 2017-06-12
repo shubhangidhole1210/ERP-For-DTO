@@ -2,6 +2,7 @@
 erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils){
 					$scope.isReadOnly = false;
 					$scope.isrmInventoryPresent=false;
+					$scope.isRmVisible = false;
 					$scope.rmInventary = {};
 					
 					$rootScope.$on("CallPopulateRMInventaryList", function() {
@@ -42,6 +43,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						$scope.flag = 0;
 						$scope.isReadOnly = false;
 						$scope.rmInventary = {};
+						$scope.isRmVisible = false;
 						$scope.information = "ADD NEW RAW MATERIAL INVENTORY INFORMATION"
 						var addNewRMInventory = {
 							controller : 'RMInvenaryDialogeController',
@@ -55,7 +57,8 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 								rmInventary : $scope.rmInventary,
 								flag : $scope.flag,
 								action : $scope.isReadOnly,
-								information : $scope.information
+								information : $scope.information,
+								rmAction : $scope.isRmVisible
 							}
 						};
 						$mdDialog
@@ -108,6 +111,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 					$scope.showEditRMInventary = function(ev, index) {
 						$scope.flag = 1;
 						$scope.isReadOnly = false;
+						$scope.isRmVisible = true;
 						$scope.rmInventary = $scope.rmInventarys[index];
 						console.log($scope.rmInventary);
 						$scope.information="EDIT NEW RAW MATERIAL INVENTORY INFORMATIONn"
@@ -123,7 +127,8 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 										rmInventary : $scope.rmInventary,
 										flag : $scope.flag,
 										action : $scope.isReadOnly,
-										information : $scope.information
+										information : $scope.information,
+										rmAction : $scope.isRmVisible
 									}
 								})
 								.then(function(answer) {},
@@ -135,6 +140,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						$scope.isReadOnly = true;
 						$scope.rmInventary = $scope.rmInventarys[index];
 						$scope.isSaving = false;
+						$scope.isRmVisible = true;
 						$scope.information="VIEW NEW RAW MATERIAL INVENTORY INFORMATION"
 						console.log($scope.rmInventary);
 						$mdDialog.show({
@@ -148,7 +154,8 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 										rmInventary : $scope.rmInventary,
 										flag : $scope.flag,
 										action : $scope.isReadOnly,
-										information : $scope.information
+										information : $scope.information,
+										rmAction : $scope.isRmVisible
 									}
 								})
 								.then(function(answer) {},
