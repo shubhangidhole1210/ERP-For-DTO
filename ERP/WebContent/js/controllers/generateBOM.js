@@ -79,7 +79,7 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 	$scope.caluculatePrice = function(quantity, id, index) {
 		console.log(quantity);
 		console.log("vendor id : " ,id);
-		if(id){
+		/*if(id){*/
 			console.log("in if condition: ", id);
 			console.log('$scope.vendorList', $scope.vendorList)
 			for (var i = 0; i < $scope.vendorList.length; i++) {
@@ -88,7 +88,7 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 				console.log('$scope.pricePerUnitL :',
 						$scope.pricePerUnit);
 			}
-		}
+		/*}*/
 	};
 	
 	/*$scope.vendorChange = function(id){

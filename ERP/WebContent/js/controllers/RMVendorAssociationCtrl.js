@@ -5,6 +5,8 @@ erpApp
 					$scope.isReadOnly = false;
 					$scope.isPresentvenodrAsso=false;
 					$scope.isDropDownreadOnly = false;
+					 $scope.currentPage = 0;
+				     $scope.pageSize = 15;
 					
 					$rootScope.$on("CallPopulateRMVendorAssociationList", function() {
 						$scope.populateRMVendorAssociationList();
@@ -14,6 +16,8 @@ erpApp
 					});
 
 					$scope.populateRMVendorAssociationList = function() {
+						 $scope.currentPage = 0;
+					     $scope.pageSize = 15;
 						utils.showProgressBar();
 						var httpparams = {};
 						httpparams.method = 'GET';

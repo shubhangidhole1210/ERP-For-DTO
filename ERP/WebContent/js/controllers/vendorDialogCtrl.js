@@ -32,7 +32,7 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 	    		 commisionerate: $scope.vendorUser.commisionerate,
 	    		 cst: $scope.vendorUser.cst,
 	    		 customerEccNumber: $scope.vendorUser.customerEccNumber,
-	    		 divison: $scope.vendorUser.division,
+	    		 divison: $scope.vendorUser.divison,
 	    		 vatNo: $scope.vendorUser.vatNo,
 	    		 renge: $scope.vendorUser.renge
 				};

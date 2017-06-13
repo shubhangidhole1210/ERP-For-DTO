@@ -10,6 +10,8 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	});
 	
 	$scope.populteProductList=function(){
+		 $scope.currentPage = 0;
+	     $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';

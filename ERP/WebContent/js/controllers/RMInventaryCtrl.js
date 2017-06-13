@@ -13,7 +13,8 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						$scope.showAddNewRMInventary();
 					});
 					$scope.populateRMInventaryList = function() {
-						{
+						 $scope.currentPage = 0;
+					     $scope.pageSize = 15;
 							var httpparams = {};
 							httpparams.method = 'GET';
 							httpparams.url = SERVER_URL + "rawmaterialinventory/list";
@@ -31,7 +32,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 							console.log("Error");
 							$mdDialog.hide();
 						});
-					   }
+					   
 						utils.showProgressBar();
 					};
 					

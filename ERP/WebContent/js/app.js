@@ -218,7 +218,25 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
  	    }
     });
 }]);
+/*erpApp.factory('data',function(){
+	 var currentPage = 0;
+    var pageSize = 15;
+    return currentPage;
+    return pageSize;
+})*/
 
+
+
+erpApp.filter('startFrom', function() {
+    return function(input, start) {
+    	if (!input || !input.length){
+    		  return;
+    		}
+        start = +start; //parse to int
+        return input.slice(start);
+        console.log("in filtter function")
+    }
+});
 
 erpApp.directive('accessibleForm', function () {
     return {

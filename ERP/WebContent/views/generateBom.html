@@ -28,12 +28,14 @@
        
     <table>
               <tr>
+              	<th>NO</th>
                <th>RAW MATERIAL</th>
                <th>VENDOR</th>
                <th>QUANTITY</th>
                <th>PRICE</th>
               </tr>
               <tr ng-repeat="rmVendor in rawMaterialVendorList">
+              <td>{{$index+1}}</td>
                  <td >
             <md-input-container class="drop-down">
           <label>Raw Material</label>

@@ -11,6 +11,8 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 	});
 	
 	$scope.populatePageList=function(){
+		 $scope.currentPage = 0;
+	     $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';

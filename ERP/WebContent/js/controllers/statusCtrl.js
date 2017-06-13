@@ -9,6 +9,8 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 	});
 	
 	$scope.populateStatusList=function(){
+		 $scope.currentPage = 0;
+		    $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';

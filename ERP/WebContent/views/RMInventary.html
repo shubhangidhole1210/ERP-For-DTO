@@ -6,28 +6,35 @@
 				ng-init="populateRMInventaryList();flag=0">ADD NEW
 			RM INVENTORY</md-button>
 		</div>
-		<md-input-container class="md-block" flex-gt-sm type="password">
+		<md-input-container class="md-block" flex-gt-sm type="password" style="margin-left:2%">
 		<input type="text" ng-model="searchText" name="password"
 			placeholder="Search by  Name" class="search-text"> </md-input-container>
 		<h1 class="table-header">RAW MATERIAL INVENTORY</h1>
 		<table>
 			<tr>
+				<th>NO</th>
 				<th>NAME</th>
 				<!-- <th>RACK NUMBER</th> -->
 				<th>QUANTITY AVAILABLE</th>
 				<th>action</th>
 			</tr>
-			<tr ng-repeat="rmInventarys in data |  filter:{ name: searchText }">
+			<tr ng-repeat="rmInventarys in data |  filter:{ name: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize" >
+			    <td>{{$index+1}}</td>
 				<td>{{rmInventarys.rawmaterial.name}}</td>
 				<td>{{rmInventarys.quantityAvailable}}</td>
 				<td><md-button class="md-raised"
-						ng-click="showEditRMInventary($event,$index)" ng-init="flag=1">EDIT</md-button>
-					<md-button class="md-raised" ng-click="showConfirm($event,$index)">Remove</md-button>
+						ng-click="showEditRMInventary($event,$index)" ng-init="flag=1" style="background: rgba(63, 81, 181, 0.72);color: white;">EDIT</md-button>
+					<md-button class="md-raised" ng-click="showConfirm($event,$index)" style="background: rgba(63, 81, 181, 0.72);color: white;">Remove</md-button>
 
 					<md-button class="md-raised"
-						ng-click="viewEditRMInventary($event,$index)">VIEW</md-button></td>
+						ng-click="viewEditRMInventary($event,$index)" style="background: rgba(63, 81, 181, 0.72);color: white;">VIEW</md-button></td>
 			</tr>
 		</table>
+		 <md-dialog-actions layout="row" style="background: rgb(230, 230, 230);margin-left:30%;margin-top:2%"> <md-button
+		class="md-raised"
+		type="button" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous Page</md-button> <md-button
+		class="md-raised" ng-disabled="currentPage >= sellerDetails.length/pageSize - 1" ng-click="currentPage=currentPage+1">Next Page</md-button>
+	</md-dialog-actions>
 		<div class="active-information" ng-show="isrmInventoryPresent"">
 			Currently there are no active raw material invenotory.Please add raw
 			material invenotory.</div>

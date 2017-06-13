@@ -25,14 +25,12 @@
 		<h2>Raw Material List</h2>
 		<table>
 			<tr>
-				<th>INDEX</th>
 				<th>RAW MATERIAL</th>
 				<th>QUANTITY</th>
 				<th>ACTION</th>
 			</tr>
 
 			<tr ng-repeat="rm in productRmAsso.productRMAssociationModelParts">
-				<td>{{ $index + 1 }}</td>
 				<td>{{rm.rawmaterial.partNumber}}</td>
 				<td><input type="number" ng-value="{{rm.quantity}}" ng-model="rm.quantity" ng-change="updateQuantity(rm.quantity)" name="quantity">
 				   <div mg-messages="productRMAssociationInformation.quantity.$error">

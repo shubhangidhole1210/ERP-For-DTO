@@ -11,6 +11,8 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 	});
 
 	$scope.populateUserTypeList = function() {
+		 $scope.currentPage = 0;
+	     $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';

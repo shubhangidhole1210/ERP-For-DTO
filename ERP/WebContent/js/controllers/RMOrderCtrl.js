@@ -7,6 +7,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	$scope.isName = true;
 	$scope.rmOrder = {};
 	
+	
 	$rootScope.$on("CallPopulateRMOrderList", function() {
 		$scope.populateRMOrderList();
 	});
@@ -15,6 +16,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	});
 
 	$scope.populateRMOrderList = function() {
+		 $scope.currentPage = 0;
+	     $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';

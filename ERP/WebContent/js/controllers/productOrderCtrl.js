@@ -12,6 +12,8 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 	
 	$scope.populateProductOrderList = function() {
 		utils.showProgressBar();
+		 $scope.currentPage = 0;
+	     $scope.pageSize = 15;
 		        var httpparams = {};
 		         httpparams.method = 'GET';
 		         httpparams.url = SERVER_URL + "productorder/list";

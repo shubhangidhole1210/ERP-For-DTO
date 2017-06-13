@@ -12,6 +12,8 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 	});
 	
 	$scope.populateRawMaterial=function(){
+		 $scope.currentPage = 0;
+	     $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';

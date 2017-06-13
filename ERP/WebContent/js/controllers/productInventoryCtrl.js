@@ -9,8 +9,9 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		$scope.showAddNewProductInventory()
 	});
 	
-	$scope.populateProductInventoryList=function()
-	{
+	$scope.populateProductInventoryList=function(){
+		 $scope.currentPage = 0;
+	     $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';

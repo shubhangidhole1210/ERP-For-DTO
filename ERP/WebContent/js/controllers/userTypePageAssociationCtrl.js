@@ -9,8 +9,9 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 	});
 	
 	
-	$scope.populateuserTeypePageAsso=function()
-	{
+	$scope.populateuserTeypePageAsso=function(){
+		 $scope.currentPage = 0;
+	     $scope.pageSize = 15;
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "usertypepageassociation/list";

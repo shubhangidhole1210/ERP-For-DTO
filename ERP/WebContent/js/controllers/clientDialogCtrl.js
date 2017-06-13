@@ -27,10 +27,10 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 				contactpersonname: $scope.client.contactpersonname,
 				commisionerate: $scope.client.commisionerate,
 	    		 cst: $scope.client.cst,
-	    		 customerEccNumber: $scope.client.customer_ECC_Number,
+	    		 customerEccNumber: $scope.client.customerEccNumber,
 	    		 division: $scope.client.division,
-	    		 vatNo: $scope.client.vat_No,
-	    		 renge: $scope.client.range
+	    		 vatNo: $scope.client.vatNo,
+	    		 renge: $scope.client.renge
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -72,7 +72,7 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 							else{
 								console.log(data.data.message);
 								$scope.displayProgressBar = false;
-								utils.showToast('User Information saved successfully.');
+								utils.showToast('Client Information saved successfully.');
 								$rootScope.$emit("CallPopulateClientList",{});
 							}
 						},
