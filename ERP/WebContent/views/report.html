@@ -1,0 +1,15 @@
+<div ng-controller="reportCtrl" >
+	<div class="erp-information">
+		<div>
+			<md-input-container style="width:100%"> <label>REPORT </label> 
+				<md-select ng-model="selectedReport"
+						name="report" value="report.id" ng-disabled="isReadOnly"
+						ng-init="setreports();" 
+						ng-change="fetchReportData()" required> 
+						<md-option ng-repeat="report in reports" ng-value="report.id">{{report.report_Name}} 
+						</md-option> 
+				</md-select>
+			</md-input-container>
+		</div>
+	</div>	
+</div>

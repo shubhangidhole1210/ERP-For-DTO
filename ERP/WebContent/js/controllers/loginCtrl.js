@@ -19,9 +19,11 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 				userInfo.auth_token = data.headers('auth_token');
 				userInfo.user = data.data.user;
 				Auth.setUser(userInfo);
-				Auth.setMenu(data.data.data);
+				Auth.setMenu(data.data.data.pages);
+				Auth.setReport(data.data.data.reports);
 				$scope.$emit('loginSuccess',{});
 				$rootScope.$emit("CallUserProfileList",{});
+				$rootScope.$emit("ReportList",{});
 				$location.path('/');
 			}else{
 				console.log('Login has different code');

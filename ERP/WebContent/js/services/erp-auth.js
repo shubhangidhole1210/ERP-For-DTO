@@ -18,6 +18,13 @@ erpApp.factory('Auth', function(){
 	    	user.menu = menu;
 	    	sessionStorage.user =JSON.stringify(user);
 	    },
+	    setReport : function(reports){
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
+	    	user.reports = reports;
+	    	sessionStorage.user =JSON.stringify(user);
+	    },
 	    
 	    isLoggedIn : function(){
 	    	if(!user && sessionStorage.user){
@@ -46,7 +53,12 @@ erpApp.factory('Auth', function(){
 	    	}
 	    	return user.menu;
 	    },
-	    
+	    getReport : function(){
+	    	if(!user && sessionStorage.user){
+	    		user = JSON.parse(sessionStorage.user);
+	    	}
+	    	return user.reports;
+	    },
 	    setUserName : function()
 	    {
 	    	if(!user && sessionStorage.user){
