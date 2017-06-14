@@ -50,7 +50,7 @@ body{
 }
 
 #customers td, #customers th {
-    border: 1px solid #ddd;
+/*     border: 1px solid #ddd; */
     padding: 8px;
 }
 
@@ -60,7 +60,7 @@ body{
     text-align: left;
     /* background: rgb(120, 129, 178); */
     color: white;
-    background: rgb(158, 169, 226);
+   /*  background: rgb(158, 169, 226); */
 }
 .erp-user-name
 {
@@ -240,7 +240,8 @@ table {
 td, th {
     border: 1px solid rgba(57, 73, 171, 0.48);
     text-align: left;
-    padding-left: 10px;
+    padding-left: 15px; 
+     /* text-align:center; */
 	color: black;
 	background: rgb(230, 230, 230);
 }

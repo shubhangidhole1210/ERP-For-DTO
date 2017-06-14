@@ -56,15 +56,14 @@
       <th>Inventory Qty</th>
       <th> Pending Qty</th>
       <tr>
-        <td>{{product.productId}}</td>
+        <td>{{product.productName}}</td>
         <td>{{product.productBalanceQty}}</td>
         <td>{{product.productTargetQty}}</td>
         
       </tr>
       </table>
     </td>
-     <div style="overflow-x: scroll;"> 
-
+ 
       <td ng-repeat="productProductionPlanItem in product.productProductionPlan" >
     <table >
       <th>Target</th>
@@ -79,7 +78,7 @@
       </tr>
     </table>
   </td>
-    </div> 
+ 
  </tr>
 </table>
 
@@ -90,9 +89,9 @@
 <div style="margin-top: 2%;margin-left: 40%;">
   <md-dialog-actions layout="row">
       
-      <md-button class="md-raised" ng-click="createDefaultProductionPlan()">CREATE DEFAULT PRODUCTION PLAN</md-button>
-      <md-button class="md-raised" ng-click="submitProductionPlan()" ng-disabled="isReadOnly" >SAVE</md-button>
-      <md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+      <md-button class="md-raised" ng-click="createDefaultProductionPlan()" style="background: rgba(63, 81, 181, 0.59);color: white;">CREATE DEFAULT PRODUCTION PLAN</md-button>
+      <md-button class="md-raised" ng-click="submitProductionPlan()" ng-disabled="isReadOnly" style="background: rgba(63, 81, 181, 0.59);color: white;">SAVE</md-button>
+      <md-button class="md-raised" ng-click="answer('not useful')" style="background: rgba(63, 81, 181, 0.59);color: white;">CANCEL</md-button>
        
     </md-dialog-actions>
     </div>

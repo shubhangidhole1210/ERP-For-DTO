@@ -3,7 +3,7 @@
     <div>
 			<md-button class="md-raised md-primary add-new-btn" ng-click="showAddNewUnit($event);"  ng-init="populateUnitList();flag=0" style="">ADD NEW UNIT</md-button>
 		</div>
-		 <md-input-container class="md-block" flex-gt-sm type="password">
+		 <md-input-container class="md-block" flex-gt-sm type="password" style="margin-left:2%">
 			<input type="text"  ng-model="searchText"  name="password" placeholder="Search by Unit Name" class="search-text">
 			</md-input-container>
      <h1 class="table-header">UNIT LIST</h1>
@@ -18,7 +18,7 @@
 				<td>{{$index+1}}</td>
 				<td>{{units.name}}</td>
 				<td>{{units.description}}</td>
-				<td>
+				<td style="text-align: center;">
 				     <md-button class="md-raised"  ng-click="showEditUnit($event,$index)" ng-init="flag=1" style="background: rgba(63, 81, 181, 0.72);color: white;">EDIT</md-button>
 				<md-button class="md-raised"  ng-click="showConfirm($event,$index)" style="background: rgba(63, 81, 181, 0.72);color: white;">Remove</md-button>
 				
@@ -29,7 +29,7 @@
 		  <md-dialog-actions layout="row" style="background: rgb(230, 230, 230);margin-left:30%;margin-top:2%"> <md-button
 		class="md-raised"
 		type="button" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous Page</md-button> <md-button
-		class="md-raised" ng-disabled="currentPage >= sellerDetails.length/pageSize - 1" ng-click="currentPage=currentPage+1">Next Page</md-button>
+		class="md-raised" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1">Next Page</md-button>
 	</md-dialog-actions>
 		<div ng-show="isUnitInPresent" class="active-information">
 		   Currently there are no active Units.Please add new unit.

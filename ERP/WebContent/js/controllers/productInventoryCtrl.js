@@ -1,5 +1,6 @@
 erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
 	$scope.isProductInventoryPresent=false;
+	$scope.isProductreadOnly = false;
 	$scope.productInventory={};
 	$rootScope.$on("callPopulateProductInventoryList", function() {
 		$scope.populateProductInventoryList();
@@ -40,6 +41,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 	$scope.showAddNewProductInventory = function(ev) {
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
+		$scope.isProductreadOnly = false;
 		$scope.information="ADD NEW PRODUCT INVENTORY";
 		$scope.productInventory={};
 		var addNewProductInventoryDialog = {
@@ -54,7 +56,8 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 				productInventory : $scope.productInventory,
 				flag : $scope.flag,
 				action : $scope.isReadOnly,
-				information : $scope.information
+				information : $scope.information,
+				productAction : $scope.isProductreadOnly
 			}
 		};
 		$mdDialog
@@ -66,6 +69,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 	  $scope.showEditProductInventory = function(ev , index) {
 		  $scope.flag = 1;
 		  $scope.isReadOnly = false;
+		  $scope.isProductreadOnly = true;
 		  $scope.productInventory = $scope.productInventorys[index];
 		  $scope.information="EDIT PRODUCT INVENTORY INFORMATION"
 		    $mdDialog.show({
@@ -79,7 +83,8 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		    	  productInventory : $scope.productInventory,
 		    	  flag : $scope.flag,
 		    	  action : $scope.isReadOnly,
-		    	  information : $scope.information
+		    	  information : $scope.information,
+		    	  productAction : $scope.isProductreadOnly
 				}
 		    })
 		    .then(function(answer) {},
@@ -107,6 +112,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		$scope.viewProductInventoryInformation = function(ev, index) {
 			$scope.flag = 2;
 			$scope.isReadOnly = true;
+			$scope.isProductreadOnly = true;
 			$scope.productInventory = $scope.productInventorys[index];
 			$scope.isSaving = false;
 			$scope.information="VIEW PRODUCT INVENTORY INFORMATION"
@@ -122,7 +128,8 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 							  productInventory : $scope.productInventory,
 							flag : $scope.flag,
 							action : $scope.isReadOnly,
-							information : $scope.information
+							information : $scope.information,
+							productAction : $scope.isProductreadOnly
 						}
 					})
 					.then(function(answer) {},

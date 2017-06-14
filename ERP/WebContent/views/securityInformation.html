@@ -113,7 +113,7 @@
 								<th>INVOICE QUANTITY</th>
 							</tr>
 							<tr ng-repeat="rawmaterial in rawMaterialList">
-								<td>{{rawmaterial.rawmaterial.name}}</td>
+								<td>{{rawmaterial.rawmaterial.partNumber}}</td>
 								<td>{{rawmaterial.quantity}}</td>
 								<td>{{rawmaterial.remainingQuantity}}</td>
 								<td><md-input-container class="md-block" flex-gt-sm>
@@ -143,8 +143,8 @@
 							<md-dialog-actions layout="row"> <md-button
 								class="md-raised"
 								ng-click="submitInformation(securityInformation.$valid,$event);resteData()"
-								type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
-								class="md-raised" ng-click="restInformation()">CANCEL</md-button>
+								type="submit" ng-disabled="isReadOnly" style="background: rgba(63, 81, 181, 0.59);color: white;">SAVE</md-button> <md-button
+								class="md-raised" ng-click="restInformation()" style="background: rgba(63, 81, 181, 0.59);color: white;">CANCEL</md-button>
 							</md-dialog-actions>
 						</div>
 

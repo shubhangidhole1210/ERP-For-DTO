@@ -44,7 +44,7 @@
 							</tr>
 							<tr ng-repeat="rmInvoiceItem in rmInvoiceList">
 							    <td>{{$index+1}}</td>
-								<td>{{rmInvoiceItem.rawmaterial.name}}</td>
+								<td>{{rmInvoiceItem.rawmaterial.partNumber}}</td>
 								<td>{{rmInvoiceItem.quantity}}</td>
 								<td><ng> <md-input-container class="md-block"
 										flex-gt-sm> <label
@@ -88,8 +88,8 @@
 							<md-dialog-actions layout="row"> <md-button
 								class="md-raised"
 								ng-click="submitInformation(qualityInspectionForm.$valid,$event)"
-								type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
-								class="md-raised" ng-click="resetQualityInspection()">CANCEL</md-button>
+								type="submit" ng-disabled="isReadOnly" style="background: rgba(63, 81, 181, 0.59);color: white;">SAVE</md-button> <md-button
+								class="md-raised" ng-click="resetQualityInspection()" style="background: rgba(63, 81, 181, 0.59);color: white;">CANCEL</md-button>
 							</md-dialog-actions>
 						</div>
 				</form>

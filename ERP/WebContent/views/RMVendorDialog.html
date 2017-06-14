@@ -36,7 +36,7 @@
 				name="rawMaterial" value="rawMaterial.id" ng-disabled="isReadOnly"
 				ng-init="getRawMaterials()" required> <md-option
 				ng-repeat="rawMaterial in rawmaterials" ng-value="rawMaterial.id">
-			{{rawMaterial.name}} </md-option> </md-select>
+			{{rawMaterial.partNumber}} </md-option> </md-select>
 			<div ng-messages="rmVendorAssociation.rawMaterial.$error">
 				<div ng-message="required">Please select Raw Material</div>
 			</div>
@@ -60,7 +60,7 @@
 	<md-dialog-actions layout="row"> <md-button
 		class="md-raised"
 		ng-click="submitRMVendorAssociationInformation(rmVendorAssociation.$valid,$event)"
-		type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
+		type="submit" ng-disabled="isReadOnly" >SAVE</md-button> <md-button
 		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
 	</md-dialog-actions>
 

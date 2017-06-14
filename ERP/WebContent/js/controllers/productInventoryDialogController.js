@@ -1,7 +1,8 @@
-erpApp.controller('productInventoryDialogController', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils,productInventory,flag,action,information){
+erpApp.controller('productInventoryDialogController', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils,productInventory,flag,action,information,productAction){
 	   $scope.productInventory=productInventory;
 	    $scope.flag=flag;
 	    $scope.isReadOnly = action;
+	    $scope.isProductreadOnly = productAction;
 	    $scope.information = information;
 	    $scope.hide = function() {
 	      $mdDialog.hide();

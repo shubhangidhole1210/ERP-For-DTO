@@ -10,7 +10,7 @@ erpApp
 						var httpparams = {};
 						httpparams.method = 'GET';
 						httpparams.url = SERVER_URL
-								+ "productionplanning/getProductionPlanListByDate/"
+								+ "productionplanning/getProductionPlanReadyListByDate/"
 								+ $scope.currentDate;
 						httpparams.headers = {
 							auth_token : Auth.getAuthToken()

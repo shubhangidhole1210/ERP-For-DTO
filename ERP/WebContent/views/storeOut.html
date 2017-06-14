@@ -14,7 +14,7 @@
 								 ng-change="getProductRMAssociation($index)" required>
 							<md-option ng-repeat="productionPlan in productionPlans"
 								ng-value="productionPlan">
-							{{productionPlan.product.name}} </md-option>
+							{{productionPlan.product.partNumber}} </md-option>
 							</md-select> 
 							 <div ng-messages="storeOutInformation.product.$error">
 								<div ng-message="required">Please enter Description</div>
@@ -65,8 +65,8 @@
 							<md-dialog-actions layout="row"> <md-button
 								class="md-raised"
 								ng-click="submitInformation(storeOutInformation.$valid,$event)"
-								type="submit" ng-disabled="isReadOnly">SAVE</md-button> <md-button
-								class="md-raised" ng-click="restInformation()" type="button">CANCEL</md-button>
+								type="submit" ng-disabled="isReadOnly" style="background: rgba(63, 81, 181, 0.59);color: white;">SAVE</md-button> <md-button
+								class="md-raised" ng-click="restInformation()" style="background: rgba(63, 81, 181, 0.59);color: white;" type="button">CANCEL</md-button>
 							</md-dialog-actions>
 						</div>
 

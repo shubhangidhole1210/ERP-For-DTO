@@ -1,4 +1,4 @@
-erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
+erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
      $scope.isNotificationPresent=false;
      $scope.notification={};
      
@@ -10,19 +10,21 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		$scope.addNewNotification();
 	});
 	
-	$scope.populateNotificationList=function(){
+	$scope.populateNotificationUserAssociationList=function(){
+		console.log("in populateNotificationUserAssociationList")
 		$scope.currentPage = 0;
 	     $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "notification/list";
+		httpparams.url = SERVER_URL + "notificationuserassociation/list";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(response) {
-			$scope.notificationList=response.data;
+			$scope.notificationUserAssociationList=response.data;
 			console.log(response)
+			console.log("$scope.notificationUserAssociationList :" ,$scope.notificationUserAssociationList);
 			utils.hideProgressBar();
 		}, function errorCallback(response) {
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
@@ -31,25 +33,25 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		});
 	};
 	
-	$scope.isNotificationInformation = function() {
+	/*$scope.isNotificationInformation = function() {
 		$scope.isNotificationPresent = $scope.data.length === 0 ? true : false;
-	};
+	};*/
 	
-	$scope.addNewNotification = function(ev) {
-		$scope.notification={};
+	$scope.addNewNotificationUserAssociation = function(ev) {
+		$scope.notificationUser={};
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
-		$scope.information = "ADD NEW NOTIFICATION"
+		$scope.information = "ADD NEW NOTIFICATION USER ASSOCIATION"
 		var addNewNotificationDialog = {
-			controller : 'notificationDialogCtrl',
-			templateUrl : 'views/notificationDialog.html',
+			controller : 'notificationUserAssociationDialogCtrl',
+			templateUrl : 'views/notificationUserAssociationDialogue.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : true,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
-				notification : $scope.notification,
+				notificationUser : $scope.notificationUser,
 				flag : $scope.flag,
 				action : $scope.isReadOnly,
 				information : $scope.information
@@ -61,22 +63,22 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				function() {});
 	};
 
-	$scope.showEditNotification = function(ev, index) {
+	$scope.showEditNotificationUserAssociation = function(ev, index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
-		$scope.notification = $scope.notificationList[index];
-		$scope.information = "EDIT NOTIFICATION INFORMATION"
+		$scope.notificationUser = $scope.notificationUserAssociationList[index];
+		$scope.information = "EDIT NOTIFICATION USER ASSOCIATION INFORMATION"
 		console.log($scope.notification);
 		$mdDialog
 				.show({
-					controller : 'notificationDialogCtrl',
-					templateUrl : 'views/notificationDialog.html',
+					controller : 'notificationUserAssociationDialogCtrl',
+					templateUrl : 'views/notificationUserAssociationDialogue.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
 					fullscreen : $scope.customFullscreen,
 					locals : {
-						notification : $scope.notification,
+						notificationUser : $scope.notificationUser,
 						flag : $scope.flag,
 						action : $scope.isReadOnly,
 						information : $scope.information
@@ -87,22 +89,22 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 						function() {});
 	};
 	
-	$scope.viewNotificationInformation = function(ev, index) {
+	$scope.viewNotificationUserAssociationInformation = function(ev, index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.notification = $scope.notificationList[index];
+		$scope.notificationUser = $scope.notificationUserAssociationList[index];
 		$scope.isSaving = false;
-		$scope.information = "VIEW NOTIFICATION INFORMATION"
+		$scope.information = "VIEW NOTIFICATION USER ASSOCIATION INFORMATION"
 		console.log($scope.notification);
 		$mdDialog.show({
-					controller : 'notificationDialogCtrl',
-					templateUrl : 'views/notificationDialog.html',
+					controller : 'notificationUserAssociationDialogCtrl',
+					templateUrl : 'views/notificationUserAssociationDialogue.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
 					fullscreen : $scope.customFullscreen,
 					locals : {
-						notification : $scope.notification,
+						notificationUser : $scope.notificationUser,
 						flag : $scope.flag,
 						action : $scope.isReadOnly,
 						information : $scope.information
@@ -113,9 +115,9 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 						function() {});
 	};
 	
-	$scope.deleteNotification = function(index) {
+	$scope.deleteNotificationUserAssociation = function(index) {
 		utils.showProgressBar();
-		 $scope.notification = $scope.notificationList[index].id; 
+		 $scope.notificationUser = $scope.notificationUserAssociationList[index].id; 
 		console.log($scope.page);
 		var httpparams = {};
 		httpparams.method = 'delete';
@@ -146,7 +148,7 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
-							$scope.deleteNotification(index);
+							$scope.deleteNotificationUserAssociation(index);
 						},
 						function() {
 							$scope.status = 'You decided to keep your debt.';
