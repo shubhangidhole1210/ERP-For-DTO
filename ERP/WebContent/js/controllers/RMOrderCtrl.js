@@ -16,6 +16,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 	});
 
 	$scope.populateRMOrderList = function() {
+		/* $scope.number = ($scope.$index + 1) + ($scope.currentPage - 1) * $scope.pageSize;*/
 		 $scope.currentPage = 0;
 	     $scope.pageSize = 15;
 		utils.showProgressBar();
@@ -38,6 +39,8 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 			utils.hideProgressBar();
 		});
 	}
+	
+	
 	
 	$scope.isRMOrderInformation = function() {
 		$scope.isRMOrderPresent = $scope.data.length === 0 ? true : false;

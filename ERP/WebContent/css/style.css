@@ -739,3 +739,31 @@ md-input-container.md-input-invalid [ng-messages] {
 
 	position: fixed;
 }
+
+.paginationclass{
+margin: 15px 28px; 
+ }
+.paginationclass div{
+    border-bottom:1px solid silver;
+    
+}
+.paginationclass span{
+    margin:0px 15px;
+    display:inline-block;
+    padding:5px 0px;
+    text-align:left;
+    width:70px;
+}
+.pagination-controle li{
+    display: inline-block;
+    
+}
+.pagination-controle button{
+    width: 63px;
+    font-size: 12px;
+    margin-left: 13px;
+    cursor:pointer;
+}
+.pagination-div{
+    margin-left:20px;
+}

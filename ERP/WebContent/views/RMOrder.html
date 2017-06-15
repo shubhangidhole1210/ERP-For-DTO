@@ -18,7 +18,8 @@
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="rmOrders in data  | filter:{ name: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize " >
-				<td>{{$index+1}}</td>
+				<!-- <td>{{number}}</td> -->
+				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{rmOrders.name}}</td>
 				<td >{{rmOrders.tax}}</td>
 				<td>{{rmOrders.totalprice}}</td>

@@ -57,7 +57,15 @@ erpApp
 												console.log(data);
 												$scope.hide();
 												utils.showToast('Something went worng. Please try again later.');
-											}else{
+											}else if(data.data.code === 2){
+												$rootScope.$emit(
+														"saveRMOrderAssociationError", {});
+												$scope.hide();
+												utils.showToast(data.data.message);
+											}
+											
+											else{
+												console.log(data.data.message);
 												$scope.displayProgressBar = false;
 												utils.showToast('Raw Material Vendor Association Information saved successfully.');
 												$rootScope.$emit("CallPopulateRMVendorAssociationList",{});

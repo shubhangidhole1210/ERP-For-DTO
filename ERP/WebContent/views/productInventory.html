@@ -20,7 +20,7 @@
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="productInventory in data.data | startFrom:currentPage*pageSize | limitTo:pageSize ">
-				<td>{{$index+1}}</td>
+				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{productInventory.product.partNumber}}</td>
 				<td>{{productInventory.quantityavailable}}</td>
 				<!-- <td>{{productInventory.racknumber}}</td> -->

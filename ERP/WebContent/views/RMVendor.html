@@ -17,7 +17,7 @@
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="rmOrderAssociations in data |  filter:{name: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize " >
-				<td>{{$index+1}}</td>
+				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{rmOrderAssociations.rawmaterial.partNumber}}</td>
 				<td>{{rmOrderAssociations.vendor.companyName}}</td>
 				<td>{{rmOrderAssociations.pricePerUnit}}</td>

@@ -11,7 +11,7 @@
          <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>NOTIFICATION ID*</label>
-          <md-select ng-model="notificationUser.notification.id" name="notification"  ng-disabled="isClientReadOnly" ng-required="true" required ng-init="getNotificationInformation()">
+          <md-select ng-model="notificationUser.notification.id" name="notification"  ng-disabled="isClientReadOnly" ng-required="true"  ng-init="getNotificationInformation()">
             <md-option ng-repeat="notification in notificationList" ng-value="notification.id" >
                {{notification.name}}
             </md-option>
@@ -26,7 +26,7 @@
 		<div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>USER ID*</label>
-          <md-select ng-model="notificationUser.user.id" name="user"  ng-disabled="isClientReadOnly" ng-required="true" required ng-init="getUserInformation()">
+          <md-select ng-model="notificationUser.user.id" name="user"  ng-disabled="isClientReadOnly" ng-required="true" ng-init="getUserInformation()">
             <md-option ng-repeat="user in userList" ng-value="user.id" >
                {{user.userid}}
             </md-option>

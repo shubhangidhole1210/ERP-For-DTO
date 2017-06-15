@@ -17,7 +17,7 @@
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="status in data |  filter:{ name: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize "">
-				<td>{{$index+1}}</td>
+				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{status.name}}</td>
 				<td>{{status.type}}</td>
 				<td><md-button class="md-raised"

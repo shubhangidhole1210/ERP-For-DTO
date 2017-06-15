@@ -3,7 +3,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
      $scope.notification={};
      
 	$rootScope.$on("CallPopulateNotificationList", function() {
-		$scope.populateNotificationList();
+		$scope.populateNotificationUserAssociationList();
 	});
 	
 	$rootScope.$on("saveUnitError", function() {

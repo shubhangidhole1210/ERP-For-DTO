@@ -17,7 +17,7 @@
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="productOrder in data | startFrom:currentPage*pageSize | limitTo:pageSize" >
-				<td>{{$index+1}}</td>
+				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{productOrder.client.companyname}}</td>
 				<td>{{productOrder.description}}</td>
 				<td>{{productOrder.status.name}}</td>

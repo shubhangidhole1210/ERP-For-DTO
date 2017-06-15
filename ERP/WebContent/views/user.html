@@ -24,7 +24,7 @@
 			</tr>
 			<tr class="erp-table-row"
 				ng-repeat="users in data |  filter:{ firstName: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize ">
-				<td>{{$index+1}}</td>
+				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{users.firstName}}</td>
 				<td>{{users.lastName}}</td>
 				<td>{{users.mobile}}</td>

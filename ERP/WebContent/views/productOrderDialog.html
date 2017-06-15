@@ -64,13 +64,13 @@
         <table>
           <tr>
             <th>PRODUCT</th>
-            <th>DESCRIPTION</th>
+            <!-- <th>DESCRIPTION</th> -->
             <th>QUANTITY</th>
             <th>ACTION</th>
           </tr>
           <tr ng-repeat="orderProductAssociation in orderproductassociations">
           <td>{{orderProductAssociation.product.partNumber}}</td>
-          <td>{{orderProductAssociation.product.description}}</td>
+          <!-- <td>{{orderProductAssociation.product.description}}</td> -->
           <!-- <td>{{orderProductAssociation.quantity}}</td> -->
           <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" name="quantity" ng-model="orderProductAssociation.quantity" ng-change="orderProductAssociation.quantity; updateQuantity(orderProductAssociation.quantity)">
              <div ng-messages="productOrderInformation.quantity.$error">
@@ -82,7 +82,7 @@
          
           <tr ng-repeat="orderProductAssociation in productOrderList">
           <td  style="background: white;">{{orderProductAssociation.product.partNumber}}</td>
-          <td  style="background: white;">{{orderProductAssociation.product.description}}</td>
+         <!--  <td  style="background: white;">{{orderProductAssociation.product.description}}</td> -->
           <td  style="background: white;"><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-disabled="isReadOnly"></td>
           <td  style="background: white;"><button type="button" ng-click="deleteProduct($index)" ng-disabled="isReadOnly" class="multiple-added-delete">Delete</button></td>
           </tr>

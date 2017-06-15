@@ -2,7 +2,7 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 	
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
-	$scope.notification = notification;
+	$scope.notificationUser = notificationUser;
 	$scope.information = information;
 	$scope.hide = function() {
 		console.log('hide DialogController');
@@ -111,12 +111,7 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 						});
 	};
 
-	$scope.submitNotificationUserAssociationForm = function(isvaliduser,$event) {
-		if (isvaliduser) {
-			$scope.saveNotificationInformation($event)
-		} else {
-			console.log('its else block');
-			utils.showToast('Please fill all required information');
-		}
+	$scope.submitNotificationUserAssociationForm = function() {
+			$scope.saveNotificationUserAssociationInformation()
 	};
 });
