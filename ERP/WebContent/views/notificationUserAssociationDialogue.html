@@ -37,7 +37,28 @@
         </md-input-container>
            </div>
 		
-		
+	<!-- 	<md-radio-group>
+
+      <md-radio-button  ng-model="notificationUser.too" class="md-primary">TO</md-radio-button>
+      <md-radio-button  ng-model="notificationUser.bcc"> BCC </md-radio-button>
+      <md-radio-button  ng-model="notificationUser.cc">CC</md-radio-button>
+
+    </md-radio-group> -->
+    
+    <label>
+    <input type="radio" ng-model="notificationUser.too" value="too">
+    TO
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="notificationUser.cc" value="cc">
+    CC
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="notificationUser.bcc" value="bcc">
+    BCC
+  </label><br/>
+    
+    
 		
 	</div>
 	</md-dialog-content>

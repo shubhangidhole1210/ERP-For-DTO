@@ -16,7 +16,7 @@
 				<th>TYPE</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="status in data |  filter:{ name: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize "">
+			<tr ng-repeat="status in data  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ name: searchText }">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{status.name}}</td>
 				<td>{{status.type}}</td>

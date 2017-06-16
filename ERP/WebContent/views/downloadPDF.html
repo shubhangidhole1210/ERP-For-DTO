@@ -20,7 +20,7 @@
             <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>BOM</label>
-          <md-select ng-model="bom" name="bom"  ng-disabled="productIdReadOnly" >
+          <md-select ng-model="bom" name="bom"  ng-disabled="productIdReadOnly" ng-click="bomValidationMsg(bom)">
             <md-option ng-repeat="bom in bomData" ng-value="bom" >
                {{bom.bomId}}
             </md-option>

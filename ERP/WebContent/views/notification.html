@@ -16,7 +16,7 @@
 				<th>TYPE</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="notification in notificationList |  filter:{ pageName: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize">
+			<tr ng-repeat="notification in notificationList  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ pageName: searchText }">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{notification.name}}</td>
 				<td>{{notification.type}}</td>

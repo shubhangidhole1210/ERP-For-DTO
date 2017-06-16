@@ -64,15 +64,6 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 		utils.showProgressBar();
 	};
 	
-	/*$scope.downloadPdf = function(isvaliduser,$event) {
-		if (isvaliduser) {
-			$scope.getPdf();
-		} else {
-			console.log('its else block');
-			utils.showToast('Please select Product ID and BOM ID');
-		}
-	};*/
-	
 	$scope.getPdf = function () {
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -110,6 +101,15 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 			utils.hideProgressBar();
 	    });
 	};
+	
+	/*$scope.bomValidationMsg = function(bom){
+		console.log("bom : ", bom);
+		if(bom == null){
+			utils.showToast("Please select product first");
+		}else if(product != null){
+			
+		}
+	}*/
 	
 	$scope.cancelBOM = function(){
 		$location.path('/home');

@@ -46,7 +46,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		var httpparams = {};
 		if ($scope.flag == 0) {
 			console.log($scope.rmOrder);
-			console.log($scope.data);
+		/*	console.log($scope.data);*/
 			httpparams.method = 'post';
 			httpparams.url = SERVER_URL + "rawmaterialorder/createmultiple";
 			httpparams.headers = {
@@ -66,7 +66,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				.then(
 						function successCallback(data) {
 							$mdDialog.hide();
-							console.log(data);
+							/*console.log(data);*/
 							if(data.data.code === 0){
 								console.log(data.data.message);
 								$rootScope.$emit(

@@ -19,7 +19,7 @@
 				<th>PART NUMBER</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="rawMaterials in data |  filter:{ name: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize ">
+			<tr ng-repeat="rawMaterials in data  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ partNumber:searchText }">
 				 <td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{rawMaterials.partNumber}}</td>
 				<td>{{rawMaterials.description}}</td>

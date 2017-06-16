@@ -16,7 +16,7 @@
 				<th>ORDER STATUS</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="productOrder in data | startFrom:currentPage*pageSize | limitTo:pageSize" >
+			<tr ng-repeat="productOrder in data | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{companyname: searchText }" >
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{productOrder.client.companyname}}</td>
 				<td>{{productOrder.description}}</td>

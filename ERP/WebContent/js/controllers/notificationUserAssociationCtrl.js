@@ -7,7 +7,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 	});
 	
 	$rootScope.$on("saveUnitError", function() {
-		$scope.addNewNotification();
+		$scope.addNewNotificationUserAssociation();
 	});
 	
 	$scope.populateNotificationUserAssociationList=function(){
@@ -27,6 +27,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 			console.log("$scope.notificationUserAssociationList :" ,$scope.notificationUserAssociationList);
 			utils.hideProgressBar();
 		}, function errorCallback(response) {
+			console.log(data.data.message);
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 			utils.hideProgressBar();
 			console.log("Error");

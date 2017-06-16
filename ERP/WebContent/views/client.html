@@ -16,12 +16,12 @@
 				<th>CONTACT NUMBER</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat=" clients in data |  filter:{ companyname: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize " >
+			<tr ng-repeat=" clients in data  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ companyname: searchText }" >
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{clients.companyname}}</td>
 				<td>{{clients.emailid}}</td>
 				<td>{{clients.contactnumber}}</td>
-				<td style="text-align: center;">
+				<td>
 				     <md-button class="md-raised"  ng-click="showEditClient($event,$index)" ng-init="flag=1" style="background: rgba(63, 81, 181, 0.72);color: white;">EDIT</md-button>
 				<!-- <md-button class="md-raised" ng-click="showConfirm($event)">REMOVE</md-button> -->
 				<md-button class="md-raised"  ng-click="showConfirm($event,$index)" style="background: rgba(63, 81, 181, 0.72);color: white;">Remove</md-button>

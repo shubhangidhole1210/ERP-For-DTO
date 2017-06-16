@@ -17,7 +17,7 @@
 				<th>DESCRIPTION</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="userType in data |  filter:{ name: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize ">
+			<tr ng-repeat="userType in data  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ name: searchText }">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{userType.usertypeName}}</td>
 				<td>{{userType.description}}</td>

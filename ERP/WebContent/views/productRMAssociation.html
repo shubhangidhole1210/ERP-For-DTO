@@ -10,11 +10,13 @@
 		<h1 class="table-header">PRODUCT RAW MATERIAL ASSOCIATION LIST</h1>
 		<table>
 			<tr>
+				<th>NO</th>
 				<th>PRODUCT</th>
 				<th>RAW MATERIAL</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="productRMAssociation in data" >
+			<tr ng-repeat="productRMAssociation in data  | startFrom:currentPage*pageSize | limitTo:pageSize | filter:{ name: searchText } ">
+				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{productRMAssociation.name}}</td>
 				 <!--  <td>
 				      <table>
@@ -35,14 +37,18 @@
 				   </table>
 				</td>
 				<td style="text-align: center;">
-				     <md-button class="md-raised"  ng-click="showEditproductRMAssociation($event,$index)" ng-init="flag=1">EDIT</md-button>
-				<md-button class="md-raised"  ng-click="showConfirm($event,$index)">Remove</md-button>
+				     <md-button class="md-raised"  ng-click="showEditproductRMAssociation($event,$index)" ng-init="flag=1" style="background: rgba(63, 81, 181, 0.72);color: white;">EDIT</md-button>
+				<md-button class="md-raised"  ng-click="showConfirm($event,$index)" style="background: rgba(63, 81, 181, 0.72);color: white;">Remove</md-button>
 				
-				<md-button class="md-raised" ng-click="viewproductRMAssociationInformation($event,$index)">VIEW</md-button>
+				<md-button class="md-raised" ng-click="viewproductRMAssociationInformation($event,$index)" style="background: rgba(63, 81, 181, 0.72);color: white;">VIEW</md-button>
 				</td>
-				
 			</tr>
 		</table>
+		 <md-dialog-actions layout="row" style="background: rgb(230, 230, 230);margin-left:30%;margin-top:2%" > <md-button
+		class="md-raised"
+		type="button" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous Page</md-button> <md-button
+		class="md-raised" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1">Next Page</md-button>
+	</md-dialog-actions>
 		
 		<div ng-show="isProductRmAssociationPresent" class="active-information">
 		         Currently there are no active Product Raw material Association.Please add new Product Raw material Association.

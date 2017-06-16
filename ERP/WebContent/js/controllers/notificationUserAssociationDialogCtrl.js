@@ -58,11 +58,13 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 	};
 	
 
-	$scope.saveNotificationUserAssociationInformation = function(ev) {
+	$scope.saveNotificationUserAssociationInformation = function() {
 		var data = {
 				user:$scope.notificationUser.user.userId,
 				notification :$scope.notificationUser.notification.notificationId,
-				"cc":"shahaaa@gmail.com"
+				cc:$scope.notificationUser.cc,
+				bcc:$scope.notificationUser.bcc,
+				too:$scope.notificationUser.too
 				
 		};
 		var httpparams = {};
@@ -121,6 +123,8 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 			utils.showToast("Please select Notification id");
 		}else if(userId == null){
 			utils.showToast("Please select User id");
+		}else{
+			$scope.saveNotificationUserAssociationInformation();
 		}
 	};
 });

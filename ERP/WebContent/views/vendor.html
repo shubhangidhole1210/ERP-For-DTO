@@ -18,7 +18,7 @@
 				<th>MOBILE</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="data in data |  filter:{ companyName: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize " ">
+			<tr ng-repeat="data in data  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ companyName: searchText }">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{data.companyName}}</td>
 				<td>{{data.firstName}}</td>
