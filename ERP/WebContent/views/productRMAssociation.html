@@ -10,13 +10,11 @@
 		<h1 class="table-header">PRODUCT RAW MATERIAL ASSOCIATION LIST</h1>
 		<table>
 			<tr>
-				<th>NO</th>
 				<th>PRODUCT</th>
 				<th>RAW MATERIAL</th>
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="productRMAssociation in data  | startFrom:currentPage*pageSize | limitTo:pageSize | filter:{ name: searchText } ">
-				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{productRMAssociation.name}}</td>
 				 <!--  <td>
 				      <table>

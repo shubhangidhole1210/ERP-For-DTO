@@ -3,6 +3,9 @@ erpApp
 				'todaysPlanCtrl',
 				function($scope, $http, $mdDialog, $mdToast, $rootScope,
 						SERVER_URL, Auth, utils, $location) {
+					
+					$scope.isTodaysProductionPlanPresent=false;
+					$scope.isButton = false;
 					$scope.currentDate = utils.getCurrentDate();
 					
 					$scope.getProducts = function() {
@@ -20,6 +23,7 @@ erpApp
 									utils.hideProgressBar();
 									$scope.productList = response.data;
 									console.log(response);
+									$scope.isProductionPlanInformation();
 								}, function errorCallback(response) {
 									console.log("Error");
 									utils.hideProgressBar();
@@ -34,6 +38,12 @@ erpApp
 							utils.showToast('Please fill all required information');
 						}
 					};
+					
+					$scope.isProductionPlanInformation = function(){
+						$scope.isTodaysProductionPlanPresent = $scope.productList.length === 0 ? true : false;
+						$scope.isButton = $scope.productList.length === 0 ? false : true;
+						console.log("$scope.productList: " ,$scope.productList);
+					}
 					
 					$scope.saveTodaysProductionPlan = function() {
 						var index = 0;

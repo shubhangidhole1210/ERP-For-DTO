@@ -207,9 +207,9 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 						auth_token : Auth.getAuthToken()
 				};
 				$http(httpparams).then(function successCallback(response) {
-					$scope.rmOrderList = response.data;
+					$scope.orderRawMaterials = response.data;
 					console.log(response);
-		            console.log($scope.rmOrderList);
+		            console.log($scope.orderRawMaterials);
 				}, function errorCallback(response) {
 					console.log("Error");
 				});

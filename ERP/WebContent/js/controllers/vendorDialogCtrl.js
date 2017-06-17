@@ -73,12 +73,12 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 										"saveVendorError", {});
 								console.log(data);
 								$scope.hide();
-								$scope.message = data.data.message;
-								$scope.showToast();
-								$scope.message = data.data.message;
-								utils.showToast();			 
+								/*$scope.message = data.data.message;*/
+								$scope.showToast(data.data.message);
+								/*$scope.message = data.data.message;
+								utils.showToast();	*/		 
 								}else{
-								$scope.displayProgressBar = false;
+							/*	$scope.displayProgressBar = false;*/
 								utils.showToast('Vendor Information saved successfully.');
 								$rootScope.$emit("callPopulateVendorList",{});
 							}

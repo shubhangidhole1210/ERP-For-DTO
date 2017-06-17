@@ -76,17 +76,15 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 		}
 	};
 
-	$scope.caluculatePrice = function(quantity, id, index) {
-		console.log(quantity);
-		console.log("vendor id : " ,id);
+	$scope.caluculatePrice = function(vendorId,quantity1,index) {
+		console.log("quanity1 :",quantity1);
+		console.log()
 		/*if(id){*/
-			console.log("in if condition: ", id);
+		     
+			/*console.log("in if condition: ", id);*/
 			console.log('$scope.vendorList', $scope.vendorList)
 			for (var i = 0; i < $scope.vendorList.length; i++) {
-				$scope.data.data[index].pricePerUnit = $scope.vendorList[i].pricePerUnit
-						* quantity;
-				console.log('$scope.pricePerUnitL :',
-						$scope.pricePerUnit);
+				$scope.data.data[index].pricePerUnit = $scope.vendorList[i].pricePerUnit * quantity1;
 			}
 		/*}*/
 	};
@@ -117,8 +115,8 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 			rmVendor.rawmaterial = $scope.data.data[index].rawmaterial.id;
 			rmVendor.pricePerUnit = $scope.data.data[index].pricePerUnit;
 			rmVendor.quantity = $scope.data.data[index].quantity;
-			rmVendor.vendor = $scope.data.data[index].vendor.id;
-			rmVendorList.push(rmVendor)
+			rmVendor.vendor = $scope.data.data[index].vendor.vendorId;
+			rmVendorList.push(rmVendor)	
 			var data = {
 				product : $scope.product.product.id,
 			/*	bomId : $scope.bomId,*/

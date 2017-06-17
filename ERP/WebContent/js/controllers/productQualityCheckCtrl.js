@@ -22,7 +22,7 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 			});
 	  };
 	
-	$scope.validatePassAndFailQuantity = function(qualityPendingQuantity,passQuantity,failQuantity){
+	/*$scope.validatePassAndFailQuantity = function(qualityPendingQuantity,passQuantity,failQuantity){
 		console.log("pending quantity : " + qualityPendingQuantity);
 		console.log("pass Quantity : " + passQuantity);
 		console.log("fail quantity : " + failQuantity);
@@ -34,7 +34,7 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 			$scope.productQualityForm.failQuantity.$setValidity("customMsg", false);
 			$scope.errorMsg="pending quantity is not equal to pass and fail quantity";
 		}
-	};  
+	};  */
 	 
 	$scope.submitInformation = function(isvaliduser, $event) {
 		if (isvaliduser) {

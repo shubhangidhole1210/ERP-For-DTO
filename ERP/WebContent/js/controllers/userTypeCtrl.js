@@ -111,12 +111,12 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 						function() {});
 	};
 	
-	$scope.deleteUserType = function(index) {
+	/*$scope.deleteUserType = function(index) {
 		console.log($scope.userType);
-	/*	console.log('$scope.userTypes : ', data)*/
+		console.log('$scope.userTypes : ', data)
 		var httpparams = {};
 		httpparams.method = 'delete';
-		httpparams.url = SERVER_URL + "userType/delete/" + $scope.userType[index].id;
+		httpparams.url = SERVER_URL + "userType/delete/" + $scope.UserTypes[index].id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -128,22 +128,40 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 		}, function errorCallback(data) {
 			console.log("Error");
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
+			$mdDialog.hide();
 		});
      utils.showProgressBar()
+	};*/
+	
+	$scope.deleteUserType = function(index) {
+		var httpparams = {};
+		httpparams.method = 'delete';
+		httpparams.url = SERVER_URL + "userType/delete/" + $scope.UserTypes[index].id;
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(data) {
+					$mdDialog.hide();
+			utils.showToast('User Type Deleted Sucessfully!');
+			$rootScope.$emit("CallPopulateUserTypeList", {});
+			console.log(data);
+
+		}, function errorCallback(data) {
+			console.log("Error");
+			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
+			
+		});
+		utils.showProgressBar();
 	};
 	
 	$scope.showConfirm = function(ev,index) {
-		var confirm = $mdDialog.confirm().title(
-				'Are you sure you want to Delete UserType Information?')
-				.ariaLabel('Lucky day').targetEvent(ev).ok(
-						'YES' ).cancel('NO');
-		$mdDialog
-				.show(confirm)
-				.then(
-						function() {
-							$scope.status = 'You decided to get rid of your debt.';
-							$scope.deleteUserType(index);
-						},
-						function() {});
+		var confirm = $mdDialog.confirm().title('Are you sure you want to Delete Unit Information?')
+				.ariaLabel('').targetEvent(ev).ok('YES' ).cancel('NO');
+
+		$mdDialog.show(confirm)
+				.then(function() {
+					$scope.deleteUserType(index);
+				}, function() {});
 	};
+	
 });

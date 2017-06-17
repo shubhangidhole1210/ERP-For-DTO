@@ -49,7 +49,7 @@
                  <td>
                      <md-input-container class="drop-down">
           <label>VENODR</label>
-          <md-select ng-model="rmVendor.vendor.id" name="product" ng-disabled="!rawmaterial.id">
+          <md-select ng-model="rmVendor.vendor.vendorId" name="product" ng-disabled="!rawmaterial.id">
             <md-option ng-repeat="vendor in vendorList" ng-value="vendor.vendor.id">
             {{vendor.vendor.companyName}}
             </md-option>
@@ -59,7 +59,7 @@
                  <td>
                     <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">QUANTITY</label> <input
-				type="number" ng-model="rmVendor.quantity1" name="quantity" ng-change="caluculatePrice(rmVendor.vendor.id,rmVendor.quantity1,$index)" min="1">
+				type="number" ng-model="rmVendor.quantity1" name="quantity" ng-change="caluculatePrice(rmVendor.vendor.vendorId,rmVendor.quantity1,$index)" min="1">
 			</md-input-container>
                  </td>
                   <div ng-messages="bomGenerateForm.quantity.$error">

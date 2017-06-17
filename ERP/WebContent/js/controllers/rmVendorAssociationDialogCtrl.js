@@ -1,7 +1,6 @@
-erpApp
-		.controller(
+erpApp		.controller(
 				'RMVendorAssociationDialogCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,rmOrderAssociation,flag,action,title,dropdownAction){
+				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,rmOrderAssociation,flag,action,title,dropdownAction,$timeout, $q, $log){
 					$scope.isReadOnly = action;
 					$scope.flag = flag;
 					$scope.rmOrderAssociation = rmOrderAssociation;
@@ -58,8 +57,7 @@ erpApp
 												$scope.hide();
 												utils.showToast('Something went worng. Please try again later.');
 											}else if(data.data.code === 2){
-												$rootScope.$emit(
-														"saveRMOrderAssociationError", {});
+												$rootScope.$emit("CallPopulateRMVendorAssociationList",{});
 												$scope.hide();
 												utils.showToast(data.data.message);
 											}
@@ -68,8 +66,10 @@ erpApp
 												console.log(data.data.message);
 												$scope.displayProgressBar = false;
 												utils.showToast('Raw Material Vendor Association Information saved successfully.');
-												$rootScope.$emit("CallPopulateRMVendorAssociationList",{});
+												$rootScope.$emit(
+														"saveRMOrderAssociationError", {});
 												utils.hideProgressBar();
+												
 											}
 										},
 										function errorCallback(data) {
@@ -119,4 +119,68 @@ erpApp
 								console.log("Error");
 							});
 					   };
+					   
+//					   var self = this;
+
+					   	$scope.simulateQuery = false;
+					    $scope.isDisabled    = false;
+
+					    $scope.states        = loadAll();
+					    $scope.querySearch   = $scope.querySearch;
+					    $scope.selectedItemChange = selectedItemChange;
+					    $scope.searchTextChange   = searchTextChange;
+
+					    $scope.newState = $scope.newState;
+
+					    $scope.newState = function(state) {
+					      alert("Sorry! You'll need to create a Constitution for " + state + " first!");
+					    }
+					    $scope.querySearch = function(query) {
+					    	console.log('querySearch : ', query);
+					    	
+					      var results = query ? $scope.states.filter( createFilterFor(query) ) : $scope.states,
+					          deferred;
+					      if ($scope.simulateQuery) {
+					        deferred = $q.defer();
+					        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+					        return deferred.promise;
+					      } else {
+					        return results;
+					      }
+					    }
+
+					    function searchTextChange(text) {
+					      $log.info('Text changed to ' + text);
+					    }
+
+					    function selectedItemChange(item) {
+					      $log.info('Item changed to ' + JSON.stringify(item));
+					    }
+
+					    function loadAll() {
+					      var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
+					              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
+					              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
+					              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
+					              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
+					              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
+					              Wisconsin, Wyoming';
+
+					      return allStates.split(/, +/g).map( function (state) {
+					        return {
+					          value: state.toLowerCase(),
+					          display: state
+					        };
+					      });
+					    }
+
+					    
+					    function createFilterFor(query) {
+					      var lowercaseQuery = angular.lowercase(query);
+
+					      return function filterFn(state) {
+					        return (state.value.indexOf(lowercaseQuery) === 0);
+					      };
+
+					    }
 });

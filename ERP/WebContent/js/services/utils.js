@@ -1,4 +1,4 @@
-erpApp.service('utils',function myutils($mdDialog, $rootScope,$mdToast) {
+erpApp.service('utils',function myutils($mdDialog, $rootScope,$mdToast,$location, $anchorScroll) {
 		function hideProgressBar() {
 				$rootScope.$emit("hide_wait");
 		};
@@ -52,11 +52,17 @@ erpApp.service('utils',function myutils($mdDialog, $rootScope,$mdToast) {
 			return currentDateFormatted;
 		}
 		
+		function scrollToTop(){
+			$anchorScroll.yOffset = 50;
+			$anchorScroll();
+		}
+		
 		return {
 			hideProgressBar : hideProgressBar,
 			showProgressBar : showProgressBar,
 			showToast : showToast,
 			getCurrentDate : getCurrentDate,
-			getCurrentMonthYearString : getCurrentMonthYearString
+			getCurrentMonthYearString : getCurrentMonthYearString,
+			scrollToTop : scrollToTop
 		};
 });

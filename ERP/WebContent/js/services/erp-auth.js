@@ -74,7 +74,7 @@ erpApp.factory('Auth', function(){
 	    		user = JSON.parse(sessionStorage.user);
 	    	}
 	    	/*return user.userId;*/
-	    	return user.user.userid;
+	    	return user.user;
 	    	
 	    },
 	    isPageAccessible : function(next){

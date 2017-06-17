@@ -61,16 +61,16 @@
 						
 				</td>
 			</tr>
-			<tr ng-repeat="orderRawMaterial in rmOrderList">
+			<!-- <tr ng-repeat="orderRawMaterial in rmOrderList">
 				<td style="background-color: white;">{{orderRawMaterial.rawmaterial.partNumber}}</td>
 				<td style="background-color: white;">{{orderRawMaterial.rawmaterial.description}}</td>
 				<td style="background-color: white;"><input type="number"
 					ng-value="{{orderRawMaterial.quantity}}" ng-disabled="isReadOnly" ></td>
 				<td style="background-color: white;">
 					<button type="button" class="multiple-added-delete"
-						 ng-disabled="isReadOnly">Delete</button>
+						 ng-disabled="isReadOnly" ng-click="deleteRM($index)">Delete</button>
 				</td>
-			</tr>
+			</tr> -->
 
 		</table>
 		<div layout-gt-sm="row" ng-show="displayAddRM">

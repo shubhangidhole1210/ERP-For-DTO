@@ -39,15 +39,16 @@
 		       </tr>
 		    </table>
 	    </div>
-	       <div class="todayPlan-save-btn">
+	    <div ng-show="isTodaysProductionPlanPresent" class="active-information">
+			  There are no product orders for production. Please create new orders.
+		</div>
+	       <div class="todayPlan-save-btn" ng-show="isButton">
 	             <md-dialog-actions layout="row">
 	      			<md-button class="md-raised" ng-click="submitInformation(todaysProductionPlanForm.$valid,$event)" ng-disabled="isReadOnly" style="background: rgba(63, 81, 181, 0.59);color: white;"  type="submit">SAVE</md-button>
 	      			<md-button class="md-raised" ng-click="cancelTodaysProductionPlan()" style="background: rgba(63, 81, 181, 0.59);color: white;">CANCEL</md-button>
 	    		</md-dialog-actions>
 	       </div>
-	    <div ng-show="isTodaysProductionPlanPresent" class="active-information">
-			   Currently there are no Todays production plan.
-		</div>
+	    
 	</form>
   </div>
   

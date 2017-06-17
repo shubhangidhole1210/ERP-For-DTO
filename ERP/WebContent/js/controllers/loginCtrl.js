@@ -17,7 +17,7 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 				console.log(data.headers('auth_token'));*/
 				var userInfo = {};
 				userInfo.auth_token = data.headers('auth_token');
-				userInfo.user = data.data.user;
+				userInfo.user = data.data.user.userid;
 				Auth.setUser(userInfo);
 				Auth.setMenu(data.data.data.pages);
 				Auth.setReport(data.data.data.reports);
