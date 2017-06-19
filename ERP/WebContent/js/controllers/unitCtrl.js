@@ -147,4 +147,15 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 					$scope.deleteUnit(index);
 				}, function() {});
 	};
+	
+	$scope.gotoPrevPage = function(){
+		 utils.scrollToTop();
+		 $scope.currentPage = $scope.currentPage - 1;
+	};
+	
+	$scope.gotoNextPage = function(){
+		 utils.scrollToTop();
+		 $scope.currentPage = $scope.currentPage + 1;
+	};
+	
 });

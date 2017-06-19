@@ -156,7 +156,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		 $scope.currentPage = $scope.currentPage + 1;
 	};
 	
-	$scope.deleteRmOrder = function(index) {
+	$scope.deleteRmOrder = function() {
 		var httpparams = {};
 		httpparams.method = 'delete';
 		httpparams.url = SERVER_URL + "rawmaterialorder/delete/" +  $scope.rmOrders[index].id;
@@ -184,7 +184,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$mdDialog.show(confirm).then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
-							$scope.deleteRmOrder(index);
+							$scope.deleteRmOrder();
 						},
 						function() { });
 	};

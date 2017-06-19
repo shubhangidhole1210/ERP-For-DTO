@@ -34,6 +34,17 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			});
 	};
 	
+	$scope.gotoPrevPage = function(){
+		 utils.scrollToTop();
+		 $scope.currentPage = $scope.currentPage - 1;
+	};
+	
+	$scope.gotoNextPage = function(){
+		 utils.scrollToTop();
+		 $scope.currentPage = $scope.currentPage + 1;
+	};
+	
+	
 	$scope.isProductInventoryinformation=function(){
 		$scope.isProductInventoryPresent= $scope.data.length === 0  ? true:false;
 	};

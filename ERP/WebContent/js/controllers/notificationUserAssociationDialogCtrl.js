@@ -37,6 +37,24 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 		});
 	};
 	
+	$scope.notificationUser.too = false;
+	$scope.notificationUser.cc = false;
+	$scope.notificationUser.bcc = false;
+	
+	$scope.changeRadioValue = function(too,cc,bcc){
+		console.log("too :" , too);
+		console.log ("cc :" ,cc);
+		console.log("bcc :" ,bcc)
+		if(too === too){
+			$scope.notificationUser.too = true;
+		}else if(cc === cc){
+			$scope.notificationUser.cc = true;
+		}else{
+			$scope.notificationUser.bcc = true;
+		}
+		
+	}
+	
 	$scope.getUserInformation=function(){
 		utils.showProgressBar();
 		var httpparams = {};

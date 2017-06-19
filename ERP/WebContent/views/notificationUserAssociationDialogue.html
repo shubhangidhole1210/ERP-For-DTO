@@ -46,15 +46,15 @@
     </md-radio-group> -->
     
     <label>
-    <input type="radio" ng-model="notificationUser.too" value="too">
+    <input type="radio" ng-model="notificationUser.too" ng-checked="{{notificationUser.too}}" ng-change="changeRadioValue(notificationUser.too,notificationUser.cc,notificationUser.bcc)">
     TO
   </label><br/>
   <label>
-    <input type="radio" ng-model="notificationUser.cc" value="cc">
+    <input type="radio" ng-model="notificationUser.cc" ng-checked="{{notificationUser.cc}}" ng-change="changeRadioValue(notificationUser.too,notificationUser.cc,notificationUser.bcc)">
     CC
   </label><br/>
   <label>
-    <input type="radio" ng-model="notificationUser.bcc" value="bcc">
+    <input type="radio" ng-model="notificationUser.bcc" ng-checked="{{notificationUser.bcc}}" ng-change="changeRadioValue(notificationUser.too,notificationUser.cc,notificationUser.bcc)">
     BCC
   </label><br/>
     

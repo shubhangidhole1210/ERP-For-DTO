@@ -154,4 +154,15 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 							$scope.status = 'You decided to keep your debt.';
 						});
 	};
+	
+	$scope.gotoPrevPage = function(){
+		 utils.scrollToTop();
+		 $scope.currentPage = $scope.currentPage - 1;
+	};
+	
+	$scope.gotoNextPage = function(){
+		 utils.scrollToTop();
+		 $scope.currentPage = $scope.currentPage + 1;
+	};
+	
 });
