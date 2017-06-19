@@ -1,72 +1,60 @@
 <md-dialog class="statusInfo">
-<form name="notificationUserAssociationForm" novalidate>
-	<md-toolbar>
-	<div class="md-toolbar-tools">
-		<h2>{{information}}</h2>
-		<span flex></span>
-	</div>
-	</md-toolbar>
-	<md-dialog-content>
-	<div class="md-dialog-content">
-         <div layout-gt-sm="row">
-               <md-input-container class="drop-down">
-          <label>NOTIFICATION ID*</label>
-          <md-select ng-model="notificationUser.notification.notificationId" name="notification"  ng-disabled="isClientReadOnly" ng-required="true"  ng-init="getNotificationInformation()">
-            <md-option ng-repeat="notification in notificationList" ng-value="notification.id" >
-               {{notification.name}}
-            </md-option>
-          </md-select>
-          <div ng-messages="notificationUserAssociationForm.notification.$error">
-                 <div ng-message="required">Please Select Notification Id</div>
-              </div>
-        </md-input-container>
-           </div>
-	
-		
-		<div layout-gt-sm="row">
-               <md-input-container class="drop-down">
-          <label>USER ID*</label>
-          <md-select ng-model="notificationUser.user.userId" name="user"  ng-disabled="isClientReadOnly" ng-required="true" ng-init="getUserInformation()">
-            <md-option ng-repeat="user in userList" ng-value="user.id" >
-               {{user.userid}}
-            </md-option>
-          </md-select>
-          <div ng-messages="notificationUserAssociationForm.user.$error">
-                 <div ng-message="required">Please Select User Id</div>
-              </div>
-        </md-input-container>
-           </div>
-		
-	<!-- 	<md-radio-group>
-
-      <md-radio-button  ng-model="notificationUser.too" class="md-primary">TO</md-radio-button>
-      <md-radio-button  ng-model="notificationUser.bcc"> BCC </md-radio-button>
-      <md-radio-button  ng-model="notificationUser.cc">CC</md-radio-button>
-
-    </md-radio-group> -->
-    
-    <label>
-    <input type="radio" ng-model="notificationUser.too" ng-checked="{{notificationUser.too}}" ng-change="changeRadioValue(notificationUser.too,notificationUser.cc,notificationUser.bcc)">
-    TO
-  </label><br/>
-  <label>
-    <input type="radio" ng-model="notificationUser.cc" ng-checked="{{notificationUser.cc}}" ng-change="changeRadioValue(notificationUser.too,notificationUser.cc,notificationUser.bcc)">
-    CC
-  </label><br/>
-  <label>
-    <input type="radio" ng-model="notificationUser.bcc" ng-checked="{{notificationUser.bcc}}" ng-change="changeRadioValue(notificationUser.too,notificationUser.cc,notificationUser.bcc)">
-    BCC
-  </label><br/>
-    
-    
-		
-	</div>
-	</md-dialog-content>
-	<md-dialog-actions layout="row"> <md-button
-		class="md-raised"
-		ng-click="submitNotificationUserAssociationForm(notificationUser.notification.notificationId,notificationUser.user.userId)"
-		type="submit" ng-disabled="isReadOnly" >SAVE</md-button> <md-button
-		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> </md-dialog-actions>
-</form>
+	<form name="notificationUserAssociationForm" novalidate>
+		<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>{{information}}</h2>
+			<span flex></span>
+		</div>
+		</md-toolbar>
+		<md-dialog-content>
+				<div class="md-dialog-content">
+			         <div layout-gt-sm="row">
+			           	<md-input-container class="drop-down">
+			          		<label>NOTIFICATION ID*</label>
+			          		<md-select ng-model="notificationUser.notification.notificationId" name="notification"  ng-disabled="isClientReadOnly" ng-required="true"  ng-init="getNotificationInformation()">
+			            		<md-option ng-repeat="notification in notificationList" ng-value="notification.id" >
+			            			{{notification.name}}
+			            		</md-option>
+			         		</md-select>
+			          		<div ng-messages="notificationUserAssociationForm.notification.$error">
+			                 	<div ng-message="required">Please Select Notification Id</div>
+			              	</div>
+			        	</md-input-container>
+			        </div>
+					<div layout-gt-sm="row">
+						<md-input-container class="drop-down">
+				          	<label>USER ID*</label>
+				          	<md-select ng-model="notificationUser.user.userId" name="user"  ng-disabled="isClientReadOnly" ng-required="true" ng-init="getUserInformation()">
+				            	<md-option ng-repeat="user in userList" ng-value="user.id" >
+				               		{{user.userid}}
+				            	</md-option>
+				          	</md-select>
+				          	<div ng-messages="notificationUserAssociationForm.user.$error">
+				            	<div ng-message="required">Please Select User Id</div>
+				            </div>
+			        	</md-input-container>
+			     	</div>
+			    
+			    <label>
+				    <input type="radio" ng-model="sendOption" value="TO" ng-change="onSendOptionChanged()">
+				    TO
+				</label><br/>
+			  	<label>
+			    	<input type="radio" ng-model="sendOption" value="CC" ng-change="onSendOptionChanged()">
+			    	CC
+			  	</label><br/>
+			  	<label>
+			    	<input type="radio" ng-model="sendOption" value="BCC" ng-change="onSendOptionChanged()">
+			    	BCC
+			  	</label><br/>
+			</div>
+		</md-dialog-content>
+		<md-dialog-actions layout="row"> 
+			<md-button
+				class="md-raised"
+				ng-click="submitNotificationUserAssociationForm(notificationUser.notification.notificationId,notificationUser.user.userId)"
+				type="submit" ng-disabled="isReadOnly" >SAVE</md-button> 
+			<md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> 
+		</md-dialog-actions>
+	</form>
 </md-dialog>
-

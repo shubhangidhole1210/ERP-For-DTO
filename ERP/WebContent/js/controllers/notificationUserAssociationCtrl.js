@@ -34,15 +34,11 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 		});
 	};
 	
-	/*$scope.isNotificationInformation = function() {
-		$scope.isNotificationPresent = $scope.data.length === 0 ? true : false;
-	};*/
-	
 	$scope.addNewNotificationUserAssociation = function(ev) {
 		$scope.notificationUser={};
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
-		$scope.information = "ADD NEW NOTIFICATION USER ASSOCIATION"
+		$scope.information = "ADD NEW NOTIFICATION USER ASSOCIATION";
 		var addNewNotificationDialog = {
 			controller : 'notificationUserAssociationDialogCtrl',
 			templateUrl : 'views/notificationUserAssociationDialogue.html',
@@ -50,7 +46,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 			targetEvent : ev,
 			clickOutsideToClose : true,
 			onRemoving : function(){console.log('Removing user dialog');},
-			fullscreen : $scope.customFullscreen,
+			fullscreen : true,
 			locals : {
 				notificationUser : $scope.notificationUser,
 				flag : $scope.flag,
@@ -77,7 +73,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : true,
-					fullscreen : $scope.customFullscreen,
+					fullscreen : true,
 					locals : {
 						notificationUser : $scope.notificationUser,
 						flag : $scope.flag,

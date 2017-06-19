@@ -2,8 +2,14 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 	
 	$scope.isReadOnly = action;
 	$scope.flag = flag;
+	$scope.sendOption = '';
 	$scope.notificationUser = notificationUser;
 	$scope.information = information;
+	$scope.notificationUser.to = false;
+	$scope.notificationUser.cc = false;
+	$scope.notificationUser.bcc = false;
+	
+	
 	$scope.hide = function() {
 		console.log('hide DialogController');
 		$mdDialog.hide();
@@ -14,11 +20,12 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 	};
 
 	$scope.answer = function(answer) {
+		console.log('$mdDialog',$mdDialog);
 		$mdDialog.hide(answer);
 	};
 	
 	$scope.getNotificationInformation=function(){
-		utils.showProgressBar();
+//		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "notification/list";
@@ -29,34 +36,35 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 			$scope.notificationList=response.data;
 			console.log(response)
 			console.log("$scope.notificationList :" ,$scope.notificationList);
-			utils.hideProgressBar();
+//			utils.hideProgressBar();
 		}, function errorCallback(response) {
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
-			utils.hideProgressBar();
+//			utils.hideProgressBar();
 			console.log("Error");
 		});
 	};
 	
-	$scope.notificationUser.too = false;
-	$scope.notificationUser.cc = false;
-	$scope.notificationUser.bcc = false;
-	
-	$scope.changeRadioValue = function(too,cc,bcc){
-		console.log("too :" , too);
-		console.log ("cc :" ,cc);
-		console.log("bcc :" ,bcc)
-		if(too === too){
-			$scope.notificationUser.too = true;
-		}else if(cc === cc){
+	$scope.onSendOptionChanged = function(){
+		console.log("sendOption :" , $scope.sendOption);
+		if($scope.sendOption === "TO"){
+			$scope.notificationUser.to = true;
+			$scope.notificationUser.cc = false;
+			$scope.notificationUser.bcc = false;
+		}else if($scope.sendOption === "CC"){
 			$scope.notificationUser.cc = true;
+			$scope.notificationUser.to = false;
+			$scope.notificationUser.bcc = false;
 		}else{
 			$scope.notificationUser.bcc = true;
+			$scope.notificationUser.to = false;
+			$scope.notificationUser.cc = false;
 		}
+		console.log($scope.notificationUser);
 		
-	}
+	};
 	
 	$scope.getUserInformation=function(){
-		utils.showProgressBar();
+//		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "user/list";
@@ -67,10 +75,10 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 			$scope.userList=response.data;
 			console.log(response)
 			console.log("$scope.userList :" ,$scope.userList);
-			utils.hideProgressBar();
+//			utils.hideProgressBar();
 		}, function errorCallback(response) {
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
-			utils.hideProgressBar();
+//			utils.hideProgressBar();
 			console.log("Error");
 		});
 	};

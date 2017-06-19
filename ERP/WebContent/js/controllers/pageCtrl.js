@@ -1,6 +1,6 @@
 erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
      $scope.isPagePresent=false;
-     $scope.page={}
+     $scope.page={};
      
 	$rootScope.$on("CallPopulatePageList", function() {
 		$scope.populatePageList();
@@ -41,7 +41,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		$scope.page={};
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
-		$scope.information = "ADD NEW PAGE"
+		$scope.information = "ADD NEW PAGE";
 		var addNewPageDialog = {
 			controller : 'pageDialogController',
 			templateUrl : 'views/pageDialog.html',
