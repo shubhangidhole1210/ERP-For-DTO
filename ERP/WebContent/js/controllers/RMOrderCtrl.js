@@ -79,13 +79,13 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 				function() {})
 	};
 	
-	$scope.showRMOrder = function(ev, index) {
+	$scope.showRMOrder = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
 		$scope.displayAddRM = false;
 		$scope.isVendorId = true;
 		$scope.isPriceReadOnly = true;
-		$scope.rmOrder = $scope.rmOrders[index];
+		$scope.rmOrder = $scope.rmOrders[($scope.currentPage*$scope.pageSize) + ($index)];
 		console.log($scope.rmOrder);
 		console.log("in edit Rm ordr" +$scope.rmOrder.totalprice)
 		$scope.title="EDIT RAW MATERIAL ORDER INFORMATION"
@@ -156,10 +156,10 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		 $scope.currentPage = $scope.currentPage + 1;
 	};
 	
-	$scope.deleteRmOrder = function() {
+	$scope.deleteRmOrder = function($index) {
 		var httpparams = {};
 		httpparams.method = 'delete';
-		httpparams.url = SERVER_URL + "rawmaterialorder/delete/" +  $scope.rmOrders[index].id;
+		httpparams.url = SERVER_URL + "rawmaterialorder/delete/" +  $scope.rmOrders[$index].id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -176,7 +176,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 
 	};
 
-	$scope.showConfirm = function(ev,index) {
+	$scope.showConfirm = function(ev,$index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete Raw Material Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -184,7 +184,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 		$mdDialog.show(confirm).then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
-							$scope.deleteRmOrder();
+							$scope.deleteRmOrder(($scope.currentPage*$scope.pageSize) + ($index));
 						},
 						function() { });
 	};
