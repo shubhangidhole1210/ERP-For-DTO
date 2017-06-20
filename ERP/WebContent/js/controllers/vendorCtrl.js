@@ -63,9 +63,9 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 				function() {});
 	  };
 	
-	  $scope.showEditVendor = function(ev , index) {
+	  $scope.showEditVendor = function(ev , $index) {
 		  $scope.flag = 1;
-		  $scope.vendorUser = $scope.vendorUsers[index];
+		  $scope.vendorUser = $scope.vendorUsers[($scope.currentPage*$scope.pageSize) + ($index)];
 		  $scope.information="EDIT VENDOR INFORMATION"
 		    $mdDialog.show({
 		      controller: 'DialogVendorController',
@@ -97,18 +97,18 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 				utils.hideProgressBar();
 						$rootScope.$emit("callPopulateVendorList", {});
 				console.log(data);
-				utils.showToast('We are Sorry. Something went wrong. Please try again later.!');
+				utils.showToast('Vendor Deleted Sucessfully!');
 			}, function errorCallback(data) {
 				console.log("Error");
-				utils.showToast('Vendor Deleted Sucessfully!');
+				utils.showToast('We are Sorry. Something went wrong. Please try again later.!');
 			});
 			utils.showProgressBar();
 		};
 		
-		$scope.viewVendarInformation = function(ev, index) {
+		$scope.viewVendarInformation = function(ev, $index) {
 			$scope.flag = 2;
 			$scope.isReadOnly = true;
-			$scope.vendorUser = $scope.vendorUsers[index];
+			$scope.vendorUser = $scope.vendorUsers[($scope.currentPage*$scope.pageSize) + ($index)];
 			$scope.isSaving = false;
 			$scope.information="VIEW VENDOR INFORMATION"
 			console.log($scope.user);
@@ -130,7 +130,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 							function() {});
 		};
 		
-		$scope.showConfirm = function(ev,index) {
+		$scope.showConfirm = function(ev,$index) {
 			var confirm = $mdDialog.confirm().title(
 					'Are you sure you want to Delete Vendor Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -140,7 +140,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 					.then(
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
-								$scope.deleteVendor(index);
+								$scope.deleteVendor(($scope.currentPage*$scope.pageSize) + ($index));
 							},
 							function() { });
 		};

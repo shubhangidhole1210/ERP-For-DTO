@@ -90,11 +90,11 @@ erpApp
 						$scope.showProgressBarOne()
 					};
 
-					$scope.showRMVendorAssociation = function(ev, index) {
+					$scope.showRMVendorAssociation = function(ev, $index) {
 						$scope.flag = 1;
 						$scope.isReadOnly = false;
 						$scope.isDropDownreadOnly = true;
-						$scope.rmOrderAssociation = $scope.rmOrderAssociations[index];
+						$scope.rmOrderAssociation = $scope.rmOrderAssociations[($scope.currentPage*$scope.pageSize) + ($index)];
 						console.log($scope.rmOrderAssociation);
 						$scope.title= "EDIT RAW MATERIAL VENDOR ASSOCIATION INFORMATION"
 						$mdDialog
@@ -117,11 +117,11 @@ erpApp
 										function() {});
 					};
 
-					$scope.viewRMVendorAssociation = function(ev, index) {
+					$scope.viewRMVendorAssociation = function(ev, $index) {
 						$scope.flag = 2;
 						$scope.isReadOnly = true;
 						$scope.isDropDownreadOnly = true;
-						$scope.rmOrderAssociation = $scope.rmOrderAssociations[index];
+						$scope.rmOrderAssociation = $scope.rmOrderAssociations[($scope.currentPage*$scope.pageSize) + ($index)];
 						$scope.isSaving = false;
 						$scope.title= "VIEW RAW MATERIAL VENDOR ASSOCIATION INFORMATION"
 					
@@ -163,7 +163,7 @@ erpApp
 						utils.showProgressBar();
 					};
 					
-					$scope.showConfirm = function(ev,index) {
+					$scope.showConfirm = function(ev,$index) {
 						var confirm = $mdDialog.confirm().title(
 								'Are you sure you want to Delete Raw Material Vendor Association Information?')
 								.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -173,7 +173,7 @@ erpApp
 								.then(
 										function() {
 											$scope.status = 'You decided to get rid of your debt.';
-											$scope.deleteRMVendorAssociation(index);
+											$scope.deleteRMVendorAssociation(($scope.currentPage*$scope.pageSize) + ($index));
 											utils.showToast('Rm Vendor Association Deleted Sucessfully!');
 										
 										},

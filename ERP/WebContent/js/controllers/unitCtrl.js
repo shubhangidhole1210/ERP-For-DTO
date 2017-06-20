@@ -66,10 +66,10 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 				function() {});
 	};
 	
-	$scope.showEditUnit = function(ev, index) {
+	$scope.showEditUnit = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
-		$scope.unit = $scope.units[index];
+		$scope.unit = $scope.units[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.information = "EDIT UNIT INFORMATION"
 		console.log($scope.user);
 		$mdDialog
@@ -91,10 +91,10 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 						function() {});
 	};
 	
-	$scope.viewUnitInformation = function(ev, index){
+	$scope.viewUnitInformation = function(ev, $index){
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.unit = $scope.units[index];
+		$scope.unit = $scope.units[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
 		$scope.information = "VIEW UNIT INFORMATION"
 		console.log($scope.unit);
@@ -138,13 +138,13 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		});
 		utils.showProgressBar();
 	};
-	$scope.showConfirm = function(ev,index) {
+	$scope.showConfirm = function(ev,$index) {
 		var confirm = $mdDialog.confirm().title('Are you sure you want to Delete Unit Information?')
 				.ariaLabel('').targetEvent(ev).ok('YES' ).cancel('NO');
 
 		$mdDialog.show(confirm)
 				.then(function() {
-					$scope.deleteUnit(index);
+					$scope.deleteUnit(($scope.currentPage*$scope.pageSize) + ($index));
 				}, function() {});
 	};
 	

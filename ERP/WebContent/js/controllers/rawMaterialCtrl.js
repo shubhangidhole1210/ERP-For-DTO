@@ -66,11 +66,11 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 				function() {});
 	};
 	
-	$scope.showEditRM = function(ev, index) {
+	$scope.showEditRM = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
 		$scope.isUnitReadOnly = true;
-		$scope.rawMaterial = $scope.rawMaterials[index];
+		$scope.rawMaterial = $scope.rawMaterials[($scope.currentPage*$scope.pageSize) + ($index)];
 		console.log($scope.user);
 		$scope.information = "EDIT RAW MATERIAL INFORMATION"
 		$mdDialog
@@ -93,10 +93,10 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 						function() {});
 	};
 	
-	$scope.viewRMInformation = function(ev, index) {
+	$scope.viewRMInformation = function(ev, $index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.rawMaterial = $scope.rawMaterials[index];
+		$scope.rawMaterial = $scope.rawMaterials[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
 		$scope.isUnitReadOnly = true;
 		console.log($scope.rawMaterial);
@@ -140,7 +140,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		utils.showProgressBar();
 	};
 	
-	$scope.showConfirm = function(ev,index) {
+	$scope.showConfirm = function(ev,$index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete Raw Material Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -150,7 +150,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
-							$scope.deleteraeMaterial(index);
+							$scope.deleteraeMaterial(($scope.currentPage*$scope.pageSize) + ($index));
 						},
 						function() { });
 	};

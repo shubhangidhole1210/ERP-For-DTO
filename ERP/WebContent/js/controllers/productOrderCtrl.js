@@ -70,9 +70,9 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				function() {});
 	  };
 	 
-	  $scope.showEditProductOrder = function(ev , index) {
+	  $scope.showEditProductOrder = function(ev , $index) {
 		  $scope.flag = 1;
-		  $scope.productOrder = $scope.productOrders[index];
+		  $scope.productOrder = $scope.productOrders[($scope.currentPage*$scope.pageSize) + ($index)];
 		  $scope.isProductOrderAdd = false;
 		  $scope.isClientReadOnly = true;
 		  $scope.information="EDIT PRODUCT ORDER INFORMATION"
@@ -116,11 +116,11 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			utils.showProgressBar();
 		};
 		
-		$scope.viewProductOrderrInformation = function(ev, index) {
+		$scope.viewProductOrderrInformation = function(ev, $index) {
 			$scope.flag = 2;
 			$scope.isReadOnly = true;
 			$scope.isProductOrderAdd = false;	
-			$scope.productOrder = $scope.productOrders[index];
+			$scope.productOrder = $scope.productOrders[($scope.currentPage*$scope.pageSize) + ($index)];
 			$scope.isSaving = false;
 			$scope.isClientReadOnly = true;
 			$scope.information="VIEW PRODUCT ORDER INFORMATION"
@@ -145,7 +145,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 							function() {});
 		};
 		
-		$scope.showConfirm = function(ev,index) {
+		$scope.showConfirm = function(ev,$index) {
 			var confirm = $mdDialog.confirm().title(
 					'Are you sure you want to Delete Product Order Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -153,7 +153,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			$mdDialog.show(confirm).then(
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
-								$scope.deleteProductOrder(index);
+								$scope.deleteProductOrder(($scope.currentPage*$scope.pageSize) + ($index));
 							},
 							function() { });
 		};

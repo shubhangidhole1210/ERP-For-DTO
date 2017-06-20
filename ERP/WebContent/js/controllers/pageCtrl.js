@@ -63,10 +63,10 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 				function() {});
 	};
 	
-	$scope.showEditPage = function(ev, index) {
+	$scope.showEditPage = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
-		$scope.page = $scope.pages[index];
+		$scope.page = $scope.pages[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.information = "EDIT PAGE INFORMATION"
 		console.log($scope.user);
 		$mdDialog
@@ -89,10 +89,10 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 						function() {});
 	};
 	
-	$scope.viewPageInformation = function(ev, index) {
+	$scope.viewPageInformation = function(ev, $index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.page = $scope.pages[index];
+		$scope.page = $scope.pages[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
 		$scope.information = "VIEW PAGE INFORMATION"
 		console.log($scope.unit);
@@ -138,7 +138,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 		});
 	};
 	
-	$scope.showConfirm = function(ev,index) {
+	$scope.showConfirm = function(ev,$index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete page Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -148,7 +148,7 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
-							$scope.deletePage(index);
+							$scope.deletePage(($scope.currentPage*$scope.pageSize) + ($index));
 						},
 						function() {
 							$scope.status = 'You decided to keep your debt.';

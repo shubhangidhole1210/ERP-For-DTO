@@ -5,7 +5,7 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 	$scope.sendOption = '';
 	$scope.notificationUser = notificationUser;
 	$scope.information = information;
-	$scope.notificationUser.too = false;
+	$scope.notificationUser.to = false;
 	$scope.notificationUser.cc = false;
 	$scope.notificationUser.bcc = false;
 	
@@ -47,16 +47,16 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 	$scope.onSendOptionChanged = function(){
 		console.log("sendOption :" , $scope.sendOption);
 		if($scope.sendOption === "TO"){
-			$scope.notificationUser.too = true;
+			$scope.notificationUser.to = true;
 			$scope.notificationUser.cc = false;
 			$scope.notificationUser.bcc = false;
 		}else if($scope.sendOption === "CC"){
 			$scope.notificationUser.cc = true;
-			$scope.notificationUser.too = false;
+			$scope.notificationUser.to = false;
 			$scope.notificationUser.bcc = false;
 		}else{
 			$scope.notificationUser.bcc = true;
-			$scope.notificationUser.too = false;
+			$scope.notificationUser.to = false;
 			$scope.notificationUser.cc = false;
 		}
 		console.log($scope.notificationUser);
@@ -90,7 +90,7 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 				notification :$scope.notificationUser.notification.notificationId,
 				cc:$scope.notificationUser.cc,
 				bcc:$scope.notificationUser.bcc,
-				too:$scope.notificationUser.too
+				to:$scope.notificationUser.to
 				
 		};
 		var httpparams = {};
@@ -126,7 +126,7 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 								utils.showToast('Something went worng. Please try again later.');
 							}else{
 								$scope.displayProgressBar = false;
-								utils.showToast('Notification Information saved successfully.');
+								utils.showToast('Notification user Information saved successfully.');
 								$rootScope.$emit("CallPopulateNotificationList",{});
 							}
 						},

@@ -67,10 +67,10 @@ erpApp.controller('userCtrl',
 								function() {});
 					};
 					  
-					$scope.showEditUser = function(ev, index) {
+					$scope.showEditUser = function(ev, $index) {
 						$scope.flag = 1;
 						$scope.isReadOnly = false;
-						$scope.user = $scope.users[index];
+						$scope.user = $scope.users[($scope.currentPage*$scope.pageSize) + ($index)];
 						$scope.information = "EDIT USER INFORMATION"
 						console.log($scope.user);
 						$mdDialog
@@ -92,10 +92,10 @@ erpApp.controller('userCtrl',
 										function() {});
 					};
 					
-					$scope.viewUserInformation = function(ev, index) {
+					$scope.viewUserInformation = function(ev, $index) {
 						$scope.flag = 2;
 						$scope.isReadOnly = true;
-						$scope.user = $scope.users[index];
+						$scope.user = $scope.users[($scope.currentPage*$scope.pageSize) + ($index)];
 						$scope.isSaving = false;
 						$scope.information = "VIEW USER INFORMATION"
 						console.log($scope.unit);
@@ -138,14 +138,14 @@ erpApp.controller('userCtrl',
 						utils.showProgressBar();
 					};
 
-					$scope.showConfirm = function(ev, index) {
+					$scope.showConfirm = function(ev, $index) {
 						var confirm = $mdDialog.confirm()
 								.title('Are you sure you want to Delete User Information?')
 								.targetEvent(ev).ok('YES').cancel('NO');
 
 						$mdDialog.show(confirm)
 								.then(function() {
-											$scope.deleteUser(index);
+											$scope.deleteUser(($scope.currentPage*$scope.pageSize) + ($index));
 											/*utils.showToast('User Deleted Sucessfully!');*/
 										},
 										function() { });

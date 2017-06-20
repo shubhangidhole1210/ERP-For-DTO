@@ -61,10 +61,10 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				function() {});
 	};
 
-	$scope.showEditNotification = function(ev, index) {
+	$scope.showEditNotification = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
-		$scope.notification = $scope.notificationList[index];
+		$scope.notification = $scope.notificationList[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.information = "EDIT NOTIFICATION INFORMATION"
 		console.log($scope.notification);
 		$mdDialog
@@ -87,10 +87,10 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 						function() {});
 	};
 	
-	$scope.viewNotificationInformation = function(ev, index) {
+	$scope.viewNotificationInformation = function(ev, $index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.notification = $scope.notificationList[index];
+		$scope.notification = $scope.notificationList[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
 		$scope.information = "VIEW NOTIFICATION INFORMATION"
 		console.log($scope.notification);
@@ -136,7 +136,7 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		});
 	};
 	
-	$scope.showConfirm = function(ev,index) {
+	$scope.showConfirm = function(ev,$index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete Notification Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -146,7 +146,7 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
-							$scope.deleteNotification(index);
+							$scope.deleteNotification(($scope.currentPage*$scope.pageSize) + ($index));
 						},
 						function() {
 							$scope.status = 'You decided to keep your debt.';

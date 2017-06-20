@@ -61,10 +61,10 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 				function() {});
 	};
 	
-	$scope.showEditStatus = function(ev, index) {
+	$scope.showEditStatus = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
-		$scope.status = $scope.statuss[index];
+		$scope.status = $scope.statuss[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.information = "EDIT STATUS INFORMATION"
 		console.log($scope.status);
 		$mdDialog
@@ -85,10 +85,10 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 						function() {});
 	};
 	
-	$scope.viewStatusInformation = function(ev, index) {
+	$scope.viewStatusInformation = function(ev, $index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.status = $scope.statuss[index];
+		$scope.status = $scope.statuss[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
 		$scope.information = "VIEW STATUS INFORMATION"
 		console.log($scope.status);
@@ -125,7 +125,7 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		$scope.showProgressBarOne();
 	};
 	
-	$scope.showConfirm = function(ev,index) {
+	$scope.showConfirm = function(ev,$index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to delete Status Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -134,7 +134,7 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 				.show(confirm)
 				.then(
 						function() {
-							$scope.deleteStatus(index);
+							$scope.deleteStatus(($scope.currentPage*$scope.pageSize) + ($index));
 							utils.showToast('Delete Status successfully');
 						},
 						function() {

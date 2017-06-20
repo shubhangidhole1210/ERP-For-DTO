@@ -77,11 +77,11 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 				function() {});
 	  };
 	  
-	  $scope.showEditProductInventory = function(ev , index) {
+	  $scope.showEditProductInventory = function(ev , $index) {
 		  $scope.flag = 1;
 		  $scope.isReadOnly = false;
 		  $scope.isProductreadOnly = true;
-		  $scope.productInventory = $scope.productInventorys[index];
+		  $scope.productInventory = $scope.productInventorys[($scope.currentPage*$scope.pageSize) + ($index)];
 		  $scope.information="EDIT PRODUCT INVENTORY INFORMATION"
 		    $mdDialog.show({
 		      controller: 'productInventoryDialogController',
@@ -120,11 +120,11 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			$scope.showProgressBarOne();
 		};
 		
-		$scope.viewProductInventoryInformation = function(ev, index) {
+		$scope.viewProductInventoryInformation = function(ev, $index) {
 			$scope.flag = 2;
 			$scope.isReadOnly = true;
 			$scope.isProductreadOnly = true;
-			$scope.productInventory = $scope.productInventorys[index];
+			$scope.productInventory = $scope.productInventorys[($scope.currentPage*$scope.pageSize) + ($index)];
 			$scope.isSaving = false;
 			$scope.information="VIEW PRODUCT INVENTORY INFORMATION"
 			console.log($scope.user);
@@ -147,7 +147,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 							function() {});
 		};
 		
-		$scope.showConfirm = function(ev,index) {
+		$scope.showConfirm = function(ev,$index) {
 			var confirm = $mdDialog.confirm().title(
 					'Are you sure you want to Delete Product Inventory Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -155,7 +155,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			$mdDialog.show(confirm).then(
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
-								$scope.deleteProductInventory(index);
+								$scope.deleteProductInventory(($scope.currentPage*$scope.pageSize) + ($index));
 								$scope.message = 'Delete Record sucessfully';
 								$scope.showToast();
 							},

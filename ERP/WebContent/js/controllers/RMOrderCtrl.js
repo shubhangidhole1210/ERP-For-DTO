@@ -113,13 +113,13 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 						function() {});
 	};
 	
-	$scope.viewRmOrder = function(ev, index) {
+	$scope.viewRmOrder = function(ev, $index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
 		$scope.displayAddRM = false;
 		$scope.isVendorId = true;
 		$scope.isPriceReadOnly = true;
-		$scope.rmOrder = $scope.rmOrders[index];
+		$scope.rmOrder = $scope.rmOrders[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
 		$scope.title = "VIEW RAW MATERIAL ORDER INFORMATION"
 		console.log($scope.rmOrder);

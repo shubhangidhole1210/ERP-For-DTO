@@ -94,7 +94,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 
 					};
 					
-					$scope.showConfirm = function(ev,index) {
+					$scope.showConfirm = function(ev,$index) {
 						var confirm = $mdDialog.confirm().title(
 								'Are you sure you want to Delete Raw Material Inventory Information?')
 								.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -104,16 +104,16 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 								.then(
 										function() {
 											$scope.status = 'You decided to get rid of your debt.';
-											$scope.deleteRMInventory(index);
+											$scope.deleteRMInventory(($scope.currentPage*$scope.pageSize) + ($index));
 										},
 										function() { });
 					};
 
-					$scope.showEditRMInventary = function(ev, index) {
+					$scope.showEditRMInventary = function(ev, $index) {
 						$scope.flag = 1;
 						$scope.isReadOnly = false;
 						$scope.isRmVisible = true;
-						$scope.rmInventary = $scope.rmInventarys[index];
+						$scope.rmInventary = $scope.rmInventarys[($scope.currentPage*$scope.pageSize) + ($index)];
 						console.log($scope.rmInventary);
 						$scope.information="EDIT NEW RAW MATERIAL INVENTORY INFORMATIONn"
 						$mdDialog
@@ -136,10 +136,10 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 										function() {});
 					};
 
-					$scope.viewEditRMInventary = function(ev, index) {
+					$scope.viewEditRMInventary = function(ev, $index) {
 						$scope.flag = 2;
 						$scope.isReadOnly = true;
-						$scope.rmInventary = $scope.rmInventarys[index];
+						$scope.rmInventary = $scope.rmInventarys[($scope.currentPage*$scope.pageSize) + ($index)];
 						$scope.isSaving = false;
 						$scope.isRmVisible = true;
 						$scope.information="VIEW NEW RAW MATERIAL INVENTORY INFORMATION"

@@ -103,11 +103,11 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		    });
 		  };
 	
-	$scope.showEditProduct = function(ev, index) {
+	$scope.showEditProduct = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
 		$scope.information= "EDIT PRODUCT INFORMATION";
-		$scope.product = $scope.products[index];
+		$scope.product = $scope.products[($scope.currentPage*$scope.pageSize) + ($index)];
 		console.log($scope.product);
 		$mdDialog
 				.show({
@@ -134,10 +134,10 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 						});
 	};
 	
-	$scope.viewProductInformation = function(ev, index) {
+	$scope.viewProductInformation = function(ev, $index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.product = $scope.products[index];
+		$scope.product = $scope.products[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
 		$scope.information="VIEW PRODUCT INFORMATION"
 		console.log($scope.product);
@@ -186,7 +186,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		$scope.showProgressBarOne();
 	};
 
-	$scope.showConfirm = function(ev,index) {
+	$scope.showConfirm = function(ev,$index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete Product Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -196,7 +196,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
-							$scope.deleteProduct(index);
+							$scope.deleteProduct(($scope.currentPage*$scope.pageSize) + ($index));
 						},
 						function() {
 							$scope.status = 'You decided to keep your debt.';

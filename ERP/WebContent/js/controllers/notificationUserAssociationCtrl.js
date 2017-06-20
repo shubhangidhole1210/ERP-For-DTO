@@ -1,6 +1,6 @@
 erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils) {
      $scope.isNotificationPresent=false;
-     $scope.notification={};
+     $scope.notificationUser={};
      
 	$rootScope.$on("CallPopulateNotificationList", function() {
 		$scope.populateNotificationUserAssociationList();
