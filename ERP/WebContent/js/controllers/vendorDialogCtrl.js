@@ -74,7 +74,7 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 								console.log(data);
 								$scope.hide();
 								/*$scope.message = data.data.message;*/
-								$scope.showToast(data.data.message);
+								utils.showToast(data.data.message);
 								/*$scope.message = data.data.message;
 								utils.showToast();	*/		 
 								}else{

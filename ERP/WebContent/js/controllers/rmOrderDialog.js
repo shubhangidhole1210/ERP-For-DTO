@@ -190,12 +190,15 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 			}
 			return false;
 		};
+		
+	
 	    
 	    $scope.deleteRM=function(index) {
 	    	console.log('in delete RM'+ $scope.orderRawMaterials)
 	    	var lastItem = $scope.orderRawMaterials.length;
 		    $scope.orderRawMaterials.splice(index,1);
 		    $scope.calculateTotalPrice();
+		    $scope.setActualPrice();
 	    }
 	    
 	    $scope.getRmForOrder=function(){
@@ -215,4 +218,13 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				});
 	    	}
 	    };
+	    
+	    $scope.setActualPrice = function(){
+	    	console.log(" $scope.rmOrder.otherCharges:", $scope.rmOrder.otherCharges)
+	    	if( $scope.orderRawMaterials.length === 0 ){
+	    		console.log("if condition of set actual price function");
+	    		$scope.rmOrder.otherCharges=0;
+	    		$scope.rmOrder.totalprice=0;
+	    	}
+	    }
 });
