@@ -138,6 +138,8 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 							utils.showToast('Something went worng. Please try again later.');
 						});
 	};
+	
+	
 
 	$scope.submitNotificationUserAssociationForm = function(notificationId,userId) {
 			/*$scope.saveNotificationUserAssociationInformation()*/
