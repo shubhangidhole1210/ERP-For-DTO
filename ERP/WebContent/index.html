@@ -79,7 +79,7 @@
 	
 </head>
 <body ng-app="ERPApp">
-	<div ng-controller="ERPController">
+	<div ng-controller="ERPController" class="section-erp-header">
 		<div>
 			<div class="erp-headder">
 				<div class="display-erp-img">
@@ -95,6 +95,7 @@
 			</div>
 		</div>
 	</div>
+	<div class="section-content">
 	<div ng-controller="menuController" class="erp-menubar" ng-show="displayMenu">
 		<div ng-repeat="menuItem in cascadedMenu track by $index" ng-init="menuItem.displaySubmenu = false" ng-animate=" 'animate' ">
 			<div ng-click="menuClicked($index);" 
@@ -108,6 +109,7 @@
 		</div>
 	</div>
 	<div ng-view ng-class="mainClass" ng-controller="erpViewController"></div>
+	</div>
   	<div class="company-information">
 	  <!-- <span><img alt="" src="image/unnamed.png" width="30px" height="30px"></span> -->
 	  <!-- <span ><a href="http://www.nextechservices.in/#/">www.nextechservices.in</a></span> -->
