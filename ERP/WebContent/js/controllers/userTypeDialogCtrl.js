@@ -32,6 +32,7 @@ erpApp.controller('userTypeDialogCtrl',function($scope, $http, $mdDialog, $mdToa
 					auth_token : Auth.getAuthToken()
 				};
 		} else {
+			data.id = $scope.userType.id;
 			console.log($scope.UserType);
 			httpparams.method = 'put';
 			httpparams.url = SERVER_URL + "usertype/update";

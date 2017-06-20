@@ -64,7 +64,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 	$scope.showEditUserType = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
-		$scope.userType = $scope.UserTypes[($scope.currentPage*$scope.pageSize) + ($index+1)];
+		$scope.userType = $scope.UserTypes[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.information = "EDIT USER TYPE"
 		console.log($scope.user);
 		$mdDialog
@@ -90,7 +90,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
 		$scope.isSaving = false;
-		$scope.userType = $scope.UserTypes[($scope.currentPage*$scope.pageSize) + ($index+1)];
+		$scope.userType = $scope.UserTypes[($scope.currentPage*$scope.pageSize) + ($index)];
 		console.log($scope.unit);
 		$mdDialog.show({
 					controller : 'userTypeDialogCtrl',
@@ -136,7 +136,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 	$scope.deleteUserType = function(index) {
 		var httpparams = {};
 		httpparams.method = 'delete';
-		httpparams.url = SERVER_URL + "userType/delete/" + $scope.UserTypes[index].id;
+		httpparams.url = SERVER_URL + "usertype/delete/" + $scope.UserTypes[index].id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -160,7 +160,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 
 		$mdDialog.show(confirm)
 				.then(function() {
-					$scope.deleteUserType(($scope.currentPage*$scope.pageSize) + ($index+1));
+					$scope.deleteUserType(($scope.currentPage*$scope.pageSize) + ($index));
 				}, function() {});
 	};
 	
