@@ -11,11 +11,18 @@
 			         <div layout-gt-sm="row">
 			           	<md-input-container class="drop-down">
 			          		<label>NOTIFICATION ID*</label>
-			          		<md-select ng-model="notificationUser.notification.notificationId" name="notification"  ng-disabled="isClientReadOnly" ng-required="true"  ng-init="getNotificationInformation()">
+			          		<!-- <md-select ng-model="notificationUser.notification.notificationId" name="notification" ng-value="{{notification.name}}" ng-disabled="isClientReadOnly" ng-required="true"  ng-init="getNotificationInformation()">
 			            		<md-option ng-repeat="notification in notificationList" ng-value="notification.id" >
 			            			{{notification.name}}
 			            		</md-option>
-			         		</md-select>
+			         		</md-select> -->
+			         		
+			         		 <md-select ng-model="notificationUser.notification.id" name="notification"  ng-disabled="isClientReadOnly" ng-required="true" required ng-init="getNotificationInformation()">
+                           <md-option ng-repeat="notification in notificationList" ng-value="notification.id" >
+                             {{notification.name}}
+                         </md-option>
+                        </md-select>
+			         		
 			          		<div ng-messages="notificationUserAssociationForm.notification.$error">
 			                 	<div ng-message="required">Please Select Notification Id</div>
 			              	</div>
@@ -24,7 +31,7 @@
 					<div layout-gt-sm="row">
 						<md-input-container class="drop-down">
 				          	<label>USER ID*</label>
-				          	<md-select ng-model="notificationUser.user.userId" name="user"  ng-disabled="isClientReadOnly" ng-required="true" ng-init="getUserInformation()">
+				          	<md-select ng-model="notificationUser.user.id" name="user"  ng-disabled="isClientReadOnly" ng-required="true" ng-init="getUserInformation()">
 				            	<md-option ng-repeat="user in userList" ng-value="user.id" >
 				               		{{user.userid}}
 				            	</md-option>
@@ -36,15 +43,15 @@
 			     	</div>
 			    
 			    <label>
-				    <input type="radio" ng-model="sendOption" value="TO" ng-change="onSendOptionChanged()">
+				    <input type="radio" ng-model="sendOption" value="to" ng-change="onSendOptionChanged()">
 				    TO
 				</label><br/>
 			  	<label>
-			    	<input type="radio" ng-model="sendOption" value="CC" ng-change="onSendOptionChanged()">
+			    	<input type="radio" ng-model="sendOption" value="cc" ng-change="onSendOptionChanged()">
 			    	CC
 			  	</label><br/>
 			  	<label>
-			    	<input type="radio" ng-model="sendOption" value="BCC" ng-change="onSendOptionChanged()">
+			    	<input type="radio" ng-model="sendOption" value="bcc" ng-change="onSendOptionChanged()">
 			    	BCC
 			  	</label><br/>
 			</div>

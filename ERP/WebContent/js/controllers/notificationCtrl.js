@@ -127,8 +127,11 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			utils.hideProgressBar();
 			$rootScope.$emit("CallPopulateNotificationList", {});
 			console.log(data);
-			$scope.message = 'Delete Notification sucessfully';
-			$scope.showToast();
+			if(data.data.code === 0){
+				utils.showToast("We are Sorry. Something went wrong. Please try again later.");
+			}else{
+				utils.showToast("Notification Deleted sucessfully");
+			}
 
 		}, function errorCallback(data) {
 			console.log("Error");

@@ -1,3 +1,817 @@
+/* @CHARSET "ISO-8859-1";
+
+body{
+	background: rgb(230, 230, 230);
+	overflow-y: hidden; 
+}
+
+.section-erp-header{
+	height: 12%;
+}
+
+.section-content{
+	width: 100%;
+	height: 100%;
+	background: rgb(230, 230, 230);
+}
+
+.erp-user-name
+{
+	font-weight: bold;
+	font-size: 16px;
+	color: black;
+}
+
+.menu-arrow{
+	margin-left: 10px;
+	margin-right: 5px;
+	position: absolute;
+	right: 0;
+	-webkit-transform: rotate(0deg);
+}
+
+.menu-arrow-rotate{
+	-webkit-transform: rotate(-270deg);
+}
+
+.erp-headder
+{
+	display: flex;
+	background-color:  #106CC8;
+	padding-top: 6px;
+	padding-left: 6px;
+	padding-bottom: 3px;
+	position: fixed;
+    width: 100%;
+    z-index: 60;
+}
+
+.action-btn{
+	background: rgba(63, 81, 181, 0.4);
+    color: white;
+}
+
+.display-erp-img
+{
+	display: inline-block;
+}
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background: rgb(120, 129, 178);
+    color: white;
+    background: rgb(158, 169, 226);
+}
+.erp-user-name
+{
+	margin-left: 80%;
+	margin-top: 20px;
+	color: white;
+	font-weight: bold;
+}
+
+.login-user-button
+{
+	margin-top: 20px;
+	padding: 10px;
+	border-radius: 2px;
+}
+
+
+.main-class {
+	display: inline-block;
+	width: 76%;
+	padding-left: 2%;
+	padding-right: 2%;
+	margin-left: 20%;
+	height: 88%;
+    overflow-y: scroll;
+	background: rgb(230, 230, 230);
+}
+.main-class-full-screen {
+	display: inline-block;
+	width: 96%;
+	padding-left: 2%;
+	padding-right: 2%;
+}
+.erp-table-row{
+	border: none;
+	border: 1px solid gray;
+}
+body::-webkit-scrollbar{
+    width: 5px;
+}
+.erp-menubar::-webkit-scrollbar{
+    width: 7px;
+}
+body::-webkit-scrollbar-track, .erp-menubar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+body::-webkit-scrollbar-thumb, .erp-menubar::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  outline: 1px solid #0000ff;
+}
+.erp-table-column, .erp-table-row td{
+	border: none;
+	border-left: 1px solid gray;
+	border-bottom: 1px solid gray;
+}
+div.erp-menu:ACTIVE{
+	background-color: #267ED5;
+}
+.erp-menubar
+{
+	background-color:  #106CC8;
+	width: 20%;
+	color: white;
+	font-weight: bold;
+	height: 88%;
+	overflow-y: scroll;
+	font-size: 15px;
+	cursor: pointer;
+	float: left;
+    max-height:88%;
+    display: inline-block;
+    position: fixed;
+    overflow-x: hidden;
+}
+.erp-menubar li
+{
+	list-style: none;
+}
+.erp-menubar a
+{
+	color: #FFFFFF;
+	text-decoration: none;
+	width: 100%;
+    height: 100%;
+    display: block;
+    padding-left: 10px
+}
+.erp-menubar a:HOVER{
+	color: white;
+	text-decoration: none;
+	background-color: #267ED5;
+}
+.erp-menu:HOVER
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: #267ED5;
+}
+
+.erp-menu
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: rgb(25, 138, 234);
+	
+}
+
+.changeERPMenu
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: #267ED5;
+}
+.erp-information
+{
+	padding-top: 20px;
+	width: 100%;
+	
+}
+.displayScroll{
+	overflow-y: hidden;
+    overflow-x: scroll;
+}
+.erp-security
+{
+	padding-top: 100px;
+	width: 100%;
+	margin-left: 20%;
+}
+.ng-view-class
+{
+	display: flex;
+}
+.user-name
+{
+	padding-left: 10px;
+}
+.user-list
+{
+	margin-top: 10px;
+	
+}
+.all-user-list
+{
+	margin-top: 2%;
+	padding-left: 10px;
+	display: flex;
+	border-bottom: 1px solid #888;
+	padding-bottom: 10px;
+}
+.user-info
+{
+	width: 60%;
+}
+.input-filed-label
+{
+	color: black;
+	font-size: 14px;
+}
+
+table {
+    font-family: arial, sans-serif;
+   
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid rgba(57, 73, 171, 0.48);
+    text-align: left;
+    padding-left: 15px; 
+     text-align:center;
+	color: black;
+	background: rgb(230, 230, 230);
+}
+tr:HOVER{
+	background-color: #c0c0c0;
+	color: #800000;
+}
+
+th
+{
+	background: rgb(120, 129, 178);
+    color: white;
+}
+
+.erp-vendor
+{
+	padding-left: 17%;
+	padding-top: 10px;
+}
+
+.erp-unit
+{
+	padding-left: 17%;
+	padding-top: 10px;
+}
+.erp-rawmaterial
+{
+	padding-left: 17%;
+	padding-top: 10px;
+}
+.erp-product
+{
+	padding-left: 17%;
+	padding-top: 10px;
+}
+body > .md-dialog-container {
+  width: 100vh !important;
+}
+
+.active-information
+{
+	 background: #fce7e7;
+    border: 1px solid #b00;
+    color: #b00;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 20%;
+    height: 30px;
+    padding: 10px;
+}
+.login-form
+{
+	
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px 50px;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
+.qualityCheck-form
+{
+	  width: 400px;
+    margin: 0 auto;
+    padding: 50px 50px;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+    
+}
+.security-Form
+{
+	 width: 400px;
+    margin: 0 auto;
+    padding: 50px 50px;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
+.text
+{
+	border-bottom: 1px solid #e0e0e0;
+	width: 300px;
+	padding: 10px;
+    padding-right: 70px;
+    margin-bottom: 10px;
+}
+.password-container{
+	position: relative;
+}
+.forgotLink
+{
+	right: 10px;
+    top: 10px;
+    position: absolute;
+    font-weight: bold;
+    
+	
+}
+.forgot a{
+	color: blue
+}
+.input-error{
+	border: 1px solid red;
+}
+.loginForm
+{
+	padding: 20px;
+}
+.loginClass
+{
+	display: inline-block;
+	vertical-align:top;
+	width: 35%;
+	height: 100%;
+	padding-left: 35%;
+	padding-top: 10%;
+}
+
+.erp-info{
+	display: inline-block;
+	width: 60%;
+	height: 100%;
+	padding-top: 10%;
+	background: url("../image/erp_1.png") no-repeat;
+	
+}
+
+.productQualityCheck
+{
+	padding-top: 10px;
+    padding-left: 40px;
+}
+.product-quality-row
+{
+	padding-top: 18px;
+	font-size: 17px;
+	font-weight: bold;
+}
+.quantity-input
+{
+     width: 80px;
+	}
+	
+.search-text
+{
+	width: 250px;
+	height: 25px;
+	padding-left: 5px;
+	position: absolute;
+	right: 20px;
+	margin-top: 16px;
+	padding: 5px;
+}	
+ @media screen and (max-width: 408px) {
+
+  .erp-headder
+{
+	display: flex;
+	background-color:  #106CC8;
+	padding-top: 6px;
+	padding-left: 6px;
+	padding-bottom: 3px;
+	position: fixed;
+    width: 100%;
+    z-index: 60;
+}
+.quantity-input
+{
+     width: 40px;
+	}
+.erp-menubar
+{
+	background-color:  #106CC8;
+	width: 15%;
+	color: white;
+	font-weight: bold;
+	height: 800px;
+	font-size: 15px;
+	cursor: pointer;
+	float: left;
+	height: 100%;
+	max-height: 100%;;
+    padding-top: 100px;
+    display: inline-block;
+}
+.erp-information {
+    padding-left: 5%;
+    padding-top: 100px;
+    width: 100%;
+    margin-left: 20%;
+}
+.login-form
+{
+	
+    width: 260px;
+    margin: 0 auto;
+   padding-top:10px;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
+.loginClass
+{
+	padding-left: 1px;
+	padding-top: 20%;
+}
+.qualityCheck-form
+{
+	 width: 260px;
+    margin: 0 auto;
+   padding-top:80px;
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+}
+.erp-security
+{
+	padding-left: 1px;
+	padding-top: 100px;
+}
+ }
+ 
+ .scroll-table
+ {
+  overflow-x: scroll;
+ }
+ 
+ .header
+ {
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(22, 181, 148);
+    padding: 11px 20px 11px 25px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #03A9F4;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: white;
+    font-size: 21px;
+    font-weight: bold;
+ }
+ .qualitycheck
+ {
+     margin-left: 7%;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    background: rgb(230, 230, 230);
+ }
+ 
+ .qualitycheck-page{
+   margin-left: 7%;
+    margin-right: 10%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    background: rgb(230, 230, 230);
+ }
+ 
+ .qualityInspection
+ {
+   padding: 10px 80px 0;
+    box-shadow: 0 5px 15px #888;
+   background: rgba(128, 128, 128, 0.09);
+ }
+ .table-header
+ {
+     text-align: center;
+     background: #03A9F4;
+    color: white;
+    padding: 12px;
+    font-weight: 500;
+ }
+ table{
+ 	border-spacing: 0;
+ }
+ 
+ th{
+ 	background-color: #03A9F4;
+ 	text-align: center;
+ 	padding-top: 15px;
+ 	padding-bottom: 15px;
+ }
+ .error-msg
+ {
+   color: red;
+   font-size: 12px;
+ }
+ 
+ .btn-class
+ {
+   margin-top: 5%;
+   margin-left: 70%;
+   padding-bottom: 50px;
+ }
+ .statusInfo
+ {
+   min-width: 1050px;
+   margin-left: 15%;
+   height: 100%;
+ }
+ 
+ .dialogueInfo
+ {
+    min-width: 1050px;
+    margin-left: 15%
+ }
+ 
+ .mainMenu
+ {
+   font-size: 18px;
+   padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	color: white;
+	font-weight: bold;
+ }
+ .company-information
+ {
+ }
+ 
+ .erp-btn
+ {
+    color: rgba(255,255,255,0.87);
+   
+ }
+ .display-scroll
+{
+	border: none;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 100%;
+    display: inline-block;
+}
+
+.todayPlan-save-btn
+{
+	margin-top: 5%;
+	margin-left: 70%;
+	padding-bottom: 20px;
+}
+
+.animate-enter {
+	-webkit-transition: 1s linear all; Chrome
+	transition: 1s linear all;
+	opacity: 0;
+}
+ 
+.animate-enter.animate-enter-active {
+	opacity: 1;
+}
+div.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+div.accordion.active, div.accordion:hover {
+    background-color: #ddd;
+}
+
+div.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+div.accordion.active:after {
+    content: "\2212";
+}
+
+div.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.erp-wlcome-label
+{
+	color: rgb(40,53,147);
+	font-weight: bold;
+	font-size: 40px;
+	margin-left: 3%;
+	margin-top: 2%;
+	text-align: center;
+}
+
+.product-store-date{
+	text-align: right;
+	font-weight: bold;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.add-new-btn{
+	background-color: rgb(126, 137, 213);
+}
+
+.store-info-btn
+{
+	margin-top: 5%; 
+	margin-left: 70%
+}
+
+.dispatch-btn
+{
+	margin-top: 5%;
+	margin-left: 75%;
+	padding-bottom: 20px
+}
+.login-container{
+	display:block;
+	width: 100%;
+}
+.login-name{
+	font-weight: 100;
+	text-align: center;
+}
+
+.drop-down{
+	width:100%
+}
+.multiple-added-delete{
+	height: 40px;
+}
+
+.added-multiple{
+	height: 40px;
+	margin-top: 2%;
+}
+.quality-btn{
+	margin-top: 5%;
+	margin-left: 70%;
+	padding-bottom: 20px;
+}
+.erp-dialog{
+	height:100%;
+}
+.unit-dialogue{
+	min-width: 50%;
+	height: 50%;
+}
+.production-plan-btn{
+	margin-top: 2%;
+	margin-left: 40%;
+}
+
+md-input-container.md-input-invalid .md-auto-hide .md-input-message-animation:not(.ng-animate) {
+  opacity: 1;
+  margin-top: 0;
+}
+
+md-input-container.md-input-invalid [ng-messages] {
+  max-height: 19px;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: black;
+    color: blue;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    Position the tooltip
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.button-ui{
+	margin-left: 70%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+.toast-msg{
+
+	position: fixed;
+}
+
+.paginationclass{
+margin: 15px 28px; 
+ }
+.paginationclass div{
+    border-bottom:1px solid silver;
+    
+}
+.paginationclass span{
+    margin:0px 15px;
+    display:inline-block;
+    padding:5px 0px;
+    text-align:left;
+    width:70px;
+}
+.pagination-controle li{
+    display: inline-block;
+    
+}
+.pagination-controle button{
+    width: 63px;
+    font-size: 12px;
+    margin-left: 13px;
+    cursor:pointer;
+}
+.pagination-div{
+    margin-left:20px;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @CHARSET "ISO-8859-1";
 
 body{

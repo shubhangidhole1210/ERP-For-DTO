@@ -46,11 +46,11 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 	
 	$scope.onSendOptionChanged = function(){
 		console.log("sendOption :" , $scope.sendOption);
-		if($scope.sendOption === "TO"){
+		if($scope.sendOption === "to"){
 			$scope.notificationUser.to = true;
 			$scope.notificationUser.cc = false;
 			$scope.notificationUser.bcc = false;
-		}else if($scope.sendOption === "CC"){
+		}else if($scope.sendOption === "cc"){
 			$scope.notificationUser.cc = true;
 			$scope.notificationUser.to = false;
 			$scope.notificationUser.bcc = false;
@@ -86,8 +86,8 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 
 	$scope.saveNotificationUserAssociationInformation = function() {
 		var data = {
-				user:$scope.notificationUser.user.userId,
-				notification :$scope.notificationUser.notification.notificationId,
+				user:$scope.notificationUser.user.id,
+				notification :$scope.notificationUser.notification.id,
 				cc:$scope.notificationUser.cc,
 				bcc:$scope.notificationUser.bcc,
 				to:$scope.notificationUser.to

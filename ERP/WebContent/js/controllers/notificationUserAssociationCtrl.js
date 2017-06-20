@@ -64,6 +64,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
 		$scope.notificationUser = $scope.notificationUserAssociationList[($scope.currentPage*$scope.pageSize) + ($index)];
+		console.log("")
 		$scope.information = "EDIT NOTIFICATION USER ASSOCIATION INFORMATION"
 		console.log($scope.notification);
 		$mdDialog
@@ -118,7 +119,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 		console.log($scope.page);
 		var httpparams = {};
 		httpparams.method = 'delete';
-		httpparams.url = SERVER_URL + "notification/delete/" + $scope.notificationList[index].id;
+		httpparams.url = SERVER_URL + "notificationuserassociation/delete/" + $scope.notificationUserAssociationList[index].id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -126,8 +127,11 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 			utils.hideProgressBar();
 			$rootScope.$emit("CallPopulateNotificationList", {});
 			console.log(data);
-			$scope.message = 'Delete Notification sucessfully';
-			$scope.showToast();
+			if(data.data.code === 0){
+				utils.showToast("We are Sorry. Something went wrong. Please try again later.");
+			}else{
+				utils.showToast("Notification User Association Deleted sucessfully");
+			}
 
 		}, function errorCallback(data) {
 			console.log("Error");
