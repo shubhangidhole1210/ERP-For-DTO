@@ -260,10 +260,10 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 					    };
 		  };
 	  
-	  $scope.editUserTypePage = function(ev , index) {
+	  $scope.editUserTypePage = function(ev , $index) {
 		  $scope.flag = 1;
 		  $scope.isReadOnly = true;
-		  $scope.userTypePageAsso = $scope.userTypePageAssociations[index];
+		  $scope.userTypePageAsso = $scope.userTypePageAssociations[($scope.currentPage*$scope.pageSize) + ($index+1)];
 		  $scope.information="EDIT USER TYPE PAGE ASSOCIATION"
 		    $mdDialog.show({
 		      controller: DialogVendorController,
@@ -304,10 +304,10 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 			$scope.showProgressBarOne();
 		};
 		
-		$scope.viewUserTypePage = function(ev, index) {
+		$scope.viewUserTypePage = function(ev, $index) {
 			$scope.flag = 2;
 			$scope.isReadOnly = true;
-			$scope.userTypePageAsso = $scope.userTypePageAssociations[index];
+			$scope.userTypePageAsso = $scope.userTypePageAssociations[($scope.currentPage*$scope.pageSize) + ($index+1)];
 			$scope.isSaving = false;
 			$scope.information="VIEW USER TYPE PAGE ASSOCIATION"
 			console.log($scope.user);
@@ -335,7 +335,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 							});
 		};
 		
-		$scope.showConfirm = function(ev,index) {
+		$scope.showConfirm = function(ev,$index) {
 			var confirm = $mdDialog.confirm().title(
 					'Are you sure you want to Delete User Type Page Information?')
 					.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -345,7 +345,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 					.then(
 							function() {
 								$scope.status = 'You decided to get rid of your debt.';
-								$scope.deleteUserTypePage(index);
+								$scope.deleteUserTypePage(($scope.currentPage*$scope.pageSize) + ($index+1));
 								$scope.message = 'Delete User Type Page Record sucessfully';
 								$scope.showToast();
 							},

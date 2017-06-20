@@ -60,10 +60,10 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 				function() {});
 	};
 
-	$scope.showEditNotificationUserAssociation = function(ev, index) {
+	$scope.showEditNotificationUserAssociation = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
-		$scope.notificationUser = $scope.notificationUserAssociationList[index];
+		$scope.notificationUser = $scope.notificationUserAssociationList[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.information = "EDIT NOTIFICATION USER ASSOCIATION INFORMATION"
 		console.log($scope.notification);
 		$mdDialog
@@ -86,10 +86,10 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 						function() {});
 	};
 	
-	$scope.viewNotificationUserAssociationInformation = function(ev, index) {
+	$scope.viewNotificationUserAssociationInformation = function(ev, $index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.notificationUser = $scope.notificationUserAssociationList[index];
+		$scope.notificationUser = $scope.notificationUserAssociationList[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
 		$scope.information = "VIEW NOTIFICATION USER ASSOCIATION INFORMATION"
 		console.log($scope.notification);
@@ -135,7 +135,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 		});
 	};
 	
-	$scope.showConfirm = function(ev,index) {
+	$scope.showConfirm = function(ev,$index) {
 		var confirm = $mdDialog.confirm().title(
 				'Are you sure you want to Delete Notification Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
@@ -145,7 +145,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 				.then(
 						function() {
 							$scope.status = 'You decided to get rid of your debt.';
-							$scope.deleteNotificationUserAssociation(index);
+							$scope.deleteNotificationUserAssociation(($scope.currentPage*$scope.pageSize) + ($index));
 						},
 						function() {
 							$scope.status = 'You decided to keep your debt.';

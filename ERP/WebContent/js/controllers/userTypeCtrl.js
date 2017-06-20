@@ -61,10 +61,10 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 				function() {});
 	};
 	  
-	$scope.showEditUserType = function(ev, index) {
+	$scope.showEditUserType = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
-		$scope.userType = $scope.UserTypes[index];
+		$scope.userType = $scope.UserTypes[($scope.currentPage*$scope.pageSize) + ($index+1)];
 		$scope.information = "EDIT USER TYPE"
 		console.log($scope.user);
 		$mdDialog
@@ -86,11 +86,11 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 						function() {});
 	};
 	
-	$scope.viewUserTypeInformation = function(ev, index) {
+	$scope.viewUserTypeInformation = function(ev, $index) {
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
 		$scope.isSaving = false;
-		$scope.userType = $scope.UserTypes[index];
+		$scope.userType = $scope.UserTypes[($scope.currentPage*$scope.pageSize) + ($index+1)];
 		console.log($scope.unit);
 		$mdDialog.show({
 					controller : 'userTypeDialogCtrl',
@@ -154,13 +154,13 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 		utils.showProgressBar();
 	};
 	
-	$scope.showConfirm = function(ev,index) {
+	$scope.showConfirm = function(ev,$index) {
 		var confirm = $mdDialog.confirm().title('Are you sure you want to Delete Unit Information?')
 				.ariaLabel('').targetEvent(ev).ok('YES' ).cancel('NO');
 
 		$mdDialog.show(confirm)
 				.then(function() {
-					$scope.deleteUserType(index);
+					$scope.deleteUserType(($scope.currentPage*$scope.pageSize) + ($index+1));
 				}, function() {});
 	};
 	

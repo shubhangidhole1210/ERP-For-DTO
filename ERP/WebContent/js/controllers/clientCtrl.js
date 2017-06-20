@@ -86,11 +86,11 @@ erpApp
 						utils.showProgressBar();
 					};
 
-					$scope.showEditClient = function(ev, index) {
+					$scope.showEditClient = function(ev, $index) {
 						$scope.information ="EDIT CLIENT INFORMATION"
 						$scope.flag = 1;
 						$scope.isReadOnly = false;
-						$scope.client = $scope.clients[index];
+						$scope.client = $scope.clients[($scope.currentPage*$scope.pageSize) + ($index)];
 						console.log($scope.client);
 						$mdDialog
 								.show({
@@ -111,10 +111,10 @@ erpApp
 										function() {});
 					};
 
-					$scope.viewClientInformation = function(ev, index) {
+					$scope.viewClientInformation = function(ev, $index) {
 						$scope.flag = 2;
 						$scope.isReadOnly = true;
-						$scope.client = $scope.clients[index];
+						$scope.client = $scope.clients[($scope.currentPage*$scope.pageSize) + ($index)];
 						$scope.isSaving = false;
 						$scope.information ="VIEW CLIENT INFORMATION"
 						console.log($scope.user);
@@ -136,14 +136,14 @@ erpApp
 										function() {});
 					};
 
-					$scope.showConfirm = function(ev,index) {
+					$scope.showConfirm = function(ev,$index) {
 						var confirm = $mdDialog.confirm().title(
 								'Are you sure you want to Delete Client Information?')
 								.ariaLabel('Lucky day').targetEvent(ev).ok(
 										'YES' ).cancel('NO');
 						$mdDialog.show(confirm).then(
 										function() {
-											$scope.deleteClient(index);
+											$scope.deleteClient(($scope.currentPage*$scope.pageSize) + ($index));
 										},
 										function() { });
 					};
