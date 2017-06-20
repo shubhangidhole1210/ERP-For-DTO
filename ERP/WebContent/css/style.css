@@ -1068,9 +1068,9 @@ table {
 td, th {
     border: 1px solid rgba(57, 73, 171, 0.48);
     text-align: left;
-    padding-left: 15px; 
-     /* text-align:center; */
-	color: black;
+    padding: 10px;
+    font-size: 13px;
+    color: black;
 	background: rgb(230, 230, 230);
 }
 tr:HOVER{
@@ -1336,6 +1336,7 @@ th
     color: white;
     padding: 12px;
     font-weight: 500;
+    font-size: 17px;
  }
  table{
  	border-spacing: 0;
@@ -1344,8 +1345,9 @@ th
  th{
  	background-color: #03A9F4;
  	text-align: center;
- 	padding-top: 15px;
- 	padding-bottom: 15px;
+ 	padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 14px;
  }
  .error-msg
  {
@@ -1377,9 +1379,10 @@ th
    font-size: 18px;
    padding-top: 10px;
 	padding-bottom: 10px;
-	padding-left: 10px;
+	padding-left: 30px;
 	color: white;
-	font-weight: bold;
+	font-weight: 500;
+    border-bottom: solid 0.1px rgb(121,134,203);
  }
  .company-information
  {
