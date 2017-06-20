@@ -2,7 +2,18 @@
 
 body{
 	background: rgb(230, 230, 230);
+	overflow-y: hidden; 
 }
+
+.section-erp-header{
+	height: 12%;
+}
+
+.section-content{
+	width: 100%;
+	height: 100%;
+}
+
 .erp-user-name
 {
 	font-weight: bold;
@@ -80,9 +91,12 @@ body{
 
 .main-class {
 	display: inline-block;
-	width: 81%;
+	width: 76%;
 	padding-left: 2%;
 	padding-right: 2%;
+	margin-left: 20%;
+	height: 88%;
+    overflow-y: scroll;
 	background: rgb(230, 230, 230);
 }
 .main-class-full-screen {
@@ -120,18 +134,18 @@ div.erp-menu:ACTIVE{
 .erp-menubar
 {
 	background-color:  #106CC8;
-	width: 15%;
+	width: 20%;
 	color: white;
 	font-weight: bold;
-	height: 800px;
+	height: 88%;
 	overflow-y: scroll;
 	font-size: 15px;
 	cursor: pointer;
 	float: left;
-    max-height:100%;
-    padding-top: 100px;
+    max-height:88%;
     display: inline-block;
     position: fixed;
+    overflow-x: hidden;
 }
 .erp-menubar li
 {
@@ -186,9 +200,9 @@ div.erp-menu:ACTIVE{
 }
 .erp-information
 {
-	padding-top: 120px;
+	padding-top: 20px;
 	width: 100%;
-	margin-left: 20%;
+	
 }
 .displayScroll{
 	overflow-y: hidden;
