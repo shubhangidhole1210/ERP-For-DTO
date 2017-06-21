@@ -16,13 +16,13 @@
 	<div class="erp-information">
 		<div ng-repeat="input in data">
 			 <md-input-container style="margin-right: 10px;">
-				<label>{{input.reportinputparameter.displayName}}</label>
-				<input ng-if="input.reportinputparameter.inputType === 'Date' || input.reportinputparameter.inputType === 'admin'" ng-model="input.value" type="{{input.reportinputparameter.inputType}}" placeholder="{{input.reportinputparameter.displayName">
-				<md-select ng-if="input.reportinputparameter.inputType === 'select'"
+				<label>{{input.displayName}}</label>
+				<input ng-if="input.inputType === 'Date' || input.inputType === 'text'" ng-model="input.value" type="{{input.inputType}}" placeholder="{{input.displayName">
+				<md-select ng-if="input.inputType === 'list'"
 							ng-model="input.value"
 							name="report" value="item.id"
-							aria-label="{{input.reportinputparameter.displayName}}" required> 
-							<md-option ng-repeat="item in input.reportinputparameter.data" ng-value="item.id">{{item.description}} 
+							aria-label="{{input.displayName}}" required> 
+							<md-option ng-repeat="item in input.data" ng-value="item.id">{{item.description}} 
 							</md-option> 
 				</md-select>
 			</md-input-container>
