@@ -33,7 +33,7 @@
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
 							<label class="input-filed-label">VEHICLE NUMBER</label> <input
-								type="text" required name="vehicleName" ng-model="vehicleNo" ng-pattern="^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$">
+								type="text" required name="vehicleName" ng-model="vehicleNo">
 							<div ng-messages="securityInformation.vehicleName.$error">
 								<div ng-message="required">Please enter Vehicle Number</div>
 							</div>
@@ -41,7 +41,7 @@
 
 							<md-input-container class="md-block" flex-gt-sm>
 							<label class="input-filed-label">DRIVER NAME</label> <input
-								type="text" required name="driverName" ng-model="driver_Name" ng-minlngth="2" limit-to="255">
+								type="text" required name="driverName" ng-model="driver_Name" ng-minlngth="2" limit-to="255" onkeypress='return event.charCode >= 65 && event.charCode <= 122'>
 							<div ng-messages="securityInformation.driverName.$error">
 								<div ng-message="required">Please enter Driver Name</div>
 								<div ng-message="minlength">Driver Name should be minimum 2 character</div>

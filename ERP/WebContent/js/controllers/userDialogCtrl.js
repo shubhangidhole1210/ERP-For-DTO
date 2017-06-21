@@ -52,7 +52,7 @@ erpApp
 								dob.getMonth(), dob.getDate());
 						console.log("max age " + $scope.maxAge);
 						if (doj >= currentDate) {
-							$scope.invalidDOJMsg = "Invalid date!! Joining should not be in future"
+							$scope.invalidDOJMsg = "Invalid date!! Joining date should not be in future";
 							$scope.userInformation.doj.$setValidity(
 									"customMsg", false);
 						} else if (doj <= $scope.maxAge) {

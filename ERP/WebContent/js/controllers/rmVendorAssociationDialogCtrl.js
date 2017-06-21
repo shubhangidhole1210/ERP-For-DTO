@@ -51,14 +51,14 @@ erpApp		.controller(
 											console.log(data);
 											if(data.data.code === 0){
 												console.log(data.data.message);
-												$rootScope.$emit(
-														"saveRMOrderAssociationError", {});
 												console.log(data);
 												$scope.hide();
 												utils.showToast('Something went worng. Please try again later.');
 											}else if(data.data.code === 2){
 												$rootScope.$emit("CallPopulateRMVendorAssociationList",{});
 												$scope.hide();
+												$rootScope.$emit(
+														"saveRMOrderAssociationError", {});
 												utils.showToast(data.data.message);
 											}
 											

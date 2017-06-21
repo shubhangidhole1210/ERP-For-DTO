@@ -73,6 +73,7 @@ erpApp.controller('userTypeDialogCtrl',function($scope, $http, $mdDialog, $mdToa
 			$scope.saveUserTypeInformation($event);
 		} else {
 			console.log('its else block');
+			utils.showToast("Please fill all required information");
 		}
 	}
 	

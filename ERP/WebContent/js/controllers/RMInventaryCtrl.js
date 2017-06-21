@@ -68,30 +68,26 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 								function() {});
 					};
 	
-
 					$scope.deleteRMInventory = function(index) {
 						console.log($scope.rmInventary);
-						$http(
-								{
-									method : 'delete',
-									url : SERVER_URL
-											+ "rawmaterialinventory/delete/"
-											+ $scope.rmInventarys[index].id
-
-								}).then(
-								function successCallback(data) {
+						var httpparams = {};
+						httpparams.method = 'delete';
+						httpparams.url = SERVER_URL + "rawmaterialinventory/delete/" + $scope.rmInventarys[index].id;
+						httpparams.headers = {
+								auth_token : Auth.getAuthToken()
+							};
+						$http(httpparams).then(function successCallback(data) {
 									$mdDialog.hide();
-									$rootScope.$emit(
-											"CallPopulateRMInventaryList", {});
-									console.log(data);
-									$scope.message = 'Delete Raw Material inventory Record sucessfully';
-									$scope.showToast();
-								}, function errorCallback(data) {
-									console.log("Error");
-									utils.showToast('We are Sorry. Something went wrong. Please try again later.');
-								});
-						$scope.showProgressBarOne();
+							utils.showToast('Delete Raw Material inventory Record sucessfully!');
+							$rootScope.$emit("CallPopulateRMInventaryList", {});
+							console.log(data);
 
+						}, function errorCallback(data) {
+							console.log("Error");
+							utils.showToast("We are Sorry. Something went wrong. Please try again later.");
+							
+						});
+						utils.showProgressBar();
 					};
 					
 					$scope.showConfirm = function(ev,$index) {
@@ -115,7 +111,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						$scope.isRmVisible = true;
 						$scope.rmInventary = $scope.rmInventarys[($scope.currentPage*$scope.pageSize) + ($index)];
 						console.log($scope.rmInventary);
-						$scope.information="EDIT NEW RAW MATERIAL INVENTORY INFORMATIONn"
+						$scope.information="EDIT  RAW MATERIAL INVENTORY INFORMATION"
 						$mdDialog
 								.show({
 									controller : 'RMInvenaryDialogeController',
@@ -142,7 +138,7 @@ erpApp.controller('rmInventoryCtrl',function($scope,$http, $mdDialog,SERVER_URL,
 						$scope.rmInventary = $scope.rmInventarys[($scope.currentPage*$scope.pageSize) + ($index)];
 						$scope.isSaving = false;
 						$scope.isRmVisible = true;
-						$scope.information="VIEW NEW RAW MATERIAL INVENTORY INFORMATION"
+						$scope.information="VIEW  RAW MATERIAL INVENTORY INFORMATION"
 						console.log($scope.rmInventary);
 						$mdDialog.show({
 									controller : 'RMInvenaryDialogeController',

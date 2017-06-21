@@ -109,7 +109,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 							$scope.status = 'You cancelled the dialog.';
 						});
 	  };
-	  function DialogVendorController($scope, $mdDialog,userTypePageAsso,flag,action,$rootScope,$mdToast,information) {
+	  function DialogVendorController($scope, $mdDialog,userTypePageAsso,flag,action,$rootScope,$mdToast,information,utils) {
 		    $scope.userTypePageAsso=userTypePageAsso;
 		    $scope.flag=flag;
 		    $scope.isReadOnly = action;
@@ -198,6 +198,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 					$scope.showProgressBar($event);
 				} else {
 					console.log('its else block');
+					utils.showToast("Please fill required information")
 				}
 			}
 		    

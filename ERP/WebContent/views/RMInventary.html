@@ -16,7 +16,7 @@
 				<th>NAME</th>
 				<!-- <th>RACK NUMBER</th> -->
 				<th>QUANTITY AVAILABLE</th>
-				<th>action</th>
+				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="rmInventarys in data | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ name: searchText } " >
 			    <td>{{(currentPage*pageSize) + ($index+1) }}</td>

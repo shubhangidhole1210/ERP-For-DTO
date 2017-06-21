@@ -72,7 +72,7 @@ erpApp
 								function() {});
 					};
 		
-					$scope.deleteUser = function(index) {
+					/*$scope.deleteUser = function(index) {
 						console.log($scope.user);
 						$http(
 								{
@@ -88,7 +88,7 @@ erpApp
 							console.log("Error");
 						});
 						$scope.showProgressBarOne()
-					};
+					};*/
 
 					$scope.showRMVendorAssociation = function(ev, $index) {
 						$scope.flag = 1;
@@ -147,7 +147,7 @@ erpApp
 					$scope.deleteRMVendorAssociation = function(index) {
 						var httpparams = {};
 						httpparams.method = 'delete';
-						httpparams.url = SERVER_URL + "unit/delete/" + $scope.rmOrderAssociations[index].id;
+						httpparams.url = SERVER_URL + "rmvendorasso/delete/" + $scope.rmOrderAssociations[index].id;
 						httpparams.headers = {
 								auth_token : Auth.getAuthToken()
 							};
@@ -155,6 +155,11 @@ erpApp
 							utils.hideProgressBar();
 							$rootScope.$emit("CallPopulateRMVendorAssociationList", {});
 							console.log(data);
+							if(data.data.code === 1){
+								utils.showToast("Raw material vendor association deleted Successfully !")
+							}else{
+								utils.showToast("We are Sorry. Something went wrong. Please try again later.")
+							}
 
 						}, function errorCallback(data) {
 							console.log("Error");
@@ -174,8 +179,6 @@ erpApp
 										function() {
 											$scope.status = 'You decided to get rid of your debt.';
 											$scope.deleteRMVendorAssociation(($scope.currentPage*$scope.pageSize) + ($index));
-											utils.showToast('Rm Vendor Association Deleted Sucessfully!');
-										
 										},
 										function() {
 											$scope.status = 'You decided to keep your debt.';

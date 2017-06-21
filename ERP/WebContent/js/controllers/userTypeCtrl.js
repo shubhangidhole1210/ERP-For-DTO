@@ -155,7 +155,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 	};
 	
 	$scope.showConfirm = function(ev,$index) {
-		var confirm = $mdDialog.confirm().title('Are you sure you want to Delete Unit Information?')
+		var confirm = $mdDialog.confirm().title('Are you sure you want to Delete User Type Information?')
 				.ariaLabel('').targetEvent(ev).ok('YES' ).cancel('NO');
 
 		$mdDialog.show(confirm)

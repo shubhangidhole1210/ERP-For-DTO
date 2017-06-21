@@ -72,10 +72,12 @@
           <td>{{orderProductAssociation.product.partNumber}}</td>
           <!-- <td>{{orderProductAssociation.product.description}}</td> -->
           <!-- <td>{{orderProductAssociation.quantity}}</td> -->
-          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" name="quantity" ng-model="orderProductAssociation.quantity" ng-change="orderProductAssociation.quantity; updateQuantity(orderProductAssociation.quantity)">
-             <div ng-messages="productOrderInformation.quantity.$error">
+          <td><input type="number" ng-value="{{orderProductAssociation.quantity}}" name="quantity1{{$index}}" ng-model="orderProductAssociation.quantity"  min="1">
+             <!-- <div ng-messages="productOrderInformation.quantity.$error">
                   <div ng-message ="customMsg" class="error-msg">{{updateQuantityMsg}}</div>
-             </div>
+             </div> -->
+              <div ng-show="productOrderInformation.quantity1{{$index}}.$error.min"
+				class="error-msg">Quantity should be greater then 0</div>
           </td>
           <td><button type="button"  ng-click="deleteProduct($index)" class="multiple-added-delete">Delete</button></td>
           </tr>
@@ -83,7 +85,10 @@
           <tr ng-repeat="orderProductAssociation in productOrderList">
           <td  style="background: white;">{{orderProductAssociation.product.partNumber}}</td>
          <!--  <td  style="background: white;">{{orderProductAssociation.product.description}}</td> -->
-          <td  style="background: white;"><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-disabled="isReadOnly"></td>
+          <td  style="background: white;"><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-model="orderProductAssociation.quantity" ng-disabled="isReadOnly" name="quantity2{{$index}}" min="1">
+               <div ng-show="productOrderInformation.quantity2{{$index}}.$error.min"
+				class="error-msg">Quantity should be greater then 0</div>
+          </td>
           <td  style="background: white;"><button type="button" ng-click="deleteProduct($index)" ng-disabled="isReadOnly" class="multiple-added-delete">Delete</button></td>
           </tr>
         </table>

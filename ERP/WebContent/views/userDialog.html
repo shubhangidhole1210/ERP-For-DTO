@@ -57,10 +57,10 @@
 				ng-disabled="isReadOnly"
 				onkeypress='return event.charCode >= 65 && event.charCode <= 122' limit-to="255">
 			<div ng-messages="userInformation.lastName.$error">
-				<div ng-message="required">Please enter  last name</div>
+				<div ng-message="required">Please enter  Last Name</div>
 				<div ng-message="minlength">Last Name Should be minimum two
 					character</div>
-				<div ng-message="maxlength">Last Name Should be minimum 255
+				<div ng-message="maxlength">Last Name Should be maximum 255
 					character</div>
 			</div>
 			</md-input-container>
@@ -75,11 +75,11 @@
 				ng-disabled="isReadOnly"
 				onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
 			<div ng-messages="userInformation.mobile.$error">
-				<div ng-message="required">Please enter user mobile number</div>
+				<div ng-message="required">Please enter Mobile Number</div>
 				<div ng-message="apierror">{{message}}</div>
-				<div ng-message="minlength">mobile number must be 10 digit</div>
-				<div ng-message="maxlength">mobile number must be 10 digit</div>
-				<div ng-message="pattern">Please enter valid mobile number</div>
+				<div ng-message="minlength">Mobile Number must be 10 digit</div>
+				<div ng-message="maxlength">Mobile Number must be 10 digit</div>
+				<div ng-message="pattern">Please enter valid Mobile Number</div>
 
 			</div>
 			</md-input-container>
@@ -89,11 +89,11 @@
 				ng-model="user.email" required name="email" ng-disabled="isReadOnly"
 				placeholder="user@gmail.com"  ng-maxLength="255" limit-to="255">
 			<div ng-messages="userInformation.email.$error">
-				<div ng-message="required">Please enter user email id</div>
+				<div ng-message="required">Please enter Email Id</div>
 				<div ng-message="email">Please enter valid email id</div>
 				<div ng-message="apierror">{{message}}</div>
-				<div ng-message="minlength">Email id should be minimum 2 character</div>
-				<div ng-message="maxlength">Email id should be maximum 255 character</div>
+				<div ng-message="minlength">Email Id should be minimum 2 character</div>
+				<div ng-message="maxlength">Email Id should be maximum 255 character</div>
 			</div>
 			</md-input-container>
 		</div>
@@ -102,7 +102,7 @@
 			ng-required="true" required ng-init="getUserType()" id="userType"> 
 			<md-option ng-repeat="userType in data" ng-value="userType.id">{{userType.usertypeName}} </md-option> </md-select>
 		 <div  ng-messages="userInformation.userType.$error">
-          <div ng-message="required">Please select user Type</div>
+          <div ng-message="required">Please select User Type</div>
         </div>
 		
 		
@@ -116,7 +116,7 @@
 			type="date" placeholder="Enter date of birth" ng-model="user.dob"
 			name="dob" required id="dob" ng-disabled="isReadOnly" ng-change="birthDateValidation(user.dob);">
 		<div ng-messages="userInformation.dob.$error">
-			<div ng-message="required">Please Enter Date of Birth</div>
+			<div ng-message="required">Please enter Date of Birth</div>
 			<div ng-message="customMsg1">{{invalidDOBMsg}}</div>
 		</div>
 		 <!--  <div ng-show=" userInformation.dob.$error.customeMsg" class="error-msg">{{invalidDOBMsg}}</div> -->
@@ -129,10 +129,10 @@
 			id="doj" ng-change="validateJoiningDate(user.dob,user.doj)"> <label
 			class="input-filed-label">DATE OF JOINING[MM/DD/YYYY]*</label>
 		<div ng-messages="userInformation.doj.$error">
-			<div ng-message="required">Please Enter Date of Joining</div>
+			<div ng-message="required">Please enter Date of Joining</div>
 		</div>
-		<div ng-show=" userInformation.doj.$error.min" class="error-msg">joining
-			Date should be greater than birth date</div>
+		<div ng-show=" userInformation.doj.$error.min" class="error-msg">Joining
+			Date should be greater than Birth Date</div>
 			<div ng-show=" userInformation.doj.$error.customMsg" class="error-msg">{{invalidDOjMsg}}</div>
 			<div ng-show=" userInformation.doj.$error.customMsg" class="error-msg">{{invalidDOJMsg}}</div>
 		</md-input-container>

@@ -8,7 +8,7 @@
 		</div>
 		<md-input-container class="md-block" flex-gt-sm type="password" style="margin-left:2%">
 		<input type="text" ng-model="searchText" name="password"
-			placeholder="Search by Name" class="search-text"> </md-input-container>
+			placeholder="Search by User Type Name" class="search-text"> </md-input-container>
 		<h1 class="table-header">USER TYPE LIST</h1>
 		<table>
 			<tr>
@@ -17,7 +17,7 @@
 				<th>DESCRIPTION</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="userType in data  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ name: searchText }">
+			<tr ng-repeat="userType in data |  filter:{usertypeName: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{userType.usertypeName}}</td>
 				<td>{{userType.description}}</td>

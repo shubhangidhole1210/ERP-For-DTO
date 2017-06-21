@@ -55,7 +55,7 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 								$scope.message = 'Something went worng. Please try again later.';
 								$scope.showToast();
 							}else{
-								$scope.message = 'User Information saved successfully.';
+								$scope.message = 'Product Inventory Information saved successfully.';
 								$scope.showToast();
 								$rootScope.$emit("callPopulateProductInventoryList",{});
 							}

@@ -129,8 +129,8 @@ erpApp.controller('pageCtrl', function($scope,$http, $mdDialog,SERVER_URL,$rootS
 			utils.hideProgressBar();
 			$rootScope.$emit("CallPopulatePageList", {});
 			console.log(data);
-			$scope.message = 'Delete page sucessfully';
-			$scope.showToast();
+			/*$scope.message = 'Delete page sucessfully';*/
+			utils.showToast("Delete page sucessfully");
 
 		}, function errorCallback(data) {
 			console.log("Error");
