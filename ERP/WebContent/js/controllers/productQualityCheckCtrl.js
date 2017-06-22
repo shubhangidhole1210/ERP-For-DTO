@@ -4,6 +4,10 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 	  $scope.reamrk = '';
 	  $scope.currentDate = utils.getCurrentDate();
 	 
+	  $scope.productQualityMsg = false;
+	  
+	  $scope.isQualityCheckButton =true;
+	  
 	  $scope.getProductionPlanByDate=function(){
 		  utils.showProgressBar();
 			var httpparams = {};
@@ -16,11 +20,18 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 				utils.hideProgressBar();
 				$scope.productionPlans = response.data;
 				console.log(response);
+				 $scope.displayMsg();
 			}, function errorCallback(response) {
 				console.log("Error");
 				utils.hideProgressBar();
 			});
 	  };
+	  
+	  
+	  $scope.displayMsg = function(){
+		  $scope.productQualityMsg = $scope.productionPlans.length === 0 ? true : false;
+		  $scope.isQualityCheckButton = $scope.productionPlans.length === 0 ? false : true;
+	  }
 	
 	/*$scope.validatePassAndFailQuantity = function(qualityPendingQuantity,passQuantity,failQuantity){
 		console.log("pending quantity : " + qualityPendingQuantity);

@@ -261,6 +261,11 @@ td, th {
     color: black;
 	background: rgb(230, 230, 230);
 }
+
+td th :HOVER{
+	background-color: pink;
+	color:red
+}
 tr:HOVER{
 	background-color: #c0c0c0;
 	color: #800000;
@@ -786,3 +791,21 @@ margin: 15px 28px;
 .pagination-div{
     margin-left:20px;
 }
+
+.cancel{
+	font-size: 20px;
+	width:35px;
+	background: transparent;
+	/* padding-top: 10px;
+	padding-bottom: 10px; */
+	margin-left: 435px;
+	border: none;
+	color: white;
+}
+
+.form-title{
+	font-size: 30px;
+    margin-left: 300px;
+}
+
+

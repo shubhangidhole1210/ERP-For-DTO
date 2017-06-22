@@ -49,7 +49,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 			templateUrl : 'views/productRMAssociationDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
@@ -80,7 +80,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 		      templateUrl: 'views/productRMAssociationDialog.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
-		      clickOutsideToClose:true,
+		      clickOutsideToClose:false,
 		      fullscreen: $scope.customFullscreen ,
 		      locals : {
 		    	  productRmAsso : $scope.productRmAsso,
@@ -134,7 +134,7 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 						templateUrl : 'views/productRMAssociationDialog.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
-						clickOutsideToClose : true,
+						clickOutsideToClose : false,
 						fullscreen : $scope.customFullscreen,
 						locals : {
 							productRmAsso : $scope.productRmAsso,

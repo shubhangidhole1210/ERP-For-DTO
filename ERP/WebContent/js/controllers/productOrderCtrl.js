@@ -52,7 +52,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			templateUrl : 'views/productOrderDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
@@ -81,7 +81,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		      templateUrl: 'views/productOrderDialog.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
-		      clickOutsideToClose:true,
+		      clickOutsideToClose:false,
 		      fullscreen: $scope.customFullscreen ,
 		      locals : {
 		    	  productOrder : $scope.productOrder,
@@ -130,7 +130,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 						templateUrl : 'views/productOrderDialog.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
-						clickOutsideToClose : true,
+						clickOutsideToClose : false,
 						fullscreen : $scope.customFullscreen,
 						locals : {
 							  productOrder : $scope.productOrder,

@@ -52,12 +52,15 @@
 										type="number" ng-model="rmInvoiceItem.goodQuantity"
 										ng-change="checkReceivedQuantity($index)"
 										name="recivedOk{{$index}}" max="{{rmInvoiceItem.quantity}}"
-										required min="1">
-									<div
+										required >
+									<!-- <div
 										ng-messages="qualityInspectionForm['recivedOk' + $index].$error">
 										<div ng-message="required">Please enter Received
 											Quantity</div>
-									</div>
+									</div> -->
+									  <div ng-show="qualityInspectionForm.recivedOk{{$index}}.$error.required" class="error-msg">
+									    Please enter quantity
+									  </div>
 									<div
 										ng-show="qualityInspectionForm.recivedOk{{$index}}.$error.max"
 										class="error-msg">The value must be in range 0 to

@@ -37,8 +37,13 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 		});
 	};
 
-	$scope.submitInformation = function($event) {
-		$scope.saveDispatchQuantity();
+	$scope.submitInformation = function(isvaliduser,$event) {
+		if(isvaliduser){
+			$scope.saveDispatchQuantity();
+		}else{
+			utils.showToast("Please fill all required information")
+		}
+	
      };
      
 	$scope.saveDispatchQuantity=function(){

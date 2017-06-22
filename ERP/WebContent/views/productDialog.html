@@ -5,6 +5,8 @@
 	<div class="md-toolbar-tools">
 		<h2>{{information}}</h2>
 		<span flex></span>
+		<md-button class="md-icon-button" ng-click="cancel()"> <md-icon>&#10006;</md-icon>
+		</md-button>
 	</div>
 	</md-toolbar>
 
@@ -29,11 +31,10 @@
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">PART NUMBER</label> <input
 				type="text" ng-model="product.partNumber" value="product.partNumber"
-				required name="partNumber" ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255" limit-to="255">
+				required name="partNumber" ng-disabled="isReadOnly" ng-minlength="2" limit-to="255">
 			<div ng-messages="productInformation.partNumber.$error">
 				<div ng-message="required">Please enter Product Part Number</div>
 				<div ng-message="minlength">Part Number should be minimum 2 character</div>
-				<div ng-messages="maxlength">Part Number should be maximum 255 character</div>
 			</div>
 			</md-input-container>
 		</div>

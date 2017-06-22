@@ -46,7 +46,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 			templateUrl : 'views/userTypeInformation.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			fullscreen : $scope.customFullscreen,
 			locals : {
 				userType : $scope.userType,
@@ -73,7 +73,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 					templateUrl : 'views/userTypeInformation.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
-					clickOutsideToClose : true,
+					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
 						userType : $scope.userType,
@@ -97,7 +97,7 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 					templateUrl : 'views/userTypeInformation.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
-					clickOutsideToClose : true,
+					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
 						userType : $scope.userType,
@@ -111,27 +111,6 @@ erpApp.controller('userTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$ro
 						function() {});
 	};
 	
-	/*$scope.deleteUserType = function(index) {
-		console.log($scope.userType);
-		console.log('$scope.userTypes : ', data)
-		var httpparams = {};
-		httpparams.method = 'delete';
-		httpparams.url = SERVER_URL + "userType/delete/" + $scope.UserTypes[index].id;
-		httpparams.headers = {
-				auth_token : Auth.getAuthToken()
-			};
-		$http(httpparams).then(function successCallback(data) {
-					$mdDialog.hide();
-			$rootScope.$emit("CallPopulateUserTypeList", {});
-			console.log(data);
-			utils.showToast('Delete UserType sucessfully');
-		}, function errorCallback(data) {
-			console.log("Error");
-			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
-			$mdDialog.hide();
-		});
-     utils.showProgressBar()
-	};*/
 	
 	$scope.deleteUserType = function(index) {
 		var httpparams = {};

@@ -49,7 +49,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 			templateUrl : 'views/rawMaterialDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
@@ -79,7 +79,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 					templateUrl : 'views/rawMaterialDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
-					clickOutsideToClose : true,
+					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
 						rawMaterial : $scope.rawMaterial,
@@ -106,7 +106,7 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 					templateUrl : 'views/rawMaterialDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
-					clickOutsideToClose : true,
+					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
 						rawMaterial : $scope.rawMaterial,
@@ -164,6 +164,4 @@ erpApp.controller('rawMaterialCtrl', function($scope, $http, $mdDialog, $mdToast
 		 utils.scrollToTop();
 		 $scope.currentPage = $scope.currentPage + 1;
 	};
-	
-
 });

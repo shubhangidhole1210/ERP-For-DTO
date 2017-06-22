@@ -52,9 +52,11 @@
 										<label class="input-filed-label">RECEIVED</label> 
 										<input type="number" ng-model="rmInvoiceItem.goodQuantity" ng-change="checkReceivedQuantity($index)"
 											name="recivedOk{{$index}}" max="{{rmInvoiceItem.quantity}}" required min="1">
-										<div ng-messages="storeForm['recivedOk' + $index].$error">
+										<!-- <div ng-messages="storeForm['recivedOk' + $index].$error">
 											<div ng-message="required">Please enter Received Quantity</div>
-										</div>
+										</div> -->
+										<div ng-show="storeForm.recivedOk{{$index}}.$error.reqired" class="error-msg">
+											Please enter quantity</div>
 										<div ng-show="storeForm.recivedOk{{$index}}.$error.max" class="error-msg">
 											The value must be in range 0 to {{rmInvoiceItem.quantity}}!</div>
 										<!-- <div ng-show="storeForm.recivedOk{{$index}}.$error.required" class="error-msg">

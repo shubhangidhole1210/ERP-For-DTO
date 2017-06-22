@@ -2,11 +2,14 @@
   <form name="userTypePageInformtion"  novalidate>
   
     <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>{{information}}</h2>
-        <span flex></span>
-      </div>
-    </md-toolbar>
+	<div class="md-toolbar-tools">
+		<h2>{{information}}</h2>
+		<span flex></span>
+		<md-button class="cancel" ng-click="cancel()"> <md-icon
+			>&#10006;</md-icon>
+		</md-button>
+	</div>
+	</md-toolbar>
 
     <md-dialog-content >
       <div class="md-dialog-content" >

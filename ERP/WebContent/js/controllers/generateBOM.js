@@ -76,22 +76,27 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 		}
 	};
 
-	$scope.caluculatePrice = function(vendorId,quantity1,index) {
-		console.log("quanity1 :",quantity1);
-		console.log()
-		/*if(id){*/
-		     
-			/*console.log("in if condition: ", id);*/
+	$scope.caluculatePrice = function(vendorId,quantity1,$index) {
+		console.log("in caluclate function")
+		console.log("vendorId :" ,vendorId);
+		console.log("quantity1 : " ,quantity1);
+		console.log("$index : " ,$index);
 			console.log('$scope.vendorList', $scope.vendorList)
-			for (var i = 0; i < $scope.vendorList.length; i++) {
-				$scope.data.data[index].pricePerUnit = $scope.vendorList[i].pricePerUnit * quantity1;
+			if(vendorId === vendorId){
+				console.log("if condition")
+				for (var i = 0; i < $scope.vendorList.length; i++) {
+				$scope.data.data[$index].pricePerUnit = $scope.vendorList[i].pricePerUnit * quantity1;
 			}
-		/*}*/
+			}
 	};
 	
-	/*$scope.vendorChange = function(id){
-		console.log("ID :" , id);
+	/*$scope.calculatePrice = function(vendorId,quantity1,$index){
+		console.log("in caluclate function")
+		console.log("vendorId :" ,vendorId);
+		console.log("quantity1 : " ,quantity1);
+		console.log("$index : " ,$index);
 	}*/
+
 
 	$scope.duplicateRM = function(rawMaterialVendorList) {
 		console.log("in duplicate RM function");

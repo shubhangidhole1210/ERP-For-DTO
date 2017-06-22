@@ -22,9 +22,10 @@
 		        	<td>{{product.achivedQuantity}}</td>
 		        	<td>
 		         		<md-input-container class="md-block" flex-gt-sm>
-							<input type="number" ng-model="product.achived" name="achivedQuantity" required>
+							<input type="number" ng-model="product.achived" name="achivedQuantity" required min="0">
 							<div ng-messages="todaysProductionPlanForm.achivedQuantity.$error">
              					<div ng-message="required">please enter Quantity </div>
+             					<div ng-message="min">Invalid quantity!!quantity should be 0 or greater then 0</div>
             				</div>
 						</md-input-container>
 					</td>

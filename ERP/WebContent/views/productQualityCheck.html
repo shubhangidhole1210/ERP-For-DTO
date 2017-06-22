@@ -55,7 +55,12 @@
 			</td>
         </tr>
      </table>
-      <div class="quality-btn">
+     
+           <div ng-show="productQualityMsg" class="active-information">
+                          There are no product orders for Product Quality check. Please update todays production plan.
+           </div>
+     
+      <div class="quality-btn" ng-show="isQualityCheckButton">
              <md-dialog-actions layout="row">
       <md-button class="md-raised" ng-click="submitInformation(productQualityForm.$valid,$event)" style="background: rgba(63, 81, 181, 0.59);color: white;" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
       <md-button class="md-raised" ng-click="cancelProductQualityForm()" style="background: rgba(63, 81, 181, 0.59);color: white;">CANCEL</md-button>

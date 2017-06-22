@@ -44,7 +44,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 			templateUrl : 'views/notificationUserAssociationDialogue.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : true,
 			locals : {
@@ -73,7 +73,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 					templateUrl : 'views/notificationUserAssociationDialogue.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
-					clickOutsideToClose : true,
+					clickOutsideToClose : false,
 					fullscreen : true,
 					locals : {
 						notificationUser : $scope.notificationUser,
@@ -99,7 +99,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 					templateUrl : 'views/notificationUserAssociationDialogue.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
-					clickOutsideToClose : true,
+					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
 						notificationUser : $scope.notificationUser,

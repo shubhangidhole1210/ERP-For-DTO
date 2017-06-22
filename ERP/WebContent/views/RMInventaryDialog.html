@@ -1,11 +1,13 @@
 <md-dialog class="dialogueInfo erp-dialog">
 <form name="RMInventaryInformation" novalidate>
-	<md-toolbar>
-	<div class="md-toolbar-tools">
-		<h2>{{information}}</h2>
-		<span flex></span>
-	</div>
-	</md-toolbar>
+	 <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{information}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">&#10006;</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
 	<md-dialog-content>
 	<div class="md-dialog-content">
 		<div layout-gt-sm="row">

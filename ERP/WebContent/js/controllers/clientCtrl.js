@@ -51,7 +51,7 @@ erpApp
 							templateUrl : 'views/clientDialog.html',
 							parent : angular.element(document.body),
 							targetEvent : ev,
-							clickOutsideToClose : true,
+							clickOutsideToClose : false,
 							onRemoving : function(){console.log('Removing user dialog');},
 							fullscreen : $scope.customFullscreen,
 							locals : {
@@ -98,7 +98,7 @@ erpApp
 									templateUrl : 'views/clientDialog.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
-									clickOutsideToClose : true,
+									clickOutsideToClose : false,
 									fullscreen : $scope.customFullscreen,
 									locals : {
 										client : $scope.client,
@@ -123,7 +123,7 @@ erpApp
 									templateUrl : 'views/clientDialog.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
-									clickOutsideToClose : true,
+									clickOutsideToClose : false,
 									fullscreen : $scope.customFullscreen,
 									locals : {
 										client : $scope.client,

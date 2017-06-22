@@ -88,7 +88,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 			templateUrl : 'views/userPageTypeAssoInfo.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
@@ -271,7 +271,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 		      templateUrl: 'views/userPageTypeAssoInfo.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
-		      clickOutsideToClose:true,
+		      clickOutsideToClose:false,
 		      fullscreen: $scope.customFullscreen ,
 		      locals : {
 		    	  userTypePageAsso : $scope.userTypePageAsso,
@@ -317,7 +317,7 @@ erpApp.controller('userTypePageAssoCtrl', function($scope,$http, $mdDialog,SERVE
 						templateUrl : 'views/userPageTypeAssoInfo.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
-						clickOutsideToClose : true,
+						clickOutsideToClose : false,
 						fullscreen : $scope.customFullscreen,
 						locals : {
 							  userTypePageAsso : $scope.userTypePageAsso,

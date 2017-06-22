@@ -60,7 +60,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 			templateUrl : 'views/productInventoryDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
@@ -88,7 +88,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 		      templateUrl: 'views/productInventoryDialog.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
-		      clickOutsideToClose:true,
+		      clickOutsideToClose:false,
 		      fullscreen: $scope.customFullscreen ,
 		      locals : {
 		    	  productInventory : $scope.productInventory,
@@ -133,7 +133,7 @@ erpApp.controller('productInventoryCtrl', function($scope,$http, $mdDialog,SERVE
 						templateUrl : 'views/productInventoryDialog.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
-						clickOutsideToClose : true,
+						clickOutsideToClose : false,
 						fullscreen : $scope.customFullscreen,
 						locals : {
 							  productInventory : $scope.productInventory,

@@ -41,7 +41,7 @@
 <div class="erp-information displayScroll" ng-init="getProductionPlanList()">
 <!-- <p style="font-weight: bold;font-size: 20px;position: fixed;">PRODUCTION PLAN</p> -->
 <h1 class="table-header">PRODUCTION PLAN</h1>
-<form  name="qualityInspectionForm " novalidate style="width: 900px;margin-top: 5%">
+<form  name="prodctionPlan " novalidate style="width: 900px;margin-top: 5%">
 <!-- <div class="display-scroll"> -->
 <ion-content delegate-handle="mainScroll" has-bouncing="true" scroll="true">
 <table id="customers" class="">
@@ -70,10 +70,11 @@
       <th>Achieved</th>
       <tr>
         <td>
-        <input type="number" class="quantity-input" ng-model="productProductionPlanItem.target_quantity">
+        <input type="number" class="quantity-input" ng-model="productProductionPlanItem.target_quantity" max="999999999" name="targetQuantity{{$index}}">
+          <div ng-show="prodctionPlan.targetQuantity{{$index}}.$error.max" class="error-msg">Enter quantity upto 99999999</div>
         </td>
         <td>
-         <input type="number" class="quantity-input" ng-model="productProductionPlanItem.achived_quantity">
+         <input type="number" class="quantity-input" ng-model="productProductionPlanItem.achived_quantity" ng-disabled="true">
         </td>
       </tr>
     </table>

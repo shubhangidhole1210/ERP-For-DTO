@@ -55,7 +55,7 @@ erpApp
 							templateUrl : 'views/RMVendorDialog.html',
 							parent : angular.element(document.body),
 							targetEvent : ev,
-							clickOutsideToClose : true,
+							clickOutsideToClose : false,
 							onRemoving : function(){console.log('Removing user dialog');},
 							fullscreen : $scope.customFullscreen,
 							locals : {
@@ -103,7 +103,7 @@ erpApp
 									templateUrl : 'views/RMVendorDialog.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
-									clickOutsideToClose : true,
+									clickOutsideToClose : false,
 									fullscreen : $scope.customFullscreen,
 									locals : {
 										rmOrderAssociation : $scope.rmOrderAssociation,
@@ -130,7 +130,7 @@ erpApp
 									templateUrl : 'views/RMVendorDialog.html',
 									parent : angular.element(document.body),
 									targetEvent : ev,
-									clickOutsideToClose : true,
+									clickOutsideToClose : false,
 									fullscreen : $scope.customFullscreen,
 									locals : {
 										rmOrderAssociation : $scope.rmOrderAssociation,

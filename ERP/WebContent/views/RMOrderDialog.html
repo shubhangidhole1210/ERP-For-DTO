@@ -1,10 +1,12 @@
 <md-dialog aria-label="Mango (Fruit)" class="dialogueInfo"
 	ng-init="getRmForOrder()">
 <form name="RMOrderInformation" novalidate>
-	<md-toolbar>
+<md-toolbar>
 	<div class="md-toolbar-tools">
 		<h2>{{title}}</h2>
 		<span flex></span>
+		<md-button class="md-icon-button" ng-click="cancel()"> <md-icon>&#10006;</md-icon>
+		</md-button>
 	</div>
 	</md-toolbar>
 	<md-dialog-content>

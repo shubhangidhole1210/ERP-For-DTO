@@ -34,7 +34,7 @@ erpApp
 						console.log("min age" + $scope.minAge);
 						console.log("date of birth" + dob);
 						if (dob > $scope.minAge) {
-							$scope.invalidDOBMsg = "Invalid date!! date of birth should be at least before 18 years of current year";
+							$scope.invalidDOBMsg = "Invalid date!! Date of birth should be at least before 18 years of current year";
 							$scope.userInformation.dob.$setValidity(
 									"customMsg1", false);
 						} else {

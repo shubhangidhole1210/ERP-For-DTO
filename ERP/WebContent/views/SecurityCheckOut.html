@@ -104,12 +104,14 @@
 						<h3>Product List</h3>
 						<table>
 							<tr>
+								<th>NO</th>
 								<th>PRODUCT NAME</th>
 								<th>QUANTITY</th>
 								<th>REMAINING QUANTITY</th>
 								<th>INVOICE QUANTITY</th>
 							</tr>
 							<tr ng-repeat="product in productOtderList">
+								<td>{{$index+1}}</td>
 								<td>{{product.product.partNumber}}</td>
 								<td>{{product.quantity}}</td>
 								<td>{{product.remainingQuantity}}</td>

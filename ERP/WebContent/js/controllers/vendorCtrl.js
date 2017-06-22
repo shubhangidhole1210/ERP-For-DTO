@@ -47,7 +47,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			templateUrl : 'views/vendorDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
@@ -72,7 +72,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 		      templateUrl: 'views/vendorDialog.html',
 		      parent: angular.element(document.body),
 		      targetEvent: ev,
-		      clickOutsideToClose:true,
+		      clickOutsideToClose:false,
 		      fullscreen: $scope.customFullscreen ,
 		      locals : {
 		    	  vendorUser : $scope.vendorUser,
@@ -117,7 +117,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 						templateUrl : 'views/vendorDialog.html',
 						parent : angular.element(document.body),
 						targetEvent : ev,
-						clickOutsideToClose : true,
+						clickOutsideToClose : false,
 						fullscreen : $scope.customFullscreen,
 						locals : {
 							  vendorUser : $scope.vendorUser,

@@ -46,7 +46,7 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 			templateUrl : 'views/statusDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			fullscreen : $scope.customFullscreen,
 			locals : {
 				status : $scope.status,
@@ -73,7 +73,7 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 					templateUrl : 'views/statusDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
-					clickOutsideToClose : true,
+					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
 						status : $scope.status,
@@ -97,7 +97,7 @@ erpApp.controller('statusCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 					templateUrl : 'views/statusDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
-					clickOutsideToClose : true,
+					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
 						status : $scope.status,

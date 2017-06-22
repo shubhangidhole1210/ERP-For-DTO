@@ -49,7 +49,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 			templateUrl : 'views/unitDialog.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
@@ -78,7 +78,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 					templateUrl : 'views/unitDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
-					clickOutsideToClose : true,
+					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
 						unit : $scope.unit,
@@ -103,7 +103,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 					templateUrl : 'views/unitDialog.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
-					clickOutsideToClose : true,
+					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
 						unit : $scope.unit,
