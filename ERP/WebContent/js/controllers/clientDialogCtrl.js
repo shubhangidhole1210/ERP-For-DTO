@@ -90,6 +90,7 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 			$scope.saveClient(event);
 		} else {
 			console.log('its else block');
+			 utils.scrollToTop();
 			utils.showToast('Please fill all required information');
 		}
 	};

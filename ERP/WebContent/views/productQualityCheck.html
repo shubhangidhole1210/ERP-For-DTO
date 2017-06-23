@@ -28,13 +28,6 @@
 				</md-input-container>
 			</td>
 			<td>
-			   	<!-- <md-input-container class="md-block" flex-gt-sm>
-					<input type="number" ng-model="productionplan.failQuantity1" name="failQuantity" id="failQuantity" 
-					ng-change="validatePassAndFailQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity)" required>
-				  <div ng-messages="productQualityForm.failQuantity.$error">
-					<div ng-message="required">Please enter Fail Quantity</div>
-            	</div>
-				</md-input-container> -->
 				
 				<md-input-container class="md-block" flex-gt-sm>
 					<input type="number" ng-model="productionplan.failQuantity1" name="failQuantity" id="failQuantity"  required>
@@ -62,8 +55,8 @@
      
       <div class="quality-btn" ng-show="isQualityCheckButton">
              <md-dialog-actions layout="row">
-      <md-button class="md-raised" ng-click="submitInformation(productQualityForm.$valid,$event)" style="background: rgba(63, 81, 181, 0.59);color: white;" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
-      <md-button class="md-raised" ng-click="cancelProductQualityForm()" style="background: rgba(63, 81, 181, 0.59);color: white;">CANCEL</md-button>
+      <md-button class="actionButton" ng-click="submitInformation(productQualityForm.$valid,$event)" style="" ng-disabled="isReadOnly"  type="submit">SAVE</md-button>
+      <md-button class="actionButton" ng-click="cancelProductQualityForm()" style="">CANCEL</md-button>
     </md-dialog-actions>
         </div>
       </form>  

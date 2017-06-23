@@ -45,8 +45,8 @@
 		</div>
 	       <div class="todayPlan-save-btn" ng-show="isButton">
 	             <md-dialog-actions layout="row">
-	      			<md-button class="md-raised" ng-click="submitInformation(todaysProductionPlanForm.$valid,$event)" ng-disabled="isReadOnly" style="background: rgba(63, 81, 181, 0.59);color: white;"  type="submit">SAVE</md-button>
-	      			<md-button class="md-raised" ng-click="cancelTodaysProductionPlan()" style="background: rgba(63, 81, 181, 0.59);color: white;">CANCEL</md-button>
+	      			<md-button class="actionButton" ng-click="submitInformation(todaysProductionPlanForm.$valid,$event)" ng-disabled="isReadOnly" type="submit">SAVE</md-button>
+	      			<md-button class="actionButton" ng-click="cancelTodaysProductionPlan()" style="">CANCEL</md-button>
 	    		</md-dialog-actions>
 	       </div>
 	    

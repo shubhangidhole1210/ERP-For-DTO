@@ -809,4 +809,15 @@ margin: 15px 28px;
     margin-left: 300px;
 }
 
+.paginationBtn{
+	background: rgb(230, 230, 230);
+	margin-left:30%;
+	margin-top:2%;
+}
 
+.actionButton{
+	background: rgba(63, 81, 181, 0.72);
+	color: white;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	
+}
