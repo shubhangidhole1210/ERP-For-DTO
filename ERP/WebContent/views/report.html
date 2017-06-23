@@ -3,10 +3,10 @@
 		<div>
 			<md-input-container style="width:100%"> <label>REPORT </label> 
 				<md-select ng-model="selectedReport"
-						name="report" value="report.id" ng-disabled="isReadOnly"
+						name="report" value="report" ng-disabled="isReadOnly"
 						ng-init="setreports();" 
 						ng-change="fetchReportData()" required> 
-						<md-option ng-repeat="report in reports" ng-value="report.id">{{report.report_Name}} 
+						<md-option ng-repeat="report in reports" ng-value="report">{{report.report_Name}} 
 						</md-option> 
 				</md-select>
 			</md-input-container>
@@ -22,11 +22,11 @@
 							ng-model="input.value"
 							name="report" value="item.id"
 							aria-label="{{input.displayName}}" required> 
-							<md-option ng-repeat="item in input.data" ng-value="item.id">{{item.description}} 
+							<md-option ng-repeat="item in input.data" ng-value="item.id">{{item.name}} 
 							</md-option> 
 				</md-select>
 			</md-input-container>
 		</div>
-	
+		<md-button class="md-raised" ng-click="submitReportQuery()" type="submit" ng-disabled="isReadOnly" >SUBMIT</md-button>
 	</div>	
 </div>

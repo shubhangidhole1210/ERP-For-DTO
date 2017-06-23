@@ -100,6 +100,7 @@ body{
 	height: 88%;
     overflow-y: scroll;
 	background: rgb(230, 230, 230);
+	position: fixed;
 }
 .main-class-full-screen {
 	display: inline-block;
