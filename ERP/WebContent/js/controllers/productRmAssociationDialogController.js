@@ -1,6 +1,6 @@
 erpApp.controller('productRmAssociationDialogController', function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils,flag,action,information,productRmAsso,productAction) {
 	  $scope.productRmAsso = productRmAsso;
-	  console.log(productRmAsso);
+	  console.log("Product RM Association : ", productRmAsso);
 	  if(angular.equals($scope.productRmAsso,{})){
 		  $scope.productRmAsso.productRMAssociationModelParts = [];
 	  }
@@ -24,7 +24,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    
 	  $scope.saveProductRMAssociationInfo = function() {
     	var data = {
-    		product : $scope.productRmAsso.product.productId,
+    		product : $scope.productRmAsso.product,
     		productRMAssociationModelParts: $scope.productRmAsso.productRMAssociationModelParts
 		};
     	var httpparams = {};
@@ -49,9 +49,9 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 				console.log(data);
 				if(data.data.code === 0){
 					console.log(data.data.message);
-					$rootScope.$emit(
-							"saveVendorError", {});
-					console.log(data);
+//					$rootScope.$emit(
+//							"saveVendorError", {});
+					console.log("Update Multiple ProductRM Association : " , data);
 					$scope.hide();
 					utils.showToast('Something went worng. Please try again later.');
 				}
@@ -92,6 +92,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    };
 		
 		$scope.rawMaterialId = function(){
+			console.log("Getting RM List");
 			var httpparams = {};
 			httpparams.method = 'GET';
 			httpparams.url = SERVER_URL + "rawmaterial/list";
@@ -100,7 +101,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			};
 			$http(httpparams).then(function successCallback(response) {
 				$scope.RMData = response.data;
-				console.log(response);
+				console.log("RM List : ", response);
 			}, function errorCallback(response) {
 				console.log("Error");
 			})
@@ -125,8 +126,15 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    function getProductListURL(){
 	    	return ($scope.flag === 0) ? "product/list/newProductRMAssociation" : "product/list";
 	    };
-		
-		$scope.getProducts = function() {
+	    
+	    $scope.getProducts = function() {
+	    	console.log("Getting Products");
+	    	$scope.flag === 0 ? $scope.getProductsWithoutRMAssociation() : $scope.getAllProducts();
+		};
+	    
+	    $scope.getProductsWithoutRMAssociation = function() {
+	    	
+	    	console.log("Getting Products without RM Association");
 			 var httpparams = {};
 				httpparams.method = 'GET';
 				httpparams.url = SERVER_URL + "product/list/newProductRMAssociation";
@@ -134,31 +142,29 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 						auth_token : Auth.getAuthToken()
 				};
 			 $http(httpparams).then(function successCallback(response) {
-					$scope.data = response.data;
+//					$scope.data = response.data;
 					$scope.products = response.data.data;
-					console.log(response);
-									if ($scope.flag === 0) {
-										$scope.products = response.data.data;
-									} else {
-										$scope.products = response.data;
-									}
-						 					console.log(response.data);
+					console.log("Products without RM Association : ", response);
+					 				
 				}, function errorCallback(response) {
 					console.log("Error");
 				});
 		};
-	    
-	    $scope.getProducts = function() {
+		
+		
+		
+		$scope.getAllProducts = function() {
+			console.log("Getting All Products");
 			 var httpparams = {};
 				httpparams.method = 'GET';
-				httpparams.url = SERVER_URL + "product/list/newProductRMAssociation";
+				httpparams.url = SERVER_URL + "product/list";
 				httpparams.headers = {
 						auth_token : Auth.getAuthToken()
 				};
 			 $http(httpparams).then(function successCallback(response) {
-					$scope.data = response.data;
-					$scope.products = response.data.data;
-					console.log(response);
+//					$scope.data = response.data;
+					$scope.products = response.data;
+					console.log("Product List : ", response);
 									
 				}, function errorCallback(response) {
 					console.log("Error");
