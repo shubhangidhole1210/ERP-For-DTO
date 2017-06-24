@@ -3,7 +3,8 @@ erpApp.service('utils',function myutils($mdDialog, $rootScope,$mdToast,$location
 				$rootScope.$emit("hide_wait");
 		};
 
-		function showProgressBar() {
+		function showProgressBar(id) {
+			var parentElement = id ? document.getElementById(id) : document.body; 
 			$mdDialog.show({
 				controller : 'ProgressBarController',
 				templateUrl : 'views/progressBar.html',

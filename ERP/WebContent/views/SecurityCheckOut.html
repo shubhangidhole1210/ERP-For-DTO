@@ -122,10 +122,10 @@
 										max="{{rawmaterial.remainingQuantity}}"
 										ng-change="toCompareQuantity(rawmaterial.remainingQuantity,rawmaterial.invoiceQuantity)" min="1">
 									<div ng-messages="securityInformation.invoiceQuantity.$error">
-										<div ng-message="required">please enter quantity</div>
+										<div ng-message="required">Please Enter Quantity</div>
 									</div>
 									<div ng-show="securityInformation.invoiceQuantity{{$index}}.$error.min" class="error-msg">
-									  Quanity should be greater then 0
+									  Quantity should be greater than 0
 									</div>
 									<div
 										ng-show=" securityInformation.invoiceQuantity{{$index}}.$error.max"

@@ -5,20 +5,17 @@ erpApp.controller('productRMAssociationCtrl', function($scope,$http, $mdDialog,S
 	$rootScope.$on("callPopulateProductRmAssociationList", function() {
 		$scope.populateProductRmAssoList();
 	});
-	$rootScope.$on("saveVendorError", function() {
-		$scope.showAddNewProductRMAssociation();
-	});
 	
 	$scope.populateProductRmAssoList=function(){
-		 $scope.currentPage = 0;
-	     $scope.pageSize = 15;
+		$scope.currentPage = 0;
+	    $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "productRMAsso/list/multiple";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
-			};
+		};
 		$http(httpparams).then(function successCallback(response) {
 				$scope.data = response.data;
 				$scope.productRmAssociations=response.data;

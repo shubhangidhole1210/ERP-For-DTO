@@ -3,8 +3,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 {
 	$scope.currentDate = utils.getCurrentDate();
 	$scope.productionPlan = {};
-	$scope.getProducts=function()
-	{
+	$scope.getProductionPlanForStoreOut = function(){
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -23,19 +22,24 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		});
 	};
 	
-	$scope.getProductRMAssociation=function($index){
+	$scope.getProductRMAssociation = function($index){
+		
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "productionplanning/getProductionPlanListForStoreOutByDateAndPId/"  +$scope.currentDate  + "/" + +$scope.productionPlan.product.id;
+		httpparams.url = SERVER_URL + "productionplanning/getProductionPlanListForStoreOutByDateAndPId/"  + $scope.currentDate + "/" + + $scope.productionPlan.product.id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(response) {
-			$scope.data = response.data;
+			
+//			$scope.data = response.data;
 			$scope.productRMList = response.data.data;
 			console.log(response);
 			utils.hideProgressBar();
+			$scope.manuFactureQuantity = $scope.productionPlan.targetQuantity;
+			console.log("Target Qty : ", $scope.productionPlan.targetQuantity);
+			$scope.updateDispatchQuantity();
 			/*if(data.code === 1){
 				utils.showToast(data.data.message);
 			}else{
@@ -51,24 +55,23 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 	};
 	
 	$scope.updateDispatchQuantity = function(){
-		for(index=0;index<$scope.data.data.length;index++){
-			$scope.data.data[index].quantityDispatched = $scope.data.data[index].quantityRequired * $scope.manuFactureQuantity;
+		for(index=0;index<$scope.productRMList.length;index++){
+			$scope.productRMList[index].quantityDispatched = $scope.productRMList[index].quantityRequired * $scope.manuFactureQuantity;
 		}
 	};
 	
 	$scope.saveStoreOutInformation=function(){
-		console.log($scope.data.data);
+		//console.log($scope.data.data);
 		var index=0;
 		var rmList = [];
-		for(index=0;index<$scope.data.data.length;index++){
+		for(index=0;index<$scope.productRMList.length;index++){
 			var storeOutProduct = {};
-			storeOutProduct.rawmaterial= $scope.data.data[index].rawmaterial;
-			storeOutProduct.quantityRequired = $scope.data.data[index].quantityRequired;
-			storeOutProduct.quantityDispatched = $scope.data.data[index].quantityDispatched;
+			storeOutProduct.rawmaterial= $scope.productRMList[index].rawmaterial;
+			storeOutProduct.quantityRequired = $scope.productRMList[index].quantityRequired;
+			storeOutProduct.quantityDispatched = $scope.productRMList[index].quantityDispatched;
 			rmList.push(storeOutProduct);
 		}
-		data=
-		      {
+		var data = {
 				productId: $scope.productionPlan.product.id,
 				productionPlanId :$scope.productionPlan.id,
 				quantityRequired: $scope.manuFactureQuantity,

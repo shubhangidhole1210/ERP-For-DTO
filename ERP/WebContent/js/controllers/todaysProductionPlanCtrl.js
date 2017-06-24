@@ -8,7 +8,7 @@ erpApp
 					$scope.isButton = false;
 					$scope.currentDate = utils.getCurrentDate();
 					
-					$scope.getProducts = function() {
+					$scope.getTodaysProductionPlan = function() {
 						utils.showProgressBar();
 						var httpparams = {};
 						httpparams.method = 'GET';
@@ -21,7 +21,10 @@ erpApp
 						$http(httpparams).then(
 								function successCallback(response) {
 									utils.hideProgressBar();
-									$scope.productList = response.data;
+									$scope.productList = response.data.data;
+									if(response.data.code === 101){
+										$scope.message = response.data.message;
+									}
 									console.log(response);
 									$scope.isProductionPlanInformation();
 								}, function errorCallback(response) {
