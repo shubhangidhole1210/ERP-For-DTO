@@ -36,6 +36,12 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 			$scope.productRMList = response.data.data;
 			console.log(response);
 			utils.hideProgressBar();
+			/*if(data.code === 1){
+				utils.showToast(data.data.message);
+			}else{
+				
+			}*/
+			
 
 		}, function errorCallback(response) {
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");

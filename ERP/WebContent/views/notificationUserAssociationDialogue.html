@@ -45,15 +45,15 @@
 			     	</div>
 			    
 			    <label>
-				    <input type="radio" ng-model="sendOption" value="to" ng-change="onSendOptionChanged()">
+				    <input type="radio" ng-model="sendOption" value="to" ng-change="onSendOptionChanged()" ng-disabled="rdaioButtinVisibleForTo">
 				    TO
 				</label><br/>
 			  	<label>
-			    	<input type="radio" ng-model="sendOption" value="cc" ng-change="onSendOptionChanged()">
+			    	<input type="radio" ng-model="sendOption" value="cc" ng-change="onSendOptionChanged()" ng-disabled="rdaioButtinVisibleForCc">
 			    	CC
 			  	</label><br/>
 			  	<label>
-			    	<input type="radio" ng-model="sendOption" value="bcc" ng-change="onSendOptionChanged()">
+			    	<input type="radio" ng-model="sendOption" value="bcc" ng-change="onSendOptionChanged()" ng-disabled="rdaioButtinVisibleForBcc">
 			    	BCC
 			  	</label><br/>
 			</div>
@@ -61,7 +61,7 @@
 		<md-dialog-actions layout="row"> 
 			<md-button
 				class="md-raised"
-				ng-click="submitNotificationUserAssociationForm(notificationUser.notification.notificationId,notificationUser.user.userId)"
+				ng-click="submitNotificationUserAssociationForm(notificationUser.notification.id,notificationUser.user.id)"
 				type="submit" ng-disabled="isReadOnly" >SAVE</md-button> 
 			<md-button class="md-raised" ng-click="answer('not useful')">CANCEL</md-button> 
 		</md-dialog-actions>

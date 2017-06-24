@@ -45,22 +45,17 @@
 							<tr ng-repeat="rmInvoiceItem in rmInvoiceList">
 								<td>{{$index+1}}</td>
 								<td>{{rmInvoiceItem.rawmaterial.partNumber}}</td>
-								<td>{{rmInvoiceItem.quantity}}</td>
+								<td>{{rmInvoiceItem.goodQuantity}}</td>
 								<td>
 									<ng>
 									<md-input-container class="md-block" flex-gt-sm>
 										<label class="input-filed-label">RECEIVED</label> 
-										<input type="number" ng-model="rmInvoiceItem.goodQuantity" ng-change="checkReceivedQuantity($index)"
-											name="recivedOk{{$index}}" max="{{rmInvoiceItem.quantity}}" required min="1">
-										<!-- <div ng-messages="storeForm['recivedOk' + $index].$error">
-											<div ng-message="required">Please enter Received Quantity</div>
-										</div> -->
+										<input type="number" ng-model="rmInvoiceItem.recivedQuantity" ng-change="checkReceivedQuantity($index)"
+											name="recivedOk{{$index}}" max="{{rmInvoiceItem.goodQuantity}}" required min="1">
 										<div ng-show="storeForm.recivedOk{{$index}}.$error.reqired" class="error-msg">
 											Please enter quantity</div>
 										<div ng-show="storeForm.recivedOk{{$index}}.$error.max" class="error-msg">
-											The value must be in range 0 to {{rmInvoiceItem.quantity}}!</div>
-										<!-- <div ng-show="storeForm.recivedOk{{$index}}.$error.required" class="error-msg">
-											Please enter Received  quantity</div> -->
+											The value must be in range 0 to {{rmInvoiceItem.goodQuantity}}!</div>
 										<div ng-show="storeForm.recivedOk{{$index}}.$error.min" class="error-msg">
 											Received Quantity should be greater then 0</div>	
 									</md-input-container>
@@ -87,9 +82,9 @@
 						</table>
 			<div style="" class="store-info-btn">
 							<md-dialog-actions layout="row"> 
-								<md-button class="md-raised" ng-click="submitInformation(storeForm.$valid,$event)"
-									type="submit" ng-disabled="isReadOnly" style="background: rgba(63, 81, 181, 0.59);color: white;">SAVE</md-button>
-								<md-button class="md-raised" ng-click="resetQualityInspection()" style="background: rgba(63, 81, 181, 0.59);color: white;">CANCEL</md-button> 
+								<md-button class="actionButton" ng-click="submitInformation(storeForm.$valid,$event)"
+									type="submit" ng-disabled="isReadOnly" style="">SAVE</md-button>
+								<md-button class="actionButton" ng-click="resetQualityInspection()" style="">CANCEL</md-button> 
 							</md-dialog-actions>
 						</div>			
  </form>

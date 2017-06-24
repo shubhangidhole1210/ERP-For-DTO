@@ -8,7 +8,11 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 	$scope.notificationUser.to = false;
 	$scope.notificationUser.cc = false;
 	$scope.notificationUser.bcc = false;
-	
+	$scope.isRdaioButtinVisible = false;
+	$scope.rdaioButtinVisibleForTo = false;
+	$scope.rdaioButtinVisibleForCc = false;
+	$scope.rdaioButtinVisibleForBcc = false;
+
 	
 	$scope.hide = function() {
 		console.log('hide DialogController');
@@ -50,14 +54,25 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 			$scope.notificationUser.to = true;
 			$scope.notificationUser.cc = false;
 			$scope.notificationUser.bcc = false;
+			$scope.rdaioButtinVisibleForCc = true;
+			$scope.rdaioButtinVisibleForBcc = true;
 		}else if($scope.sendOption === "cc"){
 			$scope.notificationUser.cc = true;
 			$scope.notificationUser.to = false;
 			$scope.notificationUser.bcc = false;
+			$scope.rdaioButtinVisibleForTo = true;
+			$scope.rdaioButtinVisibleForCc = false;
+			$scope.rdaioButtinVisibleForBcc = true;
+
 		}else{
 			$scope.notificationUser.bcc = true;
 			$scope.notificationUser.to = false;
 			$scope.notificationUser.cc = false;
+			$scope.rdaioButtinVisibleForTo = true;
+			$scope.rdaioButtinVisibleForCc = true;
+			$scope.rdaioButtinVisibleForBcc = false;
+
+			
 		}
 		console.log($scope.notificationUser);
 		

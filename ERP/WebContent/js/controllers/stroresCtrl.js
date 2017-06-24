@@ -33,7 +33,7 @@
 						var httpparams = {};
 						httpparams.method = 'GET';
 						httpparams.url = SERVER_URL
-								+ "qualitycheckrawmaterial/listrm/"
+								+ "qualitycheckrawmaterial/listrmGoodQuantity/"
 								+ $scope.invoiceList.id;
 						httpparams.headers = {
 							auth_token : Auth.getAuthToken()
@@ -111,10 +111,10 @@
 				
 					$scope.checkReceivedQuantity = function(index) {
 						console.log('checkReceivedQuantity');
-						if ($scope.rmInvoiceList[index].quantity === parseInt($scope.rmInvoiceList[index].goodQuantity)) {
+						if ($scope.rmInvoiceList[index].quantity === parseInt($scope.rmInvoiceList[index].recivedQuantity)) {
 							$scope.rmInvoiceList[index].isReturnInvoiceInitated = false;
 							$scope.rmInvoiceList[index].ischeckBoxDisabled = true;
-						} else if ($scope.rmInvoiceList[index].quantity <= parseInt($scope.rmInvoiceList[index].goodQuantity)) {
+						} else if ($scope.rmInvoiceList[index].quantity <= parseInt($scope.rmInvoiceList[index].recivedQuantity)) {
 							$scope.rmInvoiceList[index].isReturnInvoiceInitated = false;
 							$scope.rmInvoiceList[index].ischeckBoxDisabled = true;
 						}else {
