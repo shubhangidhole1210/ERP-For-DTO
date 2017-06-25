@@ -5,6 +5,13 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 	$scope.rmMsg = true;
 	$scope.createDate = new Date($scope.createDate);
 	
+	//TODO Setting Default for Testing Later It should be removed
+	$scope.driver_Name = "Sanjay";
+	$scope.vehicleNo = "MH 12 AB 1212";
+	$scope.intime = new Date();
+	$scope.outtime = new Date();
+	$scope.outtime.setTime($scope.intime.getTime() + (15 * 60 * 1000));
+	
 	$scope.getRMInformation = function(){
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -26,7 +33,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 	};
 		
 	$scope.displayRMList = function(index) {
-		console.log($scope.rawMaterials);
+		console.log("Display RM List");
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "rawmaterialorderassociation/getRMForRMOrder/"+ $scope.rawMaterialOrders.id;
@@ -34,9 +41,12 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(response) {
-			$scope.rawMaterialList = response.data;
-			console.log(response);
-             console.log($scope.rawMaterialList)
+			console.log("Raw Material Order  Association : ", response);
+			$scope.rawMaterialList = response.data.data;
+			if(response.data.code == 0){
+				utils.showToast(response.data.message);
+			}
+			console.log($scope.rawMaterialList)
              utils.hideProgressBar();
 		}, function errorCallback(response) {
 			console.log("Error");
