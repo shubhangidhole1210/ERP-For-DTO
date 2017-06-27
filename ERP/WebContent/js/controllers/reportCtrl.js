@@ -43,8 +43,8 @@ erpApp.controller('reportCtrl', function($scope,$http, $mdDialog,SERVER_URL,$roo
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(response) {
-			$scope.data = response.data;
-			console.log(response);
+			//$scope.data = response.data;
+			//console.log(response);
 		}, function errorCallback(response) {
 			console.log("Error");
 		})
