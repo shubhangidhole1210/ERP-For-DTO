@@ -12,6 +12,9 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 					$scope.products = response.data.data;
 					console.log(response);
 					utils.hideProgressBar();
+					if( response.data.code === 0){
+						utils.showToast(response.data.message);
+					}
 				}, function errorCallback(response) {
 					console.log("Error");
 					utils.hideProgressBar();
