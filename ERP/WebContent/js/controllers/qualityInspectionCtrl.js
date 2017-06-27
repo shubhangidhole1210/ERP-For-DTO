@@ -7,7 +7,8 @@ erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $md
 		$scope.rmInvoiceList = [];
 		$scope.description = "";
 		$scope.getRMOrderInvoiceInformation();
-		
+		$scope.isInvoice = false;
+		$scope.isInvoiceDisabled = false;
 	};
 	$scope.getRMOrderInvoiceInformation = function(){
 		var httpparams = {};
@@ -21,13 +22,20 @@ erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $md
 				function successCallback(response) {
 					$scope.invoiceList = response.data;
 					console.log(response);
+					console.log("$scope.invoiceList : " ,$scope.invoiceList);
 					utils.hideProgressBar();
+					$scope.isInvoicePresent();
 				}, function errorCallback(response) {
 					console.log("Error");
 					utils.hideProgressBar();
 				});
 		utils.showProgressBar();
 	};
+	
+	$scope.isInvoicePresent = function(){
+		$scope.isInvoice = $scope.invoiceList.length === 0? true:false;
+		$scope.isInvoiceDisabled = $scope.invoiceList.length === 0? true:false;
+	}
 
 	$scope.invoiceRawMaterialList = function(index) {
 		var httpparams = {};

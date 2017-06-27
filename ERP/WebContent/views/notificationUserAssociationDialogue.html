@@ -21,7 +21,7 @@
 			         		
 			         		 <md-select ng-model="notificationUser.notification.id" name="notification"  ng-disabled="isClientReadOnly" ng-required="true" required ng-init="getNotificationInformation()">
                            <md-option ng-repeat="notification in notificationList" ng-value="notification.id" >
-                             {{notification.name}}
+                             {{notification.subject}}
                          </md-option>
                         </md-select>
 			         		

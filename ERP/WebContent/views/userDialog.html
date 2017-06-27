@@ -104,11 +104,8 @@
 		 <div  ng-messages="userInformation.userType.$error">
           <div ng-message="required">Please select User Type</div>
         </div>
-		
-		
-		
 		</md-input-container>
-		
+		<div class="ui-msg" ng-show="isUserType" ng-disabled="isUserTypeDisabled">Please add user type</div>
 		
 		
 		<md-input-container class="md-block" flex-gt-sm type="password">

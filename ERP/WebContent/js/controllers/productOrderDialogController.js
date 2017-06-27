@@ -61,7 +61,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 				}
 				else{
 					$scope.displayProgressBar = false;
-					utils.showToast('Product Order Created successfully..');
+					utils.showToast(data.data.message);
 					$rootScope.$emit("callPopulateProductOrderList",{});
 				}
 			},

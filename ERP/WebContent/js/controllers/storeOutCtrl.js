@@ -1,7 +1,9 @@
 erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		$rootScope, SERVER_URL,$filter,utils,Auth,$location)
 {
+	$scope.addProductRmAssociationMsg = false;
 	$scope.currentDate = utils.getCurrentDate();
+	$scope.isProduct = false;
 	$scope.productionPlan = {};
 	$scope.getProductionPlanForStoreOut = function(){
 		utils.showProgressBar();
@@ -15,6 +17,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 			$scope.productionPlans = response.data;
 			console.log(response);
 			utils.hideProgressBar();
+			$scope.isProductOrderPresent();
 		}, function errorCallback(response) {
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 			console.log("Error");
@@ -22,7 +25,11 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		});
 	};
 	
-	$scope.getProductRMAssociation = function($index){
+	$scope.isProductOrderPresent = function(){
+		$scope.isProduct = $scope.productionPlans.length ===0?true : false;
+	}
+	
+	$scope.getProductRMAssociation = function(){
 		
 		utils.showProgressBar();
 		var httpparams = {};
@@ -34,16 +41,19 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		$http(httpparams).then(function successCallback(response) {
 			
 //			$scope.data = response.data;
-			$scope.productRMList = response.data.data;
-			console.log(response);
-			utils.hideProgressBar();
-			$scope.manuFactureQuantity = $scope.productionPlan.targetQuantity;
-			console.log("Target Qty : ", $scope.productionPlan.targetQuantity);
-			$scope.updateDispatchQuantity();
-			if(data.code === 0){
-				utils.showToast(data.data.message);
-			}
 			
+			if(response.data.code === 0){
+				utils.showToast(response.data.message);
+				console.log(response.data.message);
+				$scope.addProductRmAssociationMsg = true;
+			}else{
+				$scope.productRMList = response.data.data;
+				console.log(response);
+				$scope.manuFactureQuantity = $scope.productionPlan.targetQuantity;
+				console.log("Target Qty : ", $scope.productionPlan.targetQuantity);
+				$scope.updateDispatchQuantity();
+			}
+			utils.hideProgressBar();
 
 		}, function errorCallback(response) {
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");

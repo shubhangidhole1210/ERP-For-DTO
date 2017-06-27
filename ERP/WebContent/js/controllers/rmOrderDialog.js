@@ -17,6 +17,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	$scope.orderRawMaterial={};
 	$scope.otherCharges=0;
 	var TAX = 0.18;
+/*	$scope.isVendor false;*/
 	
 	$scope.hide = function() {
 		console.log('hide DialogController');
@@ -66,7 +67,6 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				.then(
 						function successCallback(data) {
 							$mdDialog.hide();
-							/*console.log(data);*/
 							if(data.data.code === 0){
 								console.log(data.data.message);
 								$rootScope.$emit(
@@ -157,12 +157,17 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(response) {
+			/*$scope.isVendorPresent();*/
 			$scope.vendorData = response.data;
 			console.log(response);
 		}, function errorCallback(response) {
 			console.log("Error");
 		})
 	};
+	/*$scope.isVendor false;
+	$scope.isVendorPresent = function(){
+		$scope.isVendor = $scope.vendorData.length === 0? true:false;
+	};*/
 	
 	    $scope.addOrderRawMaterial = function(){
 	    	console.log('Adding RM : ', $scope.orderRawMaterial);

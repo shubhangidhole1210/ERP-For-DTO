@@ -4,6 +4,7 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 	$scope.rawMaterial = rawMaterial;
 	$scope.information= information;
 	$scope.isUnitReadOnly = unitAction;
+	$scope.isUnit = false
 	
 	$scope.hide = function() {
 		console.log('hide DialogController');
@@ -91,8 +92,13 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			console.log(response);
+			$scope.isUnitPresent();
 		}, function errorCallback(response) {
 			console.log("Error");
 		});
+	}
+	
+	$scope.isUnitPresent = function(){
+		scope.isUnit = $scope.data.length === 0 ? true : false;
 	}
 });

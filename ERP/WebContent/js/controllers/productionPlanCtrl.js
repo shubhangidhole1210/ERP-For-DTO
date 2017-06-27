@@ -1,5 +1,5 @@
 erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
-		 $rootScope, SERVER_URL, Auth) {
+		 $rootScope, SERVER_URL, Auth , $location) {
 
 	$scope.currentDate = new Date();
 	$scope.monthStart = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), 1);
@@ -81,12 +81,17 @@ erpApp.controller('productionPlanCtrl', function($scope, $http, $mdDialog,utils,
 			utils.hideProgressBar();
 			console.log(response);
 			utils.showToast("Production Plan Update sucessfully");
+			$location.path('/home');
 		}, function errorCallback(response) {
 			console.log("Error");
 			utils.showToast("Something went wrong. Please try again later.");
 			utils.hideProgressBar();
 		});
 	};
+	
+	$scope.cancelProductionPlan = function(){
+		$location.path('/home');
+	}
 	
 	// TODO Implement Web service call Create Default Production Plan
 	// TODO Implement Notification to tell user that new Product is added to the Product List and add it to the Production Plan.

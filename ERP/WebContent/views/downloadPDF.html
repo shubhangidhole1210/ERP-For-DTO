@@ -1,5 +1,5 @@
 <div ng-controller="downloadPDFController">
-<div class="erp-security">
+<div class="erp-security" style="margin-left: 7%;width: 90%">
 <div class="qualitycheck" style="margin-left: -23px;width: 95%">
    	<div class="header">GENERATE BOM HERE</div>
  <div class="qualityInspection" >
@@ -20,11 +20,13 @@
             <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>BOM</label>
-          <md-select ng-model="bom" name="bom"  ng-disabled="productIdReadOnly" ng-click="bomValidationMsg(bom)">
+          <md-select ng-model="bom" name="bom"  ng-disabled="productIdReadOnly" ng-click="bomValidationMsg(bom)" ng-disabled="true">
             <md-option ng-repeat="bom in bomData" ng-value="bom" >
                {{bom.bomId}}
             </md-option>
           </md-select>
+          <div class="ui-msg">Please Select Product First</div>
+          
           <!-- <div ng-messages="bomReturnForm.bom.$error">
                  <div ng-message="message">please select bom</div>
               </div> -->

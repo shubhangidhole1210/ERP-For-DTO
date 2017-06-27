@@ -16,7 +16,8 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 			};
 			$http(httpparams).then(function successCallback(response) {
 				utils.hideProgressBar();
-				$scope.productionPlans = response.data;
+				$scope.productionPlans = response.data.data;
+				console.log("$scope.productionPlans : " ,$scope.productionPlans);
 				console.log(response);
 			}, function errorCallback(response) {
 				console.log("Error");

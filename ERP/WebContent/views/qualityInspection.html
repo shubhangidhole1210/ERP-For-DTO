@@ -8,14 +8,14 @@
 							<md-input-container class="drop-down"> <label>Invoice
 								No*</label> <md-select id="invoiceNumber" ng-model="invoiceId"
 								name="invoice" ng-init="getRMOrderInvoiceInformation()"
-								ng-change="invoiceRawMaterialList($index)" required>
+								ng-change="invoiceRawMaterialList($index)" required ng-disabled="isInvoiceDisabled">
 							<md-option ng-repeat="invoice in invoiceList"
 								ng-value="invoice.id"> {{invoice.invoice_No}} </md-option> </md-select>
-							<div ng-messages="qualityInspectionForm.invoice.$error">
+							<!-- <div ng-messages="qualityInspectionForm.invoice.$error">
 								<div ng-message="required">Please Select Invoice number</div>
-							</div>
+							</div> -->
 							</md-input-container>
-
+								<div class="ui-msg" ng-show="isInvoice">Please create RM Order first</div>
 						<!-- </div> -->
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
