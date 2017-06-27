@@ -177,13 +177,12 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 					$mdDialog.hide();
 			$rootScope.$emit("CallPopulateProductList", {});
 			console.log(data);
-			$scope.message = 'Delete Product Record sucessfully';
-			$scope.showToast();
+			utils.showToast("Delete Product Record sucessfully!!");
 		}, function errorCallback(data) {
 			console.log("Error");
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 		});
-		$scope.showProgressBarOne();
+		utils.showProgressBar();
 	};
 
 	$scope.showConfirm = function(ev,$index) {

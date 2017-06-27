@@ -18,7 +18,7 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 	};
 
 	$scope.saveProduct = function(ev) {
-		utils.showProgressBar('parent');
+	/*	utils.showProgressBar();*/
 		var data = {
 				name: $scope.product.name,
 				partNumber: $scope.product.partNumber,
@@ -48,20 +48,21 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 		$http(httpparams)
 				.then(
 						function successCallback(data) {
+							$mdDialog.hide();
 							utils.hideProgressBar('parent');
-							//$mdDialog.hide();
 							console.log(data);
 							if(data.data.code === 0){
 								console.log(data.data.message);
 								$rootScope.$emit(
 										"saveProductError", {});
 								console.log(data);
-								//$scope.hide();
-								utils.showToast('Something went worng. Please try again later.');
+								$scope.hide();
+								utils.showToast(data.data.message);
 							}
 							else{
+								//utils.hideProgressBar();
 								$scope.displayProgressBar = false;
-								utils.showToast('Product Information saved successfully.');
+								utils.showToast(data.data.message);
 								$rootScope.$emit("CallPopulateProductList",{});
 							}
 						},
@@ -69,7 +70,6 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 							$rootScope.$emit(
 									"saveProductError", {});
 							console.log(data);
-							//$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
 						});
 	};
