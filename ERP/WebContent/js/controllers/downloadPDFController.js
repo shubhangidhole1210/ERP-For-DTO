@@ -1,4 +1,6 @@
 erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,$rootScope,SERVER_URL,Auth,$http,utils){
+	$scope.ProductOrderMsg = true;
+	
 	$scope.getProducts = function() {
 		utils.showProgressBar();
 		        var httpparams = {};
@@ -16,7 +18,7 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 								if(response.data.code === 0){
 									utils.showToast(response.data.message);
 								}
-								
+								/*$scope.ProductOrderMsg = false;*/
 							},
 							function errorCallback(response) {
 								console.log("Error");
@@ -61,6 +63,7 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 			$scope.bomData = response.data;
 			console.log(response);
              utils.hideProgressBar();
+             $scope.ProductOrderMsg = false;
 		}, function errorCallback(response) {
 			console.log("Error");
 			utils.hideProgressBar();

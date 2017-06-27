@@ -21,19 +21,19 @@
            <td>{{productionplan.qualityPendingQuantity}}</td>
            <td>
            		<md-input-container class="md-block" flex-gt-sm>
-					<input type="number" ng-model="productionplan.passQuantity"  name="passQuantity" required>
-					<div ng-messages="productQualityForm.passQuantity.$error">
+					<input type="number" ng-model="productionplan.passQuantity"  name="passQuantity"  ng-change="validatePassAndFailQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity1)">
+					<!-- <div ng-messages="productQualityForm.passQuantity.$error">
              	  <div ng-message="required">please enter Pass Quantity </div>
-            	</div>
+            	</div> -->
 				</md-input-container>
 			</td>
 			<td>
 				
 				<md-input-container class="md-block" flex-gt-sm>
-					<input type="number" ng-model="productionplan.failQuantity1" name="failQuantity" id="failQuantity"  required>
-				  <div ng-messages="productQualityForm.failQuantity.$error">
+					<input type="number" ng-model="productionplan.failQuantity1" name="failQuantity" id="failQuantity"   ng-change="validatePassAndFailQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity1)">
+				 <!--  <div ng-messages="productQualityForm.failQuantity.$error">
 					<div ng-message="required">Please enter Fail Quantity</div>
-            	</div>
+            	</div> -->
 				</md-input-container>
 				
             	<!-- <div ng-show="productQualityForm.failQuantity{{$index}}.$error.customMsg" class="error-msg">{{errorMsg}}</div> -->

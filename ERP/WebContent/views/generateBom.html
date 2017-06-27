@@ -59,7 +59,8 @@
                  <td>
                     <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">QUANTITY</label> <input
-				type="number" ng-model="productRM.quantity" name="quantity{{$index}}"  min="1">
+				type="number" ng-model="productRM.quantity" 
+			ng-disabled="true"	name="quantity{{$index}}"  min="1">
 			</md-input-container>
                  </td>
                   <div ng-messages="bomGenerateForm.quantity$index.$error">
@@ -68,7 +69,7 @@
                  <td>
                 <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">Price</label> <input
-				type="number" ng-model="productRM.price" name="pricePerUnit" value="{{productRM.price}}" >
+				type="number" ng-model="productRM.price" name="pricePerUnit" value="{{productRM.price}}" ng-disabled="true">
 			</md-input-container>
                  </td>
               </tr>

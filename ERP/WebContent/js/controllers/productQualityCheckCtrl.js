@@ -33,17 +33,15 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 		  $scope.isQualityCheckButton = $scope.productionPlans.length === 0 ? false : true;
 	  }
 	
-	$scope.validatePassAndFailQuantity = function(qualityPendingQuantity,passQuantity,failQuantity){
+	$scope.validatePassAndFailQuantity = function(qualityPendingQuantity,passQuantity,failQuantity1){
 		console.log("pending quantity : " + qualityPendingQuantity);
 		console.log("pass Quantity : " + passQuantity);
-		console.log("fail quantity : " + failQuantity);
-		if(qualityPendingQuantity == (passQuantity + failQuantity)){
+		console.log("fail quantity : " + failQuantity1);
+		if(qualityPendingQuantity == (passQuantity + failQuantity1)){
 			console.log("if condition");
-			$scope.productQualityForm.failQuantity.$setValidity("customMsg", true);
 		}else{
 			console.log("else condition");
 			$scope.productQualityForm.failQuantity.$setValidity("customMsg", false);
-			$scope.errorMsg="pending quantity is not equal to pass and fail quantity";
 		}
 	};  
 	 
