@@ -6,11 +6,11 @@
  <form name="bomGenerateForm" novalidate>
      <div layout-gt-sm="row">
 			<md-input-container> <label>PART NUMNBER
-			</label> <md-select ng-model="product.product.id" name=""
+			</label> <md-select ng-model="product.id" name=""
 				ng-disabled="isVendorId" name="vendorId"
-				required ng-change="getRawMaterials()" ng-init="abc()">
-			<md-option ng-repeat="product in products" ng-value="product.product.id">
-			{{product.product.partNumber}} </md-option> </md-select> 
+				required ng-change="getRawMaterials()" ng-init="getProductList()">
+			<md-option ng-repeat="product in products" ng-value="product.id">
+			{{product.partNumber}} </md-option> </md-select> 
 			 <div ng-messages="RMOrderInformation.vendorId.$error">
 				<div ng-message="required">Please select Vendor</div>
 			</div>
@@ -34,23 +34,23 @@
                <th>QUANTITY</th>
                <th>PRICE</th>
               </tr>
-              <tr ng-repeat="rmVendor in rawMaterialVendorList">
+              <tr ng-repeat="productRM in productRMList">
               <td>{{$index+1}}</td>
                  <td >
             <md-input-container class="drop-down">
-          <label>Raw Material</label>
-          <md-select ng-model="rawmaterial.id" name="product"  ng-disabled="productIdReadOnly" ng-change="getVenodrList(rawmaterial.id)">
+          <div ng-init="getVenodrList($index, productRM.rawmaterial.id)">{{productRM.rawmaterial.description}}</div>
+          <!-- <md-select ng-model="rawmaterial.id" name="product"  ng-disabled="productIdReadOnly" ng-change="getVenodrList(rawmaterial.id)">
             <md-option ng-repeat="rawMaterials in data.data" ng-value="rawMaterials.rawmaterial.id">
             {{rawMaterials.rawmaterial.partNumber}}
             </md-option>
-          </md-select>
+          </md-select> -->
         </md-input-container>
                  </td>
                  <td>
                      <md-input-container class="drop-down">
           <label>VENODR</label>
-          <md-select ng-model="rmVendor.vendor.vendorId" name="product" ng-disabled="!rawmaterial.id">
-            <md-option ng-repeat="vendor in vendorList" ng-value="vendor.vendor.id">
+          <md-select ng-model="productRM.vendor" name="product" ng-change="onRawMaterialQuantityChange($index, productRM.quantity,productRM.vendor.pricePerUnit)">
+            <md-option ng-repeat="vendor in productRM.vendorList" ng-value="vendor">
             {{vendor.vendor.companyName}}
             </md-option>
           </md-select>
@@ -59,16 +59,16 @@
                  <td>
                     <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">QUANTITY</label> <input
-				type="number" ng-model="rmVendor.quantity1" name="quantity" ng-change="caluculatePrice(rmVendor.vendor.vendorId,rmVendor.quantity1,$index)" min="1">
+				type="number" ng-model="productRM.quantity" name="quantity{{$index}}"  min="1">
 			</md-input-container>
                  </td>
-                  <div ng-messages="bomGenerateForm.quantity.$error">
+                  <div ng-messages="bomGenerateForm.quantity$index.$error">
 			         <div ng-message="min" class="error-msg">Price should be greater than 0</div>
 			      </div>
                  <td>
                 <md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">Price</label> <input
-				type="number" ng-model="rmVendor.pricePerUnit" name="pricePerUnit" value="{{pricePerUnit}}" >
+				type="number" ng-model="productRM.price" name="pricePerUnit" value="{{productRM.price}}" >
 			</md-input-container>
                  </td>
               </tr>

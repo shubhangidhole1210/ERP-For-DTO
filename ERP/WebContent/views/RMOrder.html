@@ -14,6 +14,8 @@
 			     <th>NO</th>
 				<th>NAME</th>
 				<th>TAX</th>
+				<th>VENDOR</th>
+				<th>STATUS</th>
 				<th>TOTAL PRICE</th>
 				<th>ACTUAL PRICE</th>
 				<th>ACTION</th>
@@ -23,6 +25,8 @@
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{rmOrders.name}}</td>
 				<td >{{rmOrders.tax}}</td>
+				<td>{{rmOrders.vendor.companyName}}</td>
+				<td >{{rmOrders.status.name}}</td>
 				<td>{{rmOrders.totalprice}}</td>
 				<td>{{rmOrders.actualPrice}}</td>
 				<td style="text-align: center;">

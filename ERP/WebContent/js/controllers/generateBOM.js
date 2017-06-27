@@ -1,15 +1,15 @@
 erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootScope,SERVER_URL,Auth,$http,utils){
-	$scope.abc = function() {
+	$scope.getProductList = function() {
 		console.log($scope.rawMaterials);
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "productRMAsso/list";
+		httpparams.url = SERVER_URL + "productRMAsso/getProductList";
 		httpparams.headers = {
 			auth_token : Auth.getAuthToken()
 		};
 		$http(httpparams).then(
 				function successCallback(response) {
-					$scope.products = response.data;
+					$scope.products = response.data.data;
 					console.log(response);
 					utils.hideProgressBar();
 				}, function errorCallback(response) {
@@ -20,12 +20,11 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 	};
 
 	$scope.getRawMaterials = function() {
-		console.log($scope.rawMaterials);
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL
 				+ "productRMAsso/productRMAssoList/"
-				+ $scope.product.product.id;
+				+ $scope.product.id;
 		httpparams.headers = {
 			auth_token : Auth.getAuthToken()
 		};
@@ -33,7 +32,7 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 				.then(
 						function successCallback(response) {
 							$scope.data = response.data;
-							$scope.rawMaterialVendorList = response.data.data;
+							$scope.productRMList = response.data.data;
 							console.log(response);
 							utils.hideProgressBar();
 						}, function errorCallback(response) {
@@ -43,7 +42,7 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 		utils.showProgressBar();
 	};
 
-	$scope.getVenodrList = function(id) {
+	$scope.getVenodrList = function(index,id) {
 		console.log($scope.rawMaterials);
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -54,7 +53,7 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 		};
 		$http(httpparams).then(
 				function successCallback(response) {
-					$scope.vendorList = response.data;
+					$scope.productRMList[index].vendorList = response.data;
 					console.log("$scope.vendorList",
 							$scope.vendorList)
 					console.log(response);
@@ -67,6 +66,7 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 	};
 
 	$scope.submitBomInformation = function(isvaliduser, $event) {
+		console.log('submitBomInformation');
 		if (isvaliduser) {
 			$scope.saveBomData();
 		} else {
@@ -89,14 +89,6 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 			}
 			}
 	};
-	
-	/*$scope.calculatePrice = function(vendorId,quantity1,$index){
-		console.log("in caluclate function")
-		console.log("vendorId :" ,vendorId);
-		console.log("quantity1 : " ,quantity1);
-		console.log("$index : " ,$index);
-	}*/
-
 
 	$scope.duplicateRM = function(rawMaterialVendorList) {
 		console.log("in duplicate RM function");
@@ -111,52 +103,54 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 	};
 
 	$scope.saveBomData = function() {
-		console.log("in save function")
+		console.log("in saveBomData function")
 		console.log($scope.data.data);
 		var index = 0;
 		var rmVendorList = [];
-		for (index = 0; index < $scope.data.data.length; index++) {
+		for (index = 0; index < $scope.productRMList.length; index++) {
 			var rmVendor = {};
-			rmVendor.rawmaterial = $scope.data.data[index].rawmaterial.id;
-			rmVendor.pricePerUnit = $scope.data.data[index].pricePerUnit;
-			rmVendor.quantity = $scope.data.data[index].quantity;
-			rmVendor.vendor = $scope.data.data[index].vendor.vendorId;
-			rmVendorList.push(rmVendor)	
-			var data = {
-				product : $scope.product.product.id,
-			/*	bomId : $scope.bomId,*/
-				bomModelParts : rmVendorList
-			};
-			var httpparams = {
-				method : 'post',
-				url : SERVER_URL + "bom/createmultiple",
-				data : data
-			};
-			httpparams.headers = {
-				auth_token : Auth.getAuthToken()
-			};
-			$http(httpparams)
-					.then(
-							function successCallback(data) {
-								console.log(data);
-								if (data.data.code === 1) {
-									utils
-											.showToast(data.data.message);
-									    $location.path('/home')
-								} else {
-									utils
-											.showToast(data.data.message);
-								}
-								utils.hideProgressBar();
-							},
-							function errorCallback(response) {
-								console.log("Error");
-								utils
-										.showToast("Something went wrong. Please try again later.");
-								utils.hideProgressBar();
-							});
-			utils.showProgressBar();
+			rmVendor.rawmaterial = $scope.productRMList[index].rawmaterial.id;
+			rmVendor.pricePerUnit = $scope.productRMList[index].price;
+			rmVendor.quantity = $scope.productRMList[index].quantity;
+			rmVendor.vendor = $scope.productRMList[index].vendor.vendor.id;
+			rmVendorList.push(rmVendor)
 		}
+		var data = {
+			product : $scope.product.id,
+		/*	bomId : $scope.bomId,*/
+			bomModelParts : rmVendorList
+		};
+		var httpparams = {
+			method : 'post',
+			url : SERVER_URL + "bom/createmultiple",
+			data : data
+		};
+		httpparams.headers = {
+			auth_token : Auth.getAuthToken()
+		};
+		$http(httpparams).then(
+			function successCallback(data) {
+				console.log(data);
+				if (data.data.code === 1) {
+					utils.showToast(data.data.message);
+					$location.path('/home')
+				} else {
+					utils.showToast(data.data.message);
+				}
+				utils.hideProgressBar();
+			},
+			function errorCallback(response) {
+				console.log("Error",response);
+				utils.showToast("Something went wrong. Please try again later.");
+				utils.hideProgressBar();
+			});
+		utils.showProgressBar();
+	};
+	
+	$scope.onRawMaterialQuantityChange = function(index, quantity, pricePerUnit){
+		console.log('onRawMaterialQuantityChange : ');
+		$scope.productRMList[index].price = pricePerUnit * quantity;
+		console.log('Price : ', $scope.productRMList[index].price);
 	};
 	
 	$scope.cancelBomForm = function(){

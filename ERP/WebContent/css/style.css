@@ -509,10 +509,7 @@ th
  }
  .qualitycheck
  {
-     margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 5%;
-    margin-bottom: 10%;
+     margin: 5%;
     background: rgb(230, 230, 230);
  }
  
