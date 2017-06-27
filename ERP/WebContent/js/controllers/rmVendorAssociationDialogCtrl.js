@@ -55,7 +55,6 @@ erpApp		.controller(
 												$scope.hide();
 												utils.showToast('Something went worng. Please try again later.');
 											}else if(data.data.code === 2){
-												$rootScope.$emit("CallPopulateRMVendorAssociationList",{});
 												$scope.hide();
 												$rootScope.$emit(
 														"saveRMOrderAssociationError", {});
@@ -66,10 +65,10 @@ erpApp		.controller(
 												console.log(data.data.message);
 												$scope.displayProgressBar = false;
 												utils.showToast('Raw Material Vendor Association Information saved successfully.');
-												$rootScope.$emit(
-														"saveRMOrderAssociationError", {});
+												/*$rootScope.$emit(
+														"saveRMOrderAssociationError", {});*/
 												utils.hideProgressBar();
-												
+												$rootScope.$emit("CallPopulateRMVendorAssociationList",{});
 											}
 										},
 										function errorCallback(data) {

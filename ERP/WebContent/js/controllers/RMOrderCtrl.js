@@ -178,7 +178,7 @@ erpApp.controller('rmOrderCtrl', function($scope,$http, $mdDialog, $mdToast, $ro
 
 	$scope.showConfirm = function(ev,$index) {
 		var confirm = $mdDialog.confirm().title(
-				'Are you sure you want to Delete Raw Material Information?')
+				'Are you sure you want to Delete Raw Material Order Information?')
 				.ariaLabel('Lucky day').targetEvent(ev).ok(
 						'Delete' ).cancel('Cancel');
 		$mdDialog.show(confirm).then(
