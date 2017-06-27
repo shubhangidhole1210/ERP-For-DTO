@@ -11,7 +11,7 @@
 							<label style="color: black;">PRODUCT</label> <md-select
 								ng-model="productionPlan" name="vendorId"
 								ng-disabled="isReadOnly" ng-init=getProductionPlanForStoreOut() name="product"
-								 ng-change="getProductRMAssociation($index)" required>
+								 ng-change="getProductRMAssociation()" required>
 							<md-option ng-repeat="productionPlan in productionPlans"
 								ng-value="productionPlan">
 							{{productionPlan.product.partNumber}} </md-option>
@@ -69,6 +69,7 @@
 								
 							</tr>
 						</table>
+						<div class="active-information" ng-show="addProductRmAssociationMsg">Please Add Product Raw Material Association for doing RM Store Out</div>
 						<div class="store-info-btn">
 							<md-dialog-actions layout="row"> <md-button
 								class="actionButton"

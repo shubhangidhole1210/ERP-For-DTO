@@ -18,7 +18,7 @@
 			</tr>
 			<tr ng-repeat="notification in notificationList  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ pageName: searchText }">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
-				<td>{{notification.name}}</td>
+				<td>{{notification.subject}}</td>
 				<td>{{notification.type}}</td>
 				<td style="text-align: center;"><md-button class="actionButton"
 						ng-click="showEditNotification($event,$index)" ng-init="flag=1" style="">EDIT</md-button>
