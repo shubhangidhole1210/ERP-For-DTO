@@ -7,8 +7,8 @@
       <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>Product</label>
-          <md-select ng-model="product.product.id" name="product"  ng-disabled="productIdReadOnly" ng-init="getProducts()" ng-change="getBomInformation($index)" required>
-            <md-option ng-repeat="product in data.data" ng-value="product.id">
+          <md-select ng-model="product.id" name="product"  ng-disabled="productIdReadOnly" ng-init="getProducts()" ng-change="getBomInformation($index)" required>
+            <md-option ng-repeat="product in products" ng-value="product.id">
                {{product.partNumber}}
             </md-option>
           </md-select>
@@ -32,7 +32,7 @@
            </div>
            <div >
                 <md-button class="md-raised md-primary add-new-btn" 
-				ng-click="submitData(product.product.id,bom)">DOWNLOAD PDF</md-button>
+				ng-click="submitData(product.id,bom)">DOWNLOAD PDF</md-button>
            </div>
            <div  class="store-info-btn">
 								<md-button style="margin-left:70%;background: rgba(63, 81, 181, 0.59);color: white;" class="md-raised" ng-click="cancelBOM()">CANCEL</md-button> 

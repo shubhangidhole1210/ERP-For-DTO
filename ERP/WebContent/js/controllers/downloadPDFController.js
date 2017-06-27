@@ -3,16 +3,20 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 		utils.showProgressBar();
 		        var httpparams = {};
 		         httpparams.method = 'GET';
-		         httpparams.url = SERVER_URL + "bom/BomCompletedList";
+		         httpparams.url = SERVER_URL + "bom/getProductList";
 		        httpparams.headers = {
 				      auth_token : Auth.getAuthToken()
 			        };
 		
 					$http(httpparams).then( function successCallback(response) {
-								$scope.data = response.data;
+//								$scope.data = response.data;
 								$scope.products = response.data.data;
 								console.log(response);
 								utils.hideProgressBar();
+								if(response.data.code === 0){
+									utils.showToast(response.data.message);
+								}
+								
 							},
 							function errorCallback(response) {
 								console.log("Error");
@@ -49,7 +53,7 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 		console.log($scope.rawMaterials);
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "bom/bomList/" + $scope.product.product.id;
+		httpparams.url = SERVER_URL + "bom/bomList/" + $scope.product.id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -67,7 +71,7 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 	$scope.getPdf = function () {
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "bom/downloadBomPdf/" +$scope.product.product.id + "/" +$scope.bom.id;
+		httpparams.url = SERVER_URL + "bom/downloadBomPdf/" + $scope.product.id + "/" +$scope.bom.id;
 		httpparams.responseType = 'arraybuffer';
 		httpparams.headers = {
 			      auth_token : Auth.getAuthToken()
