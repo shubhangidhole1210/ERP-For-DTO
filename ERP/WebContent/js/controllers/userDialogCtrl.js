@@ -10,6 +10,8 @@ erpApp
 					$scope.information = information;
 					$scope.user.dob = new Date($scope.user.dob);
 					$scope.user.doj = new Date($scope.user.doj);
+					$scope.isUserType = false;
+					$scope.isUserTypeDisabled = true;
 					
 					$scope.hide = function() {
 						console.log('hide DialogController');
@@ -181,5 +183,10 @@ erpApp
 								}, function errorCallback(response) {
 									console.log("Error");
 								});
+					}
+					
+					$scope.isUserTypePresent = function(){
+						$scope.isUserType =  $scope.users.length === 0? true : false;
+						$scope.isUserTypeDisabled = $scope.users.length === 0? false : true;
 					}
 		});

@@ -815,5 +815,8 @@ margin: 15px 28px;
 	background: rgba(63, 81, 181, 0.72);
 	color: white;
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-	
+}
+.ui-msg{
+	color: blue;
+	font-size: 15px
 }

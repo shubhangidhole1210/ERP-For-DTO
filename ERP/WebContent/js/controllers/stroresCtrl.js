@@ -5,6 +5,7 @@
 						SERVER_URL, utils, Auth, $location) {
 					
 					$scope.ischeckBoxDisabled = true;
+					$scope.isRawMaterial = false;
 					document.getElementById('invoiceNumber').focus();
 					
 					$scope.getRMOrderInvoiceInformation = function(){
@@ -19,7 +20,7 @@
 						$http(httpparams).then(
 								function successCallback(response) {
 									$scope.invoiceList = response.data;
-									
+									$scope.rmInvoicePresent(); 
 									console.log(response);
 									utils.hideProgressBar();
 								}, function errorCallback(response) {
@@ -29,6 +30,11 @@
 						utils.showProgressBar();
 					};
 
+					$scope.rmInvoicePresent = function(){
+						$scope.isRawMaterial = $scope.invoiceList.length ===0? true:false;
+					};
+					
+					
 					$scope.invoiceRawMaterialList = function(index) {
 						var httpparams = {};
 						httpparams.method = 'GET';
@@ -109,7 +115,7 @@
 						utils.showProgressBar();
 					};
 				
-					$scope.checkReceivedQuantity = function(index) {
+					/*$scope.checkReceivedQuantity = function(index) {
 						console.log('checkReceivedQuantity');
 						if ($scope.rmInvoiceList[index].quantity === parseInt($scope.rmInvoiceList[index].recivedQuantity)) {
 							$scope.rmInvoiceList[index].isReturnInvoiceInitated = false;
@@ -117,9 +123,14 @@
 						} else if ($scope.rmInvoiceList[index].quantity <= parseInt($scope.rmInvoiceList[index].recivedQuantity)) {
 							$scope.rmInvoiceList[index].isReturnInvoiceInitated = false;
 							$scope.rmInvoiceList[index].ischeckBoxDisabled = true;
+						}else if ($scope.rmInvoiceList[index].goodQuantity > 0){
+							$scope.rmInvoiceList[index].isReturnInvoiceInitated = true;
+							$scope.rmInvoiceList[index].ischeckBoxDisabled = false;
 						}else {
 							$scope.rmInvoiceList[index].isReturnInvoiceInitated = true;
 							$scope.rmInvoiceList[index].ischeckBoxDisabled = false;
 						}
-					};
+					};*/
+					
+					
 				});

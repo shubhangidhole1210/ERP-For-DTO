@@ -58,6 +58,8 @@
 			</div>
 			</md-input-container>
 		</div>
+		
+		<div class="ui-msg" ng-show="isRawMaterial">Please create Raw Material</div>
 
 		<md-input-container class="drop-down"> <label
 			style="color: black;">Vendor *</label> <md-select
@@ -69,6 +71,7 @@
 			<div ng-message="required">Please select Vendor</div>
 		</div>
 		</md-input-container>
+		<div class="ui-msg" ng-show="isVendor">Please Create Vendor</div>
 	</div>
 
 	</md-dialog-content>

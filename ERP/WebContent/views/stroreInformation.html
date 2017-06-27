@@ -1,7 +1,7 @@
 <div ng-controller="stroresCtrl">
 <div class="erp-security">
 <div class="qualitycheck">
-   	<div class="header">RAW MATERIAL STORES</div>
+   	<div class="header">RAW MATERIAL STORE IN</div>
  <div class="qualityInspection">
  <form name="storeForm" novalidate>
  <div>
@@ -16,6 +16,7 @@
 </div>
 </md-input-container>
  </div>
+ <div class="ui-msg" ng-show="isRawMaterial">Please create Raw Material Order first</div>
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
 							<label class="input-filed-label">DESCRIPTION</label> <input
@@ -40,7 +41,7 @@
 								<th>INVOICE QUANTITY</th>
 								<th>RECEIVED OK</th>
 								<th>REMARK</th>
-								<th>IS RETURN INVOICE</th>
+								<!-- <th>IS RETURN INVOICE</th> -->
 							</tr>
 							<tr ng-repeat="rmInvoiceItem in rmInvoiceList">
 								<td>{{$index+1}}</td>
@@ -69,7 +70,7 @@
 										</div>
 									</md-input-container>
 								</td>
-								<td>
+								<!-- <td>
 									<md-input-container class="md-block" flex-gt-sm>
 										<md-checkbox ng-model="rmInvoiceItem.isReturnInvoiceInitated" aria-label="Checkbox 1"
 										ng-checked="{{rmInvoiceItem.isReturnInvoiceInitated}}" ng-disabled="{{rmInvoiceItem.ischeckBoxDisabled}}">
@@ -77,7 +78,7 @@
 										<div ng-message="required">please enter is return invoice</div>
 									</div>
 									</md-input-container>
-								</td>
+								</td> -->
 							</tr>
 						</table>
 			<div style="" class="store-info-btn">

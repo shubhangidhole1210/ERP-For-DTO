@@ -13,6 +13,7 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 								$scope.productOrders = response.data;
 								console.log(response);
 								utils.hideProgressBar();
+								$scope.isProductPresent();
 							},
 							function errorCallback(response) {
 								console.log("Error");
@@ -20,6 +21,11 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 								utils.hideProgressBar();
 			});
 	};
+	
+	$scope.isproduct = false;
+	$scope.isProductPresent = function(){
+        $scope.isproduct = $scope.productOrders.length ===0? true :false;
+	}
 	
 	$scope.getDispatchquantity=function($index){
 		var httpparams = {};

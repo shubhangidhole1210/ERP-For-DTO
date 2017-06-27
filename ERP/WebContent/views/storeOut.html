@@ -2,7 +2,7 @@
 
 	<div class="erp-security">
 		<div class="qualitycheck">
-			<div class="header">STORE OUT</div>
+			<div class="header">RAW MATERIAL STORE OUT</div>
 			<div class="qualityInspection">
 				<form name="storeOutInformation" novalidate>
 					<div>
@@ -21,6 +21,7 @@
 							</div>
 							</md-input-container>
 						</div>
+						<div class="ui-msg" ng-show="isProduct">Please Create Product order first</div>
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm>
 							<label class="input-filed-label">DESCRIPTION</label> <input

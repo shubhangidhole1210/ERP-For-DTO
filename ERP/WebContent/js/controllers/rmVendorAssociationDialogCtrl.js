@@ -5,11 +5,16 @@ erpApp		.controller(
 					$scope.flag = flag;
 					$scope.rmOrderAssociation = rmOrderAssociation;
 					$scope.title = title;
+					/*$scope.isRawMaterial = false;
+					$scope.isVendor false;*/
+					
+					
 					$scope.isDropDownreadOnly = dropdownAction;
 					$scope.hide = function() {
 						console.log('hide DialogController');
 						$mdDialog.hide();
 					};
+					
 
 					$scope.cancel = function() {
 						$mdDialog.cancel();
@@ -98,7 +103,7 @@ erpApp		.controller(
 								};
 							$http(httpparams).then(function successCallback(response) {
 								$scope.rawmaterials = response.data;
-								console.log(response);
+								console.log("In get raw materials function $scope.rawmaterials is :",$scope.rawmaterials);
 							}, function errorCallback(response) {
 								console.log("Error");
 							});
@@ -118,6 +123,14 @@ erpApp		.controller(
 								console.log("Error");
 							});
 					   };
+					   
+					  /* $scope.isRawMaterialPresent = function(){
+						   $scope.isRawMaterial = $scope.rawmaterials.length === 0 ? true : false;
+					   };
+					   
+					   $scope.isvendorPresent = function(){
+						 $scope.isVendor = $scope.venodrs.length ===0? true:false;  
+					   };*/
 					   
 //					   var self = this;
 
@@ -157,6 +170,8 @@ erpApp		.controller(
 					    }
 
 					    function loadAll() {
+					    	console.log("in load all function");
+					    	
 					      var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
 					              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
 					              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\

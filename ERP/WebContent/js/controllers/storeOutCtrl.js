@@ -2,6 +2,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		$rootScope, SERVER_URL,$filter,utils,Auth,$location)
 {
 	$scope.currentDate = utils.getCurrentDate();
+	$scope.isProduct = false;
 	$scope.productionPlan = {};
 	$scope.getProductionPlanForStoreOut = function(){
 		utils.showProgressBar();
@@ -15,12 +16,17 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 			$scope.productionPlans = response.data;
 			console.log(response);
 			utils.hideProgressBar();
+			$scope.isProductOrderPresent();
 		}, function errorCallback(response) {
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
 			console.log("Error");
 			utils.hideProgressBar();
 		});
 	};
+	
+	$scope.isProductOrderPresent = function(){
+		$scope.isProduct = $scope.productionPlans.length ===0?true : false;
+	}
 	
 	$scope.getProductRMAssociation = function($index){
 		
