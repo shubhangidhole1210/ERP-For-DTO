@@ -32,11 +32,11 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		utils.showProgressBar();
 	};
 		
-	$scope.displayRMList = function(index) {
+	$scope.getRMListForRMOrder = function(index) {
 		console.log("Display RM List");
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "rawmaterialorderassociation/getRMForRMOrder/"+ $scope.rawMaterialOrders.id;
+		httpparams.url = SERVER_URL + "rawmaterialorderassociation/getRMForRMOrder/"+ $scope.selectedRMOrderId;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -112,7 +112,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 			createDate : $scope.createDate,
 			intime : $scope.intime.toLocaleTimeString().split(" ")[0],
 			outtime : $scope.outtime.toLocaleTimeString().split(" ")[0],
-			po_No :  $scope.rawMaterialOrders.id,
+			po_No :  $scope.selectedRMOrderId,
 			rmorderinvoiceintakquantities : rmorderinvoiceintakquantities
 		};
 		var httpparams = {
@@ -131,7 +131,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 				utils.showToast("Raw Material security check sucessfully !");
 				$location.path('/');
 			}else{
-				utils.showToast("Something went wrong. Please try again later.");
+				utils.showToast(data.data.message);
 			}
 			utils.hideProgressBar();
 		}, function errorCallback(response) {
@@ -153,7 +153,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		}
 	};
 	
-	$scope.displayVendorId=function(){
+	$scope.getVendorList = function(){
 		var httpparams = {};
 		httpparams.method = 'GET';
 		httpparams.url = SERVER_URL + "vendor/list";
@@ -168,7 +168,7 @@ erpApp.controller('securityCtrl', function($scope, $http, $mdDialog, $mdToast,
 		})
 	};
 	
-	$scope.vendorRmOrder=function(index){
+	$scope.getRMOrdersForVendor = function(index){
 		$scope.rmMsg = false;
 		var httpparams = {};
 		httpparams.method = 'GET';

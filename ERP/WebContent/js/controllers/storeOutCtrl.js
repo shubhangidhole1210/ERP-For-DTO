@@ -54,7 +54,6 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 				$scope.updateDispatchQuantity();
 			}
 			utils.hideProgressBar();
-			
 
 		}, function errorCallback(response) {
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
