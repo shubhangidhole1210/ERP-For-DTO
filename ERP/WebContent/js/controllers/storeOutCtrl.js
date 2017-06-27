@@ -40,11 +40,9 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 			$scope.manuFactureQuantity = $scope.productionPlan.targetQuantity;
 			console.log("Target Qty : ", $scope.productionPlan.targetQuantity);
 			$scope.updateDispatchQuantity();
-			/*if(data.code === 1){
+			if(data.code === 0){
 				utils.showToast(data.data.message);
-			}else{
-				
-			}*/
+			}
 			
 
 		}, function errorCallback(response) {

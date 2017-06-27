@@ -19,8 +19,8 @@
 
 							<label>VENDOR </label> <md-select ng-model="selectedVendor"
 								name="vendorId" ng-disabled="isReadOnly"
-								ng-init="displayVendorId()" name="vendorId" required
-								ng-change="vendorRmOrder($index)"> <md-option
+								ng-init="getVendorList()" name="vendorId" required
+								ng-change="getRMOrdersForVendor($index)"> <md-option
 								ng-repeat="vendorId in vendorData" ng-value="vendorId.id">
 							{{vendorId.companyName}} </md-option>
 							</md-select> 
@@ -92,8 +92,8 @@
 						<div layout-gt-sm="row">
 							<md-input-container class="drop-down"> <label
 								style="color: black;">RM Order</label> <md-select
-								ng-model="rawMaterialOrders.id" name="rawMaterial"
-								ng-init="getRMInformation()" ng-change="displayRMList($index)" ng-disabled="!selectedVendor" required>
+								ng-model="selectedRMOrderId" name="rawMaterial"
+								ng-init="getRMInformation()" ng-change="getRMListForRMOrder($index)" ng-disabled="!selectedVendor" required>
 							<md-option ng-repeat="rawMaterialOrder in vendorRmList"
 								ng-value="rawMaterialOrder.id">
 							{{rawMaterialOrder.name}} </md-option> </md-select>
