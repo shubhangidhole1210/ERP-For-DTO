@@ -17,7 +17,7 @@
 		<div ng-repeat="input in data">
 			 <md-input-container style="margin-right: 10px;">
 				<label>{{input.displayName}}</label>
-				<input ng-if="input.inputType === 'Date' || input.inputType === 'text'" ng-model="input.value" type="{{input.inputType}}" placeholder="{{input.displayName">
+				<input ng-if="input.inputType === 'DATE' || input.inputType === 'TEXT'" ng-model="input.value" type="{{input.inputType}}" placeholder="{{input.displayName">
 				<md-select ng-if="input.inputType === 'LIST'"
 							ng-model="input.value"
 							name="report" value="item.id"
