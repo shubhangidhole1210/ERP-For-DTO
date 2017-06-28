@@ -58,12 +58,23 @@ erpApp.service('utils',function myutils($mdDialog, $rootScope,$mdToast,$location
 			$anchorScroll();
 		}
 		
+		function showConfirm(ev){
+			var confirm = $mdDialog.confirm().title('You want to back home page else same page')
+			.ariaLabel('').targetEvent(ev).ok('YES' ).cancel('NO');
+
+	$mdDialog.show(confirm)
+			.then(function() {
+				$location.path('/home');
+			}, function() {});
+		};
+		
 		return {
 			hideProgressBar : hideProgressBar,
 			showProgressBar : showProgressBar,
 			showToast : showToast,
 			getCurrentDate : getCurrentDate,
 			getCurrentMonthYearString : getCurrentMonthYearString,
-			scrollToTop : scrollToTop
+			scrollToTop : scrollToTop,
+			showConfirm : showConfirm
 		};
 });

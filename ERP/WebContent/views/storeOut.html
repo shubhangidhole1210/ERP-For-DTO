@@ -32,11 +32,16 @@
 								<div ng-message="maxlength">Description should be minimum 4 and maximum 255 character</div>
 							</div>
 							</md-input-container>
-							<div></div>
 						</div>
+						
+						
+						  <md-input-container class="md-block" flex-gt-sm>
+									<md-checkbox aria-label="Checkbox 1" ng-model="isSelectedItemStoreOut"> Select Required Items for store out </md-checkbox>
+									</md-input-container>
+									
 						<md-input-container class="md-block" flex-gt-sm>
 						<label class="input-filed-label">QUANTITY TO MANUFACTURE</label> <input
-							type="number" required name="quantity" disabled
+							type="number" required name="quantity" 
 							ng-model="manuFactureQuantity"
 							ng-change="updateDispatchQuantity()" min="1">
 						<div ng-messages="storeOutInformation.quantity.$error">
@@ -47,17 +52,23 @@
 						<h3>Raw Material List</h3>
 						<table>
 							<tr>
+								<th>NO</th>
+								<th ng-show="isSelectedItemStoreOut">ISSELECTED</th>
 								<th>RAW MATERIAL NAME</th>
 								<th>INVENTORY QUANTITY</th>
 								<th>QUANTITY REQUIRED</th>
 								<th>QUANTITY DISPATCH</th>
 							</tr>
 							<tr ng-repeat="rawMaterial in productRMList">
+							    <td>{{$index+1}}</td>
+							      <td ng-show="isSelectedItemStoreOut"> <md-input-container class="md-block" flex-gt-sm>
+									<md-checkbox  aria-label="Checkbox 1" ng-model="isSelectedRawMaterial" ng-change="onIsSelectedChange(isSelectedRawMaterial,$index)">
+									</md-input-container></td>
 								<td>{{rawMaterial.name}}</td>
 								<td>{{rawMaterial.inventoryQuantity}}</td>
 								<td>{{rawMaterial.quantityRequired}}</td>
 								<td>
-									<md-input-container class="md-block" flex-gt-sm>
+									<!-- <md-input-container class="md-block" flex-gt-sm>
 										<input type="number" name="dispatchQuantity{{$index}}"
 											ng-model="rawMaterial.quantityDispatched" max="{{rawMaterial.inventoryQuantity}}" disabled min="0" >
 										<div ng-show="storeOutInformation.dispatchQuantity{{$index}}.$error.max" class="error-msg">
@@ -65,6 +76,11 @@
 										  Dispatch Quantity should not be greater than Inventory Quantity. 
 										  Please add Raw Materials to the Inventory.
 										</div>	
+									</md-input-container></td> -->
+									
+									<md-input-container class="md-block" flex-gt-sm>
+										<input type="number" name="dispatchQuantity{{$index}}"
+											ng-model="rawMaterial.quantityDispatched" >
 									</md-input-container></td>
 								
 							</tr>

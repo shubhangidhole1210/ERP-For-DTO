@@ -52,7 +52,7 @@
 									<md-input-container class="md-block" flex-gt-sm>
 										<label class="input-filed-label">RECEIVED</label> 
 										<input type="number" ng-model="rmInvoiceItem.recivedQuantity" ng-change="checkReceivedQuantity($index)"
-											name="recivedOk{{$index}}" max="{{rmInvoiceItem.goodQuantity}}" required min="1">
+											name="recivedOk{{$index}}" max="{{rmInvoiceItem.goodQuantity}}" required min="0">
 										<div ng-show="storeForm.recivedOk{{$index}}.$error.reqired" class="error-msg">
 											Please enter quantity</div>
 										<div ng-show="storeForm.recivedOk{{$index}}.$error.max" class="error-msg">

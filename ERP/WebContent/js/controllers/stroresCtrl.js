@@ -95,15 +95,15 @@
 											if (data.data.code === 1) {
 												console.log(data.data.message);
 												console.log(data);
-												$location.path('/')
+												
 												utils
 														.showToast('Raw Material information store sucessfully!');
-												utils.hideProgressBar();
+												/*utils.hideProgressBar();*/
 											} else {
 												console.log(data);
 												utils
 														.showToast('something went wrong please try again')
-												utils.hideProgressBar();
+												/*utils.hideProgressBar();*/
 											}
 										},
 										function errorCallback(response) {
@@ -112,25 +112,9 @@
 											utils
 													.showToast('something went wrong please try again')
 										});
-						utils.showProgressBar();
+					/*	utils.showProgressBar();*/
+						utils.showConfirm();
 					};
 				
-					/*$scope.checkReceivedQuantity = function(index) {
-						console.log('checkReceivedQuantity');
-						if ($scope.rmInvoiceList[index].quantity === parseInt($scope.rmInvoiceList[index].recivedQuantity)) {
-							$scope.rmInvoiceList[index].isReturnInvoiceInitated = false;
-							$scope.rmInvoiceList[index].ischeckBoxDisabled = true;
-						} else if ($scope.rmInvoiceList[index].quantity <= parseInt($scope.rmInvoiceList[index].recivedQuantity)) {
-							$scope.rmInvoiceList[index].isReturnInvoiceInitated = false;
-							$scope.rmInvoiceList[index].ischeckBoxDisabled = true;
-						}else if ($scope.rmInvoiceList[index].goodQuantity > 0){
-							$scope.rmInvoiceList[index].isReturnInvoiceInitated = true;
-							$scope.rmInvoiceList[index].ischeckBoxDisabled = false;
-						}else {
-							$scope.rmInvoiceList[index].isReturnInvoiceInitated = true;
-							$scope.rmInvoiceList[index].ischeckBoxDisabled = false;
-						}
-					};*/
-					
 					
 				});

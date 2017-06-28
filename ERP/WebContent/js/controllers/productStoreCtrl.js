@@ -51,7 +51,7 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 					 productQualityParts:productQualityParts
 			 };
 			 console.log("Data",data);
-			 utils.showProgressBar();
+			/* utils.showProgressBar();*/
 				var httpparams = {};
 				httpparams.method = 'POST';
 				httpparams.url = SERVER_URL + "productquality/productQualityCheckStore";
@@ -64,17 +64,36 @@ erpApp.controller('productStoreCtrl', function($scope,$http, $mdDialog, $mdToast
 					console.log(data);
 					if (data.data.code === 1) {
 						utils.showToast("Product Store sucessfully!");
-						$location.path('/');
 					} else {
 						utils.showToast("Something went wrong. Please try again later.");
 					}
-					utils.hideProgressBar();
+					/*utils.hideProgressBar();*/
 				}, function errorCallback(response) {
 					utils.showToast("Something went wrong. Please try again later.");
 					console.log("Error");
-					utils.hideProgressBar();
 				});
+				utils.showConfirm();
 		};
+		
+		$scope.validatePassQuantity = function(qualityCheckedQuantity,passQuantity,$index){
+			console.log("qualityCheckedQuantity : " , qualityCheckedQuantity);
+			console.log("passQuantity : ",passQuantity);
+			if(qualityCheckedQuantity === passQuantity){
+				$scope.productStoreForm["passQuantity" + $index].$setValidity("customMsg", true);
+			}else{
+				$scope.productStoreForm["passQuantity" + $index].$setValidity("customMsg", false);
+			}
+		}
+		
+		/*$scope.showConfirm = function(ev,$index) {
+			var confirm = $mdDialog.confirm().title('You want to back home page else same page?')
+					.ariaLabel('').targetEvent(ev).ok('YES' ).cancel('NO');
+
+			$mdDialog.show(confirm)
+					.then(function() {
+						$location.path('/home');
+					}, function() {});
+		};*/
 		
 		$scope.cancelProductStore=function(){
 			$location.path('/');

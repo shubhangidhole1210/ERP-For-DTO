@@ -19,10 +19,11 @@
            <td>{{productionplan.targetQuantity}}</td>
            <td>{{productionplan.qualityCheckedQuantity}}</td>
            <td><md-input-container class="md-block" flex-gt-sm>
-				<input type="number" ng-model="productionplan.passQuantity" name="passQuantity" required>
-				<div ng-messages="productStoreForm.passQuantity.$error">
-             		<div ng-message="required">please enter Pass Quantity </div>
-            	</div>
+				<input type="number" ng-model="productionplan.passQuantity" name="passQuantity{{$index}}" required ng-change="validatePassQuantity(productionplan.qualityCheckedQuantity,productionplan.passQuantity,$index)">
+				 <div ng-messages="productStoreForm.passQuantity.$error">
+				    <div ng-message="required">Please enter quantity</div>
+				 </div>
+				  <div ng-show="productStoreForm.passQuantity{{$index}}.$error.customMsg" class="error-msg">Pass quantity should be equal to QC pass quantity</div>
 				</md-input-container></td>
 			<td>
 			   <md-input-container class="md-block" flex-gt-sm>

@@ -136,18 +136,25 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 				console.log(data);
 				if (data.data.code === 1) {
 					utils.showToast(data.data.message);
-					$location.path('/home')
 				} else {
 					utils.showToast(data.data.message);
 				}
-				utils.hideProgressBar();
 			},
 			function errorCallback(response) {
 				console.log("Error",response);
 				utils.showToast("Something went wrong. Please try again later.");
-				utils.hideProgressBar();
 			});
-		utils.showProgressBar();
+		$scope.showConfirm();
+	};
+	
+	function showConfirm(ev){
+		var confirm = $mdDialog.confirm().title('You want to download PDF for generating BOM')
+		.ariaLabel('').targetEvent(ev).ok('YES' ).cancel('NO');
+
+$mdDialog.show(confirm)
+		.then(function() {
+			$location.path('/getPdf');
+		}, function() {});
 	};
 	
 	$scope.onRawMaterialQuantityChange = function(index, quantity, pricePerUnit){
