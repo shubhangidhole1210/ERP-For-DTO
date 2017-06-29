@@ -14,6 +14,8 @@
 		       <th>TARGET QUANTITY</th>
 		       <th>COMPLETED QUANTITY</th>
 		       <th>ACHIEVED QUANTITY</th>
+		       <th>FAILD QUANTITY</th>
+		       <th>QC PENDING QUANITY</th>
 		       <th>REMARK</th>
 		       </tr>
 		       <tr ng-repeat="product in productList">
@@ -23,6 +25,18 @@
 		        	<td>
 		         		<md-input-container class="md-block" flex-gt-sm>
 							<input type="number" ng-model="product.achived" name="achivedQuantity{{$index}}"  min="1">
+							<div ng-show="todaysProductionPlanForm.achivedQuantity{{$index}}.$error.min" class="error-msg">Quantity should be greater then 0</div>
+						</md-input-container>
+					</td>
+					<td>
+					    <md-input-container class="md-block" flex-gt-sm>
+							<input type="number" ng-model="product.failQuantity" name="" ng-value="{{product.failQuantity}}" >
+							<div ng-show="todaysProductionPlanForm.achivedQuantity{{$index}}.$error.min" class="error-msg">Quantity should be greater then 0</div>
+						</md-input-container>
+					</td>
+					<td>
+					    <md-input-container class="md-block" flex-gt-sm>
+							<input type="number" ng-model="product.qualityPendingQuantity" ng-disabled="true">
 							<div ng-show="todaysProductionPlanForm.achivedQuantity{{$index}}.$error.min" class="error-msg">Quantity should be greater then 0</div>
 						</md-input-container>
 					</td>

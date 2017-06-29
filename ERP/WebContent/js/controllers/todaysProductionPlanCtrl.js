@@ -57,6 +57,8 @@ erpApp
 							product.targetQuantity = $scope.productList[index].targetQuantity;
 							product.achivedQuantity = $scope.productList[index].achived;
 							product.remark = $scope.productList[index].remark;
+							product.failQuantity = $scope.productList[index].failQuantity;
+							product.qualityPendingQuantity = $scope.productList[index].qualityPendingQuantity;
 							product.productionPlanId = $scope.productList[index].id;
 							productinPlanCurrentDateLists.push(product);
 						}
@@ -96,6 +98,15 @@ erpApp
 										});
 						utils.showProgressBar();
 					};
+					
+					
+					$scope.validateTargetQuantity = function(targetQuantity,achivedQuantity,failQuantity,qualityPendingQuantity,$index){
+						console.log("targetQuantity :" ,targetQuantity);
+						console.log("achivedQuantity :" ,achivedQuantity)
+						console.log("failQuantity :" ,failQuantity)
+						console.log("qualityPendingQuantity :" ,qualityPendingQuantity);
+					}
+					
 					
 					$scope.cancelTodaysProductionPlan=function(){
 						$location.path('/');

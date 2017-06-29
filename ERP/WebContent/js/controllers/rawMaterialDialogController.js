@@ -25,7 +25,9 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 				description:$scope.rawMaterial.description,
 				partNumber:$scope.rawMaterial.partNumber,
 				unit:$scope.rawMaterial.unit.id,
-				pricePerUnit:$scope.rawMaterial.pricePerUnit
+				pricePerUnit:$scope.rawMaterial.pricePerUnit,
+				minQuantity:$scope.rawMaterial.minQuantity,
+				maxQuantity:$scope.rawMaterial.maxQuantity
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {

@@ -102,7 +102,6 @@ body{
     overflow-y: scroll;
 	background: rgb(230, 230, 230);
 	position: fixed;
-	overflow: auto;
 	
 }
 .main-class-full-screen {
@@ -822,4 +821,14 @@ margin: 15px 28px;
 .ui-msg{
 	color: blue;
 	font-size: 15px
+}
+
+.scrollable-div{
+    height: 98%;
+    overflow-y: scroll;
+    float: left;
+    max-height: 98%;
+  
+    position: fixed;
+    overflow-x: hidden;
 }
