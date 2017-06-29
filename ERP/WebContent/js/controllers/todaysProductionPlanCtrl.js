@@ -50,7 +50,7 @@ erpApp
 					
 					$scope.saveTodaysProductionPlan = function() {
 						var index = 0;
-						var productinPlanCurrentDateLists = [];
+						var productinPlanDTOs = [];
 						for (index = 0; index < $scope.productList.length; index++) {
 							var product = {};
 							product.productId = $scope.productList[index].product.id;
@@ -60,11 +60,11 @@ erpApp
 							product.failQuantity = $scope.productList[index].failQuantity;
 							product.qualityPendingQuantity = $scope.productList[index].qualityPendingQuantity;
 							product.productionPlanId = $scope.productList[index].id;
-							productinPlanCurrentDateLists.push(product);
+							productinPlanDTOs.push(product);
 						}
 						var data = {
 							createDate : $scope.currentDate,
-							productinPlanCurrentDateLists : productinPlanCurrentDateLists
+							productinPlanDTOs : productinPlanDTOs
 						};
 						var httpparams = {
 							method : 'post',
