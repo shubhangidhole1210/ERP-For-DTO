@@ -52,7 +52,7 @@
 										type="number" ng-model="rmInvoiceItem.goodQuantity"
 										ng-change="checkReceivedQuantity($index)"
 										name="recivedOk{{$index}}" max="{{rmInvoiceItem.quantity}}"
-										required >
+										required min="0">
 									<!-- <div
 										ng-messages="qualityInspectionForm['recivedOk' + $index].$error">
 										<div ng-message="required">Please enter Received
@@ -67,7 +67,7 @@
 										{{rmInvoiceItem.quantity}}!</div>
 										<div
 										ng-show="qualityInspectionForm.recivedOk{{$index}}.$error.min"
-										class="error-msg">Quantity should be greater then 0</div>
+										class="error-msg">Invalid Quantity!!Quantity should be 0 or  greater than 0</div>
 									</md-input-container></td>
 								<td><md-input-container class="md-block" flex-gt-sm>
 									<label class="input-filed-label">REMARK</label> <input

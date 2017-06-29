@@ -47,7 +47,7 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 			utils.showToast("PDF download sucessfully");
 			console.log("its else  condition");
 			$scope.getPdf();
-			$location.path('/home');
+			/*$location.path('/home');*/
 		}
 	};
 	
@@ -107,6 +107,7 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 			utils.showToast('We are Sorry. Something went wrong. Please try again later.');
 			utils.hideProgressBar();
 	    });
+		utils.showConfirm();
 	};
 	
 	/*$scope.bomValidationMsg = function(bom){

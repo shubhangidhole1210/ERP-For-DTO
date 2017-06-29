@@ -144,7 +144,7 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 				console.log("Error",response);
 				utils.showToast("Something went wrong. Please try again later.");
 			});
-		$scope.showConfirm();
+		showConfirm();
 	};
 	
 	function showConfirm(ev){

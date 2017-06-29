@@ -12,6 +12,7 @@
           <th>TARGET QUANTITY</th>
           <th>QC PASS QUANTITY</th>
           <th>PASS QUANTITY</th>
+          <!-- <th>FAILD QUANTITY</th> -->
           <th>REMARK</th>
         </tr>
         <tr ng-repeat="productionplan in productionPlans">
@@ -25,12 +26,21 @@
 				 </div>
 				  <div ng-show="productStoreForm.passQuantity{{$index}}.$error.customMsg" class="error-msg">Pass quantity should be equal to QC pass quantity</div>
 				</md-input-container></td>
+				
+				<!--  <td><md-input-container class="md-block" flex-gt-sm>
+				<input type="number" ng-model="productionplan.failQuantity" name="passQuantity{{$index}}" required ng-change="validatePassQuantity(productionplan.qualityCheckedQuantity,productionplan.passQuantity,$index)">
+				 <div ng-messages="productStoreForm.passQuantity.$error">
+				    <div ng-message="required">Please enter quantity</div>
+				 </div>
+				  <div ng-show="productStoreForm.passQuantity{{$index}}.$error.customMsg" class="error-msg">Pass quantity should be equal to QC pass quantity</div>
+				</md-input-container></td> -->
 			<td>
+			
 			   <md-input-container class="md-block" flex-gt-sm>
 				<input type="text" ng-model="productionplan.remark" name="remark">
-				<div ng-messages="productStoreForm.remark.$error">
+				<!-- <div ng-messages="productStoreForm.remark.$error">
              		<div ng-message="required">please enter Remark </div>
-            	</div>
+            	</div> -->
 				</md-input-container>
 			</td>
         </tr>

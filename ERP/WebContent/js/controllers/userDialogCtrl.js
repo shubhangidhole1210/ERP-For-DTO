@@ -112,22 +112,12 @@ erpApp
 											} else if (data.data.code === 2) {
 												$rootScope.$emit(
 														"saveUserError", {});
-												$scope.message = data.data.message;
-												$scope.userInformation.userid
-														.$setValidity(
-																"apierror",
-																false);
-												$scope.userInformation.mobile
-														.$setValidity(
-																"apierror",
-																false);
-												$scope.userInformation.email
-														.$setValidity(
-																"apierror",
-																false);
 												console.log($scope.message);
 												utils
 														.showToast(data.data.message);
+												$scope.userInformation.email.$setValidity("apierror", true);
+												$scope.message = data.data.message;
+												console.log("$scope.message: " ,$scope.message);
 											} else {
 												$scope.displayProgressBar = false;
 												utils

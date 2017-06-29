@@ -12,7 +12,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 	
 	$scope.populateVendorList=function(){
 		 $scope.currentPage = 0;
-	     $scope.pageSize = 15;
+	     $scope.pageSize = 10;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -154,5 +154,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			 utils.scrollToTop();
 			 $scope.currentPage = $scope.currentPage + 1;
 		};
+		
+		
 });
 

@@ -134,7 +134,7 @@ erpApp		.controller(
 					   
 //					   var self = this;
 
-					   	$scope.simulateQuery = false;
+/*					   	$scope.simulateQuery = false;
 					    $scope.isDisabled    = false;
 
 					    $scope.states        = loadAll();
@@ -197,5 +197,5 @@ erpApp		.controller(
 					        return (state.value.indexOf(lowercaseQuery) === 0);
 					      };
 
-					    }
+					    }*/
 });

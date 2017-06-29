@@ -9,6 +9,7 @@
 		<input type="text" ng-model="searchText" name="password"
 			placeholder="Search by Company Name" class="search-text"> </md-input-container>
 		<h1 class="table-header">VENDOR LIST</h1>
+		<div style="overflow-y: auto">
 		<table>
 			<tr>
 				<th>NO</th>
@@ -18,7 +19,7 @@
 				<th>MOBILE</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="data in data  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ companyName: searchText }">
+			<tr ng-repeat="data in data  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ companyName: searchText }" style="overflow: scroll">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{data.companyName}}</td>
 				<td>{{data.firstName}}</td>
@@ -32,6 +33,8 @@
 						ng-click="viewVendarInformation($event,$index)" style="">VIEW</md-button></td>
 			</tr>
 		</table>
+		</div>
+		
 		<md-dialog-actions layout="row" style="" class="paginationBtn"> <md-button
 		class="md-raised"
 		type="button" ng-disabled="currentPage == 0" ng-click="gotoPrevPage()">Previous Page</md-button> <md-button

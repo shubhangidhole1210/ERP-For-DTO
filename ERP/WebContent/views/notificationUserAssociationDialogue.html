@@ -19,7 +19,7 @@
 			            		</md-option>
 			         		</md-select> -->
 			         		
-			         		 <md-select ng-model="notificationUser.notification.id" name="notification"  ng-disabled="isClientReadOnly" ng-required="true" required ng-init="getNotificationInformation()">
+			         		 <md-select ng-model="notificationUser.notification.id" name="notification"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getNotificationInformation()">
                            <md-option ng-repeat="notification in notificationList" ng-value="notification.id" >
                              {{notification.subject}}
                          </md-option>
@@ -33,7 +33,7 @@
 					<div layout-gt-sm="row">
 						<md-input-container class="drop-down">
 				          	<label>USER ID*</label>
-				          	<md-select ng-model="notificationUser.user.id" name="user"  ng-disabled="isClientReadOnly" ng-required="true" ng-init="getUserInformation()">
+				          	<md-select ng-model="notificationUser.user.id" name="user"  ng-disabled="isReadOnly" ng-required="true" ng-init="getUserInformation()">
 				            	<md-option ng-repeat="user in userList" ng-value="user.id" >
 				               		{{user.userid}}
 				            	</md-option>
@@ -45,15 +45,15 @@
 			     	</div>
 			    
 			    <label>
-				    <input type="radio" ng-model="sendOption" value="to" ng-change="onSendOptionChanged()" ng-disabled="rdaioButtinVisibleForTo">
+				    <input type="radio" ng-model="sendOption" value="to" ng-change="onSendOptionChanged()" ng-disabled="rdaioButtinVisibleForTo;isReadOnly">
 				    TO
 				</label><br/>
 			  	<label>
-			    	<input type="radio" ng-model="sendOption" value="cc" ng-change="onSendOptionChanged()" ng-disabled="rdaioButtinVisibleForCc">
+			    	<input type="radio" ng-model="sendOption" value="cc" ng-change="onSendOptionChanged()" ng-disabled="rdaioButtinVisibleForCc;isReadOnly">
 			    	CC
 			  	</label><br/>
 			  	<label>
-			    	<input type="radio" ng-model="sendOption" value="bcc" ng-change="onSendOptionChanged()" ng-disabled="rdaioButtinVisibleForBcc">
+			    	<input type="radio" ng-model="sendOption" value="bcc" ng-change="onSendOptionChanged()" ng-disabled="rdaioButtinVisibleForBcc;isReadOnly">
 			    	BCC
 			  	</label><br/>
 			</div>

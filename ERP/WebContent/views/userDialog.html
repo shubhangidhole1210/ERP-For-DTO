@@ -20,9 +20,8 @@
 				<div ng-message="required">Please enter user ID</div>
 				<div ng-message="minlength">User ID should be minimum 5
 					character or Digit</div>
-				<div ng-message="apierror">User ID should be minimum 5
-					character or Digit</div>
 			</div>
+			<div ng-show="userInformation.userid.$error.apierror">{{message}}</div>
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-sm type="password">
@@ -109,7 +108,7 @@
 		
 		
 		<md-input-container class="md-block" flex-gt-sm type="password">
-		<label class="input-filed-label">DATE OF BIRTH[MM/DD/YYYY]*</label> <input
+		<label class="input-filed-label">DATE OF BIRTH[MM/DD/YYYY]</label> <input
 			type="date" placeholder="Enter date of birth" ng-model="user.dob"
 			name="dob" required id="dob" ng-disabled="isReadOnly" ng-change="birthDateValidation(user.dob);">
 		<div ng-messages="userInformation.dob.$error">

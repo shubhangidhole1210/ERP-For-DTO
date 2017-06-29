@@ -55,7 +55,7 @@ erpApp.controller('userTypeDialogCtrl',function($scope, $http, $mdDialog, $mdToa
 								utils.showToast('Something went worng. Please try again later.')
 							}else{
 								$scope.displayProgressBar = false;
-								utils.showToast('UserType Information saved successfully.')
+								utils.showToast(data.data.message);
 								$rootScope.$emit("CallPopulateUserTypeList",{});
 							}
 						},

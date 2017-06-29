@@ -6,6 +6,9 @@
 			<div class="qualityInspection">
 				<form name="storeOutInformation" novalidate>
 					<div>
+					       <!--  <md-input-container class="md-block" flex-gt-sm>
+									<md-checkbox aria-label="Checkbox 1"> Select Required Product for store out </md-checkbox>
+									</md-input-container> -->
 						<div layout-gt-sm="row">
 							<md-input-container class="md-block" flex-gt-sm type="password">
 							<label style="color: black;">PRODUCT</label> <md-select
@@ -36,7 +39,7 @@
 						
 						
 						  <md-input-container class="md-block" flex-gt-sm>
-									<md-checkbox aria-label="Checkbox 1" ng-model="isSelectedItemStoreOut"> Select Required Items for store out </md-checkbox>
+									<md-checkbox aria-label="Checkbox 1" ng-model="isSelectedItemStoreOut" ng-disabled="!productionPlan"> Select Required Items for store out </md-checkbox>
 									</md-input-container>
 									
 						<md-input-container class="md-block" flex-gt-sm>
@@ -68,7 +71,7 @@
 								<td>{{rawMaterial.inventoryQuantity}}</td>
 								<td>{{rawMaterial.quantityRequired}}</td>
 								<td>
-									<!-- <md-input-container class="md-block" flex-gt-sm>
+									<md-input-container class="md-block" flex-gt-sm>
 										<input type="number" name="dispatchQuantity{{$index}}"
 											ng-model="rawMaterial.quantityDispatched" max="{{rawMaterial.inventoryQuantity}}" disabled min="0" >
 										<div ng-show="storeOutInformation.dispatchQuantity{{$index}}.$error.max" class="error-msg">
@@ -76,12 +79,12 @@
 										  Dispatch Quantity should not be greater than Inventory Quantity. 
 										  Please add Raw Materials to the Inventory.
 										</div>	
-									</md-input-container></td> -->
+									</md-input-container></td>
 									
-									<md-input-container class="md-block" flex-gt-sm>
+									<!-- <md-input-container class="md-block" flex-gt-sm>
 										<input type="number" name="dispatchQuantity{{$index}}"
 											ng-model="rawMaterial.quantityDispatched" >
-									</md-input-container></td>
+									</md-input-container></td> -->
 								
 							</tr>
 						</table>

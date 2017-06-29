@@ -121,13 +121,13 @@
 										type="number" ng-model="rawmaterial.invoiceQuantity"
 										name="invoiceQuantity{{$index}}"
 										max="{{rawmaterial.remainingQuantity}}"
-										ng-change="toCompareQuantity(rawmaterial.remainingQuantity,rawmaterial.invoiceQuantity)" min="1">
+										ng-change="toCompareQuantity(rawmaterial.remainingQuantity,rawmaterial.invoiceQuantity)" min="0">
 									<div ng-messages="securityInformation.invoiceQuantity.$error">
 										<div ng-message="required">please enter quantity</div>
-										<div ng-message="min">Quantity Should be greater then 0</div>
+										<div ng-message="min">Invalid quantity!!!quantity should b 0 or greater than 0</div>
 									</div>
 									<div ng-show="securityInformation.invoiceQuantity{{$index}}.$error.min" class="error-msg">
-									  Quanity should be greater then 0
+									 Invalid quantity!!!quantity should b 0 or greater than 0
 									</div>
 									<div
 										ng-show=" securityInformation.invoiceQuantity{{$index}}.$error.max"

@@ -57,7 +57,7 @@ erpApp.controller('pageDialogController', function($scope,$http, $mdDialog,SERVE
 								utils.showToast('Something went worng. Please try again later.');
 							}else{
 								$scope.displayProgressBar = false;
-								utils.showToast('Page Information saved successfully.');
+								utils.showToast(data.data.message);
 								$rootScope.$emit("CallPopulatePageList",{});
 							}
 						},

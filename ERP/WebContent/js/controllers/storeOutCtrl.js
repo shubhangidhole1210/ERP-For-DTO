@@ -54,6 +54,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 				$scope.manuFactureQuantity = $scope.productionPlan.targetQuantity;
 				console.log("Target Qty : ", $scope.productionPlan.targetQuantity);
 				$scope.updateDispatchQuantity();
+				$scope.addProductRmAssociationMsg = false;
 			}
 			utils.hideProgressBar();
 
@@ -69,16 +70,18 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 			$scope.productRMList[index].quantityDispatched = $scope.productRMList[index].quantityRequired * $scope.manuFactureQuantity;
 		}
 	};
-	var rmList = [];
+	
 	
 	$scope.saveStoreOutInformation=function(){
 		//console.log($scope.data.data);
+		var rmList = [];
 		var index=0;
 		var storeOutProduct = {};
 		if($scope.isSelectedItemStoreOut){
 			var rmList = $scope.selectedRawMaterialList;
 		}else{
 			for(index=0;index<$scope.productRMList.length;index++){
+				storeOutProduct.rawmaterial = $scope.productRMList[index].rawmaterial;
 				storeOutProduct.quantityRequired = $scope.productRMList[index].quantityRequired;
 				storeOutProduct.quantityDispatched = $scope.productRMList[index].quantityDispatched;
 				rmList.push(storeOutProduct);
