@@ -217,10 +217,10 @@ erpApp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, 
  	                /*console.log('loginRequired = ' + loginRequired);*/
  	                if(!Auth.isLoggedIn() && loginRequired){
  	                	$location.path('/login');
- 	                 }/*else if(next.$$route.originalPath !=='/' && !Auth.isPageAccessible(next)){
+ 	                 }else if(next.$$route.originalPath !=='/' && !Auth.isPageAccessible(next)){
  	                	 console.log('page is not accessible');
  	                	$location.path('/unAuthorized');
- 	                 }*/else{
+ 	                 }else{
  	                	 //do nothing
  	                 }
  	            }
