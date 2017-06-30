@@ -26,8 +26,6 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 				partNumber:$scope.rawMaterial.partNumber,
 				unit:$scope.rawMaterial.unit.id,
 				pricePerUnit:$scope.rawMaterial.pricePerUnit,
-				minQuantity:$scope.rawMaterial.minQuantity,
-				maxQuantity:$scope.rawMaterial.maxQuantity
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -94,13 +92,13 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
 			console.log(response);
-			$scope.isUnitPresent();
+			/*$scope.isUnitPresent();*/
 		}, function errorCallback(response) {
 			console.log("Error");
 		});
 	}
 	
-	$scope.isUnitPresent = function(){
+	/*$scope.isUnitPresent = function(){
 		scope.isUnit = $scope.data.length === 0 ? true : false;
-	}
+	}*/
 });

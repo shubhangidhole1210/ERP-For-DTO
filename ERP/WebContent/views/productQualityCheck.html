@@ -12,6 +12,7 @@
           <th>TARGET QUANTITY</th>
           <th>QC PENDING QUANTITY</th>
           <th>QC PASS QUANTITY</th>
+          <th>QC REPAIRED QUANTITY</th>
           <th>QC FAIL QUANTITY</th>
           <th>REMARK</th>
         </tr>
@@ -21,17 +22,20 @@
            <td>{{productionplan.qualityPendingQuantity}}</td>
            <td>
            		<md-input-container class="md-block" flex-gt-sm>
-					<input type="number" ng-model="productionplan.passQuantity"  name="passQuantity"  ng-change="validatePassAndFailQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity1,$index)">
-					<!-- <div ng-messages="productQualityForm.passQuantity.$error">
+					<input type="number" ng-model="productionplan.passQuantity"  name="passQuantity{{$index}}" ng-change="validatePassAndFailQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity1,$index)" >
+					<div ng-messages="productQualityForm.passQuantity$index.$error">
              	  <div ng-message="required">please enter Pass Quantity </div>
-            	</div> -->
+            	</div>
 				</md-input-container>
+			</td>
+			<td>
+           		{{productionplan.repaired_quantity}}
 			</td>
 			<td>
 				
 				<md-input-container class="md-block" flex-gt-sm>
 					<input type="number" ng-model="productionplan.failQuantity1" name="failQuantity{{$index}}" id="failQuantity"   ng-change="validatePassAndFailQuantity(productionplan.qualityPendingQuantity,productionplan.passQuantity,productionplan.failQuantity1,$index)">
-				<div ng-show="productQualityForm.failQuantity{{$index}}.$error.customMsg" class="error-msg">pass and fail quantity should be equal to pending quantity</div>
+				<div ng-show="productQualityForm.failQuantity{{$index}}.$error.customMsg" class="error-msg">Total of pass and fail quantity is {{passFailQuantity}} and it  should be equal to {{productionplan.qualityPendingQuantity}}</div>
 				</md-input-container>
 				
             	

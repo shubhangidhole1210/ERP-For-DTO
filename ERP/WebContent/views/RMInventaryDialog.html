@@ -13,7 +13,7 @@
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">QUANTITY AVAILABLE</label> <input
-				type="text" ng-model="rmInventary.quantityAvailable"
+				type="number" ng-model="rmInventary.quantityAvailable"
 				value="rmInventary.quantityAvailable" required
 				name="quantityAvailable" ng-disabled="isReadOnly">
 			<div ng-messages="RMInventaryInformation.quantityAvailable.$error">
@@ -33,6 +33,31 @@
 			</div>
 			</md-input-container>
 		</div>
+		
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">MINIMUM QUANTITY</label> <input
+				type="number" ng-model="rmInventary.minimum_quantity" required name="minQuantity" ng-disabled="isReadOnly"  min="0" max="9999">
+			<div ng-messages="RMInventaryInformation.minQuantity.$error">
+				<div ng-message="required">Please enter Minimum Quantity</div>
+				<div ng-message="min">Invalid quantity!! Quantity should b 0 or greater than 0</div>
+				<div ng-message="max">Invalid quantity!! maximum Quantity 9999</div>
+			</div>
+			</md-input-container>
+		</div>
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex-gt-sm>
+			<label class="input-filed-label">MAXIMUM QUANTITY</label> <input
+				type="number" ng-model="rmInventary.maximum_quantity"
+				 required name="maxQuantity" ng-disabled="isReadOnly" min="0" max="9999">
+			<div ng-messages="RMInventaryInformation.maxQuantity.$error">
+				<div ng-message="required">Please enter Maximum Quantity</div>
+				<div ng-message="min">Invalid quantity!! Quantity should b 0 or greater than 0</div>
+				<div ng-message="max">Invalid quantity!! maximum Quantity 9999</div>
+			</div>
+			</md-input-container>
+		</div>
+		
 	</div>
 	</md-dialog-content>
 	<md-dialog-actions layout="row"> <md-button

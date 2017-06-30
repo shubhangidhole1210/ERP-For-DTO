@@ -33,11 +33,13 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 		  $scope.isQualityCheckButton = $scope.productionPlans.length === 0 ? false : true;
 	  }
 	
-	$scope.validatePassAndFailQuantity = function(qualityPendingQuantity,passQuantity,failQuantity1,$index){
+	$scope.validatePassAndFailQuantity = function(qualityPendingQuantity, passQuantity, failQuantity1, $index){
 		console.log("pending quantity : " + qualityPendingQuantity);
 		console.log("pass Quantity : " + passQuantity);
 		console.log("fail quantity : " + failQuantity1);
-		if(qualityPendingQuantity == (passQuantity + failQuantity1)){
+		$scope.passFailQuantity = passQuantity + failQuantity1 ;
+		console.log("$scope.passFailQuantity :", $scope.passFailQuantity);
+		if(qualityPendingQuantity == $scope.passFailQuantity){
 			console.log("if condition");
 			$scope.productQualityForm["failQuantity" + $index].$setValidity("customMsg", true);
 		}else{

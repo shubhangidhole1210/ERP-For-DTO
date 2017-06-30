@@ -13,31 +13,53 @@
 		       <th>PRODUCT</th>
 		       <th>TARGET QUANTITY</th>
 		       <th>COMPLETED QUANTITY</th>
+		       <th>FAILED QUANTITY</th>
+		       <th>QC PASS QUANTITY</th>
+		       <th>QC PENDING QUANTITY</th>
+		       <th>STORE OUT QUANTITY</th>
 		       <th>ACHIEVED QUANTITY</th>
-		       <th>FAILD QUANTITY</th>
-		       <th>QC PENDING QUANITY</th>
+		       <th>REPAIRED QUANTITY</th>
 		       <th>REMARK</th>
 		       </tr>
 		       <tr ng-repeat="product in productList">
 		        	<td>{{product.product.partNumber}}</td>
 		        	<td>{{product.targetQuantity}}</td>
-		        	<td>{{product.achivedQuantity}}</td>
-		        	<td>
+		        	<td>{{product.completedQuantity}}</td>
+		        	
+					<td>
+					    <md-input-container class="md-block" flex-gt-sm>
+							<input type="number" ng-model="product.failQuantity" name="failedQuantity" ng-value="{{product.failQuantity}}" ng-disabled="true" >
+						</md-input-container>
+					</td>
+					<td>
+					    <md-input-container class="md-block" flex-gt-sm>
+							<input type="number" ng-model="product.qualityCheckedQuantity" name="failedQuantity" ng-disabled="true" >
+						</md-input-container>
+					</td>
+					<td>
+					    <md-input-container class="md-block" flex-gt-sm>
+							<input type="number" ng-model="product.qualityPendingQuantity" name="qualityPendingQuantity" ng-disabled="true">
+						</md-input-container>
+					</td>
+					 <td>
 		         		<md-input-container class="md-block" flex-gt-sm>
-							<input type="number" ng-model="product.achived" name="achivedQuantity{{$index}}"  min="1">
-							<div ng-show="todaysProductionPlanForm.achivedQuantity{{$index}}.$error.min" class="error-msg">Quantity should be greater then 0</div>
+							<input type="number" ng-model="product.storeOut_quantity" name="storeOutQuantity" ng-disabled="true">
 						</md-input-container>
 					</td>
+					
 					<td>
-					    <md-input-container class="md-block" flex-gt-sm>
-							<input type="number" ng-model="product.failQuantity" name="" ng-value="{{product.failQuantity}}" >
+		         		<md-input-container class="md-block" flex-gt-sm>
+							<input type="number" ng-model="product.achived" name="achivedQuantity{{$index}}"  min="0" ng-change="validateTargetQuantity(product.storeOut_quantity,product.completedQuantity,product.failQuantity,product.qualityPendingQuantity,product.achived,product.qualityCheckedQuantity,$index)">
 							<div ng-show="todaysProductionPlanForm.achivedQuantity{{$index}}.$error.min" class="error-msg">Quantity should be greater then 0</div>
+							<div ng-show="todaysProductionPlanForm.achivedQuantity{{$index}}.$error.customError" class="error-msg">Please Store out Raw Material if you want to manufacture more products</div>
 						</md-input-container>
 					</td>
+					
 					<td>
-					    <md-input-container class="md-block" flex-gt-sm>
-							<input type="number" ng-model="product.qualityPendingQuantity" ng-disabled="true">
-							<div ng-show="todaysProductionPlanForm.achivedQuantity{{$index}}.$error.min" class="error-msg">Quantity should be greater then 0</div>
+		         		<md-input-container class="md-block" flex-gt-sm>
+							<input type="number" ng-model="product.repairedQuantity" name="repairedQuantity{{$index}}"  min="0" max="{{product.failQuantity}}">
+							<div ng-show="todaysProductionPlanForm.repairedQuantity{{$index}}.$error.min" class="error-msg">Quantity should be greater then 0</div>
+							<div ng-show="todaysProductionPlanForm.repairedQuantity{{$index}}.$error.max" class="error-msg">Quantity should not be greater then {{product.failQuantity}} </div>
 						</md-input-container>
 					</td>
 					<td>

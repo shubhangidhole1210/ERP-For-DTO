@@ -73,24 +73,27 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 	
 	
 	$scope.saveStoreOutInformation=function(){
-		//console.log($scope.data.data);
 		var rmList = [];
 		var index=0;
-		var storeOutProduct = {};
+		
 		if($scope.isSelectedItemStoreOut){
 			var rmList = $scope.selectedRawMaterialList;
+			console.log("if block");
 		}else{
 			for(index=0;index<$scope.productRMList.length;index++){
+				var storeOutProduct = {};
 				storeOutProduct.rawmaterial = $scope.productRMList[index].rawmaterial;
 				storeOutProduct.quantityRequired = $scope.productRMList[index].quantityRequired;
 				storeOutProduct.quantityDispatched = $scope.productRMList[index].quantityDispatched;
 				rmList.push(storeOutProduct);
+				console.log("else block");
 			}
 		}
 		var data = {
 				productId: $scope.productionPlan.product.id,
 				productionPlanId :$scope.productionPlan.id,
 				quantityRequired: $scope.manuFactureQuantity,
+				isSelectedStoreOut: $scope.isSelectedItemStoreOut,
 				description:$scope.description,
 				storeOutParts:rmList
 			};

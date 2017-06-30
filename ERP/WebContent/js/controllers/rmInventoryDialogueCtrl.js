@@ -24,7 +24,9 @@ erpApp.controller('RMInvenaryDialogeController',
 				rawmaterial:$scope.rmInventary.rawmaterial.id,
 				quantityAvailable:$scope.rmInventary.quantityAvailable,
 				name:$scope.rmInventary.name,
-				description:$scope.rmInventary.description
+				description:$scope.rmInventary.description,
+				minimum_quantity:$scope.rmInventary.minimum_quantity,
+				maximum_quantity:$scope.rmInventary.maximum_quantity
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -56,10 +58,10 @@ erpApp.controller('RMInvenaryDialogeController',
 										"saveRMInventaryError", {});
 								console.log(data);
 								$scope.hide();
-								utils.showToast('Something went worng. Please try again later.');
+								utils.showToast(data.data.message);
 							}else{
 								$scope.displayProgressBar = false;
-								utils.showToast('Raw material inventory Information saved successfully.');
+								utils.showToast(data.data.message);
 								$rootScope.$emit("CallPopulateRMInventaryList",{});
 							}
 						},
