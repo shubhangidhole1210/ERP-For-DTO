@@ -10,7 +10,7 @@
 								name="invoice" ng-init="getRMOrderInvoiceInformation()"
 								ng-change="invoiceRawMaterialList($index)" required ng-disabled="isInvoiceDisabled">
 							<md-option ng-repeat="invoice in invoiceList"
-								ng-value="invoice.id"> {{invoice.invoice_No}} </md-option> </md-select>
+								ng-value="invoice.id"> {{invoice.name}} </md-option> </md-select>
 							<!-- <div ng-messages="qualityInspectionForm.invoice.$error">
 								<div ng-message="required">Please Select Invoice number</div>
 							</div> -->

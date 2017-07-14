@@ -34,13 +34,15 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 
 	$scope.saveRMOrder = function(ev) {
 		var data = {
-				rawmaterialorderassociations:$scope.orderRawMaterials,
+				rmOrderAssociationDTOs:$scope.orderRawMaterials,
 				name:$scope.rmOrder.name,
 				description:$scope.rmOrder.description,
 				quantity:$scope.rmOrder.quantity,
-				vendor:$scope.rmOrder.vendor.id,
-				totalprice:$scope.rmOrder.totalprice,
+				vendorId:$scope.rmOrder.vendor.id,
+				totalPrice:$scope.rmOrder.totalprice,
 				tax:$scope.rmOrder.tax,
+				expectedDeliveryDate : $scope.rmOrder.expecteddeliveryDate,
+				/*createDate : $scope.rmOrder.createDate,*/
 				otherCharges:$scope.rmOrder.otherCharges,
 				actualPrice:$scope.rmOrder.actualPrice
 		};
@@ -121,7 +123,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		console.log($scope.orderRawMaterials);
 		$scope.productSubTotal = 0;
 		for (var i = 0; i < $scope.orderRawMaterials.length; i++){
-		   $scope.productSubTotal += $scope.orderRawMaterials[i].rawmaterial.pricePerUnit * $scope.orderRawMaterials[i].quantity;
+		   $scope.productSubTotal += $scope.orderRawMaterials[i].rawmaterialId.pricePerUnit * $scope.orderRawMaterials[i].quantity;
 		}
 		console.log('Product Sub Total : '+$scope.productSubTotal);
 		$scope.rmOrder.actualPrice = $scope.productSubTotal;
@@ -189,7 +191,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	
 	    $scope.isDuplicateRM = function(orderRawMaterial) {
 			for (var i = 0; i < $scope.orderRawMaterials.length; i++) {
-				if ($scope.orderRawMaterials[i].rawmaterial.id === orderRawMaterial.rawmaterial.id) {
+				if ($scope.orderRawMaterials[i].rawmaterialId.id === orderRawMaterial.rawmaterialId.id) {
 					return true;
 				}
 			}
@@ -215,7 +217,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 						auth_token : Auth.getAuthToken()
 				};
 				$http(httpparams).then(function successCallback(response) {
-					$scope.orderRawMaterials = response.data.data;
+					$scope.rmOrderList = response.data.data;
 					console.log(response);
 		            console.log($scope.orderRawMaterials);
 				}, function errorCallback(response) {
@@ -226,7 +228,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	    
 	    $scope.setActualPrice = function(){
 	    	console.log(" $scope.rmOrder.otherCharges:", $scope.rmOrder.otherCharges)
-	    	if( $scope.orderRawMaterials.length === 0 ){
+	    	if( $scope.orders.length === 0 ){
 	    		console.log("if condition of set actual price function");
 	    		$scope.rmOrder.otherCharges=0;
 	    		$scope.rmOrder.totalprice=0;

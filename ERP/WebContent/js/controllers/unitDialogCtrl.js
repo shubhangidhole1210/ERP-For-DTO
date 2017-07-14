@@ -47,7 +47,7 @@ erpApp.controller('unitDialogCtrl',
 						function successCallback(data) {
 							$mdDialog.hide();
 							console.log(data);
-							if(data.data.code === 0){
+							if(data.code === 0){
 								console.log(data.data.message);
 								$rootScope.$emit(
 										"saveUnitError", {});

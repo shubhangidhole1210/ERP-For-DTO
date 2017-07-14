@@ -25,11 +25,11 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
     
     $scope.saveProductOrder = function() {
     	var data = {
-    			 orderproductassociations : $scope.orderproductassociations,
+    			 productOrderAssociationDTOs : $scope.orderproductassociations,
     			 description:$scope.productOrder.description,
     			 invoiceNo:$scope.productOrder.invoiceNo,
-    			 expecteddeliveryDate:$scope.productOrder.expecteddeliveryDate ,
-    			  client:$scope.productOrder.client.id
+    			 expectedDeliveryDate:$scope.productOrder.expecteddeliveryDate ,
+    			 clientId:$scope.productOrder.client.id
 		};
     	var httpparams = {};
     	if($scope.flag === 0){
@@ -130,7 +130,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 	    
 	    $scope.isDuplicateRM = function(orderProductAssociation) {
 			for (var i = 0; i < $scope.orderproductassociations.length; i++) {
-				if ($scope.orderproductassociations[i].product.id === orderProductAssociation.product.id) {
+				if ($scope.orderproductassociations[i].productId.id === orderProductAssociation.productId.id) {
 					return true;
 				}
 			}
