@@ -22,10 +22,10 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 		var data = {
 				name: $scope.product.name,
 				partNumber: $scope.product.partNumber,
-				clientpartnumber: $scope.product.clientpartnumber,
+				clientPartNumber: $scope.product.clientpartnumber,
 				description: $scope.product.description,
-				minQuantity: $scope.product.minQuantity,
-				maxQuantity: $scope.product.maxQuantity,
+				//minQuantity: $scope.product.minQuantity,
+				//maxQuantity: $scope.product.maxQuantity,
 				design: 'Design will be added later on'
 		};
 		var httpparams = {};

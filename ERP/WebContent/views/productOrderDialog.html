@@ -37,7 +37,7 @@
           <label>CLIENT*</label>
           <md-select ng-model="productOrder.client.id" name="client"  ng-disabled="isClientReadOnly" ng-required="true" required ng-init="getClient()">
             <md-option ng-repeat="client in clients" ng-value="client.id" >
-               {{client.companyname}}
+               {{client.companyName}}
             </md-option>
           </md-select>
           <div ng-messages="productOrderInformation.client.$error">

@@ -35,7 +35,7 @@ erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $md
 	$scope.isInvoicePresent = function(){
 		$scope.isInvoice = $scope.invoiceList.length === 0? true:false;
 		$scope.isInvoiceDisabled = $scope.invoiceList.length === 0? true:false;
-	}
+	};
 
 	$scope.invoiceRawMaterialList = function(index) {
 		var httpparams = {};
@@ -49,7 +49,7 @@ erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $md
 		$http(httpparams).then(
 				function successCallback(response) {
 					$scope.rmInvoiceList = response.data;
-					console.log($scope.rmInvoiceList)
+					console.log($scope.rmInvoiceList);
 					console.log(response);
 					utils.hideProgressBar();
 				}, function errorCallback(response) {
@@ -81,7 +81,7 @@ erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $md
 		var data = {
 			description : $scope.description,
 			id : $scope.invoiceId,
-			qualitycheckrawmaterials : $scope.rmInvoiceList
+			qualityCheckRMDTOs : $scope.rmInvoiceList
 		};
 		var httpparams = {};
 		httpparams.method = 'post';
@@ -97,9 +97,9 @@ erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $md
 							if (data.data.code === 1) {
 								console.log(data.data.message);
 								console.log(data);
-								$location.path('/')
+								$location.path('/');
 								utils
-										.showToast('Raw Material quality check Successfully !')
+										.showToast('Raw Material quality check Successfully !');
 								utils.hideProgressBar();
 							} else {
 								console.log(data);

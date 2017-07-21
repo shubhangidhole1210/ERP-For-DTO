@@ -16,7 +16,7 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 	    };
 	    
 	    $scope.saveVendorInfo=function(ev){
-	    	 console.log($scope.data)
+	    	 console.log($scope.data);
 	    	 var data = {
 	    		 companyName : $scope.vendorUser.companyName,
 	    		 email: $scope.vendorUser.email,
@@ -39,7 +39,7 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 	    	 var httpparams = {};
 	    	 if($scope.flag==0){
 	    		    httpparams.method='post',
-	    		    httpparams.url=SERVER_URL + "vendor/create"
+	    		    httpparams.url=SERVER_URL + "vendor/create";
 	    		    httpparams.headers = {
 	    					auth_token : Auth.getAuthToken()
 	    				};
@@ -47,7 +47,7 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 	    	 else{
 	    		      data.id=$scope.vendorUser.id,
 	    		      httpparams.method='put',
-	    		      httpparams.url=SERVER_URL + "vendor/update"
+	    		      httpparams.url=SERVER_URL + "vendor/update";
 	    		      httpparams.headers = {
 		    					auth_token : Auth.getAuthToken()
 		    				};
@@ -75,97 +75,18 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 								$scope.hide();
 								/*$scope.message = data.data.message;*/
 								utils.showToast(data.data.message);
-								/*$scope.message = data.data.message;
-								utils.showToast();	*/		 
 								}else{
-							/*	$scope.displayProgressBar = false;*/
 								utils.showToast('Vendor Information saved successfully.');
 								$rootScope.$emit("callPopulateVendorList",{});
 							}
 						},
 						function errorCallback(data) {
-							$rootScope.$emit(
-									"saveVendorError", {});
 							console.log(data);
-							$scope.hide();
-							$scope.hide();
 							$scope.hide();
 							utils.showToast('Something went worng. Please try again later.');
 						});
 	    };
 	    
-	  /*  $scope.saveVendorInfo = function(ev) {
-			var data = {
-					companyName : $scope.vendorUser.companyName,
-		    		 email: $scope.vendorUser.email,
-		    		 firstName : $scope.vendorUser.firstName ,
-		    		 lastName : $scope.vendorUser.lastName,
-		    		 address : $scope.vendorUser.address, 
-		    		 contactNumberMobile : $scope.vendorUser.contactNumberMobile,
-		    		 contactNumberOffice: $scope.vendorUser.contactNumberOffice,
-		    		 city : $scope.vendorUser.city,
-		    		 state : $scope.vendorUser.state,
-		    		 postalcode : $scope.vendorUser.postalcode,
-		    		 description: $scope.vendorUser.description,
-		    		 commisionerate: $scope.vendorUser.commisionerate,
-		    		 cst: $scope.vendorUser.cst,
-		    		 customer_ECC_Number: $scope.vendorUser.customer_ECC_Number,
-		    		 division: $scope.vendorUser.division,
-		    		 vat_No: $scope.vendorUser.vat_No,
-		    		 range: $scope.vendorUser.range
-			};
-			var httpparams = {};
-			if ($scope.flag == 0) {
-				console.log($scope.user);
-				console.log($scope.data);
-				httpparams.method = 'post';
-				httpparams.url = SERVER_URL + "vendor/create";
-				httpparams.headers = {
-						auth_token : Auth.getAuthToken()
-					};
-			} else {
-				console.log($scope.client);
-				 data.id=$scope.vendorUser.id;
-				httpparams.method = 'put';
-				httpparams.url = SERVER_URL + "vendor/update";
-				httpparams.headers = {
-						auth_token : Auth.getAuthToken()
-					};
-			}
-			httpparams.data = data;
-			$http(httpparams)
-					.then(
-							function successCallback(data) {
-								$mdDialog.hide();
-								console.log(data);
-								if(data.data.code === 0){
-									console.log(data.data.message);
-									$rootScope.$emit(
-											"saveVendorError", {});
-									console.log(data);
-									$scope.hide();
-									utils.showToast('Something went worng. Please try again later.');
-								}else if(data.data.code === 2){
-									$rootScope.$emit(
-											"saveVendorError", {});
-									$scope.message = data.data.message;
-									utils.showToast(data.data.message);
-								}
-								else{
-									console.log(data.data.message);
-									$scope.displayProgressBar = false;
-									utils.showToast('Vendor Information saved successfully.');
-									$rootScope.$emit("callPopulateVendorList",{});
-								}
-							},
-							function errorCallback(data) {
-								$rootScope.$emit(
-										"saveVendorError", {});
-								console.log(data);
-								$scope.hide();
-								utils.showToast('Something went worng. Please try again later.');
-							});
-		};*/
 	    
     		$scope.submitVendorInformation = function(isvaliduser,$event) {
 			if (isvaliduser) {
@@ -174,5 +95,5 @@ erpApp.controller('DialogVendorController', function($scope,$http, $mdDialog,ven
 				console.log('its else block');
 				utils.showToast('Please fill all required information');
 			}
-		}
+		};
 });

@@ -54,10 +54,10 @@ erpApp.controller('StatusDialogueController',
 										"saveUnitError", {});
 								console.log(data);
 								$scope.hide();
-								utils.showToast('Something went worng. Please try again later.')
+								utils.showToast('Something went worng. Please try again later.');
 							}else{
 								$scope.displayProgressBar = false;
-								utils.showToast('Status Information saved successfully.')
+								utils.showToast('Status Information saved successfully.');
 								$rootScope.$emit("callPopulateStatusList",{});
 							}
 						},
@@ -66,16 +66,16 @@ erpApp.controller('StatusDialogueController',
 									"saveUnitError", {});
 							console.log(data);
 							$scope.hide();
-							utils.showToast('Something went worng. Please try again later.')
+							utils.showToast('Something went worng. Please try again later.');
 						});
-	}
+	};
 
 	$scope.submitStatusInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			$scope.saveStatusInformation(event)
+			$scope.saveStatusInformation(event);
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
 		}
-	}
+	};
 });

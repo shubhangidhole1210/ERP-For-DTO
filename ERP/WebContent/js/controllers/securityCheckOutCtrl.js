@@ -33,7 +33,7 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 				console.log(response);
 			}, function errorCallback(response) {
 				console.log("Error");
-			})
+			});
 		};
 	    
 	    $scope.displayProductList = function(index) {
@@ -47,7 +47,7 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 			$http(httpparams).then(function successCallback(response) {
 				$scope.productOtderList = response.data;
 				console.log(response);
-	             console.log($scope.rawMaterialList)
+	             console.log($scope.rawMaterialList);
 	             utils.hideProgressBar();
 			}, function errorCallback(response) {
 				console.log("Error");
@@ -74,23 +74,24 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 				securityCheckOutParts.push(securityCheckOut);
 			}
 			console.log('intime : ' + $scope.intime.getTime());
-			console.log('out : ' + $scope.outtime.getTime());
+			/*console.log('out : ' + $scope.outtime.getTime());*/
 			console.log('intime : ' + $scope.intime.toLocaleTimeString());
-			console.log('out : ' + $scope.outtime.toLocaleTimeString());
+			/*console.log('out : ' + $scope.outtime.toLocaleTimeString());
 			if($scope.intime.getTime() < $scope.outtime.getTime()){
-				console.log('intime is lesser than outtime')
+				console.log('intime is lesser than outtime');
 			}else{
-				console.log('intime is greater than outtime')
-			}
+				console.log('intime is greater than outtime');
+			}*/
 			var data = {
 				invoice_No : $scope.invoice_No,
 				clientname : $scope.selectedClient,
 				vehicleNo : $scope.vehicleNo,
 				driver_Name : $scope.driver_Name,
+				driver_Name : $scope.driver_Name,
 				description : $scope.description,
 				createDate : $scope.createDate,
 				intime : $scope.intime.toLocaleTimeString().split(" ")[0],
-				outtime : $scope.outtime.toLocaleTimeString().split(" ")[0],
+				/*outtime : $scope.outtime.toLocaleTimeString().split(" ")[0],*/
 				poNo :  $scope.productOrders.id,
 				securityCheckOutParts : securityCheckOutParts
 			};
@@ -130,10 +131,9 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 			$scope.currentDate = new Date();
 			console.log("currentDate" +$scope.currentDate);
 			if(createDate != $scope.currentDate){
-				console.log("if condition")
+				console.log("if condition");
 			}else{
-				console.log("else condition")
+				console.log("else condition");
 			}
-		}
-	
+		};
 });

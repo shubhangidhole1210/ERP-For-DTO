@@ -70,13 +70,13 @@ erpApp
 
 					$scope.saveUser = function(ev) {
 						var data = {
-							userId : $scope.user.userid,
-							password : $scope.user.password,
-							firstName : $scope.user.firstName,
-							lastName : $scope.user.lastName,
-							mobileNo : $scope.user.mobile,
-							emailId : $scope.user.email,
-							userType : $scope.user.usertype.id,
+						    userId : $scope.user.userId,
+						    password: $scope.user.password,
+						    firstName : $scope.user.firstName,
+						    lastName : $scope.user.lastName,
+						    mobileNo : $scope.user.mobileNo,
+						    emailId : $scope.user.emailId,
+							userType : $scope.user.userType.id,
 							doj : $scope.user.doj,
 							dob : $scope.user.dob
 						};

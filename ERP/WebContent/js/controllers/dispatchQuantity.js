@@ -17,7 +17,7 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 							},
 							function errorCallback(response) {
 								console.log("Error");
-								$scope.message = "We are Sorry. Something went wrong. Please try again later."
+								$scope.message = "We are Sorry. Something went wrong. Please try again later.";
 								utils.hideProgressBar();
 			});
 	};
@@ -25,7 +25,7 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 	$scope.isproduct = false;
 	$scope.isProductPresent = function(){
         $scope.isproduct = $scope.productOrders.length ===0? true :false;
-	}
+	};
 	
 	$scope.getDispatchquantity=function($index){
 		var httpparams = {};
@@ -47,7 +47,7 @@ erpApp.controller('dispatchQuantityCtrl', function($scope, $http, $mdDialog, $md
 		if(isvaliduser){
 			$scope.saveDispatchQuantity();
 		}else{
-			utils.showToast("Please fill all required information")
+			utils.showToast("Please fill all required information");
 		}
 	
      };

@@ -21,10 +21,10 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 
 	$scope.saveRawMaterial = function(ev) {
 		var data = {
-				name:$scope.rawMaterial.name,
+				rmName:$scope.rawMaterial.name,
 				description:$scope.rawMaterial.description,
 				partNumber:$scope.rawMaterial.partNumber,
-				unit:$scope.rawMaterial.unit.id,
+				unitId:$scope.rawMaterial.unit.id,
 				pricePerUnit:$scope.rawMaterial.pricePerUnit,
 		};
 		var httpparams = {};

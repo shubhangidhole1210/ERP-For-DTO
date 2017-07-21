@@ -41,7 +41,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
     	}else{
     		 data.id=$scope.productOrder.id;
     		httpparams.method='put',
-    		httpparams.url=SERVER_URL + "productorder/update"
+    		httpparams.url=SERVER_URL + "productorder/update";
     		httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 			};
@@ -119,7 +119,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 				   $scope.orderproductassociations.push($scope.orderProductAssociation);	
 				   $scope.orderProductAssociation = {};
 				   $scope.productOrderInformation.product.$setValidity("message", true);
-				   console.log('setting validity true')
+				   console.log('setting validity true');
 				   $scope.message="";
 	    		}else{
 	    			$scope.message = 'This Product is already added';
@@ -169,7 +169,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 	    		 console.log("its if block");
 	    	}else{
 	    		 $scope.productOrderInformation.quantity.$setValidity("customMsg", true);
-	    		 console.log("its else block")
+	    		 console.log("its else block");
 	    	}
 	    };
 	    

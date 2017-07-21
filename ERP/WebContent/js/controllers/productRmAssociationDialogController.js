@@ -37,7 +37,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
     	}else{
     		data.id=$scope.productRmAsso.id,
     		httpparams.method='put',
-    		httpparams.url=SERVER_URL + "productRMAsso/update/multipleProductRMAssociation"
+    		httpparams.url=SERVER_URL + "productRMAsso/update/multipleProductRMAssociation";
     		httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 			};

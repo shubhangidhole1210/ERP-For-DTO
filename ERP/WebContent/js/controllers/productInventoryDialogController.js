@@ -18,12 +18,12 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 	    
 	    $scope.saveProductInventory=function(ev){
 	    	 var data = {
-	    			 product:$scope.productInventory.product.id,
+	    			 productId:$scope.productInventory.product.id,
 	    			 description:$scope.productInventory.description,
-	    			 quantityavailable:$scope.productInventory.quantityavailable,
+	    			 quantityAvailable:$scope.productInventory.quantityavailable,
 	    			 racknumber:$scope.productInventory.racknumber,
-	    			 minimum_quantity:$scope.productInventory.minimum_quantity,
-	 				maximum_quantity:$scope.productInventory.maximum_quantity
+	    			 minimumQuantity:$scope.productInventory.minimum_quantity,
+	    			 maximumQuantity:$scope.productInventory.maximum_quantity
 				};
 	    	 var httpparams = {};
 	    	 if($scope.flag==0)

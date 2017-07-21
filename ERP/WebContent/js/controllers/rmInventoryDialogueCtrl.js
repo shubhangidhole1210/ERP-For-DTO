@@ -21,12 +21,12 @@ erpApp.controller('RMInvenaryDialogeController',
 
 	$scope.saveRMInventaryInformation = function(ev) {
 		var data = {
-				rawmaterial:$scope.rmInventary.rawmaterial.id,
+				rawmaterialId:$scope.rmInventary.rawmaterial.id,
 				quantityAvailable:$scope.rmInventary.quantityAvailable,
 				name:$scope.rmInventary.name,
 				description:$scope.rmInventary.description,
-				minimum_quantity:$scope.rmInventary.minimum_quantity,
-				maximum_quantity:$scope.rmInventary.maximum_quantity
+				minimumQuantity:$scope.rmInventary.minimum_quantity,
+				maximumQuantity:$scope.rmInventary.maximum_quantity
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {

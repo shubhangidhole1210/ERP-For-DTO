@@ -10,7 +10,7 @@
 		<md-input-container class="md-block" flex-gt-sm type="password">
 		<input type="text" ng-model="searchText" name="password"
 			placeholder="Search by First Name" class="search-text"> </md-input-container>
-
+		<div class="scroll-rm-list">
 		<h1 class="table-header">USER LIST</h1>
 		<table>
 			<tr>
@@ -27,8 +27,8 @@
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{users.firstName}}</td>
 				<td>{{users.lastName}}</td>
-				<td>{{users.mobile}}</td>
-				<td>{{users.usertype.usertypeName}}</td>
+				<td>{{users.mobileNo}}</td>
+				<td>{{users.userType.usertypeName}}</td>
 			<!-- 	<td>{{users.email}}</td> -->
 				<td style="text-align: center;"><md-button class="actionButton "
 						ng-click="showEditUser($event,$index)" style="" ng-init="flag=1">EDIT
@@ -45,6 +45,7 @@
 		type="button" ng-disabled="currentPage == 0" ng-click="gotoPrevPage()">Previous Page</md-button> <md-button
 		class="md-raised" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="gotoNextPage()">Next Page</md-button>
 	</md-dialog-actions>
+	</div>
 		<div class="active-information" ng-show="isUserUnavailable">
 			Currently there are no active users.Please add new user.</div>
 

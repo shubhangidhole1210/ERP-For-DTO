@@ -89,7 +89,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 							$scope.hide();
 							utils.showToast('Please add atleast one raw material');
 						});
-	}
+	};
 	
 	$scope.submitRMOrderInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
@@ -116,7 +116,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		}, function errorCallback(response) {
 			console.log("Error");
 			utils.hideProgressBar();
-		})
+		});
 	};
 	
 	$scope.calculateTotalPrice=function(){
@@ -164,7 +164,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 			console.log(response);
 		}, function errorCallback(response) {
 			console.log("Error");
-		})
+		});
 	};
 	/*$scope.isVendor false;
 	$scope.isVendorPresent = function(){
@@ -179,7 +179,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				   console.log(" $scope.orderRawMaterials : " , $scope.orderRawMaterials);
 				   $scope.RMOrderInformation.rawmaterial.$setValidity("message", true);
 				   $scope.orderRawMaterial={};
-				   console.log('setting validity true')
+				   console.log('setting validity true');
 				   $scope.message="";
 	    		}else{
 	    			$scope.message = 'This Rawmaterial is already added';
@@ -201,12 +201,12 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	
 	    
 	    $scope.deleteRM=function(index) {
-	    	console.log('in delete RM'+ $scope.orderRawMaterials)
+	    	console.log('in delete RM'+ $scope.orderRawMaterials);
 	    	var lastItem = $scope.orderRawMaterials.length;
 		    $scope.orderRawMaterials.splice(index,1);
 		    $scope.calculateTotalPrice();
 		    $scope.setActualPrice();
-	    }
+	    };
 	    
 	    $scope.getRmForOrder=function(){
 	    	if($scope.rmOrder.id){
@@ -227,11 +227,11 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	    };
 	    
 	    $scope.setActualPrice = function(){
-	    	console.log(" $scope.rmOrder.otherCharges:", $scope.rmOrder.otherCharges)
+	    	console.log(" $scope.rmOrder.otherCharges:", $scope.rmOrder.otherCharges);
 	    	if( $scope.orders.length === 0 ){
 	    		console.log("if condition of set actual price function");
 	    		$scope.rmOrder.otherCharges=0;
 	    		$scope.rmOrder.totalprice=0;
 	    	}
-	    }
+	    };
 });

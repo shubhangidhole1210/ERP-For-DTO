@@ -8,6 +8,7 @@
 		<md-input-container class="md-block" flex-gt-sm type="password" style="margin-left:2%">
 		<input type="text" ng-model="searchText" name="password"
 			placeholder="Search by Name" class="search-text"> </md-input-container>
+		<div class="scroll-rm-list">
 		<h1 class="table-header">NOTIFICATION LIST</h1>
 		<table>
 			<tr>
@@ -34,6 +35,7 @@
 		type="button" ng-disabled="currentPage == 0" ng-click="gotoPrevPage()">Previous Page</md-button> <md-button
 		class="md-raised" ng-disabled="currentPage >= notificationList.length/pageSize - 1" ng-click="gotoNextPage()">Next Page</md-button>
 	</md-dialog-actions>
+	</div>
 		<div ng-show="isNotificationPresent">Currently there are no active
 			Page.Please add new Page.</div>
 	</div>
