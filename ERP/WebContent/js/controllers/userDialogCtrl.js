@@ -44,6 +44,18 @@ erpApp
 									"customMsg1", true);
 						}
 					};
+					
+					$scope.validateConfirmPassword = function(password,confirmPassword){
+						console.log("password : ", password);
+						console.log("confirmPassword : " ,confirmPassword);
+						if(password === confirmPassword){
+							console.log("its if block");
+							$scope.userInformation.confirmPassword.$setValidity("passwordMsg", true);
+						}else{
+							console.log("its else block");
+							$scope.userInformation.confirmPassword.$setValidity("passwordMsg", false);
+						}
+					};
 
 					$scope.validateJoiningDate = function(dob, doj) {
 						var currentDate = new Date();

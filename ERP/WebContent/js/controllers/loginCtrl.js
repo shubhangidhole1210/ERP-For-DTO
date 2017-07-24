@@ -11,7 +11,7 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 		}).then(function successCallback(data, headers) {
 			console.log(data);
 			utils.hideProgressBar();
-			console.log($scope.userid)
+			console.log($scope.userid);
 			if(data.data.code == 1){
 				/*console.log(data.headers());
 				console.log(data.headers('auth_token'));*/

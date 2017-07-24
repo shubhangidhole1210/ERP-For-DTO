@@ -23,7 +23,8 @@
 			</div>
 			<div ng-show="userInformation.userid.$error.apierror">{{message}}</div>
 			</md-input-container>
-
+			</div>
+			<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm type="password">
 			<label class="input-filed-label">PASSWORD</label> <input
 				type="password" ng-model="user.password" required name="password"
@@ -33,8 +34,17 @@
 				<div ng-message="minlength">password is too short</div>
 			</div>
 			</md-input-container>
-		</div>
-
+			<md-input-container class="md-block" flex-gt-sm type="password">
+			<label class="input-filed-label">CONFIRM PASSWORD</label> <input
+				type="password" ng-model="user.confirmPassword" required name="confirmPassword"
+				ng-minlength="5" ng-disabled="isReadOnly" limit-to="255" ng-change="validateConfirmPassword(user.password,user.confirmPassword)">
+			<div ng-messages="userInformation.confirmPassword.$error">
+				<div ng-message="required">Password is required</div>
+				<div ng-message="minlength">password is too short</div>
+				<div ng-message="passwordMsg">These passwords don't match. Try again?</div>
+			</div>
+			</md-input-container>
+         </div>
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">FIRST NAME</label> <input

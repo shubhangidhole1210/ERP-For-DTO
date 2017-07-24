@@ -19,7 +19,7 @@
 			</tr>
 			<tr ng-repeat="userTypePage in data | startFrom:currentPage*pageSize | limitTo:pageSize ">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
-				<td>{{userTypePage.usertype.usertypeName}}</td>
+				<td>{{userTypePage.usertypeId.usertypeName}}</td>
 				<td>{{userTypePage.page.pageName}}</td>
 				<td>{{userTypePage.page.url}}</td>
 				

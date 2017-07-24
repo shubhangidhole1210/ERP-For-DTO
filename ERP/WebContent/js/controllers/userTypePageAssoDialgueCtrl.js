@@ -3,6 +3,8 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 	    $scope.flag=flag;
 	    $scope.isReadOnly = action;
 	    $scope.information = information;
+	    $scope.userPages =[];
+	    $scope.userPage={};
 	
 	$scope.hide = function() {
 		console.log('hide DialogController');
@@ -20,15 +22,15 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 	  $scope.saveUserTypePage=function(ev)
 	    {
 	    	 var data = {
-	    			 page:$scope.userTypePageAsso.page.id,
-	    			 usertype:$scope.userTypePageAsso.usertype.id
+	    			 userTypePageAssoParts:$scope.userPages,
+	    			 usertypeId:$scope.userTypePageAsso.usertype.id
 				};
 	    	 
 	    	 var httpparams = {};
 	    	 if($scope.flag==0)
 	    		 {
 	    		    httpparams.method='post',
-	    		    httpparams.url=SERVER_URL + "usertypepageassociation/create"
+	    		    httpparams.url=SERVER_URL + "usertypepageassociation/addMultiplePage";
 	    		    httpparams.headers = {
 							auth_token : Auth.getAuthToken()
 						};
@@ -37,7 +39,7 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 	    		 {
 	    		      data.id=$scope.userTypePageAsso.id,
 	    		      httpparams.method='put',
-	    		      httpparams.url=SERVER_URL + "usertypepageassociation/update"
+	    		      httpparams.url=SERVER_URL + "usertypepageassociation/update";
 	    		      httpparams.headers = {
 								auth_token : Auth.getAuthToken()
 							};
@@ -75,7 +77,7 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 				$scope.saveUserTypePage($event);
 			} else {
 				console.log('its else block');
-				utils.showToast("Please fill required information")
+				utils.showToast("Please fill required information");
 			}
 		};
 		
@@ -110,5 +112,27 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 							console.log("Error");
 						});
 				    };
+				    
+				$scope.addPages = function(){
+			    	console.log('Adding RM : ', $scope.userPage);
+			    	if( !angular.equals($scope.userPage,{}) ){
+			    		if(!$scope.isDuplicatePage($scope.userPage)){
+						   $scope.userPages.push($scope.userPage);	
+						   $scope.userPage = {};
+			    		}else{
+			    			console.log("else block");
+			    		}
+					}
+			    
+				};    
+				
+				$scope.isDuplicatePage = function(userPage) {
+					for (var i = 0; i < $scope.userPages.length; i++) {
+						if ($scope.userPages[i].pageId === userPage.pageId) {
+							return true;
+						}
+					}
+					//return false;
+				};
 	
 });

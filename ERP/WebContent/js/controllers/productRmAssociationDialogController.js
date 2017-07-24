@@ -87,7 +87,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 		};
 	   
 	    $scope.deleteRM = function(index){
-	    	console.log('in delete RM'+ $scope.productRmAsso.productRMAssociationModelParts)
+	    	console.log('in delete RM'+ $scope.productRmAsso.productRMAssociationModelParts);
 		    $scope.productRmAsso.productRMAssociationModelParts.splice(index,1);
 	    };
 		
@@ -104,7 +104,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 				console.log("RM List : ", response);
 			}, function errorCallback(response) {
 				console.log("Error");
-			})
+			});
 		};
 		  
 	    $scope.addRawMaterial = function(){
@@ -113,7 +113,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    		if(!$scope.isDuplicateRM($scope.rawmaterialPart)){
 				   $scope.productRmAsso.productRMAssociationModelParts.push($scope.rawmaterialPart);	
 				   $scope.rawmaterialPart = {};
-				   console.log('setting validity true')
+				   console.log('setting validity true');
 				   $scope.productRMAssociationInformation.rawmaterial.$setValidity("message", true);
 				   $scope.message="";
 	    		}else{
@@ -175,7 +175,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	   
 		$scope.addQuantity = function(quantity) {
 			if (quantity <= 0) {
-				console.log('if condition')
+				console.log('if condition');
 				$scope.addQuantityMsg = 'quantity should be greater than 0';
 				$scope.productRMAssociationInformation.quantity.$setValidity("message", false);
 			} else {
