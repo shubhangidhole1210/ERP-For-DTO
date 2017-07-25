@@ -115,7 +115,7 @@ erpApp.controller('generateBomCtrl',function($scope, $mdDialog, $location,$rootS
 			rmVendor.rawmaterial = $scope.productRMList[index].rawmaterial.id;
 			rmVendor.pricePerUnit = $scope.productRMList[index].price;
 			rmVendor.quantity = $scope.productRMList[index].quantity;
-			rmVendor.vendor = $scope.productRMList[index].vendor.vendor.id;
+			rmVendor.vendor = $scope.productRMList[index].vendor.vendorId.id;
 			rmVendorList.push(rmVendor)
 		}
 		var data = {

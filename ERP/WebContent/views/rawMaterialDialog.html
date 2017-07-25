@@ -74,7 +74,17 @@
 			</div>
 			</md-input-container>
 		</div>
-		
+		<div layout-gt-sm="row">
+			<md-input-container class="drop-down"> <label>RM TYPE</label> <md-select ng-model="rawMaterial.rmType.id" name="rmType"
+				value="unitID.id" ng-disabled="isReadOnly" ng-init="getRmTypeList()"
+				ng-required="true" rrquired> <md-option
+				ng-repeat="rMType in rmTypes" ng-value="rMType.id">
+			{{rMType.rmTypeName}} </md-option> </md-select>
+			<div ng-messages="rawMaterialInformation.rmType.$error">
+				<div ng-message="required">Please Select RM Type</div>
+			</div>
+			</md-input-container>
+		</div>
 		
 		
 		<div class="ui-msg" ng-show="isUnit">Please create Unit</div>

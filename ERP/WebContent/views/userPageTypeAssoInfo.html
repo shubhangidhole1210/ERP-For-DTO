@@ -57,6 +57,7 @@
                {{page.pageName}}
             </md-option>
           </md-select>
+          <div ng-show="userTypePageInformtion.page.$error.message" class="error-msg">{{message}}</div>
         </md-input-container>
         <button type="button" class="added-multiple"
 				ng-click="addPages()">Add Pages</button>

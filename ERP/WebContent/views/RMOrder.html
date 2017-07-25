@@ -27,9 +27,9 @@
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{rmOrders.name}}</td>
 				<td >{{rmOrders.tax}}</td>
-				<td>{{rmOrders.vendor.companyName}}</td>
-				<td >{{rmOrders.status.name}}</td>
-				<td>{{rmOrders.totalprice}}</td>
+				<td>{{rmOrders.vendorId.companyName}}</td>
+				<td >{{rmOrders.statusId.name}}</td>
+				<td>{{rmOrders.totalPrice}}</td>
 				<td>{{rmOrders.actualPrice}}</td>
 				<td>
 				     <md-button class=" actionButton"  ng-click="showRMOrder($event,$index)" style="" ng-init="flag=1" type="button">EDIT</md-button>

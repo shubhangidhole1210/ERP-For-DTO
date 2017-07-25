@@ -18,8 +18,8 @@
 			</tr>
 			<tr ng-repeat="status in data  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ name: searchText }">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
-				<td>{{status.name}}</td>
-				<td>{{status.type}}</td>
+				<td>{{status.statusName}}</td>
+				<td>{{status.statusType}}</td>
 				<td><md-button class="actionButton"
 						ng-click="showEditStatus($event,$index)" ng-init="flag=1" style="">EDIT</md-button>
 					<md-button class="actionButton" ng-click="showConfirm($event,$index)" style="">Remove</md-button>

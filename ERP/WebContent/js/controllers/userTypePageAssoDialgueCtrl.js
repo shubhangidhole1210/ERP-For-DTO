@@ -30,7 +30,7 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 	    	 if($scope.flag==0)
 	    		 {
 	    		    httpparams.method='post',
-	    		    httpparams.url=SERVER_URL + "usertypepageassociation/addMultiplePage";
+	    		    httpparams.url=SERVER_URL + "usertypepageassociation/createMultiple";
 	    		    httpparams.headers = {
 							auth_token : Auth.getAuthToken()
 						};
@@ -119,8 +119,12 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 			    		if(!$scope.isDuplicatePage($scope.userPage)){
 						   $scope.userPages.push($scope.userPage);	
 						   $scope.userPage = {};
+						   $scope.userTypePageInformtion.page.$setValidity("message", true);
+						   $scope.message="";
 			    		}else{
+			    			$scope.message = 'This Page is already added';
 			    			console.log("else block");
+			    			 $scope.userTypePageInformtion.page.$setValidity("message", false);
 			    		}
 					}
 			    
@@ -132,7 +136,7 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 							return true;
 						}
 					}
-					//return false;
+					return false;
 				};
 	
 });

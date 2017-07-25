@@ -25,6 +25,7 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 				description:$scope.rawMaterial.description,
 				partNumber:$scope.rawMaterial.partNumber,
 				unitId:$scope.rawMaterial.unit.id,
+				rmTypeId:$scope.rawMaterial.rmType.id,
 				pricePerUnit:$scope.rawMaterial.pricePerUnit,
 		};
 		var httpparams = {};
@@ -75,7 +76,7 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 
 	$scope.submitRMInformation = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			$scope.saveRawMaterial($event)
+			$scope.saveRawMaterial($event);
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');
@@ -96,7 +97,23 @@ erpApp.controller('rawMaterialDialogCtrl', function($scope, $http, $mdDialog, $m
 		}, function errorCallback(response) {
 			console.log("Error");
 		});
-	}
+	};
+	
+	$scope.getRmTypeList= function(){
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "rmtype/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(response) {
+			$scope.rmTypes = response.data;
+			console.log("$scope.rmType : " ,$scope.rmTypes);
+			/*$scope.isUnitPresent();*/
+		}, function errorCallback(response) {
+			console.log("Error");
+		});
+	};
 	
 	/*$scope.isUnitPresent = function(){
 		scope.isUnit = $scope.data.length === 0 ? true : false;

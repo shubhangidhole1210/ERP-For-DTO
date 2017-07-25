@@ -51,7 +51,7 @@
           <label>VENODR</label>
           <md-select ng-model="productRM.vendor" name="product" ng-change="onRawMaterialQuantityChange($index, productRM.quantity,productRM.vendor.pricePerUnit)">
             <md-option ng-repeat="vendor in productRM.vendorList" ng-value="vendor">
-            {{vendor.vendor.companyName}}
+            {{vendor.vendorId.companyName}}
             </md-option>
           </md-select>
         </md-input-container>
