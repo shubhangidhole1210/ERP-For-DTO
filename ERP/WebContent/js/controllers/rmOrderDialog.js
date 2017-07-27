@@ -7,16 +7,18 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	$scope.isVendorId = vendorAction;
 	$scope.rmOrder.actualPrice = $scope.rmOrder.actualPrice ? $scope.rmOrder.actualPrice : 0;
 	$scope.rmOrder.tax = $scope.rmOrder.tax ? $scope.rmOrder.tax : 0;
-	$scope.rmOrder.totalprice = $scope.rmOrder.totalprice ? $scope.rmOrder.totalprice : 0;
+	$scope.rmOrder.totalPrice = $scope.rmOrder.totalPrice ? $scope.rmOrder.totalPrice : 0;
 	$scope.rmOrder.otherCharges = $scope.rmOrder.otherCharges ? $scope.rmOrder.otherCharges : 0;
 	$scope.title = title;
 	$scope.displayAddRM = hideAction;
 	$scope.rmMsg = true;
 	$scope.rmOrder.expectedDeliveryDate = new Date($scope.rmOrder.expectedDeliveryDate);
+	$scope.rmOrder.createDate = new Date($scope.rmOrder.createDate);
 	$scope.orderRawMaterials=[];
 	$scope.orderRawMaterial={};
 	$scope.otherCharges=0;
 	var TAX = 0.18;
+	
 /*	$scope.isVendor false;*/
 	
 	$scope.hide = function() {
@@ -35,16 +37,16 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	$scope.saveRMOrder = function(ev) {
 		var data = {
 				rmOrderAssociationDTOs:$scope.orderRawMaterials,
-				name:$scope.rmOrder.name,
+				name :$scope.rmOrder.name,
 				description:$scope.rmOrder.description,
 				quantity:$scope.rmOrder.quantity,
-				vendorId:$scope.rmOrder.vendor.id,
-				totalPrice:$scope.rmOrder.totalprice,
+				vendorId:$scope.rmOrder.vendorId.id,
+				totalPrice:$scope.rmOrder.totalPrice,
 				tax:$scope.rmOrder.tax,
-				expectedDeliveryDate : $scope.rmOrder.expecteddeliveryDate,
-				/*createDate : $scope.rmOrder.createDate,*/
 				otherCharges:$scope.rmOrder.otherCharges,
-				actualPrice:$scope.rmOrder.actualPrice
+				actualPrice:$scope.rmOrder.actualPrice,
+				expectedDeliveryDate:$scope.rmOrder.expectedDeliveryDate,
+				createDate:$scope.rmOrder.createDate
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -105,7 +107,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		/*utils.showProgressBar();*/
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "rawmaterial/getRMaterial/" + $scope.rmOrder.vendor.id;
+		httpparams.url = SERVER_URL + "rawmaterial/getRMaterial/" + $scope.rmOrder.vendorId.id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -129,7 +131,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 		$scope.rmOrder.actualPrice = $scope.productSubTotal;
 		$scope.rmOrder.tax = $scope.productSubTotal * TAX;
 		console.log('Tax Sub Total : '+$scope.rmOrder.tax);
-		$scope.rmOrder.totalprice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
+		$scope.rmOrder.totalPrice = $scope.rmOrder.actualPrice + $scope.rmOrder.tax + $scope.rmOrder.otherCharges;
 		console.log('Total Price : '+ $scope.rmOrder.totalprice);
 	};
 	
@@ -219,7 +221,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 				$http(httpparams).then(function successCallback(response) {
 					$scope.rmOrderList = response.data.data;
 					console.log(response);
-		            console.log($scope.orderRawMaterials);
+		            console.log($scope.rmOrderList);
 				}, function errorCallback(response) {
 					console.log("Error");
 				});
@@ -228,7 +230,7 @@ erpApp.controller('rmOrderDialogCtrl', function($scope,$http, $mdDialog, $mdToas
 	    
 	    $scope.setActualPrice = function(){
 	    	console.log(" $scope.rmOrder.otherCharges:", $scope.rmOrder.otherCharges);
-	    	if( $scope.orders.length === 0 ){
+	    	if( $scope.orderRawMaterials.length === 0 ){
 	    		console.log("if condition of set actual price function");
 	    		$scope.rmOrder.otherCharges=0;
 	    		$scope.rmOrder.totalprice=0;

@@ -33,12 +33,15 @@
           <a ng-click="newState(searchText)">Create a new one!</a>
         </md-not-found>
       </md-autocomplete> -->
+        <div class="bar">
+			<input type="text" ng-model="searchString" placeholder="Enter your search terms" />
+		</div>
 		<div>
 			<md-input-container style="width:100%"> <label>Raw
 				material*</label> <md-select ng-model="rmOrderAssociation.rawmaterialId.id"
 				name="rawMaterial" value="rawMaterial.id" ng-disabled="isReadOnly"
 				ng-init="getRawMaterials()" required ng-change="getPrice($index)"> <md-option
-				ng-repeat="rawMaterial in rawmaterials" ng-value="rawMaterial.id">
+				ng-repeat="rawMaterial in rawmaterials | searchFor:searchString" ng-value="rawMaterial.id">
 			{{rawMaterial.partNumber}} </md-option> </md-select>
 			<div ng-messages="rmVendorAssociation.rawMaterial.$error">
 				<div ng-message="required">Please select Raw Material</div>
@@ -59,10 +62,10 @@
 		</div>
 		<md-input-container class="drop-down"> <label
 			style="color: black;">Vendor *</label> <md-select
-			ng-model="rmOrderAssociation.vendorId" name="vendor"
+			ng-model="rmOrderAssociation.vendorId.id" name="vendor"
 			value="vendor.id" ng-disabled="isReadOnly" ng-init="getVendors()"
-			required> <md-option ng-repeat="vendor in venodrs"
-			ng-value="vendor.id"> {{vendor.companyName}} </md-option> </md-select>
+			required> <md-option ng-repeat="vendorId in venodrs"
+			ng-value="vendorId.id"> {{vendorId.companyName}} </md-option> </md-select>
 		<div ng-messages="rmVendorAssociation.vendor.$error">
 			<div ng-message="required">Please select Vendor</div>
 		</div>

@@ -27,8 +27,8 @@ erpApp.controller(
 					$scope.saveRMOrderAssociation = function() {
 						var data = {
 								rawmaterialId:$scope.rmOrderAssociation.rawmaterialId.id,
-								vendorId:$scope.rmOrderAssociation.vendorId,
-								pricePerUnit:$scope.rawmaterial.pricePerUnit
+								vendorId:$scope.rmOrderAssociation.vendorId.id,
+								pricePerUnit:$scope.rmOrderAssociation.pricePerUnit
 						};
 						var httpparams = {};
 						if ($scope.flag == 0) {

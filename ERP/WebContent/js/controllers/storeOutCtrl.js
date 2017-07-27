@@ -29,7 +29,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 	
 	$scope.isProductOrderPresent = function(){
 		$scope.isProduct = $scope.productionPlans.length ===0?true : false;
-	}
+	};
 	
 	$scope.getProductRMAssociation = function(){
 		

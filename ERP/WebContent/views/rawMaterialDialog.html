@@ -13,7 +13,7 @@
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">NAME</label> <input type="text"
-				ng-model="rawMaterial.name" value="rawMaterial.name" required
+				ng-model="rawMaterial.rmName" value="rawMaterial.rmName" required
 				name="name" ng-disabled="isReadOnly" ng-minlength="2" ng-maxlength="255" limit-to="255">
 			<div ng-messages="rawMaterialInformation.name.$error">
 				<div ng-message="required">Please enter Name</div>
@@ -64,22 +64,22 @@
 		</div>
 		<div layout-gt-sm="row">
 			<md-input-container class="drop-down"> <label>UNIT
-				ID*</label> <md-select ng-model="rawMaterial.unit.id" name="unitID"
-				value="unitID.id" ng-disabled="isReadOnly" ng-init="getUnitList()"
+				ID*</label> <md-select ng-model="rawMaterial.unitId.id" name="unitID"
+				 ng-disabled="isReadOnly" ng-init="getUnitList()"
 				ng-required="true" rrquired> <md-option
-				ng-repeat="unitID in data" ng-value="unitID.id">
-			{{unitID.name}} </md-option> </md-select>
+				ng-repeat="unitId in data" ng-value="unitId.id">
+			{{unitId.name}} </md-option> </md-select>
 			<div ng-messages="rawMaterialInformation.unitID.$error">
 				<div ng-message="required">Please Select Unit</div>
 			</div>
 			</md-input-container>
 		</div>
 		<div layout-gt-sm="row">
-			<md-input-container class="drop-down"> <label>RM TYPE</label> <md-select ng-model="rawMaterial.rmType.id" name="rmType"
-				value="unitID.id" ng-disabled="isReadOnly" ng-init="getRmTypeList()"
+			<md-input-container class="drop-down"> <label>RM TYPE</label> <md-select ng-model="rawMaterial.rmTypeId.id" name="rmType"
+				 ng-disabled="isReadOnly" ng-init="getRmTypeList()"
 				ng-required="true" rrquired> <md-option
-				ng-repeat="rMType in rmTypes" ng-value="rMType.id">
-			{{rMType.rmTypeName}} </md-option> </md-select>
+				ng-repeat="rmTypeId in rmTypes" ng-value="rmTypeId.id">
+			{{rmTypeId.rmTypeName}} </md-option> </md-select>
 			<div ng-messages="rawMaterialInformation.rmType.$error">
 				<div ng-message="required">Please Select RM Type</div>
 			</div>

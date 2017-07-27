@@ -21,8 +21,8 @@
 			</tr>
 			<tr ng-repeat="productInventory in data.data | startFrom:currentPage*pageSize | limitTo:pageSize ">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
-				<td>{{productInventory.product.partNumber}}</td>
-				<td>{{productInventory.quantityavailable}}</td>
+				<td>{{productInventory.productId.partNumber}}</td>
+				<td>{{productInventory.quantityAvailable}}</td>
 				<!-- <td>{{productInventory.racknumber}}</td> -->
 				<td style="text-align: center;"><md-button class="actionButton "
 						ng-click="showEditProductInventory($event,$index)"

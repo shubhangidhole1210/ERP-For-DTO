@@ -27,7 +27,7 @@
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">QUANITY AVAILABLE</label> <input
-				type="text" ng-model="productInventory.quantityavailable" required
+				type="text" ng-model="productInventory.quantityAvailable" required
 				name="quantityavailable" ng-disabled="isReadOnly"
 				onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
 			<div
@@ -38,7 +38,7 @@
 		</div>
 		
 		<md-input-container style="width:100%"> <label>PRODUCT*</label>
-		<md-select ng-model="productInventory.product.id" name="product"
+		<md-select ng-model="productInventory.productId.id" name="product"
 			ng-disabled="isProductreadOnly" ng-required="true" required
 			ng-init="getProduct()"> <md-option
 			ng-repeat="product in prducts" ng-value="product.id">
@@ -51,7 +51,7 @@
           <div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">MINIMUM QUANTITY</label> <input
-				type="number" ng-model="productInventory.minimum_quantity" required name="minQuantity" ng-disabled="isReadOnly"  min="0" max="9999">
+				type="number" ng-model="productInventory.minimumQuantity" required name="minQuantity" ng-disabled="isReadOnly"  min="0" max="9999">
 			<div ng-messages="productInventoryInformation.minQuantity.$error">
 				<div ng-message="required">Please enter Minimum Quantity</div>
 				<div ng-message="min">Invalid quantity!! Quantity should b 0 or greater than 0</div>
@@ -62,7 +62,7 @@
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">MAXIMUM QUANTITY</label> <input
-				type="number" ng-model="productInventory.maximum_quantity"
+				type="number" ng-model="productInventory.maximumQuantity"
 				 required name="maxQuantity" ng-disabled="isReadOnly" min="0" max="9999">
 			<div ng-messages="productInventoryInformation.maxQuantity.$error">
 				<div ng-message="required">Please enter Maximum Quantity</div>

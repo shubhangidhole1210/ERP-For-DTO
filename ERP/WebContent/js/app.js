@@ -3,7 +3,7 @@ var erpApp = angular
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-erpApp.value('SERVER_URL', 'http://192.168.2.101:8086/ERP/');
+erpApp.value('SERVER_URL', 'http://192.168.2.102:8086/ERP/');
 
 
 
@@ -249,8 +249,8 @@ erpApp.filter('startFrom', function() {
     		}
         start = +start; //parse to int
         return input.slice(start);
-        console.log("in filtter function")
-    }
+        console.log("in filtter function");
+    };
 });
 
 erpApp.directive('accessibleForm', function () {
@@ -284,8 +284,33 @@ erpApp.directive("limitTo", [function() {
                 if (this.value.length == limit) e.preventDefault();
             });
         }
-    }
+    };
 }]);
+
+
+erpApp.filter('searchFor', function(){
+	return function(arr, searchString){
+		if(!searchString){
+			return arr;
+		}
+
+		var result = [];
+
+		searchString = searchString.toLowerCase();
+
+		
+		angular.forEach(arr, function(item){
+
+			if(item.title.toLowerCase().indexOf(searchString) !== -1){
+				result.push(item);
+			}
+
+		});
+
+		return result;
+	};
+
+});
 
 
 /*erpApp.directive("fileread", [
@@ -321,8 +346,8 @@ erpApp.directive('ngFiles', ['$parse', function ($parse) {
 
     return {
         link: fn_link
-    }
-} ])
+    };
+} ]);
 
 
 

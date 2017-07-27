@@ -85,6 +85,19 @@
 			</div>
 			</md-input-container>
 		</div>
+		  <div layout-gt-sm="row">
+          <div layout-gt-sm="row">
+			<md-input-container class="drop-down"> <label>STATUS</label> <md-select ng-model="notification.status1.id" name="status"
+				 ng-disabled="isReadOnly" ng-init="statusList()"
+				ng-required="true" rrquired> <md-option
+				ng-repeat="status in status" ng-value="status.id">
+			{{status.statusName}} </md-option> </md-select>
+			<div ng-messages="notificationForm.status.$error">
+				<div ng-message="required">Please Select Status</div>
+			</div>
+			</md-input-container>
+		</div>
+		</div>	
 	</div>
 	</md-dialog-content>
 	<md-dialog-actions layout="row"> <md-button

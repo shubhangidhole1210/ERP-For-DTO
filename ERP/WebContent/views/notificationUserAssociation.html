@@ -19,8 +19,8 @@
 			</tr>
 			<tr ng-repeat="notificationUserAsso in notificationUserAssociationList |  filter:{ pageName: searchText } | startFrom:currentPage*pageSize | limitTo:pageSize">
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
-				<td>{{notificationUserAsso.notification.name}}</td>
-				<td>{{notificationUserAsso.user.userid}}</td>
+				<td>{{notificationUserAsso.notificationId.name}}</td>
+				<td>{{notificationUserAsso.userId.userid}}</td>
 				<td style="text-align: center;"><md-button class="actionButton"
 						ng-click="showEditNotificationUserAssociation($event,$index)" ng-init="flag=1" style="">EDIT</md-button>
 					<md-button class="actionButton" ng-click="showConfirm($event,$index)" style="">Remove</md-button>

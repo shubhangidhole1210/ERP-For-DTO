@@ -21,12 +21,12 @@ erpApp.controller('RMInvenaryDialogeController',
 
 	$scope.saveRMInventaryInformation = function(ev) {
 		var data = {
-				rawmaterialId:$scope.rmInventary.rawmaterial.id,
+				rawmaterialId:$scope.rmInventary.rawmaterialId.id,
 				quantityAvailable:$scope.rmInventary.quantityAvailable,
 				name:$scope.rmInventary.name,
 				description:$scope.rmInventary.description,
-				minimumQuantity:$scope.rmInventary.minimum_quantity,
-				maximumQuantity:$scope.rmInventary.maximum_quantity
+				minimumQuantity:$scope.rmInventary.minimumQuantity,
+				maximumQuantity:$scope.rmInventary.maximumQuantity
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -83,18 +83,21 @@ erpApp.controller('RMInvenaryDialogeController',
 		}
 	};
 
-	var httpparams = {};
-	httpparams.method = 'GET';
-	httpparams.url = SERVER_URL + "rawmaterial/list";
-	httpparams.headers = {
-			auth_token : Auth.getAuthToken()
-		};
-	$http(httpparams).then(function successCallback(response) {
-		$scope.data = response.data;
-		$scope.users = response.data;
-		console.log(response);
-	}, function errorCallback(response) {
-		console.log("Error");
-	});
+	$scope.getRmList = function(){
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "rawmaterial/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(response) {
+			$scope.data = response.data;
+			$scope.users = response.data;
+			console.log(response);
+		}, function errorCallback(response) {
+			console.log("Error");
+		});
+	};
+	
 	
 });

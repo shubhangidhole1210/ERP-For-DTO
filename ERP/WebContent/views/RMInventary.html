@@ -21,7 +21,7 @@
 			</tr>
 			<tr ng-repeat="rmInventarys in data | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ name: searchText } " >
 			    <td>{{(currentPage*pageSize) + ($index+1) }}</td>
-				<td>{{rmInventarys.rawmaterial.partNumber}}</td>
+				<td>{{rmInventarys.rawmaterialId.partNumber}}</td>
 				<td>{{rmInventarys.quantityAvailable}}</td>
 				<td style="text-align: center"><md-button class="actionButton"
 						ng-click="showEditRMInventary($event,$index)" ng-init="flag=1" style="">EDIT</md-button>

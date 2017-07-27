@@ -24,9 +24,9 @@
 		<div layout-gt-sm="row">
 			<md-input-container class="drop-down"> <label
 				style="color: black;">RAW MATERIAL</label> <md-select
-				ng-model="rmInventary.rawmaterial.id" name="RMInventory"
+				ng-model="rmInventary.rawmaterialId.id" name="RMInventory"
 				value="RMInventory.id" ng-disabled="isRmVisible" ng-required="true"
-				rrquired> <md-option ng-repeat="RMInventory in data"
+				rrquired ng-init="getRmList()"> <md-option ng-repeat="RMInventory in data"
 				ng-value="RMInventory.id"> {{RMInventory.partNumber}} </md-option> </md-select>
 			<div ng-messages="RMInventaryInformation.RMInventory.$error">
 				<div ng-message="required">Please Select Raw Material</div>
@@ -37,7 +37,7 @@
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">MINIMUM QUANTITY</label> <input
-				type="number" ng-model="rmInventary.minimum_quantity" required name="minQuantity" ng-disabled="isReadOnly"  min="0" max="9999">
+				type="number" ng-model="rmInventary.minimumQuantity" required name="minQuantity" ng-disabled="isReadOnly"  min="0" max="9999">
 			<div ng-messages="RMInventaryInformation.minQuantity.$error">
 				<div ng-message="required">Please enter Minimum Quantity</div>
 				<div ng-message="min">Invalid quantity!! Quantity should b 0 or greater than 0</div>
@@ -48,7 +48,7 @@
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">MAXIMUM QUANTITY</label> <input
-				type="number" ng-model="rmInventary.maximum_quantity"
+				type="number" ng-model="rmInventary.maximumQuantity"
 				 required name="maxQuantity" ng-disabled="isReadOnly" min="0" max="9999">
 			<div ng-messages="RMInventaryInformation.maxQuantity.$error">
 				<div ng-message="required">Please enter Maximum Quantity</div>

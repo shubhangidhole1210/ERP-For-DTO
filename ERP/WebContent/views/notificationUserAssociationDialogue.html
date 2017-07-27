@@ -19,7 +19,7 @@
 			            		</md-option>
 			         		</md-select> -->
 			         		
-			         		 <md-select ng-model="notificationUser.notification.id" name="notification"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getNotificationInformation()">
+			         		 <md-select ng-model="notificationUser.notificationId.id" name="notification"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getNotificationInformation()">
                            <md-option ng-repeat="notification in notificationList" ng-value="notification.id" >
                              {{notification.subject}}
                          </md-option>
@@ -33,9 +33,9 @@
 					<div layout-gt-sm="row">
 						<md-input-container class="drop-down">
 				          	<label>USER ID*</label>
-				          	<md-select ng-model="notificationUser.user.id" name="user"  ng-disabled="isReadOnly" ng-required="true" ng-init="getUserInformation()">
+				          	<md-select ng-model="notificationUser.userId.id" name="user"  ng-disabled="isReadOnly" ng-required="true" ng-init="getUserInformation()">
 				            	<md-option ng-repeat="user in userList" ng-value="user.id" >
-				               		{{user.userid}}
+				               		{{user.userId}}
 				            	</md-option>
 				          	</md-select>
 				          	<div ng-messages="notificationUserAssociationForm.user.$error">

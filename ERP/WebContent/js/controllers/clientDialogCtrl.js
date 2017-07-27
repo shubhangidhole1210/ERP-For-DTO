@@ -19,12 +19,12 @@ erpApp.controller('clientDialogCtrl',function($scope, $mdDialog, client,
 
 	$scope.saveClient = function(ev) {
 		var data = {
-				companyName: $scope.client.companyname,
+				companyName: $scope.client.companyName,
 				description: $scope.client.description,
 				address: $scope.client.address,
-				emailId: $scope.client.emailid,
-				contactNumber:$scope.client.contactnumber ,
-				contactPersonName: $scope.client.contactpersonname,
+				emailId: $scope.client.emailId,
+				contactNumber:$scope.client.contactNumber ,
+				contactPersonName: $scope.client.contactPersonName,
 				commisionerate: $scope.client.commisionerate,
 	    		 cst: $scope.client.cst,
 	    		 customerEccNumber: $scope.client.customerEccNumber,

@@ -25,6 +25,7 @@ erpApp.controller('notificationDialogCtrl', function($scope,$http, $mdDialog,SER
 				subject: $scope.notification.subject ,
 				template: $scope.notification.template,
 				type: $scope.notification.type,
+				status1 : $scope.notification.status1,
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -71,10 +72,28 @@ erpApp.controller('notificationDialogCtrl', function($scope,$http, $mdDialog,SER
 							utils.showToast('Something went worng. Please try again later.');
 						});
 	};
+	
+	
+	$scope.statusList=function(){
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "status/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(response) {
+			//$scope.data = response.data;
+			$scope.status=response.data;
+			console.log("$scope.statusList: " , $scope.status);
+		}, function errorCallback(response) {
+			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
+			console.log("Error");
+		});
+	};
 
 	$scope.submitnotificationForm = function(isvaliduser,$event) {
 		if (isvaliduser) {
-			$scope.saveNotificationInformation($event)
+			$scope.saveNotificationInformation($event);
 		} else {
 			console.log('its else block');
 			utils.showToast('Please fill all required information');

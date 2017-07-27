@@ -22,7 +22,7 @@
 			</tr>
 			<tr ng-repeat="rawMaterials in data  | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ partNumber:searchText }">
 				 <td>{{(currentPage*pageSize) + ($index+1) }}</td>
-				<td>{{rawMaterials.partNumber}}</td>
+				<td>{{rawMaterials.rmName}}</td>
 				<td>{{rawMaterials.description}}</td>
 				<td>{{rawMaterials.partNumber}}</td>
 				<td style="margin-left: 40%"><md-button class="actionButton"

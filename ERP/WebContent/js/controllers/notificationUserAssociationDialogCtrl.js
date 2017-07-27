@@ -38,7 +38,7 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 			};
 		$http(httpparams).then(function successCallback(response) {
 			$scope.notificationList=response.data;
-			console.log(response)
+			console.log(response);
 			console.log("$scope.notificationList :" ,$scope.notificationList);
 //			utils.hideProgressBar();
 		}, function errorCallback(response) {
@@ -88,7 +88,7 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 			};
 		$http(httpparams).then(function successCallback(response) {
 			$scope.userList=response.data;
-			console.log(response)
+			console.log(response);
 			console.log("$scope.userList :" ,$scope.userList);
 //			utils.hideProgressBar();
 		}, function errorCallback(response) {
@@ -101,8 +101,8 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 
 	$scope.saveNotificationUserAssociationInformation = function() {
 		var data = {
-				user:$scope.notificationUser.user.id,
-				notification :$scope.notificationUser.notification.id,
+				userId:$scope.notificationUser.userId.id,
+				notificationId :$scope.notificationUser.notificationId.id,
 				cc:$scope.notificationUser.cc,
 				bcc:$scope.notificationUser.bcc,
 				to:$scope.notificationUser.to
@@ -161,7 +161,7 @@ erpApp.controller('notificationUserAssociationDialogCtrl', function($scope,$http
 		console.log("notification id :" , notificationId);
 		console.log("user id :" , userId);
 		if(notificationId == null && userId == null){
-			utils.showToast("Please Select Notification Id and User Id")
+			utils.showToast("Please Select Notification Id and User Id");
 		}else if(notificationId == null){
 			utils.showToast("Please select Notification id");
 		}else if(userId == null){

@@ -18,18 +18,18 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 	    
 	    $scope.saveProductInventory=function(ev){
 	    	 var data = {
-	    			 productId:$scope.productInventory.product.id,
+	    			 productId:$scope.productInventory.productId.id,
 	    			 description:$scope.productInventory.description,
-	    			 quantityAvailable:$scope.productInventory.quantityavailable,
+	    			 quantityAvailable:$scope.productInventory.quantityAvailable,
 	    			 racknumber:$scope.productInventory.racknumber,
-	    			 minimumQuantity:$scope.productInventory.minimum_quantity,
-	    			 maximumQuantity:$scope.productInventory.maximum_quantity
+	    			 minimumQuantity:$scope.productInventory.minimumQuantity,
+	    			 maximumQuantity:$scope.productInventory.maximumQuantity
 				};
 	    	 var httpparams = {};
 	    	 if($scope.flag==0)
 	    		 {
 	    		    httpparams.method='post',
-	    		    httpparams.url=SERVER_URL + "productinventory/create"
+	    		    httpparams.url=SERVER_URL + "productinventory/create";
 	    		    httpparams.headers = {
 							auth_token : Auth.getAuthToken()
 						};
@@ -37,7 +37,7 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 	    	 else{
 	    		      data.id=$scope.productInventory.id,
 	    		      httpparams.method='put',
-	    		      httpparams.url=SERVER_URL + "productinventory/update"
+	    		      httpparams.url=SERVER_URL + "productinventory/update";
 	    		      httpparams.headers = {
 	  						auth_token : Auth.getAuthToken()
 	  					};
@@ -54,10 +54,9 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 										"saveVendorError", {});
 								console.log(data);
 								$scope.hide();
-								$scope.message = 'Something went worng. Please try again later.';
-								$scope.showToast();
+								utils.showToast(data.data.message);
 							}else{
-								$scope.message = 'Product Inventory Information saved successfully.';
+								utils.showToast(data.data.message);
 								$scope.showToast();
 								$rootScope.$emit("callPopulateProductInventoryList",{});
 							}
@@ -67,7 +66,7 @@ erpApp.controller('productInventoryDialogController', function($scope,$http, $md
 									"saveVendorError", {});
 							console.log(data);
 							$scope.hide();
-							$scope.message = 'Something went worng. Please try again later.';
+							utils.showToast(data.data.message);
 							$scope.showToast();
 						});
 	    };

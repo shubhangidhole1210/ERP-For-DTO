@@ -35,9 +35,9 @@
            <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>CLIENT*</label>
-          <md-select ng-model="productOrder.client.id" name="client"  ng-disabled="isClientReadOnly" ng-required="true" required ng-init="getClient()">
-            <md-option ng-repeat="client in clients" ng-value="client.id" >
-               {{client.companyName}}
+          <md-select ng-model="productOrder.clientId.id" name="client"  ng-disabled="isClientReadOnly" ng-required="true" required ng-init="getClient()">
+            <md-option ng-repeat="clientId in clients" ng-value="clientId.id" >
+               {{clientId.companyName}}
             </md-option>
           </md-select>
           <div ng-messages="productOrderInformation.client.$error">
@@ -53,7 +53,7 @@
               <div ng-messages="productOrderInformation.expecteddeliveryDate.$error">
                  <div ng-message="required">Please Enter Expected Delivery Date</div>
               </div>
-               <div ng-show=" productOrderInformation.expecteddeliveryDate.$error.customeMsg" class="error-msg">{{msg}}</div>
+               <div ng-show="productOrderInformation.expecteddeliveryDate.$error.customeMsg" class="error-msg">{{msg}}</div>
          </md-input-container>  
            </div>
         
@@ -80,7 +80,7 @@
           </tr>
          
           <tr ng-repeat="orderProductAssociation in productOrderList">
-          <td  style="background: white;">{{orderProductAssociation.product.partNumber}}</td>
+          <td  style="background: white;">{{orderProductAssociation.productId.partNumber}}</td>
          <!--  <td  style="background: white;">{{orderProductAssociation.product.description}}</td> -->
           <td  style="background: white;"><input type="number" ng-value="{{orderProductAssociation.quantity}}" ng-model="orderProductAssociation.quantity" ng-disabled="isReadOnly" name="quantity2{{$index}}" min="1">
                <div ng-show="productOrderInformation.quantity2{{$index}}.$error.min"

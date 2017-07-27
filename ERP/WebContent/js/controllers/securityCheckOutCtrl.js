@@ -70,7 +70,7 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 			var securityCheckOutParts = [];
 			for(index=0;index<$scope.productOtderList.length;index++){
 				var securityCheckOut = {};
-				securityCheckOut.productId= $scope.productOtderList[index].product.id;
+				securityCheckOut.productId= $scope.productOtderList[index].productId.id;
 				securityCheckOutParts.push(securityCheckOut);
 			}
 			console.log('intime : ' + $scope.intime.getTime());

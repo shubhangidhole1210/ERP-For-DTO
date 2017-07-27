@@ -28,8 +28,8 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
     			 productOrderAssociationDTOs : $scope.orderproductassociations,
     			 description:$scope.productOrder.description,
     			 invoiceNo:$scope.productOrder.invoiceNo,
-    			 expectedDeliveryDate:$scope.productOrder.expecteddeliveryDate ,
-    			 clientId:$scope.productOrder.client.id
+    			 expectedDeliveryDate:$scope.productOrder.expectedDeliveryDate ,
+    			 clientId:$scope.productOrder.clientId.id
 		};
     	var httpparams = {};
     	if($scope.flag === 0){

@@ -24,9 +24,27 @@
 				ng-disabled="isReadOnly">
 			</md-input-container>
 		</div>
+		
+		
+		 <div layout-gt-sm="row">
+		      <md-input-container class="md-block" flex-gt-sm type="password">
+              <label class="input-filed-label">CREATED DATE[MM/DD/YYYY]*</label>
+              <input type="date" placeholder="Enter date of Delivery" ng-model="rmOrder.createDate"  name="createdDate" required ng-disabled="isReadOnly">
+              <div ng-messages="RMOrderInformation.createdDate.$error">
+                 <div ng-message="required">Please Enter Created  Date</div>
+              </div>
+               </md-input-container>  
+               <md-input-container class="md-block" flex-gt-sm type="password">
+              <label class="input-filed-label">EXPECTED DELIVERY DELIVERY[MM/DD/YYYY]*</label>
+              <input type="date" placeholder="Enter date of Delivery" ng-model="rmOrder.expectedDeliveryDate"  name="expecteddeliveryDate" required ng-disabled="isReadOnly">
+              <div ng-messages="RMOrderInformation.expecteddeliveryDate.$error">
+                 <div ng-message="required">Please Enter Expected Delivery Date</div>
+              </div>
+         </md-input-container>  
+           </div>
 		<div layout-gt-sm="row">
 			<md-input-container> <label>VENDOR
-			</label> <md-select ng-model="rmOrder.vendor.id" name="vendorId"
+			</label> <md-select ng-model="rmOrder.vendorId.id" name="vendorId"
 				ng-disabled="isVendorId" ng-init="displayVendorId()" name="vendorId"
 				required ng-change="getRMListByVendor()">
 			<md-option ng-repeat="vendorId in vendorData" ng-value="vendorId.id">
@@ -35,23 +53,8 @@
 				<div ng-message="required">Please select Vendor</div>
 			</div>
 			</md-input-container>
-			</div>
-			<div layout-gt-sm="row">
-			 <md-input-container class="md-block" flex-gt-sm type="password">
-              <label class="input-filed-label">DATE OF DELIVERY[MM/DD/YYYY]</label>
-              <input type="date"  ng-model="rmOrder.expecteddeliveryDate"  name="expecteddeliveryDate" required ng-disabled="isReadOnly">
-              <div ng-messages="RMOrderInformation.expecteddeliveryDate.$error">
-                 <div ng-message="required">Please Enter Expected Delivery Date</div>
-              </div>
-         </md-input-container>
-         <!--  <md-input-container class="md-block" flex-gt-sm type="password">
-              <label class="input-filed-label">CREATE DATE[MM/DD/YYYY]</label>
-              <input type="date" ng-model="rmOrder.createDate"  name="createDate" required ng-disabled="isReadOnly">
-              <div ng-messages="RMOrderInformation.createDate.$error">
-                 <div ng-message="required">Please Enter create Date</div>
-              </div>
-         </md-input-container> -->
-		   </div>
+		</div>
+		
 		<div class="ui-msg" ng-show="isVendor">Please create vendor first</div>
 		
 		<h2>Raw Material List</h2>
@@ -94,10 +97,10 @@
 			<md-input-container> <label
 				style="color: black;">RAW MATERIAL</label> <md-select
 				ng-model="orderRawMaterial.rawmaterialId" name="rawmaterial"
-				value="rawmaterial.id" ng-disabled="!rmOrder.vendor.id" name="rawMaterialId">
+				 ng-disabled="!rmOrder.vendorId.id" name="rawMaterialId">
 			<md-option ng-repeat="rawmaterial in vendorRmList"
-				ng-value="rawmaterial.rawmaterial">
-			{{rawmaterial.rawmaterial.partNumber}} </md-option> </md-select>
+				ng-value="rawmaterial.rawmaterialId">
+			{{rawmaterial.rawmaterialId.partNumber}} </md-option> </md-select>
 			<div ng-show="RMOrderInformation.rawmaterial.$error.message"
 				class="error-msg">{{message}}</div>
 			</md-input-container>
@@ -122,8 +125,8 @@
 
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">TOTAL PRICE</label> <input
-				type="number" ng-model="rmOrder.totalprice"
-				name="totalprice" ng-disabled="isPriceReadOnly" value="{{totalprice}}">
+				type="number" ng-model="rmOrder.totalPrice"
+				name="totalprice" ng-disabled="isPriceReadOnly" value="{{totalPrice}}">
 			<div ng-messages="RMOrderInformation.totalprice.$error">
 				<div ng-message="required">Please enter total price</div>
 			</div>
