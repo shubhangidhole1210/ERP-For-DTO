@@ -7,12 +7,12 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 	});
 	
 	$rootScope.$on("saveVendorError", function() {
-		$scope.showAddNewVendor()
+		$scope.showAddNewVendor();
 	});
 	
 	$scope.populateVendorList=function(){
 		 $scope.currentPage = 0;
-	     $scope.pageSize = 10;
+	     $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
@@ -31,7 +31,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 				console.log("Error");
 				utils.hideProgressBar();
 			});
-	}
+	};
 	
 	$scope.isVendorInformation = function() {
 		$scope.isVendorPredent = $scope.data.length === 0 ? true : false;
@@ -66,7 +66,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 	  $scope.showEditVendor = function(ev , $index) {
 		  $scope.flag = 1;
 		  $scope.vendorUser = $scope.vendorUsers[($scope.currentPage*$scope.pageSize) + ($index)];
-		  $scope.information="EDIT VENDOR INFORMATION"
+		  $scope.information="EDIT VENDOR INFORMATION";
 		    $mdDialog.show({
 		      controller: 'DialogVendorController',
 		      templateUrl: 'views/vendorDialog.html',
@@ -110,7 +110,7 @@ erpApp.controller('vedorCtrl', function($scope,$http, $mdDialog,SERVER_URL,$root
 			$scope.isReadOnly = true;
 			$scope.vendorUser = $scope.vendorUsers[($scope.currentPage*$scope.pageSize) + ($index)];
 			$scope.isSaving = false;
-			$scope.information="VIEW VENDOR INFORMATION"
+			$scope.information="VIEW VENDOR INFORMATION";
 			console.log($scope.user);
 			$mdDialog.show({
 						controller : 'DialogVendorController',

@@ -23,7 +23,7 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 	    {
 	    	 var data = {
 	    			 userTypePageAssoParts:$scope.userPages,
-	    			 usertypeId:$scope.userTypePageAsso.usertype.id
+	    			 usertypeId:$scope.userTypePageAsso.usertypeId.id
 				};
 	    	 
 	    	 var httpparams = {};
@@ -71,6 +71,8 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 							utils.showToast("Something went worng. Please try again later.");
 						});
 	    };
+	    
+	    
 
 	    $scope.submitUserTypePageInformation = function(isvaliduser,$event) {
 			if (isvaliduser) {
@@ -138,5 +140,26 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 					}
 					return false;
 				};
+				
+				
+				$scope.deletePage = function(index){
+			    	console.log("$scope.userPages:" , $scope.userPages);
+			    	$scope.userPages.splice(index, 1);
+			    };
+			    
+			    $scope.getUserTypeId = function(){
+			    	var httpparams = {};
+					httpparams.method = 'GET';
+					httpparams.url = SERVER_URL + "usertypepageassociation/UserTypePageAsso/" + $scope.userTypePageAsso.usertypeId.id;
+					httpparams.headers = {
+							auth_token : Auth.getAuthToken()
+						};
+					 $http(httpparams).then(function successCallback(response) {
+							$scope.userPageAssociation = response.data;
+							console.log("$scope.userPageAssociation :" ,$scope.userPageAssociation);
+						}, function errorCallback(response) {
+							console.log("Error");
+						});
+			    };
 	
 });

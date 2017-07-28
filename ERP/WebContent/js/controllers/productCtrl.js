@@ -2,6 +2,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	$scope.isProductPresent=false;
 	$scope.product = {};
 	
+	
 	$rootScope.$on("CallPopulateProductList", function() {
 		$scope.populteProductList();
 	});
@@ -41,7 +42,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
 		$scope.product = {};
-		$scope.information="ADD NEW PRODUCT"
+		$scope.information="ADD NEW PRODUCT";
 		var addNewProductDialog = {
 			controller : 'productDialogCtrl',
 			templateUrl : 'views/productDialog.html',
@@ -64,7 +65,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	};
 	
 	$scope.showGenerateBom = function(ev) {
-		$scope.bomInformation="GENERATE BOM"
+		$scope.bomInformation="GENERATE BOM";
 	    $mdDialog.show({
 	      controller: 'bomDialogueController',
 	      templateUrl: 'views/bomGenerateDialogue.html',
@@ -84,7 +85,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 	  };
 	  
 	  $scope.showReturnBom = function(ev) {
-		  $scope.bomInformation="DOWNLOAD BOM"
+		  $scope.bomInformation="DOWNLOAD BOM";
 		    $mdDialog.show({
 		      controller: 'bomReturnDialogueController',
 		      templateUrl: 'views/bomReturnDialog.html',
@@ -139,7 +140,7 @@ erpApp.controller('productCtrl', function($scope, $http, $mdDialog, $mdToast, $r
 		$scope.isReadOnly = true;
 		$scope.product = $scope.products[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
-		$scope.information="VIEW PRODUCT INFORMATION"
+		$scope.information="VIEW PRODUCT INFORMATION";
 		console.log($scope.product);
 		$mdDialog.show({
 					controller : 'productDialogCtrl',

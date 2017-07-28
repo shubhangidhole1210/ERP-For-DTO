@@ -17,7 +17,7 @@
 								 ng-change="getProductRMAssociation()" required>
 							<md-option ng-repeat="productionPlan in productionPlans"
 								ng-value="productionPlan">
-							{{productionPlan.product.partNumber}} </md-option>
+							{{productionPlan.productId.partNumber}} </md-option>
 							</md-select> 
 							 <div ng-messages="storeOutInformation.product.$error">
 								<div ng-message="required">Please enter Description</div>

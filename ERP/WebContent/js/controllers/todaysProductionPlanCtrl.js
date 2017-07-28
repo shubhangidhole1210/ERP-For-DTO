@@ -54,7 +54,7 @@ erpApp
 						for (index = 0; index < $scope.productList.length; index++) {
 							if(($scope.productList[index].achived && $scope.productList[index].achived !== 0) || ($scope.productList[index].repairedQuantity && $scope.productList[index].repairedQuantity !== 0)){
 								var product = {};
-								product.productId = $scope.productList[index].product.id;
+								product.productId = $scope.productList[index].productId.id;
 								product.targetQuantity = $scope.productList[index].targetQuantity;
 								product.completedQuantity = $scope.productList[index].completedQuantity;
 								product.achivedQuantity = $scope.productList[index].achived;
@@ -66,8 +66,8 @@ erpApp
 							}
 						}
 						var data = {
-							createDate : $scope.currentDate,
-							dailyProductionPlanDTOs : productinPlanDTOs
+								createDate : $scope.currentDate,
+								dailyProductionPlanDTOs : productinPlanDTOs
 						};
 						var httpparams = {
 							method : 'post',
@@ -107,8 +107,8 @@ erpApp
 					};
 					
 					
-					$scope.validateTargetQuantity = function(storeOut_quantity,completedQuantity,failedQuantity,qualityPendingQuantity,achived,qualityCheckedQuantity,$index){
-						console.log("storeOut_quantity :" ,storeOut_quantity);
+					$scope.validateTargetQuantity = function(storeOutQuantity,completedQuantity,failedQuantity,qualityPendingQuantity,achived,qualityCheckedQuantity,$index){
+						console.log("storeOut_quantity :" ,storeOutQuantity);
 						console.log("completedQuantity :" ,completedQuantity)
 						console.log("failQuantity :" ,failedQuantity)
 						console.log("qualityPendingQuantity :" ,qualityPendingQuantity);
@@ -116,7 +116,7 @@ erpApp
 						console.log("$index : " ,$index);
 						$scope.totalOfDailyProductionPlanQuantity = completedQuantity + failedQuantity + qualityPendingQuantity + achived + qualityCheckedQuantity;
 						console.log("$scope.totalOfDailyProductionPlanQuantity:",$scope.totalOfDailyProductionPlanQuantity);
-						if(storeOut_quantity >= $scope.totalOfDailyProductionPlanQuantity){
+						if(storeOutQuantity >= $scope.totalOfDailyProductionPlanQuantity){
 							console.log("if block");
 							$scope.todaysProductionPlanForm["achivedQuantity" + $index].$setValidity("customError", true);
 						}else{

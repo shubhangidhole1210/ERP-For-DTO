@@ -1,4 +1,4 @@
-<md-dialog>
+<md-dialog ng-init="getUserTypeId()">
   <form name="userTypePageInformtion"  novalidate>
   
     <md-toolbar>
@@ -16,9 +16,9 @@
          <div layout-gt-sm="row">
            <md-input-container>
           <label>USER TYPE*</label>
-          <md-select ng-model="userTypePageAsso.usertype.id" name="userType"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getUserType()">
-            <md-option ng-repeat="userType in userTypes" ng-value="userType.id" >
-               {{userType.usertypeName}}
+          <md-select ng-model="userTypePageAsso.usertypeId.id" name="userType"  ng-disabled="isReadOnly" ng-required="true" required ng-init="getUserType()">
+            <md-option ng-repeat="usertypeId in userTypes" ng-value="usertypeId.id" >
+               {{usertypeId.usertypeName}}
             </md-option>
           </md-select>
           <div ng-messages="userTypePageInformtion.userType.$error" >
@@ -45,12 +45,18 @@
              <tr ng-repeat="userPage in userPages" >
                 <td>{{userPage.pageId.pageName}}</td>
                 <td>
-                   <button type="button">DELETE</button>
+                   <button type="button" ng-click="deletePage($index)">DELETE</button>
+                </td>
+             </tr>
+              <tr ng-repeat="userPageId in userPageAssociation" >
+                <td>{{userPageId.page.pageName}}</td>
+                <td>
+                   <button type="button" ng-click="deletePage($index)">DELETE</button>
                 </td>
              </tr>
           </table>
           <div layout-gt-sm="row">
-             <md-input-container>
+             <md-input-container style="width:85%">
           <label>PAGE*</label>
           <md-select ng-model="userPage.pageId" name="page"  ng-disabled="isReadOnly"  ng-init="getPage()">
             <md-option ng-repeat="page in pages" ng-value="page" >

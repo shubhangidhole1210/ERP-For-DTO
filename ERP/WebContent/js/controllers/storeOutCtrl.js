@@ -36,7 +36,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "productionplanning/getProductionPlanListForStoreOutByDateAndPId/"  + $scope.currentDate + "/" + + $scope.productionPlan.product.id;
+		httpparams.url = SERVER_URL + "productionplanning/getProductionPlanListForStoreOutByDateAndPId/"  + $scope.currentDate + "/" + + $scope.productionPlan.productId.id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -90,7 +90,7 @@ erpApp.controller('storeOutCtrl',function($scope, $http, $mdDialog, $mdToast,
 			}
 		}
 		var data = {
-				productId: $scope.productionPlan.product.id,
+				productId: $scope.productionPlan.productId.id,
 				productionPlanId :$scope.productionPlan.id,
 				quantityRequired: $scope.manuFactureQuantity,
 				isSelectedStoreOut: $scope.isSelectedItemStoreOut,

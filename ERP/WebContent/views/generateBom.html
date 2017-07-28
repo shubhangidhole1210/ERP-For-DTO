@@ -38,7 +38,7 @@
               <td>{{$index+1}}</td>
                  <td >
             <md-input-container class="drop-down">
-          <div ng-init="getVenodrList($index, productRM.rawmaterial.id)">{{productRM.rawmaterial.description}}</div>
+          <div ng-init="getVenodrList($index, productRM.rawmaterialId.id)">{{productRM.rawmaterialId.partNumber}}</div>
           <!-- <md-select ng-model="rawmaterial.id" name="product"  ng-disabled="productIdReadOnly" ng-change="getVenodrList(rawmaterial.id)">
             <md-option ng-repeat="rawMaterials in data.data" ng-value="rawMaterials.rawmaterial.id">
             {{rawMaterials.rawmaterial.partNumber}}

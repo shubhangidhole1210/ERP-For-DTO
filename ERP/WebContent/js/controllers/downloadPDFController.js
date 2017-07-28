@@ -1,6 +1,6 @@
 erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,$rootScope,SERVER_URL,Auth,$http,utils){
 	$scope.ProductOrderMsg = true;
-	
+	$scope.isBomDisabled = true;
 	$scope.getProducts = function() {
 		utils.showProgressBar();
 		        var httpparams = {};
@@ -63,6 +63,7 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 			$scope.bomData = response.data;
 			console.log(response);
              utils.hideProgressBar();
+             $scope.isBomDisabled = false;
              $scope.ProductOrderMsg = false;
 		}, function errorCallback(response) {
 			console.log("Error");
@@ -84,7 +85,7 @@ erpApp.controller('downloadPDFController',function($scope, $mdDialog, $location,
 	        headers = response.headers();
 	        var filename = headers['BOMDetails.pdf'];
 	        var contentType = headers['content-type'];
-	        console.log("file name:-" + filename)
+	        console.log("file name:-" + filename);
 	        var linkElement = document.createElement('a');
 	        console.log("bom id is :" ,$scope.bom.bomId)
 	        try {

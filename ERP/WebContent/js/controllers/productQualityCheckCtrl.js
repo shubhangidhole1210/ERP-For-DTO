@@ -62,7 +62,7 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 				var productQualityParts = [];
 				for(index=0;index<$scope.productionPlans.length;index++){
 					var product = {};
-					product.productId= $scope.productionPlans[index].product.id;
+					product.productId= $scope.productionPlans[index].productId.id;
 					product.productQuantity = $scope.productionPlans[index].targetQuantity;
 					product.passQuantity = $scope.productionPlans[index].passQuantity;
 					product.failQuantity = $scope.productionPlans[index].failQuantity1;

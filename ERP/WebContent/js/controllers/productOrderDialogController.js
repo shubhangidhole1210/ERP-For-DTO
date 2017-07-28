@@ -138,8 +138,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 		};
 	    
 	    $scope.deleteProduct=function(index){
-	    	console.log('delted products' +  $scope.orderproductassociations)
-	    	var lastItem = $scope.orderproductassociations.length;
+	    	console.log('delted products' +  $scope.orderproductassociations);
 		    $scope.orderproductassociations.splice(index,1);
 	    };
 	    
