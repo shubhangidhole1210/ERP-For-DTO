@@ -64,8 +64,9 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
 		$scope.notificationUser = $scope.notificationUserAssociationList[($scope.currentPage*$scope.pageSize) + ($index)];
-		console.log("")
-		$scope.information = "EDIT NOTIFICATION USER ASSOCIATION INFORMATION"
+		console.log("$scope.notificationUser:" ,$scope.notificationUser);
+		console.log("$scope.notificationUserAssociationList :" ,$scope.notificationUserAssociationList);
+		$scope.information = "EDIT NOTIFICATION USER ASSOCIATION INFORMATION";
 		console.log($scope.notification);
 		$mdDialog
 				.show({
@@ -92,7 +93,7 @@ erpApp.controller('notificationUserAssociationCtrl', function($scope,$http, $mdD
 		$scope.isReadOnly = true;
 		$scope.notificationUser = $scope.notificationUserAssociationList[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
-		$scope.information = "VIEW NOTIFICATION USER ASSOCIATION INFORMATION"
+		$scope.information = "VIEW NOTIFICATION USER ASSOCIATION INFORMATION";
 		console.log($scope.notification);
 		$mdDialog.show({
 					controller : 'notificationUserAssociationDialogCtrl',

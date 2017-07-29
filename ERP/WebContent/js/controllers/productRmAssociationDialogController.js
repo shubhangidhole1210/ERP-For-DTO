@@ -152,8 +152,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	    
 	    $scope.getProductsWithoutRMAssociation = function() {
 	    	
-	    	console.log("Getting Products without RM Association");
-			 var httpparams = {};
+	    	var httpparams = {};
 				httpparams.method = 'GET';
 				httpparams.url = SERVER_URL + "product/list/newProductRMAssociation";
 				httpparams.headers = {
@@ -162,7 +161,7 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			 $http(httpparams).then(function successCallback(response) {
 //					$scope.data = response.data;
 					$scope.products = response.data.data;
-					console.log("Products without RM Association : ", response);
+					$scope.productList = response.data.data.map(function(product){ return product.partNumber});
 					 				
 				}, function errorCallback(response) {
 					console.log("Error");
@@ -226,25 +225,21 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 			});
 		};
 		
-	
-	   
-		$scope.simulateQuery = false;
+	   /* $scope.simulateQuery = false;
 	    $scope.isDisabled    = false;
 
-	    $scope.states        = loadAll();
-	    $scope.querySearch   = $scope.querySearch;
-	    $scope.selectedItemChange = selectedItemChange;
-	    $scope.searchTextChange   = searchTextChange;
+	    $scope.getProducts();
+	    $scope.queryProductSearch   = $scope.queryProductSearch;
+	    $scope.selectedProductItemChange = selectedProductItemChange;
+	    $scope.productSearchTextChange   = productSearchTextChange;
 
 	    $scope.newState = $scope.newState;
 
 	    $scope.newState = function(state) {
 	      alert("Sorry! You'll need to create a Constitution for " + state + " first!");
-	    }
-	    $scope.querySearch = function(query) {
-	    	console.log('querySearch : ', query);
-	    	
-	      var results = query ? $scope.states.filter( createFilterFor(query) ) : $scope.states,
+	    };
+	    $scope.queryProductSearch = function(query) {
+	      var results = query && query!== '' ? $scope.productList.filter( createFilterForProduct(query) ) : $scope.productList,
 	          deferred;
 	      if ($scope.simulateQuery) {
 	        deferred = $q.defer();
@@ -253,46 +248,23 @@ erpApp.controller('productRmAssociationDialogController', function($scope,$http,
 	      } else {
 	        return results;
 	      }
-	    }
+	    };
 
-	    function searchTextChange(text) {
+	    function productSearchTextChange(text) {
 	      $log.info('Text changed to ' + text);
 	    }
 
-	    function selectedItemChange(item) {
+	    function selectedProductItemChange(item) {
 	      $log.info('Item changed to ' + JSON.stringify(item));
 	    }
 
-	    function loadAll() {
-	    	console.log("in load all function");
-	    	
-	      var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-	              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-	              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-	              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-	              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-	              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-	              Wisconsin, Wyoming';
-
-	      return allStates.split(/, +/g).map( function (state) {
-	        return {
-	          value: state.toLowerCase(),
-	          display: state
-	        };
-	      });
-	    }
-
-	    
-	    
-	    function createFilterFor(query) {
+	    function createFilterForProduct(query) {
 	      var lowercaseQuery = angular.lowercase(query);
 
 	      return function filterFn(state) {
-	        return (state.value.indexOf(lowercaseQuery) === 0);
+	        return (state.indexOf(lowercaseQuery) === 0);
 	      };
 
-	    }
-
-		
+	    }*/
 		
 });

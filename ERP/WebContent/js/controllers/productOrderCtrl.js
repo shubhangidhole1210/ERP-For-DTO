@@ -7,7 +7,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		$scope.populateProductOrderList();
 	});
 	$rootScope.$on("saveVendorError", function() {
-		$scope.showAddNewProductOrder()
+		$scope.showAddNewProductOrder();
 	});
 	
 	$scope.populateProductOrderList = function() {
@@ -73,9 +73,11 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 	  $scope.showEditProductOrder = function(ev , $index) {
 		  $scope.flag = 1;
 		  $scope.productOrder = $scope.productOrders[($scope.currentPage*$scope.pageSize) + ($index)];
+		  console.log("$scope.productOrder:" ,$scope.productOrder);
+		  console.log("$scope.productOrders : ", $scope.productOrders);
 		  $scope.isProductOrderAdd = false;
 		  $scope.isClientReadOnly = true;
-		  $scope.information="EDIT PRODUCT ORDER INFORMATION"
+		  $scope.information="EDIT PRODUCT ORDER INFORMATION";
 		    $mdDialog.show({
 		      controller: 'productOrderDialogCtrl',
 		      templateUrl: 'views/productOrderDialog.html',
@@ -123,7 +125,7 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			$scope.productOrder = $scope.productOrders[($scope.currentPage*$scope.pageSize) + ($index)];
 			$scope.isSaving = false;
 			$scope.isClientReadOnly = true;
-			$scope.information="VIEW PRODUCT ORDER INFORMATION"
+			$scope.information="VIEW PRODUCT ORDER INFORMATION";
 			console.log($scope.user);
 			$mdDialog.show({
 						controller : 'productOrderDialogCtrl',

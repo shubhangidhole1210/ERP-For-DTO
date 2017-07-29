@@ -9,7 +9,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
     $rootScope.isAddButtonDisplay=true;
     $scope.orderproductassociations=[];
     $scope.orderProductAssociation={};
-    $scope.productOrder.expecteddeliveryDate = new Date($scope.productOrder.expecteddeliveryDate);
+    $scope.productOrder.expectedDeliveryDate = new Date($scope.productOrder.expectedDeliveryDate);
    
     $scope.hide = function() {
       $mdDialog.hide();
@@ -28,7 +28,7 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
     			 productOrderAssociationDTOs : $scope.orderproductassociations,
     			 description:$scope.productOrder.description,
     			 invoiceNo:$scope.productOrder.invoiceNo,
-    			 expectedDeliveryDate:$scope.productOrder.expectedDeliveryDate ,
+    			 expectedDeliveryDate:$scope.productOrder.expectedDeliveryDate,
     			 clientId:$scope.productOrder.clientId.id
 		};
     	var httpparams = {};
@@ -172,11 +172,11 @@ erpApp.controller('productOrderDialogCtrl', function($scope,$http, $mdDialog,SER
 	    	}
 	    };
 	    
-	  $scope.orderDateValidation = function(expecteddeliveryDate){
-		  console.log("expected deliver date" + expecteddeliveryDate);
+	  $scope.orderDateValidation = function(expectedDeliveryDate){
+		  console.log("expected deliver date" + expectedDeliveryDate);
 		  $scope.currentDate = new Date();
 		  console.log("current date" +  $scope.currentDate);
-		  if(expecteddeliveryDate <= $scope.currentDate){
+		  if(expectedDeliveryDate <= $scope.currentDate){
 			  console.log("its if condition");
 			  $scope.msg="Date should be greater then current date";
 			  $scope.productOrderInformation.expecteddeliveryDate.$setValidity("customeMsg", false);

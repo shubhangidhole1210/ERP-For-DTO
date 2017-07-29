@@ -33,10 +33,27 @@
           <a ng-click="newState(searchText)">Create a new one!</a>
         </md-not-found>
       </md-autocomplete> -->
-        <div class="bar">
-			<input type="text" ng-model="searchString" placeholder="Enter your search terms" />
-		</div>
-		<div>
+       
+           <md-autocomplete 
+                     ng-disabled="isDisabled"
+                    md-selected-item="selectedRM"
+                     md-search-text="searchText"
+                      md-items="item in rawmaterials | filter:searchText"
+                       md-item-text="item.partNumber"
+                        ng-init="getRawMaterials()" 
+                        placeholder="Search Raw material" 
+                         md-no-cache="noCache"
+                         md-selected-item-change="getPrice()"> 
+    <md-item-template>
+          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.partNumber}}</span>
+        </md-item-template>
+    <md-not-found>
+          No Products matching "{{searchText}}" were found.
+          <a ng-click="newState(searchText)">Create a new one!</a>
+        </md-not-found>
+  </md-autocomplete>      
+       
+		<!-- <div>
 			<md-input-container style="width:100%"> <label>Raw
 				material*</label> <md-select ng-model="rmOrderAssociation.rawmaterialId.id"
 				name="rawMaterial" value="rawMaterial.id" ng-disabled="isReadOnly"
@@ -47,7 +64,7 @@
 				<div ng-message="required">Please select Raw Material</div>
 			</div>
 			</md-input-container>
-		</div>
+		</div> -->
 		
 		<div class="ui-msg" ng-show="isRawMaterial">Please create Raw Material</div>
 

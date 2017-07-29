@@ -68,6 +68,17 @@ erpApp.service('utils',function myutils($mdDialog, $rootScope,$mdToast,$location
 			}, function() {});
 		};
 		
+	/*	function showConfirm(message,url,yes,no){
+			var confirm = $mdDialog.confirm().title(message)
+			.ariaLabel('').targetEvent(ev).ok(yes ).cancel(no);
+
+	$mdDialog.show(confirm)
+			.then(function() {
+				$location.path(url);
+			}, function() {});
+		};*/
+		
+		
 		return {
 			hideProgressBar : hideProgressBar,
 			showProgressBar : showProgressBar,

@@ -49,7 +49,17 @@
            <div layout-gt-sm="row">
                <md-input-container class="md-block" flex-gt-sm type="password">
               <label class="input-filed-label">DATE OF DELIVERY[MM/DD/YYYY]*</label>
-              <input type="date" placeholder="Enter date of Delivery" ng-model="productOrder.expecteddeliveryDate" ng-change="orderDateValidation(productOrder.expecteddeliveryDate)"  name="expecteddeliveryDate" required ng-disabled="isReadOnly">
+              <input type="date" placeholder="Enter date of Delivery" ng-model="productOrder.expectedDeliveryDate" ng-change="orderDateValidation(productOrder.expectedDeliveryDate)"  name="expecteddeliveryDate" required ng-disabled="isReadOnly">
+              <div ng-messages="productOrderInformation.expecteddeliveryDate.$error">
+                 <div ng-message="required">Please Enter Expected Delivery Date</div>
+              </div>
+               <div ng-show="productOrderInformation.expecteddeliveryDate.$error.customeMsg" class="error-msg">{{msg}}</div>
+         </md-input-container>  
+           </div>
+            <div layout-gt-sm="row">
+               <md-input-container class="md-block" flex-gt-sm type="password">
+              <label class="input-filed-label">DATE OF DELIVERY[MM/DD/YYYY]*</label>
+              <input type="date" placeholder="Enter date of Delivery" ng-model="productOrder.expectedDeliveryDate" ng-change="orderDateValidation(productOrder.expectedDeliveryDate)"  name="expecteddeliveryDate" required ng-disabled="isReadOnly">
               <div ng-messages="productOrderInformation.expecteddeliveryDate.$error">
                  <div ng-message="required">Please Enter Expected Delivery Date</div>
               </div>

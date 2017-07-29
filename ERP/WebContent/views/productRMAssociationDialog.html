@@ -11,26 +11,26 @@
 
 	<md-dialog-content>
 	<div class="md-dialog-content">
-	
-           <md-autocomplete
+       <!-- <md-autocomplete
           ng-disabled="isDisabled"
           md-no-cache="noCache"
-          md-selected-item="selectedItem"
-          md-search-text-change="searchTextChange(ctrl.searchText)"
-          md-search-text="searchText"
-          md-selected-item-change="selectedItemChange(item)"
-          md-items="item in querySearch(searchText)"
-          md-item-text="item.display"
+          md-selected-item="selectedProductItem"
+          md-search-text-change="productSearchTextChange(productSearchText)"
+          md-search-text="productSearchText"
+          md-selected-item-change="selectedProductItemChange(item)"
+          md-items="item in queryProductSearch(productSearchText)"
+          md-item-text="item"
           md-min-length="0"
-          placeholder="What is your favorite US state?">
+          placeholder="Product Name">
         <md-item-template>
-          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.display}}</span>
+          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item}}</span>
         </md-item-template>
         <md-not-found>
-          No states matching "{{searchText}}" were found.
+          No Products matching "{{productSearchText}}" were found.
           <a ng-click="newState(searchText)">Create a new one!</a>
         </md-not-found>
-      </md-autocomplete>	
+      </md-autocomplete> -->
+      
 		 <div layout-gt-sm="row">
                <md-input-container class="drop-down">
           <label>Product*</label>
@@ -77,7 +77,7 @@
 			</tr>
 		</table>
 		<div layout-gt-sm="row">
-			<md-input-container> <label
+			<!-- <md-input-container> <label
 				style="color: black;">RAW MATERIAL</label> <md-select
 				ng-model="rawmaterialPart.rawmaterial" ng-disabled="isRMTypeSelected"
 				ng-init="rawMaterialId()" name="rawmaterial"> <md-option
@@ -86,7 +86,28 @@
 			<div ng-messages="productRMAssociationInformation.$error"
 				ng-show="productRMAssociationInformation.rawmaterial.$dirty">
 				{{message}}</div>
-			</md-input-container>
+			</md-input-container> -->
+			  <md-autocomplete 
+                     ng-disabled="isDisabled"
+                    md-selected-item="rawmaterialPart.rawmaterial"
+                     md-search-text="searchText"
+                      md-items="item in rawMtaerials | filter:searchText"
+                       md-item-text="item.partNumber"
+                        ng-init="rawMaterialId()" 
+                        placeholder="Search Raw material" 
+                         md-no-cache="noCache"
+                         md-selected-item-change="getPrice()"
+                         name="rawmaterial"> 
+    <md-item-template>
+          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.partNumber}}</span>
+        </md-item-template>
+    <md-not-found>
+          No Products matching "{{searchText}}" were found.
+          <a ng-click="newState(searchText)">Create a new one!</a>
+        </md-not-found>
+  </md-autocomplete>      
+			
+			
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">QUANTITY</label> <input
 				type="number" ng-model="rawmaterialPart.quantity" name="quantity"

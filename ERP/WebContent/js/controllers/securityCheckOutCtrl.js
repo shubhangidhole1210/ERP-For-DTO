@@ -74,14 +74,8 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 				securityCheckOutParts.push(securityCheckOut);
 			}
 			console.log('intime : ' + $scope.intime.getTime());
-			/*console.log('out : ' + $scope.outtime.getTime());*/
 			console.log('intime : ' + $scope.intime.toLocaleTimeString());
-			/*console.log('out : ' + $scope.outtime.toLocaleTimeString());
-			if($scope.intime.getTime() < $scope.outtime.getTime()){
-				console.log('intime is lesser than outtime');
-			}else{
-				console.log('intime is greater than outtime');
-			}*/
+			
 			var data = {
 				invoice_No : $scope.invoice_No,
 				clientname : $scope.selectedClient,
@@ -91,7 +85,6 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 				description : $scope.description,
 				createDate : $scope.createDate,
 				intime : $scope.intime.toLocaleTimeString().split(" ")[0],
-				/*outtime : $scope.outtime.toLocaleTimeString().split(" ")[0],*/
 				poNo :  $scope.productOrders.id,
 				securityCheckOutParts : securityCheckOutParts
 			};
@@ -109,7 +102,7 @@ erpApp.controller('securityCheckOutCtrl', function($scope, $http, $mdDialog, $md
 				console.log(data);
 				if(data.data.code === 1){
 					utils.showToast("Security Check out Sucessfully!");
-					$location.path('/');
+					
 				}else{
 					utils.showToast("Something went wrong. Please try again later.");
 				}

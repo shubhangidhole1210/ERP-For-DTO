@@ -95,7 +95,7 @@ erpApp
 						$scope.isReadOnly = false;
 						$scope.isDropDownreadOnly = true;
 						$scope.rmOrderAssociation = $scope.rmOrderAssociations[($scope.currentPage*$scope.pageSize) + ($index)];
-						console.log($scope.rmOrderAssociation);
+						console.log("$scope.rmOrderAssociation:" ,$scope.rmOrderAssociation);
 						$scope.title= "EDIT RAW MATERIAL VENDOR ASSOCIATION INFORMATION";
 						$mdDialog
 								.show({
