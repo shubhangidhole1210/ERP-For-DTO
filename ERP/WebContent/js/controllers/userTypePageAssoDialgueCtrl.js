@@ -57,7 +57,16 @@ erpApp.controller('userTypePageDialogCtrl',function($scope, $http, $mdDialog, $m
 								console.log(data);
 								$scope.hide();
 								utils.showToast("Something went worng. Please try again later.");
-							}else{
+							}else if(data.data.code === 2){
+								console.log(data.data.message);
+								$rootScope.$emit(
+										"saveVendorError", {});
+								console.log(data);
+								$scope.hide();
+								utils.showToast(data.data.message);
+							}
+							
+							else{
 								$scope.displayProgressBar = false;
 								utils.showToast(data.data.message);
 								$rootScope.$emit("callPopulateUserTypePageAsso",{});

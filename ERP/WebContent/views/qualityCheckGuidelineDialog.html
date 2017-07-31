@@ -1,0 +1,60 @@
+<md-dialog class="unit-dialogue">
+<form name="QcGuideLineInformation" novalidate>
+	<md-toolbar>
+	<div class="md-toolbar-tools">
+		<h2>{{information}}</h2>
+		<span flex></span>
+		<md-button class="cancel" ng-click="cancel()"> <md-icon
+			>&#10006;</md-icon>
+		</md-button>
+	</div>
+	</md-toolbar>
+	<md-dialog-content>
+	<div class="md-dialog-content">
+		 <label>
+		    <input type="radio" ng-model="sendOption1" value="to" ng-change="getRawMaterial()">
+				    RAW MATERIAL
+		</label><br/>
+		
+		<label>
+		    <input type="radio" ng-model="sendOption1" value="too" ng-change="getProductList()" >
+				    PRODUCT
+		</label><br/>
+		<div layout-gt-sm="row">
+		  <md-input-container> <label>RAW MATERIAL</label> <md-select
+			ng-model="QualityCheckGuideline.details.id" name="userType" ng-disabled="isReadOnly"
+			  id="userType"> 
+			<md-option ng-repeat="details in data" ng-value="details.id">{{details.partNumber}} </md-option> </md-select>
+		</md-input-container>
+		</div>
+		<!-- <div layout-gt-sm="row">
+		 <md-input-container> <label>PRODUCT</label> <md-select
+			ng-model="QualityCheckGuideline.product.id" name="userType" ng-disabled="isReadOnly"
+			 id="userType"> 
+			<md-option ng-repeat="product in productList" ng-value="product.id" >{{product.partNumber}} </md-option> </md-select>
+		
+		</md-input-container>
+		</div> -->
+		<div>
+		  <input type="text" ng-model="QualityCheckGuideline.guidelines">
+		
+		</div>
+		
+		</div>
+		</md-input-container>
+	</md-dialog-content>
+	<md-dialog-actions layout="row"> <md-button
+		class="md-raised"
+		ng-click="submitQcGuideLineInformation(QcGuideLineInformation.$valid,$event)"
+		type="submit" ng-disabled="isReadOnly" >SAVE</md-button> <md-button
+		class="md-raised" ng-click="answer('not useful')">CANCEL</md-button>
+	</md-dialog-actions>
+
+</form>
+</md-dialog>
+
+
+
+
+
+

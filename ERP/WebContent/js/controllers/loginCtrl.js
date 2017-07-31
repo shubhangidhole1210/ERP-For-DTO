@@ -60,4 +60,9 @@ erpApp.controller('loginCtrl', function($scope, $location,$rootScope, $http, Aut
 		$scope.loginForm.password.$setValidity("apierror", true);
 	};
 	
+	$scope.isPasswordForget = function(){
+		$location.path('forgetPassword');
+	};
+	
+	
 });

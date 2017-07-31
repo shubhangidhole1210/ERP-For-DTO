@@ -41,6 +41,7 @@
 								<th>RECEIVED OK</th>
 								<th>REMARK</th>
 								<th>IS RETURN INVOICE</th>
+								<th>QC Guide Line</th>
 							</tr>
 							<tr ng-repeat="rmInvoiceItem in rmInvoiceList">
 							    <td>{{$index+1}}</td>
@@ -85,6 +86,7 @@
 										<div ng-message="required">please enter is return
 											invoice</div>
 									</div></md-input-container></td>
+									<td><md-button class="actionButton"  ng-click="showConfirm($event)"  style="">Guide Line</md-button></td>
 							</tr>
 						</table>
 						<div class="store-info-btn">
@@ -96,6 +98,10 @@
 							</md-dialog-actions>
 						</div>
 				</form>
+				
+				<div ui-grid="gridOptions" class="grid" ui-grid-pinning></div>
+				
+				
 			</div>
 		</div>
 	</div>

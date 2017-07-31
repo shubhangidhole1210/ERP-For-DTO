@@ -33,14 +33,14 @@
 							             <div ng-message="minlength">password should be minimum 5 character</div>
 							        </div>
 							    </md-input-container>
-								<span class="forgot"><a href="" class="forgotLink">Forgot?</a></span>
+								<span class="forgot"><a href="" class="forgotLink" ng-click="isPasswordForget()">Forgot?</a></span>
 							</div>
 			
 							<div layout-gt-sm="row">
 								<div style="margin-left: 4%"><md-button class="md-raised md-primary" ng-click="submitLogin(loginForm.$valid)" 
 									type="submit" tabindex="3">LOGIN</md-button>
 								</div>
-							 	<md-button class="md-primary"  target="_blank">New User? Sign-Up</md-button>
+							 	<!-- <md-button class="md-primary"  target="_blank">New User? Sign-Up</md-button> -->
 							</div>
 						</div>
 					</div>

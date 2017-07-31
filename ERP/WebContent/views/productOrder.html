@@ -13,15 +13,17 @@
 			<tr>
 				<th>NO</th>
 				<th>CLIENT</th>
-				<th>DESCRIPTION</th>
+				<!-- <th>DESCRIPTION</th> -->
 				<th>ORDER STATUS</th>
+				<th>DELIVERY DATE</th>
 				<th>ACTION</th>
 			</tr>
-			<tr ng-repeat="productOrder in data | startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ companyname: searchText }" >
+			<tr ng-repeat="productOrder in data | orderBy:'expectedDeliveryDate'| startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ companyname: searchText }" >
 				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
 				<td>{{productOrder.clientId.companyname}}</td>
-				<td>{{productOrder.description}}</td>
+				<!-- <td>{{productOrder.description}}</td> -->
 				<td>{{productOrder.statusId.name}}</td>
+				<td>{{productOrder.expectedDeliveryDate}}</td>
 				<td>
 				     <md-button class="actionButton"  ng-click="showEditProductOrder($event,$index)"  style="" ng-init="flag=1">EDIT</md-button>
 				<md-button class="actionButton"  ng-click="showConfirm($event,$index)"  style="">Remove</md-button>

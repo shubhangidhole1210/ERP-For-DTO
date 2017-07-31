@@ -1,4 +1,4 @@
-erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils)
+erpApp.controller('rmTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils)
 {
 	$scope.isUnitInPresent=false; 
 	$scope.unit={}
@@ -11,21 +11,22 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 		$scope.showAddNewUnit();
 	});
 	
-	$scope.populateUnitList=function(){
+	$scope.populateRmTypeList=function(){
 		 $scope.currentPage = 0;
 	     $scope.pageSize = 15;
 		utils.showProgressBar();
 		var httpparams = {};
 		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "unit/list";
+		httpparams.url = SERVER_URL + "rmtype/list";
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(response) {
 			$scope.data = response.data;
-			$scope.units=response.data;
-			$scope.isUnitInformation()
-			console.log(response)
+			$scope.rmTypes=response.data;
+			//$scope.isUnitInformation()
+			console.log(response);
+			console.log("$scope.rmTypes : ", $scope.rmTypes);
 			utils.hideProgressBar();
 		}, function errorCallback(response) {
 			$scope.message = 
@@ -118,7 +119,7 @@ erpApp.controller('unitCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootSc
 	
 	$scope.deleteUnit = function(index) {
 		console.log($scope.unit);
-		console.log('$scope.units' , $scope.units);
+		console.log('$scope.units' , $scope.units)
 		var httpparams = {};
 		httpparams.method = 'delete';
 		httpparams.url = SERVER_URL + "unit/delete/" + $scope.units[index].id;

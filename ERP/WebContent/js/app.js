@@ -3,7 +3,7 @@ var erpApp = angular
 erpApp.config(function($locationProvider) {
 	$locationProvider.hashPrefix('');
 });
-erpApp.value('SERVER_URL', 'http://192.168.2.102:8086/ERP/');
+erpApp.value('SERVER_URL', 'http://192.168.2.100:8086/ERP/');
 
 
 
@@ -116,13 +116,18 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	}).when('/productionPlan', {
-		templateUrl : 'views/productionPlan.html',
+	}).when('/qualityCheck', {
+		templateUrl : 'views/qualityInspection.html',
 		data : {
 			loginRequired : true
 		}
 	}).when('/productionPlan', {
 		templateUrl : 'views/productionPlan.html',
+		data : {
+			loginRequired : true
+		}
+	}).when('/qualityCheckGuideline', {
+		templateUrl : 'views/qualityCheckGuideline.html',
 		data : {
 			loginRequired : true
 		}
@@ -200,13 +205,10 @@ erpApp.config(function($routeProvider) {
 		data : {
 			loginRequired : true
 		}
-	}).when('/rmType', {
-		templateUrl : 'views/rmType.html',
-		data : {
-			loginRequired : true
-		}
 	}).when('/notFound', {
 		templateUrl : 'views/notFound.html',
+	}).when('/forgetPassword', {
+		templateUrl : 'views/forgetPassword.html',
 	}).otherwise({
 		redirectTo : '/notFound'
 	});
@@ -249,8 +251,8 @@ erpApp.filter('startFrom', function() {
     		}
         start = +start; //parse to int
         return input.slice(start);
-        console.log("in filtter function");
-    };
+        console.log("in filtter function")
+    }
 });
 
 erpApp.directive('accessibleForm', function () {
@@ -284,33 +286,8 @@ erpApp.directive("limitTo", [function() {
                 if (this.value.length == limit) e.preventDefault();
             });
         }
-    };
+    }
 }]);
-
-
-erpApp.filter('searchFor', function(){
-	return function(arr, searchString){
-		if(!searchString){
-			return arr;
-		}
-
-		var result = [];
-
-		searchString = searchString.toLowerCase();
-
-		
-		angular.forEach(arr, function(item){
-
-			if(item.title.toLowerCase().indexOf(searchString) !== -1){
-				result.push(item);
-			}
-
-		});
-
-		return result;
-	};
-
-});
 
 
 /*erpApp.directive("fileread", [
@@ -346,8 +323,8 @@ erpApp.directive('ngFiles', ['$parse', function ($parse) {
 
     return {
         link: fn_link
-    };
-} ]);
+    }
+} ])
 
 
 

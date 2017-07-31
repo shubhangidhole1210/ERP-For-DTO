@@ -1,6 +1,9 @@
-erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $mdToast, $rootScope, SERVER_URL, utils, Auth, $location) {
+erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $mdToast, $rootScope, SERVER_URL, utils, Auth, $location,$log) {
 	$scope.ischeckBoxDisabled = true;
+	 $scope.gridOptions = {};
+	
 	document.getElementById('invoiceNumber').focus();
+	
 	$scope.resetQualityInspectionForm = function(){
 		console.log('Reset Quality Inspection Form');
 		$scope.invoiceId = "";
@@ -112,7 +115,7 @@ erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $md
 							console.log("Error : ", response);
 							utils.hideProgressBar();
 							utils
-									.showToast('something went wrong please try again')
+									.showToast('something went wrong please try again');
 						});
 		utils.showProgressBar();
 	};
@@ -134,4 +137,29 @@ erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $md
 			$scope.rmInvoiceList[index].ischeckBoxDisabled = false;
 		}
 	};
+	
+	$scope.showGuideLine=function(){
+
+		var httpparams = {};
+		httpparams.method = 'GET';
+		httpparams.url = SERVER_URL + "qcGuideline/list";
+		httpparams.headers = {
+				auth_token : Auth.getAuthToken()
+			};
+		$http(httpparams).then(function successCallback(response) {
+			$scope.QualityCheckGuidelineList=response.data;
+			console.log("$scope.QualityCheckGuidelineList:" ,$scope.QualityCheckGuidelineList);
+		}, function errorCallback(response) {
+			$scope.message = 
+				utils.showToast("We are Sorry. Something went wrong. Please try again later.");
+				console.log("Error");
+		});
+	
+	};
+	
+	
+	
+	
+	
+	
 });
