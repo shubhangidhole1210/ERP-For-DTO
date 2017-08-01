@@ -1,14 +1,14 @@
 erpApp.controller('rmTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$rootScope,$mdToast,Auth,utils)
 {
-	$scope.isUnitInPresent=false; 
-	$scope.unit={}
+	$scope.isRmTypePresent=false; 
+	$scope.rmType={};
 	
-	$rootScope.$on("CallPopulateUnitList", function() {
-		$scope.populateUnitList();
+	$rootScope.$on("CallPopulateRmTypeList", function() {
+		$scope.populateRmTypeList();
 	});
 	
-	$rootScope.$on("saveUnitError", function() {
-		$scope.showAddNewUnit();
+	$rootScope.$on("saveRmTypeError", function() {
+		$scope.addNewRmType();
 	});
 	
 	$scope.populateRmTypeList=function(){
@@ -22,11 +22,10 @@ erpApp.controller('rmTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(response) {
-			$scope.data = response.data;
-			$scope.rmTypes=response.data;
-			//$scope.isUnitInformation()
+			$scope.rmTypeList=response.data;
+			$scope.isRmTypeInformation();
 			console.log(response);
-			console.log("$scope.rmTypes : ", $scope.rmTypes);
+			console.log("$scope.rmTypes : ", $scope.rmTypeList);
 			utils.hideProgressBar();
 		}, function errorCallback(response) {
 			$scope.message = 
@@ -36,25 +35,25 @@ erpApp.controller('rmTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		});
 	};
 	
-	$scope.isUnitInformation = function() {
-		$scope.isUnitInPresent = $scope.data.length === 0 ? true : false;
+	$scope.isRmTypeInformation = function() {
+		$scope.isRmTypePresent = $scope.rmTypeList.length === 0 ? true : false;
 	};
 	
-	$scope.showAddNewUnit = function(ev) {
-		$scope.unit={};
+	$scope.addNewRmType = function(ev) {
+		$scope.rmType={};
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
-		$scope.information = "ADD NEW UNIT"
-		var addNewUnitDialog = {
-			controller : 'unitDialogCtrl',
-			templateUrl : 'views/unitDialog.html',
+		$scope.information = "ADD NEW RM TYPE";
+		var addNewRmTypeDialog = {
+			controller : 'rmTypeDialogueController',
+			templateUrl : 'views/rmTypeDialoguehtml.html',
 			parent : angular.element(document.body),
 			targetEvent : ev,
 			clickOutsideToClose : false,
 			onRemoving : function(){console.log('Removing user dialog');},
 			fullscreen : $scope.customFullscreen,
 			locals : {
-				unit : $scope.unit,
+				rmType : $scope.rmType,
 				flag : $scope.flag,
 				action : $scope.isReadOnly,
 				information : $scope.information
@@ -62,27 +61,27 @@ erpApp.controller('rmTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		};
 		$mdDialog
 		$mdDialog
-		.show(addNewUnitDialog)
+		.show(addNewRmTypeDialog)
 		.then(function(answer) {},
 				function() {});
 	};
 	
-	$scope.showEditUnit = function(ev, $index) {
+	$scope.EditRMType = function(ev, $index) {
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
-		$scope.unit = $scope.units[($scope.currentPage*$scope.pageSize) + ($index)];
-		$scope.information = "EDIT UNIT INFORMATION"
+		$scope.rmType = $scope.rmTypeList[($scope.currentPage*$scope.pageSize) + ($index)];
+		$scope.information = "EDIT RM TYPE INFORMATION"
 		console.log($scope.user);
 		$mdDialog
 				.show({
-					controller : 'unitDialogCtrl',
-					templateUrl : 'views/unitDialog.html',
+					controller : 'rmTypeDialogueController',
+					templateUrl : 'views/rmTypeDialoguehtml.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
-						unit : $scope.unit,
+						rmType : $scope.rmType,
 						flag : $scope.flag,
 						action : $scope.isReadOnly,
 						information : $scope.information
@@ -92,22 +91,22 @@ erpApp.controller('rmTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 						function() {});
 	};
 	
-	$scope.viewUnitInformation = function(ev, $index){
+	$scope.viewRMTypenformation = function(ev, $index){
 		$scope.flag = 2;
 		$scope.isReadOnly = true;
-		$scope.unit = $scope.units[($scope.currentPage*$scope.pageSize) + ($index)];
+		$scope.rmType = $scope.rmTypeList[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
-		$scope.information = "VIEW UNIT INFORMATION"
+		$scope.information = "VIEW RM TYPE INFORMATION"
 		console.log($scope.unit);
 		$mdDialog.show({
-					controller : 'unitDialogCtrl',
-					templateUrl : 'views/unitDialog.html',
+					controller : 'rmTypeDialogueController',
+					templateUrl : 'views/rmTypeDialoguehtml.html',
 					parent : angular.element(document.body),
 					targetEvent : ev,
 					clickOutsideToClose : false,
 					fullscreen : $scope.customFullscreen,
 					locals : {
-						unit : $scope.unit,
+						rmType : $scope.rmType,
 						flag : $scope.flag,
 						action : $scope.isReadOnly,
 						information : $scope.information
@@ -117,19 +116,18 @@ erpApp.controller('rmTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 						function() {});
 	};
 	
-	$scope.deleteUnit = function(index) {
+	$scope.deleteRmType = function(index) {
 		console.log($scope.unit);
-		console.log('$scope.units' , $scope.units)
 		var httpparams = {};
 		httpparams.method = 'delete';
-		httpparams.url = SERVER_URL + "unit/delete/" + $scope.units[index].id;
+		httpparams.url = SERVER_URL + "unit/delete/" + $scope.rmTypeList[index].id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
 		$http(httpparams).then(function successCallback(data) {
 					$mdDialog.hide();
-			utils.showToast('Unit Deleted Sucessfully!');
-			$rootScope.$emit("CallPopulateUnitList", {});
+			utils.showToast('RM Type Deleted Sucessfully!');
+			$rootScope.$emit("CallPopulateRmTypeList", {});
 			console.log(data);
 
 		}, function errorCallback(data) {
@@ -145,7 +143,7 @@ erpApp.controller('rmTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 
 		$mdDialog.show(confirm)
 				.then(function() {
-					$scope.deleteUnit(($scope.currentPage*$scope.pageSize) + ($index));
+					$scope.deleteRmType(($scope.currentPage*$scope.pageSize) + ($index));
 				}, function() {});
 	};
 	

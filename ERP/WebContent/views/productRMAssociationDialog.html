@@ -76,7 +76,7 @@
 				</td>
 			</tr>
 		</table>
-		<div layout-gt-sm="row">
+		<div layout-gt-sm="row" >
 			<!-- <md-input-container> <label
 				style="color: black;">RAW MATERIAL</label> <md-select
 				ng-model="rawmaterialPart.rawmaterial" ng-disabled="isRMTypeSelected"
@@ -87,6 +87,8 @@
 				ng-show="productRMAssociationInformation.rawmaterial.$dirty">
 				{{message}}</div>
 			</md-input-container> -->
+			
+			<div class="drop-down-ui">
 			  <md-autocomplete 
                      ng-disabled="isDisabled"
                     md-selected-item="rawmaterialPart.rawmaterial"
@@ -106,8 +108,8 @@
           <a ng-click="newState(searchText)">Create a new one!</a>
         </md-not-found>
   </md-autocomplete>      
-			
-			
+			</div>
+			<div style="width: 32%">
 			<md-input-container class="md-block" flex-gt-sm>
 			<label class="input-filed-label">QUANTITY</label> <input
 				type="number" ng-model="rawmaterialPart.quantity" name="quantity"
@@ -119,6 +121,7 @@
 				<div ng-show="productRMAssociationInformation.quantity.$error.min"
 				class="error-msg">Quantity should be greater then 0</div>
 			</md-input-container>
+			</div>
 			<button type="button" class="added-multiple"
 				ng-click="addRawMaterial()"
 				ng-disabled="!(!!rawmaterialPart.rawmaterial && !!rawmaterialPart.quantity)">Add

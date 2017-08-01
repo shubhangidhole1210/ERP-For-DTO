@@ -19,11 +19,11 @@
 				<th>ACTION</th>
 			</tr>
 			<tr ng-repeat="productOrder in data | orderBy:'expectedDeliveryDate'| startFrom:currentPage*pageSize | limitTo:pageSize |  filter:{ companyname: searchText }" >
-				<td>{{(currentPage*pageSize) + ($index+1) }}</td>
-				<td>{{productOrder.clientId.companyname}}</td>
+				<td ng-class="{'green': productOrder.statusId.name === 'STATUS_PRODUCT_ORDER_COMPLETE'}">{{(currentPage*pageSize) + ($index+1) }}</td>
+				<td ng-class="{'green': productOrder.statusId.name === 'STATUS_PRODUCT_ORDER_COMPLETE'}">{{productOrder.clientId.companyname}}</td>
 				<!-- <td>{{productOrder.description}}</td> -->
-				<td>{{productOrder.statusId.name}}</td>
-				<td>{{productOrder.expectedDeliveryDate}}</td>
+				<td  ng-class="{'green': productOrder.statusId.name === 'STATUS_PRODUCT_ORDER_COMPLETE'}">{{productOrder.statusId.name}}</td>
+				<td ng-class="{'green': productOrder.statusId.name === 'STATUS_PRODUCT_ORDER_COMPLETE'}">{{productOrder.expectedDeliveryDate}}</td>
 				<td>
 				     <md-button class="actionButton"  ng-click="showEditProductOrder($event,$index)"  style="" ng-init="flag=1">EDIT</md-button>
 				<md-button class="actionButton"  ng-click="showConfirm($event,$index)"  style="">Remove</md-button>

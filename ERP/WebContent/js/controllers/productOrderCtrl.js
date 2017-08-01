@@ -27,6 +27,14 @@ erpApp.controller('productOrderCtrl', function($scope,$http, $mdDialog,SERVER_UR
 								console.log(response);
 								$scope.isProductOrderInformation();
 								utils.hideProgressBar();
+								//console.log("status: ", $scope.productOrders.statusId.type);
+								if('STATUS_PRODUCT_ORDER_COMPLETE' === 'STATUS_PRODUCT_ORDER_COMPLETE'){
+									  return {
+							                color: "red"
+							            };
+								}else{
+									
+								}
 							},
 							function errorCallback(response) {
 								console.log("Error");
