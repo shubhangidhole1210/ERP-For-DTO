@@ -45,6 +45,8 @@ erpApp.config(function ($provide, $httpProvider) {
 		    		  Auth.logout();
 			    	  $rootScope.$emit("logout",{});
 //		    		  $location.path = "/login";
+		    	  }else{
+		    		  console.log("session expire");
 		    	  }
 		    	  
 	    	  }

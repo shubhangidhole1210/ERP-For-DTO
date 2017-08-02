@@ -1,6 +1,6 @@
 erpApp.controller(
 				'RMVendorAssociationDialogCtrl',
-				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,rmOrderAssociation,flag,action,title,dropdownAction,$timeout, $q, $log){
+				function($scope, $http, $mdDialog, $mdToast, $rootScope,SERVER_URL,Auth,utils,rmOrderAssociation,flag,action,title,dropdownAction){
 					$scope.isReadOnly = action;
 					$scope.flag = flag;
 					$scope.rmOrderAssociation = rmOrderAssociation;

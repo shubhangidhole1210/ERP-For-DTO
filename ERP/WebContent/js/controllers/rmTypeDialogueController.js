@@ -27,14 +27,14 @@ erpApp.controller('rmTypeDialogueController',
 		if ($scope.flag == 0) {
 			console.log($scope.data);
 			httpparams.method = 'post';
-			httpparams.url = SERVER_URL + "unit/create";
+			httpparams.url = SERVER_URL + "rmtype/create";
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};
 		} else {
 			data.id = $scope.rmType.id;
 			httpparams.method = 'put';
-			httpparams.url = SERVER_URL + "unit/update";
+			httpparams.url = SERVER_URL + "rmtype/update";
 			httpparams.headers = {
 					auth_token : Auth.getAuthToken()
 				};

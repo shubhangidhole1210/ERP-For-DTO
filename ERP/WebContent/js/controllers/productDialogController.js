@@ -26,7 +26,7 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 				description: $scope.product.description,
 				//minQuantity: $scope.product.minQuantity,
 				//maxQuantity: $scope.product.maxQuantity,
-				design: 'Design will be added later on'
+				design: $files
 		};
 		var httpparams = {};
 		if ($scope.flag == 0) {
@@ -94,7 +94,7 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
         });
     };
 
-    $scope.uploadFiles = function () {
+  /*  $scope.uploadFiles = function () {
     	var httpparams = {};
     	httpparams.method = 'post';
     	httpparams.url = SERVER_URL + "fileupload";
@@ -111,7 +111,7 @@ erpApp.controller('productDialogCtrl', function($scope, $http, $mdDialog, $mdToa
 					console.log(response);
 				},
 				function errorCallback(response) {
-					console.log(error)
+					console.log(error);
 				});
-    }
+    }*/
 });

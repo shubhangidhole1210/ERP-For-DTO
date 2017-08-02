@@ -101,5 +101,25 @@ erpApp.controller('prodcutQualityCheckCtrl', function($scope,$http, $mdDialog, $
 		$scope.cancelProductQualityForm = function(){
 			$location.path('/');
 		};
+		
+		
+		$scope.showGuideLine = function(ev) {
+			var addNewDialog = {
+				controller : 'productCheckGuideLineCtrl',
+				templateUrl : 'views/productQualityGuideline.html',
+				parent : angular.element(document.body),
+				targetEvent : ev,
+				clickOutsideToClose : true,
+				onRemoving : function(){console.log('Removing user dialog');},
+				fullscreen : $scope.customFullscreen,
+				
+			};
+			$mdDialog
+			$mdDialog
+			.show(addNewDialog)
+			.then(function(answer) {},
+					function() {});
+		};
+		
 });
 		

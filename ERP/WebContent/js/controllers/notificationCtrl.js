@@ -22,7 +22,7 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 			};
 		$http(httpparams).then(function successCallback(response) {
 			$scope.notificationList=response.data;
-			console.log(response)
+			console.log(response);
 			utils.hideProgressBar();
 		}, function errorCallback(response) {
 			utils.showToast("We are Sorry. Something went wrong. Please try again later.");
@@ -39,7 +39,7 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		$scope.notification={};
 		$scope.flag = 0;
 		$scope.isReadOnly = false;
-		$scope.information = "ADD NEW NOTIFICATION"
+		$scope.information = "ADD NEW NOTIFICATION";
 		var addNewNotificationDialog = {
 			controller : 'notificationDialogCtrl',
 			templateUrl : 'views/notificationDialog.html',
@@ -65,7 +65,7 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		$scope.flag = 1;
 		$scope.isReadOnly = false;
 		$scope.notification = $scope.notificationList[($scope.currentPage*$scope.pageSize) + ($index)];
-		$scope.information = "EDIT NOTIFICATION INFORMATION"
+		$scope.information = "EDIT NOTIFICATION INFORMATION";
 		console.log($scope.notification);
 		$mdDialog
 				.show({
@@ -92,7 +92,7 @@ erpApp.controller('notificationCtrl', function($scope,$http, $mdDialog,SERVER_UR
 		$scope.isReadOnly = true;
 		$scope.notification = $scope.notificationList[($scope.currentPage*$scope.pageSize) + ($index)];
 		$scope.isSaving = false;
-		$scope.information = "VIEW NOTIFICATION INFORMATION"
+		$scope.information = "VIEW NOTIFICATION INFORMATION";
 		console.log($scope.notification);
 		$mdDialog.show({
 					controller : 'notificationDialogCtrl',

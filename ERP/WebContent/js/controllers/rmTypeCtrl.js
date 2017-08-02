@@ -120,7 +120,7 @@ erpApp.controller('rmTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		console.log($scope.unit);
 		var httpparams = {};
 		httpparams.method = 'delete';
-		httpparams.url = SERVER_URL + "unit/delete/" + $scope.rmTypeList[index].id;
+		httpparams.url = SERVER_URL + "rmtype/delete/" + $scope.rmTypeList[index].id;
 		httpparams.headers = {
 				auth_token : Auth.getAuthToken()
 			};
@@ -138,7 +138,7 @@ erpApp.controller('rmTypeCtrl',function($scope,$http, $mdDialog,SERVER_URL,$root
 		utils.showProgressBar();
 	};
 	$scope.showConfirm = function(ev,$index) {
-		var confirm = $mdDialog.confirm().title('Are you sure you want to Delete Unit Information?')
+		var confirm = $mdDialog.confirm().title('Are you sure you want to Delete RM Type Information?')
 				.ariaLabel('').targetEvent(ev).ok('YES' ).cancel('NO');
 
 		$mdDialog.show(confirm)

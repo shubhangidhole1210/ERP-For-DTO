@@ -138,25 +138,24 @@ erpApp.controller('qualityInspectionCtrl',function($scope, $http, $mdDialog, $md
 		}
 	};
 	
-	$scope.showGuideLine=function(){
-
-		var httpparams = {};
-		httpparams.method = 'GET';
-		httpparams.url = SERVER_URL + "qcGuideline/list";
-		httpparams.headers = {
-				auth_token : Auth.getAuthToken()
-			};
-		$http(httpparams).then(function successCallback(response) {
-			$scope.QualityCheckGuidelineList=response.data;
-			console.log("$scope.QualityCheckGuidelineList:" ,$scope.QualityCheckGuidelineList);
-		}, function errorCallback(response) {
-			$scope.message = 
-				utils.showToast("We are Sorry. Something went wrong. Please try again later.");
-				console.log("Error");
-		});
 	
+	$scope.showGuideLine = function(ev) {
+		var addNewDialog = {
+			controller : 'rmQcGuideLineCtrl',
+			templateUrl : 'views/rmQcGuidelineDialogue.html',
+			parent : angular.element(document.body),
+			targetEvent : ev,
+			clickOutsideToClose : true,
+			onRemoving : function(){console.log('Removing user dialog');},
+			fullscreen : $scope.customFullscreen,
+			
+		};
+		$mdDialog
+		$mdDialog
+		.show(addNewDialog)
+		.then(function(answer) {},
+				function() {});
 	};
-	
 	
 	
 	

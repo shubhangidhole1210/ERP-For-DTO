@@ -16,6 +16,7 @@
           <th>QC REPAIRED QUANTITY</th>
           <th>QC FAIL QUANTITY</th>
           <th>REMARK</th>
+          <th>QC GUIDELINE </th>
         </tr>
         <tr ng-repeat="productionplan in productionPlans">
             <td>{{$index+1}}</td>
@@ -49,6 +50,9 @@
 					<div ng-message="required">Please enter Remark</div>
             	</div>
 				</md-input-container>
+			</td>
+			<td>
+			    <td><md-button class="actionButton"  ng-click="showGuideLine($event)"  style="">Guide Line</md-button></td>
 			</td>
         </tr>
      </table>

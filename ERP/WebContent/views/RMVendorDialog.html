@@ -34,7 +34,7 @@
         </md-not-found>
       </md-autocomplete> -->
        
-           <md-autocomplete 
+          <!--  <md-autocomplete 
                      ng-disabled="isDisabled"
                     md-selected-item="selectedRM"
                      md-search-text="searchText"
@@ -51,9 +51,9 @@
           No Products matching "{{searchText}}" were found.
           <a ng-click="newState(searchText)">Create a new one!</a>
         </md-not-found>
-  </md-autocomplete>      
+  </md-autocomplete>       -->
        
-		<!-- <div>
+		<div>
 			<md-input-container style="width:100%"> <label>Raw
 				material*</label> <md-select ng-model="rmOrderAssociation.rawmaterialId.id"
 				name="rawMaterial" value="rawMaterial.id" ng-disabled="isReadOnly"
@@ -64,7 +64,7 @@
 				<div ng-message="required">Please select Raw Material</div>
 			</div>
 			</md-input-container>
-		</div> -->
+		</div>
 		
 		<div class="ui-msg" ng-show="isRawMaterial">Please create Raw Material</div>
 
